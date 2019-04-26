@@ -1,1 +1,1 @@
-Document explaining business rules for application
+Documents supporting Finance and Purchasing Application
