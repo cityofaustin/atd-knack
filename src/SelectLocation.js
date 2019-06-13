@@ -83,7 +83,6 @@ export default class SelectLocation extends Component {
 
   onMoveEnd(map) {
     const center = map.getCenter();
-    // TODO add state to store lat/long of pin drop
     console.log(center, "inside onMoveEnd()");
     this.setState({
       lat: center.lat,
