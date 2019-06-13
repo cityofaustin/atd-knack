@@ -57,7 +57,9 @@ export default class SelectLocation extends Component {
       center: [location.position.lng, location.position.lat],
       showPin: true,
       geocodeAddressString: location.address,
-      formValue: props.value || ""
+      formValue: props.value || "",
+      lat: 0,
+      lng: 0
     };
   }
 
@@ -83,6 +85,11 @@ export default class SelectLocation extends Component {
     const center = map.getCenter();
     // TODO add state to store lat/long of pin drop
     console.log(center, "inside onMoveEnd()");
+    this.setState({
+      lat: center.lat,
+      lng: center.lng
+    });
+    console.log(this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -91,7 +98,7 @@ export default class SelectLocation extends Component {
 
   // calls us-forms-system onChange to propogate values up to the form
   onChange(newFormValue) {
-    // TODO address onChange error that occurs upon location selection in map
+    // onChange below error that occurs upon location selection in map
     // this.props.onChange(newFormValue);
     this.setState({ formValue: newFormValue });
   }
