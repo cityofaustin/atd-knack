@@ -90,8 +90,9 @@ export default class SelectLocation extends Component {
   // calls us-forms-system onChange to propogate values up to the form
   onChange(newFormValue) {
     // TODO address onChange error that occurs upon location selection in map
-    this.props.onChange(newFormValue);
+    // this.props.onChange(newFormValue);
     this.setState({ formValue: newFormValue });
+    console.log(this.state.formValue);
   }
 
   onGeocoderClear() {
