@@ -12,6 +12,15 @@ code {
     monospace;
 }
 
+/* buttons */
+
+#lat-long-display {
+  position: absolute;
+  bottom: 10%;
+  right: 0%;
+  margin: 0px 10px 0px 0px;
+}
+
 .map-container {
   position: relative;
 }

@@ -254,6 +254,39 @@ export default class SelectLocation extends Component {
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
           </Map>
+          <form id="lat-long-display">
+            <div class="form-row align-items-center">
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInput">
+                  Latitude
+                </label>
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="inlineFormInput"
+                  placeholder="Latitude"
+                />
+              </div>
+              <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">
+                  Longitude
+                </label>
+                <div class="input-group mb-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="inlineFormInputGroup"
+                    placeholder="Longitude"
+                  />
+                </div>
+              </div>
+              <div class="col-auto">
+                <button type="submit" class="btn btn-success mb-2">
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     );
