@@ -58,10 +58,16 @@ export default class SelectLocation extends Component {
       showPin: true,
       geocodeAddressString: location.address,
       formValue: props.value || "",
-      lat: 0,
-      lng: 0
+      lat: "Loading...",
+      lng: "Loading..."
     };
   }
+
+  handleChange = event => {
+    const state = {};
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  };
 
   onForwardGeocodeResult(geocodeResult) {
     const address = geocodeResult.result.place_name;
@@ -262,9 +268,12 @@ export default class SelectLocation extends Component {
                 </label>
                 <input
                   type="text"
+                  name="lat"
                   class="form-control mb-2"
                   id="inlineFormInput"
                   placeholder="Latitude"
+                  value={this.state.lat}
+                  onChange={this.handleChange}
                 />
               </div>
               <div class="col-auto">
@@ -274,9 +283,12 @@ export default class SelectLocation extends Component {
                 <div class="input-group mb-2">
                   <input
                     type="text"
+                    name="lng"
                     class="form-control"
                     id="inlineFormInputGroup"
                     placeholder="Longitude"
+                    value={this.state.lng}
+                    onChange={this.handleChange}
                   />
                 </div>
               </div>
