@@ -261,30 +261,33 @@ export default class SelectLocation extends Component {
             <div className="pulse" />
           </Map>
           <form id="lat-long-display">
-            <div class="form-row align-items-center">
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInput">
+            <div className="form-row align-items-center">
+              <div className="col-auto">
+                <label htmlFor="inlineFormInput" className="font-weight-bold">
                   Latitude
                 </label>
                 <input
                   type="text"
                   name="lat"
-                  class="form-control mb-2"
+                  className="form-control mb-2"
                   id="inlineFormInput"
                   placeholder="Latitude"
                   value={this.state.lat}
                   onChange={this.handleChange}
                 />
               </div>
-              <div class="col-auto">
-                <label class="sr-only" for="inlineFormInputGroup">
+              <div className="col-auto">
+                <label
+                  htmlFor="inlineFormInputGroup"
+                  className="font-weight-bold"
+                >
                   Longitude
                 </label>
-                <div class="input-group mb-2">
+                <div className="input-group mb-2">
                   <input
                     type="text"
                     name="lng"
-                    class="form-control"
+                    className="form-control"
                     id="inlineFormInputGroup"
                     placeholder="Longitude"
                     value={this.state.lng}
@@ -292,8 +295,13 @@ export default class SelectLocation extends Component {
                   />
                 </div>
               </div>
-              <div class="col-auto">
-                <button type="submit" class="btn btn-success mb-2">
+            </div>
+            <div className="form-row align-items-center">
+              <div className="col-auto">
+                <button
+                  type="submit"
+                  className="btn btn-success mb-2 submit-button"
+                >
                   Submit
                 </button>
               </div>
