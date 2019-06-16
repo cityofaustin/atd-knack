@@ -20,6 +20,10 @@ code {
   min-height: 100vh;
 }
 
+.mapboxgl-canvas {
+  cursor: grab;
+}
+
 /* Basics */
 .mapboxgl-ctrl-geocoder,
 .mapboxgl-ctrl-geocoder *,
