@@ -370,21 +370,59 @@ $(document).on("knack-view-render.view_1996", function(event, scene) {
 //////////////////////////////////////////////////
 $(document).on("knack-scene-render.scene_716", function(event, scene) {
   console.log("~ scene_716 rendered ~");
+  var $view2587 = $("#view_2587");
 
-  //   Add link/button for React drop a pin applet
-  $view.append(
-    '<a href="https://atd-geo-knack-ui.netlify.com/" target="_blank">\
-        <input type="submit" value="Drop a Pin"/>\
-    </a>'
+  // Add React app as iframe
+  $(
+    '<iframe src="https://deploy-preview-15--wonderful-heyrovsky-db4c26.netlify.com/" frameborder="0" scrolling="yes" id="myFrame" \
+    style="width: 100%;height: 523px;"></iframe>'
+  ).appendTo($view2587);
+
+  $view2587.append(
+    '<button id="pin-select-button">Select pin location</button>'
   );
 
-  //   Register Knack API variables as cookies
-  //   TODO
-
-  //   Hide form entry fields
-  $view.find("form").hide();
-  //   Hide View Header
-  //   $view.find(".view-header").hide();
+  $("#pin-select-button").on("click", () => {
+    debugger;
+    var lat = $("#inlineFormInput").value;
+    var lon = $("#inlineFormInputGroup").value;
+    console.log("lat", lat);
+    console.log("lon", lon);
+  });
 
   debugger;
+
+  //   Register Knack API variables as cookies
+  // document.cookie = "ATD_geoKnack_sceneId=scene_716";
+  // document.cookie = "ATD_geoKnack_viewId=view_2587";
+  // document.cookie = "ATD_geoKnack_addressFieldId=field_3194";
+  // document.cookie = "ATD_geoKnack_addressFieldId=field_3194";
+
+  //   Hide form entry fields
+  $view2587.find("form").hide();
+
+  // Hide the submit button in the React app
+  // setTimeout(function() {
+  //   $(".submit-button").style.display = "none";
+  // }, 2000)
+
+  debugger;
+
+  // POST ENDPOINT
+  // https://us-east-1-renderer-write.knack.com/v1/scenes/scene_716/views/view_2587/records/?format=both&callback=jQuery17208164001805214571_1560784713434
+
+  // EXAMPLE REQUEST PAYLOAD
+  // TODO: Ask Diana about Lat/Lons getting actually stored to the DB vs just geo-coded addresses
+  // {
+  //   field_3194: {
+  //     latitude: "30.266184073558826",
+  //     longitude: "-97.7460479736328"
+  //   },
+  //   crumbtrail: {},
+  //   coords: { latitude: 30.344690099999994, longitude: -97.6781298 },
+  //   url:
+  //     "https://atd.knack.com/21-may-2019-test-signs-migration-atd-data-tracker#view-work-orders-marking-details/view-work-orders-markings-job-details/",
+  //   parent_url:
+  //     "https://atd.knack.com/21-may-2019-test-signs-migration-atd-data-tracker#view-work-orders-marking-details"
+  // };
 });
