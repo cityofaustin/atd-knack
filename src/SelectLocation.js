@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactMapboxGl from "react-mapbox-gl";
-import { NavigationControl } from "mapbox-gl";
+import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
 
@@ -27,6 +27,13 @@ const geocoderControl = new MapboxGeocoder({
   // countries: 'us',
   limit: 5,
   trackProximity: true
+});
+
+const geolocateControl = new GeolocateControl({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+  trackUserLocation: true
 });
 
 export default class SelectLocation extends Component {
@@ -121,6 +128,9 @@ export default class SelectLocation extends Component {
     const zoomControl = new NavigationControl();
     map.addControl(zoomControl, "bottom-right");
     map.addControl(geocoderControl, "top-left");
+
+    // add geolocate control to map
+    map.addControl(geolocateControl, "top-right");
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
 
