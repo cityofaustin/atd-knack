@@ -378,25 +378,26 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view2587);
 
+  // Add button to external React app
   $view2587.append(
-    '<button id="pin-select-button">Select pin location</button>'
+    '<a href="https://atd-geo-knack-ui.netlify.com?sceneId=scene_716&viewId=view_2587&fieldId=field_3194&knackUser=' +
+      window.window.Knack.user.attributes.token +
+      '" target="_blank">\
+        <input type="submit" value="Drop a Pin"/>\
+    </a>'
   );
 
-  $("#pin-select-button").on("click", () => {
-    debugger;
-    var lat = $("#inlineFormInput").value;
-    var lon = $("#inlineFormInputGroup").value;
-    console.log("lat", lat);
-    console.log("lon", lon);
-  });
+  // $view2587.append(
+  //   '<button id="pin-select-button">Select pin location</button>'
+  // );
 
-  debugger;
-
-  //   Register Knack API variables as cookies
-  // document.cookie = "ATD_geoKnack_sceneId=scene_716";
-  // document.cookie = "ATD_geoKnack_viewId=view_2587";
-  // document.cookie = "ATD_geoKnack_addressFieldId=field_3194";
-  // document.cookie = "ATD_geoKnack_addressFieldId=field_3194";
+  // $("#pin-select-button").on("click", () => {
+  //   debugger;
+  //   var lat = $("#inlineFormInput").value;
+  //   var lon = $("#inlineFormInputGroup").value;
+  //   console.log("lat", lat);
+  //   console.log("lon", lon);
+  // });
 
   //   Hide form entry fields
   $view2587.find("form").hide();
@@ -406,13 +407,10 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
   //   $(".submit-button").style.display = "none";
   // }, 2000)
 
-  debugger;
-
   // POST ENDPOINT
   // https://us-east-1-renderer-write.knack.com/v1/scenes/scene_716/views/view_2587/records/?format=both&callback=jQuery17208164001805214571_1560784713434
 
   // EXAMPLE REQUEST PAYLOAD
-  // TODO: Ask Diana about Lat/Lons getting actually stored to the DB vs just geo-coded addresses
   // {
   //   field_3194: {
   //     latitude: "30.266184073558826",
