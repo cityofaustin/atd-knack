@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactMapboxGl from "react-mapbox-gl";
-import { NavigationControl } from "mapbox-gl";
+import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
 
@@ -27,6 +27,13 @@ const geocoderControl = new MapboxGeocoder({
   // countries: 'us',
   limit: 5,
   trackProximity: true
+});
+
+const geolocateControl = new GeolocateControl({
+  positionOptions: {
+    enableHighAccuracy: true
+  },
+  trackUserLocation: true
 });
 
 export default class SelectLocation extends Component {
@@ -57,9 +64,17 @@ export default class SelectLocation extends Component {
       center: [location.position.lng, location.position.lat],
       showPin: true,
       geocodeAddressString: location.address,
-      formValue: props.value || ""
+      formValue: props.value || "",
+      lat: "Loading...",
+      lng: "Loading..."
     };
   }
+
+  handleChange = event => {
+    const state = {};
+    state[event.target.name] = event.target.value;
+    this.setState(state);
+  };
 
   onForwardGeocodeResult(geocodeResult) {
     const address = geocodeResult.result.place_name;
@@ -81,6 +96,12 @@ export default class SelectLocation extends Component {
 
   onMoveEnd(map) {
     const center = map.getCenter();
+    console.log(center, "inside onMoveEnd()");
+    this.setState({
+      lat: center.lat,
+      lng: center.lng
+    });
+    console.log(this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -89,9 +110,10 @@ export default class SelectLocation extends Component {
 
   // calls us-forms-system onChange to propogate values up to the form
   onChange(newFormValue) {
-    // TODO address onChange error that occurs upon location selection in map
-    this.props.onChange(newFormValue);
+    // onChange below errors upon location selection in map
+    // this.props.onChange(newFormValue);
     this.setState({ formValue: newFormValue });
+    console.log(this.state.formValue);
   }
 
   onGeocoderClear() {
@@ -112,6 +134,9 @@ export default class SelectLocation extends Component {
     const zoomControl = new NavigationControl();
     map.addControl(zoomControl, "bottom-right");
     map.addControl(geocoderControl, "top-left");
+
+    // add geolocate control to map
+    map.addControl(geolocateControl, "top-right");
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
 
@@ -245,6 +270,53 @@ export default class SelectLocation extends Component {
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
           </Map>
+          <form id="lat-long-display">
+            <div className="form-row align-items-center">
+              <div className="col-auto">
+                <label htmlFor="inlineFormInput" className="font-weight-bold">
+                  Latitude
+                </label>
+                <input
+                  type="text"
+                  name="lat"
+                  className="form-control mb-2"
+                  id="inlineFormInput"
+                  placeholder="Latitude"
+                  value={this.state.lat}
+                  onChange={this.handleChange}
+                />
+              </div>
+              <div className="col-auto">
+                <label
+                  htmlFor="inlineFormInputGroup"
+                  className="font-weight-bold"
+                >
+                  Longitude
+                </label>
+                <div className="input-group mb-2">
+                  <input
+                    type="text"
+                    name="lng"
+                    className="form-control"
+                    id="inlineFormInputGroup"
+                    placeholder="Longitude"
+                    value={this.state.lng}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="form-row align-items-center">
+              <div className="col-auto">
+                <button
+                  type="submit"
+                  className="btn btn-success mb-2 submit-button"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     );
