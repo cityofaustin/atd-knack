@@ -374,18 +374,34 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
 
   // Add React app as iframe
   $(
-    '<iframe src="https://deploy-preview-15--wonderful-heyrovsky-db4c26.netlify.com/" frameborder="0" scrolling="yes" id="myFrame" \
+    '<iframe src="https://localhost:3000/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view2587);
 
+  $view2587.find("form").hide();
+
+  // set up Post Message connection with iframe and parent page
+  //create popup window
+  var domain =
+    "https://atd.knack.com/21-may-2019-test-signs-migration-atd-data-tracker#view-work-orders-marking-details/view-work-orders-markings-job-details/";
+  var iframe = document.getElementById("mapIFrame").contentWindow;
+
+  //periodical message sender
+  setInterval(function() {
+    var message = "Hello!  The time is: " + new Date().getTime();
+    console.log("blog.local:  sending message:  " + message);
+    iframe.postMessage(message, domain); //send the message and target URI
+  }, 6000);
+  // end post message
+
   // Add button to external React app
-  $view2587.append(
-    '<a href="https://atd-geo-knack-ui.netlify.com?sceneId=scene_716&viewId=view_2587&fieldId=field_3194&knackUser=' +
-      window.window.Knack.user.attributes.token +
-      '" target="_blank">\
-        <input type="submit" value="Drop a Pin"/>\
-    </a>'
-  );
+  // $view2587.append(
+  //   '<a href="https://atd-geo-knack-ui.netlify.com?sceneId=scene_716&viewId=view_2587&fieldId=field_3194&knackUser=' +
+  //     window.window.Knack.user.attributes.token +
+  //     '" target="_blank">\
+  //       <input type="submit" value="Drop a Pin"/>\
+  //   </a>'
+  // );
 
   // $view2587.append(
   //   '<button id="pin-select-button">Select pin location</button>'
@@ -398,9 +414,6 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
   //   console.log("lat", lat);
   //   console.log("lon", lon);
   // });
-
-  //   Hide form entry fields
-  $view2587.find("form").hide();
 
   // Hide the submit button in the React app
   // setTimeout(function() {
