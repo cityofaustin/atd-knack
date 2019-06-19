@@ -257,6 +257,7 @@ export default class SelectLocation extends Component {
 
   componentDidMount() {
     window.isReady = "true";
+    console.log("howdy mundo");
   }
 
   render() {
