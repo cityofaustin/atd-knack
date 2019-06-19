@@ -167,7 +167,7 @@ export default class SelectLocation extends Component {
       type: "arcgisraster",
       url:
         "https://tiles.arcgis.com/tiles/0L95CJ0VTaxqcmED/arcgis/rest/services/Imagery_2018/MapServer?f=json",
-      tileSize: 256
+      tileSize: 512
     });
 
     map.addLayer({
