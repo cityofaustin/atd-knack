@@ -3,6 +3,7 @@ import ReactMapboxGl from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
+const ArcGISRasterTileSource = require("mapbox-gl-arcgis-tiled-map-service");
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -155,6 +156,32 @@ export default class SelectLocation extends Component {
         geocoderControl.setProximity(null);
       }
     }
+
+    map.addSourceType("arcgisraster", ArcGISRasterTileSource, function(err) {
+      if (err) {
+        /*do something*/
+      }
+    });
+
+    map.addSource("imagery_2018", {
+      type: "arcgisraster",
+      url:
+        "https://tiles.arcgis.com/tiles/0L95CJ0VTaxqcmED/arcgis/rest/services/Imagery_2018/MapServer?f=json",
+      tileSize: 256
+    });
+
+    map.addLayer({
+      id: "satellite",
+      type: "raster",
+      source: "imagery_2018",
+      minzoom: 0,
+      maxzoom: 18,
+      paint: {
+        "raster-opacity": 1
+      }
+    });
+    map.setLayoutProperty("satellite", "visibility", "visible");
+    console.log("layer loaded");
 
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
