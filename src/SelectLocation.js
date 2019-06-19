@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Source } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -11,6 +11,20 @@ const MAPBOX_TOKEN =
   "pk.eyJ1Ijoiam9obmNsYXJ5IiwiYSI6ImNqbjhkZ25vcjF2eTMzbG52dGRlbnVqOHAifQ.y1xhnHxbB6KlpQgTp1g1Ow";
 const GEOCODE_DEBUG = false;
 const MAP_LANGUAGE = "englishMap";
+const RASTER_SOURCE_OPTIONS = {
+  type: "raster",
+  tiles: [
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+  ],
+  tileSize: 512
+};
+const ROAD_LABELS_OPTIONS = {
+  type: "raster",
+  tiles: [
+    "https://{s}.tile.openstreetmap.se/hydda/roads_and_labels/{z}/{x}/{y}.png"
+  ],
+  tileSize: 512
+};
 
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
@@ -67,9 +81,23 @@ export default class SelectLocation extends Component {
       geocodeAddressString: location.address,
       formValue: props.value || "",
       lat: "Loading...",
-      lng: "Loading..."
+      lng: "Loading...",
+      layer: ""
     };
   }
+
+  toggleLayer = event => {
+    if (event.target.checked) {
+      const layerClicked = event.target.id;
+      this.setState({
+        layer: layerClicked
+      });
+    } else {
+      this.setState({
+        layer: ""
+      });
+    }
+  };
 
   handleChange = event => {
     const state = {};
@@ -157,31 +185,34 @@ export default class SelectLocation extends Component {
       }
     }
 
-    map.addSourceType("arcgisraster", ArcGISRasterTileSource, function(err) {
-      if (err) {
-        /*do something*/
-      }
-    });
+    // TODO revisit after web mercator aerial tile service published
 
-    map.addSource("imagery_2018", {
-      type: "arcgisraster",
-      url:
-        "https://tiles.arcgis.com/tiles/0L95CJ0VTaxqcmED/arcgis/rest/services/Imagery_2018/MapServer?f=json",
-      tileSize: 512
-    });
+    // map.addSourceType("arcgisraster", ArcGISRasterTileSource, function(err) {
+    //   if (err) {
+    //     /*do something*/
+    //   }
+    // });
 
-    map.addLayer({
-      id: "satellite",
-      type: "raster",
-      source: "imagery_2018",
-      minzoom: 0,
-      maxzoom: 18,
-      paint: {
-        "raster-opacity": 1
-      }
-    });
-    map.setLayoutProperty("satellite", "visibility", "visible");
-    console.log("layer loaded");
+    // map.addSource("imagery_2018", {
+    //   type: "arcgisraster",
+    //   url:
+    //     // "http://coagisp.austintexas.gov/arcgis/rest/services/AerialMosaics/AerialImages2012/MapServer?f=json"
+    //     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    //   tileSize: 512
+    // });
+
+    // map.addLayer({
+    //   id: "satellite",
+    //   type: "raster",
+    //   source: "imagery_2018",
+    //   minzoom: 0,
+    //   maxzoom: 18,
+    //   paint: {
+    //     "raster-opacity": 1
+    //   }
+    // });
+    // map.setLayoutProperty("satellite", "visibility", "visible");
+    // console.log("layer loaded");
 
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
@@ -296,7 +327,31 @@ export default class SelectLocation extends Component {
           >
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
+            <Source id="satellite" tileJsonSource={RASTER_SOURCE_OPTIONS} />
+            {this.state.layer === "satellite" ? (
+              <Layer type="raster" id="satellite" sourceId="satellite" />
+            ) : (
+              ""
+            )}
+            {/* TODO find a roads/labels layer */}
+            {/* <Source id="roads-labels" tileJsonSource={ROAD_LABELS_OPTIONS} />
+            <Layer type="raster" id="roads-labels" sourceId="roads-labels" /> */}
           </Map>
+          <div className="input-group mb-3 layer-buttons">
+            <div className="input-group-prepend">
+              <div className="ibtn btn-secondary">
+                <label htmlFor="satellite" className="input-group-text">
+                  Satellite
+                </label>
+                <input
+                  id="satellite"
+                  type="checkbox"
+                  aria-label="Checkbox for following text input"
+                  onClick={this.toggleLayer}
+                />
+              </div>
+            </div>
+          </div>
           <form id="lat-long-display">
             <div className="form-row align-items-center">
               <div className="col-auto">
