@@ -282,46 +282,6 @@ export default class SelectLocation extends Component {
             <div className="pulse" />
           </Map>
           <LayerButtons toggleStyle={this.toggleStyle} />
-          {/* <div className="input-group mb-3 layer-buttons">
-            <div className="input-group-prepend">
-              <div className="ibtn btn-secondary">
-                <label htmlFor="streets-v9" className="input-group-text">
-                  Streets
-                </label>
-                <input
-                  name="style"
-                  id="streets-v9"
-                  type="radio"
-                  aria-label="Checkbox for following text input"
-                  onClick={this.toggleStyle}
-                  defaultChecked
-                />
-                <label htmlFor="satellite" className="input-group-text">
-                  Satellite
-                </label>
-                <input
-                  name="style"
-                  id="satellite-v9"
-                  type="radio"
-                  aria-label="Checkbox for following text input"
-                  onClick={this.toggleStyle}
-                />
-                <label
-                  htmlFor="satellite-streets-v9"
-                  className="input-group-text"
-                >
-                  Hybrid
-                </label>
-                <input
-                  name="style"
-                  id="satellite-streets-v9"
-                  type="radio"
-                  aria-label="Checkbox for following text input"
-                  onClick={this.toggleStyle}
-                />
-              </div>
-            </div>
-          </div> */}
           <form id="lat-long-display">
             <div className="form-row align-items-center">
               <div className="col-auto">
