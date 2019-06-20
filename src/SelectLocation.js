@@ -258,6 +258,17 @@ export default class SelectLocation extends Component {
   componentDidMount() {
     window.isReady = "true";
     console.log("howdy mundo");
+
+    //respond to events
+    window.addEventListener(
+      "message",
+      function(event) {
+        // if (event.origin !== "https://davidwalsh.name") return;
+        console.log("message received:  " + event.data, event);
+        event.source.postMessage("holla back youngin!", event.origin);
+      },
+      false
+    );
   }
 
   render() {
