@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { Marker } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -269,6 +269,12 @@ export default class SelectLocation extends Component {
           >
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
+            <Marker
+              coordinates={[-97.7460479736328, 30.266184073558826]}
+              anchor="bottom"
+            >
+              <img src="https://i.imgur.com/MK4NUzI.png" />
+            </Marker>
           </Map>
           <form id="lat-long-display">
             <div className="form-row align-items-center">
