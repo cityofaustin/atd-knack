@@ -66,9 +66,17 @@ export default class SelectLocation extends Component {
       geocodeAddressString: location.address,
       formValue: props.value || "",
       lat: "Loading...",
-      lng: "Loading..."
+      lng: "Loading...",
+      markers: [
+        { lng: -97.7460479736328, lat: 30.266184073558826 },
+        { lng: -97.72012764103664, lat: 30.3082008239101 }
+      ]
     };
   }
+
+  markerDetails = () => {
+    console.log("You clicked the marker");
+  };
 
   handleChange = event => {
     const state = {};
@@ -269,12 +277,16 @@ export default class SelectLocation extends Component {
           >
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
-            <Marker
-              coordinates={[-97.7460479736328, 30.266184073558826]}
-              anchor="bottom"
-            >
-              <img src="https://i.imgur.com/MK4NUzI.png" />
-            </Marker>
+            {this.state.markers.map((marker, i) => (
+              <Marker
+                key={i}
+                coordinates={[marker.lng, marker.lat]}
+                anchor="bottom"
+                onClick={this.markerDetails}
+              >
+                <img src="https://i.imgur.com/MK4NUzI.png" />
+              </Marker>
+            ))}
           </Map>
           <form id="lat-long-display">
             <div className="form-row align-items-center">
