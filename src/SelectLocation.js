@@ -256,20 +256,20 @@ export default class SelectLocation extends Component {
   }
 
   componentDidMount() {
-    window.isReady = "true";
-    console.log("howdy mundo");
+    const thisComponent = this;
 
-    //respond to events
-    window.addEventListener(
-      "message",
-      function(event) {
-        console.log(event);
-        if (event.origin !== "https://atd.knack.com/") return;
+    window.addEventListener("message", function(event) {
+      if (event.origin !== "https://atd.knack.com") return;
+
+      if (event.data === "KNACK_LAT_LON_REQUEST") {
         console.log("message received:  " + event.data, event);
-        event.source.postMessage("holla back youngin!", event.origin);
-      },
-      false
-    );
+        // send lat/lon back to Knack as comma separated string
+        event.source.postMessage(
+          `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
+          event.origin
+        );
+      }
+    });
   }
 
   render() {
@@ -290,7 +290,7 @@ export default class SelectLocation extends Component {
             <div className="pulse" />
           </Map>
           <form id="lat-long-display">
-            <div className="form-row align-items-center">
+            <div className="form-row align-items-center mr-5">
               <div className="col-auto">
                 <label htmlFor="inlineFormInput" className="font-weight-bold">
                   Latitude
@@ -323,16 +323,6 @@ export default class SelectLocation extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-              </div>
-            </div>
-            <div className="form-row align-items-center">
-              <div className="col-auto">
-                <button
-                  type="submit"
-                  className="btn btn-success mb-2 submit-button"
-                >
-                  Submit
-                </button>
               </div>
             </div>
           </form>

@@ -374,7 +374,7 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
 
   // Add React app as iframe
   $(
-    '<iframe src="https://deploy-preview-23--wonderful-heyrovsky-db4c26.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+    '<iframe src="https://localhost:3001/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view2587);
 
@@ -382,58 +382,27 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
 
   // set up Post Message connection with iframe and parent page
   //create popup window
-  var domain = "https://atd.knack.com/";
   var iframe = document.getElementById("mapIFrame").contentWindow;
-  console.log(iframe);
+  // create lat/lon request button
+  $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
+    $view2587
+  );
 
-  //periodical message sender
-  setInterval(function() {
-    var message = "Hello!  The time is: " + new Date().getTime();
-    console.log("blog.local:  sending message:  " + message);
-    iframe.postMessage(message, domain); //send the message and target URI
-  }, 6000);
-  // end post message
+  // send message to iframe on button click
+  $("#latLonButton").on("click", function(e) {
+    var message = "KNACK_LAT_LON_REQUEST";
+    console.log("knack:  sending message:  " + message);
+    iframe.postMessage(message, "*"); //send the message and target URI
+  });
 
-  // Add button to external React app
-  // $view2587.append(
-  //   '<a href="https://atd-geo-knack-ui.netlify.com?sceneId=scene_716&viewId=view_2587&fieldId=field_3194&knackUser=' +
-  //     window.window.Knack.user.attributes.token +
-  //     '" target="_blank">\
-  //       <input type="submit" value="Drop a Pin"/>\
-  //   </a>'
-  // );
+  // listen for response
+  window.addEventListener("message", function(event) {
+    console.log("message received:  " + event.data, event);
+    var latLonResponse = event.data.split(", ");
+    $view2587.find("form").show();
+    var $latLonFields = $("#kn-input-field_3194");
 
-  // $view2587.append(
-  //   '<button id="pin-select-button">Select pin location</button>'
-  // );
-
-  // $("#pin-select-button").on("click", () => {
-  //   debugger;
-  //   var lat = $("#inlineFormInput").value;
-  //   var lon = $("#inlineFormInputGroup").value;
-  //   console.log("lat", lat);
-  //   console.log("lon", lon);
-  // });
-
-  // Hide the submit button in the React app
-  // setTimeout(function() {
-  //   $(".submit-button").style.display = "none";
-  // }, 2000)
-
-  // POST ENDPOINT
-  // https://us-east-1-renderer-write.knack.com/v1/scenes/scene_716/views/view_2587/records/?format=both&callback=jQuery17208164001805214571_1560784713434
-
-  // EXAMPLE REQUEST PAYLOAD
-  // {
-  //   field_3194: {
-  //     latitude: "30.266184073558826",
-  //     longitude: "-97.7460479736328"
-  //   },
-  //   crumbtrail: {},
-  //   coords: { latitude: 30.344690099999994, longitude: -97.6781298 },
-  //   url:
-  //     "https://atd.knack.com/21-may-2019-test-signs-migration-atd-data-tracker#view-work-orders-marking-details/view-work-orders-markings-job-details/",
-  //   parent_url:
-  //     "https://atd.knack.com/21-may-2019-test-signs-migration-atd-data-tracker#view-work-orders-marking-details"
-  // };
+    $latLonFields.find("#latitude").val(latLonResponse[0]);
+    $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
+  });
 });
