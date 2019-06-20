@@ -263,7 +263,8 @@ export default class SelectLocation extends Component {
     window.addEventListener(
       "message",
       function(event) {
-        // if (event.origin !== "https://davidwalsh.name") return;
+        console.log(event);
+        if (event.origin !== "https://atd.knack.com/") return;
         console.log("message received:  " + event.data, event);
         event.source.postMessage("holla back youngin!", event.origin);
       },
