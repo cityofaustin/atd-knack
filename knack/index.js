@@ -382,9 +382,9 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
 
   // set up Post Message connection with iframe and parent page
   //create popup window
-  var domain =
-    "https://atd.knack.com/21-may-2019-test-signs-migration-atd-data-tracker#view-work-orders-marking-details/view-work-orders-markings-job-details/";
+  var domain = "https://atd.knack.com/";
   var iframe = document.getElementById("mapIFrame").contentWindow;
+  console.log(iframe);
 
   //periodical message sender
   setInterval(function() {
