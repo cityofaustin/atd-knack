@@ -101,6 +101,8 @@ export default class SelectLocation extends Component {
       lat: center.lat,
       lng: center.lng
     });
+    window.lat = center.lat;
+    window.lon = center.lon;
     console.log(this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
@@ -253,6 +255,23 @@ export default class SelectLocation extends Component {
     this.reverseGeocode({ lngLat });
   }
 
+  componentDidMount() {
+    const thisComponent = this;
+
+    window.addEventListener("message", function(event) {
+      if (event.origin !== "https://atd.knack.com") return;
+
+      if (event.data === "KNACK_LAT_LON_REQUEST") {
+        console.log("message received:  " + event.data, event);
+        // send lat/lon back to Knack as comma separated string
+        event.source.postMessage(
+          `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
+          event.origin
+        );
+      }
+    });
+  }
+
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
 
@@ -271,7 +290,7 @@ export default class SelectLocation extends Component {
             <div className="pulse" />
           </Map>
           <form id="lat-long-display">
-            <div className="form-row align-items-center">
+            <div className="form-row align-items-center mr-5">
               <div className="col-auto">
                 <label htmlFor="inlineFormInput" className="font-weight-bold">
                   Latitude
@@ -304,16 +323,6 @@ export default class SelectLocation extends Component {
                     onChange={this.handleChange}
                   />
                 </div>
-              </div>
-            </div>
-            <div className="form-row align-items-center">
-              <div className="col-auto">
-                <button
-                  type="submit"
-                  className="btn btn-success mb-2 submit-button"
-                >
-                  Submit
-                </button>
               </div>
             </div>
           </form>
