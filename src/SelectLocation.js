@@ -3,6 +3,7 @@ import ReactMapboxGl from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
+import LayerButtons from "./Components/LayerButtons";
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -280,7 +281,8 @@ export default class SelectLocation extends Component {
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
           </Map>
-          <div className="input-group mb-3 layer-buttons">
+          <LayerButtons toggleStyle={this.toggleStyle} />
+          {/* <div className="input-group mb-3 layer-buttons">
             <div className="input-group-prepend">
               <div className="ibtn btn-secondary">
                 <label htmlFor="streets-v9" className="input-group-text">
@@ -319,7 +321,7 @@ export default class SelectLocation extends Component {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
           <form id="lat-long-display">
             <div className="form-row align-items-center">
               <div className="col-auto">
