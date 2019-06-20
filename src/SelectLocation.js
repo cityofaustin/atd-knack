@@ -68,14 +68,20 @@ export default class SelectLocation extends Component {
       lat: "Loading...",
       lng: "Loading...",
       markers: [
-        { lng: -97.7460479736328, lat: 30.266184073558826 },
-        { lng: -97.72012764103664, lat: 30.3082008239101 }
+        { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
+        { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
+        { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
       ]
     };
   }
 
-  markerDetails = () => {
+  markerDetails = event => {
     console.log("You clicked the marker");
+    console.log(
+      event.target.dataset.lat,
+      event.target.dataset.lng,
+      event.target.dataset.id
+    );
   };
 
   handleChange = event => {
@@ -284,7 +290,12 @@ export default class SelectLocation extends Component {
                 anchor="bottom"
                 onClick={this.markerDetails}
               >
-                <img src="https://i.imgur.com/MK4NUzI.png" />
+                <img
+                  data-lat={marker.lat}
+                  data-lng={marker.lng}
+                  data-id={marker.id}
+                  src="https://i.imgur.com/MK4NUzI.png"
+                />
               </Marker>
             ))}
           </Map>
