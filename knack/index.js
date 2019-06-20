@@ -374,7 +374,7 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
 
   // Add React app as iframe
   $(
-    '<iframe src="https://localhost:3000/" frameborder="0" scrolling="yes" id="mapIFrame" \
+    '<iframe src="https://deploy-preview-23--wonderful-heyrovsky-db4c26.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view2587);
 
