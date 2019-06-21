@@ -82,10 +82,14 @@ export default class SelectLocation extends Component {
     this.setState({ sign: "" });
   };
 
-  setSign = (event, id) => {
+  signClick = (event, id) => {
+    // set state.sign for Popup parameters in render, center map to clicked sign
     const clickedSign = this.state.signs.find(sign => sign.id === id);
-    console.log("you clicked the sign", clickedSign);
-    this.setState({ sign: clickedSign });
+    const newCenter = [clickedSign.lng, clickedSign.lat];
+    this.setState({
+      sign: clickedSign,
+      center: newCenter
+    });
   };
 
   handleChange = event => {
@@ -114,12 +118,10 @@ export default class SelectLocation extends Component {
 
   onMoveEnd(map) {
     const center = map.getCenter();
-    console.log(center, "inside onMoveEnd()");
     this.setState({
       lat: center.lat,
       lng: center.lng
     });
-    console.log(this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -267,7 +269,6 @@ export default class SelectLocation extends Component {
       this.passGeocodedResult({ lngLat, addressString });
       return;
     }
-
     this.reverseGeocode({ lngLat });
   }
 
@@ -284,6 +285,7 @@ export default class SelectLocation extends Component {
             onDragStart={this.onDragStart}
             onDragEnd={this.onDragEnd}
             onMoveEnd={this.onMoveEnd}
+            center={this.state.center}
           >
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
@@ -292,7 +294,7 @@ export default class SelectLocation extends Component {
                 <Feature
                   key={sign.id}
                   coordinates={[sign.lng, sign.lat]}
-                  onClick={e => this.setSign(e, sign.id)}
+                  onClick={e => this.signClick(e, sign.id)}
                 />
               ))}
             </Layer>
@@ -302,7 +304,7 @@ export default class SelectLocation extends Component {
                 coordinates={[sign.lng, sign.lat]}
                 onClick={this.closePopup}
               >
-                <div className="container">
+                <div className="container popup">
                   <span>ID: {sign.id}</span>
                   <br />
                   <span>Latitude: {sign.lat}</span>
