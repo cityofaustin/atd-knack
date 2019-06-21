@@ -73,13 +73,15 @@ export default class SelectLocation extends Component {
         { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
         { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
         { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
-      ]
+      ],
+      sign: ""
     };
   }
 
   setSign = (event, id) => {
     const clickedSign = this.state.signs.find(sign => sign.id === id);
     console.log("you clicked the sign", clickedSign);
+    this.setState({ sign: clickedSign });
   };
 
   handleChange = event => {
@@ -267,7 +269,7 @@ export default class SelectLocation extends Component {
 
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
-
+    const sign = this.state.sign;
     return (
       <div>
         <div className="map-container">
@@ -290,6 +292,22 @@ export default class SelectLocation extends Component {
                 />
               ))}
             </Layer>
+            {sign !== "" && (
+              <Popup key={sign.id} coordinates={[sign.lng, sign.lat]}>
+                <div>
+                  <p>I'm a popup!</p>
+                  <p>ID: {sign.id}</p>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              </Popup>
+            )}
           </Map>
           <form id="lat-long-display">
             <div className="form-row align-items-center">
