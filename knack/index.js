@@ -368,24 +368,24 @@ $(document).on("knack-view-render.view_1996", function(event, scene) {
 
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
-$(document).on("knack-scene-render.scene_716", function(event, scene) {
-  console.log("~ scene_716 rendered ~");
-  var $view2587 = $("#view_2587");
+$(document).on("knack-view-render.view_2587", function(event, scene) {
+  console.log("~ view_2587 rendered ~");
+  var $view_2587 = $("#view_2587");
 
   // Add React app as iframe
   $(
     '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
-  ).appendTo($view2587);
+  ).appendTo($view_2587);
 
-  $view2587.find("form").hide();
+  $view_2587.find("form").hide();
 
   // set up Post Message connection with iframe and parent page
   //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
   // create lat/lon request button
   $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
-    $view2587
+    $view_2587
   );
 
   // send message to iframe on button click
@@ -399,7 +399,7 @@ $(document).on("knack-scene-render.scene_716", function(event, scene) {
   window.addEventListener("message", function(event) {
     console.log("message received:  " + event.data, event);
     var latLonResponse = event.data.split(", ");
-    $view2587.find("form").show();
+    $view_2587.find("form").show();
     var $latLonFields = $("#kn-input-field_3194");
 
     $latLonFields.find("#latitude").val(latLonResponse[0]);
