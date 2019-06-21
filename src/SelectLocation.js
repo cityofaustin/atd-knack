@@ -78,6 +78,10 @@ export default class SelectLocation extends Component {
     };
   }
 
+  closePopup = event => {
+    this.setState({ sign: "" });
+  };
+
   setSign = (event, id) => {
     const clickedSign = this.state.signs.find(sign => sign.id === id);
     console.log("you clicked the sign", clickedSign);
@@ -293,18 +297,17 @@ export default class SelectLocation extends Component {
               ))}
             </Layer>
             {sign !== "" && (
-              <Popup key={sign.id} coordinates={[sign.lng, sign.lat]}>
-                <div>
-                  <p>I'm a popup!</p>
-                  <p>ID: {sign.id}</p>
-                  <button
-                    type="button"
-                    className="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
-                  >
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+              <Popup
+                key={sign.id}
+                coordinates={[sign.lng, sign.lat]}
+                onClick={this.closePopup}
+              >
+                <div className="container">
+                  <span>ID: {sign.id}</span>
+                  <br />
+                  <span>Latitude: {sign.lat}</span>
+                  <br />
+                  <span>Longitude: {sign.lng}</span>
                 </div>
               </Popup>
             )}
