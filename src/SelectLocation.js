@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapboxGl, { Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Marker, Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -14,6 +14,8 @@ const MAP_LANGUAGE = "englishMap";
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
+
+const layoutLayer = { "icon-image": "circle-15" };
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -67,7 +69,7 @@ export default class SelectLocation extends Component {
       formValue: props.value || "",
       lat: "Loading...",
       lng: "Loading...",
-      markers: [
+      signs: [
         { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
         { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
         { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
@@ -283,7 +285,12 @@ export default class SelectLocation extends Component {
           >
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
-            {this.state.markers.map((marker, i) => (
+            <Layer type="symbol" id="signs" layout={layoutLayer}>
+              {this.state.signs.map(sign => (
+                <Feature key={sign.id} coordinates={[sign.lng, sign.lat]} />
+              ))}
+            </Layer>
+            {/* {this.state.markers.map((marker, i) => (
               <Marker
                 key={i}
                 coordinates={[marker.lng, marker.lat]}
@@ -297,7 +304,7 @@ export default class SelectLocation extends Component {
                   src="https://i.imgur.com/MK4NUzI.png"
                 />
               </Marker>
-            ))}
+            ))} */}
           </Map>
           <form id="lat-long-display">
             <div className="form-row align-items-center">
