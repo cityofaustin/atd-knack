@@ -372,9 +372,24 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   console.log("~ view_2587 rendered ~");
   var $view_2587 = $("#view_2587");
 
+  // Message for React app API call for sign records
+  const message = {
+    message: "SIGNS_API_REQUEST",
+    view: "view_2588",
+    scene: "scene_716",
+    token: Knack.getUserToken(),
+    app_id: Knack.application_id
+  };
+
+  // TODO: where to call this function?
+  // function sendMessageToApp(message) {
+  //   iframe.postMessage(message, "*");
+  // }
+  // sendMessageToApp(message);
+
   // Add React app as iframe
   $(
-    '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+    '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view_2587);
 
