@@ -77,13 +77,9 @@ export default class SelectLocation extends Component {
     };
   }
 
-  markerDetails = event => {
-    console.log("You clicked the marker");
-    console.log(
-      event.target.dataset.lat,
-      event.target.dataset.lng,
-      event.target.dataset.id
-    );
+  setSign = (event, id) => {
+    const clickedSign = this.state.signs.find(sign => sign.id === id);
+    console.log("you clicked the sign", clickedSign);
   };
 
   handleChange = event => {
@@ -287,24 +283,13 @@ export default class SelectLocation extends Component {
             <div className="pulse" />
             <Layer type="symbol" id="signs" layout={layoutLayer}>
               {this.state.signs.map(sign => (
-                <Feature key={sign.id} coordinates={[sign.lng, sign.lat]} />
+                <Feature
+                  key={sign.id}
+                  coordinates={[sign.lng, sign.lat]}
+                  onClick={e => this.setSign(e, sign.id)}
+                />
               ))}
             </Layer>
-            {/* {this.state.markers.map((marker, i) => (
-              <Marker
-                key={i}
-                coordinates={[marker.lng, marker.lat]}
-                anchor="bottom"
-                onClick={this.markerDetails}
-              >
-                <img
-                  data-lat={marker.lat}
-                  data-lng={marker.lng}
-                  data-id={marker.id}
-                  src="https://i.imgur.com/MK4NUzI.png"
-                />
-              </Marker>
-            ))} */}
           </Map>
           <form id="lat-long-display">
             <div className="form-row align-items-center">
