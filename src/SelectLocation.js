@@ -101,8 +101,6 @@ export default class SelectLocation extends Component {
       lat: center.lat,
       lng: center.lng
     });
-    window.lat = center.lat;
-    window.lon = center.lon;
     console.log(this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
