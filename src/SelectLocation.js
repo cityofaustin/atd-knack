@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactMapboxGl, { Marker, Layer, Feature, Popup } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -78,11 +78,11 @@ export default class SelectLocation extends Component {
     };
   }
 
-  closePopup = event => {
+  closePopup = () => {
     this.setState({ sign: "" });
   };
 
-  signClick = (event, id) => {
+  signClick = id => {
     // set state.sign for Popup parameters in render, center map to clicked sign
     const clickedSign = this.state.signs.find(sign => sign.id === id);
     const newCenter = [clickedSign.lng, clickedSign.lat];
@@ -294,7 +294,7 @@ export default class SelectLocation extends Component {
                 <Feature
                   key={sign.id}
                   coordinates={[sign.lng, sign.lat]}
-                  onClick={e => this.signClick(e, sign.id)}
+                  onClick={() => this.signClick(sign.id)}
                 />
               ))}
             </Layer>
