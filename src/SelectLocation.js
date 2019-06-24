@@ -3,6 +3,7 @@ import ReactMapboxGl from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
+import LayerButtons from "./Components/LayerButtons";
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -66,9 +67,20 @@ export default class SelectLocation extends Component {
       geocodeAddressString: location.address,
       formValue: props.value || "",
       lat: "Loading...",
-      lng: "Loading..."
+      lng: "Loading...",
+      style: "satellite-streets-v9"
     };
   }
+
+  toggleStyle = event => {
+    // toggle style based on id of radio button
+    if (event.target.checked) {
+      const styleClicked = event.target.id;
+      this.setState({
+        style: styleClicked
+      });
+    }
+  };
 
   handleChange = event => {
     const state = {};
@@ -96,12 +108,11 @@ export default class SelectLocation extends Component {
 
   onMoveEnd(map) {
     const center = map.getCenter();
-    console.log(center, "inside onMoveEnd()");
     this.setState({
       lat: center.lat,
       lng: center.lng
     });
-    console.log(this.state.lat, this.state.lng);
+    console.log("Lat/lng state update", this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -278,7 +289,7 @@ export default class SelectLocation extends Component {
         <div className="map-container">
           <Map
             // eslint-disable-next-line react/style-prop-object
-            style={"mapbox://styles/mapbox/streets-v9"}
+            style={`mapbox://styles/mapbox/${this.state.style}`}
             onStyleLoad={this.onStyleLoad}
             onDragStart={this.onDragStart}
             onDragEnd={this.onDragEnd}
@@ -287,6 +298,7 @@ export default class SelectLocation extends Component {
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
           </Map>
+          <LayerButtons toggleStyle={this.toggleStyle} />
           <form id="lat-long-display">
             <div className="form-row align-items-center mr-5">
               <div className="col-auto">

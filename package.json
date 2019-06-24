@@ -8,10 +8,12 @@
     "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
     "mapbox-gl": "^0.52.0-beta.2",
+    "mapbox-gl-arcgis-tiled-map-service": "^0.3.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-mapbox-gl": "3.9.2",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "styled-components": "^4.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
