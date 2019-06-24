@@ -407,7 +407,8 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
   // send message to iframe on button click
   $("#latLonButton").on("click", function(e) {
-    var message = "KNACK_LAT_LON_REQUEST";
+    var coordMessage = { message: "KNACK_LAT_LON_REQUEST" };
+    const message = JSON.stringify(coordMessage);
     console.log("knack:  sending message:  " + message);
     iframe.postMessage(message, "*"); //send the message and target URI
   });
@@ -423,6 +424,7 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
     $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
   });
 
+  // Wait for iFrame to load before sending message to React app
   $("#mapIFrame").load(function() {
     sendMessageToApp(markerMessage);
   });

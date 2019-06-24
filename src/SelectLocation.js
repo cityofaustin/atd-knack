@@ -3,6 +3,7 @@ import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
+const axios = require("axios");
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -77,6 +78,17 @@ export default class SelectLocation extends Component {
       sign: ""
     };
   }
+
+  getHeaders = (userToken, appId) => {
+    return {
+      headers: {
+        "X-Knack-Application-Id": appId,
+        "X-Knack-REST-API-KEY": "knack",
+        Authorization: userToken,
+        "content-type": "application/json"
+      }
+    };
+  };
 
   closePopup = () => {
     this.setState({ sign: "" });
@@ -276,10 +288,10 @@ export default class SelectLocation extends Component {
     const thisComponent = this;
 
     window.addEventListener("message", function(event) {
+      if (event.origin !== "https://atd.knack.com") return;
       const data = JSON.parse(event.data);
 
-      if (event.origin !== "https://atd.knack.com") return;
-      if (event.data === "KNACK_LAT_LON_REQUEST") {
+      if (data.message === "KNACK_LAT_LON_REQUEST") {
         console.log("message received:  " + event.data, event);
         // send lat/lon back to Knack as comma separated string
         event.source.postMessage(
@@ -288,7 +300,21 @@ export default class SelectLocation extends Component {
         );
       }
       if (data.message === "SIGNS_API_REQUEST") {
-        debugger;
+        const url = `https://us-api.knack.com/v1/scenes/${
+          data.scene
+        }/views/${"view_2310"}/records/`;
+        // 403 5ce4246cca18e226e958a133
+        // const url = `https://us-api.knack.com/v1/objects/object_176/records/`;
+        axios
+          .get(url, thisComponent.getHeaders(data.token, data.app_id))
+          .then(response => {
+            // handle success
+            console.log(response.status, response);
+          })
+          .catch(error => {
+            // handle error
+            console.log("Submission failed");
+          });
       }
     });
   }
