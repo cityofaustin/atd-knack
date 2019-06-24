@@ -2,8 +2,6 @@
 #
 # Helper Scripts for AWS
 #
-CIRCLE_PROJECT_REPONAME="atd-deleteme";
-CIRCLE_BRANCH="master";
 
 function deploy_knack_apps {
     echo "Copying files to s3";
