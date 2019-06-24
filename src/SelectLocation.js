@@ -194,6 +194,11 @@ export default class SelectLocation extends Component {
     // set initial center
     map.setCenter([-97.7460479736328, 30.266184073558826]);
     map.resize();
+
+    if (this.state.signs !== []) {
+      // TODO handle zoom/resize to existing signs
+      // debugger;
+    }
   }
 
   // prepare geocoded result to be propogated to form
@@ -300,16 +305,15 @@ export default class SelectLocation extends Component {
         );
       }
       if (data.message === "SIGNS_API_REQUEST") {
-        const url = `https://us-api.knack.com/v1/scenes/${
-          data.scene
-        }/views/${"view_2310"}/records/`;
-        // 403 5ce4246cca18e226e958a133
-        // const url = `https://us-api.knack.com/v1/objects/object_176/records/`;
+        const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+          data.view
+        }/records?view-work-orders-markings-job-details_id=${data.id}`;
         axios
           .get(url, thisComponent.getHeaders(data.token, data.app_id))
           .then(response => {
             // handle success
             console.log(response.status, response);
+            // TODO map over response.data to populate state.signs
           })
           .catch(error => {
             // handle error

@@ -378,7 +378,8 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
     view: "view_2588",
     scene: "scene_716",
     token: Knack.getUserToken(),
-    app_id: Knack.application_id
+    app_id: Knack.application_id,
+    id: Knack.hash_id
   };
 
   // Add React app as iframe
