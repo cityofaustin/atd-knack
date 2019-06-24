@@ -312,12 +312,20 @@ export default class SelectLocation extends Component {
           .get(url, thisComponent.getHeaders(data.token, data.app_id))
           .then(response => {
             // handle success
-            console.log(response.status, response);
-            // TODO map over response.data to populate state.signs
+            const signObjs = response.data.records.map(sign => {
+              const signObj = {};
+              signObj["id"] = sign.id;
+              signObj["lat"] = sign.field_3194_raw.latitude;
+              signObj["lng"] = sign.field_3194_raw.longitude;
+              return signObj;
+            });
+            thisComponent.setState({
+              signs: signObjs
+            });
           })
           .catch(error => {
             // handle error
-            console.log("Submission failed");
+            console.log("Knack API call failed");
           });
       }
     });
