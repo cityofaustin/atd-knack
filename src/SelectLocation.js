@@ -71,9 +71,9 @@ export default class SelectLocation extends Component {
       lat: "Loading...",
       lng: "Loading...",
       signs: [
-        { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
-        { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
-        { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
+        // { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
+        // { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
+        // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
       ],
       sign: ""
     };
@@ -312,11 +312,13 @@ export default class SelectLocation extends Component {
           .get(url, thisComponent.getHeaders(data.token, data.app_id))
           .then(response => {
             // handle success
+            console.log(response);
             const signObjs = response.data.records.map(sign => {
               const signObj = {};
               signObj["id"] = sign.id;
               signObj["lat"] = sign.field_3194_raw.latitude;
               signObj["lng"] = sign.field_3194_raw.longitude;
+              signObj["spatialId"] = sign.field_3195;
               return signObj;
             });
             thisComponent.setState({
@@ -364,6 +366,8 @@ export default class SelectLocation extends Component {
                 onClick={this.closePopup}
               >
                 <div className="container popup">
+                  <span>Spatial ID: {sign.spatialId}</span>
+                  <br />
                   <span>ID: {sign.id}</span>
                   <br />
                   <span>Latitude: {sign.lat}</span>
