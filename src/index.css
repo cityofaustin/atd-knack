@@ -14,13 +14,6 @@ code {
 
 /* buttons */
 
-.layer-buttons {
-  position: absolute;
-  top: 7%;
-  left: 0%;
-  margin: 0px 0px 0px 10px;
-}
-
 #lat-long-display {
   position: absolute;
   bottom: 10%;

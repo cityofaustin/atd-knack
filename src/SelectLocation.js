@@ -68,7 +68,7 @@ export default class SelectLocation extends Component {
       formValue: props.value || "",
       lat: "Loading...",
       lng: "Loading...",
-      style: "streets-v9"
+      style: "satellite-streets-v9"
     };
   }
 
