@@ -1,0 +1,36 @@
+#
+# CircleCI Package builder for data utilities
+# Austin Transportation Department
+#
+# This is a package builder for the python utility packages
+# found in https://github.com/cityofaustin/atd-data-utilities/
+#
+
+version: 2.1
+
+jobs:
+  #
+  # Our entry point
+  #
+  build:
+    # We specify where the commands will be run
+    working_directory: ~/atd-data-utilities
+
+    # We are going to pick a stable python distribution
+    docker:
+      - image: circleci/python:3.7
+
+    # Our build steps
+    steps:
+      - checkout
+      - run:
+          name: "Installing dependencies"
+          command: |
+            sudo apt-get install jq
+            sudo pip install awscli
+      - run:
+          name: "Building Packages"
+          command: |
+            source .circleci/aws-helper.sh
+            deploy_knack_apps
+
