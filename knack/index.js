@@ -373,19 +373,13 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   var $view_2587 = $("#view_2587");
 
   // Message for React app API call for sign records
-  const message = {
+  const markerMessage = {
     message: "SIGNS_API_REQUEST",
     view: "view_2588",
     scene: "scene_716",
     token: Knack.getUserToken(),
     app_id: Knack.application_id
   };
-
-  // TODO: where to call this function?
-  // function sendMessageToApp(message) {
-  //   iframe.postMessage(message, "*");
-  // }
-  // sendMessageToApp(message);
 
   // Add React app as iframe
   $(
@@ -398,6 +392,14 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   // set up Post Message connection with iframe and parent page
   //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
+
+  // TODO: where to call this function?
+  function sendMessageToApp(message) {
+    const stringifiedMessage = JSON.stringify(message);
+    console.log("inside API", stringifiedMessage);
+    iframe.postMessage(stringifiedMessage, "*");
+  }
+
   // create lat/lon request button
   $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
     $view_2587
@@ -419,5 +421,9 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
     $latLonFields.find("#latitude").val(latLonResponse[0]);
     $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
+  });
+
+  $("#mapIFrame").load(function() {
+    sendMessageToApp(markerMessage);
   });
 });

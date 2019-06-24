@@ -276,8 +276,9 @@ export default class SelectLocation extends Component {
     const thisComponent = this;
 
     window.addEventListener("message", function(event) {
-      if (event.origin !== "https://atd.knack.com") return;
+      const data = JSON.parse(event.data);
 
+      if (event.origin !== "https://atd.knack.com") return;
       if (event.data === "KNACK_LAT_LON_REQUEST") {
         console.log("message received:  " + event.data, event);
         // send lat/lon back to Knack as comma separated string
@@ -285,6 +286,9 @@ export default class SelectLocation extends Component {
           `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
           event.origin
         );
+      }
+      if (data.message === "SIGNS_API_REQUEST") {
+        debugger;
       }
     });
   }
