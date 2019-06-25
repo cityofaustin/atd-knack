@@ -372,9 +372,19 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   console.log("~ view_2587 rendered ~");
   var $view_2587 = $("#view_2587");
 
+  // Message for React app API call for sign records
+  const markerMessage = {
+    message: "SIGNS_API_REQUEST",
+    view: "view_2588",
+    scene: "scene_716",
+    token: Knack.getUserToken(),
+    app_id: Knack.application_id,
+    id: Knack.hash_id
+  };
+
   // Add React app as iframe
   $(
-    '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+    '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view_2587);
 
@@ -383,6 +393,14 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   // set up Post Message connection with iframe and parent page
   //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
+
+  // TODO: where to call this function?
+  function sendMessageToApp(message) {
+    const stringifiedMessage = JSON.stringify(message);
+    console.log("inside API", stringifiedMessage);
+    iframe.postMessage(stringifiedMessage, "*");
+  }
+
   // create lat/lon request button
   $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
     $view_2587
@@ -404,5 +422,21 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
     $latLonFields.find("#latitude").val(latLonResponse[0]);
     $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
+  });
+
+  $("#mapIFrame").load(function() {
+    sendMessageToApp(markerMessage);
+  });
+
+  //////////////////////////////////////////////////
+  // load auto-zoom.js /////////////////////////////
+
+  var url =
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-geospatial-knack-ui/20_autozoom/auto-zoom.js";
+  $.getScript(url, function(data, textStatus, jqxhr) {
+    console.log(data); // Data returned
+    console.log(textStatus); // Success
+    console.log(jqxhr.status); // 200
+    console.log("Load was performed.");
   });
 });
