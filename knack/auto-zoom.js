@@ -40,8 +40,7 @@
         };
 
         // envoke message once the iframe is loaded
-        debugger;
-        $("#mapIFrame").load(function() {
+        $("#mapIFrame").on("load", function() {
           AutozoomSendMessageToApp(geolocationMessage);
         });
       });
