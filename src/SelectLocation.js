@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import ReactMapboxGl from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import LayerButtons from "./Components/LayerButtons";
+import bbox from "@turf/bbox";
+import { lineString } from "@turf/helpers";
+const axios = require("axios");
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -15,6 +18,8 @@ const MAP_LANGUAGE = "englishMap";
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
+
+const layoutLayer = { "icon-image": "marker" };
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -68,7 +73,14 @@ export default class SelectLocation extends Component {
       formValue: props.value || "",
       lat: "Loading...",
       lng: "Loading...",
-      style: "satellite-streets-v9"
+      style: "satellite-streets-v9",
+      signs: [
+        // { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
+        // { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
+        // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
+      ],
+      sign: "",
+      signsArray: []
     };
   }
 
@@ -80,6 +92,31 @@ export default class SelectLocation extends Component {
         style: styleClicked
       });
     }
+  };
+
+  getHeaders = (userToken, appId) => {
+    return {
+      headers: {
+        "X-Knack-Application-Id": appId,
+        "X-Knack-REST-API-KEY": "knack",
+        Authorization: userToken,
+        "content-type": "application/json"
+      }
+    };
+  };
+
+  closePopup = () => {
+    this.setState({ sign: "" });
+  };
+
+  signClick = id => {
+    // set state.sign for Popup parameters in render, center map to clicked sign
+    const clickedSign = this.state.signs.find(sign => sign.id === id);
+    const newCenter = [clickedSign.lng, clickedSign.lat];
+    this.setState({
+      sign: clickedSign,
+      center: newCenter
+    });
   };
 
   handleChange = event => {
@@ -112,7 +149,6 @@ export default class SelectLocation extends Component {
       lat: center.lat,
       lng: center.lng
     });
-    console.log("Lat/lng state update", this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -167,12 +203,27 @@ export default class SelectLocation extends Component {
       }
     }
 
+    // Load sign marker icon and add to map
+    map.loadImage("/icons8-marker-40.png", function(error, image) {
+      if (error) throw error;
+      map.addImage("marker", image);
+    });
+
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
     // set initial center
     map.setCenter([-97.7460479736328, 30.266184073558826]);
     map.resize();
+
+    if (this.state.signsArray.length !== 0) {
+      // Handle zoom/resize to existing signs if work order has existing locations
+      // Use Turf.js to create a bounding box, use bbox to set bounds for Map
+      console.log(this.state.signsArray);
+      const line = lineString(this.state.signsArray);
+      const mapBbox = bbox(line);
+      map.fitBounds(mapBbox, { padding: 160 });
+    }
   }
 
   // prepare geocoded result to be propogated to form
@@ -260,7 +311,6 @@ export default class SelectLocation extends Component {
       this.passGeocodedResult({ lngLat, addressString });
       return;
     }
-
     this.reverseGeocode({ lngLat });
   }
 
@@ -269,21 +319,66 @@ export default class SelectLocation extends Component {
 
     window.addEventListener("message", function(event) {
       if (event.origin !== "https://atd.knack.com") return;
+      const data = JSON.parse(event.data);
 
-      if (event.data === "KNACK_LAT_LON_REQUEST") {
-        console.log("message received:  " + event.data, event);
-        // send lat/lon back to Knack as comma separated string
-        event.source.postMessage(
-          `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
-          event.origin
-        );
+      switch (data.message) {
+        case "KNACK_LAT_LON_REQUEST":
+          console.log("message received:  " + event.data, event);
+          // send lat/lon back to Knack as comma separated string
+          event.source.postMessage(
+            `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
+            event.origin
+          );
+          break;
+        case "SIGNS_API_REQUEST":
+          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+            data.view
+          }/records?view-work-orders-markings-job-details_id=${data.id}`;
+          axios
+            .get(url, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              console.log(response);
+              const data = response.data.records;
+              // Populate state with existing signs in Knack work order
+              const signObjs =
+                data === []
+                  ? data
+                  : data.map(sign => {
+                      const signObj = {};
+                      signObj["id"] = sign.id;
+                      signObj["lat"] = sign.field_3194_raw.latitude;
+                      signObj["lng"] = sign.field_3194_raw.longitude;
+                      signObj["spatialId"] = sign.field_3195;
+                      return signObj;
+                    });
+              // Populate state with array of long, lat to set bounding box used by Turf.js in onStyleLoad()
+              const signsArray =
+                data === []
+                  ? data
+                  : data.map(sign => [
+                      parseFloat(sign.field_3194_raw.longitude),
+                      parseFloat(sign.field_3194_raw.latitude)
+                    ]);
+              thisComponent.setState({
+                signs: signObjs,
+                signsArray: signsArray
+              });
+            })
+            .catch(error => {
+              // handle error
+              console.log("Knack API call failed");
+            });
+          break;
+        default:
+          return;
       }
     });
   }
 
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
-
+    const sign = this.state.sign;
     return (
       <div>
         <div className="map-container">
@@ -294,9 +389,36 @@ export default class SelectLocation extends Component {
             onDragStart={this.onDragStart}
             onDragEnd={this.onDragEnd}
             onMoveEnd={this.onMoveEnd}
+            center={this.state.center}
           >
             <div className={`pin ${pinDrop}`} />
             <div className="pulse" />
+            <Layer type="symbol" id="signs" layout={layoutLayer}>
+              {this.state.signs.map(sign => (
+                <Feature
+                  key={sign.id}
+                  coordinates={[sign.lng, sign.lat]}
+                  onClick={() => this.signClick(sign.id)}
+                />
+              ))}
+            </Layer>
+            {sign !== "" && (
+              <Popup
+                key={sign.id}
+                coordinates={[sign.lng, sign.lat]}
+                onClick={this.closePopup}
+              >
+                <div className="container popup">
+                  <span>Spatial ID: {sign.spatialId}</span>
+                  <br />
+                  <span>ID: {sign.id}</span>
+                  <br />
+                  <span>Latitude: {sign.lat}</span>
+                  <br />
+                  <span>Longitude: {sign.lng}</span>
+                </div>
+              </Popup>
+            )}
           </Map>
           <LayerButtons toggleStyle={this.toggleStyle} />
           <form id="lat-long-display">
