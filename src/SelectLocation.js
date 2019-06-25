@@ -302,56 +302,58 @@ export default class SelectLocation extends Component {
       if (event.origin !== "https://atd.knack.com") return;
       const data = JSON.parse(event.data);
 
-      if (data.message === "KNACK_LAT_LON_REQUEST") {
-        console.log("message received:  " + event.data, event);
-        // send lat/lon back to Knack as comma separated string
-        event.source.postMessage(
-          `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
-          event.origin
-        );
-      }
-      if (data.message === "SIGNS_API_REQUEST") {
-        const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
-          data.view
-        }/records?view-work-orders-markings-job-details_id=${data.id}`;
-        axios
-          .get(url, thisComponent.getHeaders(data.token, data.app_id))
-          .then(response => {
-            // handle success
-            console.log(response);
-            const data = response.data.records;
-            // Populate state with existing signs in Knack work order
-            const signObjs =
-              data === ""
-                ? data
-                : data.map(sign => {
-                    const signObj = {};
-                    signObj["id"] = sign.id;
-                    signObj["lat"] = sign.field_3194_raw.latitude;
-                    signObj["lng"] = sign.field_3194_raw.longitude;
-                    signObj["spatialId"] = sign.field_3195;
-                    return signObj;
-                  });
-            // Populate state with array of long, lat to set bounding box used by Turf.js in onStyleLoad()
-            const signsArray =
-              data === ""
-                ? data
-                : data.map(sign => {
-                    const coord = [
-                      parseFloat(sign.field_3194_raw.longitude),
-                      parseFloat(sign.field_3194_raw.latitude)
-                    ];
-                    return coord;
-                  });
-            thisComponent.setState({
-              signs: signObjs,
-              signsArray: signsArray
+      switch (data.message) {
+        case "KNACK_LAT_LON_REQUEST":
+          console.log("message received:  " + event.data, event);
+          // send lat/lon back to Knack as comma separated string
+          event.source.postMessage(
+            `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
+            event.origin
+          );
+        case "SIGNS_API_REQUEST":
+          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+            data.view
+          }/records?view-work-orders-markings-job-details_id=${data.id}`;
+          axios
+            .get(url, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              console.log(response);
+              const data = response.data.records;
+              // Populate state with existing signs in Knack work order
+              const signObjs =
+                data === ""
+                  ? data
+                  : data.map(sign => {
+                      const signObj = {};
+                      signObj["id"] = sign.id;
+                      signObj["lat"] = sign.field_3194_raw.latitude;
+                      signObj["lng"] = sign.field_3194_raw.longitude;
+                      signObj["spatialId"] = sign.field_3195;
+                      return signObj;
+                    });
+              // Populate state with array of long, lat to set bounding box used by Turf.js in onStyleLoad()
+              const signsArray =
+                data === ""
+                  ? data
+                  : data.map(sign => {
+                      const coord = [
+                        parseFloat(sign.field_3194_raw.longitude),
+                        parseFloat(sign.field_3194_raw.latitude)
+                      ];
+                      return coord;
+                    });
+              thisComponent.setState({
+                signs: signObjs,
+                signsArray: signsArray
+              });
+            })
+            .catch(error => {
+              // handle error
+              console.log("Knack API call failed");
             });
-          })
-          .catch(error => {
-            // handle error
-            console.log("Knack API call failed");
-          });
+        default:
+          return;
       }
     });
   }
