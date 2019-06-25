@@ -18,7 +18,7 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
-const layoutLayer = { "icon-image": "circle-15" };
+const layoutLayer = { "icon-image": "marker" };
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -191,6 +191,12 @@ export default class SelectLocation extends Component {
       }
     }
 
+    // Load sign marker icon and add to map
+    map.loadImage("/icons8-marker-40.png", function(error, image) {
+      if (error) throw error;
+      map.addImage("marker", image);
+    });
+
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
@@ -201,6 +207,7 @@ export default class SelectLocation extends Component {
     if (this.state.signsArray !== []) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
+      console.log(this.state.signsArray);
       const line = lineString(this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
@@ -310,6 +317,7 @@ export default class SelectLocation extends Component {
             `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
             event.origin
           );
+          break;
         case "SIGNS_API_REQUEST":
           const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
@@ -349,6 +357,7 @@ export default class SelectLocation extends Component {
               // handle error
               console.log("Knack API call failed");
             });
+          break;
         default:
           return;
       }
