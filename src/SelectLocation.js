@@ -370,6 +370,13 @@ export default class SelectLocation extends Component {
               console.log("Knack API call failed");
             });
           break;
+        case "KNACK_GEOLOCATION":
+          console.log("KNACK_GEOLOCATION", data);
+          var center = [data.lat, data.lon];
+          this.setState({
+            center
+          });
+          break;
         default:
           return;
       }

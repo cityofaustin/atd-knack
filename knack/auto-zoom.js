@@ -39,8 +39,10 @@
           lon: position.coords.longitude
         };
 
-        // envoke message
-        AutozoomSendMessageToApp(geolocationMessage);
+        // envoke message once the iframe is loaded
+        $("#mapIFrame").load(function() {
+          AutozoomSendMessageToApp(geolocationMessage);
+        });
       });
     });
   });
