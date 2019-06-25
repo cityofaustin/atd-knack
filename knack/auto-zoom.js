@@ -19,19 +19,29 @@
     }
   };
 
+  function AutozoomSendMessageToApp(message) {
+    var iframe = document.getElementById("mapIFrame").contentWindow;
+    const stringifiedMessage = JSON.stringify(message);
+    console.log("inside API", stringifiedMessage);
+    iframe.postMessage(stringifiedMessage, "*");
+  }
+
   // Start polling...
   checkReady(function($) {
     $(function() {
-      var endingTime = new Date().getTime();
-      var tookTime = endingTime - startingTime;
-      window.alert("jQuery is loaded, after " + tookTime + " milliseconds!");
-    });
+      // Get the current location from browser.
+      // TODO: we might need to wrap this in try/catch check
+      navigator.geolocation.getCurrentPosition(function(position) {
+        // create message object for React App
+        const geolocationMessage = {
+          message: "KNACK_GEOLOCATION",
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        };
 
-    // Our actual Knack custom code goes here...
-    console.log("autozooom script loaded");
-
-    navigator.geolocation.getCurrentPosition(function(position) {
-      console.log(position);
+        // envoke message
+        AutozoomSendMessageToApp(geolocationMessage);
+      });
     });
   });
 })();
