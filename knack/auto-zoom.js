@@ -29,5 +29,9 @@
 
     // Our actual Knack custom code goes here...
     console.log("autozooom script loaded");
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log(position);
+    });
   });
 })();
