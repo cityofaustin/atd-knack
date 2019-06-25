@@ -28,8 +28,6 @@
     });
 
     // Our actual Knack custom code goes here...
-    $(document).on("knack-view-render.view_2587", function(event, scene) {
-      console.log("autozooom script loaded");
-    });
+    console.log("autozooom script loaded");
   });
 })();
