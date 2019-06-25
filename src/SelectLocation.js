@@ -204,7 +204,7 @@ export default class SelectLocation extends Component {
     map.setCenter([-97.7460479736328, 30.266184073558826]);
     map.resize();
 
-    if (this.state.signsArray !== []) {
+    if (this.state.signsArray.length !== 0) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
       console.log(this.state.signsArray);
@@ -330,7 +330,7 @@ export default class SelectLocation extends Component {
               const data = response.data.records;
               // Populate state with existing signs in Knack work order
               const signObjs =
-                data === ""
+                data === []
                   ? data
                   : data.map(sign => {
                       const signObj = {};
@@ -342,7 +342,7 @@ export default class SelectLocation extends Component {
                     });
               // Populate state with array of long, lat to set bounding box used by Turf.js in onStyleLoad()
               const signsArray =
-                data === ""
+                data === []
                   ? data
                   : data.map(sign => [
                       parseFloat(sign.field_3194_raw.longitude),
