@@ -8,7 +8,7 @@ function deploy_knack_apps {
     aws s3 cp knack "s3://atd-knack-code/${CIRCLE_PROJECT_REPONAME}/${CIRCLE_BRANCH}" --recursive;
 
     echo "Clearing CloudFront distribution...";
-    aws cloudfront create-invalidation --distribution-id "E2DXTBTARUZTKP" --paths "/${CIRCLE_PROJECT_REPONAME}";
+    aws cloudfront create-invalidation --distribution-id "E2DXTBTARUZTKP" --paths "/${CIRCLE_PROJECT_REPONAME}/*";
 
     echo "Deployment Finished";
 }
