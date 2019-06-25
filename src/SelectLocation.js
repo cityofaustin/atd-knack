@@ -3,6 +3,8 @@ import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
+import bbox from "@turf/bbox";
+import { lineString } from "@turf/helpers";
 const axios = require("axios");
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
@@ -75,7 +77,8 @@ export default class SelectLocation extends Component {
         // { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
         // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
       ],
-      sign: ""
+      sign: "",
+      signsArray: ""
     };
   }
 
@@ -195,9 +198,12 @@ export default class SelectLocation extends Component {
     map.setCenter([-97.7460479736328, 30.266184073558826]);
     map.resize();
 
-    if (this.state.signs !== []) {
-      // TODO handle zoom/resize to existing signs
-      // debugger;
+    if (this.state.signsArray !== []) {
+      // Handle zoom/resize to existing signs if work order has existing locations
+      // Use Turf.js to create a bounding box, use bbox to set bounds for Map
+      const line = lineString(this.state.signsArray);
+      const mapBbox = bbox(line);
+      map.fitBounds(mapBbox, { padding: 160 });
     }
   }
 
@@ -313,16 +319,33 @@ export default class SelectLocation extends Component {
           .then(response => {
             // handle success
             console.log(response);
-            const signObjs = response.data.records.map(sign => {
-              const signObj = {};
-              signObj["id"] = sign.id;
-              signObj["lat"] = sign.field_3194_raw.latitude;
-              signObj["lng"] = sign.field_3194_raw.longitude;
-              signObj["spatialId"] = sign.field_3195;
-              return signObj;
-            });
+            const data = response.data.records;
+            // Populate state with existing signs in Knack work order
+            const signObjs =
+              data === ""
+                ? data
+                : data.map(sign => {
+                    const signObj = {};
+                    signObj["id"] = sign.id;
+                    signObj["lat"] = sign.field_3194_raw.latitude;
+                    signObj["lng"] = sign.field_3194_raw.longitude;
+                    signObj["spatialId"] = sign.field_3195;
+                    return signObj;
+                  });
+            // Populate state with array of long, lat to set bounding box used by Turf.js in onStyleLoad()
+            const signsArray =
+              data === ""
+                ? data
+                : data.map(sign => {
+                    const coord = [
+                      parseFloat(sign.field_3194_raw.longitude),
+                      parseFloat(sign.field_3194_raw.latitude)
+                    ];
+                    return coord;
+                  });
             thisComponent.setState({
-              signs: signObjs
+              signs: signObjs,
+              signsArray: signsArray
             });
           })
           .catch(error => {
