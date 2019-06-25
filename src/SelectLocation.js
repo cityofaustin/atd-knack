@@ -78,7 +78,7 @@ export default class SelectLocation extends Component {
         // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
       ],
       sign: "",
-      signsArray: ""
+      signsArray: []
     };
   }
 
@@ -336,13 +336,10 @@ export default class SelectLocation extends Component {
               const signsArray =
                 data === ""
                   ? data
-                  : data.map(sign => {
-                      const coord = [
-                        parseFloat(sign.field_3194_raw.longitude),
-                        parseFloat(sign.field_3194_raw.latitude)
-                      ];
-                      return coord;
-                    });
+                  : data.map(sign => [
+                      parseFloat(sign.field_3194_raw.longitude),
+                      parseFloat(sign.field_3194_raw.latitude)
+                    ]);
               thisComponent.setState({
                 signs: signObjs,
                 signsArray: signsArray
