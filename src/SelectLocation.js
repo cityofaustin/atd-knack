@@ -256,7 +256,11 @@ export default class SelectLocation extends Component {
       const line = lineString(this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
-      this.setState({ initialLoad: true });
+    } else {
+      // set initial center
+      map.setCenter(this.state.center);
+      map.resize();
+      map.setZoom(17);
     }
   }
 
