@@ -79,7 +79,6 @@ export default class SelectLocation extends Component {
       ],
       activeSign: "",
       signsArray: [], // This is an array of arrays that turf.js uses to calculate the bounding box
-      style: "satellite-streets-v9",
       layersLoaded: true,
       initialLoad: false,
       zoom: ""
