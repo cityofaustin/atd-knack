@@ -82,12 +82,6 @@ export default class SelectLocation extends Component {
     }
   };
 
-  handleChange = event => {
-    const state = {};
-    state[event.target.name] = event.target.value;
-    this.setState(state);
-  };
-
   onForwardGeocodeResult(geocodeResult) {
     const address = geocodeResult.result.place_name;
     this.setState({ geocodeAddressString: address });
@@ -303,43 +297,6 @@ export default class SelectLocation extends Component {
             <div className="pulse" />
           </Map>
           <LayerButtons toggleStyle={this.toggleStyle} />
-          <form id="lat-long-display">
-            <div className="form-row align-items-center mr-5">
-              <div className="col-auto">
-                <label htmlFor="inlineFormInput" className="font-weight-bold">
-                  Latitude
-                </label>
-                <input
-                  type="text"
-                  name="lat"
-                  className="form-control mb-2"
-                  id="inlineFormInput"
-                  placeholder="Latitude"
-                  value={this.state.lat}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="col-auto">
-                <label
-                  htmlFor="inlineFormInputGroup"
-                  className="font-weight-bold"
-                >
-                  Longitude
-                </label>
-                <div className="input-group mb-2">
-                  <input
-                    type="text"
-                    name="lng"
-                    className="form-control"
-                    id="inlineFormInputGroup"
-                    placeholder="Longitude"
-                    value={this.state.lng}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
     );

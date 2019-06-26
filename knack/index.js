@@ -388,8 +388,6 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view_2587);
 
-  // $view_2587.find("form").hide();
-
   // set up Post Message connection with iframe and parent page
   //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
@@ -401,23 +399,9 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
     iframe.postMessage(stringifiedMessage, "*");
   }
 
-  // create lat/lon request button
-  // $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
-  //   $view_2587
-  // );
-
-  // send message to iframe on button click
-  // $("#latLonButton").on("click", function(e) {
-  //   var coordMessage = { message: "KNACK_LAT_LON_REQUEST" };
-  //   const message = JSON.stringify(coordMessage);
-  //   console.log("knack:  sending message:  " + message);
-  //   iframe.postMessage(message, "*"); //send the message and target URI
-  // });
-
   // listen for response
   window.addEventListener("message", function(event) {
     console.log("message received:  " + event.data, event);
-    // var latLonResponse = event.data.split(", ");
     const data = event.data;
     if (data.message === "LAT_LON_FIELDS") {
       var $latLonFields = $("#kn-input-field_3194");
