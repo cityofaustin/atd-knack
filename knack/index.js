@@ -389,10 +389,8 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   ).appendTo($view_2587);
 
   // set up Post Message connection with iframe and parent page
-  //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
 
-  // TODO: where to call this function?
   function sendMessageToApp(message) {
     const stringifiedMessage = JSON.stringify(message);
     console.log("inside API", stringifiedMessage);

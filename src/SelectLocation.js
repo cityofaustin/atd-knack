@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import ReactMapboxGl from "react-mapbox-gl";
+import LayerButtons from "./Components/LayerButtons";
+import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
-import LayerButtons from "./Components/LayerButtons";
+import bbox from "@turf/bbox";
+import { lineString } from "@turf/helpers";
+import axios from "axios";
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -15,6 +18,8 @@ const MAP_LANGUAGE = "englishMap";
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
+
+const layoutLayer = { "icon-image": "marker" };
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -68,7 +73,16 @@ export default class SelectLocation extends Component {
       formValue: props.value || "",
       lat: "Loading...",
       lng: "Loading...",
-      style: "satellite-streets-v9"
+      style: "satellite-streets-v9",
+      signs: [
+        // EX: { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
+      ],
+      activeSign: "",
+      signsArray: [], // This is an array of arrays that turf.js uses to calculate the bounding box
+      style: "satellite-streets-v9",
+      layersLoaded: true,
+      initialLoad: false,
+      zoom: ""
     };
   }
 
@@ -78,6 +92,42 @@ export default class SelectLocation extends Component {
       const styleClicked = event.target.id;
       this.setState({
         style: styleClicked
+      });
+    }
+  };
+
+  getHeaders = (userToken, appId) => {
+    return {
+      headers: {
+        "X-Knack-Application-Id": appId,
+        "X-Knack-REST-API-KEY": "knack",
+        Authorization: userToken,
+        "content-type": "application/json"
+      }
+    };
+  };
+
+  closePopup = () => {
+    this.setState({ activeSign: "" });
+  };
+
+  signClick = id => {
+    // set state.sign for Popup parameters in render, center map to clicked sign
+    const clickedSign = this.state.signs.find(sign => sign.id === id);
+    const newCenter = [clickedSign.lng, clickedSign.lat];
+    this.setState({
+      activeSign: clickedSign,
+      center: newCenter
+    });
+  };
+
+  toggleStyle = event => {
+    // toggle style based on id of radio button
+    if (event.target.checked) {
+      const styleClicked = event.target.id;
+      // Switch layersLoaded boolean to force map to render in view upon style update and retain Layer and Features
+      this.setState({ layersLoaded: false, style: styleClicked }, () => {
+        this.setState({ layersLoaded: true });
       });
     }
   };
@@ -102,11 +152,13 @@ export default class SelectLocation extends Component {
 
   onMoveEnd(map) {
     const center = map.getCenter();
+    // Set zoom to retain zoom between Map style changes
+    const zoom = map.getZoom();
     this.setState({
       lat: center.lat,
-      lng: center.lng
+      lng: center.lng,
+      zoom: zoom
     });
-    console.log("Lat/lng state update", this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -165,12 +217,40 @@ export default class SelectLocation extends Component {
       }
     }
 
+    // Load sign marker icon and add to map
+    map.loadImage("/icons8-marker-40.png", function(error, image) {
+      if (error) throw error;
+      map.addImage("marker", image);
+    });
+
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
-    // set initial center
-    map.setCenter([-97.7460479736328, 30.266184073558826]);
-    map.resize();
+    const shouldZoomToBBox =
+      this.state.signsArray.length !== 0 && this.state.initialLoad === false;
+
+    const shouldMaintainZoomAndCenterFromUserChanges =
+      this.state.initialLoad === true;
+
+    if (shouldZoomToBBox) {
+      // Handle zoom/resize to existing signs if work order has existing locations
+      // Use Turf.js to create a bounding box, use bbox to set bounds for Map
+      const line = lineString(this.state.signsArray);
+      const mapBbox = bbox(line);
+      map.fitBounds(mapBbox, { padding: 160 });
+      this.setState({ initialLoad: true });
+    } else if (shouldMaintainZoomAndCenterFromUserChanges) {
+      // Handle case when user switches layer after moving pin
+      map.jumpTo({
+        center: [this.state.lng, this.state.lat],
+        zoom: this.state.zoom
+      });
+    } else {
+      // When there are no exisiting locations, zoom in on center which should be the users current location
+      map.setCenter(this.state.center);
+      map.resize();
+      map.setZoom(17);
+    }
   }
 
   // prepare geocoded result to be propogated to form
@@ -258,7 +338,6 @@ export default class SelectLocation extends Component {
       this.passGeocodedResult({ lngLat, addressString });
       return;
     }
-
     this.reverseGeocode({ lngLat });
   }
 
@@ -267,35 +346,109 @@ export default class SelectLocation extends Component {
 
     window.addEventListener("message", function(event) {
       if (event.origin !== "https://atd.knack.com") return;
+      const data = JSON.parse(event.data);
 
-      if (JSON.parse(event.data).message === "KNACK_LAT_LON_REQUEST") {
-        console.log("message received:  " + event.data, event);
-        // send lat/lon back to Knack as comma separated string
-        event.source.postMessage(
-          `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
-          event.origin
-        );
+      switch (data.message) {
+        case "SIGNS_API_REQUEST":
+          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+            data.view
+          }/records?view-work-orders-markings-job-details_id=${data.id}`;
+          axios
+            .get(url, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              const data = response.data.records;
+              // Populate state with existing signs in Knack work order
+              const signsObjects =
+                data === []
+                  ? data
+                  : data.map(sign => {
+                      const signObj = {};
+                      signObj["id"] = sign.id;
+                      signObj["lat"] = sign.field_3194_raw.latitude;
+                      signObj["lng"] = sign.field_3194_raw.longitude;
+                      signObj["spatialId"] = sign.field_3195;
+                      return signObj;
+                    });
+              // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
+              const signsArray =
+                data === []
+                  ? data
+                  : data.map(sign => [
+                      parseFloat(sign.field_3194_raw.longitude),
+                      parseFloat(sign.field_3194_raw.latitude)
+                    ]);
+              thisComponent.setState({
+                signs: signsObjects,
+                signsArray: signsArray
+              });
+            })
+            .catch(error => {
+              // handle error
+              console.log("Knack API call failed");
+            });
+          break;
+        case "KNACK_GEOLOCATION":
+          console.log("KNACK_GEOLOCATION", data);
+          var center = [data.lon, data.lat];
+          thisComponent.setState({
+            center
+          });
+          break;
+        default:
+          return;
       }
     });
   }
 
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
-
+    const { activeSign, style, layersLoaded, center, signs } = this.state;
     return (
       <div>
         <div className="map-container">
-          <Map
-            // eslint-disable-next-line react/style-prop-object
-            style={`mapbox://styles/mapbox/${this.state.style}`}
-            onStyleLoad={this.onStyleLoad}
-            onDragStart={this.onDragStart}
-            onDragEnd={this.onDragEnd}
-            onMoveEnd={this.onMoveEnd}
-          >
-            <div className={`pin ${pinDrop}`} />
-            <div className="pulse" />
-          </Map>
+          {/* Boolean to force Map to render upon changing style (layers and features dissapear otherwise) */}
+          {layersLoaded && (
+            <Map
+              // eslint-disable-next-line react/style-prop-object
+              style={`mapbox://styles/mapbox/${style}`}
+              onStyleLoad={this.onStyleLoad}
+              onDragStart={this.onDragStart}
+              onDragEnd={this.onDragEnd}
+              onMoveEnd={this.onMoveEnd}
+              center={center}
+            >
+              <div className={`pin ${pinDrop}`} />
+              <div className="pulse" />
+
+              <Layer type="symbol" id="signs" layout={layoutLayer}>
+                {signs.map(sign => (
+                  <Feature
+                    key={sign.id}
+                    coordinates={[sign.lng, sign.lat]}
+                    onClick={() => this.signClick(sign.id)}
+                  />
+                ))}
+              </Layer>
+              {activeSign !== "" && (
+                <Popup
+                  key={activeSign.id}
+                  coordinates={[activeSign.lng, activeSign.lat]}
+                  onClick={this.closePopup}
+                >
+                  <div className="container popup">
+                    <span>Spatial ID: {activeSign.spatialId}</span>
+                    <br />
+                    <span>ID: {activeSign.id}</span>
+                    <br />
+                    <span>Latitude: {activeSign.lat}</span>
+                    <br />
+                    <span>Longitude: {activeSign.lng}</span>
+                  </div>
+                </Popup>
+              )}
+            </Map>
+          )}
           <LayerButtons toggleStyle={this.toggleStyle} />
         </div>
       </div>
