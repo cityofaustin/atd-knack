@@ -73,6 +73,7 @@ export default class SelectLocation extends Component {
       formValue: props.value || "",
       lat: "Loading...",
       lng: "Loading...",
+      style: "satellite-streets-v9",
       signs: [
         // { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
         // { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
@@ -86,6 +87,16 @@ export default class SelectLocation extends Component {
       zoom: ""
     };
   }
+
+  toggleStyle = event => {
+    // toggle style based on id of radio button
+    if (event.target.checked) {
+      const styleClicked = event.target.id;
+      this.setState({
+        style: styleClicked
+      });
+    }
+  };
 
   getHeaders = (userToken, appId) => {
     return {
@@ -245,7 +256,11 @@ export default class SelectLocation extends Component {
       const line = lineString(this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
-      this.setState({ initialLoad: true });
+    } else {
+      // set initial center
+      map.setCenter(this.state.center);
+      map.resize();
+      map.setZoom(17);
     }
   }
 
@@ -392,6 +407,13 @@ export default class SelectLocation extends Component {
               // handle error
               console.log("Knack API call failed");
             });
+          break;
+        case "KNACK_GEOLOCATION":
+          console.log("KNACK_GEOLOCATION", data);
+          var center = [data.lon, data.lat];
+          thisComponent.setState({
+            center
+          });
           break;
         default:
           return;

@@ -425,8 +425,19 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
     $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
   });
 
-  // Wait for iFrame to load before sending message to React app
   $("#mapIFrame").load(function() {
     sendMessageToApp(markerMessage);
+  });
+
+  //////////////////////////////////////////////////
+  // load auto-zoom.js /////////////////////////////
+
+  var url =
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-geospatial-knack-ui/20_autozoom/auto-zoom.js";
+  $.getScript(url, function(data, textStatus, jqxhr) {
+    console.log(data); // Data returned
+    console.log(textStatus); // Success
+    console.log(jqxhr.status); // 200
+    console.log("Load was performed.");
   });
 });
