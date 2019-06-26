@@ -117,6 +117,10 @@ export default class SelectLocation extends Component {
       lngLat: center,
       addressString: this.state.geocodeAddressString
     });
+    window.parent.postMessage(
+      { message: "LAT_LON_FIELDS", lat: this.state.lat, lng: this.state.lng },
+      "*"
+    );
   }
 
   // calls us-forms-system onChange to propogate values up to the form
@@ -270,7 +274,7 @@ export default class SelectLocation extends Component {
     window.addEventListener("message", function(event) {
       if (event.origin !== "https://atd.knack.com") return;
 
-      if (event.data === "KNACK_LAT_LON_REQUEST") {
+      if (JSON.parse(event.data).message === "KNACK_LAT_LON_REQUEST") {
         console.log("message received:  " + event.data, event);
         // send lat/lon back to Knack as comma separated string
         event.source.postMessage(
