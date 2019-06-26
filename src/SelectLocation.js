@@ -394,8 +394,8 @@ export default class SelectLocation extends Component {
           break;
         case "KNACK_GEOLOCATION":
           console.log("KNACK_GEOLOCATION", data);
-          var center = [data.lat, data.lon];
-          this.setState({
+          var center = [data.lon, data.lat];
+          thisComponent.setState({
             center
           });
           break;
