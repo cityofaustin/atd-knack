@@ -4,7 +4,6 @@ import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
-import LayerButtons from "./Components/LayerButtons";
 import bbox from "@turf/bbox";
 import { lineString } from "@turf/helpers";
 const axios = require("axios");
