@@ -6,6 +6,7 @@ import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import bbox from "@turf/bbox";
 import { lineString } from "@turf/helpers";
 const axios = require("axios");
+import LayerButtons from "./Components/LayerButtons";
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -78,7 +79,8 @@ export default class SelectLocation extends Component {
         // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
       ],
       sign: "",
-      signsArray: []
+      signsArray: [],
+      style: "satellite-streets-v9"
     };
   }
 
@@ -105,6 +107,16 @@ export default class SelectLocation extends Component {
       sign: clickedSign,
       center: newCenter
     });
+  };
+
+  toggleStyle = event => {
+    // toggle style based on id of radio button
+    if (event.target.checked) {
+      const styleClicked = event.target.id;
+      this.setState({
+        style: styleClicked
+      });
+    }
   };
 
   handleChange = event => {
@@ -137,6 +149,7 @@ export default class SelectLocation extends Component {
       lat: center.lat,
       lng: center.lng
     });
+    console.log("Lat/lng state update", this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -372,7 +385,7 @@ export default class SelectLocation extends Component {
         <div className="map-container">
           <Map
             // eslint-disable-next-line react/style-prop-object
-            style={"mapbox://styles/mapbox/streets-v9"}
+            style={`mapbox://styles/mapbox/${this.state.style}`}
             onStyleLoad={this.onStyleLoad}
             onDragStart={this.onDragStart}
             onDragEnd={this.onDragEnd}
@@ -408,6 +421,7 @@ export default class SelectLocation extends Component {
               </Popup>
             )}
           </Map>
+          <LayerButtons toggleStyle={this.toggleStyle} />
           <form id="lat-long-display">
             <div className="form-row align-items-center mr-5">
               <div className="col-auto">
