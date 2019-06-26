@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LayerButtons from "./Components/LayerButtons";
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
@@ -6,7 +7,6 @@ import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import bbox from "@turf/bbox";
 import { lineString } from "@turf/helpers";
 const axios = require("axios");
-import LayerButtons from "./Components/LayerButtons";
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -80,7 +80,8 @@ export default class SelectLocation extends Component {
       ],
       sign: "",
       signsArray: [],
-      style: "satellite-streets-v9"
+      style: "satellite-streets-v9",
+      layersLoaded: true
     };
   }
 
@@ -113,8 +114,9 @@ export default class SelectLocation extends Component {
     // toggle style based on id of radio button
     if (event.target.checked) {
       const styleClicked = event.target.id;
-      this.setState({
-        style: styleClicked
+      // Switch layersLoaded boolean to force map to render in view upon style update and retain Layer and Features
+      this.setState({ layersLoaded: false, style: styleClicked }, () => {
+        this.setState({ layersLoaded: true });
       });
     }
   };
@@ -383,44 +385,48 @@ export default class SelectLocation extends Component {
     return (
       <div>
         <div className="map-container">
-          <Map
-            // eslint-disable-next-line react/style-prop-object
-            style={`mapbox://styles/mapbox/${this.state.style}`}
-            onStyleLoad={this.onStyleLoad}
-            onDragStart={this.onDragStart}
-            onDragEnd={this.onDragEnd}
-            onMoveEnd={this.onMoveEnd}
-            center={this.state.center}
-          >
-            <div className={`pin ${pinDrop}`} />
-            <div className="pulse" />
-            <Layer type="symbol" id="signs" layout={layoutLayer}>
-              {this.state.signs.map(sign => (
-                <Feature
+          {/* Boolean to force Map to render upon changing style (layers and features dissapear otherwise) */}
+          {this.state.layersLoaded && (
+            <Map
+              // eslint-disable-next-line react/style-prop-object
+              style={`mapbox://styles/mapbox/${this.state.style}`}
+              onStyleLoad={this.onStyleLoad}
+              onDragStart={this.onDragStart}
+              onDragEnd={this.onDragEnd}
+              onMoveEnd={this.onMoveEnd}
+              center={this.state.center}
+            >
+              <div className={`pin ${pinDrop}`} />
+              <div className="pulse" />
+
+              <Layer type="symbol" id="signs" layout={layoutLayer}>
+                {this.state.signs.map(sign => (
+                  <Feature
+                    key={sign.id}
+                    coordinates={[sign.lng, sign.lat]}
+                    onClick={() => this.signClick(sign.id)}
+                  />
+                ))}
+              </Layer>
+              {sign !== "" && (
+                <Popup
                   key={sign.id}
                   coordinates={[sign.lng, sign.lat]}
-                  onClick={() => this.signClick(sign.id)}
-                />
-              ))}
-            </Layer>
-            {sign !== "" && (
-              <Popup
-                key={sign.id}
-                coordinates={[sign.lng, sign.lat]}
-                onClick={this.closePopup}
-              >
-                <div className="container popup">
-                  <span>Spatial ID: {sign.spatialId}</span>
-                  <br />
-                  <span>ID: {sign.id}</span>
-                  <br />
-                  <span>Latitude: {sign.lat}</span>
-                  <br />
-                  <span>Longitude: {sign.lng}</span>
-                </div>
-              </Popup>
-            )}
-          </Map>
+                  onClick={this.closePopup}
+                >
+                  <div className="container popup">
+                    <span>Spatial ID: {sign.spatialId}</span>
+                    <br />
+                    <span>ID: {sign.id}</span>
+                    <br />
+                    <span>Latitude: {sign.lat}</span>
+                    <br />
+                    <span>Longitude: {sign.lng}</span>
+                  </div>
+                </Popup>
+              )}
+            </Map>
+          )}
           <LayerButtons toggleStyle={this.toggleStyle} />
           <form id="lat-long-display">
             <div className="form-row align-items-center mr-5">
