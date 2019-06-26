@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import LayerButtons from "./Components/LayerButtons";
 import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
@@ -80,7 +81,10 @@ export default class SelectLocation extends Component {
         // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
       ],
       sign: "",
-      signsArray: []
+      signsArray: [],
+      style: "satellite-streets-v9",
+      layersLoaded: true,
+      initialLoad: false
     };
   }
 
@@ -119,6 +123,17 @@ export default class SelectLocation extends Component {
     });
   };
 
+  toggleStyle = event => {
+    // toggle style based on id of radio button
+    if (event.target.checked) {
+      const styleClicked = event.target.id;
+      // Switch layersLoaded boolean to force map to render in view upon style update and retain Layer and Features
+      this.setState({ layersLoaded: false, style: styleClicked }, () => {
+        this.setState({ layersLoaded: true });
+      });
+    }
+  };
+
   handleChange = event => {
     const state = {};
     state[event.target.name] = event.target.value;
@@ -149,6 +164,7 @@ export default class SelectLocation extends Component {
       lat: center.lat,
       lng: center.lng
     });
+    console.log("Lat/lng state update", this.state.lat, this.state.lng);
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -212,17 +228,24 @@ export default class SelectLocation extends Component {
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
-    // set initial center
-    map.setCenter([-97.7460479736328, 30.266184073558826]);
-    map.resize();
+    // Handle case when user switches layer after moving pin
+    // TODO handle retaining user's zoom
+    if (this.state.initialLoad === true) {
+      map.setCenter([this.state.lng, this.state.lat]);
+      // map.resize();
+    }
 
-    if (this.state.signsArray.length !== 0) {
+    if (
+      this.state.signsArray.length !== 0 &&
+      this.state.initialLoad === false
+    ) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
       console.log(this.state.signsArray);
       const line = lineString(this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
+      this.setState({ initialLoad: true });
     }
   }
 
@@ -389,44 +412,48 @@ export default class SelectLocation extends Component {
     return (
       <div>
         <div className="map-container">
-          <Map
-            // eslint-disable-next-line react/style-prop-object
-            style={`mapbox://styles/mapbox/${this.state.style}`}
-            onStyleLoad={this.onStyleLoad}
-            onDragStart={this.onDragStart}
-            onDragEnd={this.onDragEnd}
-            onMoveEnd={this.onMoveEnd}
-            center={this.state.center}
-          >
-            <div className={`pin ${pinDrop}`} />
-            <div className="pulse" />
-            <Layer type="symbol" id="signs" layout={layoutLayer}>
-              {this.state.signs.map(sign => (
-                <Feature
+          {/* Boolean to force Map to render upon changing style (layers and features dissapear otherwise) */}
+          {this.state.layersLoaded && (
+            <Map
+              // eslint-disable-next-line react/style-prop-object
+              style={`mapbox://styles/mapbox/${this.state.style}`}
+              onStyleLoad={this.onStyleLoad}
+              onDragStart={this.onDragStart}
+              onDragEnd={this.onDragEnd}
+              onMoveEnd={this.onMoveEnd}
+              center={this.state.center}
+            >
+              <div className={`pin ${pinDrop}`} />
+              <div className="pulse" />
+
+              <Layer type="symbol" id="signs" layout={layoutLayer}>
+                {this.state.signs.map(sign => (
+                  <Feature
+                    key={sign.id}
+                    coordinates={[sign.lng, sign.lat]}
+                    onClick={() => this.signClick(sign.id)}
+                  />
+                ))}
+              </Layer>
+              {sign !== "" && (
+                <Popup
                   key={sign.id}
                   coordinates={[sign.lng, sign.lat]}
-                  onClick={() => this.signClick(sign.id)}
-                />
-              ))}
-            </Layer>
-            {sign !== "" && (
-              <Popup
-                key={sign.id}
-                coordinates={[sign.lng, sign.lat]}
-                onClick={this.closePopup}
-              >
-                <div className="container popup">
-                  <span>Spatial ID: {sign.spatialId}</span>
-                  <br />
-                  <span>ID: {sign.id}</span>
-                  <br />
-                  <span>Latitude: {sign.lat}</span>
-                  <br />
-                  <span>Longitude: {sign.lng}</span>
-                </div>
-              </Popup>
-            )}
-          </Map>
+                  onClick={this.closePopup}
+                >
+                  <div className="container popup">
+                    <span>Spatial ID: {sign.spatialId}</span>
+                    <br />
+                    <span>ID: {sign.id}</span>
+                    <br />
+                    <span>Latitude: {sign.lat}</span>
+                    <br />
+                    <span>Longitude: {sign.lng}</span>
+                  </div>
+                </Popup>
+              )}
+            </Map>
+          )}
           <LayerButtons toggleStyle={this.toggleStyle} />
           <form id="lat-long-display">
             <div className="form-row align-items-center mr-5">
