@@ -82,7 +82,8 @@ export default class SelectLocation extends Component {
       signsArray: [],
       style: "satellite-streets-v9",
       layersLoaded: true,
-      initialLoad: false
+      initialLoad: false,
+      zoom: ""
     };
   }
 
@@ -148,11 +149,20 @@ export default class SelectLocation extends Component {
 
   onMoveEnd(map) {
     const center = map.getCenter();
+    // Set zoom to retain zoom between Map style changes
+    const zoom = map.getZoom();
     this.setState({
       lat: center.lat,
-      lng: center.lng
+      lng: center.lng,
+      zoom: zoom
     });
-    console.log("Lat/lng state update", this.state.lat, this.state.lng);
+    // Logs change in lat/lng and zoom
+    console.log(
+      "Lat/lng state update",
+      this.state.lat,
+      this.state.lng,
+      this.state.zoom
+    );
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -219,7 +229,10 @@ export default class SelectLocation extends Component {
     // Handle case when user switches layer after moving pin
     // TODO handle retaining user's zoom
     if (this.state.initialLoad === true) {
-      map.setCenter([this.state.lng, this.state.lat]);
+      map.jumpTo({
+        center: [this.state.lng, this.state.lat],
+        zoom: this.state.zoom
+      });
       // map.resize();
     }
 
