@@ -6,7 +6,7 @@ import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import bbox from "@turf/bbox";
 import { lineString } from "@turf/helpers";
-const axios = require("axios");
+import axios from "axios";
 
 // const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
 // const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
@@ -75,12 +75,10 @@ export default class SelectLocation extends Component {
       lng: "Loading...",
       style: "satellite-streets-v9",
       signs: [
-        // { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
-        // { id: "Sign 2", lng: -97.72012764103664, lat: 30.3082008239101 },
-        // { id: "Sign 3", lng: -97.67812960000003, lat: 30.34468450044895 }
+        // EX: { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },
       ],
-      sign: "",
-      signsArray: [],
+      activeSign: "",
+      signsArray: [], // This is an array of arrays that turf.js uses to calculate the bounding box
       style: "satellite-streets-v9",
       layersLoaded: true,
       initialLoad: false,
@@ -110,7 +108,7 @@ export default class SelectLocation extends Component {
   };
 
   closePopup = () => {
-    this.setState({ sign: "" });
+    this.setState({ activeSign: "" });
   };
 
   signClick = id => {
@@ -118,7 +116,7 @@ export default class SelectLocation extends Component {
     const clickedSign = this.state.signs.find(sign => sign.id === id);
     const newCenter = [clickedSign.lng, clickedSign.lat];
     this.setState({
-      sign: clickedSign,
+      activeSign: clickedSign,
       center: newCenter
     });
   };
@@ -167,13 +165,6 @@ export default class SelectLocation extends Component {
       lng: center.lng,
       zoom: zoom
     });
-    // Logs change in lat/lng and zoom
-    console.log(
-      "Lat/lng state update",
-      this.state.lat,
-      this.state.lng,
-      this.state.zoom
-    );
     this.locationUpdated({
       lngLat: center,
       addressString: this.state.geocodeAddressString
@@ -237,27 +228,27 @@ export default class SelectLocation extends Component {
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
-    // Handle case when user switches layer after moving pin
-    // TODO handle retaining user's zoom
-    if (this.state.initialLoad === true) {
-      map.jumpTo({
-        center: [this.state.lng, this.state.lat],
-        zoom: this.state.zoom
-      });
-      // map.resize();
-    }
+    const shouldZoomToBBox =
+      this.state.signsArray.length !== 0 && this.state.initialLoad === false;
 
-    if (
-      this.state.signsArray.length !== 0 &&
-      this.state.initialLoad === false
-    ) {
+    const shouldMaintainZoomAndCenterFromUserChanges =
+      this.state.initialLoad === true;
+
+    if (shouldZoomToBBox) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
       const line = lineString(this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
+      this.setState({ initialLoad: true });
+    } else if (shouldMaintainZoomAndCenterFromUserChanges) {
+      // Handle case when user switches layer after moving pin
+      map.jumpTo({
+        center: [this.state.lng, this.state.lat],
+        zoom: this.state.zoom
+      });
     } else {
-      // set initial center
+      // When there are no exisiting locations, zoom in on center which should be the users current location
       map.setCenter(this.state.center);
       map.resize();
       map.setZoom(17);
@@ -361,7 +352,6 @@ export default class SelectLocation extends Component {
 
       switch (data.message) {
         case "KNACK_LAT_LON_REQUEST":
-          console.log("message received:  " + event.data, event);
           // send lat/lon back to Knack as comma separated string
           event.source.postMessage(
             `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
@@ -376,10 +366,9 @@ export default class SelectLocation extends Component {
             .get(url, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              console.log(response);
               const data = response.data.records;
               // Populate state with existing signs in Knack work order
-              const signObjs =
+              const signsObjects =
                 data === []
                   ? data
                   : data.map(sign => {
@@ -390,7 +379,7 @@ export default class SelectLocation extends Component {
                       signObj["spatialId"] = sign.field_3195;
                       return signObj;
                     });
-              // Populate state with array of long, lat to set bounding box used by Turf.js in onStyleLoad()
+              // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
               const signsArray =
                 data === []
                   ? data
@@ -399,7 +388,7 @@ export default class SelectLocation extends Component {
                       parseFloat(sign.field_3194_raw.latitude)
                     ]);
               thisComponent.setState({
-                signs: signObjs,
+                signs: signsObjects,
                 signsArray: signsArray
               });
             })
@@ -423,26 +412,34 @@ export default class SelectLocation extends Component {
 
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
-    const sign = this.state.sign;
+    const {
+      activeSign,
+      style,
+      layersLoaded,
+      lat,
+      lng,
+      center,
+      signs
+    } = this.state;
     return (
       <div>
         <div className="map-container">
           {/* Boolean to force Map to render upon changing style (layers and features dissapear otherwise) */}
-          {this.state.layersLoaded && (
+          {layersLoaded && (
             <Map
               // eslint-disable-next-line react/style-prop-object
-              style={`mapbox://styles/mapbox/${this.state.style}`}
+              style={`mapbox://styles/mapbox/${style}`}
               onStyleLoad={this.onStyleLoad}
               onDragStart={this.onDragStart}
               onDragEnd={this.onDragEnd}
               onMoveEnd={this.onMoveEnd}
-              center={this.state.center}
+              center={center}
             >
               <div className={`pin ${pinDrop}`} />
               <div className="pulse" />
 
               <Layer type="symbol" id="signs" layout={layoutLayer}>
-                {this.state.signs.map(sign => (
+                {signs.map(sign => (
                   <Feature
                     key={sign.id}
                     coordinates={[sign.lng, sign.lat]}
@@ -450,20 +447,20 @@ export default class SelectLocation extends Component {
                   />
                 ))}
               </Layer>
-              {sign !== "" && (
+              {activeSign !== "" && (
                 <Popup
-                  key={sign.id}
-                  coordinates={[sign.lng, sign.lat]}
+                  key={activeSign.id}
+                  coordinates={[activeSign.lng, activeSign.lat]}
                   onClick={this.closePopup}
                 >
                   <div className="container popup">
-                    <span>Spatial ID: {sign.spatialId}</span>
+                    <span>Spatial ID: {activeSign.spatialId}</span>
                     <br />
-                    <span>ID: {sign.id}</span>
+                    <span>ID: {activeSign.id}</span>
                     <br />
-                    <span>Latitude: {sign.lat}</span>
+                    <span>Latitude: {activeSign.lat}</span>
                     <br />
-                    <span>Longitude: {sign.lng}</span>
+                    <span>Longitude: {activeSign.lng}</span>
                   </div>
                 </Popup>
               )}
@@ -482,7 +479,7 @@ export default class SelectLocation extends Component {
                   className="form-control mb-2"
                   id="inlineFormInput"
                   placeholder="Latitude"
-                  value={this.state.lat}
+                  value={lat}
                   onChange={this.handleChange}
                 />
               </div>
@@ -500,7 +497,7 @@ export default class SelectLocation extends Component {
                     className="form-control"
                     id="inlineFormInputGroup"
                     placeholder="Longitude"
-                    value={this.state.lng}
+                    value={lng}
                     onChange={this.handleChange}
                   />
                 </div>

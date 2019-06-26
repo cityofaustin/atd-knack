@@ -384,7 +384,7 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
   // Add React app as iframe
   $(
-    '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
+    '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view_2587);
 
@@ -394,10 +394,8 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
 
-  // TODO: where to call this function?
   function sendMessageToApp(message) {
     const stringifiedMessage = JSON.stringify(message);
-    console.log("inside API", stringifiedMessage);
     iframe.postMessage(stringifiedMessage, "*");
   }
 
