@@ -372,6 +372,16 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   console.log("~ view_2587 rendered ~");
   var $view_2587 = $("#view_2587");
 
+  // Message for React app API call for sign records
+  const markerMessage = {
+    message: "SIGNS_API_REQUEST",
+    view: "view_2588",
+    scene: "scene_716",
+    token: Knack.getUserToken(),
+    app_id: Knack.application_id,
+    id: Knack.hash_id
+  };
+
   // Add React app as iframe
   $(
     '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
@@ -383,6 +393,12 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   // set up Post Message connection with iframe and parent page
   //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
+
+  function sendMessageToApp(message) {
+    const stringifiedMessage = JSON.stringify(message);
+    iframe.postMessage(stringifiedMessage, "*");
+  }
+
   // create lat/lon request button
   $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
     $view_2587
@@ -390,7 +406,8 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
   // send message to iframe on button click
   $("#latLonButton").on("click", function(e) {
-    var message = "KNACK_LAT_LON_REQUEST";
+    var coordMessage = { message: "KNACK_LAT_LON_REQUEST" };
+    const message = JSON.stringify(coordMessage);
     console.log("knack:  sending message:  " + message);
     iframe.postMessage(message, "*"); //send the message and target URI
   });
@@ -404,5 +421,21 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
     $latLonFields.find("#latitude").val(latLonResponse[0]);
     $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
+  });
+
+  $("#mapIFrame").load(function() {
+    sendMessageToApp(markerMessage);
+  });
+
+  //////////////////////////////////////////////////
+  // load auto-zoom.js /////////////////////////////
+
+  var url =
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-geospatial-knack-ui/20_autozoom/auto-zoom.js";
+  $.getScript(url, function(data, textStatus, jqxhr) {
+    console.log(data); // Data returned
+    console.log(textStatus); // Success
+    console.log(jqxhr.status); // 200
+    console.log("Load was performed.");
   });
 });

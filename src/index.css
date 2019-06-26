@@ -21,6 +21,11 @@ code {
   margin: 0px 10px 0px 0px;
 }
 
+.popup {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 .map-container {
   position: relative;
 }
