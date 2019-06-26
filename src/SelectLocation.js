@@ -81,7 +81,8 @@ export default class SelectLocation extends Component {
       sign: "",
       signsArray: [],
       style: "satellite-streets-v9",
-      layersLoaded: true
+      layersLoaded: true,
+      initialLoad: false
     };
   }
 
@@ -215,17 +216,24 @@ export default class SelectLocation extends Component {
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
-    // set initial center
-    map.setCenter([-97.7460479736328, 30.266184073558826]);
-    map.resize();
+    // Handle case when user switches layer after moving pin
+    // TODO handle retaining user's zoom
+    if (this.state.initialLoad === true) {
+      map.setCenter([this.state.lng, this.state.lat]);
+      // map.resize();
+    }
 
-    if (this.state.signsArray.length !== 0) {
+    if (
+      this.state.signsArray.length !== 0 &&
+      this.state.initialLoad === false
+    ) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
       console.log(this.state.signsArray);
       const line = lineString(this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
+      this.setState({ initialLoad: true });
     }
   }
 
