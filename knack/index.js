@@ -503,11 +503,11 @@ function loadIframeMapMessenger(viewId) {
 window.viewIdsArray = [];
 
 $(document).on("knack-view-render.view_2619", function(event, scene) {
-  window.viewIdsArray.push("view_2619");
+  window.viewIdsArray.push("#view_2619");
   loadIframeMapMessenger("view_2619");
 });
 
 $(document).on("knack-view-render.view_2573", function(event, scene) {
-  window.viewIdsArray.push("view_2573");
+  window.viewIdsArray.push("#view_2573");
   loadIframeMapMessenger("view_2573");
 });
