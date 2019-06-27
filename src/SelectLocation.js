@@ -8,10 +8,7 @@ import bbox from "@turf/bbox";
 import { lineString } from "@turf/helpers";
 import axios from "axios";
 
-// const HERE_APP_ID = "R3EtGwWQmTKG5eVeyLV8";
-// const HERE_APP_CODE = "8aDkNeOzfxGFkOKm9fER0A";
-const MAPBOX_TOKEN =
-  "pk.eyJ1Ijoiam9obmNsYXJ5IiwiYSI6ImNqbjhkZ25vcjF2eTMzbG52dGRlbnVqOHAifQ.y1xhnHxbB6KlpQgTp1g1Ow";
+const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 const GEOCODE_DEBUG = false;
 const MAP_LANGUAGE = "englishMap";
 
