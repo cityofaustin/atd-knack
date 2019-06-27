@@ -366,62 +366,144 @@ $(document).on("knack-view-render.view_1996", function(event, scene) {
   });
 });
 
+$(document).on("knack-view-render.view_2357", function(event, page) {
+  //  now with minor changes, used for traffic count attachments field
+  //  this one affects the table that those with editing priviledges see
+  //  replace attachment filename with attachment type
+  //  find each attachment cell
+  $("td.field_3176").each(function() {
+    //  find each attachment link within the cell
+    $(this)
+      .find("a")
+      .each(function(index) {
+        var attachmentType = "";
+
+        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
+        $(this)
+          .closest("tr")
+          .children("td.field_3174")
+          .find("span")
+          .children("span")
+          .each(function(index2) {
+            if (index == index2) {
+              attachmentType = $(this).text();
+            }
+          });
+
+        //  update link contents
+        // and add a line break to make it consistent with the box next to it (BH)
+        $(this).html(attachmentType + "<br>");
+      });
+  });
+});
+
+$(document).on("knack-view-render.view_2486", function(event, page) {
+  //  now with minor changes, used for traffic count attachments field
+  //  this one affects the table that those without editing priviledges see
+  //  replace attachment filename with attachment type
+  //  find each attachment cell
+  $("td.field_3176").each(function() {
+    //  find each attachment link within the cell
+    $(this)
+      .find("a")
+      .each(function(index) {
+        var attachmentType = "";
+
+        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
+        $(this)
+          .closest("tr")
+          .children("td.field_3174")
+          .find("span")
+          .children("span")
+          .each(function(index2) {
+            if (index == index2) {
+              attachmentType = $(this).text();
+            }
+          });
+
+        //  update link contents
+        // and add a line break to make it consistent with the box next to it (BH)
+        $(this).html(attachmentType + "<br>");
+      });
+  });
+});
+
+$(document).on("knack-view-render.view_2491", function(event, page) {
+  // Another copy of the find and replace attachment types script, this one for the manage requests
+  // page
+  $("td.field_3176").each(function() {
+    //  find each attachment link within the cell
+    $(this)
+      .find("a")
+      .each(function(index) {
+        var attachmentType = "";
+
+        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
+        $(this)
+          .closest("tr")
+          .children("td.field_3174")
+          .find("span")
+          .children("span")
+          .each(function(index2) {
+            if (index == index2) {
+              attachmentType = $(this).text();
+            }
+          });
+
+        //  update link contents
+        // and add a line break to make it consistent with the box next to it (BH)
+        $(this).html(attachmentType + "<br>");
+      });
+  });
+});
+
+$(document).on("knack-view-render.view_2465", function(event, page) {
+  // Another copy of the find and replace attachment types script.  This one is used
+  // on the Request Status page under Traffic Counts.
+  $("td.field_3176").each(function() {
+    //  find each attachment link within the cell
+    $(this)
+      .find("a")
+      .each(function(index) {
+        var attachmentType = "";
+
+        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
+        $(this)
+          .closest("tr")
+          .children("td.field_3174")
+          .find("span")
+          .children("span")
+          .each(function(index2) {
+            if (index == index2) {
+              attachmentType = $(this).text();
+            }
+          });
+
+        //  update link contents
+        // and add a line break to make it consistent with the box next to it (BH)
+        $(this).html(attachmentType + "<br>");
+      });
+  });
+});
+
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
-$(document).on("knack-view-render.view_2587", function(event, scene) {
-  console.log("~ view_2587 rendered ~");
-  var $view_2587 = $("#view_2587");
 
-  // Message for React app API call for sign records
-  var markerMessage = {
-    message: "SIGNS_API_REQUEST",
-    view: "view_2588",
-    scene: "scene_716",
-    token: Knack.getUserToken(),
-    app_id: Knack.application_id,
-    id: Knack.hash_id
-  };
-
-  // Add React app as iframe
-  $(
-    '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
-    style="width: 100%;height: 523px;"></iframe>'
-  ).appendTo($view_2587);
-
-  // set up Post Message connection with iframe and parent page
-  var iframe = document.getElementById("mapIFrame").contentWindow;
-
-  function sendMessageToApp(message) {
-    var stringifiedMessage = JSON.stringify(message);
-    console.log("inside API", stringifiedMessage);
-    iframe.postMessage(stringifiedMessage, "*");
-  }
-
-  // listen for response
-  window.addEventListener("message", function(event) {
-    console.log("message received:  " + event.data, event);
-    var data = event.data;
-    if (data.message === "LAT_LON_FIELDS") {
-      var $latLonFields = $("#kn-input-field_3194");
-
-      $latLonFields.find("#latitude").val(data.lat);
-      $latLonFields.find("[name='longitude']").val(data.lng);
-    }
-  });
-
-  $("#mapIFrame").load(function() {
-    sendMessageToApp(markerMessage);
-  });
-
-  //////////////////////////////////////////////////
-  // load auto-zoom.js /////////////////////////////
-
+function loadIframeMapMessenger() {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-geospatial-knack-ui/20_autozoom/auto-zoom.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/20_autozoom/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
     console.log(jqxhr.status); // 200
     console.log("Load was performed.");
   });
+}
+
+$(document).on("knack-view-render.view_2619", function(event, scene) {
+  loadIframeMapMessenger();
+});
+
+$(document).on("knack-view-render.view_2573", function(event, scene) {
+  loadIframeMapMessenger();
 });
