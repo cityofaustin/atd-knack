@@ -491,7 +491,7 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 
 function loadIframeMapMessenger() {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/20_autozoom/iframeMapMessenger.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/32_migrate/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
