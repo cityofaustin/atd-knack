@@ -1,5 +1,8 @@
 (function() {
   console.log("iframeMapMessenger script begins...");
+  console.log(viewIdsArray);
+  var myView = viewIdsArray.splice(0);
+  console.log(myView);
 
   var startingTime = new Date().getTime();
   // Import jQuery into this file from CDN
