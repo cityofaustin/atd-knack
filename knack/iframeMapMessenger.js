@@ -1,6 +1,6 @@
 (function() {
   console.log("iframeMapMessenger script begins...");
-  console.log(viewIdsArray);
+  console.log(window.viewIdsArray);
   var myView = window.viewIdsArray.splice(0);
   console.log(myView);
 
