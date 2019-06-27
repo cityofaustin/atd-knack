@@ -33,6 +33,7 @@
 
   // Start polling...
   checkReady(function($) {
+    debugger;
     var $viewSelector = $(myView);
 
     // Message for React app API call for sign records
