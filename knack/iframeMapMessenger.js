@@ -33,7 +33,7 @@
 
   // Start polling...
   checkReady(function($) {
-    var $view_2587 = $("#view_2587");
+    var $viewSelector = $(myView);
 
     // Message for React app API call for sign records
     var markerMessage = {
@@ -49,7 +49,7 @@
     $(
       '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
-    ).appendTo($view_2587);
+    ).appendTo($viewSelector);
 
     // set up Post Message connection with iframe and parent page
     var iframe = document.getElementById("mapIFrame").contentWindow;

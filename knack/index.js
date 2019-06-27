@@ -490,8 +490,6 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 //////////////////////////////////////////////////
 
 function loadIframeMapMessenger(viewId) {
-  window.viewIdsArray = [];
-
   var url =
     "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/32_migrate/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
@@ -499,14 +497,17 @@ function loadIframeMapMessenger(viewId) {
     console.log(textStatus); // Success
     console.log(jqxhr.status); // 200
     console.log("Load was performed.");
-    window.viewIdsArray.push(viewId);
   });
 }
 
+window.viewIdsArray = [];
+
 $(document).on("knack-view-render.view_2619", function(event, scene) {
+  window.viewIdsArray.push("view_2619");
   loadIframeMapMessenger("view_2619");
 });
 
 $(document).on("knack-view-render.view_2573", function(event, scene) {
+  window.viewIdsArray.push("view_2573");
   loadIframeMapMessenger("view_2573");
 });
