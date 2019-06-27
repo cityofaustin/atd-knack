@@ -79,7 +79,6 @@ export default class SelectLocation extends Component {
       ],
       activeSign: "",
       signsArray: [], // This is an array of arrays that turf.js uses to calculate the bounding box
-      style: "satellite-streets-v9",
       layersLoaded: true,
       initialLoad: false,
       zoom: ""
@@ -132,12 +131,6 @@ export default class SelectLocation extends Component {
     }
   };
 
-  handleChange = event => {
-    const state = {};
-    state[event.target.name] = event.target.value;
-    this.setState(state);
-  };
-
   onForwardGeocodeResult(geocodeResult) {
     const address = geocodeResult.result.place_name;
     this.setState({ geocodeAddressString: address });
@@ -169,6 +162,10 @@ export default class SelectLocation extends Component {
       lngLat: center,
       addressString: this.state.geocodeAddressString
     });
+    window.parent.postMessage(
+      { message: "LAT_LON_FIELDS", lat: this.state.lat, lng: this.state.lng },
+      "*"
+    );
   }
 
   // calls us-forms-system onChange to propogate values up to the form
@@ -351,13 +348,6 @@ export default class SelectLocation extends Component {
       const data = JSON.parse(event.data);
 
       switch (data.message) {
-        case "KNACK_LAT_LON_REQUEST":
-          // send lat/lon back to Knack as comma separated string
-          event.source.postMessage(
-            `${thisComponent.state.lat}, ${thisComponent.state.lng}`,
-            event.origin
-          );
-          break;
         case "SIGNS_API_REQUEST":
           const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
@@ -412,15 +402,7 @@ export default class SelectLocation extends Component {
 
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
-    const {
-      activeSign,
-      style,
-      layersLoaded,
-      lat,
-      lng,
-      center,
-      signs
-    } = this.state;
+    const { activeSign, style, layersLoaded, center, signs } = this.state;
     return (
       <div>
         <div className="map-container">
@@ -467,43 +449,6 @@ export default class SelectLocation extends Component {
             </Map>
           )}
           <LayerButtons toggleStyle={this.toggleStyle} />
-          <form id="lat-long-display">
-            <div className="form-row align-items-center mr-5">
-              <div className="col-auto">
-                <label htmlFor="inlineFormInput" className="font-weight-bold">
-                  Latitude
-                </label>
-                <input
-                  type="text"
-                  name="lat"
-                  className="form-control mb-2"
-                  id="inlineFormInput"
-                  placeholder="Latitude"
-                  value={lat}
-                  onChange={this.handleChange}
-                />
-              </div>
-              <div className="col-auto">
-                <label
-                  htmlFor="inlineFormInputGroup"
-                  className="font-weight-bold"
-                >
-                  Longitude
-                </label>
-                <div className="input-group mb-2">
-                  <input
-                    type="text"
-                    name="lng"
-                    className="form-control"
-                    id="inlineFormInputGroup"
-                    placeholder="Longitude"
-                    value={lng}
-                    onChange={this.handleChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
         </div>
       </div>
     );
