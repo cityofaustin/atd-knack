@@ -1,7 +1,7 @@
 (function() {
   console.log("iframeMapMessenger script begins...");
   console.log(window.viewIdsArray);
-  var myView = window.viewIdsArray.splice(0);
+  var myView = window.viewIdsArray.shift(0);
   console.log(myView);
 
   var startingTime = new Date().getTime();
