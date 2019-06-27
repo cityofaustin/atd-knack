@@ -373,7 +373,7 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   var $view_2587 = $("#view_2587");
 
   // Message for React app API call for sign records
-  const markerMessage = {
+  var markerMessage = {
     message: "SIGNS_API_REQUEST",
     view: "view_2588",
     scene: "scene_716",
@@ -392,7 +392,7 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   var iframe = document.getElementById("mapIFrame").contentWindow;
 
   function sendMessageToApp(message) {
-    const stringifiedMessage = JSON.stringify(message);
+    var stringifiedMessage = JSON.stringify(message);
     console.log("inside API", stringifiedMessage);
     iframe.postMessage(stringifiedMessage, "*");
   }
@@ -400,7 +400,7 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   // listen for response
   window.addEventListener("message", function(event) {
     console.log("message received:  " + event.data, event);
-    const data = event.data;
+    var data = event.data;
     if (data.message === "LAT_LON_FIELDS") {
       var $latLonFields = $("#kn-input-field_3194");
 
