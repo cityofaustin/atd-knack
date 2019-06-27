@@ -490,7 +490,7 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 //////////////////////////////////////////////////
 
 function loadIframeMapMessenger(viewId) {
-  var viewIdsArray = [];
+  window.viewIdsArray = [];
 
   var url =
     "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/32_migrate/iframeMapMessenger.js";
@@ -499,7 +499,7 @@ function loadIframeMapMessenger(viewId) {
     console.log(textStatus); // Success
     console.log(jqxhr.status); // 200
     console.log("Load was performed.");
-    viewIdsArray.push(viewId);
+    window.viewIdsArray.push(viewId);
   });
 }
 
