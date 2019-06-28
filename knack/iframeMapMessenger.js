@@ -33,7 +33,6 @@
 
   // Start polling...
   checkReady(function($) {
-    debugger;
     var $viewSelector = $(myView);
 
     var recordId = Knack.hash_id;
