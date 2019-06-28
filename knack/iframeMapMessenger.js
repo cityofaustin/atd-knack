@@ -37,13 +37,17 @@
     var $viewSelector = $(myView);
 
     // Message for React app API call for sign records
+    var recordId = $($(".kn-crumbtrail").children()[2])
+      .attr("href")
+      .split("/")[2]
+      .slice(0, -1);
     var markerMessage = {
       message: "SIGNS_API_REQUEST",
-      view: "view_2588",
-      scene: "scene_716",
+      view: myView.slice(1),
+      scene: "scene_1028",
       token: Knack.getUserToken(),
       app_id: Knack.application_id,
-      id: Knack.hash_id
+      id: recordId
     };
 
     // Add React app as iframe

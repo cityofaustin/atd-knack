@@ -346,6 +346,7 @@ export default class SelectLocation extends Component {
 
       switch (data.message) {
         case "SIGNS_API_REQUEST":
+          debugger;
           const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
           }/records?view-work-orders-markings-job-details_id=${data.id}`;
