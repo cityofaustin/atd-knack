@@ -37,11 +37,15 @@
     var $viewSelector = $(myView);
 
     // Message for React app API call for sign records
+    var recordId = "";
+
+    $(".kn-crumbtrail").load(function() {
+      recordId = $($(".kn-crumbtrail").children()[2])
+        .attr("href")
+        .split("/")[2]
+        .slice(0, -1);
+    });
     debugger;
-    var recordId = $($(".kn-crumbtrail").children()[2])
-      .attr("href")
-      .split("/")[2]
-      .slice(0, -1);
     var markerMessage = {
       message: "SIGNS_API_REQUEST",
       view: myView.slice(1),
