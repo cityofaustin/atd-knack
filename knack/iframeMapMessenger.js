@@ -37,6 +37,7 @@
     var $viewSelector = $(myView);
 
     // Message for React app API call for sign records
+    debugger;
     var recordId = $($(".kn-crumbtrail").children()[2])
       .attr("href")
       .split("/")[2]
