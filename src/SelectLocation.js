@@ -360,7 +360,7 @@ export default class SelectLocation extends Component {
         case "SIGNS_API_REQUEST":
           const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
-          }/records?view-work-orders-markings-job-details_id=${data.id}`;
+          }/records?view-work-orders-details-sign_id=${data.id}`;
           axios
             .get(url, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
@@ -373,8 +373,8 @@ export default class SelectLocation extends Component {
                   : data.map(sign => {
                       const signObj = {};
                       signObj["id"] = sign.id;
-                      signObj["lat"] = sign.field_3194_raw.latitude;
-                      signObj["lng"] = sign.field_3194_raw.longitude;
+                      signObj["lat"] = sign.field_3300_raw.latitude;
+                      signObj["lng"] = sign.field_3300_raw.longitude;
                       signObj["spatialId"] = sign.field_3195;
                       return signObj;
                     });
@@ -383,8 +383,8 @@ export default class SelectLocation extends Component {
                 data === []
                   ? data
                   : data.map(sign => [
-                      parseFloat(sign.field_3194_raw.longitude),
-                      parseFloat(sign.field_3194_raw.latitude)
+                      parseFloat(sign.field_3300_raw.longitude),
+                      parseFloat(sign.field_3300_raw.latitude)
                     ]);
               thisComponent.setState({
                 signs: signsObjects,
