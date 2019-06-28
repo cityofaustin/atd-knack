@@ -39,7 +39,7 @@
     // Message for React app API call for sign records
     var recordId = "";
 
-    $(".kn-crumbtrail").on("load", function() {
+    $(".kn-crumbtrail").load(function() {
       debugger;
       recordId = $($(".kn-crumbtrail").children()[2])
         .attr("href")
