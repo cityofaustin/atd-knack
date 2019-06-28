@@ -231,10 +231,10 @@ export default class SelectLocation extends Component {
     if (shouldZoomToBBox) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
-      const line = lineString(this.state.signsArray);
-      const mapBbox = bbox(line);
-      map.fitBounds(mapBbox, { padding: 160 });
-      this.setState({ initialLoad: true });
+      // const line = lineString(this.state.signsArray, this.state.signsArray);
+      // const mapBbox = bbox(line);
+      // map.fitBounds(mapBbox, { padding: 160 });
+      // this.setState({ initialLoad: true });
     } else if (shouldMaintainZoomAndCenterFromUserChanges) {
       // Handle case when user switches layer after moving pin
       map.jumpTo({
@@ -346,10 +346,9 @@ export default class SelectLocation extends Component {
 
       switch (data.message) {
         case "SIGNS_API_REQUEST":
-          debugger;
           const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
-          }/records?view-work-orders-markings-job-details_id=${data.id}`;
+          }/records?view-work-orders-details-sign_id=${data.id}`;
           axios
             .get(url, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
@@ -362,8 +361,8 @@ export default class SelectLocation extends Component {
                   : data.map(sign => {
                       const signObj = {};
                       signObj["id"] = sign.id;
-                      signObj["lat"] = sign.field_3194_raw.latitude;
-                      signObj["lng"] = sign.field_3194_raw.longitude;
+                      signObj["lat"] = sign.field_3300_raw.latitude;
+                      signObj["lng"] = sign.field_3300_raw.longitude;
                       signObj["spatialId"] = sign.field_3195;
                       return signObj;
                     });
@@ -372,8 +371,8 @@ export default class SelectLocation extends Component {
                 data === []
                   ? data
                   : data.map(sign => [
-                      parseFloat(sign.field_3194_raw.longitude),
-                      parseFloat(sign.field_3194_raw.latitude)
+                      parseFloat(sign.field_3300_raw.longitude),
+                      parseFloat(sign.field_3300_raw.latitude)
                     ]);
               thisComponent.setState({
                 signs: signsObjects,

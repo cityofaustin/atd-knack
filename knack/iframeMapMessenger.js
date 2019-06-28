@@ -77,7 +77,7 @@
       console.log("message received:  " + event.data, event);
       var data = event.data;
       if (data.message === "LAT_LON_FIELDS") {
-        var $latLonFields = $("#kn-input-field_3194");
+        var $latLonFields = $("#kn-input-field_3300");
 
         $latLonFields.find("#latitude").val(data.lat);
         $latLonFields.find("[name='longitude']").val(data.lng);
