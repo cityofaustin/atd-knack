@@ -40,12 +40,13 @@
     var recordId = "";
 
     $(".kn-crumbtrail").load(function() {
+      debugger;
       recordId = $($(".kn-crumbtrail").children()[2])
         .attr("href")
         .split("/")[2]
         .slice(0, -1);
     });
-    debugger;
+
     var markerMessage = {
       message: "SIGNS_API_REQUEST",
       view: myView.slice(1),
