@@ -84,7 +84,7 @@
       }
     });
 
-    $("#mapIFrame").load(function() {
+    $("#mapIFrame").on("load", (function() {
       sendMessageToApp(markerMessage);
     });
 
