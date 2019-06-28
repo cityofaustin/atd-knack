@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import SelectLocation from "./SelectLocation";
+require("dotenv").config();
 
 function App() {
   return (

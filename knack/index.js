@@ -373,7 +373,7 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
   var $view_2587 = $("#view_2587");
 
   // Message for React app API call for sign records
-  const markerMessage = {
+  var markerMessage = {
     message: "SIGNS_API_REQUEST",
     view: "view_2588",
     scene: "scene_716",
@@ -384,43 +384,29 @@ $(document).on("knack-view-render.view_2587", function(event, scene) {
 
   // Add React app as iframe
   $(
-    '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+    '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
   ).appendTo($view_2587);
 
-  $view_2587.find("form").hide();
-
   // set up Post Message connection with iframe and parent page
-  //create popup window
   var iframe = document.getElementById("mapIFrame").contentWindow;
 
   function sendMessageToApp(message) {
-    const stringifiedMessage = JSON.stringify(message);
+    var stringifiedMessage = JSON.stringify(message);
+    console.log("inside API", stringifiedMessage);
     iframe.postMessage(stringifiedMessage, "*");
   }
-
-  // create lat/lon request button
-  $('<button id="latLonButton">Get Lat/Lon from Map</button>').appendTo(
-    $view_2587
-  );
-
-  // send message to iframe on button click
-  $("#latLonButton").on("click", function(e) {
-    var coordMessage = { message: "KNACK_LAT_LON_REQUEST" };
-    const message = JSON.stringify(coordMessage);
-    console.log("knack:  sending message:  " + message);
-    iframe.postMessage(message, "*"); //send the message and target URI
-  });
 
   // listen for response
   window.addEventListener("message", function(event) {
     console.log("message received:  " + event.data, event);
-    var latLonResponse = event.data.split(", ");
-    $view_2587.find("form").show();
-    var $latLonFields = $("#kn-input-field_3194");
+    var data = event.data;
+    if (data.message === "LAT_LON_FIELDS") {
+      var $latLonFields = $("#kn-input-field_3194");
 
-    $latLonFields.find("#latitude").val(latLonResponse[0]);
-    $latLonFields.find("[name='longitude']").val(latLonResponse[1]);
+      $latLonFields.find("#latitude").val(data.lat);
+      $latLonFields.find("[name='longitude']").val(data.lng);
+    }
   });
 
   $("#mapIFrame").load(function() {
