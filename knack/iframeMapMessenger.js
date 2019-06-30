@@ -63,13 +63,13 @@
     });
 
     $("#mapIFrame").on("load", function() {
-      debugger;
       var recordId = "";
       // Message for React app API call for sign records
       recordId = $($(".kn-crumbtrail").children()[2])
         .attr("href")
         .split("/")[2]
         .slice(0, -1);
+
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
         view: myView.slice(1),
@@ -97,6 +97,14 @@
       $("#mapIFrame").on("load", function() {
         AutozoomSendMessageToApp(geolocationMessage);
       });
+
+      // Move lat/long fields and Add Location button on top of iFrame and format text
+      $("#view_2607 button").css({ marginTop: "-=125px" });
+      $("#view_2607 button").css({ marginLeft: "+=5px" });
+      $("#view_2607").css({ marginTop: "-=130px" });
+      $("#view_2607 > div.view-header > p").hide();
+      $("#view_2607").css("color", "white");
+      $("#view_2607").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
     });
   });
 })();
