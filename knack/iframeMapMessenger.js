@@ -35,7 +35,7 @@
   checkReady(function($) {
     var $viewSelector = $(myView);
 
-    $(window).on('load', (function() {
+    $(window).on("load", function() {
       var recordId = "";
 
       // TODO breadcrumb not loaded yet, .load() generates TypeError
