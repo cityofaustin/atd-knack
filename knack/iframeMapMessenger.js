@@ -35,19 +35,41 @@
   checkReady(function($) {
     var $viewSelector = $(myView);
 
-    $(window).on("load", function() {
-      var recordId = "";
+    // Add React app as iframe
+    $(
+      '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
+    style="width: 100%;height: 523px;"></iframe>'
+    ).appendTo($viewSelector);
 
-      // TODO breadcrumb not loaded yet, .load() generates TypeError
-      // $(".kn-crumbtrail").on("load", function() {
+    // set up Post Message connection with iframe and parent page
+    var iframe = document.getElementById("mapIFrame").contentWindow;
+
+    function sendMessageToApp(message) {
+      var stringifiedMessage = JSON.stringify(message);
+      console.log("inside API", stringifiedMessage);
+      iframe.postMessage(stringifiedMessage, "*");
+    }
+
+    // listen for response
+    window.addEventListener("message", function(event) {
+      console.log("message received:  " + event.data, event);
+      var data = event.data;
+      if (data.message === "LAT_LON_FIELDS") {
+        var $latLonFields = $("#kn-input-field_3300");
+
+        $latLonFields.find("#latitude").val(data.lat);
+        $latLonFields.find("[name='longitude']").val(data.lng);
+      }
+    });
+
+    $("#mapIFrame").on("load", function() {
       debugger;
+      var recordId = "";
+      // Message for React app API call for sign records
       recordId = $($(".kn-crumbtrail").children()[2])
         .attr("href")
         .split("/")[2]
         .slice(0, -1);
-      // });
-
-      // Message for React app API call for sign records
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
         view: myView.slice(1),
@@ -57,52 +79,23 @@
         id: recordId
       };
 
-      // Add React app as iframe
-      $(
-        '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
-    style="width: 100%;height: 523px;"></iframe>'
-      ).appendTo($viewSelector);
+      sendMessageToApp(markerMessage);
+    });
 
-      // set up Post Message connection with iframe and parent page
-      var iframe = document.getElementById("mapIFrame").contentWindow;
+    // $(function() {
+    // Get the current location from browser.
+    // TODO: we might need to wrap this in try/catch check
+    navigator.geolocation.getCurrentPosition(function(position) {
+      // create message object for React App
+      const geolocationMessage = {
+        message: "KNACK_GEOLOCATION",
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      };
 
-      function sendMessageToApp(message) {
-        var stringifiedMessage = JSON.stringify(message);
-        console.log("inside API", stringifiedMessage);
-        iframe.postMessage(stringifiedMessage, "*");
-      }
-
-      // listen for response
-      window.addEventListener("message", function(event) {
-        console.log("message received:  " + event.data, event);
-        var data = event.data;
-        if (data.message === "LAT_LON_FIELDS") {
-          var $latLonFields = $("#kn-input-field_3300");
-
-          $latLonFields.find("#latitude").val(data.lat);
-          $latLonFields.find("[name='longitude']").val(data.lng);
-        }
-      });
-
+      // envoke message once the iframe is loaded
       $("#mapIFrame").on("load", function() {
-        sendMessageToApp(markerMessage);
-      });
-
-      // $(function() {
-      // Get the current location from browser.
-      // TODO: we might need to wrap this in try/catch check
-      navigator.geolocation.getCurrentPosition(function(position) {
-        // create message object for React App
-        const geolocationMessage = {
-          message: "KNACK_GEOLOCATION",
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        };
-
-        // envoke message once the iframe is loaded
-        $("#mapIFrame").on("load", function() {
-          AutozoomSendMessageToApp(geolocationMessage);
-        });
+        AutozoomSendMessageToApp(geolocationMessage);
       });
     });
   });
