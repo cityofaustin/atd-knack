@@ -249,6 +249,7 @@ export default class SelectLocation extends Component {
       map.setCenter(this.state.center);
       map.setZoom(17);
     }
+    // Prevent map from shrinking in iFrame within Knack app
     map.resize();
   }
 
