@@ -63,13 +63,9 @@
     });
 
     $("#mapIFrame").on("load", function() {
-      var recordId = Knack.hash_id;
-      // TODO div.crumbtrail is often not loaded before assignment to recordId below
-      // Message for React app API call for sign records
-      // recordId = $($(".kn-crumbtrail").children()[2])
-      //   .attr("href")
-      //   .split("/")[2]
-      //   .slice(0, -1);
+      debugger;
+      var urlArray = window.location.href.split("/");
+      var recordId = urlArray[urlArray.length - 2];
 
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
