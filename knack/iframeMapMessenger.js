@@ -33,81 +33,78 @@
 
   // Start polling...
   checkReady(function($) {
-    $(function() {
-      var $viewSelector = $(myView);
+    var $viewSelector = $(myView);
 
-      // Add React app as iframe
-      $(
-        '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
+    // Add React app as iframe
+    $(
+      '<iframe src="https://localhost:9001" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
-      ).appendTo($viewSelector);
+    ).appendTo($viewSelector);
 
-      // set up Post Message connection with iframe and parent page
-      var iframe = document.getElementById("mapIFrame").contentWindow;
+    // set up Post Message connection with iframe and parent page
+    var iframe = document.getElementById("mapIFrame").contentWindow;
 
-      function sendMessageToApp(message) {
-        var stringifiedMessage = JSON.stringify(message);
-        console.log("inside API", stringifiedMessage);
-        iframe.postMessage(stringifiedMessage, "*");
+    function sendMessageToApp(message) {
+      var stringifiedMessage = JSON.stringify(message);
+      console.log("inside API", stringifiedMessage);
+      iframe.postMessage(stringifiedMessage, "*");
+    }
+
+    // listen for response
+    window.addEventListener("message", function(event) {
+      console.log("message received:  " + event.data, event);
+      var data = event.data;
+      if (data.message === "LAT_LON_FIELDS") {
+        var $latLonFields = $("#kn-input-field_3300");
+
+        $latLonFields.find("#latitude").val(data.lat);
+        $latLonFields.find("[name='longitude']").val(data.lng);
       }
+    });
 
-      // listen for response
-      window.addEventListener("message", function(event) {
-        console.log("message received:  " + event.data, event);
-        var data = event.data;
-        if (data.message === "LAT_LON_FIELDS") {
-          var $latLonFields = $("#kn-input-field_3300");
+    $("#mapIFrame").on("load", function() {
+      var recordId = Knack.hash_id;
+      // Message for React app API call for sign records
+      // recordId = $($(".kn-crumbtrail").children()[2])
+      //   .attr("href")
+      //   .split("/")[2]
+      //   .slice(0, -1);
 
-          $latLonFields.find("#latitude").val(data.lat);
-          $latLonFields.find("[name='longitude']").val(data.lng);
-        }
-      });
+      var markerMessage = {
+        message: "SIGNS_API_REQUEST",
+        view: myView.slice(1),
+        scene: "scene_1028",
+        token: Knack.getUserToken(),
+        app_id: Knack.application_id,
+        id: recordId
+      };
 
+      sendMessageToApp(markerMessage);
+    });
+
+    // $(function() {
+    // Get the current location from browser.
+    // TODO: we might need to wrap this in try/catch check
+    navigator.geolocation.getCurrentPosition(function(position) {
+      // create message object for React App
+      const geolocationMessage = {
+        message: "KNACK_GEOLOCATION",
+        lat: position.coords.latitude,
+        lon: position.coords.longitude
+      };
+
+      // envoke message once the iframe is loaded
       $("#mapIFrame").on("load", function() {
-        debugger;
-        var recordId = "";
-        // Message for React app API call for sign records
-        recordId = $($(".kn-crumbtrail").children()[2])
-          .attr("href")
-          .split("/")[2]
-          .slice(0, -1);
-
-        var markerMessage = {
-          message: "SIGNS_API_REQUEST",
-          view: myView.slice(1),
-          scene: "scene_1028",
-          token: Knack.getUserToken(),
-          app_id: Knack.application_id,
-          id: recordId
-        };
-
-        sendMessageToApp(markerMessage);
+        AutozoomSendMessageToApp(geolocationMessage);
       });
 
-      // $(function() {
-      // Get the current location from browser.
-      // TODO: we might need to wrap this in try/catch check
-      navigator.geolocation.getCurrentPosition(function(position) {
-        // create message object for React App
-        const geolocationMessage = {
-          message: "KNACK_GEOLOCATION",
-          lat: position.coords.latitude,
-          lon: position.coords.longitude
-        };
-
-        // envoke message once the iframe is loaded
-        $("#mapIFrame").on("load", function() {
-          AutozoomSendMessageToApp(geolocationMessage);
-        });
-
-        // Move lat/long fields and Add Location button on top of iFrame and format text
-        $("#view_2607 button").css({ marginTop: "-=125px" });
-        $("#view_2607 button").css({ marginLeft: "+=5px" });
-        $("#view_2607").css({ marginTop: "-=130px" });
-        $("#view_2607 > div.view-header > p").hide();
-        $("#view_2607").css("color", "white");
-        $("#view_2607").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
-      });
+      // Move lat/long fields and Add Location button on top of iFrame and format text
+      $("#view_2607 button").css({ marginTop: "-=125px" });
+      $("#view_2607 button").css({ marginLeft: "+=5px" });
+      $("#view_2607").css({ marginTop: "-=130px" });
+      $("#view_2607 > div.view-header > p").hide();
+      $("#view_2607").css("color", "white");
+      $("#view_2607").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
     });
   });
 })();
