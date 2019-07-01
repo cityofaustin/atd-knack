@@ -63,23 +63,25 @@
     });
 
     $("#mapIFrame").on("load", function() {
-      var recordId = "";
-      // Message for React app API call for sign records
-      recordId = $($(".kn-crumbtrail").children()[2])
-        .attr("href")
-        .split("/")[2]
-        .slice(0, -1);
+      $("div.kn-crumbtrail").on("load", function() {
+        var recordId = "";
+        // Message for React app API call for sign records
+        recordId = $($(".kn-crumbtrail").children()[2])
+          .attr("href")
+          .split("/")[2]
+          .slice(0, -1);
 
-      var markerMessage = {
-        message: "SIGNS_API_REQUEST",
-        view: myView.slice(1),
-        scene: "scene_1028",
-        token: Knack.getUserToken(),
-        app_id: Knack.application_id,
-        id: recordId
-      };
+        var markerMessage = {
+          message: "SIGNS_API_REQUEST",
+          view: myView.slice(1),
+          scene: "scene_1028",
+          token: Knack.getUserToken(),
+          app_id: Knack.application_id,
+          id: recordId
+        };
 
-      sendMessageToApp(markerMessage);
+        sendMessageToApp(markerMessage);
+      });
     });
 
     // $(function() {
