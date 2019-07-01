@@ -244,9 +244,9 @@ export default class SelectLocation extends Component {
     } else {
       // When there are no exisiting locations, zoom in on center which should be the users current location
       map.setCenter(this.state.center);
-      map.resize();
       map.setZoom(17);
     }
+    map.resize();
   }
 
   // prepare geocoded result to be propogated to form
