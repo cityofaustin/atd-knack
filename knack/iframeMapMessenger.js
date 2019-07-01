@@ -63,7 +63,9 @@
     });
 
     $("#mapIFrame").on("load", function() {
+      debugger;
       $("div.kn-crumbtrail").on("load", function() {
+        debugger;
         var recordId = "";
         // Message for React app API call for sign records
         recordId = $($(".kn-crumbtrail").children()[2])
