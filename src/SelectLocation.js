@@ -159,10 +159,10 @@ export default class SelectLocation extends Component {
       lngLat: center,
       addressString: this.state.geocodeAddressString
     });
-    window.parent.postMessage(
-      { message: "LAT_LON_FIELDS", lat: this.state.lat, lng: this.state.lng },
-      "*"
-    );
+    // format lat/lon to 7 digits after decimal point to avoid rejection from Knack
+    const lat = this.state.lat.toFixed(7);
+    const lng = this.state.lng.toFixed(7);
+    window.parent.postMessage({ message: "LAT_LON_FIELDS", lat, lng }, "*");
   }
 
   // calls us-forms-system onChange to propogate values up to the form
