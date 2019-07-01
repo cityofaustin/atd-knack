@@ -64,6 +64,7 @@
 
     $("#mapIFrame").on("load", function() {
       var recordId = Knack.hash_id;
+      // TODO div.crumbtrail is often not loaded before assignment to recordId below
       // Message for React app API call for sign records
       // recordId = $($(".kn-crumbtrail").children()[2])
       //   .attr("href")
