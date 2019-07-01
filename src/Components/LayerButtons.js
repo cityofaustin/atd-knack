@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const LayerControls = styled.div`
   position: absolute;
-  top: 7%;
+  top: 12%;
   left: 0%;
   margin: 0px 0px 0px 10px;
 `;

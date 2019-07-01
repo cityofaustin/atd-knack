@@ -231,7 +231,7 @@ export default class SelectLocation extends Component {
     if (shouldZoomToBBox) {
       // Handle zoom/resize to existing signs if work order has existing locations
       // Use Turf.js to create a bounding box, use bbox to set bounds for Map
-      const line = lineString(this.state.signsArray);
+      const line = lineString(this.state.signsArray, this.state.signsArray);
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160 });
       this.setState({ initialLoad: true });
