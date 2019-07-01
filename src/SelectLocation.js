@@ -363,7 +363,7 @@ export default class SelectLocation extends Component {
                       signObj["id"] = sign.id;
                       signObj["lat"] = sign.field_3300_raw.latitude;
                       signObj["lng"] = sign.field_3300_raw.longitude;
-                      signObj["spatialId"] = sign.field_3195;
+                      signObj["spatialId"] = sign.field_3297;
                       return signObj;
                     });
               // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
