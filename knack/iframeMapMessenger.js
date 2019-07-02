@@ -34,7 +34,7 @@
 
     // Add React app as iframe if iframe doesn't already exist
     debugger;
-    if ($("#mapIFrame")) {
+    if (!!$("#mapIFrame")) {
       return;
     } else {
       $(
