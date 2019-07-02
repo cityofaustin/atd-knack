@@ -59,25 +59,31 @@
       }
     });
 
+    $("div.map-container").on("load", function() {
+      debugger;
+      var urlArray = window.location.href.split("/");
+      var recordId = urlArray[urlArray.length - 2];
+
+      var markerMessage = {
+        message: "KNACK_LOCATION_DETAILS",
+        view: myView.slice(1),
+        scene: "scene_1039",
+        token: Knack.getUserToken(),
+        app_id: Knack.application_id,
+        id: recordId
+      };
+
+      sendMessageToApp(markerMessage);
+    });
+
     $("#mapIFrame").on("load", function() {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 
-      debugger;
-      if (myView === "#view_2609") {
-        // Location Details View
-        var sceneId = "scene_1039";
-        var message = "KNACK_LOCATION_DETAILS";
-      } else {
-        // Work Order Details Views
-        var sceneId = "scene_1028";
-        var message = "SIGNS_API_REQUEST";
-      }
-
       var markerMessage = {
-        message: message,
+        message: "SIGNS_API_REQUEST",
         view: myView.slice(1),
-        scene: sceneId,
+        scene: "scene_1028",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
         id: recordId
