@@ -28,6 +28,14 @@
     iframe.postMessage(stringifiedMessage, "*");
   }
 
+  function addMapToLocationDetails() {
+    // Remove map from Location Details
+    $(document).on("knack-view-render.view_2609", function() {
+      console.log("in view_2609");
+      $("#kn-map-field_3300").hide();
+    });
+  }
+
   // Start polling...
   checkReady(function($) {
     var $viewSelector = $(myView);
@@ -92,11 +100,7 @@
       });
     });
 
-    // Remove map from Location Details
-    $(document).on("knack-view-render.view_2609", function() {
-      console.log("in view_2609");
-      $("#kn-map-field_3300").hide();
-    });
+    addMapToLocationDetails();
 
     // Move lat/long fields and Add Location button on top of iFrame and format text
     // $("#view_2607 button").css({ marginTop: "-=125px" });
