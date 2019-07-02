@@ -93,7 +93,10 @@
     });
 
     // Remove map from Location Details
-    $("#kn-map-field_3300").hide();
+    $(document).on("knack-view-render.view_2609", function() {
+      console.log("in view_2609");
+      $("#kn-map-field_3300").hide();
+    });
 
     // Move lat/long fields and Add Location button on top of iFrame and format text
     // $("#view_2607 button").css({ marginTop: "-=125px" });
