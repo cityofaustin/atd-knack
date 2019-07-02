@@ -63,7 +63,7 @@
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 
-      if (myView === "view_2609") {
+      if (myView === "#view_2609") {
         // Location Details View
         var sceneId = "scene_1039";
         var message = "KNACK_LOCATION_DETAILS";
