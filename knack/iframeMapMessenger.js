@@ -60,7 +60,6 @@
     });
 
     $("#view_2609 #mapIFrame").on("load", function() {
-      debugger;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 

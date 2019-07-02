@@ -392,9 +392,16 @@ export default class SelectLocation extends Component {
           });
           break;
         case "KNACK_LOCATION_DETAILS":
-          debugger;
           console.log("KNACK_LOCATION_DETAILS", data);
-          // TODO add Knack API call
+          const locationUrl = `https://us-api.knack.com/v1/pages/${
+            data.scene
+          }/views/${data.view}/records/${data.id}`;
+          axios
+            .get(locationUrl, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              console.log(response);
+            });
           break;
         default:
           return;
