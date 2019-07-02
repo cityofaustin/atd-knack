@@ -391,6 +391,10 @@ export default class SelectLocation extends Component {
             center
           });
           break;
+        case "KNACK_LOCATION_DETAILS":
+          console.log("KNACK_LOCATION_DETAILS", data);
+          // TODO add Knack API call
+          break;
         default:
           return;
       }
