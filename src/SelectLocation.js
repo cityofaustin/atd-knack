@@ -17,6 +17,7 @@ const Map = ReactMapboxGl({
 });
 
 const layoutLayer = { "icon-image": "marker" };
+const locationViewLayer = { "icon-image": "marker-15" };
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -78,7 +79,8 @@ export default class SelectLocation extends Component {
       signsArray: [], // This is an array of arrays that turf.js uses to calculate the bounding box
       layersLoaded: true,
       initialLoad: false,
-      zoom: ""
+      zoom: "",
+      viewLocation: []
     };
   }
 
@@ -393,41 +395,8 @@ export default class SelectLocation extends Component {
           break;
         case "KNACK_LOCATION_DETAILS":
           console.log("KNACK_LOCATION_DETAILS", data);
-          const locationUrl = `https://us-api.knack.com/v1/pages/${
-            data.scene
-          }/views/${data.view}/records/${data.id}`;
-          axios
-            .get(locationUrl, thisComponent.getHeaders(data.token, data.app_id))
-            .then(response => {
-              // handle success
-              const data = response.data;
-              // Populate state with existing signs in Knack work order
-              const signsObjects =
-                data === []
-                  ? data
-                  : [
-                      {
-                        id: data.id,
-                        lat: data.field_3300_raw.latitude,
-                        lng: data.field_3300_raw.longitude,
-                        spatialId: data.field_3297
-                      }
-                    ];
-              // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
-              const signsArray =
-                data === []
-                  ? data
-                  : [
-                      [
-                        parseFloat(data.field_3300_raw.longitude),
-                        parseFloat(data.field_3300_raw.latitude)
-                      ]
-                    ];
-              thisComponent.setState({
-                signs: signsObjects,
-                signsArray: signsArray
-              });
-            });
+          // TODO Find way to get scene, view, and record from Knack Location Details modal
+          // Find way to differentiate iFrame messages
           break;
         default:
           return;
@@ -437,7 +406,14 @@ export default class SelectLocation extends Component {
 
   render() {
     const pinDrop = this.state.showPin ? "show" : "hide";
-    const { activeSign, style, layersLoaded, center, signs } = this.state;
+    const {
+      activeSign,
+      style,
+      layersLoaded,
+      center,
+      signs,
+      viewLocation
+    } = this.state;
     return (
       <div>
         <div className="map-container">
@@ -464,6 +440,15 @@ export default class SelectLocation extends Component {
                   />
                 ))}
               </Layer>
+              {viewLocation.length !== 0 && (
+                <Layer
+                  type="symbol"
+                  id="view-location"
+                  layout={locationViewLayer}
+                >
+                  <Feature coordinates={viewLocation} />
+                </Layer>
+              )}
               {activeSign !== "" && (
                 <Popup
                   key={activeSign.id}
