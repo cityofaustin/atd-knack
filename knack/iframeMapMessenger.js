@@ -40,8 +40,9 @@
 
     // set up Post Message connection with iframe and parent page
     var iframe = document.getElementById("mapIFrame").contentWindow;
+    var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
 
-    function sendMessageToApp(message) {
+    function sendMessageToApp(message, iframe) {
       var stringifiedMessage = JSON.stringify(message);
       console.log("inside API", stringifiedMessage);
       iframe.postMessage(stringifiedMessage, "*");
@@ -72,7 +73,7 @@
         id: recordId
       };
 
-      sendMessageToApp(markerMessage);
+      sendMessageToApp(markerMessage, locationViewIFrame);
     });
 
     $("#mapIFrame").on("load", function() {
@@ -88,7 +89,7 @@
         id: recordId
       };
 
-      sendMessageToApp(markerMessage);
+      sendMessageToApp(markerMessage, iframe);
     });
 
     // $(function() {
