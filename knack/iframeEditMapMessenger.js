@@ -35,12 +35,11 @@
     if ($("#mapIFrame").length === 0) {
       $(
         '<iframe src="https://5d1ad828f6d3f10009e4ca54--wonderful-heyrovsky-db4c26.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
-    style="width: 100%;height: 523px;"></iframe>'
+        style="width: 100%;height: 523px;"></iframe>'
       ).appendTo($viewSelector);
     }
 
     // set up Post Message connection with iframe and parent page
-    // var iframe = document.getElementById("mapIFrame").contentWindow;
 
     // listen for response
     // window.addEventListener("message", function(event) {
@@ -55,6 +54,7 @@
     // });
 
     function sendMessageToApp(message) {
+      var iframe = document.getElementById("mapIFrame").contentWindow;
       var stringifiedMessage = JSON.stringify(message);
       console.log("inside API", stringifiedMessage);
       iframe.postMessage(stringifiedMessage, "*");
