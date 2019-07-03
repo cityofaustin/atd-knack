@@ -17,7 +17,7 @@ const Map = ReactMapboxGl({
 });
 
 const layoutLayer = { "icon-image": "marker" };
-const locationViewLayer = { "icon-image": "marker-15" };
+const locationViewLayer = { "icon-image": "red-marker" };
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -221,6 +221,11 @@ export default class SelectLocation extends Component {
       map.addImage("marker", image);
     });
 
+    map.loadImage("/red-icons8-marker-40.png", function(error, image) {
+      if (error) throw error;
+      map.addImage("red-marker", image);
+    });
+
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
@@ -396,7 +401,24 @@ export default class SelectLocation extends Component {
         case "KNACK_LOCATION_DETAILS":
           console.log("KNACK_LOCATION_DETAILS", data);
           // TODO Find way to get scene, view, and record from Knack Location Details modal
-          // Find way to differentiate iFrame messages
+          const locationUrl = `https://us-api.knack.com/v1/pages/${
+            data.scene
+          }/views/${data.view}/records/${data.id}`;
+          axios
+            .get(locationUrl, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              console.log(response);
+              const locationDetails = response.data.field_3300_raw;
+              const viewLocationCoords = [
+                locationDetails.longitude,
+                locationDetails.latitude
+              ];
+              thisComponent.setState({
+                viewLocation: viewLocationCoords,
+                center: viewLocationCoords
+              });
+            });
           break;
         default:
           return;
