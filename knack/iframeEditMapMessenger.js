@@ -20,13 +20,6 @@
     }
   };
 
-  //   function AutozoomSendMessageToApp(message) {
-  //     var iframe = document.getElementById("mapIFrame").contentWindow;
-  //     const stringifiedMessage = JSON.stringify(message);
-  //     console.log("inside API", stringifiedMessage);
-  //     iframe.postMessage(stringifiedMessage, "*");
-  //   }
-
   // Start polling...
   checkReady(function($) {
     var $viewSelector = $(myView);
@@ -39,9 +32,7 @@
       ).appendTo($viewSelector);
     }
 
-    // set up Post Message connection with iframe and parent page
-
-    // listen for response
+    // Listen for lat/lon changes
     window.addEventListener("message", function(event) {
       console.log("message received:  " + event.data, event);
       var data = event.data;
@@ -61,7 +52,6 @@
     }
 
     $("#mapIFrame").on("load", function() {
-      debugger;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 
@@ -74,26 +64,7 @@
         id: recordId
       };
 
-      console.log(markerMessage);
-
       sendMessageToApp(markerMessage);
     });
-
-    // $(function() {
-    // Get the current location from browser.
-    // TODO: we might need to wrap this in try/catch check
-    // navigator.geolocation.getCurrentPosition(function(position) {
-    // create message object for React App
-    //   const geolocationMessage = {
-    //     message: "KNACK_GEOLOCATION",
-    //     lat: position.coords.latitude,
-    //     lon: position.coords.longitude
-    //   };
-
-    // envoke message once the iframe is loaded
-    //   $("#mapIFrame").on("load", function() {
-    //     AutozoomSendMessageToApp(geolocationMessage);
-    //   });
-    // });
   });
 })();

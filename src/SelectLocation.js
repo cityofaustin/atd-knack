@@ -395,7 +395,6 @@ export default class SelectLocation extends Component {
             });
           break;
         case "EDIT_SIGNS_API_REQUEST":
-          console.log("EDIT_SIGNS_API_REQUEST");
           let editUrl = `https://us-api.knack.com/v1/scenes/${
             data.scene
           }/views/${data.view}/records/${data.id}`;
@@ -404,8 +403,6 @@ export default class SelectLocation extends Component {
             .then(response => {
               // handle success
               const data = response.data;
-
-              debugger;
 
               let signs = [
                 {

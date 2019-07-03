@@ -512,13 +512,10 @@ $(document).on("knack-view-render.view_2573", function(event, scene) {
   loadIframeMapMessenger("view_2573");
 });
 
-// Mateo's work on Edit Location
-// scene_1061
-// view_2682
-
+// IN PROGRESS: Mateo's work on Edit Location
 $(document).on("knack-view-render.view_2682", function(event, scene) {
   window.viewIdsArray.push("#view_2682");
-  // loadIframeMapMessenger("view_2682");
+  $(".field_3300").hide();
 
   var url =
     "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/26_edit_location/iframeEditMapMessenger.js";
