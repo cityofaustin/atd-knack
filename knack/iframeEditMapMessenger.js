@@ -42,16 +42,16 @@
     // set up Post Message connection with iframe and parent page
 
     // listen for response
-    // window.addEventListener("message", function(event) {
-    //   console.log("message received:  " + event.data, event);
-    //   var data = event.data;
-    //   if (data.message === "LAT_LON_FIELDS") {
-    //     var $latLonFields = $("#kn-input-field_3300");
+    window.addEventListener("message", function(event) {
+      console.log("message received:  " + event.data, event);
+      var data = event.data;
+      if (data.message === "LAT_LON_FIELDS") {
+        var $latLonFields = $("#kn-input-field_3300");
 
-    //     $latLonFields.find("#latitude").val(data.lat);
-    //     $latLonFields.find("[name='longitude']").val(data.lng);
-    //   }
-    // });
+        $latLonFields.find("#latitude").val(data.lat);
+        $latLonFields.find("[name='longitude']").val(data.lng);
+      }
+    });
 
     function sendMessageToApp(message) {
       var iframe = document.getElementById("mapIFrame").contentWindow;
