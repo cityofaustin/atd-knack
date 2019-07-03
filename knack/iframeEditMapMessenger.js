@@ -66,7 +66,7 @@
       var recordId = urlArray[urlArray.length - 2];
 
       var markerMessage = {
-        message: "SIGNS_API_REQUEST",
+        message: "EDIT_SIGNS_API_REQUEST",
         scene: "scene_1061",
         view: "view_2682",
         token: Knack.getUserToken(),

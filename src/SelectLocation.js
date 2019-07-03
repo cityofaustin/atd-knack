@@ -392,6 +392,45 @@ export default class SelectLocation extends Component {
               console.log("Knack API call failed");
             });
           break;
+        case "EDIT_SIGNS_API_REQUEST":
+          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+            data.view
+          }/records/${data.id}`;
+          axios
+            .get(url, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              const data = response.data.records;
+              // Populate state with existing signs in Knack work order
+              const signsObjects =
+                data === []
+                  ? data
+                  : data.map(sign => {
+                      const signObj = {};
+                      signObj["id"] = sign.id;
+                      signObj["lat"] = sign.field_3300_raw.latitude;
+                      signObj["lng"] = sign.field_3300_raw.longitude;
+                      signObj["spatialId"] = sign.field_3297;
+                      return signObj;
+                    });
+              // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
+              const signsArray =
+                data === []
+                  ? data
+                  : data.map(sign => [
+                      parseFloat(sign.field_3300_raw.longitude),
+                      parseFloat(sign.field_3300_raw.latitude)
+                    ]);
+              thisComponent.setState({
+                signs: signsObjects,
+                signsArray: signsArray
+              });
+            })
+            .catch(error => {
+              // handle error
+              console.log("Knack API call failed");
+            });
+          break;
         case "KNACK_GEOLOCATION":
           console.log("KNACK_GEOLOCATION", data);
           var center = [data.lon, data.lat];
