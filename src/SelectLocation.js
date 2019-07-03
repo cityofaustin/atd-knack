@@ -420,7 +420,13 @@ export default class SelectLocation extends Component {
                   center: viewLocationCoords
                 },
                 () => {
-                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/scene_1028/views/view_2573/records?view-work-orders-details-sign_id=5d165bbcb6b62b000abff573`;
+                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${
+                    data.scene
+                  }/views/${
+                    data.view
+                  }/records?view-work-orders-details-sign_id=${
+                    data.workOrderId
+                  }`;
                   axios
                     .get(
                       otherLocationsUrl,

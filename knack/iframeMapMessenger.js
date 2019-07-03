@@ -63,6 +63,7 @@
       var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
+      var workOrderId = urlArray[urlArray.length - 4];
 
       var markerMessage = {
         message: "KNACK_LOCATION_DETAILS",
@@ -70,7 +71,8 @@
         scene: "scene_1039",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
-        id: recordId
+        id: recordId,
+        workOrderId: workOrderId
       };
 
       sendMessageToApp(markerMessage, locationViewIFrame);
