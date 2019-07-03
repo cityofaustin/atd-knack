@@ -20,12 +20,12 @@
     }
   };
 
-  function AutozoomSendMessageToApp(message) {
-    var iframe = document.getElementById("mapIFrame").contentWindow;
-    const stringifiedMessage = JSON.stringify(message);
-    console.log("inside API", stringifiedMessage);
-    iframe.postMessage(stringifiedMessage, "*");
-  }
+  //   function AutozoomSendMessageToApp(message) {
+  //     var iframe = document.getElementById("mapIFrame").contentWindow;
+  //     const stringifiedMessage = JSON.stringify(message);
+  //     console.log("inside API", stringifiedMessage);
+  //     iframe.postMessage(stringifiedMessage, "*");
+  //   }
 
   // Start polling...
   checkReady(function($) {
@@ -40,7 +40,19 @@
     }
 
     // set up Post Message connection with iframe and parent page
-    var iframe = document.getElementById("mapIFrame").contentWindow;
+    // var iframe = document.getElementById("mapIFrame").contentWindow;
+
+    // listen for response
+    // window.addEventListener("message", function(event) {
+    //   console.log("message received:  " + event.data, event);
+    //   var data = event.data;
+    //   if (data.message === "LAT_LON_FIELDS") {
+    //     var $latLonFields = $("#kn-input-field_3300");
+
+    //     $latLonFields.find("#latitude").val(data.lat);
+    //     $latLonFields.find("[name='longitude']").val(data.lng);
+    //   }
+    // });
 
     function sendMessageToApp(message) {
       var stringifiedMessage = JSON.stringify(message);
@@ -48,19 +60,8 @@
       iframe.postMessage(stringifiedMessage, "*");
     }
 
-    // listen for response
-    window.addEventListener("message", function(event) {
-      console.log("message received:  " + event.data, event);
-      var data = event.data;
-      if (data.message === "LAT_LON_FIELDS") {
-        var $latLonFields = $("#kn-input-field_3300");
-
-        $latLonFields.find("#latitude").val(data.lat);
-        $latLonFields.find("[name='longitude']").val(data.lng);
-      }
-    });
-
     $("#mapIFrame").on("load", function() {
+      debugger;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 
@@ -73,24 +74,26 @@
         id: recordId
       };
 
+      console.log(markerMessage);
+
       sendMessageToApp(markerMessage);
     });
 
     // $(function() {
     // Get the current location from browser.
     // TODO: we might need to wrap this in try/catch check
-    navigator.geolocation.getCurrentPosition(function(position) {
-      // create message object for React App
-      const geolocationMessage = {
-        message: "KNACK_GEOLOCATION",
-        lat: position.coords.latitude,
-        lon: position.coords.longitude
-      };
+    // navigator.geolocation.getCurrentPosition(function(position) {
+    // create message object for React App
+    //   const geolocationMessage = {
+    //     message: "KNACK_GEOLOCATION",
+    //     lat: position.coords.latitude,
+    //     lon: position.coords.longitude
+    //   };
 
-      // envoke message once the iframe is loaded
-      $("#mapIFrame").on("load", function() {
-        AutozoomSendMessageToApp(geolocationMessage);
-      });
-    });
+    // envoke message once the iframe is loaded
+    //   $("#mapIFrame").on("load", function() {
+    //     AutozoomSendMessageToApp(geolocationMessage);
+    //   });
+    // });
   });
 })();
