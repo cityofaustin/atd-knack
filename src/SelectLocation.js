@@ -420,8 +420,10 @@ export default class SelectLocation extends Component {
                   center: viewLocationCoords
                 },
                 () => {
-                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${"scene_1028"}/views/${
-                    data.view
+                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${
+                    data.workOrderScene
+                  }/views/${
+                    data.workOrderView
                   }/records?view-work-orders-details-sign_id=${
                     data.workOrderId
                   }`;
