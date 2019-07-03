@@ -352,9 +352,11 @@ export default class SelectLocation extends Component {
       if (event.origin !== "https://atd.knack.com") return;
       const data = JSON.parse(event.data);
 
+      console.log(data.message);
+
       switch (data.message) {
         case "SIGNS_API_REQUEST":
-          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+          let url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
           }/records?view-work-orders-details-sign_id=${data.id}`;
           axios
@@ -393,37 +395,33 @@ export default class SelectLocation extends Component {
             });
           break;
         case "EDIT_SIGNS_API_REQUEST":
-          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
-            data.view
-          }/records/${data.id}`;
+          console.log("EDIT_SIGNS_API_REQUEST");
+          let editUrl = `https://us-api.knack.com/v1/scenes/${
+            data.scene
+          }/views/${data.view}/records/${data.id}`;
           axios
-            .get(url, thisComponent.getHeaders(data.token, data.app_id))
+            .get(editUrl, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              const data = response.data.records;
-              // Populate state with existing signs in Knack work order
-              const signsObjects =
-                data === []
-                  ? data
-                  : data.map(sign => {
-                      const signObj = {};
-                      signObj["id"] = sign.id;
-                      signObj["lat"] = sign.field_3300_raw.latitude;
-                      signObj["lng"] = sign.field_3300_raw.longitude;
-                      signObj["spatialId"] = sign.field_3297;
-                      return signObj;
-                    });
-              // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
-              const signsArray =
-                data === []
-                  ? data
-                  : data.map(sign => [
-                      parseFloat(sign.field_3300_raw.longitude),
-                      parseFloat(sign.field_3300_raw.latitude)
-                    ]);
+              const data = response.data;
+
+              debugger;
+
+              let signs = [
+                {
+                  id: data.id,
+                  lng: data.field_3300_raw.longitude,
+                  lat: data.field_3300_raw.latitude
+                }
+              ];
+
+              var center = [
+                data.field_3300_raw.longitude,
+                data.field_3300_raw.latitude
+              ];
               thisComponent.setState({
-                signs: signsObjects,
-                signsArray: signsArray
+                center,
+                signs
               });
             })
             .catch(error => {
