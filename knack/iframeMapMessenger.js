@@ -40,7 +40,6 @@
 
     // set up Post Message connection with iframe and parent page
     var iframe = document.getElementById("mapIFrame").contentWindow;
-    var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
 
     function sendMessageToApp(message, iframe) {
       var stringifiedMessage = JSON.stringify(message);
@@ -61,6 +60,7 @@
     });
 
     $("#view_2609 #mapIFrame").on("load", function() {
+      var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 
