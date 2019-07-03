@@ -67,8 +67,8 @@
 
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
-        view: "view_2680",
-        scene: "scene_1028",
+        scene: "scene_1061",
+        view: "view_2682",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
         id: recordId
