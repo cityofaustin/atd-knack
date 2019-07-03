@@ -72,7 +72,7 @@
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
         id: recordId,
-        workOrderScene: "scene_1028"
+        workOrderScene: "scene_1028",
         workOrderId: workOrderId,
         workOrderView: "view_2573"
       };
