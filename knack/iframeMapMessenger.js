@@ -72,7 +72,9 @@
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
         id: recordId,
-        workOrderId: workOrderId
+        workOrderScene: "scene_1028"
+        workOrderId: workOrderId,
+        workOrderView: "view_2573"
       };
 
       sendMessageToApp(markerMessage, locationViewIFrame);

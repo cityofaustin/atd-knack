@@ -66,7 +66,7 @@ export default class SelectLocation extends Component {
 
     this.state = {
       center: [location.position.lng, location.position.lat],
-      showPin: false,
+      showPin: true,
       geocodeAddressString: location.address,
       formValue: props.value || "",
       lat: "Loading...",
@@ -420,9 +420,7 @@ export default class SelectLocation extends Component {
                   center: viewLocationCoords
                 },
                 () => {
-                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${
-                    data.scene
-                  }/views/${
+                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${"scene_1028"}/views/${
                     data.view
                   }/records?view-work-orders-details-sign_id=${
                     data.workOrderId
@@ -434,6 +432,7 @@ export default class SelectLocation extends Component {
                     )
                     .then(response => {
                       // handle success
+                      console.log(response);
                       const data = response.data.records;
                       // Populate state with existing signs in Knack work order
                       const signsObjects =
