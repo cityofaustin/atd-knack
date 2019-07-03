@@ -401,6 +401,34 @@ export default class SelectLocation extends Component {
             .then(response => {
               // handle success
               console.log(response);
+              const data = response.data;
+              // Populate state with existing signs in Knack work order
+              const signsObjects =
+                data === []
+                  ? data
+                  : [
+                      {
+                        id: data.id,
+                        lat: data.field_3300_raw.latitude,
+                        lng: data.field_3300_raw.longitude,
+                        spatialId: data.field_3297
+                      }
+                    ];
+              // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
+              const signsArray =
+                data === []
+                  ? data
+                  : [
+                      [
+                        parseFloat(data.field_3300_raw.longitude),
+                        parseFloat(data.field_3300_raw.latitude)
+                      ]
+                    ];
+              debugger;
+              thisComponent.setState({
+                signs: signsObjects,
+                signsArray: signsArray
+              });
             });
           break;
         default:
