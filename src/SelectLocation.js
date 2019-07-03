@@ -400,7 +400,6 @@ export default class SelectLocation extends Component {
             .get(locationUrl, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              console.log(response);
               const data = response.data;
               // Populate state with existing signs in Knack work order
               const signsObjects =
@@ -424,7 +423,6 @@ export default class SelectLocation extends Component {
                         parseFloat(data.field_3300_raw.latitude)
                       ]
                     ];
-              debugger;
               thisComponent.setState({
                 signs: signsObjects,
                 signsArray: signsArray
