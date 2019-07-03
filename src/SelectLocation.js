@@ -66,7 +66,7 @@ export default class SelectLocation extends Component {
 
     this.state = {
       center: [location.position.lng, location.position.lat],
-      showPin: true,
+      showPin: false,
       geocodeAddressString: location.address,
       formValue: props.value || "",
       lat: "Loading...",
@@ -414,10 +414,52 @@ export default class SelectLocation extends Component {
                 locationDetails.longitude,
                 locationDetails.latitude
               ];
-              thisComponent.setState({
-                viewLocation: viewLocationCoords,
-                center: viewLocationCoords
-              });
+              thisComponent.setState(
+                {
+                  viewLocation: viewLocationCoords,
+                  center: viewLocationCoords
+                },
+                () => {
+                  const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/scene_1028/views/view_2573/records?view-work-orders-details-sign_id=5d165bbcb6b62b000abff573`;
+                  axios
+                    .get(
+                      otherLocationsUrl,
+                      thisComponent.getHeaders(data.token, data.app_id)
+                    )
+                    .then(response => {
+                      // handle success
+                      const data = response.data.records;
+                      // Populate state with existing signs in Knack work order
+                      const signsObjects =
+                        data === []
+                          ? data
+                          : data.map(sign => {
+                              const signObj = {};
+                              signObj["id"] = sign.id;
+                              signObj["lat"] = sign.field_3300_raw.latitude;
+                              signObj["lng"] = sign.field_3300_raw.longitude;
+                              signObj["spatialId"] = sign.field_3297;
+                              return signObj;
+                            });
+                      // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
+                      const signsArray =
+                        data === []
+                          ? data
+                          : data.map(sign => [
+                              parseFloat(sign.field_3300_raw.longitude),
+                              parseFloat(sign.field_3300_raw.latitude)
+                            ]);
+                      thisComponent.setState({
+                        signs: signsObjects,
+                        signsArray: signsArray
+                      });
+                    })
+                    .catch(error => {
+                      // handle error
+                      console.log("Knack API call failed");
+                    });
+                }
+              );
             });
           break;
         default:
