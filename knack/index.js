@@ -487,11 +487,15 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 });
 
 //////////////////////////////////////////////////
+//     Knack Geo Location Selector Plugin       //
 //////////////////////////////////////////////////
+
+// TODO: In places where we are removing maps and other fields with JQuery,
+// can we remove them on the Knack side instead?
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/32_migrate/iframeMapMessenger.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/master/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -512,17 +516,19 @@ $(document).on("knack-view-render.view_2573", function(event, scene) {
   loadIframeMapMessenger("view_2573");
 });
 
-// IN PROGRESS: Mateo's work on Edit Location
+// Edit Location Page
 $(document).on("knack-view-render.view_2682", function(event, scene) {
   window.viewIdsArray.push("#view_2682");
   $(".field_3300").hide();
 
-  var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/26_edit_location/iframeEditMapMessenger.js";
-  $.getScript(url, function(data, textStatus, jqxhr) {
-    console.log(data); // Data returned
-    console.log(textStatus); // Success
-    console.log(jqxhr.status); // 200
-    console.log("Load was performed.");
-  });
+  loadIframeMapMessenger("view_2682");
 });
+
+// Location Details Modal
+$(document).on("knack-view-render.view_2609", function(event, scene) {
+  window.viewIdsArray.push("#view_2609");
+  loadIframeMapMessenger("view_2609");
+  $("#kn-map-field_3300").hide(); // Remove map from Location Details
+});
+
+// END: Knack Geo Location Selector Plugin
