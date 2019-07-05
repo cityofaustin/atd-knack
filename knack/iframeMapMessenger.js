@@ -43,7 +43,7 @@
     // set up Post Message connection with iframe and parent page
     var iframe = document.getElementById("mapIFrame").contentWindow;
 
-    function sendMessageToApp(message) {
+    function sendMessageToApp(message, iframe) {
       var stringifiedMessage = JSON.stringify(message);
       console.log("inside API", stringifiedMessage);
       iframe.postMessage(stringifiedMessage, "*");
@@ -61,6 +61,27 @@
       }
     });
 
+    $("#view_2609 #mapIFrame").on("load", function() {
+      var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
+      var urlArray = window.location.href.split("/");
+      var recordId = urlArray[urlArray.length - 2];
+      var workOrderId = urlArray[urlArray.length - 4];
+
+      var markerMessage = {
+        message: "KNACK_LOCATION_DETAILS",
+        view: "view_2733",
+        scene: "scene_1039",
+        token: Knack.getUserToken(),
+        app_id: Knack.application_id,
+        id: recordId,
+        workOrderScene: "scene_1028",
+        workOrderId: workOrderId,
+        workOrderView: "view_2573"
+      };
+
+      sendMessageToApp(markerMessage, locationViewIFrame);
+    });
+
     $("#mapIFrame").on("load", function() {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
@@ -74,7 +95,7 @@
         id: recordId
       };
 
-      sendMessageToApp(markerMessage);
+      sendMessageToApp(markerMessage, iframe);
     });
 
     // $(function() {
@@ -92,14 +113,14 @@
       $("#mapIFrame").on("load", function() {
         AutozoomSendMessageToApp(geolocationMessage);
       });
-
-      // Move lat/long fields and Add Location button on top of iFrame and format text
-      // $("#view_2607 button").css({ marginTop: "-=125px" });
-      // $("#view_2607 button").css({ marginLeft: "+=5px" });
-      // $("#view_2607").css({ marginTop: "-=130px" });
-      // $("#view_2607 > div.view-header > p").hide();
-      // $("#view_2607").css("color", "white");
-      // $("#view_2607").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
     });
+
+    // Move lat/long fields and Add Location button on top of iFrame and format text
+    // $("#view_2607 button").css({ marginTop: "-=125px" });
+    // $("#view_2607 button").css({ marginLeft: "+=5px" });
+    // $("#view_2607").css({ marginTop: "-=130px" });
+    // $("#view_2607 > div.view-header > p").hide();
+    // $("#view_2607").css("color", "white");
+    // $("#view_2607").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
   });
 })();

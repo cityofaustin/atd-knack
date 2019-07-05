@@ -21,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "proxy": "local-ssl-proxy --source 9001 --target 3000"
   },
   "eslintConfig": {
     "extends": "react-app"
