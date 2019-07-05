@@ -59,7 +59,7 @@
       }
     });
 
-    $("#view_2609 #mapIFrame").on("load", function() {
+    $("#view_2733 #mapIFrame").on("load", function() {
       var locationViewIFrame = $("#view_2733 #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
