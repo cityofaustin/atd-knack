@@ -363,9 +363,11 @@ export default class SelectLocation extends Component {
       if (event.origin !== "https://atd.knack.com") return;
       const data = JSON.parse(event.data);
 
+      console.log(data.message);
+
       switch (data.message) {
         case "SIGNS_API_REQUEST":
-          const url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
+          let url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
           }/records?view-work-orders-details-sign_id=${data.id}`;
           axios
@@ -397,6 +399,28 @@ export default class SelectLocation extends Component {
                 signs: signsObjects,
                 signsArray: signsArray
               });
+            })
+            .catch(error => {
+              // handle error
+              console.log("Knack API call failed");
+            });
+          break;
+        case "EDIT_SIGNS_API_REQUEST":
+          let editUrl = `https://us-api.knack.com/v1/scenes/${
+            data.scene
+          }/views/${data.view}/records/${data.id}`;
+          axios
+            .get(editUrl, thisComponent.getHeaders(data.token, data.app_id))
+            .then(response => {
+              // handle success
+              const data = response.data;
+
+              // Postion Edit location pin at the record's exisiting lat/lon
+              var center = [
+                data.field_3300_raw.longitude,
+                data.field_3300_raw.latitude
+              ];
+              thisComponent.setState({ center });
             })
             .catch(error => {
               // handle error
