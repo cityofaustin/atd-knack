@@ -32,7 +32,7 @@
     var $viewSelector = $(myView);
 
     // Add React app as iframe if iframe doesn't already exist
-    if ($("#mapIFrame").length === 0) {
+    if ($(myView + " #mapIFrame").length === 0) {
       $(
         '<iframe src="https://localhost:9001/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
@@ -65,7 +65,7 @@
 
       var markerMessage = {
         message: "KNACK_LOCATION_DETAILS",
-        view: "view_2733",
+        view: myView.slice(1),
         scene: "scene_1039",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
