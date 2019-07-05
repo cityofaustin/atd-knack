@@ -400,7 +400,6 @@ export default class SelectLocation extends Component {
           break;
         case "KNACK_LOCATION_DETAILS":
           console.log("KNACK_LOCATION_DETAILS", data);
-          // TODO Find way to get scene, view, and record from Knack Location Details modal
           const locationUrl = `https://us-api.knack.com/v1/pages/${
             data.scene
           }/views/${data.view}/records/${data.id}`;
