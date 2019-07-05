@@ -404,22 +404,12 @@ export default class SelectLocation extends Component {
               // handle success
               const data = response.data;
 
-              let signs = [
-                {
-                  id: data.id,
-                  lng: data.field_3300_raw.longitude,
-                  lat: data.field_3300_raw.latitude
-                }
-              ];
-
+              // Postion Edit location pin at the record's exisiting lat/lon
               var center = [
                 data.field_3300_raw.longitude,
                 data.field_3300_raw.latitude
               ];
-              thisComponent.setState({
-                center,
-                signs
-              });
+              thisComponent.setState({ center });
             })
             .catch(error => {
               // handle error
