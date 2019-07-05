@@ -65,7 +65,7 @@
 
       var markerMessage = {
         message: "KNACK_LOCATION_DETAILS",
-        view: myView.slice(1),
+        view: "view_2733",
         scene: "scene_1039",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
