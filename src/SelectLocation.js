@@ -69,8 +69,8 @@ export default class SelectLocation extends Component {
       showPin: true,
       geocodeAddressString: location.address,
       formValue: props.value || "",
-      lat: "Loading...",
-      lng: "Loading...",
+      lat: 30.264918,
+      lng: -97.745224,
       style: "satellite-streets-v9",
       signs: [
         // EX: { id: "Sign 1", lng: -97.7460479736328, lat: 30.266184073558826 },

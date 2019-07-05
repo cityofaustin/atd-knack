@@ -487,11 +487,15 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 });
 
 //////////////////////////////////////////////////
+//     Knack Geo Location Selector Plugin       //
 //////////////////////////////////////////////////
+
+// TODO: In places where we are removing maps and other fields with JQuery,
+// can we remove them on the Knack side instead?
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/32_migrate/iframeMapMessenger.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/merge_custom_js/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -512,17 +516,43 @@ $(document).on("knack-view-render.view_2573", function(event, scene) {
   loadIframeMapMessenger("view_2573");
 });
 
-// IN PROGRESS: Mateo's work on Edit Location
+// Edit Location Page
 $(document).on("knack-view-render.view_2682", function(event, scene) {
   window.viewIdsArray.push("#view_2682");
   $(".field_3300").hide();
 
-  var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/26_edit_location/iframeEditMapMessenger.js";
-  $.getScript(url, function(data, textStatus, jqxhr) {
-    console.log(data); // Data returned
-    console.log(textStatus); // Success
-    console.log(jqxhr.status); // 200
-    console.log("Load was performed.");
+  loadIframeMapMessenger("view_2682");
+});
+
+// Location Details Modal
+$(document).on("knack-view-render.view_2609", function(event, scene) {
+  window.viewIdsArray.push("#view_2609");
+  loadIframeMapMessenger("view_2609");
+  $("#kn-map-field_3300").hide(); // Remove map from Location Details
+});
+
+// IN PROGRESS: Mike's code for 51_lat_lon_layout
+$(document).on("knack-view-render.view_2607", function(event, scene) {
+  $header = $("#view_2607 > div.view-header");
+  $(document).on("knack-view-render.view_2586", function(event, scene) {
+    $("#view_2586").append($header);
+  });
+  $form = $("#view_2607");
+  $form.attr("id", "lat-lon-form");
+  $form.detach();
+  $(document).on("knack-view-render.view_2572", function(event, scene) {
+    $("#view_2572").prepend($form);
+    $("#lat-lon-form > form > div > button").css({
+      marginLeft: "+=5px"
+    });
+    $("#lat-lon-form > form > div > button").css({
+      marginTop: "-=125px"
+    });
+    $("#lat-lon-form").css({ marginTop: "-=130px" });
+    $("#lat-lon-form > div.view-header > p").hide();
+    $("#lat-lon-form").css("color", "white");
+    $("#lat-lon-form").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
   });
 });
+
+// END: Knack Geo Location Selector Plugin

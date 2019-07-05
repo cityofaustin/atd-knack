@@ -1,7 +1,6 @@
 (function() {
   var myView = window.viewIdsArray.shift(0);
 
-  var startingTime = new Date().getTime();
   // Import jQuery into this file from CDN
   // https://stackoverflow.com/questions/34338411/how-to-import-jquery-using-es6-syntax
   var script = document.createElement("SCRIPT");
@@ -33,15 +32,12 @@
     var $viewSelector = $(myView);
 
     // Add React app as iframe if iframe doesn't already exist
-    if ($("#mapIFrame").length === 0) {
+    if ($(myView + " #mapIFrame").length === 0) {
       $(
-        '<iframe src="https://5d1ad828f6d3f10009e4ca54--wonderful-heyrovsky-db4c26.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+        '<iframe src="https://localhost:9001/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
       ).appendTo($viewSelector);
     }
-
-    // set up Post Message connection with iframe and parent page
-    var iframe = document.getElementById("mapIFrame").contentWindow;
 
     function sendMessageToApp(message, iframe) {
       var stringifiedMessage = JSON.stringify(message);
@@ -49,7 +45,7 @@
       iframe.postMessage(stringifiedMessage, "*");
     }
 
-    // listen for response
+    // Listen for lat/lon changes
     window.addEventListener("message", function(event) {
       console.log("message received:  " + event.data, event);
       var data = event.data;
@@ -82,9 +78,11 @@
       sendMessageToApp(markerMessage, locationViewIFrame);
     });
 
+    // TODO: grab view for this iframe
     $("#mapIFrame").on("load", function() {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
+      var iframe = document.getElementById("mapIFrame").contentWindow;
 
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
@@ -98,9 +96,28 @@
       sendMessageToApp(markerMessage, iframe);
     });
 
-    // $(function() {
+    $("#view_2682 #mapIFrame").on("load", function() {
+      // Use crumbtrail to get Location record ID
+      var crumbtrailArray = $(".kn-crumbtrail")
+        .children()
+        .last()
+        .attr("href")
+        .split("/");
+      var recordId = crumbtrailArray[crumbtrailArray.length - 1].split("?")[0];
+      var editLocationIframe = $("#view_2682 #mapIFrame")[0].contentWindow;
+
+      var markerMessage = {
+        message: "EDIT_SIGNS_API_REQUEST",
+        scene: "scene_1061",
+        view: "view_2682",
+        token: Knack.getUserToken(),
+        app_id: Knack.application_id,
+        id: recordId
+      };
+      sendMessageToApp(markerMessage, editLocationIframe);
+    });
+
     // Get the current location from browser.
-    // TODO: we might need to wrap this in try/catch check
     navigator.geolocation.getCurrentPosition(function(position) {
       // create message object for React App
       const geolocationMessage = {
@@ -114,13 +131,5 @@
         AutozoomSendMessageToApp(geolocationMessage);
       });
     });
-
-    // Move lat/long fields and Add Location button on top of iFrame and format text
-    // $("#view_2607 button").css({ marginTop: "-=125px" });
-    // $("#view_2607 button").css({ marginLeft: "+=5px" });
-    // $("#view_2607").css({ marginTop: "-=130px" });
-    // $("#view_2607 > div.view-header > p").hide();
-    // $("#view_2607").css("color", "white");
-    // $("#view_2607").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
   });
 })();
