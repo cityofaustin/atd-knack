@@ -60,7 +60,7 @@
     });
 
     $("#view_2609 #mapIFrame").on("load", function() {
-      var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
+      var locationViewIFrame = $("#view_2733 #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
       var workOrderId = urlArray[urlArray.length - 4];
