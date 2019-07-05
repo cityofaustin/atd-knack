@@ -159,8 +159,11 @@ export default class SelectLocation extends Component {
       lngLat: center,
       addressString: this.state.geocodeAddressString
     });
+    // format lat/lon to 7 digits after decimal point to avoid rejection from Knack
+    const lat = this.state.lat.toFixed(7);
+    const lng = this.state.lng.toFixed(7);
     window.parent.postMessage(
-      { message: "LAT_LON_FIELDS", lat: this.state.lat, lng: this.state.lng },
+      { message: "LAT_LON_FIELDS", lat: lat, lng: lng },
       "*"
     );
   }
@@ -244,9 +247,10 @@ export default class SelectLocation extends Component {
     } else {
       // When there are no exisiting locations, zoom in on center which should be the users current location
       map.setCenter(this.state.center);
-      map.resize();
       map.setZoom(17);
     }
+    // Prevent map from shrinking in iFrame within Knack app
+    map.resize();
   }
 
   // prepare geocoded result to be propogated to form
