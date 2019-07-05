@@ -55,6 +55,18 @@
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
 
+      var crumbtrailArray = $(".kn-crumbtrail")
+        .children()
+        .last()
+        .attr("href")
+        .split("/");
+      var recordId2 = crumbtrailArray[crumbtrailArray.length - 1].split("?")[0];
+
+      console.log(recordId);
+      console.log(recordId2);
+
+      debugger;
+
       var markerMessage = {
         message: "EDIT_SIGNS_API_REQUEST",
         scene: "scene_1061",
