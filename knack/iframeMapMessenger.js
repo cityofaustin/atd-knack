@@ -59,15 +59,15 @@
       }
     });
 
-    $("#view_2733 #mapIFrame").on("load", function() {
-      var locationViewIFrame = $("#view_2733 #mapIFrame")[0].contentWindow;
+    $("#view_2609 #mapIFrame").on("load", function() {
+      var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
       var workOrderId = urlArray[urlArray.length - 4];
 
       var markerMessage = {
         message: "KNACK_LOCATION_DETAILS",
-        view: "view_2733",
+        view: myView.slice(1),
         scene: "scene_1039",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
