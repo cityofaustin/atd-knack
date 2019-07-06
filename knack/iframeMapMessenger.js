@@ -34,7 +34,7 @@
     // Add React app as iframe if iframe doesn't already exist
     if ($(myView + " #mapIFrame").length === 0) {
       $(
-        '<iframe src="https://localhost:9001/" frameborder="0" scrolling="yes" id="mapIFrame" \
+        '<iframe src="https://5d2115b19ceaed0007c6ae7d--atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
       ).appendTo($viewSelector);
     }
