@@ -531,28 +531,22 @@ $(document).on("knack-view-render.view_2609", function(event, scene) {
   $("#kn-map-field_3300").hide(); // Remove map from Location Details
 });
 
-// IN PROGRESS: Mike's code for 51_lat_lon_layout
-$(document).on("knack-view-render.view_2607", function(event, scene) {
-  $header = $("#view_2607 > div.view-header");
-  $(document).on("knack-view-render.view_2586", function(event, scene) {
-    $("#view_2586").append($header);
-  });
-  $form = $("#view_2607");
+// Overlay Latitude/Longitude fields and button on map
+$(document).on("knack-scene-render.scene_1028", function(event, scene) {
+  // Separate header from form and move form below map
+  var $header = $("#view_2607 > div.view-header");
+  $("#view_2586").append($header);
+  var $form = $("#view_2607");
   $form.attr("id", "lat-lon-form");
   $form.detach();
-  $(document).on("knack-view-render.view_2572", function(event, scene) {
-    $("#view_2572").prepend($form);
-    $("#lat-lon-form > form > div > button").css({
-      marginLeft: "+=5px"
-    });
-    $("#lat-lon-form > form > div > button").css({
-      marginTop: "-=125px"
-    });
-    $("#lat-lon-form").css({ marginTop: "-=130px" });
-    $("#lat-lon-form > div.view-header > p").hide();
-    $("#lat-lon-form").css("color", "white");
-    $("#lat-lon-form").css("textShadow", "1px 1px 1px rgba(0, 0, 0, 1)");
-  });
+  $("#view_2572").prepend($form);
+});
+
+$(document).on("knack-view-render.view_2607", function(event, scene) {
+  // Remove header that renders in DOM after successfully submitting form
+  if ($("#lat-lon-form .view-header").length !== 0) {
+    $("#lat-lon-form .view-header").remove();
+  }
 });
 
 // END: Knack Geo Location Selector Plugin
