@@ -34,8 +34,8 @@
     // Add React app as iframe if iframe doesn't already exist
     if ($(myView + " #mapIFrame").length === 0) {
       $(
-        '<div id="iframe-wrapper"><iframe src="https://localhost:9001/" frameborder="0" scrolling="yes" id="mapIFrame" \
-    style="width: 100%;height: 523px;"></iframe></div>'
+        '<iframe src="https://localhost:9001/" frameborder="0" scrolling="yes" id="mapIFrame" \
+    style="width: 100%;height: 523px;"></iframe>'
       ).appendTo($viewSelector);
     }
 
