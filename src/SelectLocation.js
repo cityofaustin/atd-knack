@@ -252,14 +252,13 @@ export default class SelectLocation extends Component {
       }
       const mapBbox = bbox(line);
       map.fitBounds(mapBbox, { padding: 160, animate: false });
-      // Disable zoom animation here
-      const zoom = this.state.zoom;
       this.setState({ initialLoad: true });
     } else if (shouldMaintainZoomAndCenterFromUserChanges) {
       // Handle case when user switches layer after moving pin
+      const zoom = this.state.zoom;
       map.jumpTo({
         center: [this.state.lng, this.state.lat],
-        zoom: this.state.zoom
+        zoom: zoom
       });
     } else {
       // When there are no exisiting locations, zoom in on center which should be the users current location
