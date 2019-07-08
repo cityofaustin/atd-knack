@@ -251,7 +251,9 @@ export default class SelectLocation extends Component {
         line = lineString(this.state.signsArray);
       }
       const mapBbox = bbox(line);
-      map.fitBounds(mapBbox, { padding: 160 });
+      map.fitBounds(mapBbox, { padding: 160, animate: false });
+      // Disable zoom animation here
+      const zoom = this.state.zoom;
       this.setState({ initialLoad: true });
     } else if (shouldMaintainZoomAndCenterFromUserChanges) {
       // Handle case when user switches layer after moving pin
