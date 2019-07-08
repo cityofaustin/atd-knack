@@ -65,7 +65,7 @@ export default class SelectLocation extends Component {
         };
 
     this.state = {
-      center: [location.position.lng, location.position.lat],
+      center: [-97.750559, 30.280005],
       showPin: true,
       geocodeAddressString: location.address,
       formValue: props.value || "",
@@ -533,6 +533,7 @@ export default class SelectLocation extends Component {
               onDragEnd={this.onDragEnd}
               onMoveEnd={this.onMoveEnd}
               center={center}
+              movingMethod={"jumpTo"}
             >
               <div className={`pin ${pinDrop}`} />
               <div className="pulse" />
