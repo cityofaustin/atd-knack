@@ -24,20 +24,34 @@ div.view_2465 .field_3174 {
   display: none;
 }
 
-/* move and style lat/lon fields and button to overlay React app map */
+/* move and style lat/lon fields and button to overlay React app map in View Work Order Details view (scene_1028) */
 #lat-lon-form {
   color: white;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
-  margin-top: -130px;
+  margin-top: -150px;
+  padding-bottom: 40px;
 }
 
 #lat-lon-form button {
-  margin-top: -125px;
-  margin-left: +5px;
+  margin-left: +4px;
 }
 
 #lat-lon-form label.help {
+  /* add id to second label.help to target it */
+  margin-top: -50px !important;
   font-weight: bold;
   font-size: 13px;
   margin-top: 1px;
+}
+
+#lat-lon-form #latitude {
+  width: 190px;
+}
+
+#kn-input-field_3300 > div > div:nth-child(2) > input {
+  margin-left: -190px;
+}
+
+#kn-input-field_3300 > div > div:nth-child(2) > label {
+  margin-left: -190px;
 }
