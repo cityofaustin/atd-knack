@@ -78,11 +78,10 @@
       sendMessageToApp(markerMessage, locationViewIFrame);
     });
 
-    // TODO: grab view for this iframe
     $("#mapIFrame").on("load", function() {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
-      var iframe = document.getElementById("mapIFrame").contentWindow;
+      var workOrderDetailsIFrame = $("#view_2573 #mapIFrame")[0].contentWindow;
 
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
@@ -93,7 +92,7 @@
         id: recordId
       };
 
-      sendMessageToApp(markerMessage, iframe);
+      sendMessageToApp(markerMessage, workOrderDetailsIFrame);
     });
 
     $("#view_2682 #mapIFrame").on("load", function() {
