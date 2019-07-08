@@ -536,8 +536,16 @@ export default class SelectLocation extends Component {
               center={center}
               movingMethod={"jumpTo"}
             >
-              <div className={`pin ${pinDrop}`} />
-              <div className="pulse" />
+              {/* 
+              We don't want to show the default centered pin when there are items in the viewLocation array.
+              This is true in cases where we display a selected "active" pin along side related pin locations.
+             */}
+              {this.state.viewLocation.length === 0 && (
+                <>
+                  <div className={`pin ${pinDrop}`} />
+                  <div className="pulse" />
+                </>
+              )}
 
               <Layer type="symbol" id="signs" layout={layoutLayer}>
                 {signs.map(sign => (
@@ -565,8 +573,6 @@ export default class SelectLocation extends Component {
                 >
                   <div className="container popup">
                     <span>Spatial ID: {activeSign.spatialId}</span>
-                    <br />
-                    <span>ID: {activeSign.id}</span>
                     <br />
                     <span>Latitude: {activeSign.lat}</span>
                     <br />
