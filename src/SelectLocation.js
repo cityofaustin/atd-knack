@@ -534,8 +534,16 @@ export default class SelectLocation extends Component {
               onMoveEnd={this.onMoveEnd}
               center={center}
             >
-              <div className={`pin ${pinDrop}`} />
-              <div className="pulse" />
+              {/* 
+              We don't want to show the default centered pin when there are items in the viewLocation array.
+              This is true in cases where we display a selected "active" pin along side related pin locations.
+             */}
+              {this.state.viewLocation.length === 0 && (
+                <>
+                  <div className={`pin ${pinDrop}`} />
+                  <div className="pulse" />
+                </>
+              )}
 
               <Layer type="symbol" id="signs" layout={layoutLayer}>
                 {signs.map(sign => (
