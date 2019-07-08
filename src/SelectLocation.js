@@ -65,7 +65,7 @@ export default class SelectLocation extends Component {
         };
 
     this.state = {
-      center: [location.position.lng, location.position.lat],
+      center: [-97.750559, 30.280005],
       showPin: true,
       geocodeAddressString: location.address,
       formValue: props.value || "",
@@ -251,13 +251,14 @@ export default class SelectLocation extends Component {
         line = lineString(this.state.signsArray);
       }
       const mapBbox = bbox(line);
-      map.fitBounds(mapBbox, { padding: 160 });
+      map.fitBounds(mapBbox, { padding: 160, animate: false });
       this.setState({ initialLoad: true });
     } else if (shouldMaintainZoomAndCenterFromUserChanges) {
       // Handle case when user switches layer after moving pin
+      const zoom = this.state.zoom;
       map.jumpTo({
         center: [this.state.lng, this.state.lat],
-        zoom: this.state.zoom
+        zoom: zoom
       });
     } else {
       // When there are no exisiting locations, zoom in on center which should be the users current location
@@ -533,6 +534,7 @@ export default class SelectLocation extends Component {
               onDragEnd={this.onDragEnd}
               onMoveEnd={this.onMoveEnd}
               center={center}
+              movingMethod={"jumpTo"}
             >
               <div className={`pin ${pinDrop}`} />
               <div className="pulse" />
