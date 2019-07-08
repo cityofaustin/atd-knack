@@ -572,8 +572,6 @@ export default class SelectLocation extends Component {
                   <div className="container popup">
                     <span>Spatial ID: {activeSign.spatialId}</span>
                     <br />
-                    <span>ID: {activeSign.id}</span>
-                    <br />
                     <span>Latitude: {activeSign.lat}</span>
                     <br />
                     <span>Longitude: {activeSign.lng}</span>
