@@ -11,13 +11,6 @@ $(document).on("knack-page-render.any", function(event, page) {
   }
 });
 
-$(document).on("knack-view-render.view_958", function(event, page) {
-  //  hide crumb trail at select locations
-  setTimeout(function() {
-    $(".kn-crumbtrail").remove();
-    //do something special
-  }, 1000);
-});
 
 $(document).on("knack-scene-render.scene_428", function(event, page) {
   // update iframe src from detail field
@@ -29,12 +22,6 @@ $(document).on("knack-scene-render.scene_501", function(event, page) {
   //  update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
   $("#csr_view").attr("src", iframe_url);
-});
-
-$(document).on("knack-view-render.view_1407", function(event, page) {
-  //  default city/state for VZA enforcement
-  $("#city").val("Austin");
-  $("#state").val("TX");
 });
 
 function insertRecord(data, scene, view) {
@@ -301,132 +288,6 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
   }
 });
 
-$(document).on("knack-scene-render.scene_1", function(event, page) {
-  // redirect to embedded homepage from unembedded homepage login
-  var url = window.location.href;
-
-  if (url.indexOf("knack.com") >= 0) {
-    // window.location.replace('http://transportation.austintexas.io/data-tracker');
-  }
-});
-
-// remove empty "select..." choices from advanced signal search
-$(document).on("knack-view-render.view_1169", function(event, page) {
-  // id*="_moComments_"
-  // $("#kn_filter_7_field_1513_chzn_c_0").remove();
-  // $("#kn_filter_8_field_491_chzn_c_0").remove();
-  // $("#kn_filter_4_field_2437_chzn_c_0").remove();
-});
-
-//////////////////////////////////////////////////
-// Remove whitespace from street segment inputs///
-//////////////////////////////////////////////////
-$(document).on("knack-view-render.view_1199", function(event, scene) {
-  $("#field_119").keyup(function() {
-    var trimmed = $("#field_119")
-      .val()
-      .trim();
-    $("#field_119").val(trimmed);
-  });
-});
-
-$(document).on("knack-view-render.view_1200", function(event, scene) {
-  $("#field_119").keyup(function() {
-    var trimmed = $("#field_119")
-      .val()
-      .trim();
-    $("#field_119").val(trimmed);
-  });
-});
-
-$(document).on("knack-view-render.view_1207", function(event, scene) {
-  $("#field_119").keyup(function() {
-    var trimmed = $("#field_119")
-      .val()
-      .trim();
-    $("#field_119").val(trimmed);
-  });
-});
-
-$(document).on("knack-view-render.view_1206", function(event, scene) {
-  $("#field_119").keyup(function() {
-    var trimmed = $("#field_119")
-      .val()
-      .trim();
-    $("#field_119").val(trimmed);
-  });
-});
-
-$(document).on("knack-view-render.view_1996", function(event, scene) {
-  $("#field_119").keyup(function() {
-    var trimmed = $("#field_119")
-      .val()
-      .trim();
-    $("#field_119").val(trimmed);
-  });
-});
-
-$(document).on("knack-view-render.view_2357", function(event, page) {
-  //  now with minor changes, used for traffic count attachments field
-  //  this one affects the table that those with editing priviledges see
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_3176").each(function() {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function(index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function(index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
-
-$(document).on("knack-view-render.view_2486", function(event, page) {
-  //  now with minor changes, used for traffic count attachments field
-  //  this one affects the table that those without editing priviledges see
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_3176").each(function() {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function(index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function(index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
 
 $(document).on("knack-view-render.view_2491", function(event, page) {
   // Another copy of the find and replace attachment types script, this one for the manage requests
@@ -562,7 +423,7 @@ function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
 
   if(callback) callback();
 }
-	//>>>HOME TAB BUTTONS
+    //>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_2621', function(event, page) {
   // create large button on the home page
     bigButton('work-orders-markings', 'view_2621', "https://atd.knack.com/signs-markings#work-orders-markings/markings/", "road", "Work Orders | Markings");
@@ -582,4 +443,3 @@ $(document).on('knack-view-render.view_2630', function(event, page) {
     // create large button on the home page
     bigButton('availability', 'view_2630', "https://atd.knack.com/street-banners#home/", "flag-o", "Program | Street Banners");
 });
-
