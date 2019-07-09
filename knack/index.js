@@ -495,7 +495,7 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/merge_custom_js/iframeMapMessenger.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/user_testing/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -550,3 +550,36 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
 });
 
 // END: Knack Geo Location Selector Plugin
+
+function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
+  // create a large button
+ 
+    $("<div/>", {
+      id: div_id,
+    }).appendTo("#" + view_id);
+    
+  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
+
+  if(callback) callback();
+}
+	//>>>HOME TAB BUTTONS
+$(document).on('knack-view-render.view_2621', function(event, page) {
+  // create large button on the home page
+    bigButton('work-orders-markings', 'view_2621', "https://atd.knack.com/signs-markings#work-orders-markings/markings/", "road", "Work Orders | Markings");
+});
+
+$(document).on('knack-view-render.view_2628', function(event, page) {
+    // create large button on the home page
+    bigButton('work-orders-signs', 'view_2628', "https://atd.knack.com/signs-markings#work-order-signs/", "flag", "Work Orders | Signs");
+});
+
+$(document).on('knack-view-render.view_2629', function(event, page) {
+    // create large button on the home page
+    bigButton('service-requests-signs', 'view_2629', "https://atd.knack.com/signs-markings#service-requests-signs/", "comments", "Service Requests | Signs");
+});
+
+$(document).on('knack-view-render.view_2630', function(event, page) {
+    // create large button on the home page
+    bigButton('availability', 'view_2630', "https://atd.knack.com/street-banners#home/", "flag-o", "Program | Street Banners");
+});
+
