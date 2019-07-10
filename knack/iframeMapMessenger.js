@@ -57,8 +57,10 @@
       }
     });
 
-    $("#view_2609 #mapIFrame").on("load", function() {
-      var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
+    // Location Details Page Maps
+
+    function locationDetailsMapMessage(viewId) {
+      var locationViewIFrame = $("#" + viewId + " #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
       var workOrderId = urlArray[urlArray.length - 4];
@@ -76,9 +78,19 @@
       };
 
       sendMessageToApp(markerMessage, locationViewIFrame);
+    }
+    // Location Details Page - Editable
+    $("#view_2609 #mapIFrame").on("load", function() {
+      locationDetailsMapMessage("view_2609");
     });
 
-    $("#mapIFrame").on("load", function() {
+    // Location Details Page - Viewer
+    $("#view_2733 #mapIFrame").on("load", function() {
+      locationDetailsMapMessage("view_2733");
+    });
+
+    // Work Orders Details Page - Editable
+    $("#view_2573 #mapIFrame").on("load", function() {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
       var workOrderDetailsIFrame = $("#view_2573 #mapIFrame")[0].contentWindow;
@@ -95,6 +107,7 @@
       sendMessageToApp(markerMessage, workOrderDetailsIFrame);
     });
 
+    // Edit Location Page
     $("#view_2682 #mapIFrame").on("load", function() {
       // Use crumbtrail to get Location record ID
       var crumbtrailArray = $(".kn-crumbtrail")
