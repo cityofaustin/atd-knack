@@ -365,11 +365,13 @@ function loadIframeMapMessenger(viewId) {
 
 window.viewIdsArray = [];
 
+// Work Orders Details Page - Viewer
 $(document).on("knack-view-render.view_2619", function(event, scene) {
   window.viewIdsArray.push("#view_2619");
   loadIframeMapMessenger("view_2619");
 });
 
+// Work Orders Details Page - Editable
 $(document).on("knack-view-render.view_2573", function(event, scene) {
   window.viewIdsArray.push("#view_2573");
   loadIframeMapMessenger("view_2573");
@@ -383,7 +385,14 @@ $(document).on("knack-view-render.view_2682", function(event, scene) {
   loadIframeMapMessenger("view_2682");
 });
 
-// Location Details Modal
+// Location Details Page - Viewer
+$(document).on("knack-view-render.view_2733", function(event, scene) {
+  window.viewIdsArray.push("#view_2733");
+  loadIframeMapMessenger("view_2733");
+  $("#kn-map-field_3300").hide(); // Remove map from Location Details
+});
+
+// Location Details Page - Editable
 $(document).on("knack-view-render.view_2609", function(event, scene) {
   window.viewIdsArray.push("#view_2609");
   loadIframeMapMessenger("view_2609");
