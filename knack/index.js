@@ -11,7 +11,6 @@ $(document).on("knack-page-render.any", function(event, page) {
   }
 });
 
-
 $(document).on("knack-scene-render.scene_428", function(event, page) {
   // update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
@@ -288,7 +287,6 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
   }
 });
 
-
 $(document).on("knack-view-render.view_2491", function(event, page) {
   // Another copy of the find and replace attachment types script, this one for the manage requests
   // page
@@ -414,32 +412,64 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
 
 function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
   // create a large button
- 
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
 
-  if(callback) callback();
+  $("<div/>", {
+    id: div_id
+  }).appendTo("#" + view_id);
+
+  $("#" + div_id).append(
+    "<a class='big-button' href='" +
+      url +
+      "'><div class='big-button-container'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></div></a>"
+  );
+
+  if (callback) callback();
 }
-    //>>>HOME TAB BUTTONS
-$(document).on('knack-view-render.view_2621', function(event, page) {
+//>>>HOME TAB BUTTONS
+$(document).on("knack-view-render.view_2621", function(event, page) {
   // create large button on the home page
-    bigButton('work-orders-markings', 'view_2621', "https://atd.knack.com/signs-markings#work-orders-markings/markings/", "road", "Work Orders | Markings");
+  bigButton(
+    "work-orders-markings",
+    "view_2621",
+    "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
+    "road",
+    "Work Orders | Markings"
+  );
 });
 
-$(document).on('knack-view-render.view_2628', function(event, page) {
-    // create large button on the home page
-    bigButton('work-orders-signs', 'view_2628', "https://atd.knack.com/signs-markings#work-order-signs/", "flag", "Work Orders | Signs");
+$(document).on("knack-view-render.view_2628", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "work-orders-signs",
+    "view_2628",
+    "https://atd.knack.com/signs-markings#work-order-signs/",
+    "flag",
+    "Work Orders | Signs"
+  );
 });
 
-$(document).on('knack-view-render.view_2629', function(event, page) {
-    // create large button on the home page
-    bigButton('service-requests-signs', 'view_2629', "https://atd.knack.com/signs-markings#service-requests-signs/", "comments", "Service Requests | Signs");
+$(document).on("knack-view-render.view_2629", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "service-requests-signs",
+    "view_2629",
+    "https://atd.knack.com/signs-markings#service-requests-signs/",
+    "comments",
+    "Service Requests | Signs"
+  );
 });
 
-$(document).on('knack-view-render.view_2630', function(event, page) {
-    // create large button on the home page
-    bigButton('availability', 'view_2630', "https://atd.knack.com/street-banners#home/", "flag-o", "Program | Street Banners");
+$(document).on("knack-view-render.view_2630", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "availability",
+    "view_2630",
+    "https://atd.knack.com/street-banners#home/",
+    "flag-o",
+    "Program | Street Banners"
+  );
 });
