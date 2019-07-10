@@ -58,7 +58,6 @@
     });
 
     // Location Details Page Maps
-
     function locationDetailsMapMessage(viewId) {
       var locationViewIFrame = $("#" + viewId + " #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
@@ -89,11 +88,12 @@
       locationDetailsMapMessage("view_2733");
     });
 
-    // Work Orders Details Page - Editable
-    $("#view_2573 #mapIFrame").on("load", function() {
+    // Work Orders Details Page Maps
+    function workOrdersDetialsMapMessage(viewId) {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
-      var workOrderDetailsIFrame = $("#view_2573 #mapIFrame")[0].contentWindow;
+      var workOrderDetailsIFrame = $("#" + viewId + " #mapIFrame")[0]
+        .contentWindow;
 
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
@@ -105,6 +105,14 @@
       };
 
       sendMessageToApp(markerMessage, workOrderDetailsIFrame);
+    }
+    // Work Order Details Page - Editable
+    $("#view_2573 #mapIFrame").on("load", function() {
+      workOrdersDetialsMapMessage("view_2573");
+    });
+    // Work Order Details Page - Viewable
+    $("#view_2619 #mapIFrame").on("load", function() {
+      workOrdersDetialsMapMessage("view_2619");
     });
 
     // Edit Location Page
