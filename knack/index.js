@@ -439,7 +439,7 @@ $(document).on("knack-view-render.view_2621", function(event, page) {
     "view_2621",
     "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
     "road",
-    "Work Orders | Markings"
+    "Markings | Work Orders"
   );
 });
 
@@ -450,7 +450,7 @@ $(document).on("knack-view-render.view_2628", function(event, page) {
     "view_2628",
     "https://atd.knack.com/signs-markings#work-order-signs/",
     "flag",
-    "Work Orders | Signs"
+    "Signs | Work Orders"
   );
 });
 
@@ -461,17 +461,39 @@ $(document).on("knack-view-render.view_2629", function(event, page) {
     "view_2629",
     "https://atd.knack.com/signs-markings#service-requests-signs/",
     "comments",
-    "Service Requests | Signs"
+    "Signs | Service Requests"
   );
 });
 
 $(document).on("knack-view-render.view_2630", function(event, page) {
   // create large button on the home page
   bigButton(
-    "availability",
+    "street-banners",
     "view_2630",
     "https://atd.knack.com/street-banners#home/",
     "flag-o",
-    "Program | Street Banners"
+    "Street Banners | Program"
+  );
+});
+
+$(document).on("knack-view-render.view_2892", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "signs-gis-qa",
+    "view_2892",
+    "https://atd.knack.com/signs-markings#signs-gis-qa/",
+    "flag",
+    "GIS QA | Signs"
+  );
+});
+
+$(document).on("knack-view-render.view_2893", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "markings-gis-qa",
+    "view_2893",
+    "https://atd.knack.com/signs-markings#marking-gis-qa/",
+    "road",
+    "GIS QA | Markings"
   );
 });
