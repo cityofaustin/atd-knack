@@ -16,8 +16,11 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
-const layoutLayer = { "icon-image": "marker" };
-const locationViewLayer = { "icon-image": "red-marker" };
+const layoutLayer = { "icon-image": "marker", "icon-allow-overlap": true };
+const locationViewLayer = {
+  "icon-image": "red-marker",
+  "icon-allow-overlap": true
+};
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -556,15 +559,15 @@ export default class SelectLocation extends Component {
                   />
                 ))}
               </Layer>
-              {viewLocation.length !== 0 && (
-                <Layer
-                  type="symbol"
-                  id="view-location"
-                  layout={locationViewLayer}
-                >
-                  <Feature coordinates={viewLocation} />
-                </Layer>
-              )}
+
+              <Layer
+                type="symbol"
+                id="view-location"
+                layout={locationViewLayer}
+              >
+                <Feature coordinates={viewLocation} />
+              </Layer>
+
               {activeSign !== "" && (
                 <Popup
                   key={activeSign.id}
