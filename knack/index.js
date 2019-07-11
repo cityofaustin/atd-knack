@@ -11,7 +11,6 @@ $(document).on("knack-page-render.any", function(event, page) {
   }
 });
 
-
 $(document).on("knack-scene-render.scene_428", function(event, page) {
   // update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
@@ -288,7 +287,6 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
   }
 });
 
-
 $(document).on("knack-view-render.view_2491", function(event, page) {
   // Another copy of the find and replace attachment types script, this one for the manage requests
   // page
@@ -356,7 +354,7 @@ $(document).on("knack-view-render.view_2465", function(event, page) {
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/user_testing/iframeMapMessenger.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/88_update_view_ids/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -367,11 +365,13 @@ function loadIframeMapMessenger(viewId) {
 
 window.viewIdsArray = [];
 
+// Work Orders Details Page - Viewer
 $(document).on("knack-view-render.view_2619", function(event, scene) {
   window.viewIdsArray.push("#view_2619");
   loadIframeMapMessenger("view_2619");
 });
 
+// Work Orders Details Page - Editable
 $(document).on("knack-view-render.view_2573", function(event, scene) {
   window.viewIdsArray.push("#view_2573");
   loadIframeMapMessenger("view_2573");
@@ -385,10 +385,10 @@ $(document).on("knack-view-render.view_2682", function(event, scene) {
   loadIframeMapMessenger("view_2682");
 });
 
-// Location Details Modal
-$(document).on("knack-view-render.view_2609", function(event, scene) {
-  window.viewIdsArray.push("#view_2609");
-  loadIframeMapMessenger("view_2609");
+// Location Details Page - Viewer & Editable
+$(document).on("knack-view-render.view_2733", function(event, scene) {
+  window.viewIdsArray.push("#view_2733");
+  loadIframeMapMessenger("view_2733");
   $("#kn-map-field_3300").hide(); // Remove map from Location Details
 });
 
@@ -414,32 +414,86 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
 
 function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
   // create a large button
- 
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
 
-  if(callback) callback();
+  $("<div/>", {
+    id: div_id
+  }).appendTo("#" + view_id);
+
+  $("#" + div_id).append(
+    "<a class='big-button' href='" +
+      url +
+      "'><div class='big-button-container'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></div></a>"
+  );
+
+  if (callback) callback();
 }
-    //>>>HOME TAB BUTTONS
-$(document).on('knack-view-render.view_2621', function(event, page) {
+//>>>HOME TAB BUTTONS
+$(document).on("knack-view-render.view_2621", function(event, page) {
   // create large button on the home page
-    bigButton('work-orders-markings', 'view_2621', "https://atd.knack.com/signs-markings#work-orders-markings/markings/", "road", "Work Orders | Markings");
+  bigButton(
+    "work-orders-markings",
+    "view_2621",
+    "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
+    "road",
+    "Markings | Work Orders"
+  );
 });
 
-$(document).on('knack-view-render.view_2628', function(event, page) {
-    // create large button on the home page
-    bigButton('work-orders-signs', 'view_2628', "https://atd.knack.com/signs-markings#work-order-signs/", "flag", "Work Orders | Signs");
+$(document).on("knack-view-render.view_2628", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "work-orders-signs",
+    "view_2628",
+    "https://atd.knack.com/signs-markings#work-order-signs/",
+    "flag",
+    "Signs | Work Orders"
+  );
 });
 
-$(document).on('knack-view-render.view_2629', function(event, page) {
-    // create large button on the home page
-    bigButton('service-requests-signs', 'view_2629', "https://atd.knack.com/signs-markings#service-requests-signs/", "comments", "Service Requests | Signs");
+$(document).on("knack-view-render.view_2629", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "service-requests-signs",
+    "view_2629",
+    "https://atd.knack.com/signs-markings#service-requests-signs/",
+    "comments",
+    "Signs | Service Requests"
+  );
 });
 
-$(document).on('knack-view-render.view_2630', function(event, page) {
-    // create large button on the home page
-    bigButton('availability', 'view_2630', "https://atd.knack.com/street-banners#home/", "flag-o", "Program | Street Banners");
+$(document).on("knack-view-render.view_2630", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "street-banners",
+    "view_2630",
+    "https://atd.knack.com/street-banners#home/",
+    "flag-o",
+    "Street Banners | Program"
+  );
+});
+
+$(document).on("knack-view-render.view_2892", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "signs-gis-qa",
+    "view_2892",
+    "https://atd.knack.com/signs-markings#signs-gis-qa/",
+    "flag",
+    "GIS QA | Signs"
+  );
+});
+
+$(document).on("knack-view-render.view_2893", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "markings-gis-qa",
+    "view_2893",
+    "https://atd.knack.com/signs-markings#marking-gis-qa/",
+    "road",
+    "GIS QA | Markings"
+  );
 });

@@ -34,7 +34,7 @@
     // Add React app as iframe if iframe doesn't already exist
     if ($(myView + " #mapIFrame").length === 0) {
       $(
-        '<iframe src="https://5d2115b19ceaed0007c6ae7d--atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+        '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
       ).appendTo($viewSelector);
     }
@@ -57,8 +57,9 @@
       }
     });
 
-    $("#view_2609 #mapIFrame").on("load", function() {
-      var locationViewIFrame = $("#view_2609 #mapIFrame")[0].contentWindow;
+    // Location Details Page Maps
+    function locationDetailsMapMessage(viewId) {
+      var locationViewIFrame = $("#" + viewId + " #mapIFrame")[0].contentWindow;
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
       var workOrderId = urlArray[urlArray.length - 4];
@@ -76,12 +77,23 @@
       };
 
       sendMessageToApp(markerMessage, locationViewIFrame);
+    }
+    // Location Details Page - Editable
+    $("#view_2609 #mapIFrame").on("load", function() {
+      locationDetailsMapMessage("view_2609");
     });
 
-    $("#mapIFrame").on("load", function() {
+    // Location Details Page - Viewer
+    $("#view_2733 #mapIFrame").on("load", function() {
+      locationDetailsMapMessage("view_2733");
+    });
+
+    // Work Orders Details Page Maps
+    function workOrdersDetialsMapMessage(viewId) {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
-      var workOrderDetailsIFrame = $("#view_2573 #mapIFrame")[0].contentWindow;
+      var workOrderDetailsIFrame = $("#" + viewId + " #mapIFrame")[0]
+        .contentWindow;
 
       var markerMessage = {
         message: "SIGNS_API_REQUEST",
@@ -93,8 +105,17 @@
       };
 
       sendMessageToApp(markerMessage, workOrderDetailsIFrame);
+    }
+    // Work Order Details Page - Editable
+    $("#view_2573 #mapIFrame").on("load", function() {
+      workOrdersDetialsMapMessage("view_2573");
+    });
+    // Work Order Details Page - Viewable
+    $("#view_2619 #mapIFrame").on("load", function() {
+      workOrdersDetialsMapMessage("view_2619");
     });
 
+    // Edit Location Page
     $("#view_2682 #mapIFrame").on("load", function() {
       // Use crumbtrail to get Location record ID
       var crumbtrailArray = $(".kn-crumbtrail")
