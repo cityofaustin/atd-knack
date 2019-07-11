@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LayerButtons from "./Components/LayerButtons";
-import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Popup, Marker } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -16,7 +16,10 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
-const layoutLayer = { "icon-image": "marker", "icon-allow-overlap": true };
+const layoutLayer = {
+  "icon-image": "marker",
+  "icon-allow-overlap": true
+};
 const locationViewLayer = {
   "icon-image": "red-marker",
   "icon-allow-overlap": true
@@ -550,15 +553,19 @@ export default class SelectLocation extends Component {
                 </>
               )}
 
-              <Layer type="symbol" id="signs" layout={layoutLayer}>
-                {signs.map(sign => (
-                  <Feature
+              {/* <Layer type="symbol" id="signs" layout={layoutLayer}> */}
+              {signs &&
+                signs.map(sign => (
+                  <Marker
                     key={sign.id}
+                    anchor="bottom"
                     coordinates={[sign.lng, sign.lat]}
                     onClick={() => this.signClick(sign.id)}
-                  />
+                  >
+                    <img src="/icons8-marker-40.png" />
+                  </Marker>
                 ))}
-              </Layer>
+              {/* </Layer> */}
               {viewLocation.length !== 0 && (
                 <Layer
                   type="symbol"
