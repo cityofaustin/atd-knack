@@ -559,15 +559,15 @@ export default class SelectLocation extends Component {
                   />
                 ))}
               </Layer>
-
-              <Layer
-                type="symbol"
-                id="view-location"
-                layout={locationViewLayer}
-              >
-                <Feature coordinates={viewLocation} />
-              </Layer>
-
+              {viewLocation.length !== 0 && (
+                <Layer
+                  type="symbol"
+                  id="view-location"
+                  layout={locationViewLayer}
+                >
+                  <Feature coordinates={viewLocation} />
+                </Layer>
+              )}
               {activeSign !== "" && (
                 <Popup
                   key={activeSign.id}
