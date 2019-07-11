@@ -385,17 +385,10 @@ $(document).on("knack-view-render.view_2682", function(event, scene) {
   loadIframeMapMessenger("view_2682");
 });
 
-// Location Details Page - Viewer
+// Location Details Page - Viewer & Editable
 $(document).on("knack-view-render.view_2733", function(event, scene) {
   window.viewIdsArray.push("#view_2733");
   loadIframeMapMessenger("view_2733");
-  $("#kn-map-field_3300").hide(); // Remove map from Location Details
-});
-
-// Location Details Page - Editable
-$(document).on("knack-view-render.view_2609", function(event, scene) {
-  window.viewIdsArray.push("#view_2609");
-  loadIframeMapMessenger("view_2609");
   $("#kn-map-field_3300").hide(); // Remove map from Location Details
 });
 
