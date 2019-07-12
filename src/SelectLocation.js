@@ -553,12 +553,7 @@ export default class SelectLocation extends Component {
                   </Marker>
                 ))}
               {viewLocation.length !== 0 && (
-                <Marker
-                  key={sign.id}
-                  anchor="bottom"
-                  coordinates={[sign.lng, sign.lat]}
-                  onClick={() => this.signClick(sign.id)}
-                >
+                <Marker anchor="bottom" coordinates={viewLocation}>
                   <img src="/red-icons8-marker-40.png" />
                 </Marker>
               )}
