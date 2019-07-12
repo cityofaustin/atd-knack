@@ -368,6 +368,7 @@ export default class SelectLocation extends Component {
 
       switch (data.message) {
         case "SIGNS_API_REQUEST":
+          // TODO add if data.view === "view_2619" make change to disable red pin and pulse
           let url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
           }/records?view-work-orders-details-sign_id=${data.id}`;
