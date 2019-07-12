@@ -224,17 +224,6 @@ export default class SelectLocation extends Component {
       }
     }
 
-    // Load sign marker icon and add to map
-    map.loadImage("/icons8-marker-40.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("marker", image);
-    });
-
-    map.loadImage("/red-icons8-marker-40.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("red-marker", image);
-    });
-
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
 
@@ -552,8 +541,6 @@ export default class SelectLocation extends Component {
                   <div className="pulse" />
                 </>
               )}
-
-              {/* <Layer type="symbol" id="signs" layout={layoutLayer}> */}
               {signs &&
                 signs.map(sign => (
                   <Marker
@@ -565,15 +552,15 @@ export default class SelectLocation extends Component {
                     <img src="/icons8-marker-40.png" />
                   </Marker>
                 ))}
-              {/* </Layer> */}
               {viewLocation.length !== 0 && (
-                <Layer
-                  type="symbol"
-                  id="view-location"
-                  layout={locationViewLayer}
+                <Marker
+                  key={sign.id}
+                  anchor="bottom"
+                  coordinates={[sign.lng, sign.lat]}
+                  onClick={() => this.signClick(sign.id)}
                 >
-                  <Feature coordinates={viewLocation} />
-                </Layer>
+                  <img src="/red-icons8-marker-40.png" />
+                </Marker>
               )}
               {activeSign !== "" && (
                 <Popup
