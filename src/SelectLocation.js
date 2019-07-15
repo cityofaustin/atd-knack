@@ -80,7 +80,8 @@ export default class SelectLocation extends Component {
       layersLoaded: true,
       initialLoad: false,
       zoom: "",
-      viewLocation: []
+      viewLocation: [],
+      workOrderDetailsViewer: false
     };
   }
 
@@ -368,7 +369,10 @@ export default class SelectLocation extends Component {
 
       switch (data.message) {
         case "SIGNS_API_REQUEST":
-          // TODO add if data.view === "view_2619" make change to disable red pin and pulse
+          // Use workOrderDetailsViewable state to disable red pin and pulse if user is Viewer role
+          if (data.view === "view_2619") {
+            thisComponent.setState({ workOrderDetailsViewer: true });
+          }
           let url = `https://us-api.knack.com/v1/scenes/${data.scene}/views/${
             data.view
           }/records?view-work-orders-details-sign_id=${data.id}`;
@@ -520,7 +524,8 @@ export default class SelectLocation extends Component {
       layersLoaded,
       center,
       signs,
-      viewLocation
+      viewLocation,
+      workOrderDetailsViewer
     } = this.state;
     return (
       <div>
@@ -538,10 +543,10 @@ export default class SelectLocation extends Component {
               movingMethod={"jumpTo"}
             >
               {/* 
-              We don't want to show the default centered pin when there are items in the viewLocation array.
+              We don't want to show the default centered pin when there are items in the viewLocation array or when the user is a Viewer.
               This is true in cases where we display a selected "active" pin along side related pin locations.
              */}
-              {this.state.viewLocation.length === 0 && (
+              {viewLocation.length === 0 && !workOrderDetailsViewer && (
                 <>
                   <div className={`pin ${pinDrop}`} />
                   <div className="pulse" />
