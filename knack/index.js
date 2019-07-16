@@ -492,7 +492,7 @@ $(document).on("knack-view-render.view_2904", function(event, page) {
   bigButton(
     "markings-gis-qa",
     "view_2904",
-    "https://atd.knack.com/signs-markings#marking-gis-qa/",
+    "https://atd.knack.com/signs-markings#markings-gis-qa/",
     "road",
     "GIS QA | Markings"
   );
