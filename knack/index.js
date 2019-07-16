@@ -476,22 +476,22 @@ $(document).on("knack-view-render.view_2630", function(event, page) {
   );
 });
 
-$(document).on("knack-view-render.view_2892", function(event, page) {
+$(document).on("knack-view-render.view_2903", function(event, page) {
   // create large button on the home page
   bigButton(
     "signs-gis-qa",
-    "view_2892",
+    "view_2903",
     "https://atd.knack.com/signs-markings#signs-gis-qa/",
     "flag",
     "GIS QA | Signs"
   );
 });
 
-$(document).on("knack-view-render.view_2893", function(event, page) {
+$(document).on("knack-view-render.view_2904", function(event, page) {
   // create large button on the home page
   bigButton(
     "markings-gis-qa",
-    "view_2893",
+    "view_2904",
     "https://atd.knack.com/signs-markings#marking-gis-qa/",
     "road",
     "GIS QA | Markings"
