@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LayerButtons from "./Components/LayerButtons";
-import ReactMapboxGl, { Layer, Feature, Popup } from "react-mapbox-gl";
+import ReactMapboxGl, { Layer, Feature, Popup, Marker } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -16,8 +16,14 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
-const layoutLayer = { "icon-image": "marker" };
-const locationViewLayer = { "icon-image": "red-marker" };
+const layoutLayer = {
+  "icon-image": "marker",
+  "icon-allow-overlap": true
+};
+const locationViewLayer = {
+  "icon-image": "red-marker",
+  "icon-allow-overlap": true
+};
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -112,10 +118,10 @@ export default class SelectLocation extends Component {
   signClick = id => {
     // set state.sign for Popup parameters in render, center map to clicked sign
     const clickedSign = this.state.signs.find(sign => sign.id === id);
-    const newCenter = [clickedSign.lng, clickedSign.lat];
+    // const newCenter = [clickedSign.lng, clickedSign.lat];
     this.setState({
-      activeSign: clickedSign,
-      center: newCenter
+      activeSign: clickedSign
+      // center: newCenter
     });
   };
 
@@ -217,17 +223,6 @@ export default class SelectLocation extends Component {
         geocoderControl.setProximity(null);
       }
     }
-
-    // Load sign marker icon and add to map
-    map.loadImage("/icons8-marker-40.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("marker", image);
-    });
-
-    map.loadImage("/red-icons8-marker-40.png", function(error, image) {
-      if (error) throw error;
-      map.addImage("red-marker", image);
-    });
 
     map.on("load", updateGeocoderProximity); // set proximity on map load
     map.on("moveend", updateGeocoderProximity); // and then update proximity each time the map moves
@@ -546,30 +541,28 @@ export default class SelectLocation extends Component {
                   <div className="pulse" />
                 </>
               )}
-
-              <Layer type="symbol" id="signs" layout={layoutLayer}>
-                {signs.map(sign => (
-                  <Feature
+              {signs &&
+                signs.map(sign => (
+                  <Marker
                     key={sign.id}
+                    anchor="bottom"
                     coordinates={[sign.lng, sign.lat]}
                     onClick={() => this.signClick(sign.id)}
-                  />
+                  >
+                    <img src="/icons8-marker-40.png" />
+                  </Marker>
                 ))}
-              </Layer>
               {viewLocation.length !== 0 && (
-                <Layer
-                  type="symbol"
-                  id="view-location"
-                  layout={locationViewLayer}
-                >
-                  <Feature coordinates={viewLocation} />
-                </Layer>
+                <Marker anchor="bottom" coordinates={viewLocation}>
+                  <img src="/red-icons8-marker-40.png" />
+                </Marker>
               )}
               {activeSign !== "" && (
                 <Popup
                   key={activeSign.id}
                   coordinates={[activeSign.lng, activeSign.lat]}
                   onClick={this.closePopup}
+                  offset={{ bottom: [0, -40] }}
                 >
                   <div className="container popup">
                     <span>Spatial ID: {activeSign.spatialId}</span>

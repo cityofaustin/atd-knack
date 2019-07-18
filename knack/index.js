@@ -394,9 +394,9 @@ $(document).on("knack-view-render.view_2733", function(event, scene) {
 
 // Overlay Latitude/Longitude fields and button on map
 $(document).on("knack-scene-render.scene_1028", function(event, scene) {
-  // Separate header from form and move form below map
+  // Remove header from form to prevent lat/lon fields from shifting and move form below map
   var $header = $("#view_2607 > div.view-header");
-  $("#view_2586").append($header);
+  $header.remove();
   var $form = $("#view_2607");
   $form.attr("id", "lat-lon-form");
   $form.detach();
