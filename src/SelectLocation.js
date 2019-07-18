@@ -118,10 +118,8 @@ export default class SelectLocation extends Component {
   signClick = id => {
     // set state.sign for Popup parameters in render, center map to clicked sign
     const clickedSign = this.state.signs.find(sign => sign.id === id);
-    // const newCenter = [clickedSign.lng, clickedSign.lat];
     this.setState({
       activeSign: clickedSign
-      // center: newCenter
     });
   };
 
