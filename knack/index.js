@@ -254,17 +254,13 @@ $(document).on("knack-scene-render.scene_716", function(event, page) {
   });
 });
 
-function setRequester() {
+function setRequester(divisionFieldId, requesterSelectorId, userRoleObject) {
   //  function to set a requester field by an attribute value associated with the logged-in user
 
-  var divisionField = "field_2186";
-
-  var requesterSelectorId = "#view_1880-field_2162";
-
-  if (!Knack.getUserRoles("object_151")) {
+  if (!Knack.getUserRoles(userRoleObject)) {
     //  ignore if user is supervisor role
     var userAttrs = Knack.getUserAttributes();
-    var division = userAttrs.values[divisionField];
+    var division = userAttrs.values[divisionFieldId];
     $(requesterSelectorId)
       .val(division)
       .change();
@@ -273,7 +269,11 @@ function setRequester() {
 }
 
 $(document).on("knack-view-render.view_1880", function(event, page) {
-  setRequester();
+  setRequester("field_2186", "#view_1880-field_2162", "object_151");
+});
+
+$(document).on("knack-view-render.view_2633", function(event, page) {
+  setRequester("field_2186", "#view_2633-field_3216", "object_151");
 });
 
 $(document).on("knack-scene-render.scene_713", function(event, page) {
