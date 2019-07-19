@@ -269,10 +269,12 @@ function setRequester(divisionFieldId, requesterSelectorId, userRoleObject) {
 }
 
 $(document).on("knack-view-render.view_1880", function(event, page) {
+  // Auto-populate requester divison field in MARKINGS New Work Order form
   setRequester("field_2186", "#view_1880-field_2162", "object_151");
 });
 
 $(document).on("knack-view-render.view_2633", function(event, page) {
+  // Auto-populate requester divison field in SIGNS New Work Order form
   setRequester("field_2186", "#view_2633-field_3216", "object_151");
 });
 
