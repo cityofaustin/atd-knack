@@ -68,7 +68,7 @@ $(document).on("knack-form-submit.view_1440", function(event, view, record) {
 });
 
 function changeFieldColor(field, color_map) {
-  var child_field = $(field).find(".kn-value");
+  var child_field = $(field).find(".kn-detail-body");
   var value = child_field.text();
   if (color_map[value]) {
     $(child_field).css({
