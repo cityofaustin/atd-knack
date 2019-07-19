@@ -87,11 +87,14 @@ var colorMapOne = {
 };
 
 $(document).on("knack-scene-render.any", function() {
-  //  work orders signs/markings status
+  //  work orders markings status
   changeFieldColor(".field_2181", colorMapOne);
 
-  //  work orders signs/markings job status
+  //  work orders markings job status
   changeFieldColor(".field_2190", colorMapOne);
+
+  //  work orders signs status
+  changeFieldColor(".field_3265", colorMapOne);
 });
 
 $(document).on("knack-view-render.view_2107", function(event, page) {
