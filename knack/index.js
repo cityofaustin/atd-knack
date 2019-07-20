@@ -68,7 +68,7 @@ $(document).on("knack-form-submit.view_1440", function(event, view, record) {
 });
 
 function changeFieldColor(field, color_map) {
-  var child_field = $(field).find(".kn-value");
+  var child_field = $(field).find(".kn-detail-body");
   var value = child_field.text();
   if (color_map[value]) {
     $(child_field).css({
@@ -87,11 +87,14 @@ var colorMapOne = {
 };
 
 $(document).on("knack-scene-render.any", function() {
-  //  work orders signs/markings status
+  //  MARKINGS Work Orders Details Status
   changeFieldColor(".field_2181", colorMapOne);
 
-  //  work orders signs/markings job status
+  //  MARKINGS Job Details Status
   changeFieldColor(".field_2190", colorMapOne);
+
+  //  SIGNS Work Orders Details Status
+  changeFieldColor(".field_3265", colorMapOne);
 });
 
 $(document).on("knack-view-render.view_2107", function(event, page) {
