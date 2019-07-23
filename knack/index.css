@@ -1,6 +1,9 @@
 /* hide attachment type column (field contents are extracted via JS */
 div.view_2107 .field_2403 { display: none; }
 div.view_2108 .field_2403 { display: none; }
+div.view_2565 .field_2403 {
+  display: none;
+}
 
 /* hide attachment type columns (in Traffic Counts), field contents extracted via JS */
 div.view_2357 .field_3174 { display: none; }
