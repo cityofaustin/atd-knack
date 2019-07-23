@@ -97,10 +97,10 @@ $(document).on("knack-scene-render.any", function() {
   changeFieldColor(".field_3265", colorMapOne);
 });
 
-$(document).on("knack-view-render.view_2107", function(event, page) {
+function replaceAttachmentFilenameWithFileType(fileFieldId, typeFieldId) {
   //  replace attachment filename with attachment type
   //  find each attachment cell
-  $("td.field_2405").each(function() {
+  $("td." + fileFieldId).each(function() {
     //  find each attachment link within the cell
     $(this)
       .find("a")
@@ -110,7 +110,7 @@ $(document).on("knack-view-render.view_2107", function(event, page) {
         //  search the neighboring field (attachmenty type) and retrieve the corresponding type
         $(this)
           .closest("tr")
-          .children("td.field_2403")
+          .children("td." + typeFieldId)
           .find("span")
           .children("span")
           .each(function(index2) {
@@ -123,33 +123,14 @@ $(document).on("knack-view-render.view_2107", function(event, page) {
         $(this).html(attachmentType);
       });
   });
+}
+
+$(document).on("knack-view-render.view_2565", function(event, page) {
+  replaceAttachmentFilenameWithFileType("field_2405", "field_2403");
 });
 
-$(document).on("knack-view-render.view_2108", function(event, page) {
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_2405").each(function() {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function(index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_2403")
-          .find("span")
-          .children("span")
-          .each(function(index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-        //  update link contents
-        $(this).html(attachmentType);
-      });
-  });
+$(document).on("knack-view-render.view_2107", function(event, page) {
+  replaceAttachmentFilenameWithFileType("field_2405", "field_2403");
 });
 
 function modCrumbtrail() {
