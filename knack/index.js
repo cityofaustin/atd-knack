@@ -11,14 +11,8 @@ $(document).on("knack-page-render.any", function(event, page) {
   }
 });
 
-$(document).on("knack-scene-render.scene_428", function(event, page) {
+$(document).on("knack-scene-render.scene_1014", function(event, page) {
   // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
-  $("#csr_view").attr("src", iframe_url);
-});
-
-$(document).on("knack-scene-render.scene_501", function(event, page) {
-  //  update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
   $("#csr_view").attr("src", iframe_url);
 });
