@@ -69,6 +69,10 @@ a.big-button {
   text-decoration: none;
 }
 
+ a.small-button {
+  text-decoration: none;
+}
+
 .small-button-container {
   padding: 5px;
   margin: 20px;
