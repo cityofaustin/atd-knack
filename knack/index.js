@@ -414,6 +414,46 @@ function customButton(div_id, view_id, url, fa_icon, button_label, button_class,
   if(callback) callback();
 }
 
+function customLoginButton(app_url, view_id, page_name) {
+  // creates a custom login interface that minimizes the basic auth login
+  // and creates a large custom button for ADFS login
+  
+  // special logic to generate URL and clean-up sign in page brefore creating large button
+  $('.kn-sso-container').hide();
+
+  $('.login_form').hide();
+
+  $('h2.kn-title').hide();
+  
+  var url = app_url + "#" + page_name + "/auth/COACD";
+
+  customButton(
+    'caocd-button-login',
+    view_id, url,
+    'sign-in',
+    'Sign-In',
+    "big-button",
+    "big-button-container"
+  );
+
+  customButton(
+    'non-coacd-button-login',
+    view_id,
+    "javascript:void(0)",
+    'lock',
+    'Non-COA Sign-In',
+    "small-button",
+    "small-button-container",
+    function(divId='non-coacd-button-login') {
+      setClickEvent(
+        divId,
+        showHideElements,
+        ".login_form",
+        ".small-button-container,.big-button-container"
+      );
+    });
+}
+
 
 $(document).on("knack-view-render.view_2621", function(event, page) {
   // create large button on the home page
