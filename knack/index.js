@@ -429,8 +429,6 @@ function customLoginButton(app_url, view_id, page_name) {
 
   var url = app_url + "#" + page_name + "/auth/COACD";
 
-  console.log(view_id);
-
   customButton(
     "caocd-button-login",
     view_id,
@@ -478,8 +476,20 @@ $(document).on('knack-view-render.any', function(event, page) {
     //  and the page url of the login page's **child page** as the value
     //  note that each login page listed below must first be configured for ADFS login
     var views = {
-        'view_2642' : 'home',
-        'view_1881' : 'new-work-order-markings'
+        "view_2642" : "home",
+        "view_1881" : "new-work-order-markings",
+        "view_1878" : "work-orders-markings-login",
+        "view_1896" : "jobs",
+        "view_2574" : "service-requests-signs",
+        "view_2631" : "new-work-order-signs",
+        "view_2622" : "work-order-signs",
+        "view_2743" : "my-work-orders",
+        "view_2806" : "my-work-orders-created",
+        "view_2943" : "manage-attachments",
+        "view_2945" : "manage-materials",
+        "view_2951" : "manage-specifications",
+        "view_2909" : "gis-qa",
+        "view_2219" : "signs--markings--requester",
     }
 
     if (page.key in views) {
