@@ -15,10 +15,9 @@ $(document).on("knack-scene-render.scene_1014", function(event, page) {
   // update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
   $("#csr_view").attr("src", iframe_url);
-  
+
   // hide the url vield, we don't need it after extracting the value
   $("#view_2528").hide();
-
 });
 
 function insertRecord(data, scene, view) {
@@ -400,29 +399,50 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
 //     Custom Buttons    //
 ///////////////////////////
 
-function customButton(div_id, view_id, url, fa_icon, button_label, button_class, container_class, callback) {
+function customButton(
+  div_id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  button_class,
+  container_class,
+  callback
+) {
   // create a custom button
-  
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='" + button_class + "' href='" + url + "'><div class='" + container_class + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
 
-  if(callback) callback();
+  $("<div/>", {
+    id: div_id
+  }).appendTo("#" + view_id);
+
+  $("#" + div_id).append(
+    "<a class='" +
+      button_class +
+      "' href='" +
+      url +
+      "'><div class='" +
+      container_class +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></div></a>"
+  );
+
+  if (callback) callback();
 }
 
 function customLoginButton(app_url, view_id, page_name) {
   // creates a custom login interface that minimizes the basic auth login
   // and creates a large custom button for ADFS login
-  
+
   // special logic to generate URL and clean-up sign in page brefore creating large button
   $(".kn-sso-container").hide();
 
   $(".login_form").hide();
 
   $("h2.kn-title").hide();
-  
+
   $("p.kn-description").hide();
 
   var url = app_url + "#" + page_name + "/auth/COACD";
@@ -438,29 +458,29 @@ function customLoginButton(app_url, view_id, page_name) {
   );
 
   customButton(
-    'non-coacd-button-login',
+    "non-coacd-button-login",
     view_id,
     "javascript:void(0)",
-    'lock',
-    'Non-COA Sign-In',
+    "lock",
+    "Non-COA Sign-In",
     "small-button",
     "small-button-container",
-    function(divId='non-coacd-button-login') {
+    function(divId = "non-coacd-button-login") {
       setClickEvent(
         divId,
         showHideElements,
         ".login_form",
         ".small-button-container,.big-button-container"
       );
-    });
+    }
+  );
 }
 
-    
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
-  $("#" + divId).click(function(){
+  $("#" + divId).click(function() {
     func(param1, param2);
-  })
+  });
 }
 
 function showHideElements(showSelector, hideSelector) {
@@ -468,34 +488,36 @@ function showHideElements(showSelector, hideSelector) {
   $(hideSelector).hide();
 }
 
-$(document).on('knack-view-render.any', function(event, page) {
-    //  wrapper to create large sign-in buttons
-    //  the views ojbect uses the view id of the login form element as each key
-    //  and the page url of the login page's **child page** as the value
-    //  note that each login page listed below must first be configured for ADFS login
-    var views = {
-        "view_2642" : "home",
-        "view_1881" : "new-work-order-markings",
-        "view_1878" : "work-orders-markings-login",
-        "view_1896" : "jobs",
-        "view_2574" : "service-requests-signs",
-        "view_2631" : "new-work-order-signs",
-        "view_2622" : "work-order-signs",
-        "view_2743" : "my-work-orders",
-        "view_2806" : "my-work-orders-created",
-        "view_2943" : "manage-attachments",
-        "view_2945" : "manage-materials",
-        "view_2951" : "manage-specifications",
-        "view_2909" : "gis-qa",
-        "view_2219" : "signs--markings--requester",
-    }
+$(document).on("knack-view-render.any", function(event, page) {
+  //  wrapper to create large sign-in buttons
+  //  the views ojbect uses the view id of the login form element as each key
+  //  and the page url of the login page's **child page** as the value
+  //  note that each login page listed below must first be configured for ADFS login
+  var views = {
+    view_2642: "home",
+    view_1881: "new-work-order-markings",
+    view_1878: "work-orders-markings-login",
+    view_1896: "jobs",
+    view_2574: "service-requests-signs",
+    view_2631: "new-work-order-signs",
+    view_2622: "work-order-signs",
+    view_2743: "my-work-orders",
+    view_2806: "my-work-orders-created",
+    view_2943: "manage-attachments",
+    view_2945: "manage-materials",
+    view_2951: "manage-specifications",
+    view_2909: "gis-qa",
+    view_2219: "signs--markings--requester"
+  };
 
-    if (page.key in views) {
-        customLoginButton("https://atd.knack.com/signs-markings", page.key, views[page.key]);    
-    }
-    
+  if (page.key in views) {
+    customLoginButton(
+      "https://atd.knack.com/signs-markings",
+      page.key,
+      views[page.key]
+    );
+  }
 });
-
 
 $(document).on("knack-view-render.view_2621", function(event, page) {
   // create large button on the home page
@@ -507,7 +529,7 @@ $(document).on("knack-view-render.view_2621", function(event, page) {
     "Markings | Work Orders",
     "big-button",
     "big-button-container"
-  )
+  );
 });
 
 $(document).on("knack-view-render.view_2628", function(event, page) {
@@ -575,4 +597,11 @@ $(document).on("knack-view-render.view_2904", function(event, page) {
   );
 });
 
+$(document).on("knack-view-render.view_1039", function(event, page) {
+  // move "Back to View Work Order Details" link to top of Location Details view
+  var $back = $("#kn-scene_1039 > div.kn-view.kn-back-link");
+  $back.detach();
+  var $view2733 = $("#view_2733");
+  $view2733.prepend($back);
+});
 // END: Custom Buttons
