@@ -1,3 +1,5 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css);
+
 /* hide attachment type column (field contents are extracted via JS */
 div.view_2107 .field_2403 {
   display: none;
@@ -101,7 +103,16 @@ a.small-button {
   cursor: pointer;
 }
 
-#view_2733 > div > a {
+#kn-scene_1039 > div.kn-view.kn-back-link > a {
   font-weight: 700;
   font-size: 18px;
+}
+
+#kn-scene_1039 > div.kn-view.kn-back-link > a:before {
+  font-family: "FontAwesome";
+  content: "\f0a8";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
 }

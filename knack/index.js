@@ -596,12 +596,4 @@ $(document).on("knack-view-render.view_2904", function(event, page) {
     "big-button-container"
   );
 });
-
-$(document).on("knack-view-render.view_1039", function(event, page) {
-  // move "Back to View Work Order Details" link to top of Location Details view
-  var $back = $("#kn-scene_1039 > div.kn-view.kn-back-link");
-  $back.detach();
-  var $view2733 = $("#view_2733");
-  $view2733.prepend($back);
-});
 // END: Custom Buttons
