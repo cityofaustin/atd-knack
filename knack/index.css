@@ -103,6 +103,7 @@ a.small-button {
   cursor: pointer;
 }
 
+/* Make back link in Location Details View bold, larger, and add FontAwesome back arrow */
 #kn-scene_1039 > div.kn-view.kn-back-link > a {
   font-weight: 700;
   font-size: 18px;
