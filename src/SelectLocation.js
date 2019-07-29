@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LayerButtons from "./Components/LayerButtons";
-import ReactMapboxGl, { Layer, Feature, Popup, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Marker } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -15,15 +15,6 @@ const MAP_LANGUAGE = "englishMap";
 const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
-
-const layoutLayer = {
-  "icon-image": "marker",
-  "icon-allow-overlap": true
-};
-const locationViewLayer = {
-  "icon-image": "red-marker",
-  "icon-allow-overlap": true
-};
 
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
@@ -553,12 +544,12 @@ export default class SelectLocation extends Component {
                     coordinates={[sign.lng, sign.lat]}
                     onClick={() => this.signClick(sign.id)}
                   >
-                    <img src="/icons8-marker-40.png" />
+                    <img src="/icons8-marker-40.png" alt="blue marker" />
                   </Marker>
                 ))}
               {viewLocation.length !== 0 && (
                 <Marker anchor="bottom" coordinates={viewLocation}>
-                  <img src="/red-icons8-marker-40.png" />
+                  <img src="/red-icons8-marker-40.png" alt="red marker" />
                 </Marker>
               )}
               {activeSign !== "" && (
