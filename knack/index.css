@@ -1,5 +1,3 @@
-@import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css);
-
 /* hide attachment type column (field contents are extracted via JS */
 div.view_2107 .field_2403 {
   display: none;
