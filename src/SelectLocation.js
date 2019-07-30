@@ -16,6 +16,17 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
+function forwardGeocoder(query) {
+  // debugger;
+  // TODO Add Here API call and format results to populate Geocoder
+  // https://docs.mapbox.com/mapbox-gl-js/example/forward-geocode-custom-data/
+  axios
+    .get(
+      `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?types=address&proximity=${-97.750559},${30.280005}&access_token=${MAPBOX_TOKEN}`
+    )
+    .then(res => console.log(res));
+}
+
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
   placeholder: "Enter a location here",
@@ -26,8 +37,9 @@ const geocoderControl = new MapboxGeocoder({
   // bbox: [65,25.84,-93.51,36.5],
   // or by country:
   // countries: 'us',
+  trackProximity: true,
   limit: 5,
-  trackProximity: true
+  localGeocoder: forwardGeocoder
 });
 
 const geolocateControl = new GeolocateControl({
