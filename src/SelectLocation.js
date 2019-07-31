@@ -19,7 +19,6 @@ const Map = ReactMapboxGl({
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
   placeholder: "Enter a location here",
-
   // bounding box restricts results to Travis County
   bbox: [-98.173053, 30.02329, -97.369564, 30.627918],
   // or texas
@@ -79,7 +78,8 @@ export default class SelectLocation extends Component {
       initialLoad: false,
       zoom: "",
       viewLocation: [],
-      workOrderDetailsViewer: false
+      workOrderDetailsViewer: false,
+      hereLocations: ""
     };
   }
 
@@ -132,20 +132,53 @@ export default class SelectLocation extends Component {
     this.setState({ geocodeAddressString: address });
   }
 
-  forwardGeocoder(query) {
-    // TODO Add Here API call and format results to populate Geocoder
+  forwardGeocoder = query => {
+    // TODO Decide whether to set state.center or populate Mapbox Geocoder
     // https://docs.mapbox.com/mapbox-gl-js/example/forward-geocode-custom-data/
-    let streetsArray = query.split(" and ");
-    let firstStreet = streetsArray[0];
-    let secondStreet = streetsArray[1];
+    const streetsArray = query.query.split(" and ");
+    const firstStreet = streetsArray[0];
+    const secondStreet = streetsArray[1];
+    let matchingFeatures = [];
     axios
       .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${firstStreet +
+        `https://geocoder.api.here.com/6.2/geocode.json?city=Austin&street=${firstStreet +
           " @ " +
-          secondStreet}.json?types=address&proximity=${-97.750559},${30.280005}&access_token=${MAPBOX_TOKEN}`
+          secondStreet}&`
       )
-      .then(res => console.log(res));
-  }
+      .then(res => {
+        console.log(res);
+        let resultGeoJSON = {
+          type: "Feature",
+          properties: {
+            title: res.data.Response.View[0].Result[0].Location.Address.Label,
+            description: "A place"
+          },
+          center: [
+            res.data.Response.View[0].Result[0].Location.DisplayPosition
+              .Longitude,
+            res.data.Response.View[0].Result[0].Location.DisplayPosition
+              .Latitude
+          ],
+          geometry: {
+            coordinates: [
+              res.data.Response.View[0].Result[0].Location.DisplayPosition
+                .Longitude,
+              res.data.Response.View[0].Result[0].Location.DisplayPosition
+                .Latitude
+            ],
+            type: "Point"
+          },
+          place_name:
+            "📍 " + res.data.Response.View[0].Result[0].Location.Address.Label,
+          place_type: ["address"]
+        };
+        matchingFeatures.push(resultGeoJSON);
+        this.setState({ hereLocations: matchingFeatures });
+      })
+      .catch(() => {
+        return null;
+      });
+  };
 
   onDragStart() {
     this.setState({
