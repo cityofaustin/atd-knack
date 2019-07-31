@@ -16,17 +16,6 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
-function forwardGeocoder(query) {
-  // debugger;
-  // TODO Add Here API call and format results to populate Geocoder
-  // https://docs.mapbox.com/mapbox-gl-js/example/forward-geocode-custom-data/
-  axios
-    .get(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?types=address&proximity=${-97.750559},${30.280005}&access_token=${MAPBOX_TOKEN}`
-    )
-    .then(res => console.log(res));
-}
-
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
   placeholder: "Enter a location here",
@@ -38,8 +27,8 @@ const geocoderControl = new MapboxGeocoder({
   // or by country:
   // countries: 'us',
   trackProximity: true,
-  limit: 5,
-  localGeocoder: forwardGeocoder
+  limit: 5
+  // localGeocoder: forwardGeocoder
 });
 
 const geolocateControl = new GeolocateControl({
@@ -143,6 +132,21 @@ export default class SelectLocation extends Component {
     this.setState({ geocodeAddressString: address });
   }
 
+  forwardGeocoder(query) {
+    // TODO Add Here API call and format results to populate Geocoder
+    // https://docs.mapbox.com/mapbox-gl-js/example/forward-geocode-custom-data/
+    let streetsArray = query.split(" and ");
+    let firstStreet = streetsArray[0];
+    let secondStreet = streetsArray[1];
+    axios
+      .get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${firstStreet +
+          " @ " +
+          secondStreet}.json?types=address&proximity=${-97.750559},${30.280005}&access_token=${MAPBOX_TOKEN}`
+      )
+      .then(res => console.log(res));
+  }
+
   onDragStart() {
     this.setState({
       showPin: false
@@ -209,7 +213,7 @@ export default class SelectLocation extends Component {
     map.addControl(geolocateControl, "top-right");
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
-
+    geocoderControl.on("loading", this.forwardGeocoder);
     geocoderControl.on("clear", this.onGeocoderClear);
 
     function updateGeocoderProximity() {
