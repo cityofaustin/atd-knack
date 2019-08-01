@@ -78,7 +78,7 @@ export default class SelectLocation extends Component {
       zoom: "",
       viewLocation: [],
       workOrderDetailsViewer: false,
-      hereLocations: ""
+      intersectionLocation: ""
     };
   }
 
@@ -132,60 +132,45 @@ export default class SelectLocation extends Component {
   }
 
   forwardGeocoder = query => {
-    // TODO Decide whether to set state.center or populate Mapbox Geocoder
-    // https://docs.mapbox.com/mapbox-gl-js/example/forward-geocode-custom-data/
     const streetsArray = query.query.split(" and ");
     const firstStreet = streetsArray[0];
     const secondStreet = streetsArray[1];
-    let matchingFeatures = [];
     axios
       .get(
-        `https://geocoder.api.here.com/6.2/geocode.json?city=Austin&street=${firstStreet +
+        `https://geocoder.api.here.com/6.2/geocode.json?bbox=30.627918,-97.369564;30.02329,-98.173053&city=Austin&street=${firstStreet +
           " @ " +
           secondStreet}&`
       )
       .then(res => {
-        console.log(res);
+        const location = res.data.Response.View[0].Result[0].Location;
+        const lat = location.DisplayPosition.Latitude;
+        const lon = location.DisplayPosition.Longitude;
         let resultGeoJSON = {
           type: "Feature",
           properties: {
-            title: res.data.Response.View[0].Result[0].Location.Address.Label,
+            title: location.Address.Label,
             description: "A place"
           },
-          center: [
-            res.data.Response.View[0].Result[0].Location.DisplayPosition
-              .Longitude,
-            res.data.Response.View[0].Result[0].Location.DisplayPosition
-              .Latitude
-          ],
+          center: [lon, lat],
           geometry: {
-            coordinates: [
-              res.data.Response.View[0].Result[0].Location.DisplayPosition
-                .Longitude,
-              res.data.Response.View[0].Result[0].Location.DisplayPosition
-                .Latitude
-            ],
+            coordinates: [lon, lat],
             type: "Point"
           },
-          place_name:
-            "📍 " + res.data.Response.View[0].Result[0].Location.Address.Label,
+          place_name: "📍 " + location.Address.Label,
           place_type: ["address"]
         };
-        matchingFeatures = [resultGeoJSON];
-        this.setState({ hereLocations: resultGeoJSON });
+        this.setState({ intersectionLocation: resultGeoJSON });
       })
       .catch(() => {
         return null;
       });
   };
 
-  populateAddressBar = async results => {
-    // TODO move to on result to populate Here response once typing is complete
-    console.log(this.state.hereLocations);
-    console.log(results);
-    const newResults = await (this.state.hereLocations !== ""
-      ? results.features.unshift(this.state.hereLocations)
-      : null);
+  populateAddressBar = results => {
+    const newResults =
+      this.state.intersectionLocation !== ""
+        ? results.features.unshift(this.state.intersectionLocation)
+        : null;
     return newResults;
   };
 
@@ -215,7 +200,7 @@ export default class SelectLocation extends Component {
       lngLat: center,
       addressString: this.state.geocodeAddressString
     });
-    // format lat/lon to 7 digits after decimal point to avoid rejection from Knack
+    // format lat/lon to 7 digits after decimal point
     const lat = this.state.lat.toFixed(7);
     const lng = this.state.lng.toFixed(7);
     window.parent.postMessage(
@@ -255,8 +240,8 @@ export default class SelectLocation extends Component {
     map.addControl(geolocateControl, "top-right");
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
-    geocoderControl.on("loading", this.forwardGeocoder);
-    geocoderControl.on("results", this.populateAddressBar);
+    geocoderControl.on("loading", this.forwardGeocoder); // Fire Here maps API call and populate state.intersectionLocation with result
+    geocoderControl.on("results", this.populateAddressBar); // Supplement Mapbox API results with state.intersectionLocation
     geocoderControl.on("clear", this.onGeocoderClear);
 
     function updateGeocoderProximity() {
