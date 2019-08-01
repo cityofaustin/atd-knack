@@ -132,14 +132,20 @@ export default class SelectLocation extends Component {
   }
 
   populateIntersection = query => {
-    const streetsArray = query.query.split(" and ");
+    const queryString = query.query;
+    const delimiters = ["@", "and", "&", " "];
+    const delimiterInQueryString = delimiters.filter(delimiter =>
+      queryString.includes(delimiter)
+    );
+    const streetsArray = query.query.split(` ${delimiterInQueryString} `);
     const firstStreet = streetsArray[0];
     const secondStreet = streetsArray[1];
     axios
       .get(
         `https://geocoder.api.here.com/6.2/geocode.json?bbox=30.627918,-98.173053;30.02329,-97.369564&city=Austin&street=${firstStreet +
           " @ " +
-          secondStreet}&app_id=J6lGCnJcHK0WL5HbHQMw&app_code=vUvXCuVInzjjThg2H6UiQg
+          secondStreet}&app_id=sFgIJcYHT0x8Deuqauwc
+          &app_code=0Bxra5iNqx6AlY0IAYivdQ
           &gen=9`
       )
       .then(res => {
