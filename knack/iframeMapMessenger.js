@@ -107,7 +107,8 @@
         scene: "scene_1028",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
-        id: recordId
+        id: recordId,
+        workOrderId: workOrderId
       };
 
       sendMessageToApp(markerMessage, workOrderDetailsIFrame);
