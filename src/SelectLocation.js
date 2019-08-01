@@ -566,6 +566,7 @@ export default class SelectLocation extends Component {
       workOrderDetailsViewer,
       workOrderId
     } = this.state;
+    console.log("hi", this.state);
     return (
       <div>
         <div className="map-container">
