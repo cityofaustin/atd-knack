@@ -2,7 +2,7 @@
 name: Signs Migration
 about: Describe this issue template's purpose here.
 title: ''
-labels: 'Workgroup: SMB, Service: Apps, Project: Signs Migration'
+labels: 'Project: Signs Migration, Service: Apps, Workgroup: SMB'
 assignees: ''
 
 ---
