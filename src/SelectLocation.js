@@ -620,6 +620,7 @@ export default class SelectLocation extends Component {
                         href={`https://atd.knack.com/signs-markings#work-order-signs/view-work-orders-details-sign/${workOrderId}/view-work-order-signs-location-details/${
                           activeSign.id
                         }`}
+                        target="_top"
                       >
                         Location Detail Page
                       </a>
