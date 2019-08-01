@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import LayerButtons from "./Components/LayerButtons";
-import ReactMapboxGl, { Layer, Feature, Popup, Marker } from "react-mapbox-gl";
+import ReactMapboxGl, { Popup, Marker } from "react-mapbox-gl";
 import { NavigationControl, GeolocateControl } from "mapbox-gl";
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
 import MapboxLanguage from "@mapbox/mapbox-gl-language";
@@ -16,19 +16,9 @@ const Map = ReactMapboxGl({
   accessToken: MAPBOX_TOKEN
 });
 
-const layoutLayer = {
-  "icon-image": "marker",
-  "icon-allow-overlap": true
-};
-const locationViewLayer = {
-  "icon-image": "red-marker",
-  "icon-allow-overlap": true
-};
-
 const geocoderControl = new MapboxGeocoder({
   accessToken: MAPBOX_TOKEN,
   placeholder: "Enter a location here",
-
   // bounding box restricts results to Travis County
   bbox: [-98.173053, 30.02329, -97.369564, 30.627918],
   // or texas
@@ -88,7 +78,8 @@ export default class SelectLocation extends Component {
       zoom: "",
       viewLocation: [],
       workOrderDetailsViewer: false,
-      workOrderId: ""
+      workOrderId: "",
+      intersectionLocation: ""
     };
   }
 
@@ -141,6 +132,56 @@ export default class SelectLocation extends Component {
     this.setState({ geocodeAddressString: address });
   }
 
+  populateIntersection = query => {
+    const queryString = query.query;
+    const delimiters = ["@", "and", "&"];
+    const delimiterInQueryString = delimiters.filter(delimiter =>
+      queryString.includes(delimiter)
+    );
+    const streetsArray = query.query.split(` ${delimiterInQueryString} `);
+    const firstStreet = streetsArray[0];
+    const secondStreet = streetsArray[1];
+    axios
+      .get(
+        `https://geocoder.api.here.com/6.2/geocode.json?bbox=30.627918,-98.173053;30.02329,-97.369564&city=Austin&street=${firstStreet +
+          " @ " +
+          secondStreet}&app_id=sFgIJcYHT0x8Deuqauwc
+          &app_code=0Bxra5iNqx6AlY0IAYivdQ
+          &gen=9`
+      )
+      .then(res => {
+        const location = res.data.Response.View[0].Result[0].Location;
+        const lat = location.DisplayPosition.Latitude;
+        const lon = location.DisplayPosition.Longitude;
+        let resultGeoJSON = {
+          type: "Feature",
+          properties: {
+            title: location.Address.Label,
+            description: "A place"
+          },
+          center: [lon, lat],
+          geometry: {
+            coordinates: [lon, lat],
+            type: "Point"
+          },
+          place_name: "📍 " + location.Address.Label,
+          place_type: ["address"]
+        };
+        this.setState({ intersectionLocation: resultGeoJSON });
+      })
+      .catch(() => {
+        return null;
+      });
+  };
+
+  populateAddressBar = results => {
+    const newResults =
+      this.state.intersectionLocation !== ""
+        ? results.features.unshift(this.state.intersectionLocation)
+        : null;
+    return newResults;
+  };
+
   onDragStart() {
     this.setState({
       showPin: false
@@ -167,7 +208,7 @@ export default class SelectLocation extends Component {
       lngLat: center,
       addressString: this.state.geocodeAddressString
     });
-    // format lat/lon to 7 digits after decimal point to avoid rejection from Knack
+    // format lat/lon to 7 digits after decimal point
     const lat = this.state.lat.toFixed(7);
     const lng = this.state.lng.toFixed(7);
     window.parent.postMessage(
@@ -186,6 +227,7 @@ export default class SelectLocation extends Component {
 
   onGeocoderClear() {
     this.onChange({});
+    this.setState({ intersectionLocation: "" });
   }
 
   onStyleLoad(map) {
@@ -207,7 +249,8 @@ export default class SelectLocation extends Component {
     map.addControl(geolocateControl, "top-right");
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
-
+    geocoderControl.on("loading", this.populateIntersection); // Fire Here maps API call and populate state.intersectionLocation with result
+    geocoderControl.on("results", this.populateAddressBar); // Supplement Mapbox API results with state.intersectionLocation
     geocoderControl.on("clear", this.onGeocoderClear);
 
     function updateGeocoderProximity() {
@@ -556,12 +599,12 @@ export default class SelectLocation extends Component {
                     coordinates={[sign.lng, sign.lat]}
                     onClick={() => this.signClick(sign.id)}
                   >
-                    <img src="/icons8-marker-40.png" />
+                    <img src="/icons8-marker-40.png" alt="blue marker" />
                   </Marker>
                 ))}
               {viewLocation.length !== 0 && (
                 <Marker anchor="bottom" coordinates={viewLocation}>
-                  <img src="/red-icons8-marker-40.png" />
+                  <img src="/red-icons8-marker-40.png" alt="red marker" />
                 </Marker>
               )}
               {activeSign !== "" && (
