@@ -27,7 +27,6 @@ const geocoderControl = new MapboxGeocoder({
   // countries: 'us',
   trackProximity: true,
   limit: 5
-  // localGeocoder: forwardGeocoder
 });
 
 const geolocateControl = new GeolocateControl({
@@ -172,12 +171,22 @@ export default class SelectLocation extends Component {
             "📍 " + res.data.Response.View[0].Result[0].Location.Address.Label,
           place_type: ["address"]
         };
-        matchingFeatures.push(resultGeoJSON);
-        this.setState({ hereLocations: matchingFeatures });
+        matchingFeatures = [resultGeoJSON];
+        this.setState({ hereLocations: resultGeoJSON });
       })
       .catch(() => {
         return null;
       });
+  };
+
+  populateAddressBar = results => {
+    // TODO move to on result to populate Here response once typing is complete
+    console.log(this.state.hereLocations);
+    console.log(results);
+    if (this.state.hereLocations !== "") {
+      results.features.unshift(this.state.hereLocations);
+      return results;
+    }
   };
 
   onDragStart() {
@@ -247,6 +256,7 @@ export default class SelectLocation extends Component {
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
     geocoderControl.on("loading", this.forwardGeocoder);
+    geocoderControl.on("results", this.populateAddressBar);
     geocoderControl.on("clear", this.onGeocoderClear);
 
     function updateGeocoderProximity() {
