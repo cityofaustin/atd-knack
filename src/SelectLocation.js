@@ -133,7 +133,7 @@ export default class SelectLocation extends Component {
 
   populateIntersection = query => {
     const queryString = query.query;
-    const delimiters = ["@", "and", "&", " "];
+    const delimiters = ["@", "and", "&"];
     const delimiterInQueryString = delimiters.filter(delimiter =>
       queryString.includes(delimiter)
     );
