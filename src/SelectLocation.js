@@ -25,8 +25,8 @@ const geocoderControl = new MapboxGeocoder({
   // bbox: [65,25.84,-93.51,36.5],
   // or by country:
   // countries: 'us',
-  trackProximity: true,
-  limit: 5
+  limit: 5,
+  trackProximity: true
 });
 
 const geolocateControl = new GeolocateControl({
@@ -131,7 +131,7 @@ export default class SelectLocation extends Component {
     this.setState({ geocodeAddressString: address });
   }
 
-  forwardGeocoder = query => {
+  populateIntersection = query => {
     const streetsArray = query.query.split(" and ");
     const firstStreet = streetsArray[0];
     const secondStreet = streetsArray[1];
@@ -219,6 +219,7 @@ export default class SelectLocation extends Component {
 
   onGeocoderClear() {
     this.onChange({});
+    this.setState({ intersectionLocation: "" });
   }
 
   onStyleLoad(map) {
@@ -240,7 +241,7 @@ export default class SelectLocation extends Component {
     map.addControl(geolocateControl, "top-right");
 
     geocoderControl.on("result", this.onForwardGeocodeResult);
-    geocoderControl.on("loading", this.forwardGeocoder); // Fire Here maps API call and populate state.intersectionLocation with result
+    geocoderControl.on("loading", this.populateIntersection); // Fire Here maps API call and populate state.intersectionLocation with result
     geocoderControl.on("results", this.populateAddressBar); // Supplement Mapbox API results with state.intersectionLocation
     geocoderControl.on("clear", this.onGeocoderClear);
 
