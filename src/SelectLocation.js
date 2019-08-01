@@ -137,7 +137,7 @@ export default class SelectLocation extends Component {
     const secondStreet = streetsArray[1];
     axios
       .get(
-        `https://geocoder.api.here.com/6.2/geocode.json?bbox=30.627918,-97.369564;30.02329,-98.173053&city=Austin&street=${firstStreet +
+        `https://geocoder.api.here.com/6.2/geocode.json?bbox=30.627918,-98.173053;30.02329,-97.369564&city=Austin&street=${firstStreet +
           " @ " +
           secondStreet}&`
       )
