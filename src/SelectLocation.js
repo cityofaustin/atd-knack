@@ -87,7 +87,8 @@ export default class SelectLocation extends Component {
       initialLoad: false,
       zoom: "",
       viewLocation: [],
-      workOrderDetailsViewer: false
+      workOrderDetailsViewer: false,
+      workOrderId: ""
     };
   }
 
@@ -451,7 +452,8 @@ export default class SelectLocation extends Component {
               thisComponent.setState(
                 {
                   viewLocation: viewLocationCoords,
-                  center: viewLocationCoords
+                  center: viewLocationCoords,
+                  workOrderId: data.workOrderId
                 },
                 () => {
                   const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${
@@ -518,7 +520,8 @@ export default class SelectLocation extends Component {
       center,
       signs,
       viewLocation,
-      workOrderDetailsViewer
+      workOrderDetailsViewer,
+      workOrderId
     } = this.state;
     return (
       <div>
@@ -569,6 +572,16 @@ export default class SelectLocation extends Component {
                   offset={{ bottom: [0, -40] }}
                 >
                   <div className="container popup">
+                    <span>
+                      <a
+                        href={`https://atd.knack.com/signs-markings#work-order-signs/view-work-orders-details-sign/${workOrderId}/view-work-order-signs-location-details/${
+                          activeSign.id
+                        }`}
+                      >
+                        Location Detail Page
+                      </a>
+                    </span>
+                    <br />
                     <span>Spatial ID: {activeSign.spatialId}</span>
                     <br />
                     <span>Latitude: {activeSign.lat}</span>
