@@ -179,14 +179,14 @@ export default class SelectLocation extends Component {
       });
   };
 
-  populateAddressBar = results => {
+  populateAddressBar = async results => {
     // TODO move to on result to populate Here response once typing is complete
     console.log(this.state.hereLocations);
     console.log(results);
-    if (this.state.hereLocations !== "") {
-      results.features.unshift(this.state.hereLocations);
-      return results;
-    }
+    const newResults = await (this.state.hereLocations !== ""
+      ? results.features.unshift(this.state.hereLocations)
+      : null);
+    return newResults;
   };
 
   onDragStart() {
