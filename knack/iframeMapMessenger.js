@@ -98,6 +98,7 @@
     function workOrdersDetialsMapMessage(viewId) {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
+      var workOrderId = urlArray[urlArray.length - 4];
       var workOrderDetailsIFrame = $("#" + viewId + " #mapIFrame")[0]
         .contentWindow;
 
