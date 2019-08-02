@@ -417,12 +417,12 @@ export default class SelectLocation extends Component {
             .get(url, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              const data = response.data.records;
+              const { records } = response.data;
               // Populate state with existing signs in Knack work order
               const signsObjects =
-                data === []
-                  ? data
-                  : data.map(sign => {
+                records === []
+                  ? records
+                  : records.map(sign => {
                       const signObj = {};
                       signObj["id"] = sign.id;
                       signObj["lat"] = sign.field_3300_raw.latitude;
@@ -432,15 +432,16 @@ export default class SelectLocation extends Component {
                     });
               // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
               const signsArray =
-                data === []
-                  ? data
-                  : data.map(sign => [
+                records === []
+                  ? records
+                  : records.map(sign => [
                       parseFloat(sign.field_3300_raw.longitude),
                       parseFloat(sign.field_3300_raw.latitude)
                     ]);
               thisComponent.setState({
                 signs: signsObjects,
-                signsArray: signsArray
+                signsArray: signsArray,
+                workOrderId: data.id
               });
             })
             .catch(error => {
@@ -491,6 +492,7 @@ export default class SelectLocation extends Component {
                 locationDetails.longitude,
                 locationDetails.latitude
               ];
+
               thisComponent.setState(
                 {
                   viewLocation: viewLocationCoords,
