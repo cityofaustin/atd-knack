@@ -78,6 +78,7 @@ export default class SelectLocation extends Component {
       zoom: "",
       viewLocation: [],
       workOrderDetailsViewer: false,
+      workOrderId: "",
       intersectionLocation: ""
     };
   }
@@ -416,12 +417,12 @@ export default class SelectLocation extends Component {
             .get(url, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              const data = response.data.records;
+              const { records } = response.data;
               // Populate state with existing signs in Knack work order
               const signsObjects =
-                data === []
-                  ? data
-                  : data.map(sign => {
+                records === []
+                  ? records
+                  : records.map(sign => {
                       const signObj = {};
                       signObj["id"] = sign.id;
                       signObj["lat"] = sign.field_3300_raw.latitude;
@@ -431,15 +432,16 @@ export default class SelectLocation extends Component {
                     });
               // Populate state with array of long, lat to set bounding box required by Turf.js in onStyleLoad()
               const signsArray =
-                data === []
-                  ? data
-                  : data.map(sign => [
+                records === []
+                  ? records
+                  : records.map(sign => [
                       parseFloat(sign.field_3300_raw.longitude),
                       parseFloat(sign.field_3300_raw.latitude)
                     ]);
               thisComponent.setState({
                 signs: signsObjects,
-                signsArray: signsArray
+                signsArray: signsArray,
+                workOrderId: data.id
               });
             })
             .catch(error => {
@@ -485,16 +487,17 @@ export default class SelectLocation extends Component {
             .get(locationUrl, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              console.log(response);
               const locationDetails = response.data.field_3300_raw;
               const viewLocationCoords = [
                 locationDetails.longitude,
                 locationDetails.latitude
               ];
+
               thisComponent.setState(
                 {
                   viewLocation: viewLocationCoords,
-                  center: viewLocationCoords
+                  center: viewLocationCoords,
+                  workOrderId: data.workOrderId
                 },
                 () => {
                   const otherLocationsUrl = `https://us-api.knack.com/v1/scenes/${
@@ -561,7 +564,8 @@ export default class SelectLocation extends Component {
       center,
       signs,
       viewLocation,
-      workOrderDetailsViewer
+      workOrderDetailsViewer,
+      workOrderId
     } = this.state;
     return (
       <div>
@@ -612,6 +616,17 @@ export default class SelectLocation extends Component {
                   offset={{ bottom: [0, -40] }}
                 >
                   <div className="container popup">
+                    <span>
+                      <a
+                        href={`https://atd.knack.com/signs-markings#work-order-signs/view-work-orders-details-sign/${workOrderId}/view-work-order-signs-location-details/${
+                          activeSign.id
+                        }`}
+                        target="_top"
+                      >
+                        Location Detail Page
+                      </a>
+                    </span>
+                    <br />
                     <span>Spatial ID: {activeSign.spatialId}</span>
                     <br />
                     <span>Latitude: {activeSign.lat}</span>

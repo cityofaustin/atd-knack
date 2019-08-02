@@ -34,7 +34,7 @@
     // Add React app as iframe if iframe doesn't already exist
     if ($(myView + " #mapIFrame").length === 0) {
       $(
-        '<iframe src="https://atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
+        '<iframe src="https://deploy-preview-172--atd-geo-knack-ui.netlify.com/" frameborder="0" scrolling="yes" id="mapIFrame" \
     style="width: 100%;height: 523px;"></iframe>'
       ).appendTo($viewSelector);
     }
@@ -92,6 +92,7 @@
     function workOrdersDetialsMapMessage(viewId) {
       var urlArray = window.location.href.split("/");
       var recordId = urlArray[urlArray.length - 2];
+      var workOrderId = urlArray[urlArray.length - 4];
       var workOrderDetailsIFrame = $("#" + viewId + " #mapIFrame")[0]
         .contentWindow;
 
@@ -101,7 +102,8 @@
         scene: "scene_1028",
         token: Knack.getUserToken(),
         app_id: Knack.application_id,
-        id: recordId
+        id: recordId,
+        workOrderId: workOrderId
       };
 
       sendMessageToApp(markerMessage, workOrderDetailsIFrame);
