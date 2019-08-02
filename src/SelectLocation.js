@@ -486,7 +486,6 @@ export default class SelectLocation extends Component {
             .get(locationUrl, thisComponent.getHeaders(data.token, data.app_id))
             .then(response => {
               // handle success
-              console.log(response);
               const locationDetails = response.data.field_3300_raw;
               const viewLocationCoords = [
                 locationDetails.longitude,
@@ -566,7 +565,6 @@ export default class SelectLocation extends Component {
       workOrderDetailsViewer,
       workOrderId
     } = this.state;
-    console.log("hi", this.state);
     return (
       <div>
         <div className="map-container">
