@@ -2,7 +2,7 @@
 name: New Enhancement request
 about: Suggest an idea for this project
 title: ''
-labels: 'Workgroup: SMB, Service: Apps, Type: Enhancement'
+labels: 'Service: Apps, Type: Enhancement, Workgroup: SMB'
 assignees: dianamartin
 
 ---
