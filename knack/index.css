@@ -118,5 +118,8 @@ a.small-button {
 
 /* Make buttons with type="submit" bigger */
 button[type="submit"] {
-  color: red !important;
+  height: 64px !important;
+  font-size: 32px !important;
+  min-width: fit-content;
+  width: 100%;
 }
