@@ -116,15 +116,17 @@ a.small-button {
   font-weight: 900;
 }
 
-/* Make buttons with type="submit" bigger */
-button[type="submit"] {
-  height: 64px !important;
-  font-size: 32px !important;
-  min-width: fit-content;
-  width: 100%;
-}
+@media (max-width: 800px) {
+  /* Make buttons with type="submit" bigger */
+  button[type="submit"] {
+    height: 64px !important;
+    font-size: 32px !important;
+    min-width: fit-content;
+    width: 100%;
+  }
 
-/* Override width set for submit buttons to prevent overlaying map controls */
-#lat-lon-form > form > div > button {
-  width: 50%;
+  /* Override width set for submit buttons to prevent overlaying map controls */
+  #lat-lon-form > form > div > button {
+    width: 50%;
+  }
 }
