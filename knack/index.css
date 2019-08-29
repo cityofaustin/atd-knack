@@ -96,6 +96,7 @@ a.small-button {
   font-weight: 900;
 }
 
+/* Mobile styles */
 @media (max-width: 800px) {
   /* Make buttons with type="submit" bigger */
   button[type="submit"] {
