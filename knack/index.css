@@ -115,3 +115,8 @@ a.small-button {
   vertical-align: middle;
   font-weight: 900;
 }
+
+/* Make buttons with type="submit" bigger */
+button[type="submit"] {
+  color: red !important;
+}
