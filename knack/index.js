@@ -384,6 +384,8 @@ $(document).on("knack-scene-render.scene_1028", function(event, scene) {
   $form.attr("id", "lat-lon-form");
   $form.detach();
   $("#view_2572").prepend($form);
+  // Hide Latitude/Longitude fields and labels overlaying map
+  $("#kn-input-field_3300 > div").hide();
 });
 
 $(document).on("knack-view-render.view_2607", function(event, scene) {
