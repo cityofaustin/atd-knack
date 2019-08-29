@@ -96,6 +96,7 @@ a.small-button {
   font-weight: 900;
 }
 
+/* Mobile Styles */
 @media (max-width: 800px) {
   /* Make buttons with type="submit" bigger */
   button[type="submit"] {
@@ -121,7 +122,7 @@ a.small-button {
     font-size: 22px !important;
   }
 
-  /* Increase height of select fields */
+  /* Increase height of select fields and font size of options */
   .chzn-single {
     height: 48px !important;
   }
