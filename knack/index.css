@@ -96,7 +96,6 @@ a.small-button {
   font-weight: 900;
 }
 
-/* Mobile styles */
 @media (max-width: 800px) {
   /* Make buttons with type="submit" bigger */
   button[type="submit"] {
@@ -113,12 +112,13 @@ a.small-button {
 
   /* Increase font size of form field labels */
   .kn-label {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   /* Increase height of text fields */
   input[type="text"] {
     height: 48px !important;
+    font-size: 22px !important;
   }
 
   /* Increase height of select fields */
@@ -126,13 +126,27 @@ a.small-button {
     height: 48px !important;
   }
 
+  .kn-select {
+    height: 48px !important;
+  }
+
+  select {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
   /* Increase height of container surrounding select fields */
   .chzn-container {
     height: 48px;
+    font-size: 22px !important;
+  }
+
+  .chzn-container > a > span {
+    font-size: 22px !important;
   }
 
   /* Increase font size of dropdown text in select fields */
   .chzn-drop {
-    font-size: 24px !important;
+    font-size: 22px !important;
   }
 }
