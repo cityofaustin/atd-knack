@@ -110,11 +110,28 @@ a.small-button {
     width: 50%;
   }
 
-  .label .kn-label {
+  /* Increase font size of form field labels */
+  .kn-label {
     font-size: 24px;
   }
 
+  /* Increase height of text fields */
   input[type="text"] {
+    height: 48px !important;
+  }
+
+  /* Increase height of select fields */
+  .chzn-single {
+    height: 48px !important;
+  }
+
+  /* Increase height of container surrounding select fields */
+  .chzn-container {
     height: 48px;
+  }
+
+  /* Increase font size of dropdown text in select fields */
+  .chzn-drop {
+    font-size: 24px !important;
   }
 }
