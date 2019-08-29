@@ -123,3 +123,8 @@ button[type="submit"] {
   min-width: fit-content;
   width: 100%;
 }
+
+/* Override width set for submit buttons to prevent overlaying map controls */
+#lat-lon-form > form > div > button {
+  width: 50%;
+}
