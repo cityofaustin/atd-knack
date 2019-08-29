@@ -122,7 +122,7 @@ a.small-button {
     font-size: 22px !important;
   }
 
-  /* Increase height of select fields and font size of options */
+  /* Increase height of select fields */
   .chzn-single {
     height: 48px !important;
   }
@@ -149,5 +149,15 @@ a.small-button {
   /* Increase font size of dropdown text in select fields */
   .chzn-drop {
     font-size: 22px !important;
+  }
+
+  /* Increase size of search button */
+  .kn-button.search {
+    height: 48px;
+  }
+
+  /* Increase font size of checkbox options */
+  .option.checkbox {
+    font-size: 22px;
   }
 }
