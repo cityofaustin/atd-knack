@@ -109,4 +109,12 @@ a.small-button {
   #lat-lon-form > form > div > button {
     width: 50%;
   }
+
+  .label .kn-label {
+    font-size: 24px;
+  }
+
+  input[type="text"] {
+    height: 48px;
+  }
 }
