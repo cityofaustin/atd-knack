@@ -2,7 +2,7 @@
 name: Bug report
 about: Create a report to help us improve
 title: 'BUG: '
-labels: 'Workgroup: SMB, Service: Apps, Type: Bug Report'
+labels: 'Service: Apps, Type: Bug Report, Workgroup: SMB'
 assignees: ''
 
 ---
