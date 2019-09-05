@@ -618,23 +618,33 @@ $(document).on('knack-view-render.view_2566', function(event, page) {
 });/* #214 Increase default menu button size */
 
 /* #214 Increase default menu button size */
-$(document).on("knack-scene-render.any", function() {
+$(document).on("knack-view-render.view_2901", function() {
   $("#view_2901 .kn-button .icon").classList.remove("is-small");
+});
 
+$(document).on("knack-view-render.view_2684", function() {
   $("#view_2684 .kn-button .icon").each(function(item) {
     this.classList.remove("is-small");
   });
+});
 
+$(document).on("knack-view-render.view_2123", function() {
   $("#view_2123 .kn-button .icon")[0].classList.remove("is-small");
+});
 
+$(document).on("knack-view-render.view_2661", function() {
   $("#view_2661 .kn-button .icon").each(function() {
     this.classList.remove("is-small");
   });
+});
 
+$(document).on("knack-view-render.view_1912", function() {
   $("#view_1912 .kn-button .icon").each(function() {
     this.classList.remove("is-small");
   });
-  $("#view_2307 .kn-button .icon").classList.remove("is-small");
 });
 
+$(document).on("knack-view-render.view_2307", function() {
+  $("#view_2307 .kn-button .icon").classList.remove("is-small");
+});
 /* END #214 */
