@@ -615,4 +615,26 @@ $(document).on('knack-view-render.view_2566', function(event, page) {
   hideFieldIfRole('.kn-detail.field_3283', 'object_152'); // Modified By (field_3283)
   hideFieldIfRole('.kn-detail.field_3215', 'object_152'); // Work Type (field_3215)
   hideFieldIfRole('.kn-detail.field_3214', 'object_152'); // Work Order ID (field_3214)
+});/* #214 Increase default menu button size */
+
+/* #214 Increase default menu button size */
+$(document).on("knack-scene-render.any", function() {
+  $("#view_2901 .kn-button .icon").classList.remove("is-small");
+
+  $("#view_2684 .kn-button .icon").each(function(item) {
+    this.classList.remove("is-small");
+  });
+
+  $("#view_2123 .kn-button .icon")[0].classList.remove("is-small");
+
+  $("#view_2661 .kn-button .icon").each(function() {
+    this.classList.remove("is-small");
+  });
+
+  $("#view_1912 .kn-button .icon").each(function() {
+    this.classList.remove("is-small");
+  });
+  $("#view_2307 .kn-button .icon").classList.remove("is-small");
 });
+
+/* END #214 */

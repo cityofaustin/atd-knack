@@ -160,4 +160,35 @@ a.small-button {
   .option.checkbox {
     font-size: 22px;
   }
+
+  /* #214 Increase default menu button size */
+  #view_2901 .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+  #view_2684 .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+  #view_2123 .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+  #view_2661 .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+  #view_1912 .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  #view_2307 .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* END #214 */
 }
