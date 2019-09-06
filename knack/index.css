@@ -174,3 +174,11 @@ a.small-button {
   }
   /* END #214 */
 }
+
+/* #213 */
+.link {
+  color: #07467c;
+  text-decoration: underline;
+  cursor: pointer;
+}
+/* END #213 */
