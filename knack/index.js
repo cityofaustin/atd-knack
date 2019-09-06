@@ -646,4 +646,8 @@ $(document).on("knack-view-render.view_1912", function() {
 $(document).on("knack-view-render.view_2307", function() {
   updateButtonIconSizes("view_2307");
 });
+
+$(document).on("knack-view-render.view_2741", function() {
+  updateButtonIconSizes("view_2741");
+});
 /* END #214 */
