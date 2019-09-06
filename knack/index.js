@@ -655,7 +655,7 @@ $(document).on("knack-view-render.view_2741", function() {
 // #213
 $(document).on("knack-scene-render.scene_1028", function() {
   $backToTop = $(".kn-back-link").append(
-    "<span class='link'>Back to top</span>"
+    "<span class='back-to-top-link'> Back to top</span>"
   );
   $backToTop.on("click", function() {
     $("html, body").animate({ scrollTop: 0 }, "slow");

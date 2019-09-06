@@ -176,9 +176,20 @@ a.small-button {
 }
 
 /* #213 */
-.link {
+.back-to-top-link {
   color: #07467c;
   text-decoration: underline;
   cursor: pointer;
+  font-weight: 700 !important;
+  font-size: 18px;
+}
+
+.back-to-top-link:before {
+  font-family: "FontAwesome";
+  content: "\f0aa";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
 }
 /* END #213 */
