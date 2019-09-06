@@ -160,4 +160,17 @@ a.small-button {
   .option.checkbox {
     font-size: 22px;
   }
+
+  /* #214 Increase default menu button size */
+  #view_2901 > div > .kn-button,
+  #view_2684 > div > .kn-button,
+  #view_2123 > div > .kn-button,
+  #view_2661 > div > .kn-button,
+  #view_1912 > div > .kn-button,
+  #view_2307 > div > .kn-button,
+  #view_2741 > div > .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* END #214 */
 }

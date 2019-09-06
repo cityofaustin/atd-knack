@@ -615,4 +615,39 @@ $(document).on('knack-view-render.view_2566', function(event, page) {
   hideFieldIfRole('.kn-detail.field_3283', 'object_152'); // Modified By (field_3283)
   hideFieldIfRole('.kn-detail.field_3215', 'object_152'); // Work Type (field_3215)
   hideFieldIfRole('.kn-detail.field_3214', 'object_152'); // Work Order ID (field_3214)
+});/* #214 Increase default menu button size */
+
+/* #214 Increase default menu button size */
+function updateButtonIconSizes(viewId) {
+  $("#" + viewId + " .kn-button .icon").each(function(item) {
+    this.classList.remove("is-small");
+  });
+}
+$(document).on("knack-view-render.view_2901", function() {
+  updateButtonIconSizes("view_2901");
 });
+
+$(document).on("knack-view-render.view_2684", function() {
+  updateButtonIconSizes("view_2684");
+});
+
+$(document).on("knack-view-render.view_2123", function() {
+  updateButtonIconSizes("view_2123");
+});
+
+$(document).on("knack-view-render.view_2661", function() {
+  updateButtonIconSizes("view_2661");
+});
+
+$(document).on("knack-view-render.view_1912", function() {
+  updateButtonIconSizes("view_1912");
+});
+
+$(document).on("knack-view-render.view_2307", function() {
+  updateButtonIconSizes("view_2307");
+});
+
+$(document).on("knack-view-render.view_2741", function() {
+  updateButtonIconSizes("view_2741");
+});
+/* END #214 */
