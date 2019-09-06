@@ -162,31 +162,31 @@ a.small-button {
   }
 
   /* #214 Increase default menu button size */
-  #view_2901 .kn-button {
+  #view_2901 > div > .kn-button {
     height: 48px !important;
     font-size: 22px !important;
   }
 
-  #view_2684 .kn-button {
+  #view_2684 > div > .kn-button {
     height: 48px !important;
     font-size: 22px !important;
   }
 
-  #view_2123 .kn-button {
+  #view_2123 > div > .kn-button {
     height: 48px !important;
     font-size: 22px !important;
   }
 
-  #view_2661 .kn-button {
+  #view_2661 > div > .kn-button {
     height: 48px !important;
     font-size: 22px !important;
   }
 
-  #view_1912 .kn-button {
+  #view_1912 > div > .kn-button {
     height: 48px !important;
     font-size: 22px !important;
   }
-  #view_2307 .kn-button {
+  #view_2307 > div > .kn-button {
     height: 48px !important;
     font-size: 22px !important;
   }
