@@ -602,20 +602,20 @@ $(document).on("knack-view-render.view_2904", function(event, page) {
 
 function hideFieldIfRole(selector, roleObjectId) {
   //  function to hide a field based on if the user does not have a given role
-  if ( Knack.getUserRoles(roleObjectId) ) {
+  if (Knack.getUserRoles(roleObjectId)) {
     $(selector).hide();
   }
 }
 
-$(document).on('knack-view-render.view_2566', function(event, page) {
+$(document).on("knack-view-render.view_2566", function(event, page) {
   // hide fields if technician user
-  hideFieldIfRole('.kn-detail.field_3252', 'object_152'); // Printed Date (field_3252)
-  hideFieldIfRole('.kn-detail.field_3203', 'object_152'); // Created Date (field_3203)
-  hideFieldIfRole('.kn-detail.field_3206', 'object_152'); // Modified Date (field_3206)
-  hideFieldIfRole('.kn-detail.field_3283', 'object_152'); // Modified By (field_3283)
-  hideFieldIfRole('.kn-detail.field_3215', 'object_152'); // Work Type (field_3215)
-  hideFieldIfRole('.kn-detail.field_3214', 'object_152'); // Work Order ID (field_3214)
-});/* #214 Increase default menu button size */
+  hideFieldIfRole(".kn-detail.field_3252", "object_152"); // Printed Date (field_3252)
+  hideFieldIfRole(".kn-detail.field_3203", "object_152"); // Created Date (field_3203)
+  hideFieldIfRole(".kn-detail.field_3206", "object_152"); // Modified Date (field_3206)
+  hideFieldIfRole(".kn-detail.field_3283", "object_152"); // Modified By (field_3283)
+  hideFieldIfRole(".kn-detail.field_3215", "object_152"); // Work Type (field_3215)
+  hideFieldIfRole(".kn-detail.field_3214", "object_152"); // Work Order ID (field_3214)
+}); /* #214 Increase default menu button size */
 
 /* #214 Increase default menu button size */
 function updateButtonIconSizes(viewId) {
