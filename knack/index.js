@@ -671,3 +671,16 @@ $(document).on("knack-view-render.view_2267", function() {
   );
 });
 // End JS Calc
+
+// #233
+$(document).on("knack-view-render.view_2985", function() {
+  $(
+    '<label for="field_2405_upload" class="custom-file-upload kn-button is-secondary">Choose File</label>'
+  ).insertBefore("#field_2405_upload");
+});
+$(document).on("knack-view-render.view_2742", function() {
+  $(
+    '<label for="field_3378_upload" class="custom-file-upload kn-button is-secondary">Choose File</label>'
+  ).insertBefore("#field_3378_upload");
+});
+// END #233
