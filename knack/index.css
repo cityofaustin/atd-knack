@@ -200,3 +200,27 @@ a.small-button {
   font-weight: 900;
 }
 /* END #213 */
+
+/* #233 Choose File Button Size */
+@media (max-width: 800px) {
+  #view_2985 input[type="file"],
+  #view_2742 input[type="file"] {
+    display: none;
+  }
+
+  #view_2985 .custom-file-upload,
+  #view_2742 .custom-file-upload {
+    cursor: pointer;
+    font-size: 22px;
+    height: 48px;
+    margin: 10px 0 20px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 801px) {
+  .custom-file-upload {
+    display: none;
+  }
+}
+/* END #233 */
