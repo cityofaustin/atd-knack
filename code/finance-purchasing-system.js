@@ -98,8 +98,10 @@ $(document).on('knack-view-render.view_167', function(event, page) {
         "big-button",
         "big-button-container"
     );
-
+  
+  
 });
+
 
 $(document).on('knack-page-render.scene_68', function(event, page) {
   // render Review Details page
@@ -340,4 +342,72 @@ $(document).on('knack-scene-render.scene_1', function() {
   if (detectIE()) {
     alert("You are using Microsoft Internet Explorer or Edge to view this page. We recommend using Firefox or Chrome. Contact your system administrator for assistance.");
   }
+});
+
+function customButton(div_id, view_id, url, fa_icon, button_label, button_class, container_class, callback) {
+  // create a custom button
+  
+    $("<div/>", {
+      id: div_id,
+    }).appendTo("#" + view_id);
+    
+  $("#" + div_id).append("<a class='" + button_class + "' href='" + url + "'><div class='" + container_class + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
+
+  if(callback) callback();
+}
+
+
+
+$(document).on('knack-view-render.view_667', function(event, page) {
+  // create large button on the home page
+    customButton(
+        "all",
+        "view_667",
+        "https://atd.knack.com/finance-purchasing#inventory-requests/",
+        "archive",
+        "All Inventory Requests",
+        "big-button",
+        "big-button-container"
+    );
+
+    customButton(
+        "create",
+        "view_667",
+        "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
+        "plus-circle",
+        "New Inventory Request",
+        "big-button",
+        "big-button-container"
+    );
+
+    customButton(
+        "review",
+        "view_667",
+        "https://atd.knack.com/finance-purchasing#transactions/",
+        "ticket",
+        "Transactions",
+        "big-button",
+        "big-button-container"
+    );
+
+    customButton(
+        "reports",
+        "view_667",
+        "https://atd.knack.com/finance-purchasing#reports/",
+        "bar-chart",
+        "Reports",
+        "big-button",
+        "big-button-container"
+    );
+  
+      customButton(
+        "inventory",
+        "view_667",
+        "https://atd.knack.com/finance-purchasing#inventory/",
+        "barcode",
+        "Inventory",
+        "big-button",
+        "big-button-container"
+    );
+  
 });
