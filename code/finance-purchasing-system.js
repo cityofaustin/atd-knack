@@ -373,7 +373,7 @@ $(document).on('knack-view-render.view_667', function(event, page) {
     customButton(
         "create",
         "view_667",
-        "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
+        "https://atd.knack.com/finance-purchasing#new-request/",
         "plus-circle",
         "New Inventory Request",
         "big-button",
