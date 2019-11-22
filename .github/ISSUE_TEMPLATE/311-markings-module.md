@@ -2,8 +2,8 @@
 name: 311 Markings module
 about: Suggest an idea for this project
 title: 'Feature: '
-labels: 'Type: Feature, Workgroup: SMB, Need: 1-Must Have, Service: Apps, Project:
-  SMB 311 Module'
+labels: 'Need: 1-Must Have, Project: SMB 311 Module, Service: Apps, Type: Feature,
+  Workgroup: SMB'
 assignees: dianamartin
 
 ---
@@ -14,4 +14,4 @@ assignees: dianamartin
 - [ ] Work Order/Job Details page
 - [ ] Job Details page
 
-**I want to be able to **
+### I want to be able to
