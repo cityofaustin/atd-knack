@@ -2,7 +2,7 @@
 name: Deleting Flex Notes
 about: Template to delete flex notes
 title: Delete "csr_flex_notes" from Signs & Markings - Mon YEAR
-labels: 'Workgroup: SMB, Service: Apps, Type: Data'
+labels: 'Service: Apps, Type: Data, Workgroup: SMB'
 assignees: ''
 
 ---
