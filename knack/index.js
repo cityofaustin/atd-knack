@@ -20,6 +20,15 @@ $(document).on("knack-scene-render.scene_1014", function(event, page) {
   $("#view_2528").hide();
 });
 
+$(document).on("knack-scene-render.scene_1264", function(event, page) {
+  // update iframe src from detail field
+  var iframe_url = $("span:contains('apps/webappviewer')").text();
+  $("#csr_view").attr("src", iframe_url);
+
+  // hide the url vield, we don't need it after extracting the value
+  $("#view_3145").hide();
+});
+
 function insertRecord(data, scene, view) {
   var url =
     "https://api.knack.com/v1/pages/" + scene + "/views/" + view + "/records";
