@@ -31,6 +31,17 @@ $(document).on("knack-scene-render.scene_1264", function(event, page) {
   $("#view_3145").hide();
 });
 
+function changeFieldColor(field, color_map) {
+  var child_field = $(field).find(".kn-detail-body");
+  var value = child_field.text();
+  if (color_map[value]) {
+    $(child_field).css({
+      "background-color": color_map[value].background_color,
+      color: color_map[value].color
+    });
+  }
+}
+
 var colorMapOne = {
   "NEED TO BE ISSUED": { background_color: "#e41a1c", color: "#fff" },
   "ON HOLD": { background_color: "#aeaeae", color: "#fff" },
