@@ -12,6 +12,7 @@ $(document).on("knack-page-render.any", function(event, page) {
 });
 
 $(document).on("knack-scene-render.scene_1014", function(event, page) {
+  // CSR issue - markings details
   // update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
   $("#csr_view").attr("src", iframe_url);
@@ -21,6 +22,7 @@ $(document).on("knack-scene-render.scene_1014", function(event, page) {
 });
 
 $(document).on("knack-scene-render.scene_1264", function(event, page) {
+  // CSR issue - signs details
   // update iframe src from detail field
   var iframe_url = $("span:contains('apps/webappviewer')").text();
   $("#csr_view").attr("src", iframe_url);
@@ -28,61 +30,6 @@ $(document).on("knack-scene-render.scene_1264", function(event, page) {
   // hide the url vield, we don't need it after extracting the value
   $("#view_3145").hide();
 });
-
-function insertRecord(data, scene, view) {
-  var url =
-    "https://api.knack.com/v1/pages/" + scene + "/views/" + view + "/records";
-
-  var user = Knack.getUserToken();
-  var app_id = Knack.application_id;
-
-  $.ajax({
-    url: url,
-    type: "POST",
-    headers: {
-      Authorization: Knack.getUserToken(),
-      "X-Knack-Application-Id": Knack.application_id,
-      "X-Knack-REST-API-Key": "knack",
-      "Content-Type": "application/json"
-    },
-    data: JSON.stringify(data),
-    success: function(response) {
-      Knack.hideSpinner();
-    },
-    error: function(xhr, ajaxOptions, thrownError) {
-      console.log(xhr.status);
-      console.log(thrownError);
-    }
-  });
-}
-
-$(document).on("knack-form-submit.view_1440", function(event, view, record) {
-  //  prepare "Dispatch Technican" activity to be added on work order create
-  //  https://builder.knack.com/atd/amd#pages/scene_428/views/view_1440
-  var tmc_activity = {};
-  var tmc_issue_id = record.field_1235_raw[0].id; //  tmc_issue connection field
-  var wo_id = record.id; // work order database id
-  var creaded_by = "do something to get user id....";
-  tmc_activity["field_1668"] = [tmc_issue_id]; // tmc issue connetion
-  tmc_activity["field_1755"] = [wo_id]; //  work order connection
-  tmc_activity["field_1053"] = "Dispatch Technician"; //  activity
-  tmc_activity["field_1874"] = "in_progress"; //  issue status snapshot
-  tmc_activity["field_1056"] = [creaded_by]; // created by
-  //  insert activity via form on same page
-  console.log(tmc_activity);
-  insertRecord(tmc_activity, "scene_428", "view_1437");
-});
-
-function changeFieldColor(field, color_map) {
-  var child_field = $(field).find(".kn-detail-body");
-  var value = child_field.text();
-  if (color_map[value]) {
-    $(child_field).css({
-      "background-color": color_map[value].background_color,
-      color: color_map[value].color
-    });
-  }
-}
 
 var colorMapOne = {
   "NEED TO BE ISSUED": { background_color: "#e41a1c", color: "#fff" },
@@ -232,6 +179,7 @@ function setUOM(element) {
 }
 
 $(document).on("knack-scene-render.scene_716", function(event, page) {
+  // set the UOM entry box on markings materials
   //  handle a click
   $("#view_1929_field_2220_chzn").click(function() {
     setUOM(this);
@@ -277,64 +225,6 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
   if (workType == "MARKINGS") {
     $("#view_1887-field_2173 option[value='SIGNS']").remove();
   }
-});
-
-$(document).on("knack-view-render.view_2491", function(event, page) {
-  // Another copy of the find and replace attachment types script, this one for the manage requests
-  // page
-  $("td.field_3176").each(function() {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function(index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function(index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
-
-$(document).on("knack-view-render.view_2465", function(event, page) {
-  // Another copy of the find and replace attachment types script.  This one is used
-  // on the Request Status page under Traffic Counts.
-  $("td.field_3176").each(function() {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function(index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function(index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
 });
 
 //////////////////////////////////////////////////
