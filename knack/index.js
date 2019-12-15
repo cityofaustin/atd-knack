@@ -1,398 +1,181 @@
-$(document).on("knack-page-render.any", function(event, page) {
-  // Hide the entire "Repeat" checkbox and label
-  $("label:contains('Repeat')").hide();
-
-  // Rename confusing google maps link
-  $('a[title="view in google maps"]').text("View on Google Maps");
-
-  //  remove signs/markings tabs/filter except on landing page
-  if (page.key != "scene_808" && page.key != "scene_809") {
-    $("#view_2106").remove();
-  }
-});
-
-$(document).on("knack-scene-render.scene_1014", function(event, page) {
-  // CSR issue - markings details
-  // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
-  $("#csr_view").attr("src", iframe_url);
-
-  // hide the url vield, we don't need it after extracting the value
-  $("#view_2528").hide();
-});
-
-$(document).on("knack-scene-render.scene_1264", function(event, page) {
-  // CSR issue - signs details
-  // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
-  $("#csr_view").attr("src", iframe_url);
-
-  // hide the url vield, we don't need it after extracting the value
-  $("#view_3145").hide();
-});
-
-function changeFieldColor(field, color_map) {
-  var child_field = $(field).find(".kn-detail-body");
-  var value = child_field.text();
+function changeFieldColor(fieldClass, color_map){
+  var child_field = $(fieldClass).find('.kn-detail-body');
+  var value = child_field.text()
   if (color_map[value]) {
-    $(child_field).css({
-      "background-color": color_map[value].background_color,
-      color: color_map[value].color
-    });
+    $(child_field).css({'background-color' : color_map[value].background_color, 'color': color_map[value].color });
   }
 }
+
+
+function insertIcon(fieldClass, icon_map){
+  var child_field = $(fieldClass).find('.kn-detail-body');
+  var value = child_field.text()
+  var elem = $(".kn-detail" + fieldClass).find(".kn-detail-body").find("span")[0];
+
+  $(elem).before("<span> <i class='fa fa-" + icon_map[value].icon + "'></i> </span>");
+}
+
 
 var colorMapOne = {
-  "NEED TO BE ISSUED": { background_color: "#e41a1c", color: "#fff" },
-  "ON HOLD": { background_color: "#aeaeae", color: "#fff" },
-  ISSUED: { background_color: "#377eb8", color: "#fff" },
-  "NEEDS GIS": { background_color: "#984ea3", color: "#fff" },
-  "FINAL REVIEW": { background_color: "#4daf4a", color: "#fff" }
-};
-
-$(document).on("knack-scene-render.any", function() {
-  //  MARKINGS Work Orders Details Status
-  changeFieldColor(".field_2181", colorMapOne);
-
-  //  MARKINGS Job Details Status
-  changeFieldColor(".field_2190", colorMapOne);
-
-  //  SIGNS Work Orders Details Status
-  changeFieldColor(".field_3265", colorMapOne);
-});
-
-function replaceAttachmentFilenameWithFileType(fileFieldId, typeFieldId) {
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td." + fileFieldId).each(function() {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function(index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td." + typeFieldId)
-          .find("span")
-          .children("span")
-          .each(function(index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        $(this).html(attachmentType);
-      });
-  });
+   "Not Submitted" : { "background_color" : "#ff9b9c", "color" : "#fff", 'icon': null },
+   "Returned" : { "background_color" : "#ff9b9c", "color" : "#fff", 'icon': null },
+   "Rejected" : { "background_color" : "#6a6565", "color" : "#fff", 'icon': null },
+   "Cancelled" : { "background_color" : "#6a6565", "color" : "#fff", 'icon': null },
+   "Waiting for Approval": { "background_color" : "#377eb8", "color" : "#fff", 'icon': null },
+    "Purchase Review" : { "background_color" : "#41ae76", "color" : "#fff", 'icon': 'clipboard' },
+    "Budget Review" : { "background_color" : "#41ae76", "color" : "#fff", 'icon': 'money' },
+    "Processing | Purchasing" : { "background_color" : "#41ae76", "color" : "#fff", 'icon': 'cogs' },
+    "Pending Invoice" : { "background_color" : "#f5901f", "color" : "#fff", 'icon': 'clock-o' },
+    "Processing | Accounts Payable" : { "background_color" : "#41ae76", "color" : "#fff", 'icon': 'credit-card' },
+    "Closed" : { "background_color" : "#ffffff", "color" : "#000", 'icon': 'check-circle' },
+    "Unpaid" : { "background_color" : "#ff9b9c", "color" : "#fff", 'icon': null },
+    "Paid" : { "background_color" : "#41ae76", "color" : "#fff", 'icon': null },
+    "Submitted to Accounts Payable" : { "background_color" : "#f5901f", "color" : "#fff", 'icon': null },
 }
 
-$(document).on("knack-view-render.view_2565", function(event, page) {
-  replaceAttachmentFilenameWithFileType("field_2405", "field_2403");
+$(document).on('knack-scene-render.scene_4', function() {
+  //  work orders signs/markings status
+  changeFieldColor('.field_17', colorMapOne);
+  insertIcon('.field_17', colorMapOne);
+  
 });
+  
 
-$(document).on("knack-view-render.view_2107", function(event, page) {
-  replaceAttachmentFilenameWithFileType("field_2405", "field_2403");
-});
 
-function modCrumbtrail() {
-  //  function to replace crumbtrail contents on signs/markings work orders when technician is viewing
-  // if user is a signs/markings tech
 
-  var techUserRole = "object_152";
-  if (Knack.getUserRoles(techUserRole)) {
-    $("div.kn-crumbtrail")
-      .find("a")
-      .each(function(index) {
-        var text = $(this)
-          .text()
-          .toUpperCase();
-
-        //  replace crumb pointer from work orders to jobs
-        if (text.indexOf("WORK ORDERS") >= 0) {
-          var href = this.href;
-          href = href.replace("work-orders-markings", "work-jobs-markings");
-          this.href = href;
-          $(this).text("Jobs");
-        }
-
-        // remove intermediary Markings or Signs work order landing page crumb entirely
-        if (text == "MARKINGS") {
-          $(this).remove();
-          //  remove extra "→" span
-          var span = $("div.kn-crumbtrail").find("span")[1];
-          $(span).remove();
-        } else if (text == "SIGNS") {
-          $(this).remove();
-          //  remove extra "→" span
-          var span = $("div.kn-crumbtrail").find("span")[1];
-        }
-      });
-  }
-}
-
-$(document).on("knack-scene-render.scene_713", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_716", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_724", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_751", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_753", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_762", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_763", function(event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_720", function(event, page) {
-  modCrumbtrail();
-});
-
-//  replace 'Quantity' label with UOM of measure by parsing the select value contents
-//  was unable to use the chosen.js native events because of however Knack has implemented them
-//  so listening for click which is a bit wonky
-function setUOM(element) {
-  //  expects a connection selector field with a pipe-delmited name/unit of measure
-  var item = $(element)
-    .find("span")
-    .text();
-
-  if (item.split("|")[1]) {
-    var unitOfMeasure = item.split("|")[1].trim();
-    $("#kn-input-field_2214")
-      .find(".kn-input-label")
-      .text(unitOfMeasure);
-  }
-}
-
-$(document).on("knack-scene-render.scene_716", function(event, page) {
-  // set the UOM entry box on markings materials
-  //  handle a click
-  $("#view_1929_field_2220_chzn").click(function() {
-    setUOM(this);
-  });
-
-  //  and for good measure update UOM on field focus
-  $("#field_2214").focus(function() {
-    var element = $("#view_1929_field_2220_chzn")["0"];
-    setUOM(element);
-  });
-});
-
-function setRequester(divisionFieldId, requesterSelectorId, userRoleObject) {
-  //  function to set a requester field by an attribute value associated with the logged-in user
-
-  if (!Knack.getUserRoles(userRoleObject)) {
-    //  ignore if user is supervisor role
-    var userAttrs = Knack.getUserAttributes();
-    var division = userAttrs.values[divisionFieldId];
-    $(requesterSelectorId)
-      .val(division)
-      .change();
-    $(requesterSelectorId).prop("disabled", "true");
-  }
-}
-
-$(document).on("knack-view-render.view_1880", function(event, page) {
-  // Auto-populate requester divison field in MARKINGS New Work Order form
-  setRequester("field_2186", "#view_1880-field_2162", "object_151");
-});
-
-$(document).on("knack-view-render.view_2633", function(event, page) {
-  // Auto-populate requester divison field in SIGNS New Work Order form
-  setRequester("field_2186", "#view_2633-field_3216", "object_151");
-});
-
-$(document).on("knack-scene-render.scene_713", function(event, page) {
-  // remove "signs" dropdown from workgroup selection choices based when work order type is markings
-  var workType = $(".field_2292 .kn-value")
-    .text()
-    .toUpperCase();
-
-  if (workType == "MARKINGS") {
-    $("#view_1887-field_2173 option[value='SIGNS']").remove();
-  }
-});
-
-//////////////////////////////////////////////////
-//     Knack Geo Location Selector Plugin       //
-//////////////////////////////////////////////////
-
-// TODO: In places where we are removing maps and other fields with JQuery,
-// can we remove them on the Knack side instead?
-
-function loadIframeMapMessenger(viewId) {
-  var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
-  $.getScript(url, function(data, textStatus, jqxhr) {
-    console.log(data); // Data returned
-    console.log(textStatus); // Success
-    console.log(jqxhr.status); // 200
-    console.log("Load was performed.");
-  });
-}
-
-window.viewIdsArray = [];
-
-// Work Orders Details Page - Viewer
-$(document).on("knack-view-render.view_2619", function(event, scene) {
-  window.viewIdsArray.push("#view_2619");
-  loadIframeMapMessenger("view_2619");
-});
-
-// Work Orders Details Page - Editable
-$(document).on("knack-view-render.view_2573", function(event, scene) {
-  window.viewIdsArray.push("#view_2573");
-  loadIframeMapMessenger("view_2573");
-});
-
-// Edit Location Page
-$(document).on("knack-view-render.view_2682", function(event, scene) {
-  window.viewIdsArray.push("#view_2682");
-  $(".field_3300").hide();
-
-  loadIframeMapMessenger("view_2682");
-});
-
-// Location Details Page - Viewer & Editable
-$(document).on("knack-view-render.view_2733", function(event, scene) {
-  window.viewIdsArray.push("#view_2733");
-  loadIframeMapMessenger("view_2733");
-  $("#kn-map-field_3300").hide(); // Remove map from Location Details
-});
-
-// Overlay Latitude/Longitude fields and button on map
-$(document).on("knack-scene-render.scene_1028", function(event, scene) {
-  // Remove header from form to prevent lat/lon fields from shifting and move form below map
-  var $header = $("#view_2607 > div.view-header");
-  $header.remove();
-  var $form = $("#view_2607");
-  $form.attr("id", "lat-lon-form");
-  $form.detach();
-  $("#view_2572").prepend($form);
-  // Hide Latitude/Longitude fields and labels overlaying map
-  $("#kn-input-field_3300 > div").hide();
-});
-
-$(document).on("knack-view-render.view_2607", function(event, scene) {
-  // Remove header that renders in DOM after successfully submitting form
-  if ($("#lat-lon-form .view-header").length !== 0) {
-    $("#lat-lon-form .view-header").remove();
-  }
-});
-
-// END: Knack Geo Location Selector Plugin
-
-///////////////////////////
-//     Custom Buttons    //
-///////////////////////////
-
-function customButton(
-  div_id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  button_class,
-  container_class,
-  callback
-) {
+function customButton(div_id, view_id, url, fa_icon, button_label, button_class, container_class, callback) {
   // create a custom button
+  
+    $("<div/>", {
+      id: div_id,
+    }).appendTo("#" + view_id);
+    
+  $("#" + div_id).append("<a class='" + button_class + "' href='" + url + "'><div class='" + container_class + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
 
-  $("<div/>", {
-    id: div_id
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
-      url +
-      "'><div class='" +
-      container_class +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></div></a>"
-  );
-
-  if (callback) callback();
+  if(callback) callback();
 }
 
-function customLoginButton(app_url, view_id, page_name) {
-  // creates a custom login interface that minimizes the basic auth login
-  // and creates a large custom button for ADFS login
 
-  // special logic to generate URL and clean-up sign in page brefore creating large button
-  $(".kn-sso-container").hide();
 
-  $(".login_form").hide();
+$(document).on('knack-view-render.view_167', function(event, page) {
+  // create large button on the home page
+    customButton(
+        "all",
+        "view_167",
+        "https://atd.knack.com/finance-purchasing#purchase-requests/",
+        "archive",
+        "All Purchase Requests",
+        "big-button",
+        "big-button-container"
+    );
 
-  $("h2.kn-title").hide();
+    customButton(
+        "create",
+        "view_167",
+        "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
+        "plus-circle",
+        "New Purchase Request",
+        "big-button",
+        "big-button-container"
+    );
 
-  $("p.kn-description").hide();
+    customButton(
+        "review",
+        "view_167",
+        "https://atd.knack.com/finance-purchasing#reviews/",
+        "check-square-o",
+        "Review Purchase Requests",
+        "big-button",
+        "big-button-container"
+    );
 
-  var url = app_url + "#" + page_name + "/auth/COACD";
+    customButton(
+        "my",
+        "view_167",
+        "https://atd.knack.com/finance-purchasing#my-purchase-requests/",
+        "male",
+        "My Purchase Requests",
+        "big-button",
+        "big-button-container"
+    );
+  
+  
+});
 
+
+$(document).on('knack-page-render.scene_68', function(event, page) {
+  // render Review Details page
+  
+  //  Create big PR details button and hide the small link
   customButton(
-    "caocd-button-login",
-    view_id,
-    url,
-    "sign-in",
-    "Sign-In",
-    "big-button",
-    "big-button-container"
+      "viewPR",
+      "view_247",
+      "https://atd.knack.com/finance-purchasing#purchase-requests/",
+      "list-alt",
+      "View Request Details",
+      "big-button",
+      "big-button-container"
   );
 
-  customButton(
-    "non-coacd-button-login",
-    view_id,
-    "javascript:void(0)",
-    "lock",
-    "Non-COA Sign-In",
-    "small-button",
-    "small-button-container",
-    function(divId = "non-coacd-button-login") {
-      setClickEvent(
-        divId,
-        showHideElements,
-        ".login_form",
-        ".small-button-container,.big-button-container"
-      );
-    }
-  );
+  hideDetailsLink("viewPR", "field_11");
+
+  
+  //  Remove unwanted select options from approval authority list
+  $("option[value='8 | Budget Review']").remove();
+  $("option[value='7 | Purchase Review']").remove();
+});
+
+
+function hideDetailsLink(dest_id, src_field) {
+    var detailsUrl = $(".kn-link-page").attr("href");
+    $("#" + dest_id).find("a").attr("href", detailsUrl);
+    $(".kn-details-link." + src_field).remove();
+}
+
+
+
+function customLoginButton(view_id, page_name) {
+  //  special logic to generate URL and clean-up sign in page brefore creating large button
+    $('.kn-sso-container').hide();
+
+    $('.login_form').hide();
+
+    $('h2.kn-title').hide();
+    
+    var url ="https://atd.knack.com/finance-purchasing#" + page_name + "/auth/COACD";
+
+    customButton(
+      'caocd-button-login',
+      view_id, url,
+      'sign-in',
+      'Sign-In',
+      "big-button",
+      "big-button-container"
+    );
+
+    customButton(
+      'non-coacd-button-login',
+      view_id,
+      "javascript:void(0)",
+      'lock',
+      'Non-COA Sign-In',
+      "small-button",
+      "small-button-container",
+      function(divId='non-coacd-button-login') {
+        setClickEvent(
+          divId,
+          showHideElements,
+          ".login_form",
+          ".small-button-container,.big-button-container"
+        );
+      });
 }
 
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
-  $("#" + divId).click(function() {
+  $("#" + divId).click(function(){
     func(param1, param2);
-  });
+  })
 }
 
 function showHideElements(showSelector, hideSelector) {
@@ -400,197 +183,269 @@ function showHideElements(showSelector, hideSelector) {
   $(hideSelector).hide();
 }
 
-$(document).on("knack-view-render.any", function(event, page) {
-  //  wrapper to create large sign-in buttons
-  //  the views ojbect uses the view id of the login form element as each key
-  //  and the page url of the login page's **child page** as the value
-  //  note that each login page listed below must first be configured for ADFS login
-  var views = {
-    view_2642: "home",
-    view_1881: "new-work-order-markings",
-    view_1878: "work-orders-markings-login",
-    view_1896: "jobs",
-    view_2574: "service-requests-signs",
-    view_2631: "new-work-order-signs",
-    view_2622: "work-order-signs",
-    view_2743: "my-work-orders",
-    view_2806: "my-work-orders-created",
-    view_2943: "manage-attachments",
-    view_2945: "manage-materials",
-    view_2951: "manage-specifications",
-    view_2909: "gis-qa",
-    view_2219: "signs--markings--requester"
-  };
+$(document).on('knack-view-render.any', function(event, page) {
+    //  wrapper to create large sign-in buttons
+    //  the views ojbect uses the view id of the login form element as each key
+    //  and the page url of the login page's **chile page** as the value
+    var views = {
+        'view_39' : 'home',
+        'view_5' : 'purchase-requests',
+        'view_82' : 'purchasing-budget-review',
+        'view_52' : 'account-administration',
+        'view_322' : 'commodity-codes',
+        'view_31' : 'reviews',
+        'view_387' : 'invoice-details',
+        'view_379' : 'add-invoice',
+        'view_77' : 'my-purchase-requests'
+    }
 
-  if (page.key in views) {
-    customLoginButton(
-      "https://atd.knack.com/signs-markings",
-      page.key,
-      views[page.key]
+    if (page.key in views) {
+        customLoginButton(page.key, views[page.key]);    
+    }
+    
+});
+
+
+// replace "Add New Option" with custom text
+$(document).on('knack-page-render.any', function(event, view) {
+
+  var addNew = $("#kn-input-field_217")
+    .find(".kn-add-option")
+    .html("<i class='fa fa-plus-circle'></i> Add New Vendor | ")
+    .removeClass('kn-add-option')
+    .detach();
+
+  $("#kn-input-field_217").find(".kn-instructions").find("a").before(addNew);
+
+});
+
+
+// --- Begin Item Copying ---
+$(document).on('knack-view-render.view_315', function(event, view) {
+    // automatically submit 'copy' form when modal renders
+    $('button[type=submit]').submit();
+});
+
+$(document).on('knack-form-submit.view_315', function(event, view, record) {
+    // Insert a copy of an item to the same purchase request
+
+    var formUrl = "https://api.knack.com/v1/pages/scene_123/views/view_316/records/";
+
+    // url where to redirect to on record insert success
+    var redirectUrl = "https://atd.knack.com/finance-purchasing#purchase-requests/purchase-request-details/";
+    
+    // grab ID of purchase request and append it to redirect URL
+    console.log(record.field_20_raw);
+
+    redirectUrl = redirectUrl + record.field_20_raw[0].id;
+
+    console.log(redirectUrl);
+    fields = [
+        'field_36', // unit of measure
+        'field_37', // part #
+        'field_15', // description
+        'field_16', // unit cost 
+        'field_20_raw', // purchase request
+        'field_189_raw', // department
+        'field_105_raw', // fund
+        'field_103_raw', // unit
+        'field_104_raw', // object
+        'field_357_raw'
+    ];
+
+    // reduce object to specified fields
+    const filtered = Object.keys(record)
+      .filter(key => fields.includes(key))
+      .reduce((obj, key) => {
+        var new_key = key.replace('_raw', '')
+        obj[new_key] = record[key];
+        return obj;
+      }, {});
+
+    insertRecord(filtered, formUrl, redirectUrl);
+
+});
+
+
+function insertRecord(record, url, redirectUrl) {
+    
+    Knack.showSpinner();
+
+    var user = Knack.getUserToken();
+
+    var headers = {
+        'X-Knack-Application-ID': '5b422c9b13774837e54ed814',
+        'Authorization': user,
+        'content-type':'application/json'
+    };
+
+    // insert the record
+    $.ajax({
+        url: url,
+        type: 'POST',
+        headers: headers,
+        data:  JSON.stringify(record),
+        success: function(response) {
+          Knack.hideSpinner();
+          window.location = redirectUrl;
+        }
+    });
+
+}
+// --- End Item Copying ---
+
+
+//  redirect to invoice details when invoice created
+//  (mysteriously unable to accomplish this with form submit rule)
+$(document).on('knack-form-submit.view_285', function(event, view, record) {
+  var _id = record.id;  // newly created invoice id
+  var id_pr = record.field_316_raw[0].id; // id of the connected purchase request
+
+  // manually create url of invoice details
+  var url = 'https://atd.knack.com/finance-purchasing#purchase-requests/purchase-request-details/' + id_pr + '/view-invoice-details/' + _id;
+  window.location = url;
+});
+
+
+/**
+ * detect IE
+ * returns version of IE or false, if browser is not Internet Explorer
+ * https://stackoverflow.com/questions/19999388/check-if-user-is-using-ie-with-jquery
+ */
+function detectIE() {
+    var ua = window.navigator.userAgent;
+
+    var msie = ua.indexOf('MSIE ');
+    if (msie > 0) {
+        // IE 10 or older => return version number
+        return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
+    }
+
+    var trident = ua.indexOf('Trident/');
+    if (trident > 0) {
+        // IE 11 => return version number
+        var rv = ua.indexOf('rv:');
+        return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
+    }
+
+    var edge = ua.indexOf('Edge/');
+    if (edge > 0) {
+       // Edge (IE 12+) => return version number
+       return parseInt(ua.substring(edge + 5, ua.indexOf('.', edge)), 10);
+    }
+
+    // other browser
+    return false;
+}
+
+$(document).on('knack-scene-render.scene_1', function() {
+  if (detectIE()) {
+    alert("You are using Microsoft Internet Explorer or Edge to view this page. We recommend using Firefox or Chrome. Contact your system administrator for assistance.");
+  }
+});
+
+function customButton(div_id, view_id, url, fa_icon, button_label, button_class, container_class, callback) {
+  // create a custom button
+  
+    $("<div/>", {
+      id: div_id,
+    }).appendTo("#" + view_id);
+    
+  $("#" + div_id).append("<a class='" + button_class + "' href='" + url + "'><div class='" + container_class + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
+
+  if(callback) callback();
+}
+
+
+
+$(document).on('knack-view-render.view_636', function(event, page) {
+  // create large button on the home page
+    customButton(
+        "all",
+        "view_636",
+        "https://atd.knack.com/finance-purchasing#inventory-requests/",
+        "archive",
+        "All Inventory Requests",
+        "big-button",
+        "big-button-container"
     );
-  }
+
+    customButton(
+        "create",
+        "view_636",
+        "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
+        "plus-circle",
+        "New Inventory Request",
+        "big-button",
+        "big-button-container"
+    );
+
+    customButton(
+        "review",
+        "view_636",
+        "https://atd.knack.com/finance-purchasing#transactions/",
+        "ticket",
+        "Inventory Transactions",
+        "big-button",
+        "big-button-container"
+    );
+
+    customButton(
+        "reports",
+        "view_636",
+        "https://atd.knack.com/finance-purchasing#reports/",
+        "bar-chart",
+        "Inventory Reports",
+        "big-button",
+        "big-button-container"
+    );
+  
+  
 });
 
-$(document).on("knack-view-render.view_2621", function(event, page) {
-  // create large button on the home page
-  customButton(
-    "work-orders-markings",
-    "view_2621",
-    "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
-    "road",
-    "Markings | Work Orders",
-    "big-button",
-    "big-button-container"
-  );
-});
 
-$(document).on("knack-view-render.view_2628", function(event, page) {
-  // create large button on the home page
-  customButton(
-    "work-orders-signs",
-    "view_2628",
-    "https://atd.knack.com/signs-markings#work-order-signs/",
-    "flag",
-    "Signs | Work Orders",
-    "big-button",
-    "big-button-container"
-  );
-});
 
-$(document).on("knack-view-render.view_2629", function(event, page) {
-  // create large button on the home page
-  customButton(
-    "service-requests-signs",
-    "view_2629",
-    "https://atd.knack.com/signs-markings#service-requests-signs/",
-    "comments",
-    "Signs | Service Requests",
-    "big-button",
-    "big-button-container"
-  );
-});
 
-$(document).on("knack-view-render.view_2630", function(event, page) {
-  // create large button on the home page
-  customButton(
-    "street-banners",
-    "view_2630",
-    "https://atd.knack.com/street-banners#home/",
-    "flag-o",
-    "Street Banners | Program",
-    "big-button",
-    "big-button-container"
-  );
-});
 
-$(document).on("knack-view-render.view_2903", function(event, page) {
-  // create large button on the home page
-  customButton(
-    "signs-gis-qa",
-    "view_2903",
-    "https://atd.knack.com/signs-markings#signs-gis-qa/",
-    "flag",
-    "GIS QA | Signs",
-    "big-button",
-    "big-button-container"
-  );
-});
+//////// Testing Checkboxes /////////
 
-$(document).on("knack-view-render.view_2904", function(event, page) {
-  // create large button on the home page
-  customButton(
-    "markings-gis-qa",
-    "view_2904",
-    "https://atd.knack.com/signs-markings#markings-gis-qa/",
-    "road",
-    "GIS QA | Markings",
-    "big-button",
-    "big-button-container"
-  );
-});
-// END: Custom Buttons
+// not editable items table
+// "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_60"
+// editable: view_16
+// submit form
+// "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_638"
 
-function hideFieldIfRole(selector, roleObjectId) {
-  //  function to hide a field based on if the user does not have a given role
-  if (Knack.getUserRoles(roleObjectId)) {
-    $(selector).hide();
-  }
-}
-
-$(document).on("knack-view-render.view_2566", function(event, page) {
-  // hide fields if technician user
-  hideFieldIfRole(".kn-detail.field_3252", "object_152"); // Printed Date (field_3252)
-  hideFieldIfRole(".kn-detail.field_3203", "object_152"); // Created Date (field_3203)
-  hideFieldIfRole(".kn-detail.field_3206", "object_152"); // Modified Date (field_3206)
-  hideFieldIfRole(".kn-detail.field_3283", "object_152"); // Modified By (field_3283)
-  hideFieldIfRole(".kn-detail.field_3215", "object_152"); // Work Type (field_3215)
-  hideFieldIfRole(".kn-detail.field_3214", "object_152"); // Work Order ID (field_3214)
-}); /* #214 Increase default menu button size */
-
-/* #214 Increase default menu button size */
-function updateButtonIconSizes(viewId) {
-  $("#" + viewId + " .kn-button .icon").each(function(item) {
-    this.classList.remove("is-small");
+// Function that adds checkboxes
+var addCheckboxes = function(view) {
+  console.log(view)
+  // Add the checkbox to to the header to select/unselect all
+  $('#' + view.key + '.kn-table thead tr').prepend('<th><input type="checkbox"></th>');
+  $('#' + view.key + '.kn-table thead input').change(function() {
+    $('.' + view.key + '.kn-table tbody tr input').each(function() {
+      $(this).attr('checked', $('#' + view.key + '.kn-table thead input').attr('checked') != undefined);
+    });
+  });
+  // Add a checkbox to each row in the table body
+  $('#' + view.key + '.kn-table tbody tr').each(function() {
+    $(this).prepend('<td><input type="checkbox"></td>');
   });
 }
-$(document).on("knack-view-render.view_2901", function() {
-  updateButtonIconSizes("view_2901");
+// Add checkboxes to a specific table view (view_1). Replace view_1 with your view key
+$(document).on('knack-view-render.view_16', function (event, view) {
+  addCheckboxes(view);
 });
 
-$(document).on("knack-view-render.view_2684", function() {
-  updateButtonIconSizes("view_2684");
+
+$(document).on('knack-form-submit.view_638', function(event, view, record) {
+  logItems();
 });
 
-$(document).on("knack-view-render.view_2123", function() {
-  updateButtonIconSizes("view_2123");
-});
-
-$(document).on("knack-view-render.view_2661", function() {
-  updateButtonIconSizes("view_2661");
-});
-
-$(document).on("knack-view-render.view_1912", function() {
-  updateButtonIconSizes("view_1912");
-});
-
-$(document).on("knack-view-render.view_2307", function() {
-  updateButtonIconSizes("view_2307");
-});
-
-$(document).on("knack-view-render.view_2741", function() {
-  updateButtonIconSizes("view_2741");
-});
-/* END #214 */
-
-// #213
-$(document).on("knack-scene-render.scene_1028", function() {
-  $backToTop = $(".kn-back-link").append(
-    "<span class='back-to-top-link'> Back to top</span>"
-  );
-  $backToTop.on("click", function() {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+function logItems() {
+  // Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
+  $('#view_16 tbody input[type=checkbox]:checked').each(function() {
+  // add code here to get record id or row value
+    var id = $(this).closest('tr').attr('id'); // record id
+    console.log($(this).closest('tr'));
+    console.log("hi!")
   });
-  $(".kn-back-link a").hide();
-});
-// END #213
-
-// Embed JS Calc for view_2267
-$(document).on("knack-view-render.view_2267", function() {
-  $("#view_2267").html(
-    '<iframe src="https://atd-knack-signs-markings.netlify.com/calcs" scrolling="no" frameborder="0" height="3000px" width="100%"></iframe>'
-  );
-});
-// End JS Calc
-
-// #233
-$(document).on("knack-view-render.view_2985", function() {
-  $(
-    '<label for="field_2405_upload" class="custom-file-upload kn-button is-secondary">Choose File</label>'
-  ).insertBefore("#field_2405_upload");
-});
-$(document).on("knack-view-render.view_2742", function() {
-  $(
-    '<label for="field_3378_upload" class="custom-file-upload kn-button is-secondary">Choose File</label>'
-  ).insertBefore("#field_3378_upload");
-});
-// END #233
+}
