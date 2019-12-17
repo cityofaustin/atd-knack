@@ -517,6 +517,7 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
   });
 
   // Retrieve Knack data about invoice records in Invoices table
+  var invoiceIds = [];
   $.ajax({
     url:
       "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86846188b491db95d0842",
@@ -526,21 +527,26 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
       Authorization: knackUserToken
     }
   }).then(function(res) {
-    console.log(res.records);
-  });
+    res.records.forEach(function(record) {
+      invoiceIds.push(record.id);
+    });
 
-  // Retrieve Knack data about invoice item records in Invoice tables
-  // $.ajax({
-  //   url:
-  //     "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details=<invoice ID>",
-  //   headers: {
-  //     "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
-  //     "X-Knack-REST-API-KEY": "knack",
-  //     Authorization: knackUserToken
-  //   }
-  // }).then(function(res){
-  // 	console.log(res.records);
-  // });
+    // Retrieve Knack data about invoice item records in Invoice tables
+    invoiceIds.forEach(function(id) {
+      $.ajax({
+        url:
+          "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
+          id,
+        headers: {
+          "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
+          "X-Knack-REST-API-KEY": "knack",
+          Authorization: knackUserToken
+        }
+      }).then(function(res) {
+        console.log(res.records);
+      });
+    });
+  });
 });
 
 function logItems() {
