@@ -502,30 +502,36 @@ $(document).on("knack-view-render.view_16", function(event, view) {
 $(document).on("knack-form-submit.view_638", function(event, view, record) {
   logItems();
   var knackUserToken = Knack.getUserToken();
+  var headers = {
+    "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
+    "X-Knack-REST-API-KEY": "knack",
+    Authorization: knackUserToken
+  };
 
+  var invoiceItems = [];
   // Retrieve Knack data about item records in Items table
   $.ajax({
     url:
-      "https://api.knack.com/v1/scenes/scene_4/views/view_60/records?purchase-request-details_id=5db86846188b491db95d0842",
-    headers: {
-      "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
-      "X-Knack-REST-API-KEY": "knack",
-      Authorization: knackUserToken
-    }
+      "https://api.knack.com/v1/scenes/scene_4/views/view_60/records?purchase-request-details_id=5db86847188b491db95d08f0",
+    headers: headers
   }).then(function(res) {
-    console.log(res.records);
+    console.log("Item records", res.records);
+    var records = res.records;
+    records.forEach(function(record) {
+      var invoiceItem = {};
+      invoiceItem["field_409"] = { id: record.id, identifier: record.field_15 };
+      invoiceItem["field_422"] = record.field_16_raw;
+      invoiceItems.push(invoiceItem);
+    });
+    console.log(invoiceItems);
   });
 
   // Retrieve Knack data about invoice records in Invoices table
   var invoiceIds = [];
   $.ajax({
     url:
-      "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86846188b491db95d0842",
-    headers: {
-      "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
-      "X-Knack-REST-API-KEY": "knack",
-      Authorization: knackUserToken
-    }
+      "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86847188b491db95d08f0",
+    headers: headers
   }).then(function(res) {
     res.records.forEach(function(record) {
       invoiceIds.push(record.id);
@@ -537,16 +543,22 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
         url:
           "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
           id,
-        headers: {
-          "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
-          "X-Knack-REST-API-KEY": "knack",
-          Authorization: knackUserToken
-        }
+        headers: headers
       }).then(function(res) {
-        console.log(res.records);
+        console.log("Invoice item records", res.records);
       });
     });
   });
+
+  // POST new records to Knack
+  // $.ajax({
+  //   url: "",
+  //   method: "POST",
+  //   headers: headers,
+  //   data:
+  // }).then(function(res){
+  //   console.log(res)
+  // })
 });
 
 function logItems() {
