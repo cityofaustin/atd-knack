@@ -500,7 +500,9 @@ $(document).on("knack-view-render.view_60", function(event, view) {
 });
 
 $(document).on("knack-form-submit.view_638", function(event, view, record) {
-  logItems();
+  // Get checked item IDs and whether items are inventory items
+  var checkedItems = getCheckedItems();
+  console.log(checkedItems);
   var knackUserToken = Knack.getUserToken();
   var headers = {
     "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
@@ -518,16 +520,24 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
   }).then(function(res) {
     console.log("Item records", res.records);
     var records = res.records;
+    // Only create record if it is an inventory item and if it is checked
     records.forEach(function(record) {
-      var invoiceItem = {};
-      // Item id and description => Invoice item description
-      invoiceItem["field_409"] = [
-        { id: record.id, identifier: record.field_15 }
-      ];
-      invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
-      invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
-      invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
-      invoiceItems.push(invoiceItem);
+      checkedItems.forEach(function(item) {
+        // if it is an inventory item and if it is checked
+        if (record.id === item.id && item.isInventoryItem === "Yes") {
+          var invoiceItem = {};
+          // Item id and description => Invoice item description
+          invoiceItem["field_409"] = [
+            { id: record.id, identifier: record.field_15 }
+          ];
+          invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
+          invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
+          invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
+          invoiceItems.push(invoiceItem);
+        } else {
+          return;
+        }
+      });
     });
     // POST new records to Knack
     invoiceItems.forEach(function(item) {
@@ -568,15 +578,19 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
   });
 });
 
-function logItems() {
+function getCheckedItems() {
   // Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
   var checkedItemIds = [];
   $("#view_60 tbody input[type=checkbox]:checked").each(function() {
-    // add code here to get record id or row value
+    // Get id
     var id = $(this)
       .closest("tr")
-      .attr("id"); // record id
-    checkedItemIds.push(id);
+      .attr("id");
+    // Get inventory item value (Yes or No)
+    var isInventoryItem = $(this)
+      .closest("tr")
+      .children()[2].innerText;
+    checkedItemIds.push({ id: id, isInventoryItem: isInventoryItem });
   });
-  console.log(checkedItemIds);
+  return checkedItemIds;
 }
