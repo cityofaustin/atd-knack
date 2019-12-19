@@ -494,15 +494,34 @@ var addCheckboxes = function(view) {
     $(this).prepend('<td><input type="checkbox"></td>');
   });
 };
+
 // Add checkboxes to a specific table view (view_1). Replace view_1 with your view key
 $(document).on("knack-view-render.view_60", function(event, view) {
   addCheckboxes(view);
 });
 
 $(document).on("knack-form-submit.view_638", function(event, view, record) {
+  // Cycle through selected checkboxes
+  function getCheckedItems() {
+    var checkedItemIds = [];
+    $("#view_60 tbody input[type=checkbox]:checked").each(function() {
+      // Get id
+      var id = $(this)
+        .closest("tr")
+        .attr("id");
+      // Get inventory item value (Yes or No)
+      var isInventoryItem = $(this)
+        .closest("tr")
+        .children()[2].innerText;
+      checkedItemIds.push({ id: id, isInventoryItem: isInventoryItem });
+    });
+    return checkedItemIds;
+  }
+
   // Get checked item IDs and whether items are inventory items
   var checkedItems = getCheckedItems();
-  console.log(checkedItems);
+
+  // Set auth and headers for API calls
   var knackUserToken = Knack.getUserToken();
   var headers = {
     "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
@@ -511,35 +530,36 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
     "content-type": "application/json"
   };
 
-  var invoiceItems = [];
   // Retrieve Knack data about item records in Items table
+  var invoiceItems = [];
   $.ajax({
     url:
       "https://api.knack.com/v1/scenes/scene_4/views/view_60/records?purchase-request-details_id=5db86847188b491db95d08f0",
     headers: headers
   }).then(function(res) {
-    console.log("Item records", res.records);
     var records = res.records;
     // Only create record if it is an inventory item and if it is checked
     records.forEach(function(record) {
       checkedItems.forEach(function(item) {
-        // if it is an inventory item and if it is checked
         if (record.id === item.id && item.isInventoryItem === "Yes") {
+          // Prepare payload to create Invoice Item record
           var invoiceItem = {};
-          // Item id and description => Invoice item description
+
           invoiceItem["field_409"] = [
             { id: record.id, identifier: record.field_15 }
-          ];
+          ]; // Item id and description => Invoice item description
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
           invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
+
           invoiceItems.push(invoiceItem);
         } else {
           return;
         }
       });
     });
-    // POST new records to Knack
+
+    // POST new Invoice Item records to Knack
     invoiceItems.forEach(function(item) {
       $.ajax({
         type: "POST",
@@ -552,6 +572,8 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
       });
     });
   });
+
+  // INVOICES //
 
   // Retrieve Knack data about invoice records in Invoices table
   var invoiceIds = [];
@@ -577,20 +599,3 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
     });
   });
 });
-
-function getCheckedItems() {
-  // Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
-  var checkedItemIds = [];
-  $("#view_60 tbody input[type=checkbox]:checked").each(function() {
-    // Get id
-    var id = $(this)
-      .closest("tr")
-      .attr("id");
-    // Get inventory item value (Yes or No)
-    var isInventoryItem = $(this)
-      .closest("tr")
-      .children()[2].innerText;
-    checkedItemIds.push({ id: id, isInventoryItem: isInventoryItem });
-  });
-  return checkedItemIds;
-}
