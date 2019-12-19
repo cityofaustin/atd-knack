@@ -495,7 +495,7 @@ var addCheckboxes = function(view) {
   });
 };
 // Add checkboxes to a specific table view (view_1). Replace view_1 with your view key
-$(document).on("knack-view-render.view_16", function(event, view) {
+$(document).on("knack-view-render.view_60", function(event, view) {
   addCheckboxes(view);
 });
 
@@ -505,7 +505,8 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
   var headers = {
     "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
     "X-Knack-REST-API-KEY": "knack",
-    Authorization: knackUserToken
+    Authorization: knackUserToken,
+    "content-type": "application/json"
   };
 
   var invoiceItems = [];
@@ -519,11 +520,25 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
     var records = res.records;
     records.forEach(function(record) {
       var invoiceItem = {};
-      invoiceItem["field_409"] = { id: record.id, identifier: record.field_15 };
+      invoiceItem["field_409"] = [
+        { id: record.id, identifier: record.field_15 }
+      ];
       invoiceItem["field_422"] = record.field_16_raw;
+      invoiceItem["field_732"] = record.field_14;
+      invoiceItem["field_733"] = "Yes";
       invoiceItems.push(invoiceItem);
     });
-    console.log(invoiceItems);
+
+    // POST new records to Knack
+    $.ajax({
+      type: "POST",
+      url: "https://api.knack.com/v1/scenes/scene_123/views/view_646/records",
+      headers: headers,
+      data: JSON.stringify(invoiceItems[0]),
+      contentType: "application/json"
+    }).then(function(res) {
+      console.log("POST invoice item", res);
+    });
   });
 
   // Retrieve Knack data about invoice records in Invoices table
@@ -549,26 +564,17 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
       });
     });
   });
-
-  // POST new records to Knack
-  // $.ajax({
-  //   url: "",
-  //   method: "POST",
-  //   headers: headers,
-  //   data:
-  // }).then(function(res){
-  //   console.log(res)
-  // })
 });
 
 function logItems() {
   // Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
-  $("#view_16 tbody input[type=checkbox]:checked").each(function() {
+  $("#view_60 tbody input[type=checkbox]:checked").each(function() {
     // add code here to get record id or row value
     var id = $(this)
       .closest("tr")
       .attr("id"); // record id
     console.log($(this).closest("tr"));
+    console.log(id);
     console.log("hi!");
   });
 }
