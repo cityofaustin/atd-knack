@@ -520,24 +520,26 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
     var records = res.records;
     records.forEach(function(record) {
       var invoiceItem = {};
+      // Item id and description => Invoice item description
       invoiceItem["field_409"] = [
         { id: record.id, identifier: record.field_15 }
       ];
-      invoiceItem["field_422"] = record.field_16_raw;
-      invoiceItem["field_732"] = record.field_14;
-      invoiceItem["field_733"] = "Yes";
+      invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
+      invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
+      invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
       invoiceItems.push(invoiceItem);
     });
-
     // POST new records to Knack
-    $.ajax({
-      type: "POST",
-      url: "https://api.knack.com/v1/scenes/scene_123/views/view_646/records",
-      headers: headers,
-      data: JSON.stringify(invoiceItems[0]),
-      contentType: "application/json"
-    }).then(function(res) {
-      console.log("POST invoice item", res);
+    invoiceItems.forEach(function(item) {
+      $.ajax({
+        type: "POST",
+        url: "https://api.knack.com/v1/scenes/scene_123/views/view_646/records",
+        headers: headers,
+        data: JSON.stringify(item),
+        contentType: "application/json"
+      }).then(function(res) {
+        console.log("POST invoice item", res);
+      });
     });
   });
 
@@ -568,13 +570,13 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
 
 function logItems() {
   // Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
+  var checkedItemIds = [];
   $("#view_60 tbody input[type=checkbox]:checked").each(function() {
     // add code here to get record id or row value
     var id = $(this)
       .closest("tr")
       .attr("id"); // record id
-    console.log($(this).closest("tr"));
-    console.log(id);
-    console.log("hi!");
+    checkedItemIds.push(id);
   });
+  console.log(checkedItemIds);
 }
