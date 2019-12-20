@@ -495,12 +495,21 @@ var addCheckboxes = function(view) {
   });
 };
 
-// Add checkboxes to a specific table view (view_1). Replace view_1 with your view key
-$(document).on("knack-view-render.view_60", function(event, view) {
-  addCheckboxes(view);
-});
+var addSubmitButton = function() {
+  $("#view_117 > div.control").append(
+    '<a id="mark-as-received-button" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>Mark as received</span></a>'
+  );
+  $("#mark-as-received-button").click(handleMarkAsReceivedClick);
+};
 
-$(document).on("knack-form-submit.view_638", function(event, view, record) {
+var handleMarkAsReceivedClick = function(event) {
+  event.preventDefault();
+
+  // Show spinner
+  $("#mark-as-received-button").append(
+    '<span id="mark-as-received-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
+  );
+
   // Cycle through selected checkboxes
   function getCheckedItems() {
     var checkedItemIds = [];
@@ -568,34 +577,47 @@ $(document).on("knack-form-submit.view_638", function(event, view, record) {
         data: JSON.stringify(item),
         contentType: "application/json"
       }).then(function(res) {
-        console.log("POST invoice item", res);
+        // Remove spinner after invoice item record is created
+        $("#mark-as-received-spinner").remove();
+
+        // TODO: Reload invoice item table?
       });
     });
   });
+};
 
-  // INVOICES //
-
-  // Retrieve Knack data about invoice records in Invoices table
-  var invoiceIds = [];
-  $.ajax({
-    url:
-      "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86847188b491db95d08f0",
-    headers: headers
-  }).then(function(res) {
-    res.records.forEach(function(record) {
-      invoiceIds.push(record.id);
-    });
-
-    // Retrieve Knack data about invoice item records in Invoice tables
-    invoiceIds.forEach(function(id) {
-      $.ajax({
-        url:
-          "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
-          id,
-        headers: headers
-      }).then(function(res) {
-        console.log("Invoice item records", res.records);
-      });
-    });
-  });
+// Add checkboxes to a specific table view (view_1). Replace view_1 with your view key
+$(document).on("knack-view-render.view_60", function(event, view) {
+  addCheckboxes(view);
 });
+
+// Add "Mark as Received" button to create invoice item records from items table
+$(document).on("knack-view-render.view_117", function(event, view) {
+  addSubmitButton();
+});
+
+// // INVOICES //
+
+// // Retrieve Knack data about invoice records in Invoices table
+// var invoiceIds = [];
+// $.ajax({
+//   url:
+//     "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86847188b491db95d08f0",
+//   headers: headers
+// }).then(function(res) {
+//   res.records.forEach(function(record) {
+//     invoiceIds.push(record.id);
+//   });
+
+//   // Retrieve Knack data about invoice item records in Invoice tables
+//   invoiceIds.forEach(function(id) {
+//     $.ajax({
+//       url:
+//         "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
+//         id,
+//       headers: headers
+//     }).then(function(res) {
+//       console.log("Invoice item records", res.records);
+//     });
+//   });
+// });
