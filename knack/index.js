@@ -560,6 +560,7 @@ var handleMarkAsReceivedClick = function(event) {
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
           invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
+          invoiceItem["field_734"] = Knack.getUserAttributes().id; // Marked received by user
 
           invoiceItems.push(invoiceItem);
         } else {
