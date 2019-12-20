@@ -474,41 +474,58 @@ $(document).on("knack-view-render.view_636", function(event, page) {
 // submit form
 // "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_638"
 
+// Wait until element is loaded by Knack
+function elementLoaded(el, callback) {
+  if ($(el).length) {
+    // Element is now loaded.
+    callback($(el));
+  } else {
+    // Repeat every 500ms.
+    setTimeout(function() {
+      elementLoaded(el, callback);
+    }, 500);
+  }
+}
+
 // Function that adds checkboxes
 var addCheckboxes = function(view) {
   // Add the checkbox to to the header to select/unselect all
   $("#" + view.key + ".kn-table thead tr").prepend(
-    '<th><input id="mark-as-received-checkbox" type="checkbox"></th>'
+    '<th class="mark-as-received-checkbox-parent"><input class="mark-as-received-checkbox" type="checkbox"></th>'
   );
 
   $("#" + view.key + ".kn-table thead input").change(function() {
     $("." + view.key + ".kn-table tbody tr input").each(function() {
       $(this).attr(
         "checked",
-        $("#" + view.key + ".kn-table thead input").attr("checked") != undefined
+        $("#" + view.key + ".kn-table thead input").attr("checked") !==
+          undefined
       );
     });
   });
+
   // Add a checkbox to each row in the table body
   $("#" + view.key + ".kn-table tbody tr").each(function() {
-    $(this).prepend('<td><input type="checkbox"></td>');
+    $(this).prepend(
+      '<td class="mark-as-received-checkbox-parent"><input class="mark-as-received-checkbox" type="checkbox"></td>'
+    );
   });
 
   // Fix offset in totals row created by checkboxes
-  $("#" + view.key + " .kn-table-totals").prepend("<td></td>");
+  elementLoaded("#" + view.key + " .kn-table-totals", function(el) {
+    el.prepend(
+      '<td style="background-color: #eee; border-top: 1px solid #dadada;">&nbsp;</td>'
+    );
+  });
 };
 
-// Add "Mark as Received" button to DOM and add click event listener
 var addSubmitButton = function() {
-  // TODO: Use Knack.getUserRoles() to show/hide based on user role
-
   $("#view_117 > div.control").append(
     '<a id="mark-as-received-button" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>Mark as received</span></a>'
   );
   $("#mark-as-received-button").click(handleMarkAsReceivedClick);
 };
 
-// onClick, create invoice item records for each checked row in the items table
 var handleMarkAsReceivedClick = function(event) {
   event.preventDefault();
 
@@ -587,8 +604,6 @@ var handleMarkAsReceivedClick = function(event) {
       }).then(function(res) {
         // Remove spinner after invoice item record is created
         $("#mark-as-received-spinner").remove();
-
-        // TODO: Reload invoice item table?
       });
     });
   });

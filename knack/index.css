@@ -209,9 +209,10 @@ a.small-button {
 
 /* Purchase Requests | Purchase Request Details | Items Checkboxes (Mark as received) */
 .mark-as-received-checkbox-parent {
-  vertical-align: middle;
+  vertical-align: middle !important;
 }
 
 .mark-as-received-checkbox {
-  zoom: 3;
+  transform: scale(3, 3);
+  margin: 20px !important;
 }
