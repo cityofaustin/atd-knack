@@ -474,6 +474,15 @@ $(document).on("knack-view-render.view_636", function(event, page) {
 // submit form
 // "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_638"
 
+// Set auth and headers for API calls
+var knackUserToken = Knack.getUserToken();
+var headers = {
+  "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
+  "X-Knack-REST-API-KEY": "knack",
+  Authorization: knackUserToken,
+  "content-type": "application/json"
+};
+
 // Wait until element is loaded by Knack
 function elementLoaded(el, callback) {
   if ($(el).length) {
@@ -536,18 +545,40 @@ var addSubmitButton = function(buttonString, id, view, handler) {
   $("#" + view.key).append(
     '<a id="' +
       id +
-      '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
+      '" class="kn-button"><span class="icon is-small"><i class="fa fa-plus"></i></span><span>' +
       buttonString +
       "</span></a>"
   );
   $("#" + id).click(handler);
 };
 
-// Prepend Knack table with Select dropdown
-var addInvoicesDropdown = function(view, id) {
-  $("#" + view.key + " div.kn-records-nav").prepend(
-    '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option></select></div></div></div>'
-  );
+// Prepend Knack table with Select dropdown and populate dropdown with invoice options
+var addInvoicesDropdown = function(view) {
+  // Set current record ID to fetch invoices from Knack API
+  var hrefArray = window.location.href.split("/");
+  var recordId = hrefArray[hrefArray.length - 2];
+
+  // Fetch invoices for record and create options HTML for select dropdown
+  var invoiceOptionsMarkup = "";
+  $.ajax({
+    url:
+      "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=" +
+      recordId,
+    headers: headers
+  }).then(function(res) {
+    // For each record, create an option tag for select menu
+    res.records.forEach(function(record) {
+      invoiceOptionsMarkup +=
+        '<option value="' + record.id + '">' + record.field_309 + "</option>";
+    });
+
+    // Add dropdown populated with invoice options
+    $("#" + view.key + " div.kn-records-nav").prepend(
+      '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option>' +
+        invoiceOptionsMarkup +
+        "</select></div></div></div>"
+    );
+  });
 };
 
 var handleMarkAsReceivedClick = function(event) {
@@ -577,15 +608,6 @@ var handleMarkAsReceivedClick = function(event) {
 
   // Get checked item IDs and whether items are inventory items
   var checkedItems = getCheckedItems();
-
-  // Set auth and headers for API calls
-  var knackUserToken = Knack.getUserToken();
-  var headers = {
-    "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
-    "X-Knack-REST-API-KEY": "knack",
-    Authorization: knackUserToken,
-    "content-type": "application/json"
-  };
 
   // Retrieve Knack data about item records in Items table
   var invoiceItems = [];
@@ -660,7 +682,7 @@ $(document).on("knack-view-render.view_117", function(event, view) {
 // Add "Add to an invoice" button to create invoice item records from items table
 $(document).on("knack-view-render.view_647", function(event, view) {
   addSubmitButton(
-    "Add to an invoice",
+    "Add to selected invoice",
     "add-to-an-invoice-item",
     view,
     handleCreateInvoiceClick
@@ -672,21 +694,13 @@ $(document).on("knack-view-render.view_647", function(event, view) {
 
 // Retrieve Knack data about invoice records in Invoices table
 
-var knackUserToken = Knack.getUserToken();
-var headers = {
-  "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
-  "X-Knack-REST-API-KEY": "knack",
-  Authorization: knackUserToken,
-  "content-type": "application/json"
-};
-
 var invoiceIds = [];
 $.ajax({
   url:
     "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86846188b491db95d0842",
   headers: headers
 }).then(function(res) {
-  console.log(res);
+  // console.log(res)
   res.records.forEach(function(record) {
     invoiceIds.push(record.id);
   });
@@ -699,7 +713,7 @@ $.ajax({
         id,
       headers: headers
     }).then(function(res) {
-      console.log("Invoice item records", res.records);
+      // console.log("Invoice item records", res.records);
     });
   });
 });
