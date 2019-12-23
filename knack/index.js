@@ -545,11 +545,11 @@ var addSubmitButton = function(buttonString, id, view, handler) {
   $("#" + view.key).append(
     '<a id="' +
       id +
-      '" class="kn-button"><span class="icon is-small"><i class="fa fa-plus"></i></span><span>' +
+      '-button" class="kn-button"><span class="icon is-small"><i class="fa fa-plus"></i></span><span>' +
       buttonString +
       "</span></a>"
   );
-  $("#" + id).click(handler);
+  $("#" + id + "-button").click(handler);
 };
 
 // Prepend Knack table with Select dropdown and populate dropdown with invoice options
@@ -658,7 +658,56 @@ var handleMarkAsReceivedClick = function(event) {
   });
 };
 
-var handleCreateInvoiceClick = function() {};
+var handleCreateInvoiceClick = function() {
+  // Show spinner
+  $("#add-to-invoice-item-button").append(
+    '<span id="mark-as-received-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
+  );
+
+  // Cycle through selected checkboxes
+  function getCheckedItems() {
+    var checkedItemIds = [];
+    $("#view_647 tbody input[type=checkbox]:checked").each(function() {
+      // Get id
+      var id = $(this)
+        .closest("tr")
+        .attr("id");
+      checkedItemIds.push({ id: id });
+    });
+    return checkedItemIds;
+  }
+
+  // Get checked invoice item IDs and selected invoice ID
+  var checkedItems = getCheckedItems();
+  var selectedInvoiceId = $("#invoice-select").val();
+  var selectedInvoiceText = $("#invoice-select")
+    .find("option:selected")
+    .text();
+  console.log(selectedInvoiceId, selectedInvoiceText);
+
+  // Get selected invoice items to add to associate with selected invoice
+  var checkedItems = getCheckedItems();
+  console.log(checkedItems);
+
+  // TODO: For each checkedItem, add invoice record ID and record identifier to checked item's record
+  // PAYLOAD: invoiceItem["field_408"] = [{ id: selectedInvoiceId, identifier: selectedInvoiceText }]; // Item id and description => Invoice item description
+
+  // invoiceItems.forEach(function(item) {
+  //   $.ajax({
+  //     type: "PUT",
+  //     url: "https://api.knack.com/v1/scenes/scene_123/views/view_650/records",
+  //     headers: headers,
+  //     data: JSON.stringify(item),
+  //     contentType: "application/json"
+  //   }).then(function(res) {
+  //     // Remove spinner after invoice item record is created
+  //     $("#mark-as-received-spinner").remove();
+
+  //     // Refetch data for invoice items table to reflect new invoice item records
+  //     Knack.views["view_647"].model.fetch();
+  //   });
+  // });
+};
 
 // Add checkboxes to a items and invoice items tables
 $(document).on("knack-view-render.view_60", function(event, view) {
@@ -683,7 +732,7 @@ $(document).on("knack-view-render.view_117", function(event, view) {
 $(document).on("knack-view-render.view_647", function(event, view) {
   addSubmitButton(
     "Add to selected invoice",
-    "add-to-an-invoice-item",
+    "add-to-invoice-item",
     view,
     handleCreateInvoiceClick
   );
