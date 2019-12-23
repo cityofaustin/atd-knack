@@ -519,11 +519,28 @@ var addCheckboxes = function(view) {
   });
 };
 
-var addSubmitButton = function() {
-  $("#view_117 > div.control").append(
-    '<a id="mark-as-received-button" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>Mark as received</span></a>'
+// Append a submit button to an existing row of buttons (div.control)
+var appendSubmitButton = function(buttonString, id, view, handler) {
+  $("#" + view.key + " > div.control").append(
+    '<a id="' +
+      id +
+      '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
+      buttonString +
+      "</span></a>"
   );
-  $("#mark-as-received-button").click(handleMarkAsReceivedClick);
+  $("#" + id).click(handler);
+};
+
+// Prepend a submit button to Knack table
+var addSubmitButton = function(buttonString, id, view, handler) {
+  $("#" + view.key + " div.kn-records-nav").prepend(
+    '<a id="' +
+      id +
+      '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
+      buttonString +
+      "</span></a>"
+  );
+  $("#" + id).click(handler);
 };
 
 var handleMarkAsReceivedClick = function(event) {
@@ -609,14 +626,35 @@ var handleMarkAsReceivedClick = function(event) {
   });
 };
 
-// Add checkboxes to a specific table view (view_1). Replace view_1 with your view key
+var handleCreateInvoiceClick = function() {};
+
+// Add checkboxes to a items and invoice items tables
 $(document).on("knack-view-render.view_60", function(event, view) {
+  addCheckboxes(view);
+});
+
+$(document).on("knack-view-render.view_647", function(event, view) {
   addCheckboxes(view);
 });
 
 // Add "Mark as Received" button to create invoice item records from items table
 $(document).on("knack-view-render.view_117", function(event, view) {
-  addSubmitButton();
+  appendSubmitButton(
+    "Mark as received",
+    "mark-as-received-button",
+    view,
+    handleMarkAsReceivedClick
+  );
+});
+
+// Add "Add to an invoice" button to create invoice item records from items table
+$(document).on("knack-view-render.view_647", function(event, view) {
+  addSubmitButton(
+    "Add to an invoice",
+    "add-to-an-invoice-item",
+    view,
+    handleCreateInvoiceClick
+  );
 });
 
 // // INVOICES //
