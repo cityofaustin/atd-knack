@@ -533,7 +533,7 @@ var appendSubmitButton = function(buttonString, id, view, handler) {
 
 // Prepend a submit button to Knack table
 var addSubmitButton = function(buttonString, id, view, handler) {
-  $("#" + view.key + " div.kn-records-nav").prepend(
+  $("#" + view.key).append(
     '<a id="' +
       id +
       '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
@@ -541,6 +541,13 @@ var addSubmitButton = function(buttonString, id, view, handler) {
       "</span></a>"
   );
   $("#" + id).click(handler);
+};
+
+// Prepend Knack table with Select dropdown
+var addInvoicesDropdown = function(view, id) {
+  $("#" + view.key + " div.kn-records-nav").prepend(
+    '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option></select></div></div></div>'
+  );
 };
 
 var handleMarkAsReceivedClick = function(event) {
@@ -601,7 +608,7 @@ var handleMarkAsReceivedClick = function(event) {
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
           invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
-          invoiceItem["field_734"] = Knack.getUserAttributes().id; // Marked received by user
+          // invoiceItem["field_734"] = Knack.getUserAttributes().id; // Marked received by user
 
           invoiceItems.push(invoiceItem);
         } else {
@@ -614,13 +621,16 @@ var handleMarkAsReceivedClick = function(event) {
     invoiceItems.forEach(function(item) {
       $.ajax({
         type: "POST",
-        url: "https://api.knack.com/v1/scenes/scene_123/views/view_646/records",
+        url: "https://api.knack.com/v1/scenes/scene_123/views/view_650/records",
         headers: headers,
         data: JSON.stringify(item),
         contentType: "application/json"
       }).then(function(res) {
         // Remove spinner after invoice item record is created
         $("#mark-as-received-spinner").remove();
+
+        // Refetch data for invoice items table to reflect new invoice item records
+        Knack.views["view_647"].model.fetch();
       });
     });
   });
@@ -655,30 +665,41 @@ $(document).on("knack-view-render.view_647", function(event, view) {
     view,
     handleCreateInvoiceClick
   );
+  addInvoicesDropdown(view);
 });
 
 // // INVOICES //
 
-// // Retrieve Knack data about invoice records in Invoices table
-// var invoiceIds = [];
-// $.ajax({
-//   url:
-//     "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86847188b491db95d08f0",
-//   headers: headers
-// }).then(function(res) {
-//   res.records.forEach(function(record) {
-//     invoiceIds.push(record.id);
-//   });
+// Retrieve Knack data about invoice records in Invoices table
 
-//   // Retrieve Knack data about invoice item records in Invoice tables
-//   invoiceIds.forEach(function(id) {
-//     $.ajax({
-//       url:
-//         "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
-//         id,
-//       headers: headers
-//     }).then(function(res) {
-//       console.log("Invoice item records", res.records);
-//     });
-//   });
-// });
+var knackUserToken = Knack.getUserToken();
+var headers = {
+  "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
+  "X-Knack-REST-API-KEY": "knack",
+  Authorization: knackUserToken,
+  "content-type": "application/json"
+};
+
+var invoiceIds = [];
+$.ajax({
+  url:
+    "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86846188b491db95d0842",
+  headers: headers
+}).then(function(res) {
+  console.log(res);
+  res.records.forEach(function(record) {
+    invoiceIds.push(record.id);
+  });
+
+  // Retrieve Knack data about invoice item records in Invoice tables
+  invoiceIds.forEach(function(id) {
+    $.ajax({
+      url:
+        "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
+        id,
+      headers: headers
+    }).then(function(res) {
+      console.log("Invoice item records", res.records);
+    });
+  });
+});
