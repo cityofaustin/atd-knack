@@ -527,7 +527,14 @@ var addCheckboxes = function(view) {
     checkbox.is(":checked")
       ? checkbox.prop("checked", false)
       : checkbox.prop("checked", true);
-    checkbox.prop("checked", this.checked);
+  });
+
+  // Restore default checkbox toggle
+  $("#" + view.key + " .table-checkboxes").click(function(event) {
+    var checkbox = $(this);
+    checkbox.is(":checked")
+      ? checkbox.prop("checked", false)
+      : checkbox.prop("checked", true);
   });
 
   // Fix offset in totals row created by checkboxes
@@ -693,7 +700,6 @@ var handleCreateInvoiceClick = function(event, id) {
   var selectedInvoiceText = $("#invoice-select")
     .find("option:selected")
     .text();
-  console.log(selectedInvoiceId, selectedInvoiceText);
 
   // Get selected invoice items to add to associate with selected invoice
   var checkedItems = getCheckedItems();
