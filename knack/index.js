@@ -687,26 +687,31 @@ var handleCreateInvoiceClick = function() {
 
   // Get selected invoice items to add to associate with selected invoice
   var checkedItems = getCheckedItems();
-  console.log(checkedItems);
 
   // TODO: For each checkedItem, add invoice record ID and record identifier to checked item's record
   // PAYLOAD: invoiceItem["field_408"] = [{ id: selectedInvoiceId, identifier: selectedInvoiceText }]; // Item id and description => Invoice item description
 
-  // invoiceItems.forEach(function(item) {
-  //   $.ajax({
-  //     type: "PUT",
-  //     url: "https://api.knack.com/v1/scenes/scene_123/views/view_650/records",
-  //     headers: headers,
-  //     data: JSON.stringify(item),
-  //     contentType: "application/json"
-  //   }).then(function(res) {
-  //     // Remove spinner after invoice item record is created
-  //     $("#mark-as-received-spinner").remove();
+  checkedItems.forEach(function(item) {
+    var updatedInvoiceItemData = {
+      field_408: [{ id: selectedInvoiceId, identifier: selectedInvoiceText }]
+    };
 
-  //     // Refetch data for invoice items table to reflect new invoice item records
-  //     Knack.views["view_647"].model.fetch();
-  //   });
-  // });
+    $.ajax({
+      type: "PUT",
+      url:
+        "https://api.knack.com/v1/scenes/scene_123/views/view_650/records/" +
+        item.id,
+      headers: headers,
+      data: JSON.stringify(updatedInvoiceItemData),
+      contentType: "application/json"
+    }).then(function(res) {
+      // Remove spinner after invoice item record is created
+      $("#mark-as-received-spinner").remove();
+
+      // Refetch data for invoice items table to reflect new invoice item records
+      Knack.views["view_647"].model.fetch();
+    });
+  });
 };
 
 // Add checkboxes to a items and invoice items tables
