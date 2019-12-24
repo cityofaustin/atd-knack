@@ -521,6 +521,15 @@ var addCheckboxes = function(view) {
     );
   });
 
+  // Add click event handler to checkbox parent to check/uncheck box
+  $("#" + view.key + " .table-checkboxes-parent").click(function(event) {
+    var checkbox = $($(this).children()[0]);
+    checkbox.is(":checked")
+      ? checkbox.prop("checked", false)
+      : checkbox.prop("checked", true);
+    checkbox.prop("checked", this.checked);
+  });
+
   // Fix offset in totals row created by checkboxes
   elementLoaded("#" + view.key + " .kn-table-totals", function(el) {
     el.prepend(
@@ -529,7 +538,7 @@ var addCheckboxes = function(view) {
   });
 };
 
-// Append a submit button and add event handler
+// Append a submit button and add event handler to element by selector
 var appendSubmitButton = function(buttonString, selector, handler) {
   var id = buttonString
     .toLowerCase()
@@ -571,7 +580,7 @@ var addInvoicesDropdown = function(view) {
 
     // Add dropdown populated with invoice options
     $("#" + view.key + " div.kn-records-nav").prepend(
-      '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option>' +
+      '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add to selected invoice</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option>' +
         invoiceOptionsMarkup +
         "</select></div></div></div>"
     );
@@ -731,7 +740,7 @@ $(document).on("knack-view-render.view_117", function(event, view) {
   );
 });
 
-// Add "Add to an invoice" button to create invoice item records from items table
+// Add "Add to selected invoice" button to create invoice item records from items table
 $(document).on("knack-view-render.view_647", function(event, view) {
   appendSubmitButton(
     "Add to selected invoice",
