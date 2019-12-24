@@ -207,12 +207,12 @@ a.small-button {
 }
 /* END #233 */
 
-/* Purchase Requests | Purchase Request Details | Items Checkboxes (Mark as received) */
-.mark-as-received-checkbox-parent {
+/* Purchase Requests | Purchase Request Details | Table Checkboxes */
+.table-checkboxes-parent {
   vertical-align: middle !important;
 }
 
-.mark-as-received-checkbox {
+.table-checkboxes {
   transform: scale(3, 3);
   margin: 20px !important;
 }

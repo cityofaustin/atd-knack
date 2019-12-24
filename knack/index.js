@@ -483,6 +483,7 @@ var headers = {
   "content-type": "application/json"
 };
 
+// Helper to select elements not immediately loaded in views
 // Wait until element is loaded by Knack
 function elementLoaded(el, callback) {
   if ($(el).length) {
@@ -496,11 +497,11 @@ function elementLoaded(el, callback) {
   }
 }
 
-// Function that adds checkboxes
+// Add left column of checkboxes to Knack table
 var addCheckboxes = function(view) {
   // Add the checkbox to to the header to select/unselect all
   $("#" + view.key + ".kn-table thead tr").prepend(
-    '<th class="mark-as-received-checkbox-parent"><input class="mark-as-received-checkbox" type="checkbox"></th>'
+    '<th class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></th>'
   );
 
   $("#" + view.key + ".kn-table thead input").change(function() {
@@ -516,7 +517,7 @@ var addCheckboxes = function(view) {
   // Add a checkbox to each row in the table body
   $("#" + view.key + ".kn-table tbody tr").each(function() {
     $(this).prepend(
-      '<td class="mark-as-received-checkbox-parent"><input class="mark-as-received-checkbox" type="checkbox"></td>'
+      '<td class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></td>'
     );
   });
 
@@ -528,28 +529,24 @@ var addCheckboxes = function(view) {
   });
 };
 
-// Append a submit button to an existing row of buttons (div.control)
-var appendSubmitButton = function(buttonString, id, view, handler) {
-  $("#" + view.key + " > div.control").append(
+// Append a submit button and add event handler
+var appendSubmitButton = function(buttonString, selector, handler) {
+  var id = buttonString
+    .toLowerCase()
+    .split(" ")
+    .join("-");
+
+  $(selector).append(
     '<a id="' +
       id +
       '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
       buttonString +
       "</span></a>"
   );
-  $("#" + id).click(handler);
-};
 
-// Prepend a submit button to Knack table
-var addSubmitButton = function(buttonString, id, view, handler) {
-  $("#" + view.key).append(
-    '<a id="' +
-      id +
-      '-button" class="kn-button"><span class="icon is-small"><i class="fa fa-plus"></i></span><span>' +
-      buttonString +
-      "</span></a>"
-  );
-  $("#" + id + "-button").click(handler);
+  $("#" + id).click(function() {
+    handler(event, id);
+  });
 };
 
 // Prepend Knack table with Select dropdown and populate dropdown with invoice options
@@ -581,11 +578,12 @@ var addInvoicesDropdown = function(view) {
   });
 };
 
-var handleMarkAsReceivedClick = function(event) {
+// Create invoice items from items after selection and submission
+var handleMarkAsReceivedClick = function(event, id) {
   event.preventDefault();
 
   // Show spinner
-  $("#mark-as-received-button").append(
+  $("#" + id).append(
     '<span id="mark-as-received-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
   );
 
@@ -658,9 +656,12 @@ var handleMarkAsReceivedClick = function(event) {
   });
 };
 
-var handleCreateInvoiceClick = function() {
+// Associate invoice items with invoice after selection and submission
+var handleCreateInvoiceClick = function(event, id) {
+  event.preventDefault();
+
   // Show spinner
-  $("#add-to-invoice-item-button").append(
+  $("#" + id).append(
     '<span id="mark-as-received-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
   );
 
@@ -688,9 +689,7 @@ var handleCreateInvoiceClick = function() {
   // Get selected invoice items to add to associate with selected invoice
   var checkedItems = getCheckedItems();
 
-  // TODO: For each checkedItem, add invoice record ID and record identifier to checked item's record
-  // PAYLOAD: invoiceItem["field_408"] = [{ id: selectedInvoiceId, identifier: selectedInvoiceText }]; // Item id and description => Invoice item description
-
+  // For each checkedItem, add invoice record ID and record identifier to associate with invoice
   checkedItems.forEach(function(item) {
     var updatedInvoiceItemData = {
       field_408: [{ id: selectedInvoiceId, identifier: selectedInvoiceText }]
@@ -708,7 +707,7 @@ var handleCreateInvoiceClick = function() {
       // Remove spinner after invoice item record is created
       $("#mark-as-received-spinner").remove();
 
-      // Refetch data for invoice items table to reflect new invoice item records
+      // Refetch data for invoice items table to reflect new association
       Knack.views["view_647"].model.fetch();
     });
   });
@@ -727,47 +726,17 @@ $(document).on("knack-view-render.view_647", function(event, view) {
 $(document).on("knack-view-render.view_117", function(event, view) {
   appendSubmitButton(
     "Mark as received",
-    "mark-as-received-button",
-    view,
+    "#" + view.key + " > div.control",
     handleMarkAsReceivedClick
   );
 });
 
 // Add "Add to an invoice" button to create invoice item records from items table
 $(document).on("knack-view-render.view_647", function(event, view) {
-  addSubmitButton(
+  appendSubmitButton(
     "Add to selected invoice",
-    "add-to-invoice-item",
-    view,
+    "#" + view.key,
     handleCreateInvoiceClick
   );
   addInvoicesDropdown(view);
-});
-
-// // INVOICES //
-
-// Retrieve Knack data about invoice records in Invoices table
-
-var invoiceIds = [];
-$.ajax({
-  url:
-    "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=5db86846188b491db95d0842",
-  headers: headers
-}).then(function(res) {
-  // console.log(res)
-  res.records.forEach(function(record) {
-    invoiceIds.push(record.id);
-  });
-
-  // Retrieve Knack data about invoice item records in Invoice tables
-  invoiceIds.forEach(function(id) {
-    $.ajax({
-      url:
-        "https://api.knack.com/v1/scenes/scene_145/views/view_630/records?view-invoice-details_id=" +
-        id,
-      headers: headers
-    }).then(function(res) {
-      // console.log("Invoice item records", res.records);
-    });
-  });
 });
