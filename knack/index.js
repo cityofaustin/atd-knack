@@ -497,8 +497,8 @@ function elementLoaded(el, callback) {
   }
 }
 
-// Add left column of checkboxes to Knack table
-var addCheckboxes = function(view) {
+// Add left column of checkboxes and event handlers to Knack table
+function addCheckboxes(view) {
   // Add the checkbox to to the header to select/unselect all
   $("#" + view.key + ".kn-table thead tr").prepend(
     '<th class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></th>'
@@ -558,10 +558,10 @@ var addCheckboxes = function(view) {
       '<td style="background-color: #eee; border-top: 1px solid #dadada;">&nbsp;</td>'
     );
   });
-};
+}
 
 // Append a submit button and add event handler to element by selector
-var appendSubmitButton = function(buttonString, selector, handler) {
+function appendSubmitButton(buttonString, selector, handler) {
   var id = buttonString
     .toLowerCase()
     .split(" ")
@@ -578,39 +578,12 @@ var appendSubmitButton = function(buttonString, selector, handler) {
   $("#" + id).click(function() {
     handler(event, id);
   });
-};
+}
 
-// Prepend Knack table with Select dropdown and populate dropdown with invoice options
-var addInvoicesDropdown = function(view) {
-  // Set current record ID to fetch invoices from Knack API
-  var hrefArray = window.location.href.split("/");
-  var recordId = hrefArray[hrefArray.length - 2];
-
-  // Fetch invoices for record and create options HTML for select dropdown
-  var invoiceOptionsMarkup = "";
-  $.ajax({
-    url:
-      "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=" +
-      recordId,
-    headers: headers
-  }).then(function(res) {
-    // For each record, create an option tag for select menu
-    res.records.forEach(function(record) {
-      invoiceOptionsMarkup +=
-        '<option value="' + record.id + '">' + record.field_309 + "</option>";
-    });
-
-    // Add dropdown populated with invoice options
-    $("#" + view.key + " div.kn-records-nav").prepend(
-      '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add to selected invoice</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option>' +
-        invoiceOptionsMarkup +
-        "</select></div></div></div>"
-    );
-  });
-};
+///// Create Invoice Items from Items /////
 
 // Create invoice items from items after selection and submission
-var handleMarkAsReceivedClick = function(event, id) {
+function handleMarkAsReceivedClick(event, id) {
   event.preventDefault();
 
   // Show spinner
@@ -690,10 +663,41 @@ var handleMarkAsReceivedClick = function(event, id) {
       });
     });
   });
-};
+}
+
+///// Associate Invoice Items with Invoice /////
+
+// Prepend Knack table with Select dropdown and populate dropdown with invoice options
+function addInvoicesDropdown(view) {
+  // Set current record ID to fetch invoices from Knack API
+  var hrefArray = window.location.href.split("/");
+  var recordId = hrefArray[hrefArray.length - 2];
+
+  // Fetch invoices for record and create options HTML for select dropdown
+  var invoiceOptionsMarkup = "";
+  $.ajax({
+    url:
+      "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=" +
+      recordId,
+    headers: headers
+  }).then(function(res) {
+    // For each record, create an option tag for select menu
+    res.records.forEach(function(record) {
+      invoiceOptionsMarkup +=
+        '<option value="' + record.id + '">' + record.field_309 + "</option>";
+    });
+
+    // Add dropdown populated with invoice options
+    $("#" + view.key + " div.kn-records-nav").prepend(
+      '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><label for="invoice-select" class="label kn-label"><span>Choose an invoice and select items to add to selected invoice</span></label><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option>' +
+        invoiceOptionsMarkup +
+        "</select></div></div></div>"
+    );
+  });
+}
 
 // Associate invoice items with invoice after selection and submission
-var handleCreateInvoiceClick = function(event, id) {
+function handleCreateInvoiceClick(event, id) {
   event.preventDefault();
 
   // Show spinner
@@ -751,7 +755,9 @@ var handleCreateInvoiceClick = function(event, id) {
       });
     });
   });
-};
+}
+
+///// View Render Events /////
 
 // Add checkboxes to a items and invoice items tables
 $(document).on("knack-view-render.view_60", function(event, view) {
