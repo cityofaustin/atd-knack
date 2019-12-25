@@ -521,20 +521,35 @@ var addCheckboxes = function(view) {
     );
   });
 
-  // Add click event handler to checkbox parent to check/uncheck box
+  function toggleCheckbox($checkbox) {
+    $checkbox.is(":checked")
+      ? $checkbox.prop("checked", false)
+      : $checkbox.prop("checked", true);
+  }
+
+  // Add click event handler to checkbox parent to check/uncheck child box
   $("#" + view.key + " .table-checkboxes-parent").click(function(event) {
-    var checkbox = $($(this).children()[0]);
-    checkbox.is(":checked")
-      ? checkbox.prop("checked", false)
-      : checkbox.prop("checked", true);
+    // If table header, check/uncheck all checkboxes
+    if ($(this).is("th")) {
+      var $headerCheckbox = $($(this).children()[0]);
+      toggleCheckbox($headerCheckbox);
+      $(
+        "#" + view.key + " td.table-checkboxes-parent input.table-checkboxes"
+      ).each(function() {
+        $headerCheckbox.is(":checked")
+          ? $(this).prop("checked", true)
+          : $(this).prop("checked", false);
+      });
+    } else {
+      var $checkbox = $($(this).children()[0]);
+      toggleCheckbox($checkbox);
+    }
   });
 
   // Restore default checkbox toggle
   $("#" + view.key + " .table-checkboxes").click(function(event) {
-    var checkbox = $(this);
-    checkbox.is(":checked")
-      ? checkbox.prop("checked", false)
-      : checkbox.prop("checked", true);
+    var $checkbox = $(this);
+    toggleCheckbox($checkbox);
   });
 
   // Fix offset in totals row created by checkboxes
@@ -667,6 +682,11 @@ var handleMarkAsReceivedClick = function(event, id) {
 
         // Refetch data for invoice items table to reflect new invoice item records
         Knack.views["view_647"].model.fetch();
+
+        // Clear all checkboxes
+        $(".table-checkboxes").each(function(event) {
+          $(this).prop("checked", false);
+        });
       });
     });
   });
@@ -724,6 +744,11 @@ var handleCreateInvoiceClick = function(event, id) {
 
       // Refetch data for invoice items table to reflect new association
       Knack.views["view_647"].model.fetch();
+
+      // Clear all checkboxes
+      $(".table-checkboxes").each(function(event) {
+        $(this).prop("checked", false);
+      });
     });
   });
 };
