@@ -561,7 +561,7 @@ function addCheckboxes(view) {
 }
 
 // Append a submit button and add event handler to element by selector
-function appendSubmitButton(buttonString, selector, handler) {
+function appendSubmitButton(buttonString, selector, handler, view) {
   var id = buttonString
     .toLowerCase()
     .split(" ")
@@ -576,19 +576,34 @@ function appendSubmitButton(buttonString, selector, handler) {
   );
 
   $("#" + id).click(function() {
-    handler(event, id);
+    handler(event, id, view);
   });
+}
+
+function showErrorMessage(id, view, msg) {
+  $("#" + view.key).append(
+    '<div id="' +
+      id +
+      '-fail" class="kn-message is-error"><a class="close delete"></a><span class="kn-message-body"><p><strong>' +
+      msg +
+      "</strong></p></span></div>"
+  );
+  setTimeout(function() {
+    $("#" + id + "-fail").remove();
+  }, 6000);
 }
 
 ///// Create Invoice Items from Items /////
 
 // Create invoice items from items after selection and submission
-function handleMarkAsReceivedClick(event, id) {
+function handleMarkAsReceivedClick(event, id, view) {
   event.preventDefault();
 
   // Show spinner
   $("#" + id).append(
-    '<span id="mark-as-received-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
+    '<span id="' +
+      id +
+      '-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
   );
 
   // Cycle through selected checkboxes
@@ -632,7 +647,6 @@ function handleMarkAsReceivedClick(event, id) {
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
           invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
-          // invoiceItem["field_734"] = Knack.getUserAttributes().id; // Marked received by user
 
           invoiceItems.push(invoiceItem);
         } else {
@@ -645,22 +659,33 @@ function handleMarkAsReceivedClick(event, id) {
     invoiceItems.forEach(function(item) {
       $.ajax({
         type: "POST",
-        url: "https://api.knack.com/v1/scenes/scene_123/views/view_650/records",
+        url: "https://api.knack.com/v1/scenes/scene_/views/view_650/records",
         headers: headers,
         data: JSON.stringify(item),
         contentType: "application/json"
-      }).then(function(res) {
-        // Remove spinner after invoice item record is created
-        $("#mark-as-received-spinner").remove();
+      })
+        .then(function(res) {
+          // Remove spinner after invoice item record is created
+          $("#" + id + "-spinner").remove();
 
-        // Refetch data for invoice items table to reflect new invoice item records
-        Knack.views["view_647"].model.fetch();
+          // Refetch data for invoice items table to reflect new invoice item records
+          Knack.views["view_647"].model.fetch();
 
-        // Clear all checkboxes
-        $(".table-checkboxes").each(function(event) {
-          $(this).prop("checked", false);
+          // Clear all checkboxes
+          $(".table-checkboxes").each(function(event) {
+            $(this).prop("checked", false);
+          });
+        })
+        .fail(function() {
+          $("#" + id + "-spinner").remove();
+          showErrorMessage(
+            id,
+            view,
+            "Failed to mark " +
+              item.field_409[0].identifier +
+              " as received. Please try again."
+          );
         });
-      });
     });
   });
 }
@@ -697,12 +722,14 @@ function addInvoicesDropdown(view) {
 }
 
 // Associate invoice items with invoice after selection and submission
-function handleCreateInvoiceClick(event, id) {
+function handleCreateInvoiceClick(event, id, view) {
   event.preventDefault();
 
   // Show spinner
   $("#" + id).append(
-    '<span id="mark-as-received-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
+    '<span id="' +
+      id +
+      '-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
   );
 
   // Cycle through selected checkboxes
@@ -713,7 +740,10 @@ function handleCreateInvoiceClick(event, id) {
       var id = $(this)
         .closest("tr")
         .attr("id");
-      checkedItemIds.push({ id: id });
+      var identifier = $(this)
+        .closest("tr")
+        .children()[2].innerText;
+      checkedItemIds.push({ id: id, identifier: identifier });
     });
     return checkedItemIds;
   }
@@ -737,23 +767,36 @@ function handleCreateInvoiceClick(event, id) {
     $.ajax({
       type: "PUT",
       url:
-        "https://api.knack.com/v1/scenes/scene_123/views/view_650/records/" +
+        "https://api.knack.com/v1/scenes/scene_/views/view_650/records/" +
         item.id,
       headers: headers,
       data: JSON.stringify(updatedInvoiceItemData),
       contentType: "application/json"
-    }).then(function(res) {
-      // Remove spinner after invoice item record is created
-      $("#mark-as-received-spinner").remove();
+    })
+      .then(function(res) {
+        // Remove spinner after invoice item record is created
+        $("#" + id + "-spinner").remove();
 
-      // Refetch data for invoice items table to reflect new association
-      Knack.views["view_647"].model.fetch();
+        // Refetch data for invoice items table to reflect new association
+        Knack.views["view_647"].model.fetch();
 
-      // Clear all checkboxes
-      $(".table-checkboxes").each(function(event) {
-        $(this).prop("checked", false);
+        // Clear all checkboxes
+        $(".table-checkboxes").each(function(event) {
+          $(this).prop("checked", false);
+        });
+      })
+      .fail(function() {
+        $("#" + id + "-spinner").remove();
+        showErrorMessage(
+          id,
+          view,
+          "Failed to add " +
+            item.identifier +
+            " to invoice " +
+            selectedInvoiceText +
+            ". Please try again."
+        );
       });
-    });
   });
 }
 
@@ -773,7 +816,8 @@ $(document).on("knack-view-render.view_117", function(event, view) {
   appendSubmitButton(
     "Mark as received",
     "#" + view.key + " > div.control",
-    handleMarkAsReceivedClick
+    handleMarkAsReceivedClick,
+    view
   );
 });
 
@@ -782,7 +826,8 @@ $(document).on("knack-view-render.view_647", function(event, view) {
   appendSubmitButton(
     "Add to selected invoice",
     "#" + view.key,
-    handleCreateInvoiceClick
+    handleCreateInvoiceClick,
+    view
   );
   addInvoicesDropdown(view);
 });
