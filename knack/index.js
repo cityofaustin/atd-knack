@@ -580,11 +580,11 @@ function appendSubmitButton(buttonString, selector, handler, view) {
   });
 }
 
-function showErrorMessage(id, view, msg) {
-  $("#" + view.key).append(
+function appendErrorMessage(id, selector, msg) {
+  $(selector).append(
     '<div id="' +
       id +
-      '-fail" class="kn-message is-error"><a class="close delete"></a><span class="kn-message-body"><p><strong>' +
+      '-fail" class="kn-message is-error"><span class="kn-message-body"><p><strong>' +
       msg +
       "</strong></p></span></div>"
   );
@@ -659,7 +659,7 @@ function handleMarkAsReceivedClick(event, id, view) {
     invoiceItems.forEach(function(item) {
       $.ajax({
         type: "POST",
-        url: "https://api.knack.com/v1/scenes/scene_/views/view_650/records",
+        url: "https://api.knack.com/v1/scenes/scene_123/views/view_650/records",
         headers: headers,
         data: JSON.stringify(item),
         contentType: "application/json"
@@ -678,9 +678,9 @@ function handleMarkAsReceivedClick(event, id, view) {
         })
         .fail(function() {
           $("#" + id + "-spinner").remove();
-          showErrorMessage(
+          appendErrorMessage(
             id,
-            view,
+            "#" + view.key,
             "Failed to mark " +
               item.field_409[0].identifier +
               " as received. Please try again."
@@ -755,9 +755,6 @@ function handleCreateInvoiceClick(event, id, view) {
     .find("option:selected")
     .text();
 
-  // Get selected invoice items to add to associate with selected invoice
-  var checkedItems = getCheckedItems();
-
   // For each checkedItem, add invoice record ID and record identifier to associate with invoice
   checkedItems.forEach(function(item) {
     var updatedInvoiceItemData = {
@@ -767,7 +764,7 @@ function handleCreateInvoiceClick(event, id, view) {
     $.ajax({
       type: "PUT",
       url:
-        "https://api.knack.com/v1/scenes/scene_/views/view_650/records/" +
+        "https://api.knack.com/v1/scenes/scene_123/views/view_650/records/" +
         item.id,
       headers: headers,
       data: JSON.stringify(updatedInvoiceItemData),
@@ -787,9 +784,9 @@ function handleCreateInvoiceClick(event, id, view) {
       })
       .fail(function() {
         $("#" + id + "-spinner").remove();
-        showErrorMessage(
+        appendErrorMessage(
           id,
-          view,
+          "#" + view.key + " .kn-records-nav",
           "Failed to add " +
             item.identifier +
             " to invoice " +
