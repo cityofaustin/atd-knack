@@ -599,6 +599,11 @@ function appendErrorMessage(id, selector, msg) {
 function handleMarkAsReceivedClick(event, id, view) {
   event.preventDefault();
 
+  // Set current record ID to fetch invoices from Knack API
+  var hrefArray = window.location.href.split("/");
+  var recordId = hrefArray[hrefArray.length - 2];
+  console.log(recordId);
+
   // Show spinner
   $("#" + id).append(
     '<span id="' +
@@ -630,7 +635,8 @@ function handleMarkAsReceivedClick(event, id, view) {
   var invoiceItems = [];
   $.ajax({
     url:
-      "https://api.knack.com/v1/scenes/scene_4/views/view_60/records?purchase-request-details_id=5db86847188b491db95d08f0",
+      "https://api.knack.com/v1/scenes/scene_4/views/view_60/records?purchase-request-details_id=" +
+      recordId,
     headers: headers
   }).then(function(res) {
     var records = res.records;
