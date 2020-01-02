@@ -216,3 +216,20 @@ a.small-button {
   transform: scale(2, 2);
   margin: 20px !important;
 }
+
+/* Hide purchase request column in Items table */
+#view_60 .field_20 {
+  visibility: hidden;
+}
+
+#view_60 tr.kn-table-totals > td:nth-child(13) {
+  visibility: hidden;
+}
+
+#view_16 .field_20 {
+  visibility: hidden;
+}
+
+#view_16 tr.kn-table-totals > td:nth-child(13) {
+  visibility: hidden;
+}

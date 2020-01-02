@@ -649,6 +649,7 @@ function handleMarkAsReceivedClick(event, id, view) {
           invoiceItem["field_409"] = [
             { id: record.id, identifier: record.field_15 }
           ]; // Item id and description => Invoice item description
+          invoiceItem["field_735"] = record.field_20_raw; // Purchase request => purchase request
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
           invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
