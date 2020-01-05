@@ -217,7 +217,7 @@ a.small-button {
   margin: 20px !important;
 }
 
-/* Hide purchase request column in Items table */
+/* Purchase Requests | Purchase Request Details | Hide purchase request column in Items table */
 #view_60 .field_20 {
   visibility: hidden;
 }
@@ -232,4 +232,9 @@ a.small-button {
 
 #view_16 tr.kn-table-totals > td:nth-child(13) {
   visibility: hidden;
+}
+
+/* Purchase Requests | Purchase Request Details | Success message */
+.success-msg {
+  background-color: #80d07e;
 }

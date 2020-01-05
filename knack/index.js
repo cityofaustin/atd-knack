@@ -593,6 +593,19 @@ function appendErrorMessage(id, selector, msg) {
   }, 6000);
 }
 
+function appendSuccessMessage(id, selector, msg) {
+  $(selector).append(
+    '<div id="' +
+      id +
+      '-success" class="kn-message success-msg"><span class="kn-message-body"><p><strong>' +
+      msg +
+      "</strong></p></span></div>"
+  );
+  setTimeout(function() {
+    $("#" + id + "-success").remove();
+  }, 6000);
+}
+
 ///// Create Invoice Items from Items /////
 
 // Create invoice items from items after selection and submission
@@ -673,6 +686,13 @@ function handleMarkAsReceivedClick(event, id, view) {
         .then(function(res) {
           // Remove spinner after invoice item record is created
           $("#" + id + "-spinner").remove();
+
+          // Display success message
+          appendSuccessMessage(
+            id,
+            "#" + view.key,
+            "Marked " + item.field_409[0].identifier + " as received."
+          );
 
           // Refetch data for invoice items table to reflect new invoice item records
           Knack.views["view_647"].model.fetch();
