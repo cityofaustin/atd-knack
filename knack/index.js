@@ -639,7 +639,7 @@ function handleMarkAsReceivedClick(event, id, view) {
   // Cycle through selected checkboxes
   function getCheckedItems() {
     var checkedItemIds = [];
-    $("#" + view.key + "tbody input[type=checkbox]:checked").each(function() {
+    $("#" + itemsView + " tbody input[type=checkbox]:checked").each(function() {
       // Get id
       var id = $(this)
         .closest("tr")
@@ -663,7 +663,7 @@ function handleMarkAsReceivedClick(event, id, view) {
       "https://api.knack.com/v1/scenes/" +
       scene +
       "/views/" +
-      view.key +
+      itemsView +
       "/records?purchase-request-details_id=" +
       recordId,
     headers: headers
@@ -790,7 +790,7 @@ function handleCreateInvoiceClick(event, id, view) {
   // Cycle through selected checkboxes
   function getCheckedItems() {
     var checkedItemIds = [];
-    $("#" + invoiceItemsView + "tbody input[type=checkbox]:checked").each(
+    $("#" + invoiceItemsView + " tbody input[type=checkbox]:checked").each(
       function() {
         // Get id
         var id = $(this)
