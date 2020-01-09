@@ -471,8 +471,21 @@ $(document).on("knack-view-render.view_636", function(event, page) {
 // not editable items table
 // "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_60"
 // editable: view_16
-// submit form
-// "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_638"
+
+// Set scenes and views
+var scene = "scene_4";
+
+// Items table
+var itemsView = "view_60";
+
+// Invoice Items table
+var invoiceItemsView = "view_647";
+
+// Invoices table
+var invoicesView = "view_282";
+
+// Invoice Items API view form scene and view
+var invoicesAPIViewConfig = { scene: "scene_123", view: "view_650" };
 
 // Set auth and headers for API calls
 var knackUserToken = Knack.getUserToken();
@@ -626,7 +639,7 @@ function handleMarkAsReceivedClick(event, id, view) {
   // Cycle through selected checkboxes
   function getCheckedItems() {
     var checkedItemIds = [];
-    $("#view_60 tbody input[type=checkbox]:checked").each(function() {
+    $("#" + view.key + "tbody input[type=checkbox]:checked").each(function() {
       // Get id
       var id = $(this)
         .closest("tr")
@@ -647,7 +660,11 @@ function handleMarkAsReceivedClick(event, id, view) {
   var invoiceItems = [];
   $.ajax({
     url:
-      "https://api.knack.com/v1/scenes/scene_4/views/view_60/records?purchase-request-details_id=" +
+      "https://api.knack.com/v1/scenes/" +
+      scene +
+      "/views/" +
+      view.key +
+      "/records?purchase-request-details_id=" +
       recordId,
     headers: headers
   }).then(function(res) {
@@ -678,7 +695,12 @@ function handleMarkAsReceivedClick(event, id, view) {
     invoiceItems.forEach(function(item) {
       $.ajax({
         type: "POST",
-        url: "https://api.knack.com/v1/scenes/scene_123/views/view_650/records",
+        url:
+          "https://api.knack.com/v1/scenes/" +
+          invoicesAPIViewConfig.scene +
+          "/views/" +
+          invoicesAPIViewConfig.view +
+          "/records",
         headers: headers,
         data: JSON.stringify(item),
         contentType: "application/json"
@@ -695,7 +717,7 @@ function handleMarkAsReceivedClick(event, id, view) {
           );
 
           // Refetch data for invoice items table to reflect new invoice item records
-          Knack.views["view_647"].model.fetch();
+          Knack.views[invoiceItemsView].model.fetch();
 
           // Clear all checkboxes
           $(".table-checkboxes").each(function(event) {
@@ -730,7 +752,11 @@ function addInvoicesDropdown(view) {
     var invoiceOptionsMarkup = "";
     $.ajax({
       url:
-        "https://api.knack.com/v1/scenes/scene_4/views/view_282/records?purchase-request-details_id=" +
+        "https://api.knack.com/v1/scenes/" +
+        scene +
+        "/views/" +
+        invoicesView +
+        "/records?purchase-request-details_id=" +
         recordId,
       headers: headers
     }).then(function(res) {
@@ -764,16 +790,18 @@ function handleCreateInvoiceClick(event, id, view) {
   // Cycle through selected checkboxes
   function getCheckedItems() {
     var checkedItemIds = [];
-    $("#view_647 tbody input[type=checkbox]:checked").each(function() {
-      // Get id
-      var id = $(this)
-        .closest("tr")
-        .attr("id");
-      var identifier = $(this)
-        .closest("tr")
-        .children()[2].innerText;
-      checkedItemIds.push({ id: id, identifier: identifier });
-    });
+    $("#" + invoiceItemsView + "tbody input[type=checkbox]:checked").each(
+      function() {
+        // Get id
+        var id = $(this)
+          .closest("tr")
+          .attr("id");
+        var identifier = $(this)
+          .closest("tr")
+          .children()[2].innerText;
+        checkedItemIds.push({ id: id, identifier: identifier });
+      }
+    );
     return checkedItemIds;
   }
 
@@ -793,7 +821,11 @@ function handleCreateInvoiceClick(event, id, view) {
     $.ajax({
       type: "PUT",
       url:
-        "https://api.knack.com/v1/scenes/scene_123/views/view_650/records/" +
+        "https://api.knack.com/v1/scenes/" +
+        invoicesAPIViewConfig.scene +
+        "/views/" +
+        invoicesAPIViewConfig.view +
+        "/records/" +
         item.id,
       headers: headers,
       data: JSON.stringify(updatedInvoiceItemData),
@@ -804,7 +836,7 @@ function handleCreateInvoiceClick(event, id, view) {
         $("#" + id + "-spinner").remove();
 
         // Refetch data for invoice items table to reflect new association
-        Knack.views["view_647"].model.fetch();
+        Knack.views[invoiceItemsView].model.fetch();
 
         // Clear all checkboxes
         $(".table-checkboxes").each(function(event) {
@@ -829,11 +861,11 @@ function handleCreateInvoiceClick(event, id, view) {
 ///// View Render Events /////
 
 // Add checkboxes to a items and invoice items tables
-$(document).on("knack-view-render.view_60", function(event, view) {
+$(document).on("knack-view-render." + itemsView, function(event, view) {
   addCheckboxes(view);
 });
 
-$(document).on("knack-view-render.view_647", function(event, view) {
+$(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
   addCheckboxes(view);
 });
 
@@ -848,7 +880,7 @@ $(document).on("knack-view-render.view_117", function(event, view) {
 });
 
 // Add "Add to selected invoice" button to create invoice item records from items table
-$(document).on("knack-view-render.view_647", function(event, view) {
+$(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
   appendSubmitButton(
     "Add to selected invoice",
     "#" + view.key,
