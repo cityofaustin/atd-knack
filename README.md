@@ -1,12 +1,10 @@
-# atd-knack
-Knack primary repository to house all app code
+# Atd-knack
+Custom code, documentation, and media for [Data & Technology Services](http://transportation.austintexas.io/about/)' [Knack](https://www.knack.com/) applications. 
 
-The [Data & Technology Services](http://transportation.austintexas.io/about/) team acts as a central technology unit servicing the entire Transportation department. Services include:
+### Apps
 
-## Application Support
-- Enterprise application support
-- Enterprise application configuration
-- Process refinement
-- Data creation and design
+- [VZA App](https://atd.knack.com/vza) - 
+App to manage Austin Transportation's Vision Zero in Action enforcement activities | [issues](https://github.com/cityofaustin/atd-data-tech/labels/Product%3A%20VZA%20App)
 
-All issues are maintained [here](https://github.com/cityofaustin/atd-data-tech/) in `atd-data-tech` repository.
+---
+Project management issues relating to this work and other DTS products are managed in https://github.com/cityofaustin/atd-data-tech/.
