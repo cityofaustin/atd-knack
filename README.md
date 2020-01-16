@@ -7,4 +7,4 @@ Custom code, documentation, and media for [Data & Technology Services](http://tr
 App to manage Austin Transportation's Vision Zero in Action enforcement activities | [issues](https://github.com/cityofaustin/atd-data-tech/labels/Product%3A%20VZA%20App)
 
 ---
-Project management issues relating to this work and other DTS products are managed in https://github.com/cityofaustin/atd-data-tech/.
+_Project management issues relating to this work and other DTS products are managed in https://github.com/cityofaustin/atd-data-tech/._
