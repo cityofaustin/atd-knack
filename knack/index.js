@@ -477,6 +477,7 @@ var scene = "scene_4";
 
 // Items table
 var itemsView = "view_60";
+var itemsEditableView = "view_16";
 
 // Invoice Items table
 var invoiceItemsView = "view_647";
@@ -637,9 +638,9 @@ function handleMarkAsReceivedClick(event, id, view) {
   );
 
   // Cycle through selected checkboxes
-  function getCheckedItems() {
+  function getCheckedItems(view) {
     var checkedItemIds = [];
-    $("#" + itemsView + " tbody input[type=checkbox]:checked").each(function() {
+    $("#" + view + " tbody input[type=checkbox]:checked").each(function() {
       // Get id
       var id = $(this)
         .closest("tr")
@@ -653,8 +654,18 @@ function handleMarkAsReceivedClick(event, id, view) {
     return checkedItemIds;
   }
 
-  // Get checked item IDs and whether items are inventory items
-  var checkedItems = getCheckedItems();
+  // Get checked item IDs and whether items are inventory items (editable or non-editable view)
+  var itemsToCreateInvoiceItems = [];
+  var checkedEditableItems = getCheckedItems(itemsEditableView);
+  var checkedItems = getCheckedItems(itemsView);
+  if (checkedEditableItems.length === 0 && checkedItems.length === 0) {
+    // Remove spinner if no checkboxes selected
+    $("#" + id + "-spinner").remove();
+  } else if (checkedEditableItems.length !== 0) {
+    itemsToCreateInvoiceItems = checkedEditableItems;
+  } else if (checkedItems.length !== 0) {
+    itemsToCreateInvoiceItems = checkedItems;
+  }
 
   // Retrieve Knack data about item records in Items table
   var invoiceItems = [];
@@ -681,7 +692,6 @@ function handleMarkAsReceivedClick(event, id, view) {
           ]; // Item id and description => Invoice item description
           invoiceItem["field_735"] = record.field_20_raw; // Purchase request => purchase request
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
-          invoiceItem["field_732"] = record.field_14; // Quantity => Quantity
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
 
           invoiceItems.push(invoiceItem);
@@ -862,6 +872,10 @@ function handleCreateInvoiceClick(event, id, view) {
 
 // Add checkboxes to a items and invoice items tables
 $(document).on("knack-view-render." + itemsView, function(event, view) {
+  addCheckboxes(view);
+});
+
+$(document).on("knack-view-render." + itemsEditableView, function(event, view) {
   addCheckboxes(view);
 });
 
