@@ -656,15 +656,20 @@ function handleMarkAsReceivedClick(event, id, view) {
 
   // Get checked item IDs and whether items are inventory items (editable or non-editable view)
   var itemsToCreateInvoiceItems = [];
+  var viewForInventoryItemQuery = "";
   var checkedEditableItems = getCheckedItems(itemsEditableView);
   var checkedItems = getCheckedItems(itemsView);
+
+  // Determine if admin or not and assign view to query
   if (checkedEditableItems.length === 0 && checkedItems.length === 0) {
     // Remove spinner if no checkboxes selected
     $("#" + id + "-spinner").remove();
   } else if (checkedEditableItems.length !== 0) {
     itemsToCreateInvoiceItems = checkedEditableItems;
+    viewForInventoryItemQuery = itemsEditableView;
   } else if (checkedItems.length !== 0) {
     itemsToCreateInvoiceItems = checkedItems;
+    viewForInventoryItemQuery = itemsView;
   }
 
   // Retrieve Knack data about item records in Items table
@@ -674,7 +679,7 @@ function handleMarkAsReceivedClick(event, id, view) {
       "https://api.knack.com/v1/scenes/" +
       scene +
       "/views/" +
-      itemsView +
+      viewForInventoryItemQuery +
       "/records?purchase-request-details_id=" +
       recordId,
     headers: headers
@@ -682,7 +687,7 @@ function handleMarkAsReceivedClick(event, id, view) {
     var records = res.records;
     // Only create record if it is an inventory item and if it is checked
     records.forEach(function(record) {
-      checkedItems.forEach(function(item) {
+      itemsToCreateInvoiceItems.forEach(function(item) {
         if (record.id === item.id && item.isInventoryItem === "Yes") {
           // Prepare payload to create Invoice Item record
           var invoiceItem = {};
