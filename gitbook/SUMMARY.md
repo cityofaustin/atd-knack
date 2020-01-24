@@ -11,6 +11,7 @@
 * [Single Sign On](knack/single-sign-on/README.md)
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [CODE: Mobile Optimization](knack/mobile-optimization.md)
+* [CODE: Big Buttons](knack/code-big-buttons.md)
 
 ## DTS Portal
 
