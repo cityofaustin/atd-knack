@@ -1,6 +1,6 @@
 # Table of contents
 
-* [DTS Portal](README.md)
+* [Table of Contents](README.md)
 
 ## DTS Portal
 
