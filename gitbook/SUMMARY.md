@@ -9,6 +9,7 @@
 * [Style Guide](knack/style-guide.md)
 * [Code Version Control](knack/code-version-control.md)
 * [Mobile Optimization](knack/mobile-optimization.md)
+* [Single Sign On](knack/single-sign-on.md)
 
 ## DTS Portal
 
