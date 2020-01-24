@@ -1,4 +1,4 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [ATD-Knack repo](README.md)
 
