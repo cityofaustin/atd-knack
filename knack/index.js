@@ -646,9 +646,18 @@ function handleMarkAsReceivedClick(event, id, view) {
         .closest("tr")
         .attr("id");
       // Get inventory item value (Yes or No)
+      // Inventory? field is in different column in view_16 (column index 3) and view_60 (column index 2)
+      // Let's define which column to get value from based on view
+      var tableColumnIndex;
+      if (view === "view_16") {
+        tableColumnIndex = 3;
+      } else if (view === "view_60") {
+        tableColumnIndex = 2;
+      }
+
       var isInventoryItem = $(this)
         .closest("tr")
-        .children()[2].innerText;
+        .children()[tableColumnIndex].innerText;
       checkedItemIds.push({ id: id, isInventoryItem: isInventoryItem });
     });
     return checkedItemIds;
@@ -685,6 +694,7 @@ function handleMarkAsReceivedClick(event, id, view) {
     headers: headers
   }).then(function(res) {
     var records = res.records;
+
     // Only create record if it is an inventory item and if it is checked
     records.forEach(function(record) {
       itemsToCreateInvoiceItems.forEach(function(item) {
@@ -762,7 +772,7 @@ function addInvoicesDropdown(view) {
   var recordId = hrefArray[hrefArray.length - 2];
 
   // Append dropdown if it doesn't already exist
-  if ($("#kn-input-invoice-select").length === 0) {
+  if (!$("#kn-input-invoice-select").length) {
     // Fetch invoices for record and create options HTML for select dropdown
     var invoiceOptionsMarkup = "";
     $.ajax({
@@ -898,13 +908,15 @@ $(document).on("knack-view-render.view_117", function(event, view) {
   );
 });
 
-// Add "Add to selected invoice" button to create invoice item records from items table
 $(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
-  appendSubmitButton(
-    "Add to selected invoice",
-    "#" + view.key,
-    handleCreateInvoiceClick,
-    view
-  );
   addInvoicesDropdown(view);
+  // Wait until dropdown is added before appending submit button to it
+  elementLoaded("#kn-input-invoice-select", function() {
+    appendSubmitButton(
+      "Add to selected invoice",
+      "#kn-input-invoice-select",
+      handleCreateInvoiceClick,
+      view
+    );
+  });
 });
