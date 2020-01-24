@@ -1,7 +1,5 @@
 # Style Guide
 
-
-
 ## Table of Contents
 
 * Banner Image
