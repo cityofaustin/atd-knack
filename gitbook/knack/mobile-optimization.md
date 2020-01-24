@@ -1,4 +1,4 @@
-# Mobile Optimization
+# CODE: Mobile Optimization
 
 This is our code documentation wiki page for Knack apps.
 

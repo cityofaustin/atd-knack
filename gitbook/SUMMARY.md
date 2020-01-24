@@ -8,9 +8,9 @@
 * [Functionality Guide](knack/functionality-guide.md)
 * [Style Guide](knack/style-guide.md)
 * [Code Version Control](knack/code-version-control.md)
-* [Mobile Optimization](knack/mobile-optimization.md)
 * [Single Sign On](knack/single-sign-on/README.md)
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
+* [CODE: Mobile Optimization](knack/mobile-optimization.md)
 
 ## DTS Portal
 
