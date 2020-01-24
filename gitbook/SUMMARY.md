@@ -5,6 +5,7 @@
 ## Knack
 
 * [Application Overview](knack/application-overview.md)
+* [Style Guide](knack/style-guide.md)
 
 ## DTS Portal
 
