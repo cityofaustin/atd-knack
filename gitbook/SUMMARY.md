@@ -8,6 +8,7 @@
 * [Functionality Guide](knack/functionality-guide.md)
 * [Style Guide](knack/style-guide.md)
 * [Code Version Control](knack/code-version-control.md)
+* [Mobile Optimization](knack/mobile-optimization.md)
 
 ## DTS Portal
 
