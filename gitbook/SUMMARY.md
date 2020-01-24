@@ -18,6 +18,7 @@
 
 * [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
 * [Cameras](data-tracker/cameras.md)
+* [Performance Measures](data-tracker/performance-measures.md)
 
 ## DTS Portal
 
