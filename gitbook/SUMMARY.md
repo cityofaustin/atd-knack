@@ -17,6 +17,7 @@
 ## DATA TRACKER
 
 * [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
+* [Cameras](data-tracker/cameras.md)
 
 ## DTS Portal
 
