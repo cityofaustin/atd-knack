@@ -2,8 +2,6 @@
 
 This is our code documentation wiki page for Knack apps.
 
-## \*\*\*\*
-
 ## Forms
 
 ### Increase size of buttons \(ex. Submit buttons\)
