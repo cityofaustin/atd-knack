@@ -12,6 +12,7 @@
 ## DTS Portal
 
 * [Data set inventory](dts-portal/dts-portal.md)
+* [Application Inventory](dts-portal/application-inventory.md)
 
 ## ROW Tracker
 
