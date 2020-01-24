@@ -13,11 +13,3 @@
 9. Lastly, you should assign a reviewer to check your code. 
    1. _\(On the right side of the page find the cog icon next to reviewers, and select one of your colleagues to review the code.\)_
 
-#### Migrate Code from these repos to atd-knack repo
-
-1. [Data Tracker](https://github.com/cityofaustin/atd-knack-data-tracker)
-2. [Street Banners](https://github.com/cityofaustin/atd-knack-street-banner)
-3. [Finance & Purchasing](https://github.com/cityofaustin/atd-knack-finance-purchasing)
-4. [Forms](https://github.com/cityofaustin/atd-knack-forms)
-5. [Visitor Log](https://github.com/cityofaustin/atd-knack-visitor-log)
-
