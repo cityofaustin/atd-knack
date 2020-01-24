@@ -7,6 +7,7 @@
 * [Application Overview](knack/application-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
 * [Style Guide](knack/style-guide.md)
+* [Code Version Control](knack/code-version-control.md)
 
 ## DTS Portal
 
