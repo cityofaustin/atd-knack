@@ -33,7 +33,7 @@ _They \(CTM\) will need to provide you with their ADFS metadata, which contains 
 
 **Identity Provider's certificate**: Find the provider certificate in the metadata under the Signature tag, then the KeyInfo tag, then the X509Certificate tag.
 
-![](../.gitbook/assets/x509_cert.png)
+![](../../.gitbook/assets/x509_cert.png)
 
 ![x509](https://github.com/cityofaustin/atd-data-tech/blob/master/images/x509_cert.png) You will need to copy the text from the certificate and paste it into the Knack field. Note that you will also need to prepend `-----BEGIN CERTIFICATE-----` and append `-----END CERTIFICATE-----` to the data you paste in the certificate field.
 
