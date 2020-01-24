@@ -901,7 +901,7 @@ $(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
 // Add "Mark as Received" button to create invoice item records from items table
 $(document).on("knack-view-render.view_117", function(event, view) {
   appendSubmitButton(
-    "Mark as received",
+    "Mark as Received",
     "#" + view.key + " > div.control",
     handleMarkAsReceivedClick,
     view
@@ -913,7 +913,7 @@ $(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
   // Wait until dropdown is added before appending submit button to it
   elementLoaded("#kn-input-invoice-select", function() {
     appendSubmitButton(
-      "Add to selected invoice",
+      "Add to Selected Invoice",
       "#kn-input-invoice-select",
       handleCreateInvoiceClick,
       view
