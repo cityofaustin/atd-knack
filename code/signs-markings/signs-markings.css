@@ -1,0 +1,243 @@
+/* hide attachment type column (field contents are extracted via JS */
+div.view_2107 .field_2403 {
+  display: none;
+}
+div.view_2108 .field_2403 {
+  display: none;
+}
+div.view_2565 .field_2403 {
+  display: none;
+}
+
+/* move and style lat/lon fields and button to overlay React app map in View Work Order Details view (scene_1028) */
+#lat-lon-form {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+  margin-top: -145px;
+  padding-bottom: 40px;
+}
+
+#lat-lon-form button {
+  margin: -10px 0 0 10px;
+  color: #07467c !important;
+  background: white !important;
+  border: 3px solid #07467c;
+  font-size: 22px;
+  font-weight: bold;
+  height: 44px;
+  padding: 0 15px;
+}
+
+.big-button-container {
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  padding: 10px;
+  margin: 20px;
+  max-width: 16em;
+}
+
+.big-button-container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.fa {
+  vertical-align: middle;
+}
+
+a.big-button {
+  text-decoration: none;
+}
+
+a.small-button {
+  text-decoration: none;
+}
+
+.small-button-container {
+  padding: 5px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #828282;
+  color: white;
+}
+
+.small-button-container:hover {
+  background-color: #4c4c4c;
+  cursor: pointer;
+}
+
+/* Make back link in Location Details View bold, larger, and add FontAwesome back arrow */
+#kn-scene_1039 > div.kn-view.kn-back-link > a {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+#kn-scene_1039 > div.kn-view.kn-back-link > a:before {
+  font-family: "FontAwesome";
+  content: "\f0a8";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+
+/* Mobile Styles */
+@media (max-width: 800px) {
+  /* Make buttons with type="submit" bigger */
+  button[type="submit"] {
+    height: 64px !important;
+    font-size: 32px !important;
+    min-width: fit-content;
+    width: 100%;
+  }
+
+  /* Override width set for submit buttons to prevent overlaying map controls */
+  #lat-lon-form > form > div > button {
+    width: 50%;
+  }
+
+  /* Increase font size of form field labels */
+  .kn-label {
+    font-size: 22px;
+  }
+
+  /* Increase height of text fields */
+  input[type="text"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+  /* Increase height of select fields */
+  .chzn-single {
+    height: 48px !important;
+  }
+
+  .kn-select {
+    height: 48px !important;
+  }
+
+  select {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+  /* Increase height of container surrounding select fields */
+  .chzn-container {
+    height: 48px;
+    font-size: 22px !important;
+  }
+
+  .chzn-container > a > span {
+    font-size: 22px !important;
+  }
+
+  /* Increase font size of dropdown text in select fields */
+  .chzn-drop {
+    font-size: 22px !important;
+  }
+
+  /* Increase size of search button */
+  .kn-button.search {
+    height: 48px;
+  }
+
+  /* Increase font size of checkbox options */
+  .option.checkbox {
+    font-size: 22px;
+  }
+
+  /* #214 Increase default menu button size */
+  #view_2901 > div > .kn-button,
+  #view_2684 > div > .kn-button,
+  #view_2123 > div > .kn-button,
+  #view_2661 > div > .kn-button,
+  #view_1912 > div > .kn-button,
+  #view_2307 > div > .kn-button,
+  #view_2741 > div > .kn-button {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* END #214 */
+}
+
+/* #213 */
+.back-to-top-link {
+  color: #07467c;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 700 !important;
+  font-size: 18px;
+}
+
+.back-to-top-link:before {
+  font-family: "FontAwesome";
+  content: "\f0aa";
+  display: inline-block;
+  padding-right: 3px;
+  vertical-align: middle;
+  font-weight: 900;
+}
+/* END #213 */
+
+/* #233 Choose File Button Size */
+@media (max-width: 800px) {
+  #view_2985 input[type="file"],
+  #view_2742 input[type="file"] {
+    display: none;
+  }
+
+  #view_2985 .custom-file-upload,
+  #view_2742 .custom-file-upload {
+    cursor: pointer;
+    font-size: 22px;
+    height: 48px;
+    margin: 10px 0 20px;
+    width: 50%;
+  }
+}
+
+@media (min-width: 801px) {
+  .custom-file-upload {
+    display: none;
+  }
+}
+/* END #233 */
+
+#view_3207 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(2) > a{
+  color: white;
+  background-color: #3366cc;
+}
+
+#view_3207 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(3) > a{
+  color: white;
+  background-color: #ff0000;
+}
+#view_3207 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(4) > a{
+  color: white;
+  background-color: #008000;
+}
+#view_3207 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(5) > a{
+  color: white;
+  background-color: #ffa500;
+}
+
+#view_3217 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(2) > a{
+  color: white;
+  background-color: #3366cc;
+}
+
+#view_3217 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(3) > a{
+  color: white;
+  background-color: #ff0000;
+}
+#view_3217 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(4) > a{
+  color: white;
+  background-color: #008000;
+}
+#view_3217 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(5) > a{
+  color: white;
+  background-color: #ffa500;
