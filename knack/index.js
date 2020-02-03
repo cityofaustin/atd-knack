@@ -695,10 +695,12 @@ function handleMarkAsReceivedClick(event, id, view) {
   }).then(function(res) {
     var records = res.records;
 
-    // Only create record if it is an inventory item and if it is checked
+    // Create invoice item record if inventory item is checked
     records.forEach(function(record) {
       itemsToCreateInvoiceItems.forEach(function(item) {
-        if (record.id === item.id && item.isInventoryItem === "Yes") {
+        // If it is an inventory item and is checked
+        // if (record.id === item.id && item.isInventoryItem === "Yes") {
+        if (record.id === item.id) {
           // Prepare payload to create Invoice Item record
           var invoiceItem = {};
 
