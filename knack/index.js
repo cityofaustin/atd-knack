@@ -700,6 +700,7 @@ function handleMarkAsReceivedClick(event, id, view) {
       itemsToCreateInvoiceItems.forEach(function(item) {
         // If it is an inventory item and is checked
         // if (record.id === item.id && item.isInventoryItem === "Yes") {
+        // Commented out in case reverting back to only marking items designated as inventory items as received
         if (record.id === item.id) {
           // Prepare payload to create Invoice Item record
           var invoiceItem = {};
