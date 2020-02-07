@@ -475,5 +475,54 @@ $(document).on('knack-view-render.view_2465', function(event, page) {
  	});
  });
 
-//////////////////////////////////////////////////
-//////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////
+// set random password when adding an account.				//
+// the user will not use this pw. they login with ADFS		//
+//////////////////////////////////////////////////////////////
+
+function generatePassword() {
+    var length = 20,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal +  "!"; // add  a special character, per app requirements
+}
+
+$(document).on('knack-view-render.view_1294', function(event, scene) {
+    // set a random password when creating a new account. the user will not
+    // use this pw. they login with ADFS
+    var pw = generatePassword();
+    $('input[name$="password"]').val(pw);
+    $('input[name$="password_confirmation"]').val(pw);
+    
+});
+
+
+///////////////////////////////
+//// Inventory API         ////
+///////////////////////////////
+$(document).on('knack-form-submit.any', function(event, view, txn) {
+    // call knack api /inventory endpoint on select form submissions
+  	// view_1197 : edit work order
+    // view_2661: add transaction
+    // view_2669: edit transaction
+    // view_2670: cancel transaction
+    var inventoryPagesKnackApi = ["view_2661", "view_2670", "view_2669", "view_1197"];
+
+    if (!inventoryPagesKnackApi.includes(view.key)) {
+        return;
+    }
+
+    var endpoint = "https://knack-api.austinmobility.io/inventory";
+    var src = Knack.application_id; // data tracker
+    var dest = "5b422c9b13774837e54ed814"; // finance prod
+    var url = endpoint + "?src=" + src + "&dest=" + dest;
+
+    // post inventory request
+    $.post(url).done(function (response) {
+        console.log(response);
+    });
+})
