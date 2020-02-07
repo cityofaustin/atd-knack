@@ -630,6 +630,11 @@ function handleMarkAsReceivedClick(event, id, view) {
   var hrefArray = window.location.href.split("/");
   var recordId = hrefArray[hrefArray.length - 2];
 
+  // Check DOM for spinner to prevent multiple requests at one time
+  if ($("#" + id + "-spinner").length) {
+    return;
+  }
+
   // Show spinner
   $("#" + id).append(
     '<span id="' +
@@ -807,6 +812,11 @@ function addInvoicesDropdown(view) {
 // Associate invoice items with invoice after selection and submission
 function handleCreateInvoiceClick(event, id, view) {
   event.preventDefault();
+
+  // Check DOM for spinner to prevent multiple requests at one time
+  if ($("#" + id + "-spinner").length) {
+    return;
+  }
 
   // Show spinner
   $("#" + id).append(
