@@ -830,18 +830,16 @@ function handleCreateInvoiceClick(event, id, view) {
   // Cycle through selected checkboxes
   function getCheckedItems() {
     var checkedItemIds = [];
-    $("#" + invoiceItemsView + " tbody input[type=checkbox]:checked").each(
-      function() {
-        // Get id
-        var id = $(this)
-          .closest("tr")
-          .attr("id");
-        var identifier = $(this)
-          .closest("tr")
-          .children()[2].innerText;
-        checkedItemIds.push({ id: id, identifier: identifier });
-      }
-    );
+    $("#" + view.key + " tbody input[type=checkbox]:checked").each(function() {
+      // Get id
+      var id = $(this)
+        .closest("tr")
+        .attr("id");
+      var identifier = $(this)
+        .closest("tr")
+        .children()[2].innerText;
+      checkedItemIds.push({ id: id, identifier: identifier });
+    });
     return checkedItemIds;
   }
 
@@ -876,7 +874,7 @@ function handleCreateInvoiceClick(event, id, view) {
         $("#" + id + "-spinner").remove();
 
         // Refetch data for invoice items table to reflect new association
-        Knack.views[view].model.fetch();
+        Knack.views[view.key].model.fetch();
 
         // Clear all checkboxes
         $(".table-checkboxes").each(function(event) {
