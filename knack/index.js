@@ -466,11 +466,7 @@ $(document).on("knack-view-render.view_636", function(event, page) {
   );
 });
 
-//////// Testing Checkboxes /////////
-
-// not editable items table
-// "https://builder.knack.com/atd/29-oct-2019--test-finance-and-purchasing-system#pages/scene_4/views/view_60"
-// editable: view_16
+//////// Inventory Checkboxes (scene_4) /////////
 
 // Set scenes and views
 var scene = "scene_4";
@@ -480,18 +476,19 @@ var itemsView = "view_60";
 var itemsEditableView = "view_16";
 
 // Invoice Items table
-var invoiceItemsView = "view_647";
+var invoiceItemsAdminView = "view_681";
+var invoiceItemsNonAdminView = "view_717";
 
 // Invoices table
 var invoicesView = "view_282";
 
 // Invoice Items API view form scene and view
-var invoicesAPIViewConfig = { scene: "scene_123", view: "view_650" };
+var invoicesAPIViewConfig = { scene: "scene_123", view: "view_698" };
 
 // Set auth and headers for API calls
 var knackUserToken = Knack.getUserToken();
 var headers = {
-  "X-Knack-Application-Id": "5db867d1edbb350015f9eaec",
+  "X-Knack-Application-Id": "5b422c9b13774837e54ed814",
   "X-Knack-REST-API-KEY": "knack",
   Authorization: knackUserToken,
   "content-type": "application/json"
@@ -673,17 +670,20 @@ function handleMarkAsReceivedClick(event, id, view) {
   var viewForInventoryItemQuery = "";
   var checkedEditableItems = getCheckedItems(itemsEditableView);
   var checkedItems = getCheckedItems(itemsView);
+  var invoiceItemsView = "";
 
-  // Determine if admin or not and assign view to query
+  // Determine if admin or not and assign view to query, assign invoice items table view
   if (checkedEditableItems.length === 0 && checkedItems.length === 0) {
     // Remove spinner if no checkboxes selected
     $("#" + id + "-spinner").remove();
   } else if (checkedEditableItems.length !== 0) {
     itemsToCreateInvoiceItems = checkedEditableItems;
     viewForInventoryItemQuery = itemsEditableView;
+    invoiceItemsView = invoiceItemsAdminView;
   } else if (checkedItems.length !== 0) {
     itemsToCreateInvoiceItems = checkedItems;
     viewForInventoryItemQuery = itemsView;
+    invoiceItemsView = invoiceItemsNonAdminView;
   }
 
   // Retrieve Knack data about item records in Items table
@@ -713,7 +713,7 @@ function handleMarkAsReceivedClick(event, id, view) {
           invoiceItem["field_409"] = [
             { id: record.id, identifier: record.field_15 }
           ]; // Item id and description => Invoice item description
-          invoiceItem["field_735"] = record.field_20_raw; // Purchase request => purchase request
+          invoiceItem["field_773"] = record.field_20_raw; // Purchase request => purchase request
           invoiceItem["field_422"] = record.field_38_raw; // Total Cost => Amount Due
           invoiceItem["field_733"] = "Yes"; // Mark Received as "Yes"
 
@@ -750,6 +750,7 @@ function handleMarkAsReceivedClick(event, id, view) {
           );
 
           // Refetch data for invoice items table to reflect new invoice item records
+
           Knack.views[invoiceItemsView].model.fetch();
 
           // Clear all checkboxes
@@ -794,13 +795,14 @@ function addInvoicesDropdown(view) {
       headers: headers
     }).then(function(res) {
       // For each record, create an option tag for select menu
+      console.log(res);
       res.records.forEach(function(record) {
         invoiceOptionsMarkup +=
           '<option value="' + record.id + '">' + record.field_309 + "</option>";
       });
 
       // Add dropdown populated with invoice options
-      $("#" + view.key + " p.kn-description").append(
+      $("#" + view.key + " div.view-header").append(
         '<div class="kn-input kn-input-select control" id="kn-input-invoice-select" data-input-id="invoice-select"><div class="kn-select"><div class="kn-select"><select data-placeholder="Select" id="invoice-select" name="invoice-select" style="vertical-align: bottom;" class="select"><option value="" selected="">Select...</option>' +
           invoiceOptionsMarkup +
           "</select></div></div></div>"
@@ -874,7 +876,7 @@ function handleCreateInvoiceClick(event, id, view) {
         $("#" + id + "-spinner").remove();
 
         // Refetch data for invoice items table to reflect new association
-        Knack.views[invoiceItemsView].model.fetch();
+        Knack.views[view].model.fetch();
 
         // Clear all checkboxes
         $(".table-checkboxes").each(function(event) {
@@ -907,7 +909,17 @@ $(document).on("knack-view-render." + itemsEditableView, function(event, view) {
   addCheckboxes(view);
 });
 
-$(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
+$(document).on("knack-view-render." + invoiceItemsAdminView, function(
+  event,
+  view
+) {
+  addCheckboxes(view);
+});
+
+$(document).on("knack-view-render." + invoiceItemsNonAdminView, function(
+  event,
+  view
+) {
   addCheckboxes(view);
 });
 
@@ -921,7 +933,26 @@ $(document).on("knack-view-render.view_117", function(event, view) {
   );
 });
 
-$(document).on("knack-view-render." + invoiceItemsView, function(event, view) {
+$(document).on("knack-view-render." + invoiceItemsAdminView, function(
+  event,
+  view
+) {
+  addInvoicesDropdown(view);
+  // Wait until dropdown is added before appending submit button to it
+  elementLoaded("#kn-input-invoice-select", function() {
+    appendSubmitButton(
+      "Add to Selected Invoice",
+      "#kn-input-invoice-select",
+      handleCreateInvoiceClick,
+      view
+    );
+  });
+});
+
+$(document).on("knack-view-render." + invoiceItemsNonAdminView, function(
+  event,
+  view
+) {
   addInvoicesDropdown(view);
   // Wait until dropdown is added before appending submit button to it
   elementLoaded("#kn-input-invoice-select", function() {
