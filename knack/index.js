@@ -795,7 +795,6 @@ function addInvoicesDropdown(view) {
       headers: headers
     }).then(function(res) {
       // For each record, create an option tag for select menu
-      console.log(res);
       res.records.forEach(function(record) {
         invoiceOptionsMarkup +=
           '<option value="' + record.id + '">' + record.field_309 + "</option>";
@@ -898,67 +897,82 @@ function handleCreateInvoiceClick(event, id, view) {
 
 ///// View Render Events /////
 
+// Check if user only has one role and it is "User" (object_10)
+function isUserRoleOnlyUser() {
+  var roles = Knack.getUserRoles();
+  if (roles.length === 1 && roles[0] === "object_10") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 // Add checkboxes to a items and invoice items tables
-$(document).on("knack-view-render." + itemsView, function(event, view) {
-  addCheckboxes(view);
-});
+if (!isUserRoleOnlyUser()) {
+  $(document).on("knack-view-render." + itemsView, function(event, view) {
+    addCheckboxes(view);
+  });
 
-$(document).on("knack-view-render." + itemsEditableView, function(event, view) {
-  addCheckboxes(view);
-});
-
-$(document).on("knack-view-render." + invoiceItemsAdminView, function(
-  event,
-  view
-) {
-  addCheckboxes(view);
-});
-
-$(document).on("knack-view-render." + invoiceItemsNonAdminView, function(
-  event,
-  view
-) {
-  addCheckboxes(view);
-});
-
-// Add "Mark as Received" button to create invoice item records from items table
-$(document).on("knack-view-render.view_117", function(event, view) {
-  appendSubmitButton(
-    "Mark as Received",
-    "#" + view.key + " > div.control",
-    handleMarkAsReceivedClick,
+  $(document).on("knack-view-render." + itemsEditableView, function(
+    event,
     view
-  );
-});
+  ) {
+    addCheckboxes(view);
+  });
 
-$(document).on("knack-view-render." + invoiceItemsAdminView, function(
-  event,
-  view
-) {
-  addInvoicesDropdown(view);
-  // Wait until dropdown is added before appending submit button to it
-  elementLoaded("#kn-input-invoice-select", function() {
+  $(document).on("knack-view-render." + invoiceItemsAdminView, function(
+    event,
+    view
+  ) {
+    addCheckboxes(view);
+  });
+
+  $(document).on("knack-view-render." + invoiceItemsNonAdminView, function(
+    event,
+    view
+  ) {
+    addCheckboxes(view);
+  });
+
+  // Add "Mark as Received" button to create invoice item records from items table
+  $(document).on("knack-view-render.view_117", function(event, view) {
     appendSubmitButton(
-      "Add to Selected Invoice",
-      "#kn-input-invoice-select",
-      handleCreateInvoiceClick,
+      "Mark as Received",
+      "#" + view.key + " > div.control",
+      handleMarkAsReceivedClick,
       view
     );
   });
-});
 
-$(document).on("knack-view-render." + invoiceItemsNonAdminView, function(
-  event,
-  view
-) {
-  addInvoicesDropdown(view);
-  // Wait until dropdown is added before appending submit button to it
-  elementLoaded("#kn-input-invoice-select", function() {
-    appendSubmitButton(
-      "Add to Selected Invoice",
-      "#kn-input-invoice-select",
-      handleCreateInvoiceClick,
-      view
-    );
+  $(document).on("knack-view-render." + invoiceItemsAdminView, function(
+    event,
+    view
+  ) {
+    addInvoicesDropdown(view);
+    // Wait until dropdown is added before appending submit button to it
+    elementLoaded("#kn-input-invoice-select", function() {
+      appendSubmitButton(
+        "Add to Selected Invoice",
+        "#kn-input-invoice-select",
+        handleCreateInvoiceClick,
+        view
+      );
+    });
   });
-});
+
+  $(document).on("knack-view-render." + invoiceItemsNonAdminView, function(
+    event,
+    view
+  ) {
+    addInvoicesDropdown(view);
+    // Wait until dropdown is added before appending submit button to it
+    elementLoaded("#kn-input-invoice-select", function() {
+      appendSubmitButton(
+        "Add to Selected Invoice",
+        "#kn-input-invoice-select",
+        handleCreateInvoiceClick,
+        view
+      );
+    });
+  });
+}
