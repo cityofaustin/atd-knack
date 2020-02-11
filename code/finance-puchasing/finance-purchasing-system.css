@@ -1,0 +1,112 @@
+.big-button-container {
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  padding: 10px;
+  margin: 20px;
+  max-width: 15em;
+}
+
+.big-button-container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.small-button-container {
+  padding: 5px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #babbbc;
+  color: white;
+}
+
+.small-button-container:hover {
+  background-color: #4c4c4c;
+  cursor: pointer;
+}
+
+.fa {
+  vertical-align: middle;
+}
+
+a.big-button {
+  text-decoration: none;
+}
+
+a.small-button {
+  text-decoration: none;
+}
+
+.kn-input-name input,
+.kn-input-address input {
+  text-transform: uppercase;
+}
+
+#view_117 > div > a.kn-link.kn-link-2.kn-link-page.kn-button {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_278 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_271 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_292 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_301 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_685 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+
+/* Purchase Requests | Purchase Request Details | Table Checkboxes */
+.table-checkboxes-parent {
+  vertical-align: middle !important;
+}
+
+.table-checkboxes {
+  transform: scale(2, 2);
+  margin: 20px !important;
+}
+
+/* Purchase Requests | Purchase Request Details | Hide purchase request column in Items table */
+#view_60 .field_20 {
+  visibility: hidden;
+}
+
+#view_60 tr.kn-table-totals > td:nth-child(13) {
+  visibility: hidden;
+}
+
+#view_16 .field_20 {
+  visibility: hidden;
+}
+
+#view_16 tr.kn-table-totals > td:nth-child(13) {
+  visibility: hidden;
+}
+
+/* Purchase Requests | Purchase Request Details | Received Items table spacing */
+#add-to-selected-invoice {
+  margin-top: 15px;
+}
+
+#view_647 > div.view-header > p {
+  margin-bottom: 15px;
+}
+
+/* Purchase Requests | Purchase Request Details | Success message */
+.success-msg {
+  background-color: #80d07e;
+}
