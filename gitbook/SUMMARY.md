@@ -14,6 +14,7 @@
 * [CODE: Mobile Optimization](knack/mobile-optimization.md)
 * [CODE: Big Buttons](knack/code-big-buttons.md)
 * [Banner Logos](knack/banner-logos.md)
+* [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
 
 ## DATA TRACKER
 
