@@ -18,6 +18,7 @@
 
 ## DATA TRACKER
 
+* [Asset Changes](data-tracker/asset-changes.md)
 * [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
 * [Cameras](data-tracker/cameras.md)
 * [Performance Measures](data-tracker/performance-measures.md)
@@ -30,8 +31,4 @@
 ## ROW Tracker
 
 * [TCP Tracking](row-tracker/tcp-tracking.md)
-* [CSR-\|-Flex-Note-Archiving](untitled/README.md)
-  * [Data-Tracker-\|-Performance-Measures](untitled/data-tracker-or-performance-measures.md)
-  * [DETAILS-\|-Asset-Changes](untitled/details-or-asset-changes.md)
-  * [DETAILS-\|-Signals](untitled/details-or-signals.md)
 
