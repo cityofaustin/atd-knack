@@ -32,3 +32,7 @@
 
 * [TCP Tracking](row-tracker/tcp-tracking.md)
 
+## O365 Resources
+
+* [Resources](o365-resources/resources.md)
+
