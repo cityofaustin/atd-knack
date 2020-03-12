@@ -4,6 +4,15 @@ description: Managing Environments
 
 # Application Inventory
 
+## Adding a New Application
+
+If you need to create a new application for an application, or delete an existing application, please follow the steps outlined below
+
+* Open the Data and Technology Services Portal, and navigate to Data Inventory - Applications. 
+* Click the "+ New Application" button \(this should open the "Add Application" form\)
+
+TO BE CONTINUED...
+
 ## Adding a New Environment
 
 If you need to create a new environment for an application, or delete an existing environment, please follow the steps outlined below -
@@ -18,7 +27,7 @@ If you need to create a new environment for an application, or delete an existin
   > 3. **Service Requests** - pertaining to the application. 
   > 4. **Environments** - associated with the application.
 
-To document a new environment associated with the application, click on the +Add Environment button. This should open the Add Environment form.
+To document a new environment associated with the application, click on the "+Add Environment" button. This should open the Add Environment form.
 
 > * **Application** - Select the parent application from the drop down list.
 > * **Application Name** - Please make sure that the Application Name is formatted to include the environment. For example - `Data and Technology Services Portal | PRODUCTION`
