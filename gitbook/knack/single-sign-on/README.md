@@ -4,10 +4,12 @@ description: ADFS Set-up
 
 # Single Sign On
 
-Knack supports Active Directory Single Sign On \(SSO\). Here's how to set it up.
+## Knack supports Active Directory Single Sign On \(SSO\). 
+
+### How to set it up.
 
 1. As a first step, open a help desk ticket and let them know you’d like to configure ADFS for one of your applications. 
-2. Log into the City's ServiceNow Portal 
+2. Log into the City's [ServiceNow Portal ](https://atx.service-now.com/sp)
 3. Indicate you want to set up `Active Directory` on an application
 4. Provide a copy of the application metadata 
    * Open the Knack builder and navigate to the login page where you want to add ADFS. 
