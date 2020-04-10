@@ -112,7 +112,7 @@ Copy and paste the contents of the `X509Certificate` tag into the [X509 Formatte
 
 You're almost done! 
 
-The last step is to update the **Provider Entry Point** field in case it has changed. In the CTM metadata, find the `ApplicationServiceEndpoint` tag, then the `Address` tag, and copy the URL value of that tag. It should look something like this: 
+The last step is to update the **Provider Entry Point** field in case it has changed. In the CTM metadata, find the `<SingleSignOnService>` tag and copy the  URL from its `Location` attribute. It should look something like this: 
 
 > `https://login.microsoftonline.com/5c5e19f6-a6ab-4b45-b1d0-be4608a9a67f/saml2`
 
