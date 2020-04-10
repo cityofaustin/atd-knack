@@ -26,8 +26,6 @@ If you need to generate a new certificate \(because the current cert has expired
 
 > SAML 1.1 or 2.0
 
-You will need to copy the text from the certificate and paste it into the Knack field. Note that you will also need to prepend `-----BEGIN CERTIFICATE-----` and append `-----END CERTIFICATE-----` to the data you paste in the certificate field.
-
 #### **Provider Entry Point**
 
 This field is required in order to proceed, but it may change later on in the process. For now, use `https://login.microsoftonline.com/5c5e19f6-a6ab-4b45-b1d0-be4608a9a67f/saml2`
@@ -48,13 +46,15 @@ This needs to uniquely and globally identify your app, and it must not change. S
 
 **Decryption private certificate & Decryption public certificate**
 
-Locate our self-signed SSL \(X.509\) certificate for your app. It is stored in 1Password as _Self-Signed x509 SSL Certificates for SAML/ADFS._ 
+{% hint style="info" %}
+These steps ensure that the certificate information is properly formatted to meet Knack's expectations
+{% endhint %}
 
-Your are going to copy our certificates from 1Password into the app. As part of this process, you will use a formatting tool to make sure the certificate is properly formatted.
+Locate our self-signed SSL \(X.509\) certificate for your app. It is stored in 1Password as _Self-Signed x509 SSL Certificates for SAML/ADFS._ 
 
 Start by copying our **Private Key** from _1Password_, and paste it into the [Private Key formatter](https://www.samltool.com/format_privatekey.php). Click the "Format Private Key" button to formate the key, and copy the contents of output box labeled "Private Key with header".
 
-Now paste the formatted private key into the **Decryption private certificate** field in the Knack login config.
+Now copy and paste the formatted private key into the **Decryption private certificate** field in the Knack login config.
 
 Now copy our **Public Certificate** from _1Password,_ and paste the key into the [X509 Formatter](https://www.samltool.com/format_x509cert.php).  Click the "Format X.509 Certificate" button, then copy the contents of output box labeled "X.509 cert with header". Paste the formatted certificate into the **Decryption public certificate** field in the Knack login config.
 
