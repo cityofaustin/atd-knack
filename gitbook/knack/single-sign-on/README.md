@@ -16,7 +16,7 @@ At a high level, the process looks like this:
 ### Configuring the Custom SSO Provider in Knack
 
 {% hint style="warning" %}
-If you need to generate a new certificate \(because the current cert has expired, for example\), see our [wiki entry](https://github.com/cityofaustin/atd-data-tech/wiki/Knack:-SSL-Certificate-Management) for instructions. Note that as a best practice we use the same certificate across all knack apps. So, if you do need to generate a new certificate, you should do this for every Knack application. Consult the application team before embarking on this.
+If you need to generate a new certificate \(because the current cert has expired, for example\), see our [wiki entry](https://atd-dts.gitbook.io/atd-knack-operations/knack/single-sign-on/ssl-certificate-management) for instructions. Note that as a best practice we use the same certificate across all knack apps. So, if you do need to generate a new certificate, you should do this for every Knack application. Consult the application team before embarking on this.
 {% endhint %}
 
 1. Open the Knack builder and navigate to the login page where you want to add ADFS. Click on the `Login` form to bring up the editing interface.
