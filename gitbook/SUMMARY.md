@@ -38,5 +38,3 @@
 
 ## Stuff to know
 
-* [Untitled](stuff-to-know/untitled.md)
-
