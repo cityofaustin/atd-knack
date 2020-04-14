@@ -13,7 +13,7 @@
 9. Lastly, you should assign a reviewer to check your code. 
    1. _\(On the right side of the page find the cog icon next to reviewers, and select one of your colleagues to review the code.\)_
 
-![Main code folder of the app code](../.gitbook/assets/image%20%282%29.png)
+![Main code folder of the app code](../.gitbook/assets/image%20%284%29.png)
 
 ![Sub folder of data-tracker](../.gitbook/assets/image%20%283%29.png)
 
