@@ -23,6 +23,10 @@
 * [Cameras](data-tracker/cameras.md)
 * [Performance Measures](data-tracker/performance-measures.md)
 
+## SMB Tracker
+
+* [Work Order Attachments](smb-tracker/work-order-attachments.md)
+
 ## DTS Portal
 
 * [Data set inventory](dts-portal/dts-portal.md)
