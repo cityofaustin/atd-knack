@@ -35,6 +35,7 @@
 ## ROW Tracker
 
 * [TCP Tracking](row-tracker/tcp-tracking.md)
+* [Migration Best Practices](row-tracker/migration-best-practices.md)
 
 ## O365 Resources
 
