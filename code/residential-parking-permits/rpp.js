@@ -17,7 +17,7 @@ $(document).on('knack-view-render.view_4', function(event, page) {
 
 $(document).on('knack-view-render.view_4', function(event, page) {
   // create large button on the home page
-    bigButton('welcome', 'view_4', "https://atd.knack.com/parking#welcome/", "file-text", "Review Requirements");
+    bigButton('welcome', 'view_4', "https://atd.knack.com/parking#review-requirements/", "file-text", "Review Requirements");
 });
 
 $(document).on('knack-view-render.view_5', function(event, page) {
@@ -99,6 +99,17 @@ $(document).on('knack-view-render.any', function(event, view, data) {
   $("#state").val('TX');
 });
 
+function updateVerifyIframe(x, y, street) {
+  // RPP Eligibility
+  // update iframe src from detail field
+  // see AGOL URL Params: https://doc.arcgis.com/en/arcgis-online/reference/use-url-parameters.htm
+  var baseUrl = "https://austin.maps.arcgis.com/apps/webappviewer/index.html?id=ba9bf354772c4d478808b6445a723a44&level=18&marker="
+  
+  var mapUrl = baseUrl + x + "," + y + ",4326,,," + street;
+  $("#map_url").attr("src", mapUrl);
+  
+};
+
 $(document).on('knack-form-submit.view_163', function(event, view, record) {
   console.log(record);
   //  initative parking zone check on verify form submit
@@ -106,7 +117,9 @@ $(document).on('knack-form-submit.view_163', function(event, view, record) {
   var lat = record.field_130_raw.latitude;
   var street = record.field_130_raw.street;
   
-  point_in_poly('RPP_Properties',0, lat, lon, street, ['ZONE_NO','RESTRICTION_TIME_DATE'], function(feature, lat, lon, address) {
+  updateVerifyIframe(lon, lat, street);
+
+  point_in_poly('RPP_Properties',0, lat, lon, street, "*", function(feature, lat, lon, address) {
     //  hide page submit confirmation message
     $('.kn-message').hide();
 
@@ -116,15 +129,20 @@ $(document).on('knack-form-submit.view_163', function(event, view, record) {
     //  get a url to view the geocoded address on the parking restrictions map
     var map_url = getMapUrl(lat, lon, address);
     var map = '<h5><b><i class="fa fa-map-marker"></i> <a target=\"_blank\" href=\"' + map_url + '\" >View this address </a> on a parking restriction map</b></h5>';
-
+   
     if (feature) {
-      //  confirm address is eligible
+      // confirm address is eligible
       var parkingZone = feature.attributes['ZONE_NO'];
       var restriction = feature.attributes['RESTRICTION_TIME_DATE'];
-        
+      var blockNo = feature.attributes['BLOCK_NO'];
+      var streetName = feature.attributes['STREET_NAME'];
+      var maxResidents = feature.attributes['MAX_RESIDENTS'];
+      var maxVisitorHangTagHouseh = feature.attributes['MAX_VISITOR_HANG_TAG_PER_HOUSEH'];
+      var renewalPeriod = feature.attributes['RENEWAL_PERIOD'];
+            
       
-      var message = '<h4></i> Residents at this address can purchase street parking permits.</h4>' + 
-        '<h5><i>' + 'Parking restrictions are in effect ' + restriction + '</i></h5>';
+      var message = '<h4></i> Residents at this address <b>' + blockNo + ' ' + streetName + '</b> can purchase street parking permits.</h4>' + 
+        '<ul><li><h5><i>' + 'Parking restrictions are in effect <b>'  + restriction + '</i></b></h5></li>'  + '<li><h5><i>Maximum Resident Decals: <b>' + maxResidents + '</b></i></h5></li>' + '<li><h5><i>Maximum Visitor Hang-tags: <b>' + maxVisitorHangTagHouseh + '</b></i></h5></li>' + '<li><h5><i>Permit Renewal Period: <b>' + renewalPeriod + '</b></i></h5></li>';
             
       var contact_us ='<h5><b><i class="fa fa-phone"></i> ' + 
       '<a href=\"https://atd.knack.com/parking#contact-us/" >Contact Us</a> if you need help</b></h5>';
@@ -136,9 +154,9 @@ $(document).on('knack-form-submit.view_163', function(event, view, record) {
       );
       
       $('.kn-form-confirmation').prepend(contact_us);
+      $('.kn-form-confirmation').prepend(webmap_url);
       $('.kn-form-confirmation').prepend(map);
       $('.kn-form-confirmation').prepend($('<h5><b><b></h5>').append($('.kn-form-reload')))
-      $('.kn-form-confirmation').prepend(sign_up);
 
     } else {
       //  address is ineligible      
@@ -155,7 +173,6 @@ $(document).on('knack-form-submit.view_163', function(event, view, record) {
       );
 
       $('.kn-form-confirmation').prepend(contact_us);
-      $('.kn-form-confirmation').prepend(map);
       $('.kn-form-confirmation').prepend($('<h5></h5>').append($('.kn-form-reload')))
     }
   })
@@ -175,7 +192,7 @@ function point_in_poly(service_name, layer_id, lat, lon, address, outfields, cal
   var url = 'https://services.arcgis.com/0L95CJ0VTaxqcmED/ArcGIS/rest/services/' + service_name + '/FeatureServer/' + layer_id + '/query'
   var params = {
       'f' : 'json',
-      'outFields'  : outfields.toString(),
+      'outFields'  : outfields,
       'geometry': point,
       'returnGeometry' : false,
       'spatialRel' :'esriSpatialRelIntersects',
@@ -237,7 +254,6 @@ function geocode(address) {
 
 
 function handleGecode(results) {
-  console.log(results);
   alert(results.candidates[0].address);
 }
 
