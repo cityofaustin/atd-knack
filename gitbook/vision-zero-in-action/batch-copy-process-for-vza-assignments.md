@@ -65,16 +65,19 @@
 
 ![](https://lh3.googleusercontent.com/NK3m1Q3VYWbkthW3Smn5Mjp-TdmybH6Hl9PE2z8HpbIesWR81GNtX7niZrzt5zDYKIFhzpRnw1HQLr43iRUHNaeg-d1DnXPt1HgHitrVfoBl0A9YAAqYzAaLIPyg932Uzk6T7BG_)
 
-1. Exclude all calculated fields - text formulas, equations and conditional fields.
-2. Exclude Additional Information and Additional Information URL \(since this is field which needs an uploaded file\).
-3. Click Next
-4. Fill out Field Defaults for Created By and Created Date. 
+16 \) Exclude all calculated fields - text formulas, equations and conditional fields.
+
+17 \) Exclude Additional Information and Additional Information URL \(since this is field which needs an uploaded file\).
+
+18 \) Click Next
+
+19 \) Fill out Field Defaults for Created By and Created Date. 
 
 ![](https://lh4.googleusercontent.com/ql0Svb-b5PtVOx3ZfdoekIgJE8x3FvVvPLH1eX46jQoANLfFJfz1KZXPZHE1T155KLGkD5zfI7jSQkNpjszf4d-xo2uTR46k1l_oNT08G-ONJKL3pkVCEBmyhuITyBbFMgFI81Tq)
 
-1. Click Next. The records will be imported into the object. 
+20 \) Click Next. The records will be imported into the object. 
 
 ![](https://lh4.googleusercontent.com/l2FdRI9Is9AawPsUDqVJphIOSKARG4f-pzqDuzOL_27bdTQKjzhcrPZmMuZ93u-2rThkFndnS_D7kw11ijyil1Irh5lYU0f6Bbmcm-FXHifWRzzhvLbrTGZU_3wQ14BcjW8fLZH9)
 
-1. Confirm the records have been imported by checking Assignment IDs and the Calendar. 
+21 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
 
