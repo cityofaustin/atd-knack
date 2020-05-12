@@ -1,6 +1,6 @@
 # Batch Copy Process for VZA Assignments
 
-1. **Open the Assignments object in Records View in the app**
+1\) Open the Assignments object in Records View in the app
 
 \*\*\*\*
 
