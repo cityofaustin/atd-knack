@@ -1,0 +1,50 @@
+.big-button-container {
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  padding: 10px;
+  margin: 20px;
+  max-width: 12em;
+}
+
+.big-button-container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.fa {
+  vertical-align: middle;
+}
+
+a.big-button {
+  text-decoration: none;
+}
+
+/* Remove Back Links */
+#kn-scene_3 .kn-back-link {
+  display: none;
+}
+#kn-scene_13 .kn-back-link {
+  display: none;
+}
+#kn-scene_123 .kn-back-link {
+  display: none;
+}
+#kn-scene_176 .kn-back-link {
+  display: none;
+}
+#kn-scene_1791 .kn-back-link {
+  display: none;
+}
+#kn-scene_140 .kn-back-link {
+  display: none;
+}
+#kn-scene_142 .kn-back-link {
+  display: none;
+}
+#kn-scene_186 .kn-back-link {
+  display: none;
+}
+#kn-scene_163 .kn-back-link {
+  display: none;
+}
