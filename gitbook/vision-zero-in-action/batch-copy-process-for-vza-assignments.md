@@ -1,3 +1,9 @@
+---
+description: >-
+  The process to batch copy Vision Zero assignments from one month to another is
+  documented below.
+---
+
 # Batch Copy Process for VZA Assignments
 
   
@@ -31,7 +37,7 @@
 
 ![](https://lh5.googleusercontent.com/fqsDsHfNMW072OTG7z-zR0WVrv_VxgZFbb0RyAovT25zY0HMWVIZtl9A-jJNKJlTPsAtJ3NlBPT7qmmMhtr7Qf5NgIf2zK1vrWPrQSOyRsri5IOOpgZlJPpVIqFB9A5MmcXySjPo)
 
-8 \) Replace the dates in the Assignment Date Time field with dates for the next batch.
+8 \) Replace the dates in the Assignment Date Time field with dates for the next batch. 
 
 ![](https://lh3.googleusercontent.com/ngZC47DUYlYM7Jl4mpvP_ftTgqFXac-VpHmWbVCIH_5joowdcvDuj4E74cLMis4V8hmQ-GnQcIhiFgJCEH6k9zuvawXluQzZNtKTQvxzQdnBt4IBGUEF6EdsiEDUhK5MGdbAAmLi)
 
