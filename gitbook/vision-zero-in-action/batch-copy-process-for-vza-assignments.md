@@ -51,7 +51,7 @@ description: >-
 
 ![](https://lh6.googleusercontent.com/Sm3p6wP-A-GWMWXeHuJKHNry3yRQTou8_uJU0rsWFY7xS9Zo6MFlQ3dOSnOiZiaZe3xPL5dw8m0xiOYrooL7XkJ2UDLZKxSCtyiDE5gpPnkPfhORS9tCGizQ8wt18N9J1klGoLjZ)
 
-11 \) For Does the CSV have a row at the top with a name for each column? Choose - Yes, the headers are on Row 1
+11 \) For _Does the CSV have a row at the top with a name for each column?_ Choose - Yes, the headers are on Row 1
 
 ![](https://lh3.googleusercontent.com/LP6xYQ0lo0Gsug9o1MTC5gtWquvBCX-c0CvRLd3hWbASDDAld-IXiiSuD8-_yXo5g3YPzMAmkCu3l4_sYwOIstrKrNTfzWjKGHULJSyNISKB6rrA69UJU-nfXXJlKmWEqgfVrTf-)
 
