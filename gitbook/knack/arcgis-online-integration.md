@@ -2,11 +2,11 @@
 
 ### Adding New Fields to an Existing ArcGIS Online Datset
 
-This doc describes the process for adding new fields to an existing Socrata dataset whose source is a Knack application.
+This doc describes the process for adding new fields to an existing ArcGIS dataset whose source is a Knack application.
 
 #### 1. Locate the API View
 
-Locate the API view in the Knack application that serves as the source for the Socrata dataset. Each of our Knack applications will have a series of views \(aka, pages\) which we call "API Views" and are purpose-built for publishing data from Knack to external sources \(Socrata, ArcGIS Online, etc.\).
+Locate the API view in the Knack application that serves as the source for the ArcGIS dataset. Each of our Knack applications will have a series of views \(aka, pages\) which we call "API Views" and are purpose-built for publishing data from Knack to external sources \(Socrata, ArcGIS Online, etc.\).
 
 If you're unsure which view is the source for a data set, you'll need a developer to review the ETL script which publishes the Knack data to the destination system. They will be able to confirm the page and scene which serves as the source.
 
@@ -20,9 +20,7 @@ Crucially, we use the user-defined Knack field label as the field name in the do
 
 As such, the field "label" of any Knack field which is to be published to an external system should follow these same conventions. Typically, we follow the practice of labeling these fields in upper case with an underscore in lieu of spaces.
 
-_Our Knack &gt; Socrata publishing script will convert any Knack field name to lowercase to match Socrata's expected field format._
-
-\_\_
+_Our Knack &gt;_ ArcGIS _publishing script will convert any Knack field name to lowercase to match ArcGIS Online's expected field format._
 
 #### 3. Update the Knack View
 
@@ -30,7 +28,7 @@ Once you've located the API view in the Knack builder, first verify \(1\) that t
 
 #### 4. Update ArcGIS Online Dataset
 
-1. Login to [data.austintexas.gov ](https://data.austintexas.gov/)and navigate to the `Primer` page of the dataset you wish to modify. Scroll down to the`Columns in this Dataset`section and verify that the fields you wish to add are not present in the dataset. To add new fields, click on the blue `Edit`button in the top right corner of the Primer page.
+1. Login to [arcgis.com](https://www.arcgis.com/sharing/rest/oauth2/authorize?client_id=arcgisonline&display=default&response_type=token&state=%7B%22useLandingPage%22%3Atrue%7D&expiration=20160&locale=en-us&redirect_uri=https%3A%2F%2Fwww.arcgis.com%2Fhome%2Faccountswitcher-callback.html&force_login=true&hideCancel=true&showSignupOption=true&canHandleCrossOrgSignIn=true&signuptype=esri) and navigate to the `Primer` page of the dataset you wish to modify. Scroll down to the`Columns in this Dataset`section and verify that the fields you wish to add are not present in the dataset. To add new fields, click on the blue `Edit`button in the top right corner of the Primer page.
 2. Click on the button below `Review & Configure Data`. From the configuration editor, click the `Add Column` button. Fill out the form fields as follows:
 3. **Display Name:** A human-friendly field label
 4. **Field name:** this is the "API Field Name" which should exactly match the Knack field label \(_with the exception that value should be lower case. See note in step \#2._\)
@@ -41,5 +39,5 @@ Once you've located the API view in the Knack builder, first verify \(1\) that t
 
 #### 5. Refresh the Dataset <a id="5-refresh-the-dataset"></a>
 
-In order to refresh the Socrata dataset with values for the new columns, a dev will need to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
+In order to refresh the ArcGIS dataset with values for the new columns, a dev will need to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
 
