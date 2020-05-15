@@ -1,6 +1,6 @@
 # ArcGIS Online Integration
 
-### Adding New Fields to an Existing ArcGIS Online Datset
+### Adding New Fields to an Existing ArcGIS Online Dataset
 
 This doc describes the process for adding new fields to an existing ArcGIS dataset whose source is a Knack application.
 
