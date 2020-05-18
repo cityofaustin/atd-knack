@@ -139,3 +139,10 @@ Prior to editing Knack applications, it's important to log your work, and schedu
 3. Aim for a user training plan that involves users at different user levels. 
 4. Communicate with product owner how user testing and training will help with application adoption.
 
+### Using Tasks
+
+1. Tasks take a fairly long time to run especially with some filter parameters. 
+2. The task runs through each record to see if it needs to be processed. 
+3. Need to research if there is a way to narrow down the records to be processed before the task can start. It takes about half an hour for one task to go through 660 records. 
+4. Tasks should be run after hours since running a task might slow the whole app down for users.
+
