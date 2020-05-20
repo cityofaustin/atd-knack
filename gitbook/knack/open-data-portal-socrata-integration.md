@@ -43,5 +43,7 @@ Once you've located the API view in the Knack builder, first verify \(1\) that t
 
 #### 5. Refresh the Dataset
 
-In order to refresh the Socrata dataset with values for the new columns, a dev will need to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
+In order to refresh the Socrata dataset with values for the new columns, you should run a batch update in the Knack builder to set the modified date of all records to the current date. This will enable the integration script to update the destination datasets the next time it runs.
+
+If your dataset contains more than ~2k rows, ask  a dev to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
 
