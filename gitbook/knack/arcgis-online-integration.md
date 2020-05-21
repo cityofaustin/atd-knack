@@ -28,18 +28,18 @@ Once you've located the API view in the Knack builder, first verify \(1\) that t
 
 #### 4. Update ArcGIS Online Dataset
 
-1. Login to [arcgis.com](https://www.arcgis.com/sharing/rest/oauth2/authorize?client_id=arcgisonline&display=default&response_type=token&state=%7B%22useLandingPage%22%3Atrue%7D&expiration=20160&locale=en-us&redirect_uri=https%3A%2F%2Fwww.arcgis.com%2Fhome%2Faccountswitcher-callback.html&force_login=true&hideCancel=true&showSignupOption=true&canHandleCrossOrgSignIn=true&signuptype=esri) and navigate to the `Primer` page of the dataset you wish to modify. Scroll down to the`Columns in this Dataset`section and verify that the fields you wish to add are not present in the dataset. To add new fields, click on the blue `Edit`button in the top right corner of the Primer page.
-2. Click on the button below `Review & Configure Data`. From the configuration editor, click the `Add Column` button. Fill out the form fields as follows:
-3. **Display Name:** A human-friendly field label
-4. **Field name:** this is the "API Field Name" which should exactly match the Knack field label \(_with the exception that value should be lower case. See note in step \#2._\)
-5. **Description:** a detailed description of what values the field contains, the purpose it serves, etc.
-6. **Source Column:** Select "No Source column"
-7. **Type:** choose the appropriate field type.
-8. Click `Save`to save your changes. Return to the Primer page, and click the blue `Update` button in the top-right of the page to publish the dataset changes.
+1. Login to [arcgis.com](https://www.arcgis.com/sharing/rest/oauth2/authorize?client_id=arcgisonline&display=default&response_type=token&state=%7B%22useLandingPage%22%3Atrue%7D&expiration=20160&locale=en-us&redirect_uri=https%3A%2F%2Fwww.arcgis.com%2Fhome%2Faccountswitcher-callback.html&force_login=true&hideCancel=true&showSignupOption=true&canHandleCrossOrgSignIn=true&signuptype=esri) and navigate to the main page for the feature layer you wish to modify. Click on Data along the top of the page, then Fields at the top right. Check the existing fields to ensure the field\(s\) you wish to add are not already present in the feature layer. To add new fields, click on the + Add button in the top left corner of the page.
+2. The Add Field window will open. Fill out the form as follows:
+3. **Field Name:** this is the "API Field Name which should exactly match the Knack field label
+4. **Display name:** can be the same as the Field Name or a human friendly field label, depending on the use of the feature layer
+5. **Type:** choose the appropriate field type
+6. **Length:** choose the appropriate field length if the Type is a String
+7. **Default Value:** this is an optional field to fill out
+8. Click Add New Field to save your changes. The new field will appear at the bottom of the field list.
 
 #### 5. Refresh the Dataset <a id="5-refresh-the-dataset"></a>
 
 In order to refresh the AGOL dataset with values for the new columns, you should run a batch update in the Knack builder to set the modified date of all records to the current date. This will cause the integration script to update the destination datasets the next time it runs.
 
-If the dataset contains more than ~2k rows, ask  a dev to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
+If the dataset contains more than ~2k rows, ask a dev to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
 
