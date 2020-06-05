@@ -111,7 +111,7 @@ Follow these guidelines when naming fields:
 * Don't want to have duplicate url names 
   * Ex. `add-attachments`, if another attachment form is created with the same name, the page url will automatically go to `add-attachments2` and incrementally go up. \(this does not look great\)
 
-### Button Styles
+## Button Styles
 
 #### Out of the box "buttons"
 
@@ -125,6 +125,12 @@ Follow these guidelines when naming fields:
 CSS Code: 
 
 ![](../.gitbook/assets/image%20%288%29.png)
+
+* `Width` changes the width of the HTML Button
+* `Background` HTML color code
+* `padding` is the top and bottom border of the HTML Button
+  * first number: `5px` \(top\)
+  * second number: `5px` \(bottom\)
 
 Used a trigger function from a Details page and replaced the Link Text with HTML
 
