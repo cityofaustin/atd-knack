@@ -124,7 +124,7 @@ Follow these guidelines when naming fields:
 
 
 
-![CSS Code - screen shot](../.gitbook/assets/image%20%2810%29.png)
+![CSS Code - screen shot](../.gitbook/assets/image%20%2811%29.png)
 
 #### CSS Code: 
 
@@ -152,7 +152,7 @@ Enter into `Link Text` field:
 
 Looks like this in the live app
 
-![](../.gitbook/assets/image%20%289%29.png)
+![](../.gitbook/assets/image%20%2810%29.png)
 
 ## Links
 
@@ -184,4 +184,10 @@ Looks like this in the live app
 Number of Resident Decals `<a href="https://atd.knack.com/parking#permit-costs/"></i class="fa fa-info-circle"></i></a>`
 
 ![](../.gitbook/assets/image%20%287%29.png)
+
+**Option 3:** Link and icon that opens in new tab
+
+`<a href="https://purchweb.austintexas.gov/search/RTMATSSelect.cfm" target=_blank> Contract Agreement </i class="fa fa-external-link-square"></i></a>`
+
+![](../.gitbook/assets/image%20%2812%29.png)
 
