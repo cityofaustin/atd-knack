@@ -13,7 +13,7 @@
 
 ### Banner Image
 
-Example: [ATD Forms banner](https://s3.amazonaws.com/assets.knackhq.com/assets/5ca25947f6973855115f5b58/logos/banner_cropped_small_atd_forms.png) Use Gimp software to create banner background color
+Example: [ATD Forms banner](https://s3.amazonaws.com/assets.knackhq.com/assets/5ca25947f6973855115f5b58/logos/banner_cropped_small_atd_forms.png) Use [Gimp software ](https://www.gimp.org/)to create banner background color
 
 * HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
 * RGB: ![\#22, 63, 110](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
@@ -99,6 +99,7 @@ Follow these guidelines when naming fields:
 * Depending on business process we do two things
 * Add `menu`, add `new page` for form/button \(cleaner look, not as efficient\)
 * Add `form directly onto page` \(not as clean of a look, but usually highly efficient for user especially if they have to enter lots of information\)
+* More about BUTTON STYLES
 
 ### Page naming conventions
 
@@ -109,4 +110,31 @@ Follow these guidelines when naming fields:
 
 * Don't want to have duplicate url names 
   * Ex. `add-attachments`, if another attachment form is created with the same name, the page url will automatically go to `add-attachments2` and incrementally go up. \(this does not look great\)
+
+### Button Styles
+
+#### Out of the box "buttons"
+
+* Add Menu&gt;Link to a **new page**
+* Add Menu&gt;Link to a **existing page**
+* Choose **icon** for button
+  * Knack references[ Font Awesome 4.7.0](https://fontawesome.com/v4.7.0/icons/)
+
+#### HTML Buttons
+
+CSS Code: 
+
+![](../.gitbook/assets/image%20%288%29.png)
+
+Used a trigger function from a Details page and replaced the Link Text with HTML
+
+Goes here into this field `Link Text`
+
+`<h2><button class="block><i class="fa fa-plus-circle"></i><strong> New Submission</strong></button></h2>`
+
+![](../.gitbook/assets/image%20%285%29.png)
+
+Looks like this in the live app
+
+![](../.gitbook/assets/image%20%287%29.png)
 
