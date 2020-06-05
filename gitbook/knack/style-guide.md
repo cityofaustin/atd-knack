@@ -122,9 +122,11 @@ Follow these guidelines when naming fields:
 
 #### HTML Buttons
 
-CSS Code: 
 
-![](../.gitbook/assets/image%20%288%29.png)
+
+![CSS Code - screen shot](../.gitbook/assets/image%20%288%29.png)
+
+CSS Code: `.block { display: block; width: 20%; border: none; background-color: #4CAE49; color: white; padding: 5px 5px; font-size: 20px; cursor: pointer; text-align: center; }`
 
 * `Width` changes the width of the HTML Button
 * `Background` HTML color code
