@@ -124,25 +124,64 @@ Follow these guidelines when naming fields:
 
 
 
-![CSS Code - screen shot](../.gitbook/assets/image%20%288%29.png)
+![CSS Code - screen shot](../.gitbook/assets/image%20%2810%29.png)
 
-CSS Code: `.block { display: block; width: 20%; border: none; background-color: #4CAE49; color: white; padding: 5px 5px; font-size: 20px; cursor: pointer; text-align: center; }`
+#### CSS Code: 
 
-* `Width` changes the width of the HTML Button
-* `Background` HTML color code
+`.block { display: block; width: 20%; border: none; background-color: #4CAE49; color: white; padding: 5px 5px; font-size: 20px; cursor: pointer; text-align: center; }`
+
+* `width` changes the width of the HTML Button
+* `background` HTML color code 
+  * ![\#80d07e](https://placehold.it/15/80d07e/000000?text=+) `#80d07e` 
+  *  ![\#367DB7](https://placehold.it/15/367DB7/000000?text=+) `#367DB7`
 * `padding` is the top and bottom border of the HTML Button
   * first number: `5px` \(top\)
   * second number: `5px` \(bottom\)
+* `font-size` can change font to different size
 
-Used a trigger function from a Details page and replaced the Link Text with HTML
+#### Trigger function and Details
 
-Goes here into this field `Link Text`
-
-`<h2><button class="block><i class="fa fa-plus-circle"></i><strong> New Submission</strong></button></h2>`
+* Used a trigger function from a Details page and replaced the Link Text with HTML
+* In Trigger configuration page, html goes here into this field: `Link Text`
 
 ![](../.gitbook/assets/image%20%285%29.png)
 
+Enter into `Link Text` field:
+
+`<h2><button class="block><i class="fa fa-plus-circle"></i><strong> New Submission</strong></button></h2>`
+
 Looks like this in the live app
+
+![](../.gitbook/assets/image%20%289%29.png)
+
+## Links
+
+### Out of the box "links"
+
+**Option 1:** Add Menu&gt;Link to a **URL**
+
+**Option 2:** Add Rich Text
+
+* * Add text for link
+  * Click **link** icon on toolbar
+  * Click **Insert link**
+    * Enter **URL**
+    * Enter **Text**
+    * Select **Open link in new tab**
+
+### Using field labels & instructions to add links
+
+#### Example 1: Form Title or Instructions
+
+**Option 1:** Link, Link Text and Icon
+
+`<a href="https://atd.knack.com/parking#verify/"> Look up address <i class="fa fa-search"><i></a>` 
+
+![](../.gitbook/assets/image%20%286%29.png)
+
+**Option 2:** Form field label text, link that is an icon
+
+Number of Resident Decals `<a href="https://atd.knack.com/parking#permit-costs/"></i class="fa fa-info-circle"></i></a>`
 
 ![](../.gitbook/assets/image%20%287%29.png)
 
