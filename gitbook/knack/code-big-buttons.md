@@ -10,69 +10,98 @@ Need to re-write this guide
 
 ####  Big Button JS code
 
-function bigButton\(div\_id, view\_id, url, fa\_icon, button\_label\) { // create a large button
-
 ```text
-$("<div/>", {
-  id: div_id,
-}).appendTo("#" + view_id);
-```
+function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
+  // create a large button
+  
+    $("<div/>", {
+      id: div_id,
+    }).appendTo("#" + view_id);
+    
+  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
 
-$\("\#" + div\_id\).append\("[ " + button\_label + "](https://github.com/cityofaustin/atd-data-tech/wiki/%22%20+%20url%20+%20%22)"\);
-
+  if(callback) callback();
 }
-
-$\(document\).on\('knack-view-render.view\_167', function\(event, page\) { // create large button on the home page bigButton\( "all", "view\_167", "[https://atd.knack.com/finance-purchasing\#purchase-requests/](https://atd.knack.com/finance-purchasing#purchase-requests/)", "archive", "All Purchase Requests" \);
-
-```text
-bigButton(
-    "create",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
-    "plus-circle",
-    "New Purchase Request"
-);
-
-bigButton(
-    "review",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#reviews/",
-    "check-square-o",
-    "Review Purchase Requests"
-);
-
-bigButton(
-    "my",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#my-purchase-requests/",
-    "male",
-    "My Purchase Requests"
-);
+	//>>>HOME TAB BUTTONS
+$(document).on('knack-view-render.view_15', function(event, page) {
+  // create large button on the home page
+    bigButton('development-reviews', 'view_15', "https://atd.knack.com/development-services#home/development-reviews/", "list-ul", "Development Reviews");
+});
+$(document).on('knack-view-render.view_55', function(event, page) {
+    // create large button on the home page
+    bigButton('my-reviews', 'view_55', "https://atd.knack.com/development-services#my-reviews/", "male", "My Reviews");
+});
 ```
 
-}\);
+ $\(document\).on\('knack-view-render.view\_15', function\(event, page\) { 
 
-$\(document\).on\('knack-page-render.scene\_68', function\(event, page\) { // render Review Details page
+  // create large button on the home page 
 
-####  Big Button CSS code
+     bigButton\('development-reviews', 'view\_15', "[https://atd.knack.com/development-services\#home/development-reviews/](https://atd.knack.com/development-services#home/development-reviews/)", "list-ul", "Development Reviews"\); 
 
-.big-button-container { border-radius: 2px; box-shadow: 0px 1px 2px 0px gray; font-size: 2.5em; padding: 10px; margin: 20px; max-width: 10em; }
+}\); 
 
-.big-button-container:hover { background-color: \#f7f7f7; cursor: pointer; }
+#### Things to change in Javascript
 
-.fa { vertical-align: middle; }
+* Change the code in two places to match the corresponding view, ex. `view_15` to `view_100` 
+* Change the code where `development-review` is to be the page url plug, ex. `new-form`
+* Change the code where the page url is `https://atd.knack.com/development-services#home/development-reviews/`to the correct page url, ex. `https://atd.knack.com/new-app#home/new-form` 
+  * \(Remember this is hard coded!! so if you make a Test environment it will redirect to the Production environment\)
+* Change the icon that shows up beside the button, ex. `list-ul` to `plus-circle`
+* Change the name of the button `Development Reviews` to `New Form`
 
-a.big-button { text-decoration: none; }
+$\(document\).on\('knack-view-render.`view_15`', function\(event, page\) { 
 
-.kn-input-name input, .kn-input-address input{ text-transform: uppercase; }
+  // create large button on the home page 
 
-* You would create a blank page and add RICH TEXT boxes.
+     bigButton\('`development-reviews`', '`view_15`', "[`https://atd.knack.com/development-services#home/development-reviews/`](https://atd.knack.com/development-services#home/development-reviews/)", "`list-ul`", "`Development Reviews`"\); 
 
-####  
+}\); 
+
+#### Big Button CSS code
+
+```text
+.big-button-container {
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px 0px gray;
+    font-size: 2.5em;
+    padding: 10px;
+    margin: 20px;
+    max-width: 12em;
+}
+ 
+.big-button-container:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+ 
+ 
+.fa {
+vertical-align: middle;
+}
+ 
+ 
+a.big-button {
+  text-decoration: none;
+}
+```
+
+#### Creating Page Buttons
+
+Create page or on the page your want to add the big button. Add a RICH TEXT widget. 
+
+When you open the RICH TEXT views, they have their own views. 
+
+* Ex. “Development Reviews \| 15” 
+  * [`https://builder.knack.com/atd/development-services#pages/scene_1/views/view_15`](https://builder.knack.com/atd/development-services#pages/scene_1/views/view_15)\`\`
+* Reference the ex. `view_15` 
+* Normally rename the Rich Text box to ex. `Development Reviews | 15`
+
+![](../.gitbook/assets/image%20%2813%29.png)
 
 #### Example
 
-My example: `https://builder.knack.com/atd/finance-purchasing#pages/scene_1`
+My example: [`https://builder.knack.com/atd/development-services#pages/scene_1`](https://builder.knack.com/atd/development-services#pages/scene_1)\`\`
 
-When you open the RICH TEXT views, they have their own views. Ex. “All PRs” [https://builder.knack.com/atd/finance-purchasing\#pages/scene\_1/views/view\_167](https://builder.knack.com/atd/finance-purchasing#pages/scene_1/views/view_167)
+
 
