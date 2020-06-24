@@ -27,6 +27,7 @@
   * [Page Rules \(TMC\) CSR](data-tracker/builder-notes/page-rules-tmc-csr.md)
   * [NOTIFICATION \| Construction Status Email](data-tracker/builder-notes/notification-or-construction-status-email.md)
   * [NOTIFICATION \| One Day Signal Engineer Due Date](data-tracker/builder-notes/notification-or-one-day-signal-engineer-due-date.md)
+  * [DETAILS \| Preventative Maintenance \(PM\)](data-tracker/builder-notes/details-or-preventative-maintenance-pm.md)
 
 ## SMB Tracker
 
