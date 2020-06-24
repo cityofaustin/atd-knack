@@ -23,8 +23,8 @@
 * [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
 * [Cameras](data-tracker/cameras.md)
 * [Performance Measures](data-tracker/performance-measures.md)
-* [Builder Notes](data-tracker/builder-notes.md)
-* [Page Rules \(TMC\) Transportation Management Center \(AMD CSR\)](data-tracker/page-rules-tmc-transportation-management-center-amd-csr.md)
+* [Builder Notes](data-tracker/builder-notes/README.md)
+  * [Page Rules \(TMC\) Transportation Management Center \(AMD CSR\)](data-tracker/builder-notes/page-rules-tmc-csr.md)
 
 ## SMB Tracker
 
