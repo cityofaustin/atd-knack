@@ -24,7 +24,7 @@
 * [Cameras](data-tracker/cameras.md)
 * [Performance Measures](data-tracker/performance-measures.md)
 * [Builder Notes](data-tracker/builder-notes/README.md)
-  * [Page Rules \(TMC\) Transportation Management Center \(AMD CSR\)](data-tracker/builder-notes/page-rules-tmc-csr.md)
+  * [Page Rules \(TMC\) CSR](data-tracker/builder-notes/page-rules-tmc-csr.md)
   * [NOTIFICATION \| Construction Status Email](data-tracker/builder-notes/notification-or-construction-status-email.md)
   * [NOTIFICATION \| One Day Signal Engineer Due Date](data-tracker/builder-notes/notification-or-one-day-signal-engineer-due-date.md)
 
