@@ -28,6 +28,8 @@
   * [NOTIFICATION \| Construction Status Email](data-tracker/builder-notes/notification-or-construction-status-email.md)
   * [NOTIFICATION \| One Day Signal Engineer Due Date](data-tracker/builder-notes/notification-or-one-day-signal-engineer-due-date.md)
   * [DETAILS \| Preventative Maintenance \(PM\)](data-tracker/builder-notes/details-or-preventative-maintenance-pm.md)
+  * [DETAILS \| Signal Detectors Object Tables, Reports, misc..](data-tracker/builder-notes/details-or-signal-detectors-object-tables-reports-misc...md)
+  * [DETAILS \| Signals](data-tracker/builder-notes/details-or-signals.md)
 
 ## SMB Tracker
 
