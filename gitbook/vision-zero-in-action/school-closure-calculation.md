@@ -24,16 +24,12 @@ Only a VZA system administrator can carry out this process.
 5. Type is School
 6. School District is Austin Independent School District
 7. SY 2020 - 21 is X \(This field should be appropriately substituted based on the current school year\).
-
-   ![](https://lh3.googleusercontent.com/YfAr7kTIEODlFxiMMJYcPdDkPeN7kZhtMd03v2hBgQIdWxgJToVKEiSMvWJHRs0p4SR_q_seKCI2g9NGTPwBK9Ux0wgSTU5wlfc9rkpuYbXg4kAjGggTcVmSPbpXA024o13J1XXo)
-
-   Select Next. 
-
-8. Select the Yes option for ‘AISD School Closed for Current Academic Year?’ 
-9. Click on Next.
-10. Click on Update Records.
-11. This will remove the records from the Location Drop Down for Adding An Assignment and Editing An Assignment on the Scheduler’s calendar interface.
-12. Check to see if the records that got updated show up in the Location drop down.
+8. Select Next. 
+9. Select the Yes option for ‘AISD School Closed for Current Academic Year?’ 
+10. Click on Next.
+11. Click on Update Records.
+12. This will remove the records from the Location Drop Down for Adding An Assignment and Editing An Assignment on the Scheduler’s calendar interface.
+13. Check to see if the records that got updated show up in the Location drop down.
 
 
 
