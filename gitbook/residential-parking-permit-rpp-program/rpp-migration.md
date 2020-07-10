@@ -157,6 +157,31 @@ Everything else is mapped automatically.
 4. Click "**Records**" at the top
 5. Click "**Export**" at the top, choice to select "**.csv**"
 
+### Import Zone "permit\_applications" object table to "Customer" object table
+
+Reference "**Customer\_import\_GREEN\_with\_appID.csv**" - is the format of the Knack `Customer` table
+
+`G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\import_tables`
+
+Fields to have on spreadsheet: 
+
+* `Name` \(Which shows the Display Name: `Ex. 488 | Adam Lescalleet`
+* `Application ID`
+
+1. Open builder
+2. Navigate under "**Data**" tab
+3. Go to "`customer`" object table
+4. Click "**Records**" at the top
+5. Click "**Import**" at the top
+6. Follow steps to import
+
+See these configurations:
+
+* Select a field to match records "`Display Name`" \(first page of "Import new records"\), click "Next"
+* Select "match column", click "Next"
+* Map "**Application ID**" to `"permit_application>Application ID"`
+* **Remove all other unnecessary or blank fields** 
+
 ## Permit spreadsheet
 
 Each record should have an association between the application and permit
