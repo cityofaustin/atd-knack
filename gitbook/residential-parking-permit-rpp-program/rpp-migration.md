@@ -125,10 +125,29 @@ Fields to configure:
 4. Click "**Records**" at the top
 5. Click "**Import**" at the top
 6. Follow steps to import
-7. 
-{% hint style="info" %}
-ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
-{% endhint %}
+7. Remove unnecessary fields 
+8. Make sure all field are mapped to their correct fields
+
+See these configurations:
+
+* **Remove "Order"**
+* Map "**Name**" to "`Name>Display Name`"
+* Map "**Name of Applicant**" to "`Name>Name of Applicant`"
+* **Remove "Resident Address"**
+* Map "**Resident Address**" to "`Resident Address: Street 1`"
+* **Remove "Resident Address: Street 2"**
+* Map "**Resident Address: City**" to "`Resident Address: City`"
+* Map "**Resident Address: City**" to "`Resident Address: State`"
+* Map "**Resident Address: Zip**" to "`Resident Address: Zipcode`" 
+  * \(CHANGE SPREADSHEET TO THIS FIELD NAME\)
+* **Remove "Resident Address: Country"**
+* **Remove "Resident Address: Latitude"**
+* **Remove "Resident Address: Longitude"**
+* Map "**RPP Zone**" to "`RPP Zone>Display Name`"
+* Map "**Hangtags**" to "`Hang-tags`" 
+  * \(CHANGE SPREADSHEET TO THIS FIELD NAME\)
+
+Everything else is mapped automatically.
 
 ### Export Zone Permit Applications from "permit\_applications" object table
 
@@ -137,10 +156,6 @@ ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
 3. Go to "`customer`" object table
 4. Click "**Records**" at the top
 5. Click "**Export**" at the top, choice to select "**.csv**"
-
-{% hint style="info" %}
-ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
-{% endhint %}
 
 ## Permit spreadsheet
 
