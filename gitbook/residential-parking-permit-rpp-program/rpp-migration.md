@@ -48,6 +48,8 @@ Fields are currently in this order:
 
 Reference "**Customers\_GREEN\_164.csv**" - is the format of the Knack `Customer` table
 
+`G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\import_tables`
+
 Fields to configure: 
 
 * `Name`
@@ -82,6 +84,8 @@ ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
 ### Configure "Permit Application" spreadsheet
 
 Reference "**permit\_application\_GREEN\_20200709.csv**" - is the format of the "`permit_application`" object table
+
+`G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\import_tables`
 
 Fields to configure: 
 
