@@ -12,9 +12,33 @@ Example of spreadsheet names:
 * "Permits\_2020\_RED\_ZONE"
 * "Permits\_2020\_ORANGE\_ZONE"
 
+## Format original spreadsheet
+
+Fields are currently in this order: 
+
+* **Name** - Extract to use for Contact spreadsheet import
+  * There are excel comments/notes that have customer phone numbers used for the Contact spreadsheet
+* **Street Name** - Extract to use for Permit Application spreadsheet import
+* **Home Address** - Extract to use for Permit Application spreadsheet import
+* **Zone \#** -  FIELD NOT USED IN IMPORT
+* **"\# of Decals"** - Extract to use for Permit Application spreadsheet import
+* **Serial \#** \(this field contains the permit serial \# and the license plate number\)
+  * Should be combined to one column field
+* **"\# of Hang-Tags"** - Extract to use for Permit Application spreadsheet import
+* **Serial \#** \(this field contains the hang tag serials\)
+  * Should be combined to one column field
+* **Day Passes** \(Used to fill out "Visitor Day Pass" field\)
+* **Serial \#** \(this field contains the day pass serials\)
+  * Should be combined to one column field
+* **Total Permits** - FIELD NOT USED IN IMPORT
+* **Revenue Generated** - FIELD NOT USED IN IMPORT
+* **Contact Information** - email address \(**Extract to use for Contact spreadsheet import\)**
+* **Date Received** - Used to fill out "Submitted Date"
+* **Total Transactions** -  FIELD NOT USED IN IMPORT
+
 ## Contacts
 
-### Configure "Contact" spreadsheet
+### Configure "Customer" spreadsheet
 
 Reference "**Customers\_GREEN\_164.csv**" - is the format of the Knack `Customer` table
 
@@ -26,9 +50,26 @@ Fields to configure:
 * `Phone`
 * `Email`
 
-### Import Zone Contacts into "Contacts" object table
+### Import Zone Contacts into "Customer" object table
 
-### Export Zone contacts from "Contacts" object table
+1. Open builder
+2. Navigate under "**Data**" tab
+3. Go to "`customer`" object table
+4. Click "**Records**" at the top
+5. Click "**Import**" at the top
+6. Follow steps to import
+7. 
+{% hint style="info" %}
+ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
+{% endhint %}
+
+### Export Zone contacts from "Customer" object table
+
+1. Open builder
+2. Navigate under "**Data**" tab
+3. Go to "`customer`" object table
+4. Click "**Records**" at the top
+5. Click "**Export**" at the top, choice to select "**.csv**"
 
 ## Permit Application
 
@@ -66,28 +107,30 @@ Fields to configure:
 | License Plate 4 |  |
 | State 4 | Texas |
 
-## Format original spreadsheet
+### Import Zone Permit Applications into "permit\_applications" object table
 
-Fields are currently in this order: 
+1. Open builder
+2. Navigate under "**Data**" tab
+3. Go to "`customer`" object table
+4. Click "**Records**" at the top
+5. Click "**Import**" at the top
+6. Follow steps to import
+7. 
+{% hint style="info" %}
+ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
+{% endhint %}
 
-* **Name - Extract to use for Contact spreadsheet import**
-  * There are excel comments/notes that have customer phone numbers used for the Contact spreadsheet
-* **Street Name**
-* **Home Address**
-* **Zone \#**
-* **"\# of Decals"**
-* **Serial \#** \(this field contains the permit serial \# and the license plate number\)
-* **"\# of Hang-Tags"**
-* **Serial \#** \(this field contains the hang tag serials\)
-* **Day Passes** \(Used to fill out "Visitor Day Pass" field\)
-* **Serial \#** \(this field contains the day pass serials\)
-* **Total Permits** - FIELD NOT USED IN IMPORT
-* **Revenue Generated** - FIELD NOT USED IN IMPORT
-* **Contact Information** - email address \(**Extract to use for Contact spreadsheet import\)**
-* **Date Received** - Used to fill out "Submitted Date"
-* **Total Transactions** -  FIELD NOT USED IN IMPORT
+### Export Zone Permit Applications from "permit\_applications" object table
 
+1. Open builder
+2. Navigate under "**Data**" tab
+3. Go to "`customer`" object table
+4. Click "**Records**" at the top
+5. Click "**Export**" at the top, choice to select "**.csv**"
 
+{% hint style="info" %}
+ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
+{% endhint %}
 
 ## Permit spreadsheet
 
