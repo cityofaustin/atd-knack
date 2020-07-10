@@ -40,6 +40,12 @@ Fields are currently in this order:
 
 ### Configure "Customer" spreadsheet
 
+1. Take original spreadsheet and filter the "Revenue Generated" field and do not select the "zero values" then extract those customers. 
+2. Look for multiple customer in the field \(hint: use Find and search for all "&" or "and" in the name\), reference the first email in the "Contact Information" field and use the customer name as the primary.
+3. Check the "Name" field for excel comments/notes that have customer phone numbers and add them to a new field called "Phone".
+4. If you notice duplicate customer records, just keep one customer record
+5. Go through every record to find decrepancies or notes about the customer \(Ex. Property Mgmt - but lists actual person\)
+
 Reference "**Customers\_GREEN\_164.csv**" - is the format of the Knack `Customer` table
 
 Fields to configure: 
