@@ -43,6 +43,10 @@
 * [Data set inventory](dts-portal/dts-portal.md)
 * [Application Inventory](dts-portal/application-inventory.md)
 
+## Finance and Purchasing
+
+* [Troubleshooting: FAQs](finance-and-purchasing/troubleshooting-faqs.md)
+
 ## Residential Parking Permit \(RPP\) Program
 
 * [RPP Migration](residential-parking-permit-rpp-program/rpp-migration.md)
