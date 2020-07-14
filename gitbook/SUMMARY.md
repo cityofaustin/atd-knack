@@ -48,7 +48,7 @@
 * [Finance & Purchasing](finance-and-purchasing/finance-and-purchasing/README.md)
   * [Training, Quiz, Account Access Process](finance-and-purchasing/finance-and-purchasing/training-quiz-account-access-process.md)
   * [Statuses](finance-and-purchasing/finance-and-purchasing/finance-and-purchasing-statuses.md)
-  * [List of Emails generated](finance-and-purchasing/finance-and-purchasing/list-of-emails-generated.md)
+  * [List of emails generated](finance-and-purchasing/finance-and-purchasing/list-of-emails-generated.md)
   * [Troubleshooting: FAQs](finance-and-purchasing/finance-and-purchasing/troubleshooting-faqs.md)
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)

@@ -1,4 +1,4 @@
-# List of Emails generated
+# List of emails generated
 
 *   Budget Review \(formerly "Purchase Review"\)
 *   Process PR
