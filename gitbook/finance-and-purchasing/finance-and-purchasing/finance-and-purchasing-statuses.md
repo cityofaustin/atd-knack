@@ -1,4 +1,4 @@
-# Finance & Purchasing Statuses
+# Statuses
 
 ### What happens when you click a button
 

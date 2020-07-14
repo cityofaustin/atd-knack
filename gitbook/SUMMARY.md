@@ -45,10 +45,10 @@
 
 ## Finance and Purchasing
 
-* [Finance & Purchasing Statuses](finance-and-purchasing/finance-and-purchasing-statuses.md)
-* [Finance & Purchasing](finance-and-purchasing/finance-and-purchasing.md)
-* [Training, Quiz, Account Access Process](finance-and-purchasing/training-quiz-account-access-process.md)
-* [Troubleshooting: FAQs](finance-and-purchasing/troubleshooting-faqs.md)
+* [Finance & Purchasing](finance-and-purchasing/finance-and-purchasing/README.md)
+  * [Training, Quiz, Account Access Process](finance-and-purchasing/finance-and-purchasing/training-quiz-account-access-process.md)
+  * [Statuses](finance-and-purchasing/finance-and-purchasing/finance-and-purchasing-statuses.md)
+  * [Troubleshooting: FAQs](finance-and-purchasing/finance-and-purchasing/troubleshooting-faqs.md)
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory.md)
 
 ## Residential Parking Permit \(RPP\) Program
