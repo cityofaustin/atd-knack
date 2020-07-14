@@ -46,6 +46,7 @@
 ## Finance and Purchasing
 
 * [Troubleshooting: FAQs](finance-and-purchasing/troubleshooting-faqs.md)
+* [Finance & Purchasing Statuses](finance-and-purchasing/finance-and-purchasing-statuses.md)
 
 ## Residential Parking Permit \(RPP\) Program
 
