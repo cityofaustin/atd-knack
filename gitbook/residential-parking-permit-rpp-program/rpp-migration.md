@@ -1,6 +1,6 @@
 # RPP Migration
 
-Navigate to this folder on the network drive: 
+[Export Zone Permit Applications from "permit\_applications" object table](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/residential-parking-permit-rpp-program/rpp-migration#export-zone-permit-applications-from-permit_applications-object-table)Navigate to this folder on the network drive: 
 
 `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\reference\RPP Tracking Spreadsheets`
 
@@ -65,8 +65,14 @@ Fields to configure:
 3. Go to "`customer`" object table
 4. Click "**Records**" at the top
 5. Click "**Import**" at the top
-6. Follow steps to import
-7. 
+6. Upload CSV, select file
+7. Leave defaults, click next
+8. Map to dropdown to appropriate fields except first full name field
+9. check number of customers with no permits linked already in system
+10. submit import
+
+
+
 {% hint style="info" %}
 ADD THE REST OF THE ****STEPS WHEN CONFIGURING "**PINK**" ZONE
 {% endhint %}
