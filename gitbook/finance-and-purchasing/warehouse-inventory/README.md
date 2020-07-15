@@ -10,8 +10,22 @@
 
 * Creates work order
 * Adds Inventory Item
+  * Choose `Item`
+  * Add `Quantity`
+  * Select `Source`
+  * Add `Comment`
 * Record is created status `Submitted to Warehouse`
   * Can `Cancel` request
+* When you `Cancel`
+  * Record status is `Cancelled`
+  * Can `Edit` request
+    * Choose `Item`
+    * Add `Quantity`
+    * Select `Source`
+    * Add `Comment`
+  * When a line item is `Cancelled` that item on the Warehouse Inventory module is also `Cancelled`
+* When you `Edit` the record
+* The new line item is sent, the Cancelled item is no longer there
 
 ## Finance and Purchasing App &gt; Warehouse Inventory module
 
@@ -59,7 +73,9 @@
 
 * Inventory Request status is `Need AIMS entry`
 
-
+{% hint style="warning" %}
+HOW DO YOU CLOSE THIS? Ask John! 
+{% endhint %}
 
 ## \(Old\) Workflow
 
