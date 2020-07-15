@@ -66,14 +66,14 @@
 
 * [Resources](o365-resources/resources.md)
 
+## Shared Mobility Operations
+
+* [Untitled](shared-mobility-operations/untitled.md)
+
 ## Stuff to know
 
 ## Vision Zero in Action
 
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
 * [School Closure Calculation](vision-zero-in-action/school-closure-calculation.md)
-
-## Shared Mobility Operations
-
-* [Untitled](shared-mobility-operations/untitled.md)
 
