@@ -1,6 +1,67 @@
 # Warehouse Inventory
 
-## Workflow
+## Workflow from AMD Work Order
+
+## AMD Data Tracker app
+
+### **Item is requested**
+
+#### **Technician**
+
+* Creates work order
+* Adds Inventory Item
+* Record is created status `Submitted to Warehouse`
+  * Can `Cancel` request
+
+## Finance and Purchasing App &gt; Warehouse Inventory module
+
+* Inventory Request record is created a status `Ready to Issue`
+
+### Issuing Item
+
+**Warehouse Staff**
+
+* Receives request and reviews inventory request details
+  * Items status is `New` 
+* Can `Edit` or `Issue` or `Cancel` Inventory line item 
+
+  Edit button allows user to edit
+
+  * Choose `Item`
+  * Add `Quantity`
+  * Add `Comment`
+
+* Issue button allows user to
+  * Choose `Issued From`
+  * Choose `Issued To`
+  * Add `Quantity`
+  * Add `Comment`
+* Clicks `Issue` button
+* Inventory Item status changes to `Issued`
+* Can `Return`Inventory line item 
+
+  Return button allows user to 
+
+  * Enter `Quantity Returned`
+  * Select `Returned By`
+
+### Reviewing Needed
+
+* Inventory Request status is `Review Needed`
+* Financial Review needs to be done
+* Click on `Financial Review` in the Inventory Request
+  * Updated `Task Order`
+  * Added `Fund`
+  * Added `Department`
+  * Added `Unit`
+
+### Need AIMS entry
+
+* Inventory Request status is `Need AIMS entry`
+
+
+
+## \(Old\) Workflow
 
 `User` --&gt; `Supervisor` --&gt; `Warehouse Staff`
 
@@ -16,7 +77,7 @@
 **Warehouse Staff**
 
 * Receives request and begins pulling inventory items - `PROCESSING`
-* Requested inventory items have been pulled and issued to technician - \`COMPLETED'
+* Requested inventory items have been pulled and issued to technician - `COMPLETED`
 
 ## Status Definitions
 
