@@ -15,12 +15,12 @@ Navigate to this folder on the network drive:
 
 \*Note: Be sure NOT to replace or overwrite the original RPP Permits file
 
-## Format original spreadsheet
+## Understanding Original Spreadsheet
 
 Fields are currently in this order: 
 
-* **Name** - Extract to use for Contact spreadsheet import
-  * There are excel comments/notes that have customer phone numbers used for the Contact spreadsheet
+* **Name** - Extract to use for Customer spreadsheet import
+  * There are excel comments/notes that have customer **phone numbers** used for the Customer spreadsheet import
 * **Street Name** - Extract to use for Permit Application spreadsheet import
 * **Home Address** - Extract to use for Permit Application spreadsheet import
 * **Zone \#** -  FIELD NOT USED IN IMPORT
@@ -35,7 +35,7 @@ Fields are currently in this order:
   * Should be combined to one column field
 * **Total Permits** - FIELD NOT USED IN IMPORT
 * **Revenue Generated** - FIELD NOT USED IN IMPORT
-* **Contact Information** - email address \(**Extract to use for Contact spreadsheet import\)**
+* **Contact Information** - \(Email Address\) Extract to use for Customer spreadsheet import
 * **Date Received** - Used to fill out "Submitted Date"
 * **Total Transactions** -  FIELD NOT USED IN IMPORT
 
