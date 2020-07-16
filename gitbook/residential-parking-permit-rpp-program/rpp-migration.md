@@ -1,16 +1,17 @@
 # RPP Migration
 
-[Export Zone Permit Applications from "permit\_applications" object table](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/residential-parking-permit-rpp-program/rpp-migration#export-zone-permit-applications-from-permit_applications-object-table)Navigate to this folder on the network drive: 
+## Preparing Original Spreadsheet
+
+[Export Zone Permit Applications from "permit\_applications" object table](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/residential-parking-permit-rpp-program/rpp-migration#export-zone-permit-applications-from-permit_applications-object-table) Navigate to this folder on the network drive: 
 
 `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\reference\RPP Tracking Spreadsheets`
 
-The spreadsheet I've been copying has been "**Sold RPP Permits 2020 - SI**" or one of the other spreadsheets "**Permits\_2020\_GREEN\_ZONE**" and saving as and renaming to the appropriate zone name. 
+1. Open the "**Sold RPP Permits 2020 - SI**" Excel spreadsheet
+2. Depending on the colored zone you are working with, remove all other sheets from the workbook
+3. With only one colored zone sheet remaining, _'Save As'_ : "**Permits\_2020\_**_**COLOR**_**\_ZONE**" \(where color is replaced with the appropriate color you are working with\)
+4. Save into the _'2020 RPP Permit Zones'_ folder for reference
 
-Example of spreadsheet names:
-
-* "Permits\_2020\_PINK\_ZONE"
-* "Permits\_2020\_RED\_ZONE"
-* "Permits\_2020\_ORANGE\_ZONE"
+\*Note: Be sure not to replace or overwrite the original RPP Permits file
 
 ## Format original spreadsheet
 
