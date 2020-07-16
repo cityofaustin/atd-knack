@@ -2,7 +2,9 @@
 
 ## Preparing Original Spreadsheet
 
-[Export Zone Permit Applications from "permit\_applications" object table](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/residential-parking-permit-rpp-program/rpp-migration#export-zone-permit-applications-from-permit_applications-object-table) Navigate to this folder on the network drive: 
+[Export Zone Permit Applications from "permit\_applications" object table](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/residential-parking-permit-rpp-program/rpp-migration#export-zone-permit-applications-from-permit_applications-object-table) 
+
+Navigate to this folder on the network drive: 
 
 `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\reference\RPP Tracking Spreadsheets`
 
@@ -11,7 +13,7 @@
 3. With only one colored zone sheet remaining, _'Save As'_ : "**Permits\_2020\_**_**COLOR**_**\_ZONE**" \(where color is replaced with the appropriate color you are working with\)
 4. Save into the _'2020 RPP Permit Zones'_ folder for reference
 
-\*Note: Be sure not to replace or overwrite the original RPP Permits file
+\*Note: Be sure NOT to replace or overwrite the original RPP Permits file
 
 ## Format original spreadsheet
 
