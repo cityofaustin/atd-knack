@@ -5,7 +5,7 @@ description: >-
   Assignments form for the Scheduler interface.
 ---
 
-# School Closure Calculation
+# Calculate School Closures
 
 ## **Purpose** 
 
