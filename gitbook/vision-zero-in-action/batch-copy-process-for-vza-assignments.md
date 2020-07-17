@@ -6,8 +6,15 @@ description: >-
 
 # Batch Copy Process for VZA Assignments
 
-  
+##  Purpose 
 
+To copy a batch of assignments from one month to another. This helps cut down on repetitive form entry and saves time.
+
+## Permission
+
+Only a VZA System Administrator /Knack Builder can carry out this process.
+
+## Process
 
 1 \) Open the Assignments object in Records View in the app
 
