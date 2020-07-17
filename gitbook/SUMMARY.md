@@ -72,6 +72,10 @@
 
 ## Stuff to know
 
+## Transportation Development Services
+
+* [TIA Module](transportation-development-services/tia-module.md)
+
 ## Vision Zero in Action
 
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
