@@ -13,7 +13,7 @@ To remove AISD schools  that may be closed due to construction from the drop dow
 
 ## **Permissions** 
 
-Only a VZA system administrator can carry out this process.  
+Only a VZA system administrator /Knack Builder can carry out this process.  
 
 
 ## **Process**
