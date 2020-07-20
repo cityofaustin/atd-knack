@@ -41,25 +41,35 @@ Fields are currently in this order:
 
 ## Contacts
 
-### Configure "Customer" spreadsheet
+### Configure "Customer" Spreadsheet
 
-1. Take original spreadsheet and filter the "Revenue Generated" field and do not select the "zero values" then extract those customers. 
-2. Look for multiple customer in the field \(hint: use Find and search for all "&" or "and" in the name\), reference the first email in the "Contact Information" field and use the customer name as the primary.
-3. Check the "Name" field for excel comments/notes that have customer phone numbers and add them to a new field called "Phone".
-4. If you notice duplicate customer records, just keep one customer record
-5. Go through every record to find decrepancies or notes about the customer \(Ex. Property Mgmt - but lists actual person\)
+1. With the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet open, select all black rows and remove from spreadsheet
+2. Select Column 'M' \(Revenue Generated\), select 'Sort & Filter' button in the Excel ribbon, select 'Filter' 
+3. Select the Filter icon that now appears on the column and exclude the "zero value" \($0.00\) records
+4. Navigate to and open the "**Customers\_COLOR\_TEMPLATE**" spreadsheet file and 'Save As' "**Customers\_COLOR**" with the appropriate color zone you are working with. Save to the **"import\_tables"** folder. Navigate and open the existing "**Customers\_COLOR**" spreadsheet file if it already exists. Fields to configure: 
+   * `Full Name`
+   * `First Name`
+   * `Middle Name`
+   * `Last Name`
+   * `Phone`
+   * `Email`
+   * `Notes`
+5. With the filtered "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file, copy all names and paste values to the 'Full Name' column in the new "**Customers\_COLOR**" spreadsheet file
+6. Copy all 'Contact Information' \(emails\) and paste values to the 'Email' column in the new "**Customers\_COLOR**" spreadsheet file
+7. Go through the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file and transpose any relevant notes and comments from each row into the 'Notes' column on the "**Customers\_COLOR**" spreadsheet file such as purchase date info or tenant names. If the information from these excel comments and notes are phone numbers, transpose them to the 'Phone' column on the "**Customers\_COLOR**" spreadsheet file
+8. If the original record has a property management company as the name yet there is a comment or note that has the owner name for the record, go ahead and replace the business name with the owner name as the 'Full Name'
+9. Once all name, phone, email, and notes information has been copied over to the "**Customers\_COLOR**" spreadsheet file, you may close the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file
+10. On the "**Customers\_COLOR**" spreadsheet file look for multiple customer names in the 'Full Name' column \(hint: use 'Find and Search' for all "&" or "and" in the name\), reference the first email in the 'Email' field and use the associated customer name as the primary 'Full Name' and remove any other names from the cell. Remove any additional emails from the 'Email' cell that are not the primary email
+11. Organize the spreadsheet alphabetically by the 'Full Name' column
+12. Check the 'Full Name' field for duplicate customer records and remove the row that features less information. If otherwise the same in all fields, choose either row to remove
+13. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
+14. Either copy/paste or enter the 'First Name', 'Middle Name', and 'Last Name' information from the 'Full Name' column for all records
+15. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
+16. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file
 
 Reference "**Customers\_GREEN\_164.csv**" - is the format of the Knack `Customer` table
 
 `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\import_tables`
-
-Fields to configure: 
-
-* `Name`
-* `First`
-* `Last`
-* `Phone`
-* `Email`
 
 ### Import Zone Contacts into "Customer" object table
 
