@@ -46,7 +46,8 @@ Fields are currently in this order:
 1. With the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet open, select all black rows and remove from spreadsheet
 2. Select Column 'M' \(Revenue Generated\), select 'Sort & Filter' button in the Excel ribbon, select 'Filter' 
 3. Select the Filter icon that now appears on the column and exclude the "zero value" \($0.00\) records
-4. Navigate to and open the "**Customers\_COLOR\_TEMPLATE**" spreadsheet file and 'Save As' "**Customers\_COLOR**" with the appropriate color zone you are working with. Save to the **"import\_tables"** folder. Navigate and open the existing "**Customers\_COLOR**" spreadsheet file if it already exists. Fields to configure: 
+4. With the now filtered "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file 'Save As' "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" into the **"Revenue Only**" folder
+5. Navigate to and open the "**Customers\_COLOR\_TEMPLATE**" spreadsheet file and 'Save As' "**Customers\_COLOR**" with the appropriate color zone you are working with. Save to the **"import\_tables"** folder. Navigate and open the existing "**Customers\_COLOR**" spreadsheet file if it already exists. Fields to configure: 
    * `Full Name`
    * `First Name`
    * `Middle Name`
@@ -54,18 +55,18 @@ Fields are currently in this order:
    * `Phone`
    * `Email`
    * `Notes`
-5. With the filtered "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file, copy all names and paste values to the 'Full Name' column in the new "**Customers\_COLOR**" spreadsheet file
-6. Copy all 'Contact Information' \(emails\) and paste values to the 'Email' column in the new "**Customers\_COLOR**" spreadsheet file
-7. Go through the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file and transpose any relevant notes and comments from each row into the 'Notes' column on the "**Customers\_COLOR**" spreadsheet file such as purchase date info or tenant names. If the information from these excel comments and notes are phone numbers, transpose them to the 'Phone' column on the "**Customers\_COLOR**" spreadsheet file
-8. If the original record has a property management company as the name yet there is a comment or note that has the owner name for the record, go ahead and replace the business name with the owner name as the 'Full Name'
-9. Once all name, phone, email, and notes information has been copied over to the "**Customers\_COLOR**" spreadsheet file, you may close the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file
-10. On the "**Customers\_COLOR**" spreadsheet file look for multiple customer names in the 'Full Name' column \(hint: use 'Find and Search' for all "&" or "and" in the name\), reference the first email in the 'Email' field and use the associated customer name as the primary 'Full Name' and remove any other names from the cell. Remove any additional emails from the 'Email' cell that are not the primary email
-11. Organize the spreadsheet alphabetically by the 'Full Name' column
-12. Check the 'Full Name' field for duplicate customer records and remove the row that features less information. If otherwise the same in all fields, choose either row to remove
-13. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
-14. Either copy/paste or enter the 'First Name', 'Middle Name', and 'Last Name' information from the 'Full Name' column for all records
-15. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
-16. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
+6. With the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file, copy all names and paste values to the 'Full Name' column in the new "**Customers\_COLOR**" spreadsheet file
+7. Copy all 'Contact Information' \(emails\) and paste values to the 'Email' column in the new "**Customers\_COLOR**" spreadsheet file
+8. Go through the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file and transpose any relevant notes and comments from each row into the 'Notes' column on the "**Customers\_COLOR**" spreadsheet file such as purchase date info or tenant names. If the information from these excel comments and notes are phone numbers, transpose them to the 'Phone' column on the "**Customers\_COLOR**" spreadsheet file
+9. If the original record has a property management company as the name yet there is a comment or note that has the owner name for the record, go ahead and replace the business name with the owner name as the 'Full Name'
+10. Once all name, phone, email, and notes information has been copied over to the "**Customers\_COLOR**" spreadsheet file, you may close the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file
+11. On the "**Customers\_COLOR**" spreadsheet file look for multiple customer names in the 'Full Name' column \(hint: use 'Find and Search' for all "&" or "and" in the name\), reference the first email in the 'Email' field and use the associated customer name as the primary 'Full Name' and remove any other names from the cell. Remove any additional emails from the 'Email' cell that are not the primary email
+12. Organize the spreadsheet alphabetically by the 'Full Name' column
+13. Check the 'Full Name' field for duplicate customer records and remove the row that features less information. If otherwise the same in all fields, choose either row to remove
+14. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
+15. Either copy/paste or enter the 'First Name', 'Middle Name', and 'Last Name' information from the 'Full Name' column for all records
+16. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
+17. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
 Reference "**Customers\_GREEN\_164.csv**" - is the format of the Knack `Customer` table
 
