@@ -65,7 +65,7 @@ Fields are currently in this order:
 13. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
 14. Either copy/paste or enter the 'First Name', 'Middle Name', and 'Last Name' information from the 'Full Name' column for all records
 15. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
-16. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file
+16. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
 Reference "**Customers\_GREEN\_164.csv**" - is the format of the Knack `Customer` table
 
