@@ -43,7 +43,7 @@ Fields are currently in this order:
 
 ### Configure "Customer" Spreadsheet
 
-1. With the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet open, select all black rows and remove from spreadsheet
+1. With the "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet open, select all black rows as well as the 2 totals rows at the bottom and remove from spreadsheet
 2. Select Column 'M' \(Revenue Generated\), select 'Sort & Filter' button in the Excel ribbon, select 'Filter' 
 3. Select the Filter icon that now appears on the column and exclude the "zero value" \($0.00\) records
 4. With the now filtered "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file 'Save As' "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" into the **"Revenue Only**" folder
