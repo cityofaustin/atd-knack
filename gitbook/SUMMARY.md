@@ -53,6 +53,11 @@
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
 
+## Transportation Development Services
+
+* [Transportation Development Services Division](transportation-development-services/transportation-development-services-division.md)
+* [TIA Module](transportation-development-services/tia-module.md)
+
 ## Residential Parking Permit \(RPP\) Program
 
 * [RPP Migration](residential-parking-permit-rpp-program/rpp-migration.md)
@@ -66,16 +71,11 @@
 
 * [Resources](o365-resources/resources.md)
 
+## Stuff to know
+
 ## Shared Mobility Operations
 
 * [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
-
-## Stuff to know
-
-## Transportation Development Services
-
-* [TIA Module](transportation-development-services/tia-module.md)
-* [Transportation Development Services Division](transportation-development-services/transportation-development-services-division.md)
 
 ## Vision Zero in Action
 
