@@ -10,17 +10,20 @@ The Residential Parking Permit Program \(RPP\) application has two main URLS:
 * They will have access to the following tabs: 
   * **Home**
     * Applications
+      * This page has the "`Backlog Permit Applications`" _\(this can be removed once the RPP Migration of customers/permit applications/permits has been completed.\)_
     * Permits
     * Transactions
     * Advanced Search
     * Am I Eligible?
   * **Look Up**
     * Customers
+      * This page has the columns in a weird order, can be changed after RPP migration is completed. Ask Steve if he has a preference.
+      * This page also has a "`+ Add Customer" button` - this is a quick way for internal staff to enter a new customer and RPP application _\(for those that submit through the mail or used for rare occurrences\)_ 
     * Addresses
     * RPP Zones
-  * **Reports**
-  * **Cashier**
-  * **Help**
+  * **Reports** - this page also includes the "`Survey Results`" from residents that have used the online application
+  * **Cashier** - separate page for ease of use for Cashier once they get a cashier to help out
+  * **Help** - guide for RPP Staff only
 
 ### **What customer/residents see**
 
