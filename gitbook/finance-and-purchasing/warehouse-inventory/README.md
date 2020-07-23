@@ -25,7 +25,7 @@
     * Add `Comment`
   * When a line item is `Cancelled` that item on the Warehouse Inventory module is also `Cancelled`
 * When you `Edit` the record
-* The new line item is sent, the Cancelled item is no longer there
+* The new line item is sent, the `Cancelled` item is no longer there
 
 ## Finance and Purchasing App &gt; Warehouse Inventory module
 
@@ -39,13 +39,13 @@
   * Items status is `New` 
 * Can `Edit` or `Issue` or `Cancel` Inventory line item 
 
-  Edit button allows user to edit
+  **Edit** button allows user to edit
 
   * Choose `Item`
   * Add `Quantity`
   * Add `Comment`
 
-* Issue button allows user to
+* **Issue** button allows user to
   * Choose `Issued From`
   * Choose `Issued To`
   * Add `Quantity`
@@ -63,7 +63,8 @@
 
 * Inventory Request status is `Review Needed`
 * Financial Review needs to be done
-* Click on `Financial Review` in the Inventory Request
+  * \(User needs to have `FDU Approver` is "Yes" in the user roles\)
+* Click on `Financial Review` in the Inventory Request details page
   * Updated `Task Order`
   * Added `Fund`
   * Added `Department`
@@ -72,28 +73,18 @@
 ### Need AIMS entry
 
 * Inventory Request status is `Need AIMS entry`
+* Change inventory item, Add "AIMS \#" 
+* Then Inventory Request status changes to `Completed`
 
-{% hint style="warning" %}
-HOW DO YOU CLOSE THIS? Ask John! 
+{% hint style="info" %}
+UPDATE DEFINITIONS FROM FINANCE & PURCHASING APP
 {% endhint %}
 
-## \(Old\) Workflow
+{% hint style="warning" %}
+UPDATE STATUS DEFINITIONS FROM AMD DATA TRACKER
+{% endhint %}
 
-`User` --&gt; `Supervisor` --&gt; `Warehouse Staff`
-
-**User**
-
-* User creates Inventory Request - `NOT SUBMITTED`
-* Submits to Supervisor: `WAITING FOR APPROVAL`
-
-**Supervisor**
-
-* Reviews inventory request and approves - `SUBMITTED`
-
-**Warehouse Staff**
-
-* Receives request and begins pulling inventory items - `PROCESSING`
-* Requested inventory items have been pulled and issued to technician - `COMPLETED`
+**DO THIS!!!! Do a status field map from both applications!!**
 
 ## Status Definitions
 
