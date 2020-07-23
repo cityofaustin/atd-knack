@@ -77,25 +77,41 @@
 * Then Inventory Request status changes to `Completed`
 
 {% hint style="info" %}
-UPDATE DEFINITIONS FROM FINANCE & PURCHASING APP
+**Do a status field map from both applications!!**
 {% endhint %}
 
-{% hint style="warning" %}
-UPDATE STATUS DEFINITIONS FROM AMD DATA TRACKER
-{% endhint %}
-
-**DO THIS!!!! Do a status field map from both applications!!**
-
-## Status Definitions
+## Inventory Request Status Definitions \(Warehouse Inventory module\)
 
 | Status | Description |
 | :--- | :--- |
-| **NOT SUBMITTED** | As a customer, added new inventory request but have yet to submit it |
-| **WAITING FOR APPROVAL** | User \(technician\) has clicked the **Submit for Approval** button to get supervisor approval on their request. |
-| **SUBMITTED** | Supervisor approval was **"YES"**, request has been submitted for warehouse staff to review |
-| **PROCESSING** | Warehouse staff is working on request and hasn't finished the inventory request fulfillment |
-| **COMPLETED** | When warehouse staff has completed the request and inventory has been issued to a technician |
-| **CANCELLED** | If request is no longer required or needed. |
+| **Not Submitted** | As a customer, added new inventory request but have yet to submit it \(NOT CURRENTLY USING..\) |
+| **Ready to Issue** | Request has been submitted for warehouse staff to review |
+| **Review Needed** | When warehouse staff has completed the request and inventory has been issued to a technician. Inventory Request as a "**Task Order**" and "**FDU \#"** that needs review |
+| **Needs AIMS entry** | When warehouse staff has completed the request and inventory has been issued to a technician, but the inventory item needs to have an AIMS \# associated to it. |
+| **Completed** | When warehouse staff has completed the request and inventory has been issued to a technician. Inventory Item has an AIMS \# associated to it. |
+| **Cancelled** |  If request is no longer required or needed. |
+
+## Inventory Request Inventory Item Status Definitions \(Warehouse Inventory module\)
+
+| Status | Definitions |
+| :--- | :--- |
+| **Issued** | When warehouse staff has completed the request and inventory has been issued to a technician.  |
+| **Returned** | When technician has brought back unused inventory item to the Warehouse  |
+| **Cancelled** | When Warehouse staff has requested that the inventory request item to be "Cancelled". |
+| **New** | Request has been submitted for warehouse staff to review |
+
+## Inventory Transaction Status Definitions \(AMD Data Tracker\)
+
+| Status | Definitions |
+| :--- | :--- |
+| **Not Requested** | As a technician, added new inventory request but have yet to submit it \(NOT CURRENTLY USING..\) |
+| **Submitted to Warehouse** | When inventory request has been submitted for warehouse staff to review |
+| **Issued** | When inventory has been issued to a technician.  |
+| **Return Requested** | When technician has requested a Return on  unused inventory item |
+| **Returned** | When technician has brought back unused inventory item to the Warehouse  |
+| **Cancelled** | When technician has requested that the inventory request item to be "Cancelled". |
+
+## 
 
 ##  
 
