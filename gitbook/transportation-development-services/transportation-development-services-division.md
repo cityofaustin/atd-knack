@@ -10,9 +10,9 @@
 ### **Project Manager**
 
 * Gets assigned to review Development Review in AMANDA
-* Create "Development Review" record in TDS Tracker - \(parent record\)
-  * Add Attachments
-  * Add Review Cycles
+* Create `Development Review` record in TDS Tracker - \(parent record\)
+  * `Add Attachments`
+  * `Add Review Cycles`
 * Review Cycles record is generated - \(child record\)
 * Review Comments are generated based on which Vision Team is checked
   * Transportation Engineering record \(grand child record\)
@@ -29,9 +29,31 @@
 ![](../.gitbook/assets/image%20%2814%29.png)
 
 * Clicks from email, `My Reviews`
-* Record under `Needs Review` is created
+* Record under `Needs Review` table is created
+* Click on `Details` icon
+* Reviewer has link to `View Development Review details`
 
+  Enters: 
 
+  * `Reviewer Comment` \(Required\)
+  * `Review Decision` \(Required\)
+  * `Attachment` \(if applicable\)
+
+* Click `Submit`
+* Review record will show up under the `Previously Reviewed` table
+
+### **Project Manager**
+
+* Can monitor all Development Reviews on the `Development Review` table
+* The corresponding Review Comments will show up as `% Complete` so that the Project Manager can know when to review and compile a unified comment
+* When reviewing the details of the Development Review, Project Manager will see `Review Cycle` is at `% Complete` - 100%.
+* Project manager would click `Edit Review Cycle`
+* Create `Unified Response` and update 
+  * Review Cycle Status
+  * Cycle Status
+  * Closed Cycle Date
+* Project manager would click `Edit Development Review`
+* Update Status to `Closed`
 
 
 
