@@ -234,9 +234,16 @@ Each record should have an association between the application and permit
    Note: For Day Passes, we will only dedicate one row for each grouping of up to 20 day passes 
 
 3. For 'Renewal Year' column select or enter 2 cells worth of values, select both, and drag that selection with the bottom right square to apply to the entire column since renewal year will be the same for all customers in the same zone
-4. Next, transpose the Name with the concatenated appID from the "Customer Export" spreadsheet to the same name on the Permits spreadsheet replacing it. Drag that cell name selection so that is copies to the blank rows below for that customer's permit records. Be sure to select the 'Copy Cells' option and not the 'Fill Series' option or you may just copy to each cell
+4. Next, transpose the Name with the concatenated appID from the "Customer Export" spreadsheet to the same name on the Permits spreadsheet replacing it. Drag that cell name selection so that it copies to the blank rows below for that customer's permit records. Be sure to select the 'Copy Cells' option and not the 'Fill Series' option or alternatively, you may just copy to each cell
 5. Make sure the 'Total Permits' column displays accurately the total number of permits when referencing for your record rows
 6. Transpose the Decal Serial Numbers, Hang-Tag Serial Numbers, and Day Pass Serial Numbers from the right columns \(columns 'I' to 'N'\) to their individual rows under column 'E' 'Serial Numbers'. You may copy and paste, manually enter, or use the 'Fill Series' option to transpose serial numbers. Remember to just paste the range of serial numbers for up to 20 day passes on its specific row
-7. 
+7. Enter the 'Total Day Passes' column 'D' with the total day pass values from column 'M' 'Day Passes' on the specific last row for that customer name where the Day Pass Serial Numbers are entered in the 'Serial Numbers' column 'E'
+8. Transpose the 'Date Received' value over to the 'Issued Date' column next to it on the same record row for all records with 'Date Received'
+9. Drag the 'Issued Date' cell down to 'Copy Cells' for the same 'Name' records accordingly to fill the remaining 'Issued Date' cells
+10. For the 'Permit Type' column, now enter the value 'Day Pass' on each respective record row that has the 'Total Day Passes' and 'Serial Numbers' for Day Passes
+11. For the 'Permit Type' column, now enter the value 'Residential Parking Permit \| decal' for each respective record row that has 'Serial Numbers' for only Decal Permits
+12. For the 'Permit Type' column, now enter the value 'Residential Parking Permit \| hang tag' for each respective record row that has 'Serial Numbers' for only Hang Tag Permits \(the remaining empty cells in the 'Permit Type' column\)
+13. Double check and verify all copied or entered data matches accordingly
+
 
 
