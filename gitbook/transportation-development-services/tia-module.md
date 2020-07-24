@@ -10,12 +10,11 @@ description: >-
 
 * Network File Location: 
 
-  `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_TDSD_Unified_Comment_Tracker\module_TIA`
+  `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_TDSD_Unified_Comment_Tracker\module_TIA\workflow`
 
-  * "`TDSD_TIA_workflow_20200618.pdf`" - Workflow and Visio found here
+  * Workflow and Visio found here
 
-* TIA Module&gt;workflow Google Drive:
-  * [TDSD\_TIA\_workflow\_20200618.pdf](https://drive.google.com/file/d/1L7bUt_935nsjEAG0fpQ41yuYjxUxjzeM/view?usp=sharing)
+* _TIA Module&gt;workflow_ Google Drive: [`https://drive.google.com/drive/folders/13GdQBj5YNH0aNjw8GNNKOXXad_KZJBIn?usp=sharing`](https://drive.google.com/drive/folders/13GdQBj5YNH0aNjw8GNNKOXXad_KZJBIn?usp=sharing)\`\`
 
 ## Current State 7/23/20
 
