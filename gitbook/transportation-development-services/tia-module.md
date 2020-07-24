@@ -60,12 +60,12 @@
 * Once the scope has been finalized and Scope status is in `Approved` scope status
 * Banner pops up to remind reviewer that Fees need to be paid
 
-OUTSIDE KNACK APPLICATION PROCESS: 
+### OUTSIDE KNACK APPLICATION PROCESS: 
 
 * Reviewer goes into AMANDA system, prepares invoice and sends to requester
 * Requester goes into AMANDA ABC online portal to pay fees
 
-IN KNACK
+### IN KNACK
 
 * Requester changes `Fee Status` and added `Fee Paid Date`
 * Requester can now click button to `Request Submission`
