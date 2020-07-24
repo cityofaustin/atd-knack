@@ -1,5 +1,11 @@
 # Application Background
 
+## Workflow
+
+Network drive: `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parking_Permit_Program\workflow`
+
+## About the application
+
 The Residential Parking Permit Program \(RPP\) application has two main URLS:
 
 * RPP Staff: [https://atd.knack.com/parking\#home](https://atd.knack.com/parking#home/)
