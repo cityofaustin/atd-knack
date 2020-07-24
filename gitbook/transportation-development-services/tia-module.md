@@ -99,18 +99,20 @@ There are some backlog features in the `Backlog` pipeline that have to do with t
 * Requester can now click button to `Request Submission`
   * Generates email to requester
     * EMAIL: Requester receives email notice of Scope Approved and now can submit TIA submission
+* TIA Review Status changes to `Pending Submittal`
 
 ## Back to Requester
 
+* Email to requester has link TIA Request details \(Public\)
 * Follows link in email to `Request Status`
 * This will show the TIA Review record they submitted
   * Need to click on `+ New Submission` button
 * New submission record is created
 * Must fill out:
-  * Attachment Name
-  * Attachment Type
-  * Attachment
-  * Attachment URL
+  * `Attachment Name`
+  * `Attachment Type`
+  * `Attachment`
+  * `Attachment URL`
 * Submit all attachments 
   * EMAIL: Reviewer receives an email notification that TIA submission attachments have been added
 
@@ -127,11 +129,11 @@ There are some backlog features in the `Backlog` pipeline that have to do with t
     * Submit Scope Approval memo to requester
     * EMAIL: Requester receives an email notification that TIA submission has been `Completed`
 * Reviewer can create **Project Mitigation** records
-  * Mitigation Type 
-  * Location 
-  * Location ID
-  * Improvement 
-  * Recommendation Notes
+  * `Mitigation Type` 
+  * `Location` 
+  * `Location ID`
+  * `Improvement` 
+  * `Recommendation Notes`
 * Reviewer can edit **Project Mitigation** details to indicate **Mitigation Fees Paid**
 * Reviewer can edit **TIA Request** and change the status to `Approved`
 * Reviewer can edit **TIA Request** and change the status to `Withdrawn/Cancelled`at any time
