@@ -228,13 +228,13 @@ Fields are currently in this order:
 
 Each record should have an association between the application and permit
 
-1. On the "Permits\_COLOR" spreadsheet \(permits\_import\_GREEN\_date\) make sure your records are ordered alphabetically. This will allow us to match the Name to the Name field on the "Customer Export" spreadsheet that include the concatenated appID for each name \(customer\_import\_GREEN\_with\_appID\)
-2. On the "Permits\_COLOR" spreadsheet select the row number for each record and right click and insert "I" for how many total permits there are for that customer. So if total permits for a customer is 4, you will need to insert 3 additional rows below that record so we can separate each permit for all customers
+1. On the **"Permits\_COLOR"** spreadsheet \(permits\_import\_GREEN\_date\) make sure your records are ordered alphabetically. This will allow us to match the Name to the Name field on the **"Customer Export"** spreadsheet that include the concatenated appID for each name \(customer\_import\_GREEN\_with\_appID\)
+2. On the **"Permits\_COLOR"** spreadsheet select the row number for each record and right click and insert \('I' key\) for how many total permits there are for that customer. So if total permits for a customer is 4, you will need to insert 3 additional rows below that record so we can separate each permit for all customers
 
    Note: For Day Passes, we will only dedicate one row for each grouping of up to 20 day passes 
 
 3. For 'Renewal Year' column select or enter 2 cells worth of values, select both, and drag that selection with the bottom right square to apply to the entire column since renewal year will be the same for all customers in the same zone
-4. Next, transpose the Name with the concatenated appID from the "Customer Export" spreadsheet to the same name on the Permits spreadsheet replacing it. Drag that cell name selection so that it copies to the blank rows below for that customer's permit records. Be sure to select the 'Copy Cells' option and not the 'Fill Series' option or alternatively, you may just copy to each cell
+4. Next, transpose the Name with the concatenated appID from the **"Customer Export"** spreadsheet to the same name on the Permits spreadsheet replacing it. Drag that cell name selection so that it copies to the blank rows below for that customer's permit records. Be sure to select the 'Copy Cells' option and not the 'Fill Series' option or alternatively, you may just copy to each cell
 5. Make sure the 'Total Permits' column displays accurately the total number of permits when referencing for your record rows
 6. Transpose the Decal Serial Numbers, Hang-Tag Serial Numbers, and Day Pass Serial Numbers from the right columns \(columns 'I' to 'N'\) to their individual rows under column 'E' 'Serial Numbers'. You may copy and paste, manually enter, or use the 'Fill Series' option to transpose serial numbers. Remember to just paste the range of serial numbers for up to 20 day passes on its specific row
 7. Enter the 'Total Day Passes' column 'D' with the total day pass values from column 'M' 'Day Passes' on the specific last row for that customer name where the Day Pass Serial Numbers are entered in the 'Serial Numbers' column 'E'
