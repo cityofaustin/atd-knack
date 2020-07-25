@@ -76,17 +76,80 @@
 * Change inventory item, Add `AIMS #`
 * Then Inventory Request status changes to `Completed`
 
-Status Field Mapping
+### Status Field Mapping
 
-| AMD Inventory Item Status \(Child\) | Warehouse Inventory Item Status \(Child\) | Warehouse Inventory Request Status \(Parent\) |
-| :--- | :--- | :--- |
-| **Submitted to Warehouse** | **New** | **Ready to Issue** |
-| **Cancelled** | **Cancelled** | **Ready to Issue** \(if there is an inventory item that is still in a "New" status |
-| **Cancelled** | **Cancelled** | **Cancelled** \(if all inventory items are cancelled\) |
-| **Returned** | **Returned** | **Ready to Issue** |
-| **Issued** | **Issued** | **Review Needed** \(if using back-chargeable Task Order \#\) |
-| **Issued** | **Issued** | **Needs AIMs entry** \(if Task Order \# IS NOT back-chargeable\) |
-| **Returned** | **Returned** | **Needs AIMs entry** \(if Task Order \# IS NOT back-chargeable\) |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">
+        <p>AMD Data Tracker</p>
+        <p>Inventory Item Status (Child)</p>
+      </th>
+      <th style="text-align:left">
+        <p>Warehouse Inventory</p>
+        <p>Item Status (Child)</p>
+      </th>
+      <th style="text-align:left">
+        <p>Warehouse Inventory</p>
+        <p>Request Status (Parent)</p>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b>Submitted to Warehouse</b>
+      </td>
+      <td style="text-align:left"><b>New</b>
+      </td>
+      <td style="text-align:left"><b>Ready to Issue</b>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>Cancelled</b>
+      </td>
+      <td style="text-align:left"><b>Cancelled</b>
+      </td>
+      <td style="text-align:left"><b>Ready to Issue</b> (if there is an inventory item that is still in a
+        &quot;New&quot; status</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>Cancelled</b>
+      </td>
+      <td style="text-align:left"><b>Cancelled</b>
+      </td>
+      <td style="text-align:left"><b>Cancelled </b>(if all inventory items are cancelled)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>Returned</b>
+      </td>
+      <td style="text-align:left"><b>Returned</b>
+      </td>
+      <td style="text-align:left"><b>Ready to Issue</b>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>Issued</b>
+      </td>
+      <td style="text-align:left"><b>Issued</b>
+      </td>
+      <td style="text-align:left"><b>Review Needed</b> (if using back-chargeable Task Order #)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>Issued</b>
+      </td>
+      <td style="text-align:left"><b>Issued</b>
+      </td>
+      <td style="text-align:left"><b>Needs AIMs entry</b> (if Task Order # IS NOT back-chargeable)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b>Returned</b>
+      </td>
+      <td style="text-align:left"><b>Returned</b>
+      </td>
+      <td style="text-align:left"><b>Needs AIMs entry</b> (if Task Order # IS NOT back-chargeable)</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Inventory Request Status Definitions \(Warehouse Inventory module\)
 
