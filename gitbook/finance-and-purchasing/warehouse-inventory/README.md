@@ -73,12 +73,20 @@
 ### Need AIMS entry
 
 * Inventory Request status is `Need AIMS entry`
-* Change inventory item, Add "AIMS \#" 
+* Change inventory item, Add `AIMS #`
 * Then Inventory Request status changes to `Completed`
 
-{% hint style="info" %}
-**Do a status field map from both applications!!**
-{% endhint %}
+Status Field Mapping
+
+| AMD Inventory Item Status \(Child\) | Warehouse Inventory Item Status \(Child\) | Warehouse Inventory Request Status \(Parent\) |
+| :--- | :--- | :--- |
+| **Submitted to Warehouse** | **New** | **Ready to Issue** |
+| **Cancelled** | **Cancelled** | **Ready to Issue** \(if there is an inventory item that is still in a "New" status |
+| **Cancelled** | **Cancelled** | **Cancelled** \(if all inventory items are cancelled\) |
+| **Returned** | **Returned** | **Ready to Issue** |
+| **Issued** | **Issued** | **Review Needed** \(if using back-chargeable Task Order \#\) |
+| **Issued** | **Issued** | **Needs AIMs entry** \(if Task Order \# IS NOT back-chargeable\) |
+| **Returned** | **Returned** | **Needs AIMs entry** \(if Task Order \# IS NOT back-chargeable\) |
 
 ## Inventory Request Status Definitions \(Warehouse Inventory module\)
 
