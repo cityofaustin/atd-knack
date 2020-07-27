@@ -49,9 +49,9 @@ Fields are currently in this order:
 4. With the now filtered "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file 'Save As' "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" into the **"Revenue Only**" folder
 5. Navigate to and open the "**Customers\_COLOR\_TEMPLATE**" spreadsheet file and 'Save As' "**Customers\_COLOR**" with the appropriate color zone you are working with. Save to the **"import\_tables"** folder. Navigate and open the existing "**Customers\_COLOR**" spreadsheet file if it already exists. Fields to configure: 
    * `Full Name`
-   * `First Name`
-   * `Middle Name`
-   * `Last Name`
+   * `Name of Applicant: First`
+   * `Name of Applicant: Middle`
+   * `Name of Applicant: Last`
    * `Phone`
    * `Email`
    * `Notes`
@@ -64,7 +64,7 @@ Fields are currently in this order:
 12. Organize the spreadsheet alphabetically by the 'Full Name' column
 13. Check the 'Full Name' field for duplicate customer records and remove the row that features less information. If otherwise the same in all fields, choose either row to remove
 14. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
-15. Either copy/paste or enter the 'First Name', 'Middle Name', and 'Last Name' information from the 'Full Name' column for all records
+15. Either copy/paste or enter the 'Name of Applicant: First', 'Name of Applicant: Middle', and 'Name of Applicant: Last' information from the 'Full Name' column for all records
 16. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
 17. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
@@ -208,34 +208,45 @@ See these configurations:
 
 Fields are currently in this order: 
 
-* **Name** -
-* **Renewal Year** - 
-* **Permit Type** - 
-* **Total Day Passes** - 
-* **Serial Numbers** -
-* **Issued Date** -
-* **Date Received** -
-* **Total Permits** -
-* **"\# of Decals"** -
-* **Serial \#** -
-* **"\# of Hang-Tags"** -
-* **Serial \#** -
-* **Day Passes** - 
-* **Serial \#**- 
-* **Total Transactions** -  
+* **Name** - The concatenated 'customer ID \| customer name' from the "Customer Export" spreadsheet
+* **Renewal Year** - Actually a month value. The same value for the entire zone
+* **Permit Type** - One of 3 types: 'Residential Parking Permit \| decal', Residential Parking Permit \| hang tag', or 'Day Pass'
+* **Total Day Passes** - The total number of Day Passes for that customer. If more than 20, create a new record for the remaining day passes and corresponding serial numbers
+* **Serial Numbers** - The 4 or 5 digit serial number that corresponds with an individual pass. For Day Passes, this value will be a range of serial number that corresponds with the total number of Day passes
+* **Issued Date** - Is actually the 'Date Received' value for the customer application
+* **Date Received** - FIELD NOT USED IN IMPORT. Copied to the 'Issued Date' column
+* **Total Permits** - FIELD NOT USED IN IMPORT. Total of Decal and Hang Tag permits. You may update to include the Day Passes in the total as reference but be aware this column will be removed.
+* **"\# of Decals"** - FIELD NOT USED IN IMPORT. Number of Decal Permits for customer. Max 4 Decal Permits per application with some exceptions made for 6
+  * Some areas within a zone may have alternate restrictions such as the Mueller area in Pink zone, which has a Max of 2 Decal Permits. Some exceptions may apply
+* **Serial \#** - FIELD NOT USED IN IMPORT. Serial Numbers and License Plate Numbers for each Decal Permit
+* **"\# of Hang-Tags"** - FIELD NOT USED IN IMPORT. Number of Hang Tag Permits for customer. Max 4 Hang Tag Permits per application with some exceptions made for 6
+  * Some areas within a zone may have alternate restrictions such as the Mueller area in Pink zone, which has a Max of 2 Hang Tag Permits. Some exceptions may apply
+* **Serial \#** - FIELD NOT USED IN IMPORT. Serial Numbers for each Hang Tag Permit. May show as a range value and and must be entered individually when copied over to the 'Serial Numbers' column for each Hang Tag permit record row for the customer
+* **Day Passes** - FIELD NOT USED IN IMPORT. Number of Day Passes for customer. Max 20 Day Pass Permits per application with some exceptions made for 40
+  * Day Passes are usually allotted to customers who represent organizations, property management, or business entities
+* **Serial \#**- FIELD NOT USED IN IMPORT. A range of Serial Numbers for all Day Pass Permits
+* **Total Transactions** -  FIELD NOT USED IN IMPORT. 
 
 ### Configure "Permits" Spreadsheet
 
 Each record should have an association between the application and permit
 
-1. On the **"Permits\_COLOR"** spreadsheet \(permits\_import\_GREEN\_date\) make sure your records are ordered alphabetically. This will allow us to match the Name to the Name field on the **"Customer Export"** spreadsheet that include the concatenated appID for each name \(customer\_import\_GREEN\_with\_appID\)
+1. On the **"Permits\_COLOR"** spreadsheet \(permits\_import\_GREEN\_date\) make sure your records are ordered alphabetically. This will allow us to match the Name to the Name field on the **"Customer Export"** spreadsheet that include the concatenated customer ID for each name \(customer\_import\_GREEN\_with\_appID\) Fields to configure:
+   * Name
+   * Renewal Year
+   * Permit Type
+   * Total Day Passes
+   * Serial Numbers
+   * Issued Date
+   * Issued By
+   * permit\_applications
 2. On the **"Permits\_COLOR"** spreadsheet select the row number for each record and right click and insert \('I' key\) for how many total permits there are for that customer. So if total permits for a customer is 4, you will need to insert 3 additional rows below that record so we can separate each permit for all customers
 
    Note: For Day Passes, we will only dedicate one row for each grouping of up to 20 day passes 
 
 3. For 'Renewal Year' column select or enter 2 cells worth of values, select both, and drag that selection with the bottom right square to apply to the entire column since renewal year will be the same for all customers in the same zone
-4. Next, transpose the Name with the concatenated appID from the **"Customer Export"** spreadsheet to the same name on the Permits spreadsheet replacing it. Drag that cell name selection so that it copies to the blank rows below for that customer's permit records. Be sure to select the 'Copy Cells' option and not the 'Fill Series' option or alternatively, you may just copy to each cell
-5. Make sure the 'Total Permits' column displays accurately the total number of permits when referencing for your record rows
+4. Next, transpose the Name with the concatenated Application ID \(appID\) from the **"Customer Export"** spreadsheet to the same name on the Permits spreadsheet replacing it. Drag that cell name selection so that it copies to the blank rows below for that customer's permit records. Be sure to select the 'Copy Cells' option and not the 'Fill Series' option or alternatively, you may just copy to each cell
+5. \(Optional\) Make sure the 'Total Permits' column displays accurately the total number of permits when referencing for your record rows
 6. Transpose the Decal Serial Numbers, Hang-Tag Serial Numbers, and Day Pass Serial Numbers from the right columns \(columns 'I' to 'N'\) to their individual rows under column 'E' 'Serial Numbers'. You may copy and paste, manually enter, or use the 'Fill Series' option to transpose serial numbers. Remember to just paste the range of serial numbers for up to 20 day passes on its specific row
 7. Enter the 'Total Day Passes' column 'D' with the total day pass values from column 'M' 'Day Passes' on the specific last row for that customer name where the Day Pass Serial Numbers are entered in the 'Serial Numbers' column 'E'
 8. Transpose the 'Date Received' value over to the 'Issued Date' column next to it on the same record row for all records with 'Date Received'
@@ -244,6 +255,12 @@ Each record should have an association between the application and permit
 11. For the 'Permit Type' column, now enter the value 'Residential Parking Permit \| decal' for each respective record row that has 'Serial Numbers' for only Decal Permits
 12. For the 'Permit Type' column, now enter the value 'Residential Parking Permit \| hang tag' for each respective record row that has 'Serial Numbers' for only Hang Tag Permits \(the remaining empty cells in the 'Permit Type' column\)
 13. Double check and verify all copied or entered data matches accordingly
+14. Remove all reference columns from the spreadsheet, columns 'G' through 'O' to finalize the spreadsheet
+15. To prepare the spreadsheet for import, we will now need to add 2 more columns, 'Issued By' and 'permit\_applications' columns.
+16. For the 'Issued By' column, fill in your name \(Knack Reviewer or Builder Admin\) and drag the cell to fill in the column for all records
+17. For the 'permit\_applications' record, we will need to enter the 8 digit Permit Application number. \(This permit application number may need to change to a 9 digit number should the number of applications exceed 10,000 in a given year\). The Permit Application number can be found and transposed from the  **"Customer Export"** spreadsheet. Copy or enter the corresponding Application ID in the 'permit\_applications' column for all records. Do not adjust the column title, we will be matching this field with the application for each permit which is also matched to each customer via the 'Name' field
+18. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
+19. Rename the file to "**Permits\_COLOR\_\#**" where \# is the number of permit records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
 
 
