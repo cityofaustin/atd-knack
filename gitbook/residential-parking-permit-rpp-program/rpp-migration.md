@@ -262,5 +262,7 @@ Each record should have an association between the application and permit
 18. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
 19. Rename the file to "**Permits\_COLOR\_\#**" where \# is the number of permit records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
+### Import "Permits" CSV
+
 
 
