@@ -47,14 +47,14 @@ Fields are currently in this order:
 2. Select Column 'M' \(Revenue Generated\), select 'Sort & Filter' button in the Excel ribbon, select 'Filter' 
 3. Select the Filter icon that now appears on the column and exclude the "zero value" \($0.00\) records
 4. With the now filtered "**Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file 'Save As' "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" into the **"Revenue Only**" folder
-5. Navigate to and open the "**Customers\_COLOR\_TEMPLATE**" spreadsheet file and 'Save As' "**Customers\_COLOR**" with the appropriate color zone you are working with. Save to the **"import\_tables"** folder. Navigate and open the existing "**Customers\_COLOR**" spreadsheet file if it already exists. Fields to configure: 
-   * `Full Name`
-   * `Name of Applicant: First`
-   * `Name of Applicant: Middle`
-   * `Name of Applicant: Last`
-   * `Phone`
-   * `Email`
-   * `Notes`
+5. Navigate to and open the "**Customers\_COLOR\_TEMPLATE**" spreadsheet file and 'Save As' "**Customers\_COLOR**" with the appropriate color zone you are working with. Save to the **"import\_tables"** folder. Navigate and open the existing "**Customers\_COLOR**" spreadsheet file if it already exists. Fields to configure:
+   * Name
+   * Name of Applicant: First
+   * Name of Applicant: Middle
+   * Name of Applicant: Last
+   * Phone
+   * Email
+   * Notes
 6. With the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file, copy all names and paste values to the 'Full Name' column in the new "**Customers\_COLOR**" spreadsheet file
 7. Copy all 'Contact Information' \(emails\) and paste values to the 'Email' column in the new "**Customers\_COLOR**" spreadsheet file
 8. Go through the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file and transpose any relevant notes and comments from each row into the 'Notes' column on the "**Customers\_COLOR**" spreadsheet file such as purchase date info or tenant names. If the information from these excel comments and notes are phone numbers, transpose them to the 'Phone' column on the "**Customers\_COLOR**" spreadsheet file
