@@ -10,12 +10,31 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   var tableScene = "scene_236";
   var tableView = "view_484";
 
+  // Define relevant fields
+  var dateField = "field_205";
+
+  var records = null;
+
+  // Filter for records for assignments today or after
+  var filters = [
+    {
+      field: dateField,
+      operator: "is today or after"
+    }
+  ];
+
   var url =
     "https://api.knack.com/v1/pages/" +
     tableScene +
     "/views/" +
     tableView +
-    "/records/";
+    "/records" +
+    "?filters=" +
+    encodeURIComponent(JSON.stringify(filters)) +
+    "&sort_field=" +
+    dateField +
+    "&sort_order=asc" +
+    "&rows_per_page=1000";
 
   // Get user auth for get request (API view is private) and set req headers
   var user = Knack.getUserToken();
@@ -32,7 +51,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     type: "GET",
     headers: headers,
     success: function (res) {
-      console.log(res);
+      records = res.records;
+      console.log(records);
     }
   });
 });
