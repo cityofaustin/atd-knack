@@ -53,23 +53,38 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     success: function (res) {
       records = res.records;
       var groupedAssignments = groupRecordsIntoAssignments(records);
+      // hideKnackTable();
+      appendShiftTable(groupedAssignments);
+      console.log(groupedAssignments);
     }
   });
 
   function groupRecordsIntoAssignments(records) {
     // Group records by field_724 (Officer Shift Label)
+    var officerShiftField = "field_724";
+
     var groupedRecords = {};
 
     for (var i = 0; i < records.length; i++) {
       var record = records[i];
+      var officerShift = record[officerShiftField];
 
-      if (groupedRecords[record.field_724]) {
-        groupedRecords[record.field_724].push(record);
+      if (groupedRecords[officerShift]) {
+        groupedRecords[officerShift].push(record);
       } else {
-        groupedRecords[record.field_724] = [record];
+        groupedRecords[officerShift] = [record];
       }
     }
 
-    console.log(groupedRecords);
+    return groupedRecords;
+  }
+
+  function hideKnackTable() {
+    $("#view_466 > div.kn-records-nav").hide();
+    $("#view_466 > div.kn-table-wrapper").hide();
+  }
+
+  function appendShiftTable(records) {
+    $("#view_466 > div.view-header").append(JSON.stringify(records));
   }
 });
