@@ -10,7 +10,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   var tableScene = "scene_236";
   var tableView = "view_484";
 
-  // Define relevant fields
+  // Define relevant officer_assignment fields
   var dateField = "field_205";
 
   var records = null;
@@ -52,7 +52,24 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     headers: headers,
     success: function (res) {
       records = res.records;
-      console.log(records);
+      var groupedAssignments = groupRecordsIntoAssignments(records);
     }
   });
+
+  function groupRecordsIntoAssignments(records) {
+    // Group records by field_724 (Officer Shift Label)
+    var groupedRecords = {};
+
+    for (var i = 0; i < records.length; i++) {
+      var record = records[i];
+
+      if (groupedRecords[record.field_724]) {
+        groupedRecords[record.field_724].push(record);
+      } else {
+        groupedRecords[record.field_724] = [record];
+      }
+    }
+
+    console.log(groupedRecords);
+  }
 });
