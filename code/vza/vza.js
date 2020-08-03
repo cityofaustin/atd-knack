@@ -146,42 +146,50 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     </div>`;
 
     function buildShiftSection(shiftRecords) {
-      var record = Object.values(shiftRecords)[0][0];
-      console.log(record);
+      function buildShift(records) {
+        var shiftsHTML = ``;
 
-      var shiftTitle = `
-      <tr class="kn-table-group kn-group-level-1">
-        <td style="" colspan="4">${record.field_724}</td>
-      </tr>`;
+        Object.entries(records).forEach(function ([title, shiftRecords]) {
+          console.log(shiftRecords);
+          shiftsHTML += `
+          <tr class="kn-table-group kn-group-level-1">
+            <td style="" colspan="4">${title}</td>
+          </tr>`;
 
-      var shiftDetails = `
-      <tr>
-        <td
-          style="background-color: rgb(82, 157, 198); padding-left: 20px;"
-          data-column-index="1"
-          data-field-key="field_139"
-        >
-          <span class="col-1">
-            ${record.field_139}
-          </span>
-        </td>
-        <td class="field_637" data-column-index="2" data-field-key="field_637">
-          <span class="col-2">
-            <span id="5f24412f3dd0c106c2719524">${
-              record.field_656_raw[0].identifier.split(" - ")[0]
-            }</span>
-          </span>
-        </td>
-        <td data-column-index="3" data-field-key="field_624">
-          <span class="col-3">
-            <span id="5f24412f3dd0c106c2719524"
-              >${record.field_656_raw[0].identifier.split(" - ")[2]}</span
-            >
-          </span>
-        </td>
-      </tr>`;
+          shiftRecords.forEach(function (record) {
+            shiftsHTML += `
+            <tr>
+              <td
+                style="background-color: rgb(82, 157, 198); padding-left: 20px;"
+                data-column-index="1"
+                data-field-key="field_139"
+              >
+                <span class="col-1">
+                  ${record.field_139}
+                </span>
+              </td>
+              <td class="field_637" data-column-index="2" data-field-key="field_637">
+                <span class="col-2">
+                  <span id="5f24412f3dd0c106c2719524">${
+                    record.field_656_raw[0].identifier.split(" - ")[0]
+                  }</span>
+                </span>
+              </td>
+              <td data-column-index="3" data-field-key="field_624">
+                <span class="col-3">
+                  <span id="5f24412f3dd0c106c2719524"
+                    >${record.field_656_raw[0].identifier.split(" - ")[2]}</span
+                  >
+                </span>
+              </td>
+            </tr>`;
+          });
+        });
 
-      return shiftTitle + shiftDetails;
+        return shiftsHTML;
+      }
+
+      return buildShift(shiftRecords);
     }
 
     // Append table, then append shifts to table body
