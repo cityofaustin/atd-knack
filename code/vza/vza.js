@@ -50,6 +50,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     `<span id="assignment-spinner" class="icon">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
   );
 
+  function hideKnackTable() {
+    $("#view_466 > div.kn-records-nav").hide();
+    $("#view_466 > div.kn-table-wrapper").hide();
+  }
+
+  // Hide Knack generated table
+  hideKnackTable();
+
   // Request officer_assignment records
   $.ajax({
     url: url,
@@ -58,7 +66,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     success: function (res) {
       records = res.records;
       var groupedAssignments = groupRecordsIntoAssignments(records);
-      hideKnackTable();
       appendShiftTable(groupedAssignments);
       console.log(groupedAssignments);
 
@@ -87,13 +94,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     return groupedRecords;
   }
 
-  function hideKnackTable() {
-    $("#view_466 > div.kn-records-nav").hide();
-    $("#view_466 > div.kn-table-wrapper").hide();
-  }
-
   function appendShiftTable(records) {
-    // $("#view_466 > div.view-header").append(JSON.stringify(records));
     var currentPage = 1;
 
     var recordsTotalsDiv = `
@@ -107,26 +108,12 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         <div class="kn-pagination level-right">
           <div class="kn-total-pages">${currentPage} of 19</div>
           <div class="kn-pagination-arrows">
-            <a
-              class="kn-change-page kn-previous disabled"
-              href="#"
-              id="previous-arrow"
-              title="Previous page"
-            >
-              <span class="icon">
-                <i class="fa fa-chevron-left"></i>
-              </span>
-            </a>
-            <a 
-              class="kn-change-page kn-next" 
-              href="#" 
-              id="next-arrow
-              title="Next page"
-            >
-              <span class="icon">
-                <i class="fa fa-chevron-right"></i>
-              </span>
-            </a>
+            <span class="icon">
+              <i class="fa fa-chevron-left"></i>
+            </span>
+            <span class="icon">
+              <i class="fa fa-chevron-right"></i>
+            </span>
           </div>
         </div>
       </div>`;
@@ -138,39 +125,18 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           <tr>
             <th class="field_139">
               <span class="table-fixed-label">
-                <a
-                  href="#field_139|asc"
-                  address="true"
-                  class="kn-sort level is-compact"
-                >
-                  <span>Time</span>
-                </a>
+                <span>Time</span>
               </span>
             </th>
             <th class="field_637">
               <span class="table-fixed-label">
-                <a
-                  href="#field_656-field_637|asc"
-                  address="true"
-                  class="kn-sort level is-compact"
-                >
-                  <span>Sector</span>
-                </a>
+                <span>Sector</span>
               </span>
             </th>
             <th class="field_624">
               <span class="table-fixed-label">
-                <a
-                  href="#field_656-field_624|asc"
-                  address="true"
-                  class="kn-sort level is-compact"
-                >
-                  <span>Location</span>
-                </a>
+                <span>Location</span>
               </span>
-            </th>
-            <th class="kn-table-action-link">
-              <span class="table-fixed-label">Sign Up</span>
             </th>
           </tr>
         </thead>
@@ -191,7 +157,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       var shiftDetails = `
       <tr>
         <td
-          class="field_139"
           style="background-color: rgb(82, 157, 198); padding-left: 20px;"
           data-column-index="1"
           data-field-key="field_139"
@@ -207,22 +172,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             }</span>
           </span>
         </td>
-        <td class="field_624" data-column-index="3" data-field-key="field_624">
+        <td data-column-index="3" data-field-key="field_624">
           <span class="col-3">
             <span id="5f24412f3dd0c106c2719524"
               >${record.field_656_raw[0].identifier.split(" - ")[2]}</span
             >
-          </span>
-        </td>
-        <td class="kn-table-link" style="text-align: center;">
-          <span class="col-4">
-            <a
-              class="kn-link kn-link-page kn-action-link"
-              href="javascript:void(0);"
-              data-action-rule-index="0"
-              style="text-align: center;"
-              ><i class="fa fa-user-plus"></i
-            ></a>
           </span>
         </td>
       </tr>`;
