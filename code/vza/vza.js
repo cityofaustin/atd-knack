@@ -199,10 +199,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           // Add sign up buttons
           shiftsHTML += `
           <tr>
-            <td style="" colspan="4">
+            <td style="padding-top: 16px;" colspan="4">
               <span
                 class="kn-button"
-                style="margin-right: 10px;"
+                style="margin: 0px 10px 10px 0px;"
               >
                 <span class="icon">
                   <i class="fa fa-plus-square"></i>
@@ -211,7 +211,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
               </span>
               <span
                 class="kn-button"
-                style="margin-right: 10px;"
+                style="margin: 0px 10px 10px 0px;"
               >
                 <span class="icon">
                   <i class="fa fa-plus-square"></i>
@@ -220,7 +220,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
               </span>
               <span
                 class="kn-button"
-                style="margin-right: 10px;"
+                style="margin: 0px 10px 10px 0px;"
               >
                 <span class="icon">
                   <i class="fa fa-plus-square"></i>
@@ -229,7 +229,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
               </span>
               <span
                 class="kn-button"
-                style="margin-right: 10px;"
+                style="margin: 0px 10px 10px 0px;"
               >
                 <span class="icon">
                   <i class="fa fa-plus-square"></i>
@@ -238,7 +238,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
               </span>
               <span
                 class="kn-button"
-                style="margin-right: 10px;"
+                style="margin: 0px 10px 10px 0px;"
               >
                 <span class="icon">
                   <i class="fa fa-plus-square"></i>
