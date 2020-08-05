@@ -102,7 +102,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         <div class="level-left">
           <div class="kn-entries-summary" style="margin-right: .5em;">
             <span class="light">Showing</span> 1-10
-            <span class="light">of</span> 184
+            <span class="light">of</span> ${Object.values(records).length}
           </div>
         </div>
         <div class="kn-pagination level-right">
@@ -151,10 +151,20 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
         Object.entries(records).forEach(function ([title, shiftRecords]) {
           console.log(shiftRecords);
+
           shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
             <td style="" colspan="4">${title}</td>
           </tr>`;
+
+          var factor = shiftRecords.length / 2;
+          var buttonIds = [];
+
+          shiftRecords.forEach(function (record) {
+            buttonIds.push(record.id);
+          });
+
+          console.log(buttonIds);
 
           shiftRecords.forEach(function (record) {
             shiftsHTML += `
@@ -182,8 +192,61 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                   >
                 </span>
               </td>
-            </tr>`;
+            </tr>
+            `;
           });
+
+          // Add sign up buttons
+          shiftsHTML += `
+          <tr>
+            <td style="" colspan="4">
+              <span
+                class="kn-button"
+                style="margin-right: 10px;"
+              >
+                <span class="icon">
+                  <i class="fa fa-plus-square"></i>
+                </span>
+                <span>Sign up - Officer 1</span>
+              </span>
+              <span
+                class="kn-button"
+                style="margin-right: 10px;"
+              >
+                <span class="icon">
+                  <i class="fa fa-plus-square"></i>
+                </span>
+                <span>Sign up - Officer 2</span>
+              </span>
+              <span
+                class="kn-button"
+                style="margin-right: 10px;"
+              >
+                <span class="icon">
+                  <i class="fa fa-plus-square"></i>
+                </span>
+                <span>Sign up - Officer 3</span>
+              </span>
+              <span
+                class="kn-button"
+                style="margin-right: 10px;"
+              >
+                <span class="icon">
+                  <i class="fa fa-plus-square"></i>
+                </span>
+                <span>Sign up - Officer 4</span>
+              </span>
+              <span
+                class="kn-button"
+                style="margin-right: 10px;"
+              >
+                <span class="icon">
+                  <i class="fa fa-plus-square"></i>
+                </span>
+                <span>Sign up - Officer 5</span>
+              </span>
+            </td>
+          </tr>`;
         });
 
         return shiftsHTML;
