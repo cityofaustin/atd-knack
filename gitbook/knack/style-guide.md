@@ -15,11 +15,16 @@
 
 Example: [ATD Forms banner](https://s3.amazonaws.com/assets.knackhq.com/assets/5ca25947f6973855115f5b58/logos/banner_cropped_small_atd_forms.png) Use [Gimp software ](https://www.gimp.org/)to create banner background color
 
+* You may use an .xcf GIMP file for an existing application and edit the text layer of the image
 * HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
 * RGB: ![\#22, 63, 110](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
-* Font: `Standard`
-* Size: `650 x 100`px, `800 x 150`px
-* Layout: \(white\) City Logo, first line: Name of application, second line: Austin Transportation Department
+* Banner Size: `800 x 160`px \(`650 x 100`px \)
+* Font: `Standard or Roboto`
+* Font Color: White
+* Font Size: 45px for first line \(bolded\), 39px for second line
+* Layout: City Logo left side, first line: Name of Application, second line: Austin Transportation Department
+* Save .xcf GIMP file in the logo folder for the application on the G Drive
+* Save as .png file in the logo folder for the application on the G Drive
 
 ### Field Naming Conventions
 
