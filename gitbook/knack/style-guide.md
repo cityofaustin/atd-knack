@@ -13,7 +13,9 @@
 
 ### Banner Image
 
-Example: [ATD Forms banner](https://s3.amazonaws.com/assets.knackhq.com/assets/5ca25947f6973855115f5b58/logos/banner_cropped_small_atd_forms.png) Use [Gimp software ](https://www.gimp.org/)to create banner background color
+Use [Gimp software ](https://www.gimp.org/)to create banner background color
+
+You can find the original banner assets and a template for creating a new application banner in the corresponding G drive folder: G:\ATD\ATD\_GIS\03\_RESOURCES\Seals\_Logos\ATD App Banner Assets
 
 * You may use an .xcf GIMP file for an existing application and edit the text layer of the image
 * HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
@@ -22,9 +24,10 @@ Example: [ATD Forms banner](https://s3.amazonaws.com/assets.knackhq.com/assets/5
 * Font: `Standard or Roboto`
 * Font Color: White
 * Font Size: 45px for first line \(bolded\), 39px for second line
+  * If text length exceeds banner size, adjust font size smaller until it fits appropriately
 * Layout: City Logo left side, first line: Name of Application, second line: Austin Transportation Department
 * Save .xcf GIMP file in the logo folder for the application on the G Drive
-* Save as .png file in the logo folder for the application on the G Drive
+* Export as .png file in the logo folder for the application on the G Drive
 
 ### Field Naming Conventions
 
