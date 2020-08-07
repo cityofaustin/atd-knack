@@ -13,14 +13,16 @@
 
 ### Banner Image
 
-Use [Gimp software ](https://www.gimp.org/)to create banner background color
+![](../.gitbook/assets/banner_800x160_coa_template.png)
+
+Use [Gimp software ](https://www.gimp.org/)to create or update a Knack application banner
 
 You can find the original banner assets and a template for creating a new application banner in the corresponding G drive folder: G:\ATD\ATD\_GIS\03\_RESOURCES\Seals\_Logos\ATD App Banner Assets
 
-* You can use the template file or an .xcf GIMP file for an existing application and edit the text layer of the image
-* HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
+* You can use the .xcf GIMP template file or an .xcf GIMP file for an existing application and edit the text layer of the banner image
+* HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color \(make sure Knack Header color is the same\)
 * RGB: ![\#22, 63, 110](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
-* Banner Size: `800 x 160`px \(`650 x 100`px \)
+* Banner Size: `800 x 160`px
 * Font: `Standard or Roboto`
 * Font Color: White
 * Font Size: 45px for first line \(bolded\), 39px for second line
