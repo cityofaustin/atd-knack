@@ -112,27 +112,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
   function appendShiftTable(records) {
     // Build table from records
-    var recordsTotalsDiv = `
-      <div class="level" style="margin-bottom: .75em;">
-        <div class="level-left">
-          <div class="kn-entries-summary" style="margin-right: .5em;">
-            <span class="light">Showing</span> ${currentRangeStart}-${currentRangeEnd}
-            <span class="light">of</span> ${completeRecords.length}
-          </div>
-        </div>
-        <div class="kn-pagination level-right">
-          <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
-          <div class="kn-pagination-arrows">
-            <span class="icon" id="prev-arrow">
-              <i class="fa fa-chevron-left"></i>
-            </span>
-            <span class="icon" id="next-arrow">
-              <i class="fa fa-chevron-right"></i>
-            </span>
-          </div>
-        </div>
-      </div>`;
-
     var recordsTable = `
     <div class="kn-table-wrapper assignments-table">
       <table class="kn-table kn-table-table is-bordered is-striped">
@@ -308,6 +287,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         );
         var shifts = buildAndAppendShiftSection(prevPageRecords);
         $("#shift-table-body").append(shifts);
+        prependShiftTableWithPagination();
       });
 
       next.click(function () {
@@ -329,17 +309,48 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         );
         var shifts = buildAndAppendShiftSection(nextPageRecords);
         $("#shift-table-body").append(shifts);
+        prependShiftTableWithPagination();
       });
+    }
+
+    // Update pagination values and add control click handlers
+    function prependShiftTableWithPagination() {
+      if ($(".pagination-controls")) {
+        $(".pagination-controls").remove();
+      }
+
+      var paginationControls = `
+      <div class="level pagination-controls" style="margin-bottom: .75em;">
+        <div class="level-left">
+          <div class="kn-entries-summary" style="margin-right: .5em;">
+            <span class="light">Showing</span> ${currentRangeStart}-${currentRangeEnd}
+            <span class="light">of</span> ${completeRecords.length}
+          </div>
+        </div>
+        <div class="kn-pagination level-right">
+          <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
+          <div class="pagination-arrows">
+            <span class="icon" id="prev-arrow">
+              <i class="fa fa-chevron-left"></i>
+            </span>
+            <span class="icon" id="next-arrow">
+              <i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+      </div>`;
+
+      $(".assignments-table").before(paginationControls);
+      addPaginationClickHandlers("prev-arrow", "next-arrow");
     }
 
     // Append table, then append shifts to table body
     $("#view_466 > div.view-header")
-      .append(recordsTotalsDiv + recordsTable)
+      .append(recordsTable)
       .ready(function () {
         buildAndAppendShiftSection(records);
+        prependShiftTableWithPagination();
         addShiftButtonClickHandlers("shift-button");
-        addPaginationClickHandlers("prev-arrow", "next-arrow");
-        // TODO: Update pagination displays with current location
       });
   }
 });
