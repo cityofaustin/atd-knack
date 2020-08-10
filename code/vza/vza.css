@@ -14,3 +14,7 @@
   color: #163f6e;
   font-size: 30px;
 }
+
+.kn-pagination-arrows {
+  cursor: pointer;
+}

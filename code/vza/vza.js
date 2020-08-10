@@ -13,7 +13,13 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Define relevant officer_assignment fields
   var dateField = "field_205";
 
-  var records = null;
+  var completeRecords = null;
+  var recordsInPage = null;
+  var currentPage = 1;
+  var recordsPerPage = 10;
+  var numberOfPages = null;
+  var currentRangeStart = 1;
+  var currentRangeEnd = currentPage - 1 + recordsPerPage;
 
   // Filter for records for assignments today or after
   var filters = [
@@ -58,6 +64,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Hide Knack generated table
   hideKnackTable();
 
+  // Setup pagination
+  function initializePagination(records) {
+    currentPage = 1;
+    numberOfPages = Math.ceil(records.length / recordsPerPage);
+
+    return records.slice(0, recordsPerPage);
+  }
+
   // Request officer_assignment records
   $.ajax({
     url: url,
@@ -65,15 +79,17 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     headers: headers,
     success: function (res) {
       records = res.records;
-      var groupedAssignments = groupRecordsIntoAssignments(records);
-      appendShiftTable(groupedAssignments);
-      console.log(groupedAssignments);
+      completeRecords = groupRecordsIntoAssignments(records);
+      recordsInPage = initializePagination(completeRecords);
+      appendShiftTable(recordsInPage);
+      console.log(recordsInPage);
 
       // Remove spinner
       $("#assignment-spinner").remove();
     }
   });
 
+  // Group officer assignments into shifts
   function groupRecordsIntoAssignments(records) {
     // Group records by field_724 (Officer Shift Label)
     var officerShiftField = "field_724";
@@ -91,27 +107,26 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       }
     }
 
-    return groupedRecords;
+    return Object.values(groupedRecords);
   }
 
   function appendShiftTable(records) {
-    var currentPage = 1;
-
+    // Build table from records
     var recordsTotalsDiv = `
       <div class="level" style="margin-bottom: .75em;">
         <div class="level-left">
           <div class="kn-entries-summary" style="margin-right: .5em;">
-            <span class="light">Showing</span> 1-10
-            <span class="light">of</span> ${Object.values(records).length}
+            <span class="light">Showing</span> ${currentRangeStart}-${currentRangeEnd}
+            <span class="light">of</span> ${completeRecords.length}
           </div>
         </div>
         <div class="kn-pagination level-right">
-          <div class="kn-total-pages">${currentPage} of 19</div>
+          <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
           <div class="kn-pagination-arrows">
-            <span class="icon">
+            <span class="icon" id="prev-arrow">
               <i class="fa fa-chevron-left"></i>
             </span>
-            <span class="icon">
+            <span class="icon" id="next-arrow">
               <i class="fa fa-chevron-right"></i>
             </span>
           </div>
@@ -119,7 +134,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       </div>`;
 
     var recordsTable = `
-    <div class="kn-table-wrapper">
+    <div class="kn-table-wrapper assignments-table">
       <table class="kn-table kn-table-table is-bordered is-striped">
         <thead>
           <tr>
@@ -145,14 +160,17 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       </table>
     </div>`;
 
-    function buildShiftSection(shiftRecords) {
+    function buildAndAppendShiftSection(shiftRecords) {
+      // Clear the table in case we need to repopulate for pagination
+      $("#shift-table-body").children().remove();
+
       function buildShift(records) {
         var shiftsHTML = ``;
 
-        Object.entries(records).forEach(function ([title, shiftRecords]) {
+        records.forEach(function (shiftRecords) {
           shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
-            <td style="" colspan="4">${title}</td>
+            <td colspan="4">${shiftRecords[0].field_724}</td>
           </tr>`;
 
           // Condense each set of officer_assignments that make up a shift together
@@ -252,7 +270,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         return shiftsHTML;
       }
 
-      return buildShift(shiftRecords);
+      var shiftSection = buildShift(shiftRecords);
+      $("#shift-table-body").append(shiftSection);
     }
 
     // Add button handler to associate officer assignment records with logged in user
@@ -265,13 +284,62 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       });
     }
 
+    // Add button handler to associate officer assignment records with logged in user
+    function addPaginationClickHandlers(prevId, nextId) {
+      var prev = $(`#${prevId}`);
+      var next = $(`#${nextId}`);
+
+      prev.click(function () {
+        if (currentPage === 1) {
+          return;
+        }
+
+        currentPage--;
+        currentRangeStart -= recordsPerPage;
+        if (currentPage === numberOfPages - 1) {
+          currentRangeEnd = currentRangeStart + recordsPerPage - 1;
+        } else {
+          currentRangeEnd -= recordsPerPage;
+        }
+
+        var prevPageRecords = completeRecords.slice(
+          currentRangeStart - 1,
+          currentRangeEnd
+        );
+        var shifts = buildAndAppendShiftSection(prevPageRecords);
+        $("#shift-table-body").append(shifts);
+      });
+
+      next.click(function () {
+        if (currentPage === numberOfPages) {
+          return;
+        }
+
+        currentPage++;
+        currentRangeStart += recordsPerPage;
+        if (currentPage === numberOfPages) {
+          currentRangeEnd = completeRecords.length;
+        } else {
+          currentRangeEnd += recordsPerPage;
+        }
+
+        var nextPageRecords = completeRecords.slice(
+          currentRangeStart - 1,
+          currentRangeEnd
+        );
+        var shifts = buildAndAppendShiftSection(nextPageRecords);
+        $("#shift-table-body").append(shifts);
+      });
+    }
+
     // Append table, then append shifts to table body
     $("#view_466 > div.view-header")
       .append(recordsTotalsDiv + recordsTable)
       .ready(function () {
-        var shifts = buildShiftSection(records);
-        $("#shift-table-body").append(shifts);
+        buildAndAppendShiftSection(records);
         addShiftButtonClickHandlers("shift-button");
+        addPaginationClickHandlers("prev-arrow", "next-arrow");
+        // TODO: Update pagination displays with current location
       });
   }
 });
