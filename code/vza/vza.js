@@ -150,21 +150,44 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         var shiftsHTML = ``;
 
         Object.entries(records).forEach(function ([title, shiftRecords]) {
-          console.log(shiftRecords);
+          // console.log(shiftRecords);
 
           shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
             <td style="" colspan="4">${title}</td>
           </tr>`;
 
-          var factor = shiftRecords.length / 2;
-          var buttonIds = [];
+          // Condense each set of officer_assignments that make up a shift together
+          // First dimension is shifts of officer_assignments (grouped together for sign up)
+          // Second dimension is array of officer_assignments within shift
+          var buttonRecords = [[]];
 
-          shiftRecords.forEach(function (record) {
-            buttonIds.push(record.id);
-          });
+          for (let i = 0; i < shiftRecords.length; i++) {
+            var record = shiftRecords[i];
+            var lastCondensed = buttonRecords[buttonRecords.length - 1];
 
-          console.log(buttonIds);
+            if (lastCondensed.length === 0) {
+              lastCondensed.push(record);
+              continue;
+            }
+
+            var firstTimeRange = lastCondensed[0].field_139;
+            var firstLocation = lastCondensed[0].field_656_raw[0].identifier;
+
+            var recordTimeRange = record.field_139;
+            var recordLocation = record.field_656_raw[0].identifier;
+
+            if (
+              firstTimeRange !== recordTimeRange &&
+              firstLocation !== recordLocation
+            ) {
+              lastCondensed.push(record);
+            } else {
+              buttonRecords.push([record]);
+            }
+          }
+
+          console.log(buttonRecords);
 
           shiftRecords.forEach(function (record) {
             shiftsHTML += `
