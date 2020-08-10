@@ -150,8 +150,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         var shiftsHTML = ``;
 
         Object.entries(records).forEach(function ([title, shiftRecords]) {
-          // console.log(shiftRecords);
-
           shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
             <td style="" colspan="4">${title}</td>
@@ -187,9 +185,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             }
           }
 
-          console.log(buttonRecords);
-
-          shiftRecords.forEach(function (record) {
+          buttonRecords[0].forEach(function (record) {
             shiftsHTML += `
             <tr>
               <td
@@ -227,6 +223,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
           // For each subarray, add one button
           buttonRecords.forEach(function (shift, i) {
+            // Build the button id from shift officer assignment ids for use by sign up click handler
             const buttonId = shift
               .map(function (assignment) {
                 return assignment.id;
@@ -258,12 +255,23 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       return buildShift(shiftRecords);
     }
 
+    // Add button handler to associate officer assignment records with logged in user
+    function addShiftButtonClickHandlers(className) {
+      var buttons = $(`.${className}`);
+      buttons.each(function () {
+        $(this).click(function () {
+          console.log(`You clicked ${$(this).attr("id")}`);
+        });
+      });
+    }
+
     // Append table, then append shifts to table body
     $("#view_466 > div.view-header")
       .append(recordsTotalsDiv + recordsTable)
       .ready(function () {
         var shifts = buildShiftSection(records);
         $("#shift-table-body").append(shifts);
+        addShiftButtonClickHandlers("shift-button");
       });
   }
 });
