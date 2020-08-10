@@ -193,7 +193,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             shiftsHTML += `
             <tr>
               <td
-                style="background-color: rgb(82, 157, 198); padding-left: 20px;"
+                style="padding-left: 20px;"
                 data-column-index="1"
                 data-field-key="field_139"
               >
@@ -223,51 +223,31 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           shiftsHTML += `
           <tr>
             <td style="padding-top: 16px;" colspan="4">
-              <span
-                class="kn-button"
-                style="margin: 0px 10px 10px 0px;"
-              >
-                <span class="icon">
-                  <i class="fa fa-plus-square"></i>
-                </span>
-                <span>Sign up - Officer 1</span>
+          `;
+
+          // For each subarray, add one button
+          buttonRecords.forEach(function (shift, i) {
+            const buttonId = shift
+              .map(function (assignment) {
+                return assignment.id;
+              })
+              .join("-");
+
+            shiftsHTML += `
+            <span
+            class="kn-button shift-button"
+            style="margin: 0px 10px 10px 0px;"
+            id="${buttonId}"
+            >
+              <span class="icon">
+                <i class="fa fa-plus-square"></i>
               </span>
-              <span
-                class="kn-button"
-                style="margin: 0px 10px 10px 0px;"
-              >
-                <span class="icon">
-                  <i class="fa fa-plus-square"></i>
-                </span>
-                <span>Sign up - Officer 2</span>
-              </span>
-              <span
-                class="kn-button"
-                style="margin: 0px 10px 10px 0px;"
-              >
-                <span class="icon">
-                  <i class="fa fa-plus-square"></i>
-                </span>
-                <span>Sign up - Officer 3</span>
-              </span>
-              <span
-                class="kn-button"
-                style="margin: 0px 10px 10px 0px;"
-              >
-                <span class="icon">
-                  <i class="fa fa-plus-square"></i>
-                </span>
-                <span>Sign up - Officer 4</span>
-              </span>
-              <span
-                class="kn-button"
-                style="margin: 0px 10px 10px 0px;"
-              >
-                <span class="icon">
-                  <i class="fa fa-plus-square"></i>
-                </span>
-                <span>Sign up - Officer 5</span>
-              </span>
+              <span>Sign up - Officer ${i + 1}</span>
+            </span>
+            `;
+          });
+
+          shiftsHTML += `
             </td>
           </tr>`;
         });
