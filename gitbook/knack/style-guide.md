@@ -23,9 +23,12 @@ You can find the original banner assets and a template for creating a new applic
 * HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color \(make sure Knack Header color is the same\)
 * RGB: ![\#22, 63, 110](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
 * Banner Size: `800 x 160`px
-* Font: `Standard or Roboto`
+* Font: `Standard or Roboto[Roboto Bold = 1st line, Roboto #1(not bolded) = 2nd line]`
+
+  `Gimp may automatically bold the second line due to the text formatting of the first line so be sure to un-bold it`
+
 * Font Color: White
-* Font Size: 45px for first line \(bolded\), 39px for second line
+* Font Size: 45px for first line \(bolded\), 36px for second line
   * If text length exceeds banner size, adjust font size smaller until it fits appropriately
 * Layout: City Logo left side, first line: Name of Application, second line: Austin Transportation Department
 * Save as .xcf GIMP file in the logo folder for the application on the G Drive
