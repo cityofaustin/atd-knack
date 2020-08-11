@@ -12,9 +12,16 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
   // Define relevant officer_assignment fields
   var dateField = "field_205";
+  var assignedOfficerField = "field_704_raw";
+  var noOfficerAssignedId = "5f2440fb3dd0c106c27178b1";
 
+  // Cache all officer_assignments to traverse with pagination
   var completeRecords = null;
+
+  // Cache records to display on each page
   var recordsInPage = null;
+
+  // Keep track of pagination details
   var currentPage = 1;
   var recordsPerPage = 10;
   var numberOfPages = null;
@@ -51,25 +58,26 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     "content-type": "application/json"
   };
 
-  // Show spinner while fetching
+  // Show spinner while fetching officer_assignment records
   $("#view_466 > div.view-header").append(
     `<span id="assignment-spinner" class="icon">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
   );
 
-  function hideKnackTable() {
-    $("#view_466 > div.kn-records-nav").hide();
-    $("#view_466 > div.kn-table-wrapper").hide();
+  function removeKnackTable() {
+    $("#view_466 > div.kn-records-nav").remove();
+    $("#view_466 > div.kn-table-wrapper").remove();
   }
 
-  // Hide Knack generated table
-  hideKnackTable();
+  // Remove Knack generated table that we are replacing
+  removeKnackTable();
 
   // Setup pagination
   function initializePagination(records) {
     currentPage = 1;
     numberOfPages = Math.ceil(records.length / recordsPerPage);
 
-    return records.slice(0, recordsPerPage);
+    var initialPageRecords = records.slice(0, recordsPerPage);
+    return initialPageRecords;
   }
 
   // Request officer_assignment records
@@ -113,8 +121,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   function appendShiftTable(records) {
     // Build table from records
     var recordsTable = `
-    <div class="kn-table-wrapper assignments-table">
-      <table class="kn-table kn-table-table is-bordered is-striped">
+    <div class="assignments-table">
+      <table class="kn-table kn-table-table is-bordered">
         <thead>
           <tr>
             <th class="field_139">
@@ -149,7 +157,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         records.forEach(function (shiftRecords) {
           shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
-            <td colspan="4">${shiftRecords[0].field_724}</td>
+            <td class="shift-header" colspan="4">${shiftRecords[0].field_724}</td>
           </tr>`;
 
           // Condense each set of officer_assignments that make up a shift together
@@ -218,6 +226,16 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             <td style="padding-top: 16px;" colspan="4">
           `;
 
+          function setButtonStatus(record) {
+            console.log(
+              record[assignedOfficerField][0].id,
+              noOfficerAssignedId
+            );
+            return record[assignedOfficerField][0].id === noOfficerAssignedId
+              ? ""
+              : "is-disabled";
+          }
+
           // For each subarray, add one button
           buttonRecords.forEach(function (shift, i) {
             // Build the button id from shift officer assignment ids for use by sign up click handler
@@ -229,7 +247,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
             shiftsHTML += `
             <span
-            class="kn-button shift-button"
+            class="kn-button shift-button ${setButtonStatus(shift[0])}"
             style="margin: 0px 10px 10px 0px;"
             id="${buttonId}"
             >
@@ -259,6 +277,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       buttons.each(function () {
         $(this).click(function () {
           console.log(`You clicked ${$(this).attr("id")}`);
+
+          // TODO: PUT each officer_assignment with current user as assignee
+          // TODO: Add "is-disabled" class to button to prevent another call
         });
       });
     }
@@ -346,11 +367,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
     // Append table, then append shifts to table body
     $("#view_466 > div.view-header")
-      .append(recordsTable)
+      .after(recordsTable)
       .ready(function () {
         buildAndAppendShiftSection(records);
         prependShiftTableWithPagination();
         addShiftButtonClickHandlers("shift-button");
+        // TODO: Active/inactive state for buttons
+        // TODO: Time filters
+        // TODO: API calls for shift signups
       });
   }
 });

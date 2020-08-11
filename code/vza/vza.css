@@ -10,12 +10,22 @@
   text-align: center;
 }
 
+/* Sign Up view - Available Assignments table scene_208 view_466 */
 #assignment-spinner {
-  color: #163f6e;
+  color: #023f74;
   font-size: 30px;
 }
 
 .pagination-arrows {
   cursor: pointer;
   display: flex;
+}
+
+.shift-header {
+  background-color: #023f74;
+  color: white;
+}
+
+.assignments-table {
+  overflow: visible;
 }
