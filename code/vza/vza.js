@@ -120,6 +120,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       headers: headers,
       success: function (res) {
         records = res.records;
+
+        // Don't process records if there are none
+        if (records.length === 0) {
+          appendTableWithNoRecordsMessage();
+          $("#assignment-spinner").remove();
+          return;
+        }
+
         completeRecords = groupRecordsIntoAssignments(records);
         recordsInPage = initializePagination(completeRecords);
         buildAndAppendShiftSection(recordsInPage);
@@ -454,6 +462,16 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             });
           });
       });
+  }
+
+  function appendTableWithNoRecordsMessage() {
+    var noRecordsRow = `
+      <tr class="kn-table-group kn-group-level-1">
+        <td colspan="4">No assignments available</td>
+      </tr>  
+    `;
+
+    $("#shift-table-body").append(noRecordsRow);
   }
 
   // Table to receive formatted table body
