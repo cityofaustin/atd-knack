@@ -11,8 +11,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   var tableView = "view_484";
 
   // Define relevant officer_assignment fields
-  var dateField = "field_205";
-  var assignedOfficerField = "field_704_raw";
+  var dateField = "field_154";
+  var assignedOfficerFieldRaw = "field_704_raw";
+  var assignedOfficerField = "field_704";
   var noOfficerAssignedId = "5f2440fb3dd0c106c27178b1";
 
   // Cache all officer_assignments to traverse with pagination
@@ -36,7 +37,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     }
   ];
 
-  var url =
+  // Endpoints
+  var getUrl =
     "https://api.knack.com/v1/pages/" +
     tableScene +
     "/views/" +
@@ -49,8 +51,16 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     "&sort_order=asc" +
     "&rows_per_page=1000";
 
+  var putUrl =
+    "https://api.knack.com/v1/pages/" +
+    tableScene +
+    "/views/" +
+    tableView +
+    "/records/";
+
   // Get user auth for get request (API view is private) and set req headers
   var user = Knack.getUserToken();
+  var userId = Knack.getUserAttributes().id;
 
   var headers = {
     "X-Knack-Application-ID": knackAppId,
@@ -82,7 +92,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
   // Request officer_assignment records
   $.ajax({
-    url: url,
+    url: getUrl,
     type: "GET",
     headers: headers,
     success: function (res) {
@@ -90,7 +100,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       completeRecords = groupRecordsIntoAssignments(records);
       recordsInPage = initializePagination(completeRecords);
       appendShiftTable(recordsInPage);
-      console.log(recordsInPage);
 
       // Remove spinner
       $("#assignment-spinner").remove();
@@ -159,36 +168,62 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           <tr class="kn-table-group kn-group-level-1">
             <td class="shift-header" colspan="4">${shiftRecords[0].field_724}</td>
           </tr>`;
-
+          console.log(shiftRecords);
           // Condense each set of officer_assignments that make up a shift together
           // First dimension is shifts of officer_assignments (grouped together for sign up)
           // Second dimension is array of officer_assignments within shift
-          var buttonRecords = [[]];
+          var buttonRecords = [];
 
-          for (let i = 0; i < shiftRecords.length; i++) {
-            var record = shiftRecords[i];
-            var lastCondensed = buttonRecords[buttonRecords.length - 1];
+          if (shiftRecords.length !== 0) {
+            var currentArrayPosition = 0;
+            var currentSubarrayPosition = 0;
 
-            if (lastCondensed.length === 0) {
-              lastCondensed.push(record);
-              continue;
+            function isSameTimeAndLocation(record1, record2) {
+              return record1.field_139 === record2.field_139;
             }
 
-            var firstTimeRange = lastCondensed[0].field_139;
-            var firstLocation = lastCondensed[0].field_656_raw[0].identifier;
-
-            var recordTimeRange = record.field_139;
-            var recordLocation = record.field_656_raw[0].identifier;
-
-            if (
-              firstTimeRange !== recordTimeRange &&
-              firstLocation !== recordLocation
-            ) {
-              lastCondensed.push(record);
-            } else {
-              buttonRecords.push([record]);
+            for (let i = 0; i < shiftRecords.length; i++) {
+              if (i === 0) {
+                buttonRecords.push([shiftRecords[i]]);
+                currentArrayPosition++;
+              } else if (
+                isSameTimeAndLocation(
+                  shiftRecords[i],
+                  buttonRecords[currentArrayPosition - 1][
+                    currentSubarrayPosition
+                  ]
+                ) &&
+                currentSubarrayPosition === 0
+              ) {
+                buttonRecords.push([shiftRecords[i]]);
+                currentArrayPosition++;
+              } else if (
+                !isSameTimeAndLocation(
+                  shiftRecords[i],
+                  buttonRecords[currentArrayPosition - 1][
+                    currentSubarrayPosition
+                  ]
+                )
+              ) {
+                currentSubarrayPosition++;
+                currentArrayPosition = 0;
+                buttonRecords[currentArrayPosition].push(shiftRecords[i]);
+                currentArrayPosition++;
+              } else if (
+                isSameTimeAndLocation(
+                  shiftRecords[i],
+                  buttonRecords[currentArrayPosition - 1][
+                    currentSubarrayPosition
+                  ]
+                ) &&
+                currentSubarrayPosition > 0
+              ) {
+                buttonRecords[currentArrayPosition].push(shiftRecords[i]);
+                currentArrayPosition++;
+              }
             }
           }
+          console.log(buttonRecords);
 
           buttonRecords[0].forEach(function (record) {
             shiftsHTML += `
@@ -227,11 +262,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           `;
 
           function setButtonStatus(record) {
-            console.log(
-              record[assignedOfficerField][0].id,
-              noOfficerAssignedId
-            );
-            return record[assignedOfficerField][0].id === noOfficerAssignedId
+            return record[assignedOfficerFieldRaw][0].id === noOfficerAssignedId
               ? ""
               : "is-disabled";
           }
@@ -276,10 +307,20 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       var buttons = $(`.${className}`);
       buttons.each(function () {
         $(this).click(function () {
-          console.log(`You clicked ${$(this).attr("id")}`);
+          // TODO: Then, if successful, Add "is-disabled" class to button to prevent another call
+          var idsToAssignCurrentUser = $(this).attr("id").split("-");
 
-          // TODO: PUT each officer_assignment with current user as assignee
-          // TODO: Add "is-disabled" class to button to prevent another call
+          idsToAssignCurrentUser.forEach(function (id) {
+            $.ajax({
+              url: putUrl + id,
+              type: "PUT",
+              data: JSON.stringify({ [assignedOfficerField]: userId }),
+              headers: headers,
+              success: function (res) {
+                console.log(res, "Record assigned to " + userId);
+              }
+            });
+          });
         });
       });
     }
@@ -309,6 +350,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         var shifts = buildAndAppendShiftSection(prevPageRecords);
         $("#shift-table-body").append(shifts);
         prependShiftTableWithPagination();
+        addShiftButtonClickHandlers("shift-button");
       });
 
       next.click(function () {
@@ -331,6 +373,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         var shifts = buildAndAppendShiftSection(nextPageRecords);
         $("#shift-table-body").append(shifts);
         prependShiftTableWithPagination();
+        addShiftButtonClickHandlers("shift-button");
       });
     }
 
@@ -372,9 +415,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         buildAndAppendShiftSection(records);
         prependShiftTableWithPagination();
         addShiftButtonClickHandlers("shift-button");
-        // TODO: Active/inactive state for buttons
         // TODO: Time filters
-        // TODO: API calls for shift signups
+        // TODO: Add spinner to button on request
       });
   }
 });
