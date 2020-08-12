@@ -39,18 +39,21 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     ],
     week: [
       {
-        field: dateField,
-        operator: "is after the next",
-        range: 7,
-        type: "days"
+        value: "",
+        text: "Next Week",
+        operator: "is during the next",
+        field: "field_154",
+        type: "weeks",
+        range: "1"
       }
     ],
     month: [
       {
-        field: dateField,
-        operator: "is after the next",
-        range: 1,
-        type: "months"
+        field: "field_154",
+        operator: "is during the next",
+        text: "Next Month",
+        type: "months",
+        range: "1"
       }
     ]
   };
