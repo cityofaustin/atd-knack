@@ -84,7 +84,7 @@ As per [Knack](https://support.knack.com/hc/en-us/articles/225973788-About-Knack
 >   [More Information](https://support.knack.com/hc/en-us/articles/225973788-About-Knack-Accounts#backups).
 
 **Attachment Size**  
-Files larger than 10 MB cannot be attached to a record. If there is a need to attach a file larger than 10 MB, please contact the administrator for assistance.
+Files larger than [250](https://support.knack.com/hc/en-us/articles/226090348-Field-Types#file-1) MB cannot be attached to a record. If there is a need to attach a file larger than 250 MB, please contact the administrator for assistance.
 
 **Attachments**  
 When designing an application, an attachment table is preferred to an attachment field, to facilitate multiple attachments.
