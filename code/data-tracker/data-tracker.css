@@ -1,13 +1,3 @@
-.kn-modal {
-  width: 100%;
-  left: 0%;
-  margin-left: 0px;
-}
-
-.kn-modal.small {
-  margin-left: 0px; 
-}
-
 .kn-input select {
  height: 2.5em; 
 }
@@ -33,16 +23,6 @@
   color: #bdbebf !important;
 }
         
-.field_976 > .kn-value {
-    font-size: 150%;
-    font-weight: bold;
-}
-        
-.field_459 > .kn-value {
-    font-size: 150%;
-    font-weight: bold;
-}
-
 .hidden {
   display: none;
 }
