@@ -501,28 +501,67 @@ $(document).on('knack-view-render.view_1294', function(event, scene) {
 });
 
 
-///////////////////////////////
-//// Inventory API         ////
-///////////////////////////////
-$(document).on('knack-form-submit.any', function(event, view, txn) {
-    // call knack api /inventory endpoint on select form submissions
-  	// view_1197 : edit work order
-    // view_2661: add transaction
-    // view_2669: edit transaction
-    // view_2670: cancel transaction
-    var inventoryPagesKnackApi = ["view_2661", "view_2670", "view_2669", "view_1197"];
+///// end set password //////
 
-    if (!inventoryPagesKnackApi.includes(view.key)) {
-        return;
-    }
+/////////////////////////////////////////////////////////////
+//// Change field color of inventory request statuses ///////
+/////////////////////////////////////////////////////////////
 
-    var endpoint = "https://knack-api.austinmobility.io/inventory";
-    var src = Knack.application_id; // data tracker
-    var dest = "5b422c9b13774837e54ed814"; // finance prod
-    var url = endpoint + "?src=" + src + "&dest=" + dest;
-
-    // post inventory request
-    $.post(url).done(function (response) {
-        console.log(response);
+function changeFieldColor(fieldClass, color_map) {
+  var child_field = $(fieldClass).find(".kn-value");
+  var value = child_field.text();
+  console.log("VALUE: ", value);
+  if (color_map[value]) {
+    $(child_field).css({
+      "background-color": color_map[value].background_color,
+      color: color_map[value].color,
     });
-})
+  }
+}
+
+function insertIcon(fieldClass, icon_map) {
+  var child_field = $(fieldClass).find(".kn-value");
+  var value = child_field.text();
+  var elem = $(fieldClass).find(".kn-value").find("span")[0];
+
+  $(elem).before(
+    "<span> <i class='fa fa-" + icon_map[value].icon + "'></i> </span>"
+  );
+}
+
+var colorMapOne = {
+  "Needs to be issued": {
+    background_color: "#377eb8",
+    color: "#fff",
+    icon: "exclamation-circle",
+  },
+  "Review needed": {
+    background_color: "#f5901f",
+    color: "#fff",
+    icon: "exclamation-triangle",
+  },
+  "Needs AIMS entry": {
+    background_color: "#ff9b9c",
+    color: "#fff",
+    icon: "exclamation-triangle",
+  },
+  Completed: {
+    background_color: "",
+    color: "#adadad",
+    icon: "check-circle",
+  },
+  Cancelled: {
+    background_color: "#adadad",
+    color: "#000",
+    icon: "times-circle-o",
+  },
+};
+
+$(document).on("knack-scene-render.scene_1085", function () {
+  //  inventory request details
+  changeFieldColor(".field_3556", colorMapOne);
+  insertIcon(".field_3556", colorMapOne);
+});
+////////////////////////////////////////////////////////////
+////////// End field color setting ////////////////////
+///////////////////////////////////////////////////////
