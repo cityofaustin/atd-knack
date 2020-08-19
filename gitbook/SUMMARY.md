@@ -72,7 +72,7 @@
 
 * [Resources](o365-resources/resources.md)
 
-## Stuff to know
+## Workarounds
 
 ## Shared Mobility Operations
 
