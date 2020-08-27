@@ -126,8 +126,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
         // Don't process records if there are none
         if (records.length === 0) {
+          $("#shift-table-body").children().remove();
           appendTableWithNoRecordsMessage();
           $("#assignment-spinner").remove();
+          completeRecords = null;
+          recordsInPage = null;
           return;
         }
 
@@ -392,7 +395,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       <div class="level pagination-controls" style="margin-bottom: .75em;">
         <div class="level-left">
           <div class="kn-entries-summary" style="margin-right: .5em;">
-            <span class="light">Showing</span> ${currentRangeStart}-${currentRangeEnd}
+            <span class="light">Showing</span> ${currentRangeStart}-${Math.min(
+      currentRangeEnd,
+      completeRecords.length
+    )}
             <span class="light">of</span> ${completeRecords.length}
           </div>
         </div>
@@ -468,8 +474,12 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   }
 
   function appendTableWithNoRecordsMessage() {
+    if ($("#no-records-msg").length) {
+      return;
+    }
+
     var noRecordsRow = `
-      <tr class="kn-table-group kn-group-level-1">
+      <tr class="kn-table-group kn-group-level-1" id="no-records-msg">
         <td colspan="4">No assignments available</td>
       </tr>  
     `;
