@@ -14,6 +14,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   var dateField = "field_154";
   var assignedOfficerFieldRaw = "field_704_raw";
   var assignedOfficerField = "field_704";
+  var timeField = "field_139";
+  var officerShiftLabel = "field_724";
+  var locationField = "field_656_raw";
   var noOfficerAssignedId = "5f2440fb3dd0c106c27178b1";
 
   // Cache all officer_assignments to traverse with pagination
@@ -178,7 +181,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       records.forEach(function (shiftRecords) {
         shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
-            <td class="shift-header" colspan="4">${shiftRecords[0].field_724}</td>
+            <td class="shift-header" colspan="4">${shiftRecords[0][officerShiftLabel]}</td>
           </tr>`;
 
         // Condense each set of officer_assignments that make up a shift together
@@ -193,7 +196,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           var currentSubarrayPosition = 0;
 
           function isSameTime(record1, record2) {
-            return record1.field_139 === record2.field_139;
+            return record1[timeField] === record2[timeField];
           }
 
           for (let i = 0; i < shiftRecords.length; i++) {
@@ -238,23 +241,25 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
               <td
                 style="padding-left: 20px;"
                 data-column-index="1"
-                data-field-key="field_139"
+                data-field-key="time"
               >
                 <span class="col-1">
-                  ${record.field_139}
+                  ${record[timeField]}
                 </span>
               </td>
-              <td class="field_637" data-column-index="2" data-field-key="field_637">
+              <td class="field_637" data-column-index="2" data-field-key="sector">
                 <span class="col-2">
-                  <span id="5f24412f3dd0c106c2719524">${
-                    record.field_656_raw[0].identifier.split(" - ")[0]
+                  <span>${
+                    record[locationField][0].identifier.split(" - ")[0]
                   }</span>
                 </span>
               </td>
-              <td data-column-index="3" data-field-key="field_624">
+              <td data-column-index="3" data-field-key="location">
                 <span class="col-3">
-                  <span id="5f24412f3dd0c106c2719524"
-                    >${record.field_656_raw[0].identifier.split(" - ")[2]}</span
+                  <span
+                    >${
+                      record[locationField][0].identifier.split(" - ")[2]
+                    }</span
                   >
                 </span>
               </td>
@@ -493,17 +498,17 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       <table class="kn-table kn-table-table is-bordered">
         <thead>
           <tr>
-            <th class="field_139">
+            <th class="time">
               <span class="table-fixed-label">
                 <span>Time</span>
               </span>
             </th>
-            <th class="field_637">
+            <th class="sector">
               <span class="table-fixed-label">
                 <span>Sector</span>
               </span>
             </th>
-            <th class="field_624">
+            <th class="location">
               <span class="table-fixed-label">
                 <span>Location</span>
               </span>
