@@ -334,18 +334,39 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     var buttons = $(`.${className}`);
     buttons.each(function () {
       var thisButton = $(this);
+      var thisButtonIcon = thisButton.find("i");
+
       thisButton.click(function () {
         // Get officer_assignment record ids
         var idsToAssignCurrentUser = thisButton.attr("id").split("-");
+        thisButtonIcon
+          .removeClass("fa-plus-square")
+          .addClass("fa-circle-o-notch fa-spin");
 
-        idsToAssignCurrentUser.forEach(function (id) {
+        idsToAssignCurrentUser.forEach(function (recordId) {
           $.ajax({
-            url: putUrl + id,
+            url: putUrl + recordId,
             type: "PUT",
             data: JSON.stringify({ [fields.assignedOfficerField]: userId }),
             headers: headers,
             success: function (res) {
               thisButton.addClass("is-disabled");
+              thisButtonIcon
+                .removeClass("fa-circle-o-notch fa-spin")
+                .addClass("fa-plus-square");
+
+              $.ajax({
+                url: putUrl + recordId,
+                type: "PUT",
+                data: JSON.stringify({
+                  action_link_index: 0,
+                  id: recordId
+                }),
+                headers: headers,
+                success: function (res) {
+                  console.log(res);
+                }
+              });
             }
           });
         });
