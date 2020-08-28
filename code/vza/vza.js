@@ -2,23 +2,28 @@ $(document).on("knack-view-render.any", function (event, view, data) {
   $("a.kn-view-asset").html("Attachment");
 });
 
+// Hide Knack generated "Available Assignments" table, create and add table that condenses
+// sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_466", function (event, view, data) {
-  // Define VZA Knack app ID
-  var knackAppId = "5f481516de107700197c3ac2";
+  // Must be updated/checked when moving this code to a new instance
+  var appSpecifics = {
+    knackAppId: "5f481516de107700197c3ac2",
+    apiTableScene: "scene_238", // Officer assignments table API scene
+    apiTableView: "view_487", // Officer assignments table API view
+    availableAssignmentsView: "view_466", // Where to insert new table
+    noOfficerAssignedId: "5f48152084b64409a8603dec" // For conditional styles based on officer assigned
+  };
 
-  // Define scene and view of officer_assignments table API view
-  var tableScene = "scene_238";
-  var tableView = "view_487";
-  var availableAssignmentsView = "view_466";
-
-  // Define relevant officer_assignment fields
-  var dateField = "field_154";
-  var timeField = "field_139";
-  var locationField = "field_656_raw";
-  var assignedOfficerFieldRaw = "field_704_raw";
-  var assignedOfficerField = "field_704";
-  var assignmentDateTimeField = "field_133";
-  var noOfficerAssignedId = "5f48152084b64409a8603dec";
+  // officer_assignment object fields
+  var fields = {
+    dateField: "field_154",
+    timeField: "field_139",
+    locationFieldRaw: "field_656_raw",
+    assignedOfficerFieldRaw: "field_704_raw",
+    assignedOfficerField: "field_704",
+    officerShiftField: "field_724",
+    assignmentDateTimeField: "field_133"
+  };
 
   // Cache all officer_assignments to traverse with pagination
   var completeRecords = null;
@@ -37,11 +42,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   var filters = {
     all: [
       {
-        field: dateField,
+        field: fields.dateField,
         operator: "is today or after"
       },
       {
-        field: assignmentDateTimeField,
+        field: fields.assignmentDateTimeField,
         operator: "is not blank"
       }
     ],
@@ -50,14 +55,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         value: "",
         text: "Next Week",
         operator: "is during the next",
-        field: dateField,
+        field: fields.dateField,
         type: "weeks",
         range: "1"
       }
     ],
     month: [
       {
-        field: dateField,
+        field: fields.dateField,
         operator: "is during the next",
         text: "Next Month",
         type: "months",
@@ -69,16 +74,16 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Endpoints
   var getUrl =
     "https://api.knack.com/v1/pages/" +
-    tableScene +
+    appSpecifics.apiTableScene +
     "/views/" +
-    tableView +
+    appSpecifics.apiTableView +
     "/records";
 
   var putUrl =
     "https://api.knack.com/v1/pages/" +
-    tableScene +
+    appSpecifics.apiTableScene +
     "/views/" +
-    tableView +
+    appSpecifics.apiTableView +
     "/records/";
 
   // Get user auth for get request (API view is private) and set req headers
@@ -86,14 +91,18 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   var userId = Knack.getUserAttributes().id;
 
   var headers = {
-    "X-Knack-Application-ID": knackAppId,
+    "X-Knack-Application-ID": appSpecifics.knackAppId,
     Authorization: user,
     "content-type": "application/json"
   };
 
   function removeKnackTable() {
-    $("#" + availableAssignmentsView + "> div.kn-records-nav").remove();
-    $("#" + availableAssignmentsView + "> div.kn-table-wrapper").remove();
+    $(
+      "#" + appSpecifics.availableAssignmentsView + "> div.kn-records-nav"
+    ).remove();
+    $(
+      "#" + appSpecifics.availableAssignmentsView + "> div.kn-table-wrapper"
+    ).remove();
   }
 
   // Remove Knack generated table that we are replacing and request records
@@ -117,7 +126,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       "&rows_per_page=1000";
 
     // Show spinner while fetching officer_assignment records
-    $("#" + availableAssignmentsView + "> div.view-header").append(
+    $("#" + appSpecifics.availableAssignmentsView + "> div.view-header").append(
       `<span id="assignment-spinner" class="icon">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
     );
 
@@ -154,14 +163,12 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
   // Group officer assignments into shifts
   function groupRecordsIntoAssignments(records) {
-    // Group records by field_724 (Officer Shift Label)
-    var officerShiftField = "field_724";
-
+    // Group records by Officer Shift Label
     var groupedRecords = {};
 
     for (var i = 0; i < records.length; i++) {
       var record = records[i];
-      var officerShift = record[officerShiftField];
+      var officerShift = record[fields.officerShiftField];
 
       if (groupedRecords[officerShift]) {
         groupedRecords[officerShift].push(record);
@@ -183,7 +190,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       records.forEach(function (shiftRecords) {
         shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
-            <td class="shift-header" colspan="4">${shiftRecords[0].field_724}</td>
+            <td class="shift-header" colspan="4">${
+              shiftRecords[0][fields.officerShiftField]
+            }</td>
           </tr>`;
 
         // Condense each set of officer_assignments that make up a shift together
@@ -198,11 +207,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           var currentSubarrayPosition = 0;
 
           function isSameTime(record1, record2) {
-            // return (
-            //   record1.field_656_raw[0].identifier ===
-            //   record2.field_656_raw[0].identifier
-            // );
-            return record1[timeField] === record2[timeField];
+            return record1[fields.timeField] === record2[fields.timeField];
           }
 
           for (let i = 0; i < shiftRecords.length; i++) {
@@ -249,13 +254,15 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                 data-column-index="1"
               >
                 <span class="col-1">
-                  ${record[timeField]}
+                  ${record[fields.timeField]}
                 </span>
               </td>
               <td data-column-index="2">
                 <span class="col-2">
                   <span>${
-                    record[locationField][0].identifier.split(" - ")[0]
+                    record[fields.locationFieldRaw][0].identifier.split(
+                      " - "
+                    )[0]
                   }</span>
                 </span>
               </td>
@@ -263,7 +270,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                 <span class="col-3">
                   <span
                     >${
-                      record[locationField][0].identifier.split(" - ")[2]
+                      record[fields.locationFieldRaw][0].identifier.split(
+                        " - "
+                      )[2]
                     }</span
                   >
                 </span>
@@ -279,7 +288,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           `;
 
         function setButtonStatus(record) {
-          return record[assignedOfficerFieldRaw][0].id === noOfficerAssignedId
+          return record[fields.assignedOfficerFieldRaw][0].id ===
+            appSpecifics.noOfficerAssignedId
             ? ""
             : "is-disabled";
         }
@@ -332,7 +342,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           $.ajax({
             url: putUrl + id,
             type: "PUT",
-            data: JSON.stringify({ [assignedOfficerField]: userId }),
+            data: JSON.stringify({ [fields.assignedOfficerField]: userId }),
             headers: headers,
             success: function (res) {
               thisButton.addClass("is-disabled");
@@ -526,7 +536,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     </div>`;
 
   // Append table, then request records and append shifts to table body
-  $("#" + availableAssignmentsView + "> div.view-header")
+  $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
       requestRecords(filters.all);
