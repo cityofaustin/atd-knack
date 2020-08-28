@@ -34,28 +34,32 @@ You can find the original banner assets and a template for creating a new applic
 * Save as .xcf GIMP file in the logo folder for the application on the G Drive
 * Export as .png file in the logo folder for the application on the G Drive
 
-### 
-
-### Page Naming Conventions
-
-* Use a unique name that no other page will use since the page URL is sourced from its name
-* Use Title Case
-* Use action verbs where appropriate
-* For example: Instead of an 'Add Attachment' page, use 'Add Attachment to TIA Review'
-
-### Field Naming Conventions
+### Overall Knack Naming Conventions
 
 * No Special Characters
 * No Double Spaces
+* Try not to exceed 63 characters for any name
+* Use singular names over plural names, for example: 'Comment Table' instead of 'Comments Table'
+
+### Page/View Naming Conventions
+
+* Use a unique and descriptive name that no other page will use since the page URL is sourced from its page name
+* Use `Title Case`
+* Use action verbs where appropriate
+* For example: Instead of an 'Add Attachment' page, use 'Add Attachment to TIA Review' instead
+
+### Field Naming Conventions
+
 * Do not begin a field with a number. For example: use 'Five Day Work Week' instead of '5 Day Work Week'
-* Use `Title Case` for fields that will be exposed to end-users in the app.
+* Do not use generic names such as 'ID', instead use descriptive names like 'productID'
+* Use `Title Case` for fields that will be exposed to end-users in the app
 * Use `camelCase` for fields that are only on the backend and not exposed to the user. For formulas and calculations for example use: 'countTasksCompleted' or 'sumOrangeDistrictTransactions'
 * Use the \(default\) `lower_case_object_name` for connection fields, unless they are directly exposed to the user, in which case, use `Title Case`.
 * Field names should not be renamed in a production application without following a change management process. This is critically important if the application has been integrated with external systems.
 
 ### Object Naming Conventions
 
-* Use snake\_case
+* Use `snake_case`
 * Order objects alphabetically in Knack
 * Renaming objects should follow a change management process, however renaming objects will not break API integrations.
 * In the ATD Forms app, prepend objects with the acronym for the program or division that owns them and the word `PROGRAM` or `DIVISION`, e.g. HR\_DIVISION\_awards\_and\_recognition\_nominations
