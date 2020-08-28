@@ -7,11 +7,11 @@ $(document).on("knack-view-render.any", function (event, view, data) {
 $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Must be updated/checked when moving this code to a new instance
   var appSpecifics = {
-    knackAppId: "5f481516de107700197c3ac2",
+    knackAppId: "5dc2ec50bbcb360016e338e1",
     apiTableScene: "scene_238", // Officer assignments table API scene
     apiTableView: "view_487", // Officer assignments table API view
     availableAssignmentsView: "view_466", // Where to insert new table
-    noOfficerAssignedId: "5f48152084b64409a8603dec" // For conditional styles based on officer assigned
+    noOfficerAssignedId: "5ebef4d0682bfc0015c9e0f4" // For conditional styles based on officer assigned
   };
 
   // officer_assignment object fields
