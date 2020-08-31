@@ -3,15 +3,14 @@
 ## Table of Contents
 
 * Banner Image
-* Field Naming Conventions
-* Object Naming Conventions
+* Knack Naming Conventions \(Pages/Views, Fields, and Objects\)
 * Colors
 * Icons
 * Layout
-* Page naming conventions
-* Page URL conventions
+* Button Styles
+* Links
 
-### Banner Image
+## Banner Image
 
 ![](../.gitbook/assets/banner_800x160_coa_template.png)
 
@@ -34,7 +33,7 @@ You can find the original banner assets and a template for creating a new applic
 * Save as .xcf GIMP file in the logo folder for the application on the G Drive
 * Export as .png file in the logo folder for the application on the G Drive
 
-### Overall Knack Naming Conventions
+## Overall Knack Naming Conventions
 
 * No Special Characters
 * No Double Spaces
@@ -126,16 +125,6 @@ You can find the original banner assets and a template for creating a new applic
 * Add `menu`, add `new page` for form/button \(cleaner look, not as efficient\)
 * Add `form directly onto page` \(not as clean of a look, but usually highly efficient for user especially if they have to enter lots of information\)
 * More about BUTTON STYLES
-
-### Page naming conventions
-
-* want to make sure the page names are simple yet descriptive
-  * ex. `Note` \(isn't as descriptive\), `Page Note` \(is more descriptive of what kind of page it is\)
-
-### Page URL conventions
-
-* Don't want to have duplicate url names 
-  * Ex. `add-attachments`, if another attachment form is created with the same name, the page url will automatically go to `add-attachments2` and incrementally go up. \(this does not look great\)
 
 ## Button Styles
 
