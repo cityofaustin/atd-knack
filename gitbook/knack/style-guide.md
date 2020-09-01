@@ -52,6 +52,7 @@ You can find the original banner assets and a template for creating a new applic
 * Do not begin a field with a number. For example: use 'Five Day Work Week' instead of '5 Day Work Week'
 * Do not use generic names such as 'ID', instead use descriptive names like 'productID'
 * Use `Title Case` for fields that will be exposed to end-users in the app
+* The use of \# or % symbols in field names is acceptable if exposed to end-users
 * Use `camelCase` for fields that are only on the backend and not exposed to the user. For formulas and calculations for example use: 'countTasksCompleted' or 'sumOrangeDistrictTransactions'
 * Use the \(default\) `lower_case_object_name` for connection fields, unless they are directly exposed to the user, in which case, use `Title Case`.
 * Field names should not be renamed in a production application without following a change management process. This is critically important if the application has been integrated with external systems.
