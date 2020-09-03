@@ -153,7 +153,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         buildAndAppendShiftSection(recordsInPage);
         prependShiftTableWithPagination();
         prependPaginationWithTimeFilters();
-        addShiftButtonClickHandlers("open-shift-button");
+        addOpenShiftButtonClickHandlers();
+        addCancelMyShiftButtonClickHandlers();
 
         // Remove spinner
         $("#assignment-spinner").remove();
@@ -339,7 +340,13 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                   (isMyAssignment && `<i class="fa fa-times-circle"></i>`)
                 }
               </span>
-              <span>Sign up - Officer ${i + 1}</span>
+              <span>
+              ${
+                (isNotAssigned && `Sign up - Officer ${i + 1}`) ||
+                (isOtherOfficerAssignment && `Filled - Officer ${i + 1}`) ||
+                (isMyAssignment && `Cancel My Sign Up`)
+              }
+             </span>
             </span>
             `;
         });
@@ -361,15 +368,19 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // TODO: Turn buttons into cancel/remove button after signing up
 
   // Add button handler to associate officer assignment records with logged in user
-  function addShiftButtonClickHandlers(className) {
-    var buttons = $(`.${className}`);
+  function addOpenShiftButtonClickHandlers() {
+    var buttons = $(`.open-shift-button`);
     buttons.each(function () {
       var thisButton = $(this);
       var thisButtonIcon = thisButton.find("i");
 
+      // Remove any existing click handler
+      thisButton.off("click");
+
       thisButton.click(function () {
         // Get officer_assignment record ids
         var idsToAssignCurrentUser = thisButton.attr("id").split("-");
+        thisButton.removeClass("open-shift-button");
         thisButtonIcon
           .removeClass("fa-plus-square")
           .addClass("fa-circle-o-notch fa-spin");
@@ -381,10 +392,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             data: JSON.stringify({ [fields.assignedOfficerField]: userId }),
             headers: headers,
             success: function (res) {
-              thisButton.addClass("is-disabled");
+              thisButton.addClass("my-shift-button");
+              console.log(thisButton);
+              thisButton[0].children[1].innerText = "Cancel My Sign Up";
               thisButtonIcon
                 .removeClass("fa-circle-o-notch fa-spin")
-                .addClass("fa-plus-square");
+                .addClass("fa-times-circle");
+
+              addCancelMyShiftButtonClickHandlers();
 
               $.ajax({
                 url: putUrl + recordId,
@@ -398,6 +413,47 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                   console.log(res);
                 }
               });
+            }
+          });
+        });
+      });
+    });
+  }
+
+  function addCancelMyShiftButtonClickHandlers() {
+    var buttons = $(`.my-shift-button`);
+    buttons.each(function () {
+      var thisButton = $(this);
+      var thisButtonIcon = thisButton.find("i");
+      // Use this to display the Officer number in the button that corresponds with its position in the UI
+      var buttonNumber = thisButton.index() + 1;
+
+      // Remove any existing click handler
+      thisButton.off("click");
+
+      thisButton.click(function () {
+        // Get officer_assignment record ids
+        var idsToAssignCurrentUser = thisButton.attr("id").split("-");
+        thisButton.removeClass("my-shift-button");
+        thisButtonIcon
+          .removeClass("fa-times-circle")
+          .addClass("fa-circle-o-notch fa-spin");
+
+        idsToAssignCurrentUser.forEach(function (recordId) {
+          $.ajax({
+            url: putUrl + recordId,
+            type: "PUT",
+            data: JSON.stringify({
+              [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId
+            }),
+            headers: headers,
+            success: function (res) {
+              thisButton.addClass("open-shift-button");
+              thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
+              thisButtonIcon
+                .removeClass("fa-circle-o-notch fa-spin")
+                .addClass("fa-plus-square");
+              addOpenShiftButtonClickHandlers();
             }
           });
         });
@@ -430,7 +486,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       var shifts = buildAndAppendShiftSection(prevPageRecords);
       $("#shift-table-body").append(shifts);
       prependShiftTableWithPagination();
-      addShiftButtonClickHandlers("open-shift-button");
+      addOpenShiftButtonClickHandlers();
     });
 
     next.click(function () {
@@ -453,7 +509,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       var shifts = buildAndAppendShiftSection(nextPageRecords);
       $("#shift-table-body").append(shifts);
       prependShiftTableWithPagination();
-      addShiftButtonClickHandlers("open-shift-button");
+      addOpenShiftButtonClickHandlers();
     });
   }
 
