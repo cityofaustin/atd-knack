@@ -153,7 +153,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         buildAndAppendShiftSection(recordsInPage);
         prependShiftTableWithPagination();
         prependPaginationWithTimeFilters();
-        addShiftButtonClickHandlers("shift-button");
+        addShiftButtonClickHandlers("open-shift-button");
 
         // Remove spinner
         $("#assignment-spinner").remove();
@@ -287,11 +287,18 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             <td style="padding-top: 16px;" colspan="4">
           `;
 
-        function setButtonStatus(record) {
-          return record[fields.assignedOfficerFieldRaw][0].id ===
-            appSpecifics.noOfficerAssignedId
-            ? ""
-            : "is-disabled";
+        function setButtonStatus(
+          isMyAssignment,
+          isOtherOfficerAssignment,
+          isNotAssigned
+        ) {
+          if (isNotAssigned) {
+            return "open-shift-button";
+          } else if (isMyAssignment) {
+            return "my-shift-button";
+          } else if (isOtherOfficerAssignment) {
+            return "is-disabled";
+          }
         }
 
         // For each subarray, add one button
@@ -303,14 +310,34 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             })
             .join("-");
 
+          // TODO: If isMyAssignment, update text to "Cancel My Sign Up"
+          // TODO: If isOtherOfficerAssignment, update text to "Filled - Officer #"
+          var assignmentOfficerId =
+            shift[0][fields.assignedOfficerFieldRaw][0].id;
+          var isMyAssignment = assignmentOfficerId === userId;
+          var isOtherOfficerAssignment =
+            assignmentOfficerId !== userId &&
+            assignmentOfficerId !== appSpecifics.noOfficerAssignedId;
+          var isNotAssigned =
+            assignmentOfficerId === appSpecifics.noOfficerAssignedId;
+
           shiftsHTML += `
             <span
-            class="kn-button shift-button ${setButtonStatus(shift[0])}"
+            class="kn-button ${setButtonStatus(
+              isMyAssignment,
+              isOtherOfficerAssignment,
+              isNotAssigned
+            )}"
             style="margin: 0px 10px 10px 0px;"
             id="${buttonId}"
             >
               <span class="icon">
-                <i class="fa fa-plus-square"></i>
+                ${
+                  (isNotAssigned && `<i class="fa fa-plus-square"></i>`) ||
+                  (isOtherOfficerAssignment &&
+                    `<i class="fa fa-check-square-o"></i>`) ||
+                  (isMyAssignment && `<i class="fa fa-times-circle"></i>`)
+                }
               </span>
               <span>Sign up - Officer ${i + 1}</span>
             </span>
@@ -328,6 +355,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     var shiftSection = buildShift(shiftRecords);
     $("#shift-table-body").append(shiftSection);
   }
+
+  // TODO: Add classname to buttons for shifts that officer already signed up for (ids in id are === officer id)
+  // TODO: Add new fn to addClick handlers to buttons that have this classname so when you click, remove from assignments
+  // TODO: Turn buttons into cancel/remove button after signing up
 
   // Add button handler to associate officer assignment records with logged in user
   function addShiftButtonClickHandlers(className) {
@@ -399,7 +430,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       var shifts = buildAndAppendShiftSection(prevPageRecords);
       $("#shift-table-body").append(shifts);
       prependShiftTableWithPagination();
-      addShiftButtonClickHandlers("shift-button");
+      addShiftButtonClickHandlers("open-shift-button");
     });
 
     next.click(function () {
@@ -422,7 +453,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       var shifts = buildAndAppendShiftSection(nextPageRecords);
       $("#shift-table-body").append(shifts);
       prependShiftTableWithPagination();
-      addShiftButtonClickHandlers("shift-button");
+      addShiftButtonClickHandlers("open-shift-button");
     });
   }
 
