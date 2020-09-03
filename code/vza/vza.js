@@ -311,8 +311,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             })
             .join("-");
 
-          // TODO: If isMyAssignment, update text to "Cancel My Sign Up"
-          // TODO: If isOtherOfficerAssignment, update text to "Filled - Officer #"
           var assignmentOfficerId =
             shift[0][fields.assignedOfficerFieldRaw][0].id;
           var isMyAssignment = assignmentOfficerId === userId;
@@ -363,10 +361,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     $("#shift-table-body").append(shiftSection);
   }
 
-  // TODO: Add classname to buttons for shifts that officer already signed up for (ids in id are === officer id)
-  // TODO: Add new fn to addClick handlers to buttons that have this classname so when you click, remove from assignments
-  // TODO: Turn buttons into cancel/remove button after signing up
-
   // Add button handler to associate officer assignment records with logged in user
   function addOpenShiftButtonClickHandlers() {
     var buttons = $(`.open-shift-button`);
@@ -393,7 +387,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             headers: headers,
             success: function (res) {
               thisButton.addClass("my-shift-button");
-              console.log(thisButton);
               thisButton[0].children[1].innerText = "Cancel My Sign Up";
               thisButtonIcon
                 .removeClass("fa-circle-o-notch fa-spin")
