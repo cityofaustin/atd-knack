@@ -1,0 +1,31 @@
+.block {
+  display: block;
+  width: 20%;
+  border: none;
+  background-color: #367db7;
+  color: white;
+  padding: 5px 5px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Sign Up view - Available Assignments table scene_208 view_466 */
+#assignment-spinner {
+  color: #023f74;
+  font-size: 30px;
+}
+
+.pagination-arrows {
+  cursor: pointer;
+  display: flex;
+}
+
+.shift-header {
+  background-color: #023f74;
+  color: white;
+}
+
+.assignments-table {
+  overflow: visible;
+}
