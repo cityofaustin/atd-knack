@@ -413,6 +413,117 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     });
   }
 
+  function addCancellationModal(recordId) {
+    var cancellationForm = `
+    <div
+    id="kn-modal-bg-0"
+    class="kn-modal-bg"
+    style="top: 0px; z-index: 2000; display: block"
+    >
+      <div class="kn-modal default" style="display: block">
+        <header class="modal-card-head">
+          <h1 class="modal-card-title">Remove From Today's Assignments</h1>
+          <button class="delete close-modal"></button>
+        </header>
+        <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
+          <div class="kn-scene kn-container" id="kn-scene_236">
+            <div class="kn-form kn-view view_484" id="view_484">
+              <div class="kn-form-confirmation" style="display: none">
+                <div class="kn-message success">
+                  <p></p>
+                </div>
+                <a href="#" class="kn-form-reload button">
+                  <span class="icon is-small"><i class="fa fa-refresh"></i></span>
+                  <span>Reload form</span>
+                </a>
+              </div>
+    
+              <form id="cancellation-form">
+                <ul class="kn-form-group columns kn-form-group-1">
+                  <li class="kn-form-col column is-constrained">
+                    <div
+                      class="kn-input kn-input-short_text control"
+                      id="kn-input-field_671"
+                      data-input-id="field_671"
+                    >
+                      <label for="field_671" class="label kn-label"
+                        ><span>Reason for Cancellation</span></label
+                      >
+                      <div class="control">
+                        <input
+                          class="input"
+                          id="field_671"
+                          name="field_671"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                      <p class="kn-instructions" style="display: none"></p>
+                    </div>
+    
+                    <div
+                      class="kn-input kn-input-boolean control"
+                      id="kn-input-field_711"
+                      data-input-id="field_711"
+                    >
+                      <label for="field_711" class="label kn-label"
+                        ><span>Remove From My Assignments</span></label
+                      >
+    
+                      <div class="control">
+                        <label class="option checkbox"
+                          ><input
+                            type="checkbox"
+                            name="field_711"
+                            value="Yes"
+                          />&nbsp;I have read the SEU Cancellation Policy and
+                          understand that by cancelling this assignment with less
+                          than 48 hours notice I am responsible for finding another
+                          Officer to work the shift or risk losing eligibility for
+                          SEU assignments.</label
+                        >
+                      </div>
+    
+                      <input name="key" type="hidden" value="field_711" />
+                      <p class="kn-instructions">
+                        <a
+                          href="https://docs.google.com/document/d/1cODXt1FuJVHAmiSg23hdcQDrfcFaiKhUmVOiFxgJ-4g/edit?usp=sharing"
+                          >Cancellation Policy</a
+                        >
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+    
+                <div class="kn-submit">
+                  <input name="id" type="hidden" value="${recordId}" />
+    
+                  <input name="view_key" type="hidden" value="view_484" />
+                  <input
+                    name="view_name"
+                    type="hidden"
+                    value="Remove from My Assignments for Today"
+                  />
+    
+                  <button class="kn-button is-primary" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    `;
+
+    $(".kn-content").append(cancellationForm);
+    var thisForm = $("#cancellation-form");
+    thisForm.off("submit");
+    thisForm.on("submit", function (e) {
+      e.preventDefault();
+      console.log(e, "You submitted the form!");
+    });
+  }
+
   function addCancelMyShiftButtonClickHandlers() {
     var buttons = $(`.my-shift-button`);
     buttons.each(function () {
@@ -425,31 +536,33 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       thisButton.off("click");
 
       thisButton.click(function () {
-        // Get officer_assignment record ids
-        var idsToAssignCurrentUser = thisButton.attr("id").split("-");
-        thisButton.removeClass("my-shift-button");
-        thisButtonIcon
-          .removeClass("fa-times-circle")
-          .addClass("fa-circle-o-notch fa-spin");
+        addCancellationModal("test");
 
-        idsToAssignCurrentUser.forEach(function (recordId) {
-          $.ajax({
-            url: putUrl + recordId,
-            type: "PUT",
-            data: JSON.stringify({
-              [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId
-            }),
-            headers: headers,
-            success: function (res) {
-              thisButton.addClass("open-shift-button");
-              thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
-              thisButtonIcon
-                .removeClass("fa-circle-o-notch fa-spin")
-                .addClass("fa-plus-square");
-              addOpenShiftButtonClickHandlers();
-            }
-          });
-        });
+        // // Get officer_assignment record ids
+        // var idsToAssignCurrentUser = thisButton.attr("id").split("-");
+        // thisButton.removeClass("my-shift-button");
+        // thisButtonIcon
+        //   .removeClass("fa-times-circle")
+        //   .addClass("fa-circle-o-notch fa-spin");
+
+        // idsToAssignCurrentUser.forEach(function (recordId) {
+        //   $.ajax({
+        //     url: putUrl + recordId,
+        //     type: "PUT",
+        //     data: JSON.stringify({
+        //       [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId
+        //     }),
+        //     headers: headers,
+        //     success: function (res) {
+        //       thisButton.addClass("open-shift-button");
+        //       thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
+        //       thisButtonIcon
+        //         .removeClass("fa-circle-o-notch fa-spin")
+        //         .addClass("fa-plus-square");
+        //       addOpenShiftButtonClickHandlers();
+        //     }
+        //   });
+        // });
       });
     });
   }
