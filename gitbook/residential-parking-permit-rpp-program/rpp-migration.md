@@ -231,7 +231,7 @@ Fields are currently in this order:
 
 Each record should have an association between the application and permit
 
-1. On both the **"Permits\_COLOR"** spreadsheet \(permits\_import\_GREEN\_date\) and **"Customer Export"** spreadsheet, make sure your records are ordered alphabetically. This will allow us to match the Name to the Name field on the **"Customer Export"** spreadsheet that includes the concatenated Customer ID for each Name as well as the Application ID in the 'permit\_applications' column \(customer\_import\_GREEN\_with\_appID\) Fields to configure:
+1. On both the **"Permits\_COLOR"** spreadsheet and **"Customer Export"** spreadsheet, make sure your records are ordered alphabetically. This will allow us to match the Name to the Name field on the **"Customer Export"** spreadsheet that includes the concatenated Customer ID for each Name as well as the Application ID in the 'permit\_applications' column. Fields to configure:
    * Issued By
    * permit\_applications \(do not rename field\)
    * Name
@@ -247,16 +247,22 @@ Each record should have an association between the application and permit
 3. Add 2 more columns, 'Issued By' as column 'A' and 'permit\_applications' as column 'B' in front of the 'Name' column
 4. For the 'Issued By' column, fill in your name \(Knack RPP Reviewer or Builder Admin\) and drag the cell to fill in the column for all records
 5. For the 'permit\_applications' field, we will need to enter the 8 digit Permit Application number. \(This permit application number may need to change to a 9 digit number should the number of applications exceed 10,000 in a given year\). The Permit Application number and the Name with the concatenated Application ID \(appID\) can both be found and transposed from the  **"Customer Export"** spreadsheet. Copy both the corresponding Application ID in the 'permit\_applications' column and the corresponding Name in the 'Name' column over the old 'Name' value for all records
+
+   **Note:** Some customers may have more than one application associated with them
+
 6. For 'Renewal Year' column select or enter 2 cells worth of values, select both, and drag that selection with the bottom right square to apply to the entire column since renewal year will be the same for all customers in the same zone
 7. Skip over 'Permit Type', 'Total Day Passes', and 'Serial Numbers" columns for now
 8. Transpose the 'Date Received' value over to the 'Issued Date' column next to it on the same record row for all records with 'Date Received'
 9. \(Optional\) Make sure the 'Total Permits' column displays accurately the total number of permits when referencing for your record rows
 10. Select the row number for each record and right click and insert \('I' key\) for how many total permits there are for that customer. Naturally the insert function will insert a row above the selected record so you can either start from bottom to top or simply just skip the first record row. So if 'Total Permits' for a customer is 4, you will need to insert 3 additional rows below that record so we can separate each permit for all customers
 
-    Note: For Day Passes, we will only dedicate one row for each grouping of up to 20 day passes
+    **Note:** For Day Passes, we will only dedicate one row for each grouping of up to 20 day passes
 
 11. Copy each customer record row or columns 'A' to 'H' for each customer record, select all corresponding empty rows below that customer and paste. Do for all records.
-12. Transpose the Decal Serial Numbers, Hang-Tag Serial Numbers, and Day Pass Serial Numbers from the right columns \(columns 'K' to 'O'\) to their individual rows under 'Serial Numbers' column 'G'. You may copy and paste, manually enter, or use the 'Fill Series' option to transpose serial numbers. Remember to just paste the range of serial numbers for up to 20 day passes on its specific row
+12. Transpose the Decal Serial Numbers, Hang-Tag Serial Numbers, and Day Pass Serial Numbers from the right columns \(columns 'K' to 'O'\) to their individual rows under 'Serial Numbers' column 'G'. You may copy and paste, manually enter, or use the 'Fill Series' option to transpose serial numbers. Remember to just paste the range of serial numbers for up to 20 day passes on its specific row.
+
+    **Note:** If a customer is associated with multiple applications, be sure that the corresponding serial numbers match accordingly
+
 13. Enter the 'Total Day Passes' column with the total day pass values from column 'O' 'Day Passes' on the specific last row for that customer name where the Day Pass Serial Numbers are entered in the 'Serial Numbers' column 'G'
 14. For the 'Permit Type' column, now enter the value 'Day Pass' on each respective record row that has the 'Total Day Passes' and 'Serial Numbers' for Day Passes
 15. For the 'Permit Type' column, now enter the value 'Residential Parking Permit \| decal' for each respective record row that has 'Serial Numbers' for only Decal Permits
