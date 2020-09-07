@@ -413,7 +413,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     });
   }
 
-  function addCancellationModal(recordId) {
+  function addCancellationModal(recordIdsString) {
     var cancellationForm = `
     <div
     id="kn-modal-bg-0"
@@ -495,16 +495,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                   </li>
                 </ul>
     
-                <div class="kn-submit">
-                  <input name="id" type="hidden" value="${recordId}" />
-    
-                  <input name="view_key" type="hidden" value="view_484" />
-                  <input
-                    name="view_name"
-                    type="hidden"
-                    value="Remove from My Assignments for Today"
-                  />
-    
+                <div class="kn-submit">    
                   <button class="kn-button is-primary" type="submit">Submit</button>
                 </div>
               </form>
@@ -521,6 +512,16 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     thisForm.on("submit", function (e) {
       e.preventDefault();
       console.log(e, "You submitted the form!");
+      var formAllFields = thisForm.serializeArray();
+      var neededFields = formAllFields.reduce(function (acc, field) {
+        if (field.name.includes("field")) {
+          return { ...acc, [field.name]: field.value };
+        } else {
+          return acc;
+        }
+      }, {});
+      console.log(neededFields, recordIdsString);
+      // TODO: PUT request to update cancellation fields on records
     });
   }
 
@@ -536,7 +537,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       thisButton.off("click");
 
       thisButton.click(function () {
-        addCancellationModal("test");
+        var recordIdsString = thisButton.attr("id");
+        addCancellationModal(recordIdsString);
 
         // // Get officer_assignment record ids
         // var idsToAssignCurrentUser = thisButton.attr("id").split("-");
