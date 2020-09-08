@@ -413,17 +413,22 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     });
   }
 
-  function addCancellationModal(recordIdsString) {
+  function addCancellationModal(
+    recordIdsString,
+    buttonNumber,
+    thisButton,
+    thisButtonIcon
+  ) {
     var cancellationForm = `
     <div
     id="kn-modal-bg-0"
-    class="kn-modal-bg"
+    class="kn-modal-bg cancellation-modal"
     style="top: 0px; z-index: 2000; display: block"
     >
       <div class="kn-modal default" style="display: block">
         <header class="modal-card-head">
           <h1 class="modal-card-title">Remove From Today's Assignments</h1>
-          <button class="delete close-modal"></button>
+          <button class="delete close-cancellation-modal"></button>
         </header>
         <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
           <div class="kn-scene kn-container" id="kn-scene_236">
@@ -506,12 +511,14 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     </div>
     `;
 
+    // Append cancellation modal and handle form submit
     $(".kn-content").append(cancellationForm);
     var thisForm = $("#cancellation-form");
     thisForm.off("submit");
     thisForm.on("submit", function (e) {
       e.preventDefault();
-      console.log(e, "You submitted the form!");
+
+      // Collect form values and create payload for officer_assignment records
       var formAllFields = thisForm.serializeArray();
       var neededFields = formAllFields.reduce(function (acc, field) {
         if (field.name.includes("field")) {
@@ -520,8 +527,47 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           return acc;
         }
       }, {});
-      console.log(neededFields, recordIdsString);
-      // TODO: PUT request to update cancellation fields on records
+
+      thisButton.removeClass("my-shift-button");
+      $("#kn-loading-spinner").css("display", "block");
+
+      // Submit PUT requests to modify each officer_assignment ID stored in button id attribute
+      var idsToAssignCurrentUser = recordIdsString.split("-");
+
+      var now = new Date();
+
+      idsToAssignCurrentUser.forEach(function (recordId) {
+        $.ajax({
+          url: putUrl + recordId,
+          type: "PUT",
+          data: JSON.stringify({
+            ...neededFields, // Reason for cancellation and
+            [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
+            field_669: userId, // Add current user as unassigned officer to track who cancelled
+            field_711: true, // Remove from My Assignments
+            field_663: "No", // Add to My Assignments
+            // TODO: Get correct date time format
+            field_712: now.getTime() // DateTime of cancellation
+          }),
+          headers: headers,
+          success: function (res) {
+            thisButton.addClass("open-shift-button");
+            thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
+            thisButtonIcon
+              .removeClass("fa-times-circle")
+              .addClass("fa-plus-square");
+            $("#kn-loading-spinner").css("display", "none");
+            addOpenShiftButtonClickHandlers();
+          }
+        });
+      });
+    });
+
+    // Add click handler to close modal (X) button
+    var closeModalButton = $(".close-cancellation-modal");
+    closeModalButton.off("click");
+    closeModalButton.click(function () {
+      $(".cancellation-modal").remove();
     });
   }
 
@@ -538,7 +584,12 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 
       thisButton.click(function () {
         var recordIdsString = thisButton.attr("id");
-        addCancellationModal(recordIdsString);
+        addCancellationModal(
+          recordIdsString,
+          buttonNumber,
+          thisButton,
+          thisButtonIcon
+        );
 
         // // Get officer_assignment record ids
         // var idsToAssignCurrentUser = thisButton.attr("id").split("-");
