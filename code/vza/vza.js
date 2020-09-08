@@ -22,7 +22,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     assignedOfficerFieldRaw: "field_704_raw",
     assignedOfficerField: "field_704",
     officerShiftField: "field_724",
-    assignmentDateTimeField: "field_133"
+    assignmentDateTimeField: "field_133",
+    unassignedOfficerField: "field_669",
+    addToMyAssignmentsField: "field_663",
+    dateTimeOfCancellationField: "field_712"
   };
 
   // Cache all officer_assignments to traverse with pagination
@@ -528,36 +531,40 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         }
       }, {});
 
-      thisButton.removeClass("my-shift-button");
+      // Start spinner
       $("#kn-loading-spinner").css("display", "block");
 
       // Submit PUT requests to modify each officer_assignment ID stored in button id attribute
       var idsToAssignCurrentUser = recordIdsString.split("-");
 
-      var now = new Date();
+      var now = new Date().toLocaleString();
 
       idsToAssignCurrentUser.forEach(function (recordId) {
         $.ajax({
           url: putUrl + recordId,
           type: "PUT",
           data: JSON.stringify({
-            ...neededFields, // Reason for cancellation and
+            ...neededFields, // Reason for cancellation and Remove from My Assignments fields from form
             [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
-            field_669: userId, // Add current user as unassigned officer to track who cancelled
-            field_711: true, // Remove from My Assignments
-            field_663: "No", // Add to My Assignments
-            // TODO: Get correct date time format
-            field_712: now.getTime() // DateTime of cancellation
+            [fields.unassignedOfficerField]: userId, // Add current user as unassigned officer to track who cancelled
+            [fields.addToMyAssignmentsField]: "No", // Add to My Assignments
+            [fields.dateTimeOfCancellationField]: now // DateTime of cancellation
           }),
           headers: headers,
           success: function (res) {
-            thisButton.addClass("open-shift-button");
+            // Switch button associated with these records back to a Sign Up button
+            thisButton
+              .removeClass("my-shift-button")
+              .addClass("open-shift-button");
             thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
             thisButtonIcon
               .removeClass("fa-times-circle")
               .addClass("fa-plus-square");
-            $("#kn-loading-spinner").css("display", "none");
             addOpenShiftButtonClickHandlers();
+
+            // Remove modal and stop spinner
+            $("#kn-modal-bg-0").remove();
+            $("#kn-loading-spinner").css("display", "none");
           }
         });
       });
@@ -590,32 +597,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           thisButton,
           thisButtonIcon
         );
-
-        // // Get officer_assignment record ids
-        // var idsToAssignCurrentUser = thisButton.attr("id").split("-");
-        // thisButton.removeClass("my-shift-button");
-        // thisButtonIcon
-        //   .removeClass("fa-times-circle")
-        //   .addClass("fa-circle-o-notch fa-spin");
-
-        // idsToAssignCurrentUser.forEach(function (recordId) {
-        //   $.ajax({
-        //     url: putUrl + recordId,
-        //     type: "PUT",
-        //     data: JSON.stringify({
-        //       [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId
-        //     }),
-        //     headers: headers,
-        //     success: function (res) {
-        //       thisButton.addClass("open-shift-button");
-        //       thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
-        //       thisButtonIcon
-        //         .removeClass("fa-circle-o-notch fa-spin")
-        //         .addClass("fa-plus-square");
-        //       addOpenShiftButtonClickHandlers();
-        //     }
-        //   });
-        // });
       });
     });
   }
