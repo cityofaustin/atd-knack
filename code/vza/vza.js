@@ -436,16 +436,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
           <div class="kn-scene kn-container" id="kn-scene_236">
             <div class="kn-form kn-view view_484" id="view_484">
-              <div class="kn-form-confirmation" style="display: none">
-                <div class="kn-message success">
-                  <p></p>
-                </div>
-                <a href="#" class="kn-form-reload button">
-                  <span class="icon is-small"><i class="fa fa-refresh"></i></span>
-                  <span>Reload form</span>
-                </a>
-              </div>
-    
               <form id="cancellation-form">
                 <ul class="kn-form-group columns kn-form-group-1">
                   <li class="kn-form-col column is-constrained">
@@ -468,7 +458,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                       </div>
                       <p class="kn-instructions" style="display: none"></p>
                     </div>
-    
                     <div
                       class="kn-input kn-input-boolean control"
                       id="kn-input-field_711"
@@ -477,7 +466,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                       <label for="field_711" class="label kn-label"
                         ><span>Remove From My Assignments</span></label
                       >
-    
                       <div class="control">
                         <label class="option checkbox"
                           ><input
@@ -491,7 +479,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                           SEU assignments.</label
                         >
                       </div>
-    
                       <input name="key" type="hidden" value="field_711" />
                       <p class="kn-instructions">
                         <a
@@ -502,7 +489,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                     </div>
                   </li>
                 </ul>
-    
                 <div class="kn-submit">    
                   <button class="kn-button is-primary" type="submit">Submit</button>
                 </div>
