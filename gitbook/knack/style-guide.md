@@ -3,38 +3,64 @@
 ## Table of Contents
 
 * Banner Image
-* Field Naming Conventions
-* Object Naming Conventions
+* Knack Naming Conventions \(Pages/Views, Fields, and Objects\)
 * Colors
 * Icons
 * Layout
-* Page naming conventions
-* Page URL conventions
+* Button Styles
+* Links
 
-### Banner Image
+## Banner Image
 
-Example: [ATD Forms banner](https://s3.amazonaws.com/assets.knackhq.com/assets/5ca25947f6973855115f5b58/logos/banner_cropped_small_atd_forms.png) Use [Gimp software ](https://www.gimp.org/)to create banner background color
+![](../.gitbook/assets/banner_800x160_coa_template.png)
 
-* HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
+Use [Gimp software ](https://www.gimp.org/)to create or update a Knack application banner
+
+You can find the original banner assets and a template for creating a new application banner in the corresponding G drive folder: G:\ATD\ATD\_GIS\03\_RESOURCES\Seals\_Logos\ATD App Banner Assets
+
+* You can use the .xcf GIMP template file or an .xcf GIMP file for an existing application and edit the text layer of the banner image
+* HTML: ![\#163f63](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color \(make sure Knack Header color is the same\)
 * RGB: ![\#22, 63, 110](https://placehold.it/15/163f63/000000?text=+) `#163f63` - Background Color
-* Font: `Standard`
-* Size: `650 x 100`px, `800 x 150`px
-* Layout: \(white\) City Logo, first line: Name of application, second line: Austin Transportation Department
+* Banner Size: `800 x 160`px
+* Font: `Standard or Roboto[Roboto Bold = 1st line, Roboto #1(not bolded) = 2nd line]`
+
+  `Gimp may automatically bold the second line due to the text formatting of the first line so be sure to un-bold it`
+
+* Font Color: White
+* Font Size: 45px for first line \(bolded\), 36px for second line
+  * If text length exceeds banner size, adjust font size smaller until it fits appropriately
+* Layout: City Logo left side, first line: Name of Application, second line: Austin Transportation Department
+* Save as .xcf GIMP file in the logo folder for the application on the G Drive
+* Export as .png file in the logo folder for the application on the G Drive
+
+## Overall Knack Naming Conventions
+
+* No Special Characters
+* No Double Spaces
+* Try not to exceed 63 characters for any name
+* Use singular names over plural names, for example: 'Comment Table' instead of 'Comments Table'
+
+### Page/View Naming Conventions
+
+* Use a unique and descriptive name that no other page will use since the page URL is sourced from its page name
+* Use `Title Case`
+* Use action verbs where appropriate
+* For example: Instead of an 'Add Attachment' page, use 'Add Attachment to TIA Review' instead
 
 ### Field Naming Conventions
 
-Follow these guidelines when naming fields:
-
-* Avoid special characters and double spaces unless absolutely necessary
-* Use `Title Case` for fields that will be exposed to end-users in the app.
-* Use `UPPERCASE_SNAKE_CASE` for fields that are not exposed to the user. Err on the side of longer names that describe functionality, and the field function should proceed it's description. Examples: `COUNT_TASKS_COMPLETED`, `SUM_ATTACHMENTS`.
+* Do not begin a field with a number. For example: use 'Five Day Work Week' instead of '5 Day Work Week'
+* Do not use generic names such as 'ID', instead use descriptive names like 'productID'
+* Use `Title Case` for fields that will be exposed to end-users in the app
+* The use of \# or % symbols in field names is acceptable if exposed to end-users
+* Use `camelCase` for fields that are only on the backend and not exposed to the user. For formulas and calculations for example use: 'countTasksCompleted' or 'sumOrangeDistrictTransactions'
 * Use the \(default\) `lower_case_object_name` for connection fields, unless they are directly exposed to the user, in which case, use `Title Case`.
 * Field names should not be renamed in a production application without following a change management process. This is critically important if the application has been integrated with external systems.
 
 ### Object Naming Conventions
 
-* Knack objects should be named using `lower_case_snake_case`. No exceptions.
-* In the Builder, Knack objects should be ordered alphabetically
+* Use `snake_case`
+* Order objects alphabetically in Knack
 * Renaming objects should follow a change management process, however renaming objects will not break API integrations.
 * In the ATD Forms app, prepend objects with the acronym for the program or division that owns them and the word `PROGRAM` or `DIVISION`, e.g. HR\_DIVISION\_awards\_and\_recognition\_nominations
 
@@ -100,16 +126,6 @@ Follow these guidelines when naming fields:
 * Add `menu`, add `new page` for form/button \(cleaner look, not as efficient\)
 * Add `form directly onto page` \(not as clean of a look, but usually highly efficient for user especially if they have to enter lots of information\)
 * More about BUTTON STYLES
-
-### Page naming conventions
-
-* want to make sure the page names are simple yet descriptive
-  * ex. `Note` \(isn't as descriptive\), `Page Note` \(is more descriptive of what kind of page it is\)
-
-### Page URL conventions
-
-* Don't want to have duplicate url names 
-  * Ex. `add-attachments`, if another attachment form is created with the same name, the page url will automatically go to `add-attachments2` and incrementally go up. \(this does not look great\)
 
 ## Button Styles
 
