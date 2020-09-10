@@ -364,6 +364,21 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     $("#shift-table-body").append(shiftSection);
   }
 
+  function findRecordById(id) {
+    var found = null;
+
+    for (let i = 0; i < completeRecords.length; i++) {
+      found = completeRecords[i].find(function (record) {
+        return record.id === id;
+      });
+      if (!!found) {
+        break;
+      }
+    }
+
+    return found;
+  }
+
   // Add button handler to associate officer assignment records with logged in user
   function addOpenShiftButtonClickHandlers() {
     var buttons = $(`.open-shift-button`);
@@ -396,6 +411,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                 .addClass("fa-times-circle");
 
               addCancelMyShiftButtonClickHandlers();
+
+              // Update cached record
+              var thisRecord = findRecordById(recordId);
+              thisRecord[fields.assignedOfficerFieldRaw][0].id = userId;
 
               $.ajax({
                 url: putUrl + recordId,
@@ -548,6 +567,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
               .addClass("fa-plus-square");
             addOpenShiftButtonClickHandlers();
 
+            // Update cached record
+            var thisRecord = findRecordById(recordId);
+            thisRecord[fields.assignedOfficerFieldRaw][0].id =
+              appSpecifics.noOfficerAssignedId;
+
             // Remove modal and stop spinner
             $("#kn-modal-bg-0").remove();
             $("#kn-loading-spinner").css("display", "none");
@@ -613,6 +637,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       $("#shift-table-body").append(shifts);
       prependShiftTableWithPagination();
       addOpenShiftButtonClickHandlers();
+      addCancelMyShiftButtonClickHandlers();
     });
 
     next.click(function () {
@@ -636,6 +661,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       $("#shift-table-body").append(shifts);
       prependShiftTableWithPagination();
       addOpenShiftButtonClickHandlers();
+      addCancelMyShiftButtonClickHandlers();
     });
   }
 
