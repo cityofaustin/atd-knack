@@ -214,7 +214,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             return record1[fields.timeField] === record2[fields.timeField];
           }
 
-          for (let i = 0; i < shiftRecords.length; i++) {
+          for (var i = 0; i < shiftRecords.length; i++) {
             if (i === 0) {
               buttonRecords.push([shiftRecords[i]]);
               currentArrayPosition++;
@@ -367,10 +367,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   function findRecordById(id) {
     var found = null;
 
-    for (let i = 0; i < completeRecords.length; i++) {
+    for (var i = 0; i < completeRecords.length; i++) {
       found = completeRecords[i].find(function (record) {
         return record.id === id;
       });
+
       if (!!found) {
         break;
       }
@@ -498,7 +499,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
                           SEU assignments.</label
                         >
                       </div>
-                      <input name="key" type="hidden" value="field_711" />
                       <p class="kn-instructions">
                         <a
                           href="https://docs.google.com/document/d/1cODXt1FuJVHAmiSg23hdcQDrfcFaiKhUmVOiFxgJ-4g/edit?usp=sharing"
@@ -526,14 +526,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     thisForm.on("submit", function (e) {
       e.preventDefault();
 
-      // Collect form values and create payload for officer_assignment records
-      var formAllFields = thisForm.serializeArray();
-      var neededFields = formAllFields.reduce(function (acc, field) {
-        if (field.name.includes("field")) {
-          return { ...acc, [field.name]: field.value };
-        } else {
-          return acc;
-        }
+      // Collect form values
+      var formFields = thisForm.serializeArray();
+      var knackFormatFields = formFields.reduce(function (acc, field) {
+        return { ...acc, [field.name]: field.value };
       }, {});
 
       // Start spinner
@@ -549,7 +545,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
           url: putUrl + recordId,
           type: "PUT",
           data: JSON.stringify({
-            ...neededFields, // Reason for cancellation and Remove from My Assignments fields from form
+            ...knackFormatFields, // Reason for cancellation and Remove from My Assignments fields from form
             [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
             [fields.unassignedOfficerField]: userId, // Add current user as unassigned officer to track who cancelled
             [fields.addToMyAssignmentsField]: "No", // Add to My Assignments
