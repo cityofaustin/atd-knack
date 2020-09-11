@@ -68,7 +68,7 @@ Fields are currently in this order:
 16. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
 17. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
-Reference "**Customers\_GREEN\_163.csv**" - is the format of the Knack `Customer` table
+Reference "**Customers\_GREEN\_163.csv**" - as the format of the Knack `Customer` table
 
 `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_RPP_Residential_Parkiing_Permit_Program\import_tables`
 
