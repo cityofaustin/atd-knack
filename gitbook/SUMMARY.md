@@ -73,8 +73,6 @@
 
 * [Resources](o365-resources/resources.md)
 
-## Workarounds
-
 ## Shared Mobility Operations
 
 * [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
