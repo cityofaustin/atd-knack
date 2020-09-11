@@ -608,9 +608,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   }
 
   // Add button handler to associate officer assignment records with logged in user
-  function addPaginationClickHandlers(prevId, nextId) {
-    var prev = $(`#${prevId}`);
-    var next = $(`#${nextId}`);
+  function addPaginationClickHandlers(prevClass, nextClass) {
+    var prev = $(`.${prevClass}`);
+    var next = $(`.${nextClass}`);
 
     prev.click(function () {
       if (currentPage === 1) {
@@ -681,10 +681,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         <div class="kn-pagination level-right">
           <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
           <div class="pagination-arrows">
-            <span class="icon" id="prev-arrow">
+            <span class="icon prev-arrow">
               <i class="fa fa-chevron-left"></i>
             </span>
-            <span class="icon" id="next-arrow">
+            <span class="icon next-arrow">
               <i class="fa fa-chevron-right"></i>
             </span>
           </div>
@@ -692,6 +692,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       </div>`;
 
     $(".assignments-table").before(paginationControls);
+    $(".assignments-table").after(paginationControls);
     addPaginationClickHandlers("prev-arrow", "next-arrow");
   }
 
@@ -797,4 +798,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.all);
     });
+});
+
+$(document).on("knack-view-render.view_448", function (event, view, data) {
+  // #view_449 > section > div > div > div > div > div > div > span > a > h2 > button > strong
+  console.log(data);
+  if (data) {
+  }
 });
