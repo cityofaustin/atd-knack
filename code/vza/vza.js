@@ -114,6 +114,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Setup pagination
   function initializePagination(records) {
     currentPage = 1;
+    currentRangeStart = 1;
+    currentRangeEnd = currentPage - 1 + recordsPerPage;
     numberOfPages = Math.ceil(records.length / recordsPerPage);
 
     var initialPageRecords = records.slice(0, recordsPerPage);
