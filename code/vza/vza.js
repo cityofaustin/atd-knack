@@ -802,9 +802,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     });
 });
 
-$(document).on("knack-view-render.view_448", function (event, view, data) {
-  // #view_449 > section > div > div > div > div > div > div > span > a > h2 > button > strong
-  console.log(data);
-  if (data) {
-  }
+$(document).on("knack-view-render.view_449", function (event, view, data) {
+  $("#view_449 button strong")[0].innerText = " Start Assignment";
 });
