@@ -56,17 +56,19 @@ Fields are currently in this order:
    * Email
    * Notes
 6. With the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file, copy all names and paste values to the 'Full Name' column in the new "**Customers\_COLOR**" spreadsheet file
-7. Copy all 'Contact Information' \(emails\) and paste values to the 'Email' column in the new "**Customers\_COLOR**" spreadsheet file
-8. Go through the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file and transpose any relevant notes and comments from each row into the 'Notes' column on the "**Customers\_COLOR**" spreadsheet file such as purchase date info or tenant names. If the information from these excel comments and notes are phone numbers, transpose them to the 'Phone' column on the "**Customers\_COLOR**" spreadsheet file
-9. If the original record has a property management company as the name yet there is a comment or note that has the owner name for the record, go ahead and replace the business name with the owner name as the 'Full Name'
-10. Once all name, phone, email, and notes information has been copied over to the "**Customers\_COLOR**" spreadsheet file, you may close the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file
-11. On the "**Customers\_COLOR**" spreadsheet file look for multiple customer names in the 'Full Name' column \(hint: use 'Find and Search' for all "&" or "and" in the name\), reference the first email in the 'Email' field and use the associated customer name as the primary 'Full Name' and remove any other names from the cell. Remove any additional emails from the 'Email' cell that are not the primary email
-12. Organize the spreadsheet alphabetically by the 'Full Name' column
-13. Check the 'Full Name' field for duplicate customer records and remove the row that features less information. If otherwise the same in all fields, choose either row to remove
-14. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
-15. Either copy/paste or enter the 'Name of Applicant: First', 'Name of Applicant: Middle', and 'Name of Applicant: Last' information from the 'Full Name' column for all records
-16. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
-17. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
+7. Select the 'Contact Information' \(emails\) column, right click, and select 'Remove Hyperlinks'
+8. Copy all 'Contact Information' \(emails\) and paste values to the 'Email' column in the new "**Customers\_COLOR**" spreadsheet file
+9. Go to the 'Review' tab in Excel, select the 'Notes' icon, and select 'Convert to Comments'. This will make it so notes are easier to read and copy
+10. Go through the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file and transpose any relevant notes and comments from each row into the 'Notes' column on the "**Customers\_COLOR**" spreadsheet file such as purchase date info, address info, or tenant names. If the information from these excel comments and notes are phone numbers, transpose them to the 'Phone' column on the "**Customers\_COLOR**" spreadsheet file
+11. If the original record has a property management company as the name yet there is a comment or note that has the owner name for the record, go ahead and replace the business name with the owner name as the 'Full Name'
+12. Once all name, phone, email, and notes information has been copied over to the "**Customers\_COLOR**" spreadsheet file, you may close the "**Revenue\_Permits\_2020\_**_**COLOR**_**\_ZONE**" spreadsheet file
+13. On the "**Customers\_COLOR**" spreadsheet file look for multiple customer names in the 'Full Name' column \(hint: use 'Find and Search' for all "&" or "and" in the name\), reference the first email in the 'Email' field and use the associated customer name as the primary 'Full Name' and remove any other names from the cell. Remove any additional emails from the 'Email' cell that are not the primary email
+14. Organize the spreadsheet alphabetically by the 'Full Name' column
+15. Check the 'Full Name' field for duplicate customer records and remove the row that features less information. If otherwise the same in all fields, choose either row to remove
+16. With the 'Phone' column, 'Find & Replace' all .\(dots\) with -\(dashes\) in all phone numbers
+17. Either copy/paste or enter the 'Name of Applicant: First', 'Name of Applicant: Middle', and 'Name of Applicant: Last' information from the 'Full Name' column for all records
+18. Lastly, go through every record and verify all fields are formatted and entered correctly. Save file
+19. Rename the file to "**Customers\_COLOR\_\#**" where \# is the number of customer records to be imported and 'Save As' a .csv file. Be sure not to include the title row in the number of records.
 
 Reference "**Customers\_GREEN\_163.csv**" - as the format of the Knack `Customer` table
 
