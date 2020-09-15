@@ -2,6 +2,7 @@ $(document).on("knack-view-render.any", function (event, view, data) {
   $("a.kn-view-asset").html("Attachment");
 });
 
+// Sign Up page
 // Hide Knack generated "Available Assignments" table, create and add table that condenses
 // sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_466", function (event, view, data) {
@@ -802,6 +803,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     });
 });
 
+// Assignment Details page
+// Update start button text
 $(document).on("knack-view-render.view_449", function (event, view, data) {
   $("#view_449 button strong")[0].innerText = " Start Assignment";
 });
