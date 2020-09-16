@@ -26,8 +26,13 @@ var fields = {
   assignmentDateTimeField: "field_133",
   unassignedOfficerField: "field_669",
   addToMyAssignmentsField: "field_663",
-  dateTimeOfCancellationField: "field_712"
+  dateTimeOfCancellationField: "field_712",
+  assignmentStatus: "field_584"
 };
+
+// Get user auth for get request (API view is private) and set req headers
+var user = Knack.getUserToken();
+var userId = Knack.getUserAttributes().id;
 
 // Shared code
 // Cache all officer_assignments to traverse with pagination
@@ -45,7 +50,7 @@ var currentRangeEnd = currentPage - 1 + recordsPerPage;
 
 // Filter for records for assignments time windows
 var filters = {
-  all: [
+  allAssignments: [
     {
       field: fields.dateField,
       operator: "is today or after"
@@ -53,6 +58,33 @@ var filters = {
     {
       field: fields.assignmentDateTimeField,
       operator: "is not blank"
+    }
+  ],
+  todayAssignments: [
+    {
+      field: fields.dateField,
+      operator: "is today"
+    },
+    {
+      field: fields.assignmentStatus,
+      operator: "is not",
+      value: "Complete"
+    },
+    {
+      field: fields.assignedOfficerField,
+      operator: "is",
+      value: userId
+    }
+  ],
+  futureAssignments: [
+    {
+      field: fields.dateField,
+      operator: "is after today"
+    },
+    {
+      field: fields.assignedOfficerField,
+      operator: "is",
+      value: userId
     }
   ],
   week: [
@@ -91,10 +123,6 @@ var putUrl =
   appSpecifics.apiTableView +
   "/records/";
 
-// Get user auth for get request (API view is private) and set req headers
-var user = Knack.getUserToken();
-var userId = Knack.getUserAttributes().id;
-
 var headers = {
   "X-Knack-Application-ID": appSpecifics.knackAppId,
   Authorization: user,
@@ -125,7 +153,7 @@ function initializePagination(records) {
 }
 
 // Request and set initial records
-function requestRecords(filters) {
+function requestRecords(filters, view) {
   var url =
     getUrl +
     "?filters=" +
@@ -157,7 +185,7 @@ function requestRecords(filters) {
 
       completeRecords = groupRecordsIntoAssignments(records);
       recordsInPage = initializePagination(completeRecords);
-      buildAndAppendShiftSection(recordsInPage);
+      buildAndAppendShiftSection(recordsInPage, view);
       prependShiftTableWithPagination();
       prependPaginationWithTimeFilters();
       addOpenShiftButtonClickHandlers();
@@ -188,7 +216,7 @@ function groupRecordsIntoAssignments(records) {
   return Object.values(groupedRecords);
 }
 
-function buildAndAppendShiftSection(shiftRecords) {
+function buildAndAppendShiftSection(shiftRecords, view) {
   // Clear the table in case we need to repopulate for pagination
   $("#shift-table-body").children().remove();
 
@@ -802,6 +830,36 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.all);
+      requestRecords(filters.allAssignments, "view_466");
     });
+});
+
+$(document).on("knack-view-render.view_447", function (event, view, data) {
+  // Append table, then request records and append shifts to table body
+  $("#view_447" + "> div.view-header")
+    .after(recordsTable)
+    .ready(function () {
+      requestRecords(filters.todayAssignments, "view_447");
+    });
+  // TODO: isMyAssignment
+  // TODO: Link to My Assignment Details
+  // TODO: No time filter buttons
+  // TODO: Don't toggle between cancel and sign up buttons
+  // TODO: Add status column
+  // TODO: Target table to replace data within since two tables coexist in My Assignments
+});
+
+$(document).on("knack-view-render.view_439", function (event, view, data) {
+  // Append table, then request records and append shifts to table body
+  $("#view_439" + "> div.view-header")
+    .after(recordsTable)
+    .ready(function () {
+      requestRecords(filters.futureAssignments, "view_439");
+    });
+  // TODO: isMyAssignment
+  // TODO: Link to My Assignment Details
+  // TODO: No time filter buttons
+  // TODO: Don't toggle between cancel and sign up buttons
+  // TODO: Add status column
+  // TODO: Target table to replace data within since two tables coexist in My Assignments
 });
