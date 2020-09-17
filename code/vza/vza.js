@@ -145,12 +145,78 @@ function initializePagination(records) {
   return initialPageRecords;
 }
 
+// Group officer assignments into shifts
+function groupRecordsIntoAssignments(records) {
+  // Group records by Officer Shift Label
+  var groupedRecords = {};
+
+  for (var i = 0; i < records.length; i++) {
+    var record = records[i];
+    var officerShift = record[fields.officerShiftField];
+
+    if (groupedRecords[officerShift]) {
+      groupedRecords[officerShift].push(record);
+    } else {
+      groupedRecords[officerShift] = [record];
+    }
+  }
+
+  return Object.values(groupedRecords);
+}
+
+// Find a record within cached records by id
+function findRecordById(id) {
+  var found = null;
+
+  for (var i = 0; i < completeRecords.length; i++) {
+    found = completeRecords[i].find(function (record) {
+      return record.id === id;
+    });
+
+    if (!!found) {
+      break;
+    }
+  }
+
+  return found;
+}
+
+// Create table to append requested records after they are formatted below
+function createRecordsTable(view) {
+  return `
+  <div class="assignments-table">
+    <table class="kn-table kn-table-table is-bordered">
+      <thead>
+        <tr>
+          <th>
+            <span class="table-fixed-label">
+              <span>Time</span>
+            </span>
+          </th>
+          <th>
+            <span class="table-fixed-label">
+              <span>Sector</span>
+            </span>
+          </th>
+          <th>
+            <span class="table-fixed-label">
+              <span>Location</span>
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="${view} shift-table-body">
+      </tbody>
+    </table>
+  </div>`;
+}
+
 // Request and set initial records
-function requestRecords(filters, view) {
+function requestRecords(filterConfig, view) {
   var url =
     getUrl +
     "?filters=" +
-    encodeURIComponent(JSON.stringify(filters)) +
+    encodeURIComponent(JSON.stringify(filterConfig)) +
     "&rows_per_page=1000";
 
   // Show spinner while fetching officer_assignment records
@@ -174,7 +240,7 @@ function requestRecords(filters, view) {
         $("." + view + ".shift-table-body")
           .children()
           .remove();
-        appendTableWithNoRecordsMessage(view);
+        appendTableWithNoRecordsMessage();
         $("#assignment-spinner").remove();
         completeRecords = null;
         recordsInPage = null;
@@ -183,296 +249,263 @@ function requestRecords(filters, view) {
 
       completeRecords = groupRecordsIntoAssignments(records);
       recordsInPage = initializePagination(completeRecords);
-      buildAndAppendShiftSection(recordsInPage, view);
-      prependShiftTableWithPagination(view);
-      prependPaginationWithTimeFilters(view);
-      addOpenShiftButtonClickHandlers(view);
-      addCancelMyShiftButtonClickHandlers(view);
+      buildAndAppendShiftSection(recordsInPage);
+      prependShiftTableWithPagination();
+      prependPaginationWithTimeFilters();
+      addOpenShiftButtonClickHandlers();
+      addCancelMyShiftButtonClickHandlers();
 
       // Remove spinner
       $("#assignment-spinner").remove();
     }
   });
-}
 
-// Group officer assignments into shifts
-function groupRecordsIntoAssignments(records) {
-  // Group records by Officer Shift Label
-  var groupedRecords = {};
+  // Helper functions that all need view arg to target correct table in view
+  function buildAndAppendShiftSection(shiftRecords) {
+    // Clear the table in case we need to repopulate for pagination
+    $("." + view + ".shift-table-body")
+      .children()
+      .remove();
 
-  for (var i = 0; i < records.length; i++) {
-    var record = records[i];
-    var officerShift = record[fields.officerShiftField];
+    function buildShift(records) {
+      var shiftsHTML = ``;
 
-    if (groupedRecords[officerShift]) {
-      groupedRecords[officerShift].push(record);
-    } else {
-      groupedRecords[officerShift] = [record];
-    }
-  }
+      records.forEach(function (shiftRecords) {
+        shiftsHTML += `
+          <tr class="kn-table-group kn-group-level-1">
+            <td class="shift-header" colspan="4">${
+              shiftRecords[0][fields.officerShiftField]
+            }</td>
+          </tr>`;
 
-  return Object.values(groupedRecords);
-}
+        // Condense each set of officer_assignments that make up a shift together
+        // First dimension is shifts of officer_assignments (grouped together for sign up)
+        // Second dimension is array of officer_assignments within shift
+        // [A,A,B,B,C,C] => [[A,B,C], [A,B,C]]
 
-function buildAndAppendShiftSection(shiftRecords, view) {
-  // Clear the table in case we need to repopulate for pagination
-  $("." + view + ".shift-table-body")
-    .children()
-    .remove();
+        var buttonRecords = [];
 
-  function buildShift(records) {
-    var shiftsHTML = ``;
+        if (shiftRecords.length !== 0) {
+          var currentArrayPosition = 0;
+          var currentSubarrayPosition = 0;
 
-    records.forEach(function (shiftRecords) {
-      shiftsHTML += `
-        <tr class="kn-table-group kn-group-level-1">
-          <td class="shift-header" colspan="4">${
-            shiftRecords[0][fields.officerShiftField]
-          }</td>
-        </tr>`;
+          function isSameTime(record1, record2) {
+            return record1[fields.timeField] === record2[fields.timeField];
+          }
 
-      // Condense each set of officer_assignments that make up a shift together
-      // First dimension is shifts of officer_assignments (grouped together for sign up)
-      // Second dimension is array of officer_assignments within shift
-      // [A,A,B,B,C,C] => [[A,B,C], [A,B,C]]
-
-      var buttonRecords = [];
-
-      if (shiftRecords.length !== 0) {
-        var currentArrayPosition = 0;
-        var currentSubarrayPosition = 0;
-
-        function isSameTime(record1, record2) {
-          return record1[fields.timeField] === record2[fields.timeField];
-        }
-
-        for (var i = 0; i < shiftRecords.length; i++) {
-          if (i === 0) {
-            buttonRecords.push([shiftRecords[i]]);
-            currentArrayPosition++;
-          } else if (
-            isSameTime(
-              shiftRecords[i],
-              buttonRecords[currentArrayPosition - 1][currentSubarrayPosition]
-            ) &&
-            currentSubarrayPosition === 0
-          ) {
-            buttonRecords.push([shiftRecords[i]]);
-            currentArrayPosition++;
-          } else if (
-            !isSameTime(
-              shiftRecords[i],
-              buttonRecords[currentArrayPosition - 1][currentSubarrayPosition]
-            )
-          ) {
-            currentSubarrayPosition++;
-            currentArrayPosition = 0;
-            buttonRecords[currentArrayPosition].push(shiftRecords[i]);
-            currentArrayPosition++;
-          } else if (
-            isSameTime(
-              shiftRecords[i],
-              buttonRecords[currentArrayPosition - 1][currentSubarrayPosition]
-            ) &&
-            currentSubarrayPosition > 0
-          ) {
-            buttonRecords[currentArrayPosition].push(shiftRecords[i]);
-            currentArrayPosition++;
+          for (var i = 0; i < shiftRecords.length; i++) {
+            if (i === 0) {
+              buttonRecords.push([shiftRecords[i]]);
+              currentArrayPosition++;
+            } else if (
+              isSameTime(
+                shiftRecords[i],
+                buttonRecords[currentArrayPosition - 1][currentSubarrayPosition]
+              ) &&
+              currentSubarrayPosition === 0
+            ) {
+              buttonRecords.push([shiftRecords[i]]);
+              currentArrayPosition++;
+            } else if (
+              !isSameTime(
+                shiftRecords[i],
+                buttonRecords[currentArrayPosition - 1][currentSubarrayPosition]
+              )
+            ) {
+              currentSubarrayPosition++;
+              currentArrayPosition = 0;
+              buttonRecords[currentArrayPosition].push(shiftRecords[i]);
+              currentArrayPosition++;
+            } else if (
+              isSameTime(
+                shiftRecords[i],
+                buttonRecords[currentArrayPosition - 1][currentSubarrayPosition]
+              ) &&
+              currentSubarrayPosition > 0
+            ) {
+              buttonRecords[currentArrayPosition].push(shiftRecords[i]);
+              currentArrayPosition++;
+            }
           }
         }
-      }
 
-      buttonRecords[0].forEach(function (record) {
-        shiftsHTML += `
-          <tr>
-            <td
-              style="padding-left: 20px;"
-              data-column-index="1"
-            >
-              <span class="col-1">
-                ${record[fields.timeField]}
-              </span>
-            </td>
-            <td data-column-index="2">
-              <span class="col-2">
-                <span>${
-                  record[fields.locationFieldRaw][0].identifier.split(" - ")[0]
-                }</span>
-              </span>
-            </td>
-            <td data-column-index="3">
-              <span class="col-3">
-                <span
-                  >${
+        buttonRecords[0].forEach(function (record) {
+          shiftsHTML += `
+            <tr>
+              <td
+                style="padding-left: 20px;"
+                data-column-index="1"
+              >
+                <span class="col-1">
+                  ${record[fields.timeField]}
+                </span>
+              </td>
+              <td data-column-index="2">
+                <span class="col-2">
+                  <span>${
                     record[fields.locationFieldRaw][0].identifier.split(
                       " - "
-                    )[2]
-                  }</span
-                >
-              </span>
-            </td>
-          </tr>
+                    )[0]
+                  }</span>
+                </span>
+              </td>
+              <td data-column-index="3">
+                <span class="col-3">
+                  <span
+                    >${
+                      record[fields.locationFieldRaw][0].identifier.split(
+                        " - "
+                      )[2]
+                    }</span
+                  >
+                </span>
+              </td>
+            </tr>
+            `;
+        });
+
+        // Add sign up buttons
+        shiftsHTML += `
+          <tr>
+            <td style="padding-top: 16px;" colspan="4">
           `;
-      });
 
-      // Add sign up buttons
-      shiftsHTML += `
-        <tr>
-          <td style="padding-top: 16px;" colspan="4">
-        `;
-
-      function setButtonStatus(
-        isMyAssignment,
-        isOtherOfficerAssignment,
-        isNotAssigned
-      ) {
-        if (isNotAssigned) {
-          return "open-shift-button";
-        } else if (isMyAssignment) {
-          return "my-shift-button";
-        } else if (isOtherOfficerAssignment) {
-          return "is-disabled";
+        function setButtonStatus(
+          isMyAssignment,
+          isOtherOfficerAssignment,
+          isNotAssigned
+        ) {
+          if (isNotAssigned) {
+            return "open-shift-button";
+          } else if (isMyAssignment) {
+            return "my-shift-button";
+          } else if (isOtherOfficerAssignment) {
+            return "is-disabled";
+          }
         }
-      }
 
-      // For each subarray, add one button
-      buttonRecords.forEach(function (shift, i) {
-        // Build the button id from shift officer assignment ids for use by sign up click handler
-        const buttonId = shift
-          .map(function (assignment) {
-            return assignment.id;
-          })
-          .join("-");
+        // For each subarray, add one button
+        buttonRecords.forEach(function (shift, i) {
+          // Build the button id from shift officer assignment ids for use by sign up click handler
+          const buttonId = shift
+            .map(function (assignment) {
+              return assignment.id;
+            })
+            .join("-");
 
-        var assignmentOfficerId =
-          shift[0][fields.assignedOfficerFieldRaw][0].id;
-        var isMyAssignment = assignmentOfficerId === userId;
-        var isOtherOfficerAssignment =
-          assignmentOfficerId !== userId &&
-          assignmentOfficerId !== appSpecifics.noOfficerAssignedId;
-        var isNotAssigned =
-          assignmentOfficerId === appSpecifics.noOfficerAssignedId;
+          var assignmentOfficerId =
+            shift[0][fields.assignedOfficerFieldRaw][0].id;
+          var isMyAssignment = assignmentOfficerId === userId;
+          var isOtherOfficerAssignment =
+            assignmentOfficerId !== userId &&
+            assignmentOfficerId !== appSpecifics.noOfficerAssignedId;
+          var isNotAssigned =
+            assignmentOfficerId === appSpecifics.noOfficerAssignedId;
+
+          shiftsHTML += `
+            <span
+            class="kn-button ${setButtonStatus(
+              isMyAssignment,
+              isOtherOfficerAssignment,
+              isNotAssigned
+            )}"
+            style="margin: 0px 10px 10px 0px;"
+            id="${buttonId}"
+            >
+              <span class="icon">
+                ${
+                  (isNotAssigned && `<i class="fa fa-plus-square"></i>`) ||
+                  (isOtherOfficerAssignment &&
+                    `<i class="fa fa-check-square-o"></i>`) ||
+                  (isMyAssignment && `<i class="fa fa-times-circle"></i>`)
+                }
+              </span>
+              <span>
+              ${
+                (isNotAssigned && `Sign up - Officer ${i + 1}`) ||
+                (isOtherOfficerAssignment && `Filled - Officer ${i + 1}`) ||
+                (isMyAssignment && `Cancel My Sign Up`)
+              }
+             </span>
+            </span>
+            `;
+        });
 
         shiftsHTML += `
-          <span
-          class="kn-button ${setButtonStatus(
-            isMyAssignment,
-            isOtherOfficerAssignment,
-            isNotAssigned
-          )}"
-          style="margin: 0px 10px 10px 0px;"
-          id="${buttonId}"
-          >
-            <span class="icon">
-              ${
-                (isNotAssigned && `<i class="fa fa-plus-square"></i>`) ||
-                (isOtherOfficerAssignment &&
-                  `<i class="fa fa-check-square-o"></i>`) ||
-                (isMyAssignment && `<i class="fa fa-times-circle"></i>`)
-              }
-            </span>
-            <span>
-            ${
-              (isNotAssigned && `Sign up - Officer ${i + 1}`) ||
-              (isOtherOfficerAssignment && `Filled - Officer ${i + 1}`) ||
-              (isMyAssignment && `Cancel My Sign Up`)
-            }
-           </span>
-          </span>
-          `;
+            </td>
+          </tr>`;
       });
 
-      shiftsHTML += `
-          </td>
-        </tr>`;
-    });
-
-    return shiftsHTML;
-  }
-
-  var shiftSection = buildShift(shiftRecords);
-  $("." + view + ".shift-table-body").append(shiftSection);
-}
-
-function findRecordById(id) {
-  var found = null;
-
-  for (var i = 0; i < completeRecords.length; i++) {
-    found = completeRecords[i].find(function (record) {
-      return record.id === id;
-    });
-
-    if (!!found) {
-      break;
+      return shiftsHTML;
     }
+
+    var shiftSection = buildShift(shiftRecords);
+    $("." + view + ".shift-table-body").append(shiftSection);
   }
 
-  return found;
-}
+  // Add button handler to associate officer assignment records with logged in user
+  function addOpenShiftButtonClickHandlers() {
+    var buttons = $(`#${view} .open-shift-button`);
+    buttons.each(function () {
+      var thisButton = $(this);
+      var thisButtonIcon = thisButton.find("i");
 
-// Add button handler to associate officer assignment records with logged in user
-function addOpenShiftButtonClickHandlers(view) {
-  var buttons = $(`#${view} .open-shift-button`);
-  buttons.each(function () {
-    var thisButton = $(this);
-    var thisButtonIcon = thisButton.find("i");
+      // Remove any existing click handler
+      thisButton.off("click");
 
-    // Remove any existing click handler
-    thisButton.off("click");
+      thisButton.click(function () {
+        // Get officer_assignment record ids
+        var idsToAssignCurrentUser = thisButton.attr("id").split("-");
+        thisButton.removeClass("open-shift-button");
+        thisButtonIcon
+          .removeClass("fa-plus-square")
+          .addClass("fa-circle-o-notch fa-spin");
 
-    thisButton.click(function () {
-      // Get officer_assignment record ids
-      var idsToAssignCurrentUser = thisButton.attr("id").split("-");
-      thisButton.removeClass("open-shift-button");
-      thisButtonIcon
-        .removeClass("fa-plus-square")
-        .addClass("fa-circle-o-notch fa-spin");
+        idsToAssignCurrentUser.forEach(function (recordId) {
+          $.ajax({
+            url: putUrl + recordId,
+            type: "PUT",
+            data: JSON.stringify({ [fields.assignedOfficerField]: userId }),
+            headers: headers,
+            success: function (res) {
+              thisButton.addClass("my-shift-button");
+              thisButton[0].children[1].innerText = "Cancel My Sign Up";
+              thisButtonIcon
+                .removeClass("fa-circle-o-notch fa-spin")
+                .addClass("fa-times-circle");
 
-      idsToAssignCurrentUser.forEach(function (recordId) {
-        $.ajax({
-          url: putUrl + recordId,
-          type: "PUT",
-          data: JSON.stringify({ [fields.assignedOfficerField]: userId }),
-          headers: headers,
-          success: function (res) {
-            thisButton.addClass("my-shift-button");
-            thisButton[0].children[1].innerText = "Cancel My Sign Up";
-            thisButtonIcon
-              .removeClass("fa-circle-o-notch fa-spin")
-              .addClass("fa-times-circle");
+              addCancelMyShiftButtonClickHandlers();
 
-            addCancelMyShiftButtonClickHandlers();
+              // Update cached record
+              var thisRecord = findRecordById(recordId);
+              thisRecord[fields.assignedOfficerFieldRaw][0].id = userId;
 
-            // Update cached record
-            var thisRecord = findRecordById(recordId);
-            thisRecord[fields.assignedOfficerFieldRaw][0].id = userId;
-
-            $.ajax({
-              url: putUrl + recordId,
-              type: "PUT",
-              data: JSON.stringify({
-                action_link_index: 0,
-                id: recordId
-              }),
-              headers: headers,
-              success: function (res) {
-                console.log(res);
-              }
-            });
-          }
+              $.ajax({
+                url: putUrl + recordId,
+                type: "PUT",
+                data: JSON.stringify({
+                  action_link_index: 0,
+                  id: recordId
+                }),
+                headers: headers,
+                success: function (res) {
+                  console.log(res);
+                }
+              });
+            }
+          });
         });
       });
     });
-  });
-}
+  }
 
-function addCancellationModal(
-  recordIdsString,
-  buttonNumber,
-  thisButton,
-  thisButtonIcon
-) {
-  var cancellationForm = `
+  function addCancellationModal(
+    recordIdsString,
+    buttonNumber,
+    thisButton,
+    thisButtonIcon
+  ) {
+    var cancellationForm = `
   <div
   id="kn-modal-bg-0"
   class="kn-modal-bg cancellation-modal"
@@ -549,280 +582,252 @@ function addCancellationModal(
   </div>
   `;
 
-  // Append cancellation modal and handle form submit
-  $(".kn-content").append(cancellationForm);
-  var thisForm = $("#cancellation-form");
-  thisForm.off("submit");
-  thisForm.on("submit", function (e) {
-    e.preventDefault();
+    // Append cancellation modal and handle form submit
+    $(".kn-content").append(cancellationForm);
+    var thisForm = $("#cancellation-form");
+    thisForm.off("submit");
+    thisForm.on("submit", function (e) {
+      e.preventDefault();
 
-    // Collect form values
-    var formFields = thisForm.serializeArray();
-    var knackFormatFields = formFields.reduce(function (acc, field) {
-      return { ...acc, [field.name]: field.value };
-    }, {});
+      // Collect form values
+      var formFields = thisForm.serializeArray();
+      var knackFormatFields = formFields.reduce(function (acc, field) {
+        return { ...acc, [field.name]: field.value };
+      }, {});
 
-    // Start spinner
-    $("#kn-loading-spinner").css("display", "block");
+      // Start spinner
+      $("#kn-loading-spinner").css("display", "block");
 
-    // Submit PUT requests to modify each officer_assignment ID stored in button id attribute
-    var idsToAssignCurrentUser = recordIdsString.split("-");
+      // Submit PUT requests to modify each officer_assignment ID stored in button id attribute
+      var idsToAssignCurrentUser = recordIdsString.split("-");
 
-    var now = new Date().toLocaleString();
+      var now = new Date().toLocaleString();
 
-    idsToAssignCurrentUser.forEach(function (recordId) {
-      $.ajax({
-        url: putUrl + recordId,
-        type: "PUT",
-        data: JSON.stringify({
-          ...knackFormatFields, // Reason for cancellation and Remove from My Assignments fields from form
-          [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
-          [fields.unassignedOfficerField]: userId, // Add current user as unassigned officer to track who cancelled
-          [fields.addToMyAssignmentsField]: "No", // Add to My Assignments
-          [fields.dateTimeOfCancellationField]: now // DateTime of cancellation
-        }),
-        headers: headers,
-        success: function (res) {
-          // Switch button associated with these records back to a Sign Up button
-          thisButton
-            .removeClass("my-shift-button")
-            .addClass("open-shift-button");
-          thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
-          thisButtonIcon
-            .removeClass("fa-times-circle")
-            .addClass("fa-plus-square");
-          addOpenShiftButtonClickHandlers();
+      idsToAssignCurrentUser.forEach(function (recordId) {
+        $.ajax({
+          url: putUrl + recordId,
+          type: "PUT",
+          data: JSON.stringify({
+            ...knackFormatFields, // Reason for cancellation and Remove from My Assignments fields from form
+            [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
+            [fields.unassignedOfficerField]: userId, // Add current user as unassigned officer to track who cancelled
+            [fields.addToMyAssignmentsField]: "No", // Add to My Assignments
+            [fields.dateTimeOfCancellationField]: now // DateTime of cancellation
+          }),
+          headers: headers,
+          success: function (res) {
+            // Switch button associated with these records back to a Sign Up button
+            thisButton
+              .removeClass("my-shift-button")
+              .addClass("open-shift-button");
+            thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
+            thisButtonIcon
+              .removeClass("fa-times-circle")
+              .addClass("fa-plus-square");
+            addOpenShiftButtonClickHandlers();
 
-          // Update cached record
-          var thisRecord = findRecordById(recordId);
-          thisRecord[fields.assignedOfficerFieldRaw][0].id =
-            appSpecifics.noOfficerAssignedId;
+            // Update cached record
+            var thisRecord = findRecordById(recordId);
+            thisRecord[fields.assignedOfficerFieldRaw][0].id =
+              appSpecifics.noOfficerAssignedId;
 
-          // Remove modal and stop spinner
-          $("#kn-modal-bg-0").remove();
-          $("#kn-loading-spinner").css("display", "none");
-        }
+            // Remove modal and stop spinner
+            $("#kn-modal-bg-0").remove();
+            $("#kn-loading-spinner").css("display", "none");
+          }
+        });
       });
     });
-  });
 
-  // Add click handler to close modal (X) button
-  var closeModalButton = $(".close-cancellation-modal");
-  closeModalButton.off("click");
-  closeModalButton.click(function () {
-    $(".cancellation-modal").remove();
-  });
-}
+    // Add click handler to close modal (X) button
+    var closeModalButton = $(".close-cancellation-modal");
+    closeModalButton.off("click");
+    closeModalButton.click(function () {
+      $(".cancellation-modal").remove();
+    });
+  }
 
-function addCancelMyShiftButtonClickHandlers(view) {
-  var buttons = $(`#${view} .my-shift-button`);
-  buttons.each(function () {
-    var thisButton = $(this);
-    var thisButtonIcon = thisButton.find("i");
-    // Use this to display the Officer number in the button that corresponds with its position in the UI
-    var buttonNumber = thisButton.index() + 1;
+  function addCancelMyShiftButtonClickHandlers() {
+    var buttons = $(`#${view} .my-shift-button`);
+    buttons.each(function () {
+      var thisButton = $(this);
+      var thisButtonIcon = thisButton.find("i");
+      // Use this to display the Officer number in the button that corresponds with its position in the UI
+      var buttonNumber = thisButton.index() + 1;
 
-    // Remove any existing click handler
-    thisButton.off("click");
+      // Remove any existing click handler
+      thisButton.off("click");
 
-    thisButton.click(function () {
-      var recordIdsString = thisButton.attr("id");
-      addCancellationModal(
-        recordIdsString,
-        buttonNumber,
-        thisButton,
-        thisButtonIcon
+      thisButton.click(function () {
+        var recordIdsString = thisButton.attr("id");
+        addCancellationModal(
+          recordIdsString,
+          buttonNumber,
+          thisButton,
+          thisButtonIcon,
+          view
+        );
+      });
+    });
+  }
+
+  // Add button handler to associate officer assignment records with logged in user
+  function addPaginationClickHandlers(prevClass, nextClass) {
+    var prev = $(`#${view} .${prevClass}`);
+    var next = $(`#${view} .${nextClass}`);
+
+    prev.click(function () {
+      if (currentPage === 1) {
+        return;
+      }
+
+      currentPage--;
+      currentRangeStart -= recordsPerPage;
+      if (currentPage === numberOfPages - 1) {
+        currentRangeEnd = currentRangeStart + recordsPerPage - 1;
+      } else {
+        currentRangeEnd -= recordsPerPage;
+      }
+
+      var prevPageRecords = completeRecords.slice(
+        currentRangeStart - 1,
+        currentRangeEnd
       );
+      var shifts = buildAndAppendShiftSection(prevPageRecords);
+      $("." + view + " .shift-table-body").append(shifts);
+      prependShiftTableWithPagination();
+      addOpenShiftButtonClickHandlers();
+      addCancelMyShiftButtonClickHandlers();
     });
-  });
-}
 
-// Add button handler to associate officer assignment records with logged in user
-function addPaginationClickHandlers(prevClass, nextClass, view) {
-  var prev = $(`#${view} .${prevClass}`);
-  var next = $(`#${view} .${nextClass}`);
+    next.click(function () {
+      if (currentPage === numberOfPages) {
+        return;
+      }
 
-  prev.click(function () {
-    if (currentPage === 1) {
-      return;
-    }
+      currentPage++;
+      currentRangeStart += recordsPerPage;
+      if (currentPage === numberOfPages) {
+        currentRangeEnd = completeRecords.length;
+      } else {
+        currentRangeEnd += recordsPerPage;
+      }
 
-    currentPage--;
-    currentRangeStart -= recordsPerPage;
-    if (currentPage === numberOfPages - 1) {
-      currentRangeEnd = currentRangeStart + recordsPerPage - 1;
-    } else {
-      currentRangeEnd -= recordsPerPage;
-    }
+      var nextPageRecords = completeRecords.slice(
+        currentRangeStart - 1,
+        currentRangeEnd
+      );
 
-    var prevPageRecords = completeRecords.slice(
-      currentRangeStart - 1,
-      currentRangeEnd
-    );
-    var shifts = buildAndAppendShiftSection(prevPageRecords);
-    $("." + view + " .shift-table-body").append(shifts);
-    prependShiftTableWithPagination(view);
-    addOpenShiftButtonClickHandlers();
-    addCancelMyShiftButtonClickHandlers();
-  });
-
-  next.click(function () {
-    if (currentPage === numberOfPages) {
-      return;
-    }
-
-    currentPage++;
-    currentRangeStart += recordsPerPage;
-    if (currentPage === numberOfPages) {
-      currentRangeEnd = completeRecords.length;
-    } else {
-      currentRangeEnd += recordsPerPage;
-    }
-
-    var nextPageRecords = completeRecords.slice(
-      currentRangeStart - 1,
-      currentRangeEnd
-    );
-
-    var shifts = buildAndAppendShiftSection(nextPageRecords, view);
-    $("." + view + " .shift-table-body").append(shifts);
-    prependShiftTableWithPagination(view);
-    addOpenShiftButtonClickHandlers();
-    addCancelMyShiftButtonClickHandlers();
-  });
-}
-
-// Update pagination values and add control click handlers
-function prependShiftTableWithPagination(view) {
-  if ($("#" + view + " .pagination-controls").length) {
-    $("#" + view + " .pagination-controls").remove();
-  }
-
-  var paginationControls = `
-    <div class="level pagination-controls" style="margin-bottom: .75em;">
-      <div class="level-left">
-        <div class="kn-entries-summary" style="margin-right: .5em;">
-          <span class="light">Showing</span> ${currentRangeStart}-${Math.min(
-    currentRangeEnd,
-    completeRecords.length
-  )}
-          <span class="light">of</span> ${completeRecords.length}
-        </div>
-      </div>
-      <div class="kn-pagination level-right">
-        <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
-        <div class="pagination-arrows">
-          <span class="icon prev-arrow">
-            <i class="fa fa-chevron-left"></i>
-          </span>
-          <span class="icon next-arrow">
-            <i class="fa fa-chevron-right"></i>
-          </span>
-        </div>
-      </div>
-    </div>`;
-
-  $("#" + view + " .assignments-table").before(paginationControls);
-  $("#" + view + " .assignments-table").after(paginationControls);
-  addPaginationClickHandlers("prev-arrow", "next-arrow", view);
-}
-
-// Add time filters once, add click handlers to add filters to record request and handle active/inactive button status
-function prependPaginationWithTimeFilters(view) {
-  if ($("#" + view + " #time-filter-buttons").length) {
-    return;
-  }
-
-  var filterMenu = `
-    <div class="js-filter-menu tabs is-toggle is-flush">
-      <ul id="time-filter-buttons">
-        <li class="is-active" id="all">
-          <a>
-            <span>All</span>
-          </a>
-        </li>
-        <li id="week">
-          <a>
-            <span>Next Week</span>
-          </a>
-        </li>
-        <li id="month">
-          <a>
-            <span>Next Month</span>
-          </a>
-          </li>
-       </ul>
-    </div>`;
-
-  $("#" + view + " .pagination-controls")
-    .before(filterMenu)
-    .ready(function () {
-      $("#" + view + " #time-filter-buttons")
-        .children()
-        .each(function () {
-          // Request records with matching time filter on click
-          $(this).click(function () {
-            var clickedFilterButtonId = $(this).attr("id");
-            requestRecords(filters[clickedFilterButtonId], view);
-
-            // Add/remove active button status
-            $("#" + view + " #time-filter-buttons")
-              .children()
-              .each(function () {
-                var thisFilterButtonId = $(this).attr("id");
-                if (thisFilterButtonId === clickedFilterButtonId) {
-                  $(this).addClass("is-active");
-                } else {
-                  $(this).removeClass("is-active");
-                }
-              });
-          });
-        });
+      var shifts = buildAndAppendShiftSection(nextPageRecords);
+      $("." + view + " .shift-table-body").append(shifts);
+      prependShiftTableWithPagination();
+      addOpenShiftButtonClickHandlers();
+      addCancelMyShiftButtonClickHandlers();
     });
-}
-
-function appendTableWithNoRecordsMessage(view) {
-  if ($("#" + view + "#no-records-msg").length) {
-    return;
   }
 
-  var noRecordsRow = `
-    <tr class="kn-table-group kn-group-level-1" id="no-records-msg">
-      <td colspan="4">No assignments available</td>
-    </tr>  
-  `;
+  // Update pagination values and add control click handlers
+  function prependShiftTableWithPagination() {
+    if ($("#" + view + " .pagination-controls").length) {
+      $("#" + view + " .pagination-controls").remove();
+    }
 
-  $("." + view + ".shift-table-body").append(noRecordsRow);
-}
-
-// Table to receive formatted table body
-function createRecordsTable(view) {
-  return `
-  <div class="assignments-table">
-    <table class="kn-table kn-table-table is-bordered">
-      <thead>
-        <tr>
-          <th>
-            <span class="table-fixed-label">
-              <span>Time</span>
-            </span>
-          </th>
-          <th>
-            <span class="table-fixed-label">
-              <span>Sector</span>
-            </span>
-          </th>
-          <th>
-            <span class="table-fixed-label">
-              <span>Location</span>
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="${view} shift-table-body">
-      </tbody>
-    </table>
+    var paginationControls = `
+  <div class="level pagination-controls" style="margin-bottom: .75em;">
+    <div class="level-left">
+      <div class="kn-entries-summary" style="margin-right: .5em;">
+        <span class="light">Showing</span> ${currentRangeStart}-${Math.min(
+      currentRangeEnd,
+      completeRecords.length
+    )}
+        <span class="light">of</span> ${completeRecords.length}
+      </div>
+    </div>
+    <div class="kn-pagination level-right">
+      <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
+      <div class="pagination-arrows">
+        <span class="icon prev-arrow">
+          <i class="fa fa-chevron-left"></i>
+        </span>
+        <span class="icon next-arrow">
+          <i class="fa fa-chevron-right"></i>
+        </span>
+      </div>
+    </div>
   </div>`;
+
+    $("#" + view + " .assignments-table").before(paginationControls);
+    $("#" + view + " .assignments-table").after(paginationControls);
+    addPaginationClickHandlers("prev-arrow", "next-arrow");
+  }
+
+  // Add time filters once, add click handlers to add filters to record request and handle active/inactive button status
+  function prependPaginationWithTimeFilters() {
+    if ($("#" + view + " #time-filter-buttons").length) {
+      return;
+    }
+
+    var filterMenu = `
+  <div class="js-filter-menu tabs is-toggle is-flush">
+    <ul id="time-filter-buttons">
+      <li class="is-active" id="all">
+        <a>
+          <span>All</span>
+        </a>
+      </li>
+      <li id="week">
+        <a>
+          <span>Next Week</span>
+        </a>
+      </li>
+      <li id="month">
+        <a>
+          <span>Next Month</span>
+        </a>
+        </li>
+     </ul>
+  </div>`;
+
+    $("#" + view + " .pagination-controls")
+      .before(filterMenu)
+      .ready(function () {
+        $("#" + view + " #time-filter-buttons")
+          .children()
+          .each(function () {
+            // Request records with matching time filter on click
+            $(this).click(function () {
+              var clickedFilterButtonId = $(this).attr("id");
+              requestRecords(filters[clickedFilterButtonId], view);
+
+              // Add/remove active button status
+              $("#" + view + " #time-filter-buttons")
+                .children()
+                .each(function () {
+                  var thisFilterButtonId = $(this).attr("id");
+                  if (thisFilterButtonId === clickedFilterButtonId) {
+                    $(this).addClass("is-active");
+                  } else {
+                    $(this).removeClass("is-active");
+                  }
+                });
+            });
+          });
+      });
+  }
+
+  function appendTableWithNoRecordsMessage() {
+    if ($("#" + view + "#no-records-msg").length) {
+      return;
+    }
+
+    var noRecordsRow = `
+  <tr class="kn-table-group kn-group-level-1" id="no-records-msg">
+    <td colspan="4">No assignments available</td>
+  </tr>  
+`;
+
+    $("." + view + ".shift-table-body").append(noRecordsRow);
+  }
 }
 
 // Sign Up page
@@ -830,6 +835,10 @@ function createRecordsTable(view) {
 // sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_466", function (event, view, data) {
   var recordsTable = createRecordsTable(view.key);
+
+  var tableConfig = {
+    columns: []
+  };
   // Append table, then request records and append shifts to table body
   $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
@@ -846,11 +855,10 @@ $(document).on("knack-view-render.view_447", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.today, view.key);
     });
-  // TODO: isMyAssignment
   // TODO: Link to My Assignment Details
   // TODO: No time filter buttons
   // TODO: Don't toggle between cancel and sign up buttons
-  // TODO: Add status column
+  // TODO: Add columns needed to configs
 });
 
 $(document).on("knack-view-render.view_439", function (event, view, data) {
@@ -861,9 +869,8 @@ $(document).on("knack-view-render.view_439", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.future, view.key);
     });
-  // TODO: isMyAssignment
   // TODO: Link to My Assignment Details
   // TODO: No time filter buttons
   // TODO: Don't toggle between cancel and sign up buttons
-  // TODO: Add status column
+  // TODO: Add columns needed to configs
 });

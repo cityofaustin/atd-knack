@@ -22,6 +22,7 @@
 - Remove From My Assignments Date and Time
 - Reason for Cancellation
 - Unassigned Officer
+- Status
 - Send email action **(this column is setup in Step 4)**
 
 ![API view columns](images/api_view_columns.png)
