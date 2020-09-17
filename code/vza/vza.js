@@ -108,7 +108,7 @@ var filters = {
   ]
 };
 
-// Endpoints
+// Endpoints for officer_assignments API view
 var getUrl =
   "https://api.knack.com/v1/pages/" +
   appSpecifics.apiTableScene +
@@ -182,28 +182,23 @@ function findRecordById(id) {
 }
 
 // Create table to append requested records after they are formatted below
-function createRecordsTable(view) {
+function createRecordsTable(view, tableConfig) {
+  var tableHeadersHTML = ``;
+
+  Object.keys(tableConfig.columns).forEach(function (columnTitle) {
+    tableHeadersHTML += `
+    <th>
+      <span class="table-fixed-label">
+        <span>${columnTitle}</span>
+      </span>
+    </th>`;
+  });
+
   return `
   <div class="assignments-table">
     <table class="kn-table kn-table-table is-bordered">
       <thead>
-        <tr>
-          <th>
-            <span class="table-fixed-label">
-              <span>Time</span>
-            </span>
-          </th>
-          <th>
-            <span class="table-fixed-label">
-              <span>Sector</span>
-            </span>
-          </th>
-          <th>
-            <span class="table-fixed-label">
-              <span>Location</span>
-            </span>
-          </th>
-        </tr>
+        ${tableHeadersHTML}
       </thead>
       <tbody class="${view} shift-table-body">
       </tbody>
@@ -212,7 +207,7 @@ function createRecordsTable(view) {
 }
 
 // Request and set initial records
-function requestRecords(filterConfig, view) {
+function requestRecords(filterConfig, view, tableConfig) {
   var url =
     getUrl +
     "?filters=" +
@@ -329,37 +324,34 @@ function requestRecords(filterConfig, view) {
           }
         }
 
+        function createTableRowData(record) {
+          var tableDataCells = ``;
+
+          Object.values(tableConfig.columns).forEach(function (
+            columnDataGetter,
+            i
+          ) {
+            var convertedIndexForColumns = i + 1;
+
+            tableDataCells += `
+            <td
+              style="padding-left: 20px;"
+              data-column-index="${convertedIndexForColumns}"
+            >
+              <span class="col-${convertedIndexForColumns}">
+                ${columnDataGetter(record)}
+              </span>
+            </td>
+            `;
+          });
+
+          return tableDataCells;
+        }
+
         buttonRecords[0].forEach(function (record) {
           shiftsHTML += `
             <tr>
-              <td
-                style="padding-left: 20px;"
-                data-column-index="1"
-              >
-                <span class="col-1">
-                  ${record[fields.timeField]}
-                </span>
-              </td>
-              <td data-column-index="2">
-                <span class="col-2">
-                  <span>${
-                    record[fields.locationFieldRaw][0].identifier.split(
-                      " - "
-                    )[0]
-                  }</span>
-                </span>
-              </td>
-              <td data-column-index="3">
-                <span class="col-3">
-                  <span
-                    >${
-                      record[fields.locationFieldRaw][0].identifier.split(
-                        " - "
-                      )[2]
-                    }</span
-                  >
-                </span>
-              </td>
+              ${createTableRowData(record)}
             </tr>
             `;
         });
@@ -830,30 +822,44 @@ function requestRecords(filterConfig, view) {
   }
 }
 
-// Sign Up page
+// #### Sign Up page ####
 // Hide Knack generated "Available Assignments" table, create and add table that condenses
 // sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_466", function (event, view, data) {
-  var recordsTable = createRecordsTable(view.key);
-
   var tableConfig = {
-    columns: []
+    columns: {
+      Time: function (record) {
+        return record[fields.timeField];
+      },
+      Sector: function (record) {
+        return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
+      },
+      Location: function (record) {
+        return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
+      }
+    }
   };
+
+  var recordsTable = createRecordsTable(view.key, tableConfig);
+
   // Append table, then request records and append shifts to table body
   $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.all, view.key);
+      requestRecords(filters.all, view.key, tableConfig);
     });
 });
 
+// #### My Assignments page ####
+// Hide Knack generated "Available Assignments" table, create and add table that condenses
+// sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_447", function (event, view, data) {
-  var recordsTable = createRecordsTable(view.key);
+  var recordsTable = createRecordsTable(view.key, tableConfig);
   // Append table, then request records and append shifts to table body
   $("#view_447" + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.today, view.key);
+      requestRecords(filters.today, view.key, tableConfig);
     });
   // TODO: Link to My Assignment Details
   // TODO: No time filter buttons
@@ -862,12 +868,12 @@ $(document).on("knack-view-render.view_447", function (event, view, data) {
 });
 
 $(document).on("knack-view-render.view_439", function (event, view, data) {
-  var recordsTable = createRecordsTable(view.key);
+  var recordsTable = createRecordsTable(view.key, tableConfig);
   // Append table, then request records and append shifts to table body
   $("#" + view.key + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.future, view.key);
+      requestRecords(filters.future, view.key, tableConfig);
     });
   // TODO: Link to My Assignment Details
   // TODO: No time filter buttons
