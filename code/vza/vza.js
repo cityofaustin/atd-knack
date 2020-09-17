@@ -623,10 +623,12 @@ function requestRecords(filterConfig, view, tableConfig) {
               .addClass("fa-plus-square");
             addOpenShiftButtonClickHandlers();
 
-            // Update cached record
-            var thisRecord = findRecordById(recordId);
-            thisRecord[fields.assignedOfficerFieldRaw][0].id =
-              appSpecifics.noOfficerAssignedId;
+            // Update cached record based if reverting to .open-shift-button button
+            if (!tableConfig.isCancelOnly) {
+              var thisRecord = findRecordById(recordId);
+              thisRecord[fields.assignedOfficerFieldRaw][0].id =
+                appSpecifics.noOfficerAssignedId;
+            }
 
             // Remove modal and stop spinner
             $("#kn-modal-bg-0").remove();
@@ -634,6 +636,11 @@ function requestRecords(filterConfig, view, tableConfig) {
           }
         });
       });
+
+      // If only cancelling, reload table to refresh user's assignments
+      if (tableConfig.isCancelOnly) {
+        requestRecords(filterConfig, view, tableConfig);
+      }
     });
 
     // Add click handler to close modal (X) button
@@ -661,8 +668,7 @@ function requestRecords(filterConfig, view, tableConfig) {
           recordIdsString,
           buttonNumber,
           thisButton,
-          thisButtonIcon,
-          view
+          thisButtonIcon
         );
       });
     });
@@ -844,7 +850,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
       }
     },
-    addTimeFilters: true
+    addTimeFilters: true,
+    isCancelOnly: false
   };
 
   var recordsTable = createRecordsTable(view.key, tableConfig);
@@ -875,13 +882,12 @@ var tableConfig = {
       return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
     }
   },
-  addTimeFilters: false
+  addTimeFilters: false,
+  isCancelOnly: true
 };
 
-function addRecordLinkToTableConfig(event, view, config) {
-  // var location = event.currentTarget.location;
+function addRecordLinkToTableConfig(view, config) {
   var slug = view.scene.slug;
-  // var recordLinkUrl = location.origin + location.pathname + "#" + slug;
 
   function createFolderIconLink(record) {
     return `
@@ -903,7 +909,7 @@ function addRecordLinkToTableConfig(event, view, config) {
 }
 
 $(document).on("knack-view-render.view_447", function (event, view, data) {
-  var updatedTableConfig = addRecordLinkToTableConfig(event, view, tableConfig);
+  var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
   var recordsTable = createRecordsTable(view.key, updatedTableConfig);
 
   // Append table, then request records and append shifts to table body
@@ -912,12 +918,10 @@ $(document).on("knack-view-render.view_447", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.today, view.key, updatedTableConfig);
     });
-  // TODO: Link to My Assignment Details
-  // TODO: Don't toggle between cancel and sign up buttons
 });
 
 $(document).on("knack-view-render.view_439", function (event, view, data) {
-  var updatedTableConfig = addRecordLinkToTableConfig(event, view, tableConfig);
+  var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
   var recordsTable = createRecordsTable(view.key, updatedTableConfig);
 
   // Append table, then request records and append shifts to table body
@@ -926,6 +930,4 @@ $(document).on("knack-view-render.view_439", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.future, view.key, updatedTableConfig);
     });
-  // TODO: Link to My Assignment Details
-  // TODO: Don't toggle between cancel and sign up buttons
 });
