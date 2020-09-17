@@ -222,6 +222,9 @@ function requestRecords(filterConfig, view, tableConfig) {
   // Remove Knack generated table that we are replacing and request records
   removeKnackTable(view);
 
+  // Calculate number of columns to set colspan in
+  var numberOfColumns = Object.keys(tableConfig.columns).length;
+
   // Request officer_assignment records
   $.ajax({
     url: url,
@@ -246,7 +249,9 @@ function requestRecords(filterConfig, view, tableConfig) {
       recordsInPage = initializePagination(completeRecords);
       buildAndAppendShiftSection(recordsInPage);
       prependShiftTableWithPagination();
-      prependPaginationWithTimeFilters();
+      if (tableConfig.addTimeFilters) {
+        prependPaginationWithTimeFilters();
+      }
       addOpenShiftButtonClickHandlers();
       addCancelMyShiftButtonClickHandlers();
 
@@ -268,9 +273,9 @@ function requestRecords(filterConfig, view, tableConfig) {
       records.forEach(function (shiftRecords) {
         shiftsHTML += `
           <tr class="kn-table-group kn-group-level-1">
-            <td class="shift-header" colspan="4">${
-              shiftRecords[0][fields.officerShiftField]
-            }</td>
+            <td class="shift-header" colspan="${numberOfColumns}">${
+          shiftRecords[0][fields.officerShiftField]
+        }</td>
           </tr>`;
 
         // Condense each set of officer_assignments that make up a shift together
@@ -359,7 +364,7 @@ function requestRecords(filterConfig, view, tableConfig) {
         // Add sign up buttons
         shiftsHTML += `
           <tr>
-            <td style="padding-top: 16px;" colspan="4">
+            <td style="padding-top: 16px;" colspan="${numberOfColumns}">
           `;
 
         function setButtonStatus(
@@ -498,81 +503,81 @@ function requestRecords(filterConfig, view, tableConfig) {
     thisButtonIcon
   ) {
     var cancellationForm = `
-  <div
-  id="kn-modal-bg-0"
-  class="kn-modal-bg cancellation-modal"
-  style="top: 0px; z-index: 2000; display: block"
-  >
-    <div class="kn-modal default" style="display: block">
-      <header class="modal-card-head">
-        <h1 class="modal-card-title">Remove From Today's Assignments</h1>
-        <button class="delete close-cancellation-modal"></button>
-      </header>
-      <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
-        <div class="kn-scene kn-container" id="kn-scene_236">
-          <div class="kn-form kn-view view_484" id="view_484">
-            <form id="cancellation-form">
-              <ul class="kn-form-group columns kn-form-group-1">
-                <li class="kn-form-col column is-constrained">
-                  <div
-                    class="kn-input kn-input-short_text control"
-                    id="kn-input-field_671"
-                    data-input-id="field_671"
-                  >
-                    <label for="field_671" class="label kn-label"
-                      ><span>Reason for Cancellation</span></label
+    <div
+    id="kn-modal-bg-0"
+    class="kn-modal-bg cancellation-modal"
+    style="top: 0px; z-index: 2000; display: block"
+    >
+      <div class="kn-modal default" style="display: block">
+        <header class="modal-card-head">
+          <h1 class="modal-card-title">Remove From Today's Assignments</h1>
+          <button class="delete close-cancellation-modal"></button>
+        </header>
+        <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
+          <div class="kn-scene kn-container" id="kn-scene_236">
+            <div class="kn-form kn-view view_484" id="view_484">
+              <form id="cancellation-form">
+                <ul class="kn-form-group columns kn-form-group-1">
+                  <li class="kn-form-col column is-constrained">
+                    <div
+                      class="kn-input kn-input-short_text control"
+                      id="kn-input-field_671"
+                      data-input-id="field_671"
                     >
-                    <div class="control">
-                      <input
-                        class="input"
-                        id="field_671"
-                        name="field_671"
-                        type="text"
-                        value=""
-                      />
+                      <label for="field_671" class="label kn-label"
+                        ><span>Reason for Cancellation</span></label
+                      >
+                      <div class="control">
+                        <input
+                          class="input"
+                          id="field_671"
+                          name="field_671"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                      <p class="kn-instructions" style="display: none"></p>
                     </div>
-                    <p class="kn-instructions" style="display: none"></p>
-                  </div>
-                  <div
-                    class="kn-input kn-input-boolean control"
-                    id="kn-input-field_711"
-                    data-input-id="field_711"
-                  >
-                    <label for="field_711" class="label kn-label"
-                      ><span>Remove From My Assignments</span></label
+                    <div
+                      class="kn-input kn-input-boolean control"
+                      id="kn-input-field_711"
+                      data-input-id="field_711"
                     >
-                    <div class="control">
-                      <label class="option checkbox"
-                        ><input
-                          type="checkbox"
-                          name="field_711"
-                          value="Yes"
-                        />&nbsp;I have read the SEU Cancellation Policy and
-                        understand that by cancelling this assignment with less
-                        than 48 hours notice I am responsible for finding another
-                        Officer to work the shift or risk losing eligibility for
-                        SEU assignments.</label
+                      <label for="field_711" class="label kn-label"
+                        ><span>Remove From My Assignments</span></label
                       >
+                      <div class="control">
+                        <label class="option checkbox"
+                          ><input
+                            type="checkbox"
+                            name="field_711"
+                            value="Yes"
+                          />&nbsp;I have read the SEU Cancellation Policy and
+                          understand that by cancelling this assignment with less
+                          than 48 hours notice I am responsible for finding another
+                          Officer to work the shift or risk losing eligibility for
+                          SEU assignments.</label
+                        >
+                      </div>
+                      <p class="kn-instructions">
+                        <a
+                          href="https://docs.google.com/document/d/1cODXt1FuJVHAmiSg23hdcQDrfcFaiKhUmVOiFxgJ-4g/edit?usp=sharing"
+                          >Cancellation Policy</a
+                        >
+                      </p>
                     </div>
-                    <p class="kn-instructions">
-                      <a
-                        href="https://docs.google.com/document/d/1cODXt1FuJVHAmiSg23hdcQDrfcFaiKhUmVOiFxgJ-4g/edit?usp=sharing"
-                        >Cancellation Policy</a
-                      >
-                    </p>
-                  </div>
-                </li>
-              </ul>
-              <div class="kn-submit">    
-                <button class="kn-button is-primary" type="submit">Submit</button>
-              </div>
-            </form>
+                  </li>
+                </ul>
+                <div class="kn-submit">    
+                  <button class="kn-button is-primary" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
-  </div>
-  `;
+    `;
 
     // Append cancellation modal and handle form submit
     $(".kn-content").append(cancellationForm);
@@ -725,28 +730,28 @@ function requestRecords(filterConfig, view, tableConfig) {
     }
 
     var paginationControls = `
-  <div class="level pagination-controls" style="margin-bottom: .75em;">
-    <div class="level-left">
-      <div class="kn-entries-summary" style="margin-right: .5em;">
-        <span class="light">Showing</span> ${currentRangeStart}-${Math.min(
+    <div class="level pagination-controls" style="margin-bottom: .75em;">
+      <div class="level-left">
+        <div class="kn-entries-summary" style="margin-right: .5em;">
+          <span class="light">Showing</span> ${currentRangeStart}-${Math.min(
       currentRangeEnd,
       completeRecords.length
     )}
-        <span class="light">of</span> ${completeRecords.length}
+          <span class="light">of</span> ${completeRecords.length}
+        </div>
       </div>
-    </div>
-    <div class="kn-pagination level-right">
-      <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
-      <div class="pagination-arrows">
-        <span class="icon prev-arrow">
-          <i class="fa fa-chevron-left"></i>
-        </span>
-        <span class="icon next-arrow">
-          <i class="fa fa-chevron-right"></i>
-        </span>
+      <div class="kn-pagination level-right">
+        <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
+        <div class="pagination-arrows">
+          <span class="icon prev-arrow">
+            <i class="fa fa-chevron-left"></i>
+          </span>
+          <span class="icon next-arrow">
+            <i class="fa fa-chevron-right"></i>
+          </span>
+        </div>
       </div>
-    </div>
-  </div>`;
+    </div>`;
 
     $("#" + view + " .assignments-table").before(paginationControls);
     $("#" + view + " .assignments-table").after(paginationControls);
@@ -760,25 +765,25 @@ function requestRecords(filterConfig, view, tableConfig) {
     }
 
     var filterMenu = `
-  <div class="js-filter-menu tabs is-toggle is-flush">
-    <ul id="time-filter-buttons">
-      <li class="is-active" id="all">
-        <a>
-          <span>All</span>
-        </a>
-      </li>
-      <li id="week">
-        <a>
-          <span>Next Week</span>
-        </a>
-      </li>
-      <li id="month">
-        <a>
-          <span>Next Month</span>
-        </a>
+    <div class="js-filter-menu tabs is-toggle is-flush">
+      <ul id="time-filter-buttons">
+        <li class="is-active" id="all">
+          <a>
+            <span>All</span>
+          </a>
         </li>
-     </ul>
-  </div>`;
+        <li id="week">
+          <a>
+            <span>Next Week</span>
+          </a>
+        </li>
+        <li id="month">
+          <a>
+            <span>Next Month</span>
+          </a>
+          </li>
+      </ul>
+    </div>`;
 
     $("#" + view + " .pagination-controls")
       .before(filterMenu)
@@ -789,7 +794,7 @@ function requestRecords(filterConfig, view, tableConfig) {
             // Request records with matching time filter on click
             $(this).click(function () {
               var clickedFilterButtonId = $(this).attr("id");
-              requestRecords(filters[clickedFilterButtonId], view);
+              requestRecords(filters[clickedFilterButtonId], view, tableConfig);
 
               // Add/remove active button status
               $("#" + view + " #time-filter-buttons")
@@ -813,10 +818,10 @@ function requestRecords(filterConfig, view, tableConfig) {
     }
 
     var noRecordsRow = `
-  <tr class="kn-table-group kn-group-level-1" id="no-records-msg">
-    <td colspan="4">No assignments available</td>
-  </tr>  
-`;
+    <tr class="kn-table-group kn-group-level-1" id="no-records-msg">
+      <td colspan="${numberOfColumns}">No assignments available</td>
+    </tr>  
+    `;
 
     $("." + view + ".shift-table-body").append(noRecordsRow);
   }
@@ -828,6 +833,7 @@ function requestRecords(filterConfig, view, tableConfig) {
 $(document).on("knack-view-render.view_466", function (event, view, data) {
   var tableConfig = {
     columns: {
+      // Header Title: Getter() for data in record
       Time: function (record) {
         return record[fields.timeField];
       },
@@ -837,7 +843,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       Location: function (record) {
         return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
       }
-    }
+    },
+    addTimeFilters: true
   };
 
   var recordsTable = createRecordsTable(view.key, tableConfig);
@@ -851,32 +858,74 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 });
 
 // #### My Assignments page ####
-// Hide Knack generated "Available Assignments" table, create and add table that condenses
-// sign up for multiple officer_assignments into one button
+// Hide Knack generated "Today's Assignments" and "Future Assignments" table, create and add tables that condense
+// cancellation for multiple officer_assignments into one button
+var tableConfig = {
+  columns: {
+    Status: function (record) {
+      return record[fields.assignmentStatus];
+    },
+    Time: function (record) {
+      return record[fields.timeField];
+    },
+    Sector: function (record) {
+      return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
+    },
+    Location: function (record) {
+      return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
+    }
+  },
+  addTimeFilters: false
+};
+
+function addRecordLinkToTableConfig(event, view, config) {
+  // var location = event.currentTarget.location;
+  var slug = view.scene.slug;
+  // var recordLinkUrl = location.origin + location.pathname + "#" + slug;
+
+  function createFolderIconLink(record) {
+    return `
+    <a href="#${slug}/assignment-details/${record.id}" 
+    class="kn-link kn-link-page" address="true" style="text-align: center; ">
+      <span class="level is-compact">
+        <span class="icon is-left">
+          <i class="fa fa-folder-open-o"></i>
+        </span>
+      </span>
+    </a>
+    `;
+  }
+
+  return {
+    ...config,
+    columns: { Details: createFolderIconLink, ...config.columns }
+  };
+}
+
 $(document).on("knack-view-render.view_447", function (event, view, data) {
-  var recordsTable = createRecordsTable(view.key, tableConfig);
+  var updatedTableConfig = addRecordLinkToTableConfig(event, view, tableConfig);
+  var recordsTable = createRecordsTable(view.key, updatedTableConfig);
+
   // Append table, then request records and append shifts to table body
   $("#view_447" + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.today, view.key, tableConfig);
+      requestRecords(filters.today, view.key, updatedTableConfig);
     });
   // TODO: Link to My Assignment Details
-  // TODO: No time filter buttons
   // TODO: Don't toggle between cancel and sign up buttons
-  // TODO: Add columns needed to configs
 });
 
 $(document).on("knack-view-render.view_439", function (event, view, data) {
-  var recordsTable = createRecordsTable(view.key, tableConfig);
+  var updatedTableConfig = addRecordLinkToTableConfig(event, view, tableConfig);
+  var recordsTable = createRecordsTable(view.key, updatedTableConfig);
+
   // Append table, then request records and append shifts to table body
   $("#" + view.key + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.future, view.key, tableConfig);
+      requestRecords(filters.future, view.key, updatedTableConfig);
     });
   // TODO: Link to My Assignment Details
-  // TODO: No time filter buttons
   // TODO: Don't toggle between cancel and sign up buttons
-  // TODO: Add columns needed to configs
 });
