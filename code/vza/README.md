@@ -18,6 +18,10 @@
 - Time
 - Officer Shift Label
 - Date
+- Remove from My Assignments
+- Remove From My Assignments Date and Time
+- Reason for Cancellation
+- Unassigned Officer
 - Send email action **(this column is setup in Step 4)**
 
 ![API view columns](images/api_view_columns.png)

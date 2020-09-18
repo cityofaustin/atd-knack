@@ -2,6 +2,7 @@ $(document).on("knack-view-render.any", function (event, view, data) {
   $("a.kn-view-asset").html("Attachment");
 });
 
+// Sign Up page
 // Hide Knack generated "Available Assignments" table, create and add table that condenses
 // sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_466", function (event, view, data) {
@@ -22,7 +23,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     assignedOfficerFieldRaw: "field_704_raw",
     assignedOfficerField: "field_704",
     officerShiftField: "field_724",
-    assignmentDateTimeField: "field_133"
+    assignmentDateTimeField: "field_133",
+    unassignedOfficerField: "field_669",
+    addToMyAssignmentsField: "field_663",
+    dateTimeOfCancellationField: "field_712"
   };
 
   // Cache all officer_assignments to traverse with pagination
@@ -111,6 +115,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Setup pagination
   function initializePagination(records) {
     currentPage = 1;
+    currentRangeStart = 1;
+    currentRangeEnd = currentPage - 1 + recordsPerPage;
     numberOfPages = Math.ceil(records.length / recordsPerPage);
 
     var initialPageRecords = records.slice(0, recordsPerPage);
@@ -211,7 +217,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
             return record1[fields.timeField] === record2[fields.timeField];
           }
 
-          for (let i = 0; i < shiftRecords.length; i++) {
+          for (var i = 0; i < shiftRecords.length; i++) {
             if (i === 0) {
               buttonRecords.push([shiftRecords[i]]);
               currentArrayPosition++;
@@ -364,10 +370,11 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   function findRecordById(id) {
     var found = null;
 
-    for (let i = 0; i < completeRecords.length; i++) {
+    for (var i = 0; i < completeRecords.length; i++) {
       found = completeRecords[i].find(function (record) {
         return record.id === id;
       });
+
       if (!!found) {
         break;
       }
@@ -432,6 +439,154 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     });
   }
 
+  function addCancellationModal(
+    recordIdsString,
+    buttonNumber,
+    thisButton,
+    thisButtonIcon
+  ) {
+    var cancellationForm = `
+    <div
+    id="kn-modal-bg-0"
+    class="kn-modal-bg cancellation-modal"
+    style="top: 0px; z-index: 2000; display: block"
+    >
+      <div class="kn-modal default" style="display: block">
+        <header class="modal-card-head">
+          <h1 class="modal-card-title">Remove From Today's Assignments</h1>
+          <button class="delete close-cancellation-modal"></button>
+        </header>
+        <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
+          <div class="kn-scene kn-container" id="kn-scene_236">
+            <div class="kn-form kn-view view_484" id="view_484">
+              <form id="cancellation-form">
+                <ul class="kn-form-group columns kn-form-group-1">
+                  <li class="kn-form-col column is-constrained">
+                    <div
+                      class="kn-input kn-input-short_text control"
+                      id="kn-input-field_671"
+                      data-input-id="field_671"
+                    >
+                      <label for="field_671" class="label kn-label"
+                        ><span>Reason for Cancellation</span></label
+                      >
+                      <div class="control">
+                        <input
+                          class="input"
+                          id="field_671"
+                          name="field_671"
+                          type="text"
+                          value=""
+                        />
+                      </div>
+                      <p class="kn-instructions" style="display: none"></p>
+                    </div>
+                    <div
+                      class="kn-input kn-input-boolean control"
+                      id="kn-input-field_711"
+                      data-input-id="field_711"
+                    >
+                      <label for="field_711" class="label kn-label"
+                        ><span>Remove From My Assignments</span></label
+                      >
+                      <div class="control">
+                        <label class="option checkbox"
+                          ><input
+                            type="checkbox"
+                            name="field_711"
+                            value="Yes"
+                          />&nbsp;I have read the SEU Cancellation Policy and
+                          understand that by cancelling this assignment with less
+                          than 48 hours notice I am responsible for finding another
+                          Officer to work the shift or risk losing eligibility for
+                          SEU assignments.</label
+                        >
+                      </div>
+                      <p class="kn-instructions">
+                        <a
+                          href="https://docs.google.com/document/d/1cODXt1FuJVHAmiSg23hdcQDrfcFaiKhUmVOiFxgJ-4g/edit?usp=sharing"
+                          >Cancellation Policy</a
+                        >
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+                <div class="kn-submit">    
+                  <button class="kn-button is-primary" type="submit">Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+    `;
+
+    // Append cancellation modal and handle form submit
+    $(".kn-content").append(cancellationForm);
+    var thisForm = $("#cancellation-form");
+    thisForm.off("submit");
+    thisForm.on("submit", function (e) {
+      e.preventDefault();
+
+      // Collect form values
+      var formFields = thisForm.serializeArray();
+      var knackFormatFields = formFields.reduce(function (acc, field) {
+        return { ...acc, [field.name]: field.value };
+      }, {});
+
+      // Start spinner
+      $("#kn-loading-spinner").css("display", "block");
+
+      // Submit PUT requests to modify each officer_assignment ID stored in button id attribute
+      var idsToAssignCurrentUser = recordIdsString.split("-");
+
+      var now = new Date().toLocaleString();
+
+      idsToAssignCurrentUser.forEach(function (recordId) {
+        $.ajax({
+          url: putUrl + recordId,
+          type: "PUT",
+          data: JSON.stringify({
+            ...knackFormatFields, // Reason for cancellation and Remove from My Assignments fields from form
+            [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
+            [fields.unassignedOfficerField]: userId, // Add current user as unassigned officer to track who cancelled
+            [fields.addToMyAssignmentsField]: "No", // Add to My Assignments
+            [fields.dateTimeOfCancellationField]: now // DateTime of cancellation
+          }),
+          headers: headers,
+          success: function (res) {
+            // Switch button associated with these records back to a Sign Up button
+            thisButton
+              .removeClass("my-shift-button")
+              .addClass("open-shift-button");
+            thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
+            thisButtonIcon
+              .removeClass("fa-times-circle")
+              .addClass("fa-plus-square");
+            addOpenShiftButtonClickHandlers();
+
+            // Update cached record
+            var thisRecord = findRecordById(recordId);
+            thisRecord[fields.assignedOfficerFieldRaw][0].id =
+              appSpecifics.noOfficerAssignedId;
+
+            // Remove modal and stop spinner
+            $("#kn-modal-bg-0").remove();
+            $("#kn-loading-spinner").css("display", "none");
+          }
+        });
+      });
+    });
+
+    // Add click handler to close modal (X) button
+    var closeModalButton = $(".close-cancellation-modal");
+    closeModalButton.off("click");
+    closeModalButton.click(function () {
+      $(".cancellation-modal").remove();
+    });
+  }
+
   function addCancelMyShiftButtonClickHandlers() {
     var buttons = $(`.my-shift-button`);
     buttons.each(function () {
@@ -444,44 +599,21 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       thisButton.off("click");
 
       thisButton.click(function () {
-        // Get officer_assignment record ids
-        var idsToAssignCurrentUser = thisButton.attr("id").split("-");
-        thisButton.removeClass("my-shift-button");
-        thisButtonIcon
-          .removeClass("fa-times-circle")
-          .addClass("fa-circle-o-notch fa-spin");
-
-        idsToAssignCurrentUser.forEach(function (recordId) {
-          $.ajax({
-            url: putUrl + recordId,
-            type: "PUT",
-            data: JSON.stringify({
-              [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId
-            }),
-            headers: headers,
-            success: function (res) {
-              thisButton.addClass("open-shift-button");
-              thisButton[0].children[1].innerText = `Sign Up - Officer ${buttonNumber}`;
-              thisButtonIcon
-                .removeClass("fa-circle-o-notch fa-spin")
-                .addClass("fa-plus-square");
-              addOpenShiftButtonClickHandlers();
-
-              // Update cached record
-              var thisRecord = findRecordById(recordId);
-              thisRecord[fields.assignedOfficerFieldRaw][0].id =
-                appSpecifics.noOfficerAssignedId;
-            }
-          });
-        });
+        var recordIdsString = thisButton.attr("id");
+        addCancellationModal(
+          recordIdsString,
+          buttonNumber,
+          thisButton,
+          thisButtonIcon
+        );
       });
     });
   }
 
   // Add button handler to associate officer assignment records with logged in user
-  function addPaginationClickHandlers(prevId, nextId) {
-    var prev = $(`#${prevId}`);
-    var next = $(`#${nextId}`);
+  function addPaginationClickHandlers(prevClass, nextClass) {
+    var prev = $(`.${prevClass}`);
+    var next = $(`.${nextClass}`);
 
     prev.click(function () {
       if (currentPage === 1) {
@@ -552,10 +684,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         <div class="kn-pagination level-right">
           <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
           <div class="pagination-arrows">
-            <span class="icon" id="prev-arrow">
+            <span class="icon prev-arrow">
               <i class="fa fa-chevron-left"></i>
             </span>
-            <span class="icon" id="next-arrow">
+            <span class="icon next-arrow">
               <i class="fa fa-chevron-right"></i>
             </span>
           </div>
@@ -563,6 +695,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       </div>`;
 
     $(".assignments-table").before(paginationControls);
+    $(".assignments-table").after(paginationControls);
     addPaginationClickHandlers("prev-arrow", "next-arrow");
   }
 
@@ -668,4 +801,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.all);
     });
+});
+
+// Assignment Details page
+// Update start button text
+$(document).on("knack-view-render.view_449", function (event, view, data) {
+  $("#view_449 button strong")[0].innerText = " Start Assignment";
 });
