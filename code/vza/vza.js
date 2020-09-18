@@ -2,6 +2,7 @@ $(document).on("knack-view-render.any", function (event, view, data) {
   $("a.kn-view-asset").html("Attachment");
 });
 
+// Sign Up page
 // Hide Knack generated "Available Assignments" table, create and add table that condenses
 // sign up for multiple officer_assignments into one button
 $(document).on("knack-view-render.view_466", function (event, view, data) {
@@ -114,6 +115,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   // Setup pagination
   function initializePagination(records) {
     currentPage = 1;
+    currentRangeStart = 1;
+    currentRangeEnd = currentPage - 1 + recordsPerPage;
     numberOfPages = Math.ceil(records.length / recordsPerPage);
 
     var initialPageRecords = records.slice(0, recordsPerPage);
@@ -608,9 +611,9 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   }
 
   // Add button handler to associate officer assignment records with logged in user
-  function addPaginationClickHandlers(prevId, nextId) {
-    var prev = $(`#${prevId}`);
-    var next = $(`#${nextId}`);
+  function addPaginationClickHandlers(prevClass, nextClass) {
+    var prev = $(`.${prevClass}`);
+    var next = $(`.${nextClass}`);
 
     prev.click(function () {
       if (currentPage === 1) {
@@ -681,10 +684,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         <div class="kn-pagination level-right">
           <div class="kn-total-pages">${currentPage} of ${numberOfPages}</div>
           <div class="pagination-arrows">
-            <span class="icon" id="prev-arrow">
+            <span class="icon prev-arrow">
               <i class="fa fa-chevron-left"></i>
             </span>
-            <span class="icon" id="next-arrow">
+            <span class="icon next-arrow">
               <i class="fa fa-chevron-right"></i>
             </span>
           </div>
@@ -692,6 +695,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       </div>`;
 
     $(".assignments-table").before(paginationControls);
+    $(".assignments-table").after(paginationControls);
     addPaginationClickHandlers("prev-arrow", "next-arrow");
   }
 
@@ -797,4 +801,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.all);
     });
+});
+
+// Assignment Details page
+// Update start button text
+$(document).on("knack-view-render.view_449", function (event, view, data) {
+  $("#view_449 button strong")[0].innerText = " Start Assignment";
 });
