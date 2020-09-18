@@ -1,10 +1,10 @@
 .block {
   display: block;
-  width: 20%;
   border: none;
-  background-color: #367db7;
+  border-radius: 0.2em;
+  background-color: #00396d;
   color: white;
-  padding: 5px 5px;
+  padding: 10px 45px;
   font-size: 20px;
   cursor: pointer;
   text-align: center;
@@ -28,4 +28,10 @@
 
 .assignments-table {
   overflow: visible;
+  /* Add some space between table and pagination controls below */
+  margin-bottom: 10.5px;
+}
+
+.my-shift-button > span.icon > i {
+  color: #af3c3c;
 }
