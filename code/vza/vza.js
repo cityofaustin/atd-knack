@@ -216,7 +216,7 @@ function requestRecords(filterConfig, view, tableConfig) {
 
   // Show spinner while fetching officer_assignment records
   $("#" + view + "> div.view-header").append(
-    `<span id="assignment-spinner" class="icon">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
+    `<span id="${view}-table-spinner" class="table-spinner">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
   );
 
   // Remove Knack generated table that we are replacing and request records
@@ -256,7 +256,7 @@ function requestRecords(filterConfig, view, tableConfig) {
       addCancelMyShiftButtonClickHandlers();
 
       // Remove spinner
-      $("#assignment-spinner").remove();
+      $("#" + view + "-table-spinner").remove();
     }
   });
 
