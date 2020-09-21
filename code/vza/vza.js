@@ -510,7 +510,7 @@ function requestRecords(filterConfig, view, tableConfig) {
     >
       <div class="kn-modal default" style="display: block">
         <header class="modal-card-head">
-          <h1 class="modal-card-title">Remove From Today's Assignments</h1>
+          <h1 class="modal-card-title">Remove From My Assignments</h1>
           <button class="delete close-cancellation-modal"></button>
         </header>
         <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
