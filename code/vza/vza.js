@@ -867,25 +867,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
 // #### My Assignments page ####
 // Hide Knack generated "Today's Assignments" and "Future Assignments" table, create and add tables that condense
 // cancellation for multiple officer_assignments into one button
-var tableConfig = {
-  columns: {
-    Status: function (record) {
-      return record[fields.assignmentStatus];
-    },
-    Time: function (record) {
-      return record[fields.timeField];
-    },
-    Sector: function (record) {
-      return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
-    },
-    Location: function (record) {
-      return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
-    }
-  },
-  addTimeFilters: false,
-  isCancelOnly: true
-};
 
+// Helper to create folder icon link in custom table data cells
 function addRecordLinkToTableConfig(view, config) {
   var slug = view.scene.slug;
 
@@ -909,6 +892,25 @@ function addRecordLinkToTableConfig(view, config) {
 }
 
 $(document).on("knack-view-render.view_447", function (event, view, data) {
+  var tableConfig = {
+    columns: {
+      Status: function (record) {
+        return record[fields.assignmentStatus];
+      },
+      Time: function (record) {
+        return record[fields.timeField];
+      },
+      Sector: function (record) {
+        return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
+      },
+      Location: function (record) {
+        return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
+      }
+    },
+    addTimeFilters: false,
+    isCancelOnly: true
+  };
+
   var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
   var recordsTable = createRecordsTable(view.key, updatedTableConfig);
 
@@ -921,13 +923,28 @@ $(document).on("knack-view-render.view_447", function (event, view, data) {
 });
 
 $(document).on("knack-view-render.view_439", function (event, view, data) {
-  var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
-  var recordsTable = createRecordsTable(view.key, updatedTableConfig);
+  var tableConfig = {
+    columns: {
+      Time: function (record) {
+        return record[fields.timeField];
+      },
+      Sector: function (record) {
+        return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
+      },
+      Location: function (record) {
+        return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
+      }
+    },
+    addTimeFilters: false,
+    isCancelOnly: true
+  };
+
+  var recordsTable = createRecordsTable(view.key, tableConfig);
 
   // Append table, then request records and append shifts to table body
   $("#" + view.key + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.future, view.key, updatedTableConfig);
+      requestRecords(filters.future, view.key, tableConfig);
     });
 });
