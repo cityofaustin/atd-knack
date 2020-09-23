@@ -534,6 +534,7 @@ function requestRecords(filterConfig, view, tableConfig) {
                           name="field_671"
                           type="text"
                           value=""
+                          required
                         />
                       </div>
                       <p class="kn-instructions" style="display: none"></p>
