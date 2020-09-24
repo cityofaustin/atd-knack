@@ -239,7 +239,7 @@ function requestRecords(filterConfig, view, tableConfig) {
           .children()
           .remove();
         appendTableWithNoRecordsMessage();
-        $("#assignment-spinner").remove();
+        $("#" + view + "-table-spinner").remove();
         completeRecords = null;
         recordsInPage = null;
         return;
