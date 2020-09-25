@@ -636,14 +636,14 @@ function requestRecords(filterConfig, view, tableConfig) {
             // Remove modal and stop spinner
             $("#kn-modal-bg-0").remove();
             $("#kn-loading-spinner").css("display", "none");
+
+            // If only cancelling, reload table to refresh user's assignments
+            if (tableConfig.isCancelOnly) {
+              requestRecords(filterConfig, view, tableConfig);
+            }
           }
         });
       });
-
-      // If only cancelling, reload table to refresh user's assignments
-      if (tableConfig.isCancelOnly) {
-        requestRecords(filterConfig, view, tableConfig);
-      }
     });
 
     // Add click handler to close modal (X) button
@@ -950,4 +950,67 @@ $(document).on("knack-view-render.view_439", function (event, view, data) {
     .ready(function () {
       requestRecords(filters.future, view.key, tableConfig);
     });
+});
+
+// The render event for this view triggers start and end button status updates
+function reloadAssignmentDetails() {
+  Knack.views["view_448"].model.fetch();
+  console.log("had to reload");
+}
+
+function pollForElement(elementSelector, callback) {
+  var element = $(elementSelector);
+
+  if (element === null) {
+    pollForButton(elementSelector, callback);
+  } else {
+    setTimeout(function () {
+      console.log("found button", element);
+      callback();
+    }, 250);
+  }
+}
+
+$(document).on("knack-view-render.view_449", function (event, view, data) {
+  reloadAssignmentDetails();
+});
+
+$(document).on("knack-view-render.view_450", function (event, view, data) {
+  reloadAssignmentDetails();
+});
+
+$(document).on("knack-view-render.view_448", function (event, view, data) {
+  var startTime = data.field_560;
+  var endTime = data.field_561;
+
+  // Disable button links based on assignment status
+  pollForElement(".view_449 a", function () {
+    var startButtonLink = $(".view_449 a");
+
+    startButtonLink.click(function () {
+      startButtonLink.addClass("disabled");
+    });
+
+    if (startTime.length !== 0) {
+      startButtonLink.addClass("disabled");
+      startButtonLink.append(
+        `<div class="content status-timestamp"><strong>Assignment started at ${startTime}</strong></div>`
+      );
+    }
+  });
+
+  pollForElement(".view_450 a", function () {
+    var endButtonLink = $(".view_450 a");
+    // Add click handlers to disable buttons on click
+    endButtonLink.click(function () {
+      endButtonLink.addClass("disabled");
+    });
+
+    if (endTime.length !== 0) {
+      endButtonLink.addClass("disabled");
+      endButtonLink.append(
+        `<div class="content status-timestamp"><strong>Assignment ended at ${endTime}</strong></div>`
+      );
+    }
+  });
 });
