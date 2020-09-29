@@ -1,6 +1,6 @@
-# Sign up / Available Assignments (scene_208)
+# Sign up / Available Assignments (scene_208) and Cancel My/Future Assignments (scene_180)
 
-## Custom table and sign up buttons (view_466)
+## Custom table and sign up/cancel buttons (view_466) and cancel-only buttons (view_439 and view_447)
 
 ### Create API view for fetching `officer_assignments`
 
