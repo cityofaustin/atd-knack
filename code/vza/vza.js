@@ -952,9 +952,9 @@ $(document).on("knack-view-render.view_439", function (event, view, data) {
     });
 });
 
-// The render event for this view triggers start and end button status updates
-function reloadAssignmentDetails() {
-  Knack.views["view_448"].model.fetch();
+// Enable/disable Start and End assignment buttons and add timestamps
+function reloadByViewId(viewId) {
+  Knack.views[viewId].model.fetch();
 }
 
 function pollForElement(elementSelector, callback) {
@@ -970,7 +970,6 @@ function pollForElement(elementSelector, callback) {
 }
 
 $(document).on("knack-view-render.view_449", function (event, view, data) {
-  // TODO: Look for start time in table and disable/add timestamp if necessary
   var startTimeSpanSelector =
     "#view_448 div.kn-detail.field_560 div.kn-detail-body";
 
@@ -978,6 +977,10 @@ $(document).on("knack-view-render.view_449", function (event, view, data) {
     var $row = $(startTimeSpanSelector);
     var startTime = $row[0].innerText;
     var startButtonLink = $(".view_449 a");
+
+    startButtonLink.click(function () {
+      reloadByViewId("view_450");
+    });
 
     if (startTime.length !== 0) {
       startButtonLink.addClass("disabled");
@@ -997,6 +1000,10 @@ $(document).on("knack-view-render.view_450", function (event, view, data) {
     var $row = $(endTimeSpanSelector);
     var endTime = $row[0].innerText;
 
+    endButtonLink.click(function () {
+      reloadByViewId("view_449");
+    });
+
     if (endTime.length !== 0) {
       endButtonLink.addClass("disabled");
     }
@@ -1013,48 +1020,9 @@ $(document).on("knack-view-render.view_450", function (event, view, data) {
   pollForElement(startTimeSpanSelector, function () {
     var $row = $(startTimeSpanSelector);
     var startTime = $row[0].innerText;
-    var startButtonLink = $(".view_449 a");
 
     if (startTime.length === 0) {
       endButtonLink.addClass("disabled");
     }
   });
 });
-
-// $(document).on("knack-view-render.view_448", function (event, view, data) {
-//   var startTime = data.field_560;
-//   var endTime = data.field_561;
-
-//   // Disable button links based on assignment status
-//   pollForElement(".view_449 a", function () {
-//     var startButtonLink = $(".view_449 a");
-
-//     startButtonLink.click(function () {
-//       startButtonLink.addClass("disabled");
-//     });
-
-//     if (startTime.length !== 0) {
-//       startButtonLink.addClass("disabled");
-//       startButtonLink.append(
-//         `<div class="content status-timestamp"><strong>Assignment started at ${startTime}</strong></div>`
-//       );
-//     }
-//   });
-
-//   pollForElement(".view_450 a", function () {
-//     var endButtonLink = $(".view_450 a");
-//     // Add click handlers to disable buttons on click
-//     endButtonLink.click(function () {
-//       endButtonLink.addClass("disabled");
-//     });
-
-//     if (endTime.length !== 0 || startTime.length === 0) {
-//       endButtonLink.addClass("disabled");
-//     }
-
-//     endTime.length !== 0 &&
-//       endButtonLink.append(
-//         `<div class="content status-timestamp"><strong>Assignment ended at ${endTime}</strong></div>`
-//       );
-//   });
-// });
