@@ -216,7 +216,7 @@ function requestRecords(filterConfig, view, tableConfig) {
 
   // Show spinner while fetching officer_assignment records
   $("#" + view + "> div.view-header").append(
-    `<span id="assignment-spinner" class="icon">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
+    `<span id="${view}-table-spinner" class="table-spinner">&nbsp;<i class="fa fa-circle-o-notch fa-spin"></i></span>`
   );
 
   // Remove Knack generated table that we are replacing and request records
@@ -239,7 +239,7 @@ function requestRecords(filterConfig, view, tableConfig) {
           .children()
           .remove();
         appendTableWithNoRecordsMessage();
-        $("#assignment-spinner").remove();
+        $("#" + view + "-table-spinner").remove();
         completeRecords = null;
         recordsInPage = null;
         return;
@@ -256,7 +256,7 @@ function requestRecords(filterConfig, view, tableConfig) {
       addCancelMyShiftButtonClickHandlers();
 
       // Remove spinner
-      $("#assignment-spinner").remove();
+      $("#" + view + "-table-spinner").remove();
     }
   });
 
@@ -510,7 +510,7 @@ function requestRecords(filterConfig, view, tableConfig) {
     >
       <div class="kn-modal default" style="display: block">
         <header class="modal-card-head">
-          <h1 class="modal-card-title">Remove From Today's Assignments</h1>
+          <h1 class="modal-card-title">Remove From My Assignments</h1>
           <button class="delete close-cancellation-modal"></button>
         </header>
         <section class="modal-card-body kn-page-modal" id="kn-page-modal-0">
@@ -534,6 +534,7 @@ function requestRecords(filterConfig, view, tableConfig) {
                           name="field_671"
                           type="text"
                           value=""
+                          required
                         />
                       </div>
                       <p class="kn-instructions" style="display: none"></p>
@@ -552,6 +553,7 @@ function requestRecords(filterConfig, view, tableConfig) {
                             type="checkbox"
                             name="field_711"
                             value="Yes"
+                            required
                           />&nbsp;I have read the SEU Cancellation Policy and
                           understand that by cancelling this assignment with less
                           than 48 hours notice I am responsible for finding another
@@ -561,7 +563,8 @@ function requestRecords(filterConfig, view, tableConfig) {
                       </div>
                       <p class="kn-instructions">
                         <a
-                          href="https://docs.google.com/document/d/1cODXt1FuJVHAmiSg23hdcQDrfcFaiKhUmVOiFxgJ-4g/edit?usp=sharing"
+                          href="https://atd.knack.com/vza#cancellation-policy/"
+                          target="_blank"
                           >Cancellation Policy</a
                         >
                       </p>

@@ -11,7 +11,9 @@
 }
 
 /* Sign Up view - Available Assignments table scene_208 view_466 */
-#assignment-spinner {
+/* My Assignments view - Today's Assignments table scene_208 view_447 */
+/* My Assignments view - Future Assignments table scene_208 view_439 */
+.table-spinner {
   color: #023f74;
   font-size: 30px;
 }
