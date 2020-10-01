@@ -12,6 +12,9 @@ var appSpecifics = {
   apiTableScene: "scene_238", // Officer assignments table API scene
   apiTableView: "view_487", // Officer assignments table API view
   availableAssignmentsView: "view_466", // Where to insert new table
+  startButtonView: "view_449",
+  endButtonView: "view_450",
+  assignmentDetailsView: "view_448",
   noOfficerAssignedId: "5ebef4d0682bfc0015c9e0f4" // For conditional styles based on officer assigned
 };
 
@@ -953,76 +956,73 @@ $(document).on("knack-view-render.view_439", function (event, view, data) {
 });
 
 // Enable/disable Start and End assignment buttons and add timestamps
-function reloadByViewId(viewId) {
-  Knack.views[viewId].model.fetch();
-}
+var startTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.field_560 div.kn-detail-body`;
+var endTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.field_561 div.kn-detail-body`;
 
-function pollForElement(elementSelector, callback) {
-  var $element = $(elementSelector);
+function waitForAllEvents(listOfEvents, cb) {
+  //cb is a callback
 
-  if (!$element[0]) {
-    setTimeout(function () {
-      pollForElement(elementSelector, callback);
-    }, 250);
-  } else {
-    callback();
-  }
-}
+  var triggeredEvents = []; //create an array called triggered events
+  listOfEvents.forEach(function (eventKey) {
+    //Looping through list of events
+    var listener = function (event, view, record) {
+      //creating event listener
 
-$(document).on("knack-view-render.view_449", function (event, view, data) {
-  var startTimeSpanSelector =
-    "#view_448 div.kn-detail.field_560 div.kn-detail-body";
+      // $(document).off(eventKey, listener);
+      // removing that listener from the document
+      // this is for Safety / optimization (in case the page loads twice)
 
-  pollForElement(startTimeSpanSelector, function () {
-    var $row = $(startTimeSpanSelector);
-    var startTime = $row[0].innerText;
-    var startButtonLink = $(".view_449 a");
+      if (!triggeredEvents.includes(eventKey)) {
+        triggeredEvents.push(eventKey); //add event to list of already triggered events
+        console.log(eventKey, triggeredEvents);
+      }
 
-    startButtonLink.click(function () {
-      reloadByViewId("view_450");
-    });
-
-    if (startTime.length !== 0) {
-      startButtonLink.addClass("disabled");
-      startButtonLink.append(
-        `<div class="content status-timestamp"><strong>Assignment started at ${startTime}</strong></div>`
-      );
-    }
+      if (triggeredEvents.length === listOfEvents.length) {
+        //have all the events finished?
+        cb(); //run the callback
+        triggeredEvents = [];
+      }
+    };
+    $(document).on(eventKey, listener);
   });
-});
+}
 
-$(document).on("knack-view-render.view_450", function (event, view, data) {
-  var endTimeSpanSelector =
-    "#view_448 div.kn-detail.field_561 div.kn-detail-body";
-  var endButtonLink = $(".view_450 a");
+waitForAllEvents(
+  [
+    "knack-view-render.view_450",
+    "knack-view-render.view_449",
+    "knack-view-render.view_448"
+  ],
+  function () {
+    var $endTimeSpan = $(endTimeSpanSelector);
+    var endTime = $endTimeSpan[0].innerText;
+    var $endButtonLink = $(`.${appSpecifics.endButtonView} a`);
 
-  pollForElement(endTimeSpanSelector, function () {
-    var $row = $(endTimeSpanSelector);
-    var endTime = $row[0].innerText;
-
-    endButtonLink.click(function () {
-      reloadByViewId("view_449");
-    });
+    var $startTimeSpan = $(startTimeSpanSelector);
+    var startTime = $startTimeSpan[0].innerText;
+    console.log(startTime);
+    var $startButtonLink = $(`.${appSpecifics.startButtonView} a`);
 
     if (endTime.length !== 0) {
-      endButtonLink.addClass("disabled");
+      $endButtonLink.addClass("disabled");
     }
 
     endTime.length !== 0 &&
-      endButtonLink.append(
-        `<div class="content status-timestamp"><strong>Assignment ended at ${endTime}</strong></div>`
+      $(".end-timestamp").length === 0 &&
+      $endButtonLink.append(
+        `<div class="content end-timestamp"><strong>Assignment ended at ${endTime}</strong></div>`
       );
-  });
 
-  var startTimeSpanSelector =
-    "#view_448 div.kn-detail.field_560 div.kn-detail-body";
-
-  pollForElement(startTimeSpanSelector, function () {
-    var $row = $(startTimeSpanSelector);
-    var startTime = $row[0].innerText;
+    if (startTime.length !== 0) {
+      $startButtonLink.addClass("disabled");
+      $(".start-timestamp").length === 0 &&
+        $startButtonLink.append(
+          `<div class="content start-timestamp"><strong>Assignment started at ${startTime}</strong></div>`
+        );
+    }
 
     if (startTime.length === 0) {
-      endButtonLink.addClass("disabled");
+      $endButtonLink.addClass("disabled");
     }
-  });
-});
+  }
+);
