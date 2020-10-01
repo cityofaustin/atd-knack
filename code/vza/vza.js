@@ -11,9 +11,11 @@ var appSpecifics = {
   knackAppId: "5dc2ec50bbcb360016e338e1",
   apiTableScene: "scene_238", // Officer assignments table API scene
   apiTableView: "view_487", // Officer assignments table API view
-  availableAssignmentsView: "view_466", // Where to insert new table
-  startButtonView: "view_449",
-  endButtonView: "view_450",
+  availableAssignmentsView: "view_466", // Insert new table
+  todayAssignmentsView: "view_447", // Insert new table
+  futureAssignmentsView: "view_439", // Insert new table
+  startButtonView: "view_449", // Assignment Details view
+  endButtonView: "view_450", // Assignment Details view
   assignmentDetailsView: "view_448",
   noOfficerAssignedId: "5ebef4d0682bfc0015c9e0f4" // For conditional styles based on officer assigned
 };
@@ -30,7 +32,9 @@ var fields = {
   unassignedOfficerField: "field_669",
   addToMyAssignmentsField: "field_663",
   dateTimeOfCancellationField: "field_712",
-  assignmentStatus: "field_584"
+  assignmentStatus: "field_584",
+  startTime: "field_560",
+  endTime: "field_561"
 };
 
 // Get user auth for get request (API view is private) and set req headers
@@ -897,121 +901,107 @@ function addRecordLinkToTableConfig(view, config) {
   };
 }
 
-$(document).on("knack-view-render.view_447", function (event, view, data) {
-  var tableConfig = {
-    columns: {
-      Status: function (record) {
-        return record[fields.assignmentStatus];
+$(document).on(
+  "knack-view-render." + appSpecifics.todayAssignmentsView,
+  function (event, view, data) {
+    var tableConfig = {
+      columns: {
+        Status: function (record) {
+          return record[fields.assignmentStatus];
+        },
+        Time: function (record) {
+          return record[fields.timeField];
+        },
+        Sector: function (record) {
+          return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
+        },
+        Location: function (record) {
+          return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
+        }
       },
-      Time: function (record) {
-        return record[fields.timeField];
+      addTimeFilters: false,
+      isCancelOnly: true
+    };
+
+    var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
+    var recordsTable = createRecordsTable(view.key, updatedTableConfig);
+
+    // Append table, then request records and append shifts to table body
+    $("#view_447" + "> div.view-header")
+      .after(recordsTable)
+      .ready(function () {
+        requestRecords(filters.today, view.key, updatedTableConfig);
+      });
+  }
+);
+
+$(document).on(
+  "knack-view-render." + appSpecifics.futureAssignmentsView,
+  function (event, view, data) {
+    var tableConfig = {
+      columns: {
+        Time: function (record) {
+          return record[fields.timeField];
+        },
+        Sector: function (record) {
+          return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
+        },
+        Location: function (record) {
+          return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
+        }
       },
-      Sector: function (record) {
-        return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
-      },
-      Location: function (record) {
-        return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
-      }
-    },
-    addTimeFilters: false,
-    isCancelOnly: true
-  };
+      addTimeFilters: false,
+      isCancelOnly: true
+    };
 
-  var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
-  var recordsTable = createRecordsTable(view.key, updatedTableConfig);
+    var recordsTable = createRecordsTable(view.key, tableConfig);
 
-  // Append table, then request records and append shifts to table body
-  $("#view_447" + "> div.view-header")
-    .after(recordsTable)
-    .ready(function () {
-      requestRecords(filters.today, view.key, updatedTableConfig);
-    });
-});
-
-$(document).on("knack-view-render.view_439", function (event, view, data) {
-  var tableConfig = {
-    columns: {
-      Time: function (record) {
-        return record[fields.timeField];
-      },
-      Sector: function (record) {
-        return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
-      },
-      Location: function (record) {
-        return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
-      }
-    },
-    addTimeFilters: false,
-    isCancelOnly: true
-  };
-
-  var recordsTable = createRecordsTable(view.key, tableConfig);
-
-  // Append table, then request records and append shifts to table body
-  $("#" + view.key + "> div.view-header")
-    .after(recordsTable)
-    .ready(function () {
-      requestRecords(filters.future, view.key, tableConfig);
-    });
-});
+    // Append table, then request records and append shifts to table body
+    $("#" + view.key + "> div.view-header")
+      .after(recordsTable)
+      .ready(function () {
+        requestRecords(filters.future, view.key, tableConfig);
+      });
+  }
+);
 
 // Enable/disable Start and End assignment buttons and add timestamps
-var startTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.field_560 div.kn-detail-body`;
-var endTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.field_561 div.kn-detail-body`;
+var startTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.${fields.startTime} div.kn-detail-body`;
+var endTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.${fields.endTime} div.kn-detail-body`;
 
 function waitForAllEvents(listOfEvents, cb) {
-  //cb is a callback
-
-  var triggeredEvents = []; //create an array called triggered events
+  var triggeredEvents = [];
   listOfEvents.forEach(function (eventKey) {
-    //Looping through list of events
     var listener = function (event, view, record) {
-      //creating event listener
-
-      // $(document).off(eventKey, listener);
-      // removing that listener from the document
-      // this is for Safety / optimization (in case the page loads twice)
-
       if (!triggeredEvents.includes(eventKey)) {
-        triggeredEvents.push(eventKey); //add event to list of already triggered events
-        console.log(eventKey, triggeredEvents);
+        triggeredEvents.push(eventKey);
       }
 
       if (triggeredEvents.length === listOfEvents.length) {
-        //have all the events finished?
-        cb(); //run the callback
-        triggeredEvents = [];
+        cb();
+        triggeredEvents = []; // Clear out array and continue listening
       }
     };
+
     $(document).on(eventKey, listener);
   });
 }
 
+// When any of these views update, makes sure all three events occurred and then apply changes to button states
 waitForAllEvents(
   [
-    "knack-view-render.view_450",
-    "knack-view-render.view_449",
-    "knack-view-render.view_448"
+    "knack-view-render." + appSpecifics.assignmentDetailsView,
+    "knack-view-render." + appSpecifics.startButtonView,
+    "knack-view-render." + appSpecifics.endButtonView
   ],
   function () {
+    var $startTimeSpan = $(startTimeSpanSelector);
+    var startTime = $startTimeSpan[0].innerText;
+    var $startButtonLink = $(`.${appSpecifics.startButtonView} a`);
+
     var $endTimeSpan = $(endTimeSpanSelector);
     var endTime = $endTimeSpan[0].innerText;
     var $endButtonLink = $(`.${appSpecifics.endButtonView} a`);
-
-    var $startTimeSpan = $(startTimeSpanSelector);
-    var startTime = $startTimeSpan[0].innerText;
-    console.log(startTime);
-    var $startButtonLink = $(`.${appSpecifics.startButtonView} a`);
-
-    if (endTime.length !== 0) {
-      $endButtonLink.addClass("disabled");
-    }
-
-    endTime.length !== 0 &&
-      $(".end-timestamp").length === 0 &&
-      $endButtonLink.append(
-        `<div class="content end-timestamp"><strong>Assignment ended at ${endTime}</strong></div>`
-      );
 
     if (startTime.length !== 0) {
       $startButtonLink.addClass("disabled");
@@ -1019,10 +1009,16 @@ waitForAllEvents(
         $startButtonLink.append(
           `<div class="content start-timestamp"><strong>Assignment started at ${startTime}</strong></div>`
         );
+    } else if (startTime.length === 0) {
+      $endButtonLink.addClass("disabled");
     }
 
-    if (startTime.length === 0) {
+    if (endTime.length !== 0) {
       $endButtonLink.addClass("disabled");
+      $(".end-timestamp").length === 0 &&
+        $endButtonLink.append(
+          `<div class="content end-timestamp"><strong>Assignment ended at ${endTime}</strong></div>`
+        );
     }
   }
 );
