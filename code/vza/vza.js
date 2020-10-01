@@ -927,7 +927,7 @@ $(document).on(
     var recordsTable = createRecordsTable(view.key, updatedTableConfig);
 
     // Append table, then request records and append shifts to table body
-    $("#view_447" + "> div.view-header")
+    $("#" + appSpecifics.todayAssignmentsView + "> div.view-header")
       .after(recordsTable)
       .ready(function () {
         requestRecords(filters.today, view.key, updatedTableConfig);
