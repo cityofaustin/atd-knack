@@ -37,10 +37,6 @@ var fields = {
   endTime: "field_561"
 };
 
-// Get user auth for get request (API view is private) and set req headers
-var user = Knack.getUserToken();
-var userId = Knack.getUserAttributes().id;
-
 // Shared code
 // Cache all officer_assignments to traverse with pagination
 var completeRecords = null;
@@ -54,6 +50,8 @@ var recordsPerPage = 10;
 var numberOfPages = null;
 var currentRangeStart = 1;
 var currentRangeEnd = currentPage - 1 + recordsPerPage;
+
+var userId = Knack.getUserAttributes().id;
 
 // Filter for records for assignments time windows
 var filters = {
@@ -129,12 +127,6 @@ var putUrl =
   "/views/" +
   appSpecifics.apiTableView +
   "/records/";
-
-var headers = {
-  "X-Knack-Application-ID": appSpecifics.knackAppId,
-  Authorization: user,
-  "content-type": "application/json"
-};
 
 function removeKnackTable(view) {
   $("#" + view + "> div.kn-records-nav").remove();
@@ -215,6 +207,15 @@ function createRecordsTable(view, tableConfig) {
 
 // Request and set initial records
 function requestRecords(filterConfig, view, tableConfig) {
+  // Get user auth for get request (API view is private) and set req headers
+  var user = Knack.getUserToken();
+  
+  var headers = {
+    "X-Knack-Application-ID": appSpecifics.knackAppId,
+    Authorization: user,
+    "content-type": "application/json"
+  };
+  
   var url =
     getUrl +
     "?filters=" +
