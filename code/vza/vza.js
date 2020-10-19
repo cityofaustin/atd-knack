@@ -34,7 +34,8 @@ var fields = {
   dateTimeOfCancellationField: "field_712",
   assignmentStatus: "field_584",
   startTime: "field_560",
-  endTime: "field_561"
+  endTime: "field_561",
+  observationsField: "field_733"
 };
 
 // Shared code
@@ -907,18 +908,21 @@ $(document).on(
   function (event, view, data) {
     var tableConfig = {
       columns: {
-        Status: function (record) {
-          return record[fields.assignmentStatus];
-        },
         Time: function (record) {
           return record[fields.timeField];
         },
-        Sector: function (record) {
-          return record[fields.locationFieldRaw][0].identifier.split(" - ")[0];
-        },
         Location: function (record) {
           return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
-        }
+        },
+        "Clock In": function (record) {
+          return record[fields.startTime];
+        },
+        "Clock Out": function (record) {
+          return record[fields.endTime];
+        },
+        "Observations": function (record) {
+          return record[fields.observationsField];
+        },
       },
       addTimeFilters: false,
       isCancelOnly: true
