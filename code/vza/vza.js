@@ -72,11 +72,6 @@ var filters = {
       operator: "is today"
     },
     {
-      field: fields.assignmentStatus,
-      operator: "is not",
-      value: "Complete"
-    },
-    {
       field: fields.assignedOfficerField,
       operator: "is",
       value: userId
