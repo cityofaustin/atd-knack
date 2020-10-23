@@ -37,3 +37,7 @@
 .my-shift-button > span.icon > i {
   color: #af3c3c;
 }
+
+a.disabled > h2 > button {
+  opacity: 40%;
+}
