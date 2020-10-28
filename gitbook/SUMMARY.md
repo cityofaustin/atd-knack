@@ -38,6 +38,8 @@
 ## SMB Tracker
 
 * [Work Order Attachments](smb-tracker/work-order-attachments.md)
+* [Contractor Work Order Tracking](smb-tracker/contractor-work-order-tracking/README.md)
+  * [Process & Functionality](smb-tracker/contractor-work-order-tracking/process-and-functionality.md)
 
 ## DTS Portal
 
