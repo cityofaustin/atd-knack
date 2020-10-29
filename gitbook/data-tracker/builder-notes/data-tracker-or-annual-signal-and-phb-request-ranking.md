@@ -6,11 +6,15 @@ description: 'Old guide - 12/10/2019, moved over 10/29/2020.'
 
 ![](../../.gitbook/assets/image%20%2818%29.png)
 
+## Overview
+
 Every year, AMD ranks [all active \("Under Evaluation"\) requests for Traffic Signals and Pedestrian Hybrid Beacons](https://data.mobility.austin.gov/data-tracker/#home/signal-requests/?view_39_filters=%7B%22match%22%3A%22and%22%2C%22rules%22%3A%5B%7B%22field%22%3A%22field_2022%22%2C%22operator%22%3A%22is%22%2C%22value%22%3A%22UNDER%20EVALUATION%22%2C%22field_name%22%3A%22REQUEST_STATUS%22%7D%5D%7D&view_39_page=1).
 
 In Data Tracker, requests are stored in the `signal_requests` object and evaluations are in a connected object. Since criteria are different for PHBs and signals, there are stored separately in `signal_requests_phb_evals` and `signal_requests_traffic_eval`.
 
-To expedite the process for AMD, we bulk create the evaluation records. This can be done using the following steps:
+### Bulk Create the evaluation records
+
+To expedite the process for AMD, we bulk create evaluation records. This can be done using the following steps:
 
 * Export two CSVs of all requests "Under evaluation", one for signals and one for PHBs
 * In Excel, delete all columns besides `REQUEST_ID`
@@ -19,7 +23,7 @@ To expedite the process for AMD, we bulk create the evaluation records. This can
 
 ![](../../.gitbook/assets/image%20%2819%29.png)
 
- Import the CSVs to the `signal_requests_phb_evals` and `signal_requests_traffic_eval` tables. Under _Select a field to match records_ select _Don't match, add all imported records_.
+Import the CSVs to the `signal_requests_phb_evals` and `signal_requests_traffic_eval` tables. Under _Select a field to match records_ select _Don't match, add all imported records_.
 
 ![](../../.gitbook/assets/image%20%2815%29.png)
 
