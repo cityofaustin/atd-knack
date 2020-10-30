@@ -42,7 +42,7 @@
 * Ability to quickly "**Issue**" from the table view
   * modal, select `Assigned To` - contractor system account, will update `Assigned Contractor` field
 
-**Contactor** 
+**Contractor** 
 
 * Only assigned work order records compiled on table view \(won't see other contractor records\)
 
@@ -63,7 +63,7 @@ Allows staff to update any work order information that may be incorrect
 
 ### Photo Attachment
 
-* both ATD staff and contractor can upload photos
+* both SMB staff and contractor can upload photos
 
 **SMB Staff**
 
@@ -71,7 +71,7 @@ Allows staff to update any work order information that may be incorrect
 
 **Contractor**
 
-* User can click `Add Photo` and then take a photo from their mobile device or upload an existing photo from a gallery
+* Contractor can click `Add Photo` and then take a photo from their mobile device or upload an existing photo from a gallery
 
 ### Issue Work Order button
 
@@ -90,15 +90,16 @@ Allows staff to update any work order information that may be incorrect
 
 **SMB Staff**
 
-* Can create a new inspection record, update `Inspection Status`, add `Inspection Issue/Comment`, triggers field for follow-up
+* Can create a new inspection record, update `Inspect, Inspection Status`, add `Inspection Issue/Comment`, triggers field for follow-up
 
 **Contractor**
 
-* Will see the created records on their page, can edit the inspection record by only commenting and updating the status. When status is updated the follow-up status will change to `Needs Review - Correction Complete` so that the ATD inspector can see there is a follow-up inspection required.
+* Will see the created records on their page, can edit the inspection record by only commenting and updating the status. 
+* When status is updated the follow-up status will change to `Ready to Inspect` so that the SMB inspector can see there is a follow-up inspection required.
 
 ### Approve
 
-* SMB Inspector will have button on their page to `Approve`. \(similar to SMB technicians\)
+* SMB Inspector will have button on their page to `Approve`. \(_similar to SMB technicians_\)
 * This will mean they have inspected the location/project and no issues are present
 * They will be required to electronically sign the approval
 
