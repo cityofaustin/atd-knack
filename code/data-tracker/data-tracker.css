@@ -1,22 +1,67 @@
-.kn-input select {
- height: 2.5em; 
-}
-
-.kn-input input[type="email"] {
- height: 2.5em; !important
- line-height: 2.5em;
-}
-
-     
-@media screen and (max-width:500px) {   
-  .kn-input input[type="email"], .kn-input input[type="password"]  {
-    height: 2.5em !important; 
-    line-height: 2.5em;
-  }
-}
-        
-.kn-input input.knack-date {
-    width: 7em !important;
+/* Mobile Styles */
+@media (max-width: 800px) {
+    /* Make buttons with type="submit" bigger */
+    button[type="submit"] {
+      height: 64px !important;
+      font-size: 32px !important;
+      min-width: fit-content;
+      width: 100%;
+    }
+  
+    /* Override width set for submit buttons to prevent overlaying map controls */
+    #lat-lon-form > form > div > button {
+      width: 50%;
+    }
+  
+    /* Increase font size of form field labels */
+    .kn-label {
+      font-size: 22px;
+    }
+  
+    /* Increase height of text fields */
+    input[type="text"] {
+      height: 48px !important;
+      font-size: 22px !important;
+    }
+  
+    /* Increase height of select fields */
+    .chzn-single {
+      height: 48px !important;
+    }
+  
+    .kn-select {
+      height: 48px !important;
+    }
+  
+    select {
+      height: 48px !important;
+      font-size: 22px !important;
+    }
+  
+    /* Increase height of container surrounding select fields */
+    .chzn-container {
+      height: 48px;
+      font-size: 22px !important;
+    }
+  
+    .chzn-container > a > span {
+      font-size: 22px !important;
+    }
+  
+    /* Increase font size of dropdown text in select fields */
+    .chzn-drop {
+      font-size: 22px !important;
+    }
+  
+    /* Increase size of search button */
+    .kn-button.search {
+      height: 48px;
+    }
+  
+    /* Increase font size of checkbox options */
+    .option.checkbox {
+      font-size: 22px;
+    }
 }
         
 .kn-link-disabled span {
@@ -44,3 +89,45 @@ div.view_2491 .field_3174 { display: none; }
 
 /* hide attachment type columns (in Request Status under Traffic Counts), field contents extracted via JS */
 div.view_2465 .field_3174 { display: none; }
+
+.big-button-container {
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px 0px gray;
+    font-size: 2.5em;
+    padding: 10px;
+    margin: 20px;
+    max-width: 15em;
+}
+ 
+.big-button-container:hover {
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+ 
+.small-button-container {
+  padding: 5px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #babbbc;
+  color: white;
+}
+
+.small-button-container:hover {
+    background-color: #4c4c4c;
+    cursor: pointer;
+}
+ 
+.fa {
+vertical-align: middle;
+}
+ 
+a.big-button {
+  text-decoration: none;
+}
+ 
+ a.small-button {
+  text-decoration: none;
+}
