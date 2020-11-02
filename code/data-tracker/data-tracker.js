@@ -65,12 +65,12 @@ $(document).on("knack-form-submit.view_1440", function (event, view, record) {
   var tmc_activity = {};
   var tmc_issue_id = record.field_1235_raw[0].id; //  tmc_issue connection field
   var wo_id = record.id; // work order database id
-  var creaded_by = "do something to get user id....";
+  var created_by = Knack.getUserAttributes().id;
   tmc_activity["field_1668"] = [tmc_issue_id]; // tmc issue connetion
   tmc_activity["field_1755"] = [wo_id]; //  work order connection
   tmc_activity["field_1053"] = "Dispatch Technician"; //  activity
   tmc_activity["field_1874"] = "in_progress"; //  issue status snapshot
-  tmc_activity["field_1056"] = [creaded_by]; // created by
+  tmc_activity["field_1056"] = [created_by]; // created by
   //  insert activity via form on same page
   console.log(tmc_activity);
   insertRecord(tmc_activity, "scene_428", "view_1437");
@@ -548,3 +548,99 @@ $(document).on("knack-scene-render.scene_1085", function () {
 ////////////////////////////////////////////////////////////
 ////////// End field color setting ////////////////////
 ///////////////////////////////////////////////////////
+
+
+
+/////////////////////////////////////////////////////////////
+//// Custom Login Buttons ///////////////////////////////////
+/////////////////////////////////////////////////////////////
+
+
+
+$(document).on('knack-view-render.any', function(event, page) {
+    //  wrapper to create large sign-in buttons
+    //  the views object uses the view id of the login form element as each key
+    //  and the page url of the login page's **child page** as the value
+    var views = {
+        'view_2750': 'work-orders-timing-engineers',
+        'view_124': 'home',
+        "view_1211": "mmc",
+        "view_1295": "account-admin",
+        "view_112": "signals",
+        "view_232": "my-work-orders",
+        "view_688": "work-orders",
+    }
+
+    if (page.key in views) {
+        customLoginButton(page.key, views[page.key]);    
+    }
+    
+});
+
+
+function customButton(div_id, view_id, url, fa_icon, button_label, button_class, container_class, callback) {
+  // create a custom button
+  
+    $("<div/>", {
+      id: div_id,
+    }).appendTo("#" + view_id);
+    
+  $("#" + div_id).append("<a class='" + button_class + "' href='" + url + "'><div class='" + container_class + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
+
+  if(callback) callback();
+}
+
+
+function customLoginButton(view_id, page_name) {
+  //  special logic to generate URL and clean-up sign in page brefore creating large button
+    $('.kn-sso-container').hide();
+
+    $('.login_form').hide();
+
+    $('h2.kn-title').hide();
+    
+    var url ="https://atd.knack.com/amd#" + page_name + "/auth/COACD";
+
+    customButton(
+      'caocd-button-login',
+      view_id, url,
+      'sign-in',
+      'Sign-In with CoA password',
+      "big-button",
+      "big-button-container"
+    );
+
+    customButton(
+      'non-coacd-button-login',
+      view_id,
+      "javascript:void(0)",
+      'lock',
+      'Non-COA Sign-In',
+      "small-button",
+      "small-button-container",
+      function(divId='non-coacd-button-login') {
+        setClickEvent(
+          divId,
+          showHideElements,
+          ".login_form",
+          ".small-button-container,.big-button-container"
+        );
+      });
+}
+
+function setClickEvent(divId, func, param1, param2) {
+  // TODO make these args less weird
+  $("#" + divId).click(function(){
+    func(param1, param2);
+  })
+}
+
+function showHideElements(showSelector, hideSelector) {
+  $(showSelector).show();
+  $(hideSelector).hide();
+}
+
+/////////////////////////////////////////////////////////////
+//// End Custom Login Buttons ///////////////////////////////////
+/////////////////////////////////////////////////////////////
+
