@@ -25,7 +25,7 @@ Here are the steps to follow after receiving the link.
 * Click on the link to the application.
 * When the application opens in Safari or another browser, click on the icon in the middle of the bottom footer menu.
 
-![](../.gitbook/assets/image%20%2822%29.png)
+![](../.gitbook/assets/image%20%2824%29.png)
 
 * Select the option called 'Add to the Home Screen'.
 * Go to the home screen, and tap on the VZA application icon.
@@ -33,9 +33,15 @@ Here are the steps to follow after receiving the link.
 
 
 
-![](../.gitbook/assets/image%20%2821%29.png)
+![](../.gitbook/assets/image%20%2822%29.png)
 
-* For Email Address, put in your badge number that starts with AP.
+* Click on Sign in with COACD
+* * You will be directed to the City of Austin Secure Authentication Portal
+* For Email Address, put in your badge number that starts with AP
 * For Password, put in the password you use to access your email in Outlook.
 * You may be asked for a token number or another way to authenticate this login.
 * 
+![](../.gitbook/assets/image%20%2823%29.png)
+
+![](../.gitbook/assets/image%20%2821%29.png)
+
