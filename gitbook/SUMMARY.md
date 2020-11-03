@@ -83,6 +83,6 @@
 ## Vision Zero in Action
 
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
-* [Officer Records](vision-zero-in-action/officer-records/README.md)
-  * [Calculate School Closures](vision-zero-in-action/officer-records/calculate-school-closure.md)
+* [Calculate School Closures](vision-zero-in-action/calculate-school-closure.md)
+* [Officer Records](vision-zero-in-action/officer-records.md)
 
