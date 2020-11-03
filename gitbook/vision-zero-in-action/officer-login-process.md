@@ -45,4 +45,7 @@ Here are the steps to follow after receiving the link.
 * For Email Address, put in your badge number that starts with AP
 * For Password, put in the password you use to access your email in Outlook.
 * You may be asked for a token number or another way to authenticate this login.
+* Once you are successfully signed in, you will see a screen like the one below.
+
+![](../.gitbook/assets/image%20%2826%29.png)
 
