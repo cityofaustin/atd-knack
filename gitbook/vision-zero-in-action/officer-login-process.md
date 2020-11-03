@@ -36,8 +36,13 @@ Here are the steps to follow after receiving the link.
 ![](../.gitbook/assets/image%20%2822%29.png)
 
 * Click on Sign in with COACD
-* * You will be directed to the City of Austin Secure Authentication Portal
+
+![](../.gitbook/assets/image%20%2825%29.png)
+
+
+
+* You will be directed to the City of Austin Secure Authentication Portal
 * For Email Address, put in your badge number that starts with AP
 * For Password, put in the password you use to access your email in Outlook.
 * You may be asked for a token number or another way to authenticate this login.
-* 
+
