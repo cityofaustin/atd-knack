@@ -24,7 +24,11 @@
 * **street\_names** \(for contractor work order object - Street, From/To Street in order to not have typos on location names.
 * **accounts** \(audit fields: Created Date/By, Modified Date/By\)
 
-\*\*\*\*
+[SMB Contractor Status Matrix](https://drive.google.com/file/d/1OTWQ8NzBe0_7QojCVpS9YN8qZ-0o01kA/view)
+
+![](../../.gitbook/assets/image%20%2828%29.png)
+
+![](../../.gitbook/assets/image%20%2827%29.png)
 
 
 
