@@ -22,8 +22,20 @@ They will receive a link to the application after creating the account.
 
 Here are the steps to follow after receiving the link.
 
+* Click on the link to the application.
+* When the application opens in Safari or another browser, click on the icon in the middle of the bottom footer menu.
+
+![](../.gitbook/assets/image%20%2822%29.png)
+
+* Select the option called 'Add to the Home Screen'.
+* Go to the home screen, and tap on the VZA application icon.
+* You should see the login screen below
+
+
+
+![](../.gitbook/assets/image%20%2821%29.png)
+
+* For Email Address, put in your badge number that starts with AP.
+* For Password, put in the password you use to access your email in Outlook.
+* You may be asked for a token number or another way to authenticate this login.
 * 
-
-
-
-
