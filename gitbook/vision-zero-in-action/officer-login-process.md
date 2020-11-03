@@ -41,7 +41,3 @@ Here are the steps to follow after receiving the link.
 * For Password, put in the password you use to access your email in Outlook.
 * You may be asked for a token number or another way to authenticate this login.
 * 
-![](../.gitbook/assets/image%20%2823%29.png)
-
-![](../.gitbook/assets/image%20%2821%29.png)
-
