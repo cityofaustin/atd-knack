@@ -16,6 +16,13 @@ A user with an Officer role in the application will be able to carry out this pr
 
 ## Process
 
+Officers will attend an introductory training session and then register to create an account in the application. The username should be _first name.last name@austintexas.gov._ 
+
+They will receive a link to the application after creating the account.
+
+Here are the steps to follow after receiving the link.
+
+* 
 
 
 
