@@ -15,6 +15,7 @@ description: >-
   * Workflow and Visio found here
 
 * _TIA Module&gt;workflow_ Google Drive: [`https://drive.google.com/drive/folders/13GdQBj5YNH0aNjw8GNNKOXXad_KZJBIn?usp=sharing`](https://drive.google.com/drive/folders/13GdQBj5YNH0aNjw8GNNKOXXad_KZJBIn?usp=sharing)\`\`
+* Workflow: [`https://drive.google.com/file/d/1L7bUt_935nsjEAG0fpQ41yuYjxUxjzeM/view`](https://drive.google.com/file/d/1L7bUt_935nsjEAG0fpQ41yuYjxUxjzeM/view)\`\`
 
 ## Current State 7/23/20
 
