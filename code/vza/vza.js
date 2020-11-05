@@ -16,8 +16,8 @@ var appSpecifics = {
   futureAssignmentsView: "view_439", // Insert new table
   startButtonView: "view_449", // Assignment Details view
   endButtonView: "view_450", // Assignment Details view
-  assignmentDetailsView: "view_448",
-  noOfficerAssignedId: "5ebef4d0682bfc0015c9e0f4" // For conditional styles based on officer assigned
+  noOfficerAssignedId: "5ebef4d0682bfc0015c9e0f4", // For conditional styles based on officer assigned
+  assignmentDetailsTimes: "view_538" // Assignment Details view
 };
 
 // officer_assignment object fields
@@ -35,7 +35,7 @@ var fields = {
   assignmentStatus: "field_584",
   startTime: "field_560",
   endTime: "field_561",
-  observationsField: "field_733"
+  observationsField: "field_734"
 };
 
 // Shared code
@@ -205,13 +205,13 @@ function createRecordsTable(view, tableConfig) {
 function requestRecords(filterConfig, view, tableConfig) {
   // Get user auth for get request (API view is private) and set req headers
   var user = Knack.getUserToken();
-  
+
   var headers = {
     "X-Knack-Application-ID": appSpecifics.knackAppId,
     Authorization: user,
     "content-type": "application/json"
   };
-  
+
   var url =
     getUrl +
     "?filters=" +
@@ -915,9 +915,9 @@ $(document).on(
         "Clock Out": function (record) {
           return record[fields.endTime];
         },
-        "Observations": function (record) {
+        Observations: function (record) {
           return record[fields.observationsField];
-        },
+        }
       },
       addTimeFilters: false,
       isCancelOnly: true
@@ -966,8 +966,8 @@ $(document).on(
 );
 
 // Enable/disable Start and End assignment buttons and add timestamps
-var startTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.${fields.startTime} div.kn-detail-body`;
-var endTimeSpanSelector = `#${appSpecifics.assignmentDetailsView} div.kn-detail.${fields.endTime} div.kn-detail-body`;
+var startTimeInputSelector = `input#${appSpecifics.assignmentDetailsTimes}-${fields.startTime}`;
+var endTimeInputSelector = `input#${appSpecifics.assignmentDetailsTimes}-${fields.endTime}`;
 
 function waitForAllEvents(listOfEvents, cb) {
   var triggeredEvents = [];
@@ -990,17 +990,17 @@ function waitForAllEvents(listOfEvents, cb) {
 // When any of these views update, makes sure all three events occurred and then apply changes to button states
 waitForAllEvents(
   [
-    "knack-view-render." + appSpecifics.assignmentDetailsView,
+    "knack-view-render." + appSpecifics.assignmentDetailsTimes,
     "knack-view-render." + appSpecifics.startButtonView,
     "knack-view-render." + appSpecifics.endButtonView
   ],
   function () {
-    var $startTimeSpan = $(startTimeSpanSelector);
-    var startTime = $startTimeSpan[0].innerText;
+    var $startTimeInput = $(startTimeInputSelector);
+    var startTime = $startTimeInput[0].value;
     var $startButtonLink = $(`.${appSpecifics.startButtonView} a`);
 
-    var $endTimeSpan = $(endTimeSpanSelector);
-    var endTime = $endTimeSpan[0].innerText;
+    var $endTimeInput = $(endTimeInputSelector);
+    var endTime = $endTimeInput[0].value;
     var $endButtonLink = $(`.${appSpecifics.endButtonView} a`);
 
     if (startTime.length !== 0) {
