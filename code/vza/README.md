@@ -23,6 +23,9 @@
 - Reason for Cancellation
 - Unassigned Officer
 - Status
+- Start Time
+- End Time
+- Number of Observations
 - Send email action **(this column is setup in Step 4)**
 
 ![API view columns](images/api_view_columns.png)
