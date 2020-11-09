@@ -1056,8 +1056,9 @@ function customButton(
 $(document).on("knack-view-render.any", function (event, page) {
   // Find SSO button
   var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
 
-  if ($ssoButton.length) {
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
     var $ssoView = $ssoButton.closest("[id^=view_]");
     var viewId = $ssoView.get(0).id;
 
@@ -1067,41 +1068,52 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
-function customLoginButton(view_id) {
-  // Hide Knack default SSO button, login form, and login title
-  $(".kn-sso-container").hide();
-  $(".login_form").hide();
-  $("h2.kn-title").hide();
+function customLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
 
   var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
 
-  customButton(
-    "caocd-button-login",
-    view_id,
-    url,
-    "sign-in",
-    "Sign-In",
-    "big-button",
-    "big-button-container"
+  // Create a custom button
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login"
+  });
+
+  // Append Big SSO Login button
+  $coacdButton.appendTo("#" + viewId);
+  $coacdButton.append(
+    "<a class='big-button' href='" +
+      url +
+      "'><div class='big-button-container'><span><i class='fa fa-sign-in'></i></span><span> Sign-in</span></div></a>"
   );
 
-  customButton(
-    "non-coacd-button-login",
-    view_id,
-    "javascript:void(0)",
-    "lock",
-    "Non-COA Sign-In",
-    "small-button",
-    "small-button-container",
-    function (divId = "non-coacd-button-login") {
-      setClickEvent(
-        divId,
-        showHideElements,
-        ".login_form",
-        ".small-button-container,.big-button-container"
-      );
-    }
-  );
+  // customButton(
+  //   "caocd-button-login",
+  //   view_id,
+  //   url,
+  //   "sign-in",
+  //   "Sign-In",
+  //   "big-button",
+  //   "big-button-container"
+  // );
+
+  // customButton(
+  //   "non-coacd-button-login",
+  //   view_id,
+  //   "javascript:void(0)",
+  //   "lock",
+  //   "Non-COA Sign-In",
+  //   "small-button",
+  //   "small-button-container",
+  //   function (divId = "non-coacd-button-login") {
+  //     setClickEvent(
+  //       divId,
+  //       showHideElements,
+  //       ".login_form",
+  //       ".small-button-container,.big-button-container"
+  //     );
+  //   }
+  // );
 }
-
-// $(".kn-sso-container").closest("[id^=view_]")
