@@ -1051,30 +1051,29 @@ function customButton(
       button_label +
       "</span></div></a>"
   );
-
-  if (callback) callback();
 }
 
 $(document).on("knack-view-render.any", function (event, page) {
-  //  wrapper to create large sign-in buttons
-  //  the views ojbect uses the view id of the login form element as each key
-  //  and the page url of the login page's **chile page** as the value
-  var views = {
-    view_39: "home"
-  };
+  // Find SSO button
+  var $ssoButton = $(".kn-sso-container");
 
-  if (page.key in views) {
-    customLoginButton(page.key, views[page.key]);
+  if ($ssoButton.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customLoginButton(viewId);
+  } else {
+    console.log("No SSO button here!");
   }
 });
 
 function customLoginButton(view_id) {
-  // Remove Knack default SSO button, login form, and login title
+  // Hide Knack default SSO button, login form, and login title
   $(".kn-sso-container").hide();
   $(".login_form").hide();
   $("h2.kn-title").hide();
 
-  var url = Knack.url_base + "/" + Knack.scene_hash + "auth/COACD";
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
 
   customButton(
     "caocd-button-login",
@@ -1104,3 +1103,5 @@ function customLoginButton(view_id) {
     }
   );
 }
+
+// $(".kn-sso-container").closest("[id^=view_]")
