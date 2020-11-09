@@ -1022,3 +1022,96 @@ waitForAllEvents(
     }
   }
 );
+
+function customButton(
+  div_id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  button_class,
+  container_class,
+  callback
+) {
+  // Create a custom button
+  $("<div/>", {
+    id: div_id
+  }).appendTo("#" + view_id);
+
+  $("#" + div_id).append(
+    "<a class='" +
+      button_class +
+      "' href='" +
+      url +
+      "'><div class='" +
+      container_class +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></div></a>"
+  );
+
+  if (callback) callback();
+}
+
+$(document).on("knack-view-render.any", function (event, page) {
+  //  wrapper to create large sign-in buttons
+  //  the views ojbect uses the view id of the login form element as each key
+  //  and the page url of the login page's **chile page** as the value
+  var views = {
+    view_39: "home",
+    view_5: "purchase-requests",
+    view_82: "purchasing-budget-review",
+    view_52: "account-administration",
+    view_322: "commodity-codes",
+    view_31: "reviews",
+    view_387: "invoice-details",
+    view_379: "add-invoice",
+    view_77: "my-purchase-requests"
+  };
+
+  if (page.key in views) {
+    customLoginButton(page.key, views[page.key]);
+  }
+});
+
+function customLoginButton(view_id, page_name) {
+  //  special logic to generate URL and clean-up sign in page brefore creating large button
+  $(".kn-sso-container").hide();
+
+  $(".login_form").hide();
+
+  $("h2.kn-title").hide();
+
+  var url =
+    "https://atd.knack.com/finance-purchasing#" + page_name + "/auth/COACD";
+
+  customButton(
+    "caocd-button-login",
+    view_id,
+    url,
+    "sign-in",
+    "Sign-In",
+    "big-button",
+    "big-button-container"
+  );
+
+  customButton(
+    "non-coacd-button-login",
+    view_id,
+    "javascript:void(0)",
+    "lock",
+    "Non-COA Sign-In",
+    "small-button",
+    "small-button-container",
+    function (divId = "non-coacd-button-login") {
+      setClickEvent(
+        divId,
+        showHideElements,
+        ".login_form",
+        ".small-button-container,.big-button-container"
+      );
+    }
+  );
+}
