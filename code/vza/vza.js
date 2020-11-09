@@ -1060,15 +1060,7 @@ $(document).on("knack-view-render.any", function (event, page) {
   //  the views ojbect uses the view id of the login form element as each key
   //  and the page url of the login page's **chile page** as the value
   var views = {
-    view_39: "home",
-    view_5: "purchase-requests",
-    view_82: "purchasing-budget-review",
-    view_52: "account-administration",
-    view_322: "commodity-codes",
-    view_31: "reviews",
-    view_387: "invoice-details",
-    view_379: "add-invoice",
-    view_77: "my-purchase-requests"
+    view_39: "home"
   };
 
   if (page.key in views) {
@@ -1076,16 +1068,13 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
-function customLoginButton(view_id, page_name) {
-  //  special logic to generate URL and clean-up sign in page brefore creating large button
+function customLoginButton(view_id) {
+  // Remove Knack default SSO button, login form, and login title
   $(".kn-sso-container").hide();
-
   $(".login_form").hide();
-
   $("h2.kn-title").hide();
 
-  var url =
-    "https://atd.knack.com/finance-purchasing#" + page_name + "/auth/COACD";
+  var url = Knack.url_base + "/" + Knack.scene_hash + "auth/COACD";
 
   customButton(
     "caocd-button-login",
