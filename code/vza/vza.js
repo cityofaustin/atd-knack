@@ -1054,10 +1054,11 @@ function customButton(
 }
 
 $(document).on("knack-view-render.any", function (event, page) {
-  // Find SSO button
+  // Find SSO button and existing custom button
   var $ssoButton = $(".kn-sso-container");
   var $coacdLoginDiv = $("#coacd-button-login");
 
+  // If SSO button exists on page and there isn't already a custom button
   if ($ssoButton.length && !$coacdLoginDiv.length) {
     var $ssoView = $ssoButton.closest("[id^=view_]");
     var viewId = $ssoView.get(0).id;
@@ -1076,33 +1077,34 @@ function customLoginButton(viewId) {
 
   var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
 
-  // Create a custom button
+  // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
     id: "coacd-button-login"
   });
-
-  // Append Big SSO Login button
   $coacdButton.appendTo("#" + viewId);
+
+  // Append Big SSO Login button and non-SSO Login button
   $coacdButton.append(
     "<a class='big-button' href='" +
       url +
       "'><div class='big-button-container'><span><i class='fa fa-sign-in'></i></span><span> Sign-in</span></div></a>"
   );
 
-  // customButton(
-  //   "caocd-button-login",
-  //   view_id,
-  //   url,
-  //   "sign-in",
-  //   "Sign-In",
-  //   "big-button",
-  //   "big-button-container"
-  // );
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
+  );
+
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    console.log("You clicked the non-SSO button");
+  });
 
   // customButton(
   //   "non-coacd-button-login",
   //   view_id,
-  //   "javascript:void(0)",
+  //   "",
   //   "lock",
   //   "Non-COA Sign-In",
   //   "small-button",
