@@ -1023,36 +1023,6 @@ waitForAllEvents(
   }
 );
 
-function customButton(
-  div_id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  button_class,
-  container_class,
-  callback
-) {
-  // Create a custom button
-  $("<div/>", {
-    id: div_id
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
-      url +
-      "'><div class='" +
-      container_class +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></div></a>"
-  );
-}
-
 $(document).on("knack-view-render.any", function (event, page) {
   // Find SSO button and existing custom button
   var $ssoButton = $(".kn-sso-container");
@@ -1063,13 +1033,11 @@ $(document).on("knack-view-render.any", function (event, page) {
     var $ssoView = $ssoButton.closest("[id^=view_]");
     var viewId = $ssoView.get(0).id;
 
-    customLoginButton(viewId);
-  } else {
-    console.log("No SSO button here!");
+    customizeLoginButton(viewId);
   }
 });
 
-function customLoginButton(viewId) {
+function customizeLoginButton(viewId) {
   // Hide Knack default SSO button, login form, login title, and any other children
   $("#" + viewId)
     .children()
@@ -1098,24 +1066,10 @@ function customLoginButton(viewId) {
   // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
   var $nonCoacdButton = $(".small-button");
   $nonCoacdButton.click(function () {
-    console.log("You clicked the non-SSO button");
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
   });
-
-  // customButton(
-  //   "non-coacd-button-login",
-  //   view_id,
-  //   "",
-  //   "lock",
-  //   "Non-COA Sign-In",
-  //   "small-button",
-  //   "small-button-container",
-  //   function (divId = "non-coacd-button-login") {
-  //     setClickEvent(
-  //       divId,
-  //       showHideElements,
-  //       ".login_form",
-  //       ".small-button-container,.big-button-container"
-  //     );
-  //   }
-  // );
 }
