@@ -13,6 +13,7 @@
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [CODE: Mobile Optimization](knack/mobile-optimization.md)
 * [CODE: Big Buttons](knack/code-big-buttons.md)
+* [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
 * [ArcGIS Online Integration](knack/arcgis-online-integration.md)
