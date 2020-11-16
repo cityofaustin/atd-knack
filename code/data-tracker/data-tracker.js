@@ -644,3 +644,76 @@ function showHideElements(showSelector, hideSelector) {
 //// End Custom Login Buttons ///////////////////////////////////
 /////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////
+//// Begin Set Weighted Unit Cost ///////////////////////////
+/////////////////////////////////////////////////////////////
+$(document).on("knack-scene-render.scene_1171", function (event, page) {
+  function dollarsToNum(val) {
+    return parseFloat(val.replace("$", "").replaceAll(",", ""));
+  }
+
+  function getWeightedUnitCost(
+    quantityOnHand,
+    unitCost,
+    restockQuantity,
+    restockUnitCost
+  ) {
+    // returns new weighted unit cost based on old/new quantities/costs
+    // console.log("quantityOnHand: ", quantityOnHand);
+    // console.log("unitCost: ", unitCost);
+    // console.log("restockQuantity: ", restockQuantity);
+    // console.log("restockUnitCost: ", restockUnitCost);
+    weightedUnitCost =
+      (quantityOnHand * unitCost + restockQuantity * restockUnitCost) /
+      (quantityOnHand + restockQuantity);
+    return weightedUnitCost.toFixed(3);
+  }
+
+  var detailsView = "view_2865";
+  var unitCostField = "field_245";
+  var quantiyOnHandField = "field_3579"; // details
+  var restockQuantityField = "field_3785";
+  var restockUnitCostField = "field_3783";
+  var newUnitCostField = "field_245";
+  var restockQuantity = dollarsToNum($("#" + restockQuantityField).val());
+  var restockUnitCost = parseFloat($("#" + restockUnitCostField).val());
+
+  $("#" + newUnitCostField).prop("disabled", true);
+
+  var quantityOnHand = dollarsToNum(
+    $("#" + detailsView)
+      .find("div.kn-detail." + quantiyOnHandField)
+      .find(".kn-detail-body span")
+      .text()
+  );
+  quantityOnHand = quantityOnHand > 0 ? quantityOnHand : 0;
+
+  var unitCost = dollarsToNum(
+    $("#" + detailsView)
+      .find("div.kn-detail." + unitCostField)
+      .find(".kn-detail-body span")
+      .text()
+  );
+
+  $("#" + restockUnitCostField).on("input", function () {
+    restockUnitCost = parseFloat($(this).val());
+    var newUnitCost = getWeightedUnitCost(
+      quantityOnHand,
+      unitCost,
+      restockQuantity,
+      restockUnitCost
+    );
+    $("#" + newUnitCostField).val(newUnitCost);
+  });
+
+  $("#" + restockQuantityField).on("input", function () {
+    restockQuantity = parseFloat($(this).val());
+    var newUnitCost = getWeightedUnitCost(
+      quantityOnHand,
+      unitCost,
+      restockQuantity,
+      restockUnitCost
+    );
+    $("#" + newUnitCostField).val(newUnitCost);
+  });
+});
