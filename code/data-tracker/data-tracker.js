@@ -493,7 +493,6 @@ $(document).on("knack-view-render.view_1294", function (event, scene) {
 function changeFieldColor(fieldClass, color_map) {
   var child_field = $(fieldClass).find(".kn-value");
   var value = child_field.text();
-  console.log("VALUE: ", value);
   if (color_map[value]) {
     $(child_field).css({
       "background-color": color_map[value].background_color,
@@ -644,6 +643,7 @@ function showHideElements(showSelector, hideSelector) {
 //// End Custom Login Buttons ///////////////////////////////////
 /////////////////////////////////////////////////////////////
 
+
 /////////////////////////////////////////////////////////////
 //// Begin Set Weighted Unit Cost ///////////////////////////
 /////////////////////////////////////////////////////////////
@@ -672,28 +672,46 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   var detailsView = "view_2865";
   var unitCostField = "field_245";
   var quantiyOnHandField = "field_3579"; // details
+  var previousUnitCostField = "field_3786"; // used to capture previous state on form submit
+  var previousOnHandQuantiyField = "field_3787"; // used to capture previous state on form submit
   var restockQuantityField = "field_3785";
   var restockUnitCostField = "field_3783";
   var newUnitCostField = "field_245";
   var restockQuantity = dollarsToNum($("#" + restockQuantityField).val());
   var restockUnitCost = parseFloat($("#" + restockUnitCostField).val());
 
+  // prevent editing of new unit cost field. this will be set programmatically
   $("#" + newUnitCostField).prop("disabled", true);
 
   var quantityOnHand = dollarsToNum(
-    $("#" + detailsView)
-      .find("div.kn-detail." + quantiyOnHandField)
-      .find(".kn-detail-body span")
-      .text()
+    $(
+      $("#" + detailsView)
+        .find("div.kn-detail." + quantiyOnHandField)
+        .find(".kn-detail-body span")[0]
+    ).text()
   );
+  // handle situation where stock levels are negative (this should not but prob will happen)
   quantityOnHand = quantityOnHand > 0 ? quantityOnHand : 0;
 
   var unitCost = dollarsToNum(
-    $("#" + detailsView)
-      .find("div.kn-detail." + unitCostField)
-      .find(".kn-detail-body span")
-      .text()
+    $(
+      $("#" + detailsView)
+        .find("div.kn-detail." + unitCostField)
+        .find(".kn-detail-body span")[0]
+    ).text()
   );
+
+  /*
+    set the value of the preivous unit cost and quanity. we pass these to a submit rule
+    on this form that will insert these values into a log record
+  */
+  $("#" + previousUnitCostField)
+    .val(unitCost)
+    .prop("disabled", true);
+
+  $("#" + previousOnHandQuantiyField)
+    .val(quantityOnHand)
+    .prop("disabled", true);
 
   $("#" + restockUnitCostField).on("input", function () {
     restockUnitCost = parseFloat($(this).val());
