@@ -702,8 +702,8 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   );
 
   /*
-    set the value of the preivous unit cost and quanity. we pass these to a submit rule
-    on this form that will insert these values into a log record
+    set the value of the preivous unit cost and quanity. these fields are hidden to the 
+    user and we pass these values via submit rule that inserts them into a log record
   */
   $("#" + previousUnitCostField)
     .val(unitCost)
@@ -712,6 +712,10 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   $("#" + previousOnHandQuantiyField)
     .val(quantityOnHand)
     .prop("disabled", true);
+
+    
+    //   $("#kn-input-" + previousUnitCostField).attr("hidden", true);
+    //   $("#kn-input-" + previousOnHandQuantiyField).attr("hidden", true);
 
   $("#" + restockUnitCostField).on("input", function () {
     restockUnitCost = parseFloat($(this).val());
@@ -733,5 +737,20 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
       restockUnitCost
     );
     $("#" + newUnitCostField).val(newUnitCost);
+  });
+});
+
+////// Add "Refresh" button to inventory requests table
+$(document).on("knack-view-render.view_2698", function (event, page) {
+  var button = $(
+    "<span style='width: 2em'></span><button id='refresh-view_2698' style='border-radius: .35em !important' class='kn-button is-primary'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Refresh</button>"
+  );
+
+  button.insertAfter(
+    $("#view_2698").find("form.table-keyword-search").find("a")[0]
+  );
+
+  $("#refresh-view_2698").click(function () {
+    Knack.views["view_2698"].model.fetch();
   });
 });
