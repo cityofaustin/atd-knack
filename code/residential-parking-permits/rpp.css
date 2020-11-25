@@ -1,26 +1,29 @@
 .big-button-container {
-  border-radius: 2px;
-  box-shadow: 0px 1px 2px 0px gray;
-  font-size: 2.5em;
-  padding: 10px;
-  margin: 20px;
-  max-width: 12em;
+    border-radius: 2px;
+    box-shadow: 0px 1px 2px 0px gray;
+    font-size: 2.5em;
+    padding: 10px;
+    margin: 20px;
+    max-width: 12em;
 }
-
+ 
 .big-button-container:hover {
-  background-color: #f7f7f7;
-  cursor: pointer;
+    background-color: #f7f7f7;
+    cursor: pointer;
 }
-
+ 
+ 
 .fa {
-  vertical-align: middle;
+vertical-align: middle;
 }
-
+ 
+ 
 a.big-button {
   text-decoration: none;
 }
 
 /* Remove Back Links */
+
 #kn-scene_3 .kn-back-link {
   display: none;
 }
@@ -33,7 +36,7 @@ a.big-button {
 #kn-scene_176 .kn-back-link {
   display: none;
 }
-#kn-scene_1791 .kn-back-link {
+#kn-scene_179 .kn-back-link {
   display: none;
 }
 #kn-scene_140 .kn-back-link {
@@ -47,4 +50,48 @@ a.big-button {
 }
 #kn-scene_163 .kn-back-link {
   display: none;
+}
+#kn-scene_226 .kn-back-link {
+  display: none;
+}
+#kn-scene_227 .kn-back-link {
+  display: none;
+}
+#kn-scene_231 .kn-back-link {
+  display: none;
+}
+#kn-scene_237 .kn-back-link {
+  display: none;
+}
+#kn-scene_244 .kn-back-link {
+  display: none;
+}
+#kn-scene_262 .kn-back-link {
+  display: none;
+}
+/* Remove Back Links for RPP Application */
+#kn-scene_309 .kn-back-link {
+  display: none;
+}
+#kn-scene_310 .kn-back-link {
+  display: none;
+}
+#kn-scene_312 .kn-back-link {
+  display: none;
+}
+#kn-scene_313 .kn-back-link {
+  display: none;
+}
+#kn-scene_314 .kn-back-link {
+  display: none;
+}
+#kn-scene_315 .kn-back-link {
+  display: none;
+}
+
+/* Used in combo w/ custom code that sets the field value */
+.hiddenFormField {
+    visibility: hidden;
+    height: 0px;
+    margin-bottom: 0 !important;
 }
