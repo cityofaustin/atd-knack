@@ -32,11 +32,11 @@ $(document).on("knack-view-render.view_4", function (event, page) {
 $(document).on("knack-view-render.view_4", function (event, page) {
   // create large button on the home page
   bigButton(
-    "welcome",
+    "get-started",
     "view_4",
-    "https://atd.knack.com/parking#review-requirements/",
+    "https://atd.knack.com/parking#get-started/",
     "file-text",
-    "Review Requirements"
+    "Get Started"
   );
 });
 
@@ -74,24 +74,13 @@ $(document).on("knack-view-render.view_236", function (event, page) {
   );
 });
 
-//>>>WELCOME TAB BUTTONS
-$(document).on("knack-view-render.view_237", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "rpp",
-    "view_237",
-    "https://atd.knack.com/parking#rpp",
-    "home",
-    "Home"
-  );
-});
-
+//>>>GET STARTED TAB BUTTONS
 $(document).on("knack-view-render.view_127", function (event, page) {
   // create large button on the home page
   bigButton(
     "apply",
     "view_127",
-    "https://atd.knack.com/parking#apply/",
+    "https://atd.knack.com/parking#apply-for-permits/",
     "arrow-right",
     "Start Application"
   );
@@ -142,16 +131,27 @@ $(document).on("knack-view-render.view_184", function (event, page) {
   );
 });
 
-$(document).on("knack-view-render.view_208", function (event, page) {
+$(document).on("knack-view-render.view_396", function (event, page) {
   // create large button on the home page
   bigButton(
-    "reports",
-    "view_208",
-    "https://atd.knack.com/parking#reports",
-    "bar-chart",
-    "Reports"
+    "verify",
+    "view_396",
+    "https://atd.knack.com/parking#verify/",
+    "map-marker",
+    "Am I Eligible?"
   );
 });
+
+//$(document).on('knack-view-render.view_208', function(event, page) {
+// create large button on the home page
+bigButton(
+  "reports",
+  "view_208",
+  "https://atd.knack.com/parking#reports",
+  "bar-chart",
+  "Reports"
+);
+//});
 
 //>>>PAYMENT OPTIONS TAB BUTTONS
 $(document).on("knack-view-render.view_273", function (event, page) {
@@ -165,8 +165,14 @@ $(document).on("knack-view-render.view_273", function (event, page) {
   );
 });
 
+//>>>APPLICATION SUBMIT BUTTONS
+//$(document).on('knack-view-render.view_755', function(event, page) {
+// create large button on the review application page
+//bigButton('continue', 'view_755', "https://atd.knack.com/parking#apply/permit-information2/required-documents/review-application/", "check", "Save & Continue");
+//});
+
 $(document).on("knack-page-render.any", function (event, page) {
-  // Convert all name and address entries to upper case
+  // Convert all name, address, and license plate entries to upper case
   //  This is required in addition to the uppercase css text transform, which is superficial
   $(".kn-input-name input").keyup(function () {
     this.value = this.value.toUpperCase();
@@ -175,13 +181,40 @@ $(document).on("knack-page-render.any", function (event, page) {
   $(".kn-input-address input").keyup(function () {
     this.value = this.value.toUpperCase();
   });
+
+  $("input#field_232").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
+
+  $("input#field_235").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
+
+  $("input#field_237").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
+
+  $("input#field_239").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
+
+  $("input#field_397").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
+
+  $("input#field_398").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
 });
 
-$(document).on("knack-view-render.any", function (event, view, data) {
-  //  autofill city and state on any address form
-  $("#city").val("AUSTIN");
-  $("#state").val("TX");
-});
+//$(document).on('knack-view-render.any', function(event, view, data) {
+//  autofill city and state on any address form except permit information on customer application
+//if (view === "view_713") {
+//  return;
+//}
+//$("#city").val('AUSTIN');
+//$("#state").val('TX');
+//});
 
 function updateVerifyIframe(x, y, street) {
   // RPP Eligibility
@@ -441,39 +474,278 @@ function disableBreadCrumbsNonAdmin() {
     });
   }
 }
-
+//no longer exists
 $(document).on("knack-scene-render.scene_3", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//no longer exists
 $(document).on("knack-scene-render.scene_13", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//delete view
 $(document).on("knack-scene-render.scene_123", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//delete view
 $(document).on("knack-scene-render.scene_176", function () {
   disableBreadCrumbsNonAdmin();
 });
-
-$(document).on("knack-scene-render.scene_1791", function () {
+//delete view
+$(document).on("knack-scene-render.scene_179", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//delete view
 $(document).on("knack-scene-render.scene_140", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//delete view
 $(document).on("knack-scene-render.scene_142", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//no longer exists
 $(document).on("knack-scene-render.scene_186", function () {
   disableBreadCrumbsNonAdmin();
 });
-
+//no longer exists
 $(document).on("knack-scene-render.scene_163", function () {
   disableBreadCrumbsNonAdmin();
+});
+//no longer exists
+$(document).on("knack-scene-render.scene_226", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//no longer exists
+$(document).on("knack-scene-render.scene_227", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//no longer exists
+$(document).on("knack-scene-render.scene_231", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//no longer exists
+$(document).on("knack-scene-render.scene_237", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//no longer exists
+$(document).on("knack-scene-render.scene_244", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//no longer exists
+$(document).on("knack-scene-render.scene_262", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//apply for permits-rpp app
+$(document).on("knack-scene-render.scene_309", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//permit information-rpp app
+$(document).on("knack-scene-render.scene_310", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//required documents-rpp app
+$(document).on("knack-scene-render.scene_312", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//review application-rpp app
+$(document).on("knack-scene-render.scene_313", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//application invoice-rpp app
+$(document).on("knack-scene-render.scene_314", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//edit application-rpp app
+$(document).on("knack-scene-render.scene_315", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/////////////////////////////////////////////////////////////
+//// Begin Set Weighted Unit Cost ///////////////////////////
+/////////////////////////////////////////////////////////////
+function setCostFields(viewId, options) {
+  var NUM_DECALS_FIELD = "field_394"; // Resident Decals Application Choice
+  var NUM_HANGTAGS_FIELD = "field_395"; // Visitor Hangtags Application Choice
+  var NUM_DAY_PASSES_FIELD = "field_396"; //  day passes choice
+  var NUM_EXISTING_PERMITS_FIELD = "field_546";
+  var COMBINED_PERMIT_COST_FIELD = "field_530";
+  var DAY_PASS_BASE_COST_FIELD = "field_505";
+  var DAY_PASS_TOTAL_COST_FIELD = "field_508";
+  var TAX_RATE_FIELD = "field_501"; // tax rate snapshot
+  var TAX_AMOUNT_FIELD = "field_538"; // tax amount
+  var SUBTOTAL_FIELD = "field_536"; // subtotal
+  var TOTAL_COST_FIELD = "field_540"; // final total cost
+  var APPLICANT_TYPE_FIELD = "field_128";
+
+  var FIELDS_TO_HIDE = [
+    COMBINED_PERMIT_COST_FIELD,
+    DAY_PASS_BASE_COST_FIELD,
+    DAY_PASS_TOTAL_COST_FIELD,
+    TAX_RATE_FIELD,
+    TAX_AMOUNT_FIELD,
+    SUBTOTAL_FIELD,
+    TOTAL_COST_FIELD,
+  ];
+
+  var hideFromUser = options.hideFromUser ?? false;
+  var autoUpdate = options.autoUpdate ?? true;
+
+  function getPermitCost(numPermits) {
+    switch (numPermits) {
+      case 0:
+        return 0;
+      case 1:
+        return 20;
+      case 2:
+        return 45;
+      case 3:
+        return 75;
+      case 4:
+        return 110;
+      case 5:
+        return 170;
+      case 6:
+        return 240;
+      default:
+        // each additional permit beyond the 6th permit costs $70
+        var baseCost = 240;
+        var additionalCost = (numPermits - 6) * 70;
+        return baseCost + additionalCost;
+    }
+    return 0;
+  }
+
+  function numToDollars(val) {
+    var isInt = val % 1 === 0;
+    var stringNum = isInt ? val + ".00" : val.toFixed(2);
+    return "$" + stringNum;
+  }
+
+  function dollarsToNum(val) {
+    return parseFloat(val.replace("$", "").replace(",", ""));
+  }
+
+  function hideFields(fieldArray) {
+    for (var i = 0; i < fieldArray.length; i++) {
+      var field = fieldArray[i];
+      $("#kn-input-" + field).addClass("hiddenFormField");
+    }
+  }
+
+  // apply hidden field classes if needed
+  hideFromUser && hideFields(FIELDS_TO_HIDE);
+
+  // set form cost values based on current form current data
+  calculateAndSetValues();
+  if (autoUpdate) {
+    // set event handlers to recalculate when select fields are changed
+    $("#" + viewId + "-" + NUM_DECALS_FIELD).on("input", function () {
+      calculateAndSetValues();
+    });
+    $("#" + viewId + "-" + NUM_HANGTAGS_FIELD).on("input", function () {
+      calculateAndSetValues();
+    });
+    $("#" + NUM_DAY_PASSES_FIELD).on("input", function () {
+      calculateAndSetValues();
+    });
+    $("#" + viewId + "-" + NUM_EXISTING_PERMITS_FIELD).on("input", function () {
+      calculateAndSetValues();
+    });
+    $("#" + APPLICANT_TYPE_FIELD).on("input", function () {
+      calculateAndSetValues();
+    });
+    $("#" + TAX_RATE_FIELD).on("input", function () {
+      calculateAndSetValues();
+    });
+  }
+
+  function calculateAndSetValues() {
+    // note <select> fields have a different identifier format than <input>
+    var numHangTags = parseInt(
+      $("#" + viewId + "-" + NUM_HANGTAGS_FIELD).val()
+    );
+    var numDecals = parseInt($("#" + viewId + "-" + NUM_DECALS_FIELD).val());
+    var numDayPasses = parseInt($("#" + NUM_DAY_PASSES_FIELD).val()) || 0;
+    var numExistingPermits =
+      parseInt($("#" + viewId + "-" + NUM_EXISTING_PERMITS_FIELD).val()) || 0;
+
+    var dayPassBaseCost = dollarsToNum($("#" + DAY_PASS_BASE_COST_FIELD).val());
+    var taxRate = $("#" + TAX_RATE_FIELD).val();
+
+    var existingPermitCost = getPermitCost(numExistingPermits);
+    var existingPlusNewPermitCost = getPermitCost(
+      numDecals + numHangTags + numExistingPermits
+    );
+    var combinedPermitCost = existingPlusNewPermitCost - existingPermitCost;
+
+    $("#" + COMBINED_PERMIT_COST_FIELD).val(numToDollars(combinedPermitCost));
+
+    var dayPassTotalCost = numDayPasses * dayPassBaseCost;
+    $("#" + DAY_PASS_TOTAL_COST_FIELD).val(numToDollars(dayPassTotalCost));
+
+    var subTotal = dayPassTotalCost + combinedPermitCost;
+    $("#" + SUBTOTAL_FIELD).val(numToDollars(subTotal));
+
+    var taxAmount = taxRate * subTotal;
+    $("#" + TAX_AMOUNT_FIELD).val(numToDollars(taxAmount));
+
+    var totalCost = taxAmount + subTotal;
+    $("#" + TOTAL_COST_FIELD).val(numToDollars(totalCost));
+
+    // conditionally hide the "required documents" fields if no decals or hangtags
+    // are being requested. we do this with custom code because the form logic via
+    // knack is quite hellish, because we already have a knack display rule to show
+    // the proof of residency document attachment conditionally
+    var dl_attachment_field = "field_419";
+    if (numDecals + numHangTags == 0) {
+      $("#kn-input-" + dl_attachment_field)
+        .closest("ul")
+        .hide();
+    } else {
+      $("#kn-input-" + dl_attachment_field)
+        .closest("ul")
+        .show();
+    }
+  }
+}
+
+$("#kn-input-field_419").closest("ul");
+
+function recalcCostsButton(clickEvent, viewKey, options) {
+  var button = $(
+    "<span style='width: 2em'></span><button id='recalc-costs-button' style='border-radius: .35em !important' class='kn-button'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Re-Calculate Costs</button>"
+  );
+
+  var placeHolder = $("h3:contains('$replace_with_javascript')");
+  placeHolder.hide();
+  button.insertAfter(placeHolder);
+  button.on("click", function (event) {
+    event.preventDefault();
+    clickEvent(viewKey, options);
+  });
+}
+
+$(document).on("knack-view-render.view_1301", function (event, view) {
+  // back office Edit Permit application view
+  // creates a "Re-calculate Costs" button which updates the Edit Permit App form
+  // with calculated cost values
+  recalcCostsButton(setCostFields, view.key, {
+    hideFromUser: false,
+    autoUpdate: false,
+  });
+});
+
+$(document).on("knack-view-render.view_1175", function (event, view) {
+  // "permit information" page of customer application workflow
+  setCostFields(view.key, { hideFromUser: true, autoUpdate: true });
+});
+
+$(document).on("knack-view-render.view_1194", function (event, view) {
+  // "edit application" page of customer application workflow
+  setCostFields(view.key, { hideFromUser: true, autoUpdate: true });
+});
+
+// hide temporary login form on Apply for Permits
+$(document).on("knack-view-render.view_1307", function (event, view) {
+  $("#view_1307").hide();
+  $("#kn-app-menu").hide();
 });
