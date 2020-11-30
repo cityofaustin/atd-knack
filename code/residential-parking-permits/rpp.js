@@ -236,90 +236,97 @@ $(document).on("knack-form-submit.view_163", function (event, view, record) {
 
   updateVerifyIframe(lon, lat, street);
 
-  point_in_poly("RPP_Properties", 0, lat, lon, street, "*", function (
-    feature,
+  point_in_poly(
+    "RPP_Properties",
+    0,
     lat,
     lon,
-    address
-  ) {
-    //  hide page submit confirmation message
-    $(".kn-message").hide();
+    street,
+    "*",
+    function (feature, lat, lon, address) {
+      //  hide page submit confirmation message
+      $(".kn-message").hide();
 
-    //  hide page instructions wich are no longer relevant
-    $(".view_89").remove();
+      //  hide page instructions wich are no longer relevant
+      $(".view_89").remove();
 
-    //  get a url to view the geocoded address on the parking restrictions map
-    var map_url = getMapUrl(lat, lon, address);
-    var map =
-      '<h5><b><i class="fa fa-map-marker"></i> <a target="_blank" href="' +
-      map_url +
-      '" >View this address </a> on a parking restriction map</b></h5>';
+      //  get a url to view the geocoded address on the parking restrictions map
+      var map_url = getMapUrl(lat, lon, address);
+      var map =
+        '<h5><b><i class="fa fa-map-marker"></i> <a target="_blank" href="' +
+        map_url +
+        '" >View this address </a> on a parking restriction map</b></h5>';
 
-    if (feature) {
-      // confirm address is eligible
-      var parkingZone = feature.attributes["ZONE_NO"];
-      var restriction = feature.attributes["RESTRICTION_TIME_DATE"];
-      var blockNo = feature.attributes["BLOCK_NO"];
-      var streetName = feature.attributes["STREET_NAME"];
-      var maxResidents = feature.attributes["MAX_RESIDENTS"];
-      var maxVisitorHangTagHouseh =
-        feature.attributes["MAX_VISITOR_HANG_TAG_PER_HOUSEH"];
-      var renewalPeriod = feature.attributes["RENEWAL_PERIOD"];
+      if (feature) {
+        // confirm address is eligible
+        var parkingZone = feature.attributes["ZONE_NO"];
+        var restriction = feature.attributes["RESTRICTION_TIME_DATE"];
+        var blockNo = feature.attributes["BLOCK_NO"];
+        var streetName = feature.attributes["STREET_NAME"];
+        var maxResidents = feature.attributes["MAX_RESIDENTS"];
+        var maxVisitorHangTagHouseh =
+          feature.attributes["MAX_VISITOR_HANG_TAG_PER_HOUSEH"];
+        var renewalPeriod = feature.attributes["RENEWAL_PERIOD"];
 
-      var message =
-        "<h4></i> Residents at this address <b>" +
-        blockNo +
-        " " +
-        streetName +
-        "</b> can purchase street parking permits.</h4>" +
-        "<ul><li><h5><i>" +
-        "Parking restrictions are in effect <b>" +
-        restriction +
-        "</i></b></h5></li>" +
-        "<li><h5><i>Maximum Resident Decals: <b>" +
-        maxResidents +
-        "</b></i></h5></li>" +
-        "<li><h5><i>Maximum Visitor Hang-tags: <b>" +
-        maxVisitorHangTagHouseh +
-        "</b></i></h5></li>" +
-        "<li><h5><i>Permit Renewal Period: <b>" +
-        renewalPeriod +
-        "</b></i></h5></li>";
+        var message =
+          "<h4></i> Residents at this address <b>" +
+          blockNo +
+          " " +
+          streetName +
+          "</b> can purchase street parking permits.</h4>" +
+          "<ul><li><h5><i>" +
+          "Parking restrictions are in effect <b>" +
+          restriction +
+          "</i></b></h5></li>" +
+          "<li><h5><i>Maximum Resident Decals: <b>" +
+          maxResidents +
+          "</b></i></h5></li>" +
+          "<li><h5><i>Maximum Visitor Hang-tags: <b>" +
+          maxVisitorHangTagHouseh +
+          "</b></i></h5></li>" +
+          "<li><h5><i>Permit Renewal Period: <b>" +
+          renewalPeriod +
+          "</b></i></h5></li>";
 
-      var contact_us =
-        '<h5><b><i class="fa fa-phone"></i> ' +
-        '<a href="https://atd.knack.com/parking#contact-us/" >Contact Us</a> if you need help</b></h5>';
+        var contact_us =
+          '<h5><b><i class="fa fa-phone"></i> ' +
+          '<a href="https://atd.knack.com/parking#contact-us/" >Contact Us</a> if you need help</b></h5>';
 
-      showMessage(
-        "#view_163",
-        (message = message),
-        (message_type = "confirmation")
-      );
+        showMessage(
+          "#view_163",
+          (message = message),
+          (message_type = "confirmation")
+        );
 
-      $(".kn-form-confirmation").prepend(contact_us);
-      $(".kn-form-confirmation").prepend(webmap_url);
-      $(".kn-form-confirmation").prepend(map);
-      $(".kn-form-confirmation").prepend(
-        $("<h5><b><b></h5>").append($(".kn-form-reload"))
-      );
-    } else {
-      //  address is ineligible
-      //  move reload form button inside message
-      var message =
-        '<h5><i class="fa fa-exclamation-triangle"></i> Our records show that <underline>no parking permit is required</underline> at this address. If you think this may be in error please email: <b>residentialparking@austintexas.gov</b></h5>';
+        $(".kn-form-confirmation").prepend(contact_us);
+        $(".kn-form-confirmation").prepend(webmap_url);
+        $(".kn-form-confirmation").prepend(map);
+        $(".kn-form-confirmation").prepend(
+          $("<h5><b><b></h5>").append($(".kn-form-reload"))
+        );
+      } else {
+        //  address is ineligible
+        //  move reload form button inside message
+        var message =
+          '<h5><i class="fa fa-exclamation-triangle"></i> Our records show that <underline>no parking permit is required</underline> at this address. If you think this may be in error please email: <b>residentialparking@austintexas.gov</b></h5>';
 
-      var contact_us =
-        '<h5><b><i class="fa fa-phone"></i> ' +
-        '<a href="https://atd.knack.com/parking#contact-us/" >Contact Us</a> if you need help.</b></h5>';
+        var contact_us =
+          '<h5><b><i class="fa fa-phone"></i> ' +
+          '<a href="https://atd.knack.com/parking#contact-us/" >Contact Us</a> if you need help.</b></h5>';
 
-      showMessage("#view_163", (message = message), (message_type = "warning"));
+        showMessage(
+          "#view_163",
+          (message = message),
+          (message_type = "warning")
+        );
 
-      $(".kn-form-confirmation").prepend(contact_us);
-      $(".kn-form-confirmation").prepend(
-        $("<h5></h5>").append($(".kn-form-reload"))
-      );
+        $(".kn-form-confirmation").prepend(contact_us);
+        $(".kn-form-confirmation").prepend(
+          $("<h5></h5>").append($(".kn-form-reload"))
+        );
+      }
     }
-  });
+  );
 
   //  these work, too:
   //  point_in_poly('BOUNDARIES_single_member_districts', 0, lon, lat, 'COUNCIL_DISTRICT')
@@ -736,16 +743,23 @@ $(document).on("knack-view-render.view_1301", function (event, view) {
 
 $(document).on("knack-view-render.view_1175", function (event, view) {
   // "permit information" page of customer application workflow
+    for (var i = 3; i < 7; i++) {
+    // remove number of hangtag chocies higher than 2. only staff can pick more than 2
+    // hangtags
+    $("#view_1175-field_395 option[value='" + i + "']").remove();
+  }
+
   setCostFields(view.key, { hideFromUser: true, autoUpdate: true });
 });
 
 $(document).on("knack-view-render.view_1194", function (event, view) {
   // "edit application" page of customer application workflow
+  for (var i = 3; i < 7; i++) {
+    // remove number of hangtag chocies higher than 2. only staff can pick more than 2
+    // hangtags
+    $("#view_1175-field_395 option[value='" + i + "']").remove();
+  }
+
   setCostFields(view.key, { hideFromUser: true, autoUpdate: true });
 });
 
-// hide temporary login form on Apply for Permits
-$(document).on("knack-view-render.view_1307", function (event, view) {
-  $("#view_1307").hide();
-  $("#kn-app-menu").hide();
-});
