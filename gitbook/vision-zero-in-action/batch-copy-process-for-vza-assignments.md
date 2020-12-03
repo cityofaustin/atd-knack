@@ -94,3 +94,5 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 21 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
 
+
+
