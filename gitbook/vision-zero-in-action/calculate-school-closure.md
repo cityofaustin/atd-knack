@@ -2,7 +2,7 @@
 description: >-
   This document will guide you through the annual process of calculating which
   schools need to be removed from the Location drop down in the Add/Edit
-  Assignments form for the Scheduler interface.
+  Assignments form on the VZ Scheduler interface.
 ---
 
 # Calculate School Closures
