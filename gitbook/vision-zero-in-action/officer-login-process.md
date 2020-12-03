@@ -12,7 +12,7 @@ To enable officers to login to the VZA application with Active Directory credent
 
 ## Permissions
 
-A user with an Officer role in the application will be able to carry out this process.
+A user with an Officer role in the application and  APD Active Directory credentials  will be able to carry out this process.
 
 ## Process
 
