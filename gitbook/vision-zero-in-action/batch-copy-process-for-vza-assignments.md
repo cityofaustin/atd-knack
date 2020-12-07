@@ -96,7 +96,7 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 ## Check/QAQC
 
-These fields need to be populated for the next steps in the process to work.
+These fields need to be populated for the next steps in the process to work. In Knack Builder, check to make sure non of these fields are blank.
 
 1. Assignment Date and Time
 2. Shift - Morning, Afternoon, Evening
