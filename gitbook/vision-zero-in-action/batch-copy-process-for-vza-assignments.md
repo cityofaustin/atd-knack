@@ -82,17 +82,31 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 17 \) Exclude Additional Information and Additional Information URL \(since this is field which needs an uploaded file\).
 
-18 \) Click Next
+18\) Here is a list of the fields that will need to be matched - 
 
-19 \) Fill out Field Defaults for Created By and Created Date. 
+1. Assignment Date and Time
+2. Assignment Number
+3. Shift
+4. Team Number
+5. Vision Zero Location - Vision Zero Location &lt;Display Name
+6. APD Sector 1 - Vision Zero Location &lt; APD Sector
+7. Location Type 1 - Vision Zero Location &lt; Location Type
+8. Council District - Vision Zero Location &lt; Council District
+9. Zip Code - Vision Zero Location &lt; Zip
 
-![](https://lh4.googleusercontent.com/ql0Svb-b5PtVOx3ZfdoekIgJE8x3FvVvPLH1eX46jQoANLfFJfz1KZXPZHE1T155KLGkD5zfI7jSQkNpjszf4d-xo2uTR46k1l_oNT08G-ONJKL3pkVCEBmyhuITyBbFMgFI81Tq)
+19 \) Click Next
 
-20 \) Click Next. The records will be imported into the object. 
+20 \) Fill out Field Defaults for Created By and Created Date. 
+
+1. Created Date - Today
+2. Assignment Type - Vision Zero
+3. Created By - your name
+
+21 \) Click Next. The records will be imported into the object. 
 
 ![](https://lh4.googleusercontent.com/l2FdRI9Is9AawPsUDqVJphIOSKARG4f-pzqDuzOL_27bdTQKjzhcrPZmMuZ93u-2rThkFndnS_D7kw11ijyil1Irh5lYU0f6Bbmcm-FXHifWRzzhvLbrTGZU_3wQ14BcjW8fLZH9)
 
-21 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
+22 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
 
 ## Check - QAQC
 
