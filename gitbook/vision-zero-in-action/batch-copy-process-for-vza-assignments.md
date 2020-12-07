@@ -94,7 +94,7 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 21 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
 
-## Check/QAQC
+## Check - QAQC
 
 These fields need to be populated for the next steps in the process to work. In Knack Builder, check to make sure non of these fields are blank.
 
