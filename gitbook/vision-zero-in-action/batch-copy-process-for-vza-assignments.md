@@ -99,10 +99,12 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 These fields need to be populated for the next steps in the process to work. In Knack Builder, check to make sure non of these fields are blank.
 
 1. Assignment Date and Time
-2. Shift - Morning, Afternoon, Evening
-3. Team Number - Team 1, Team 2, Team 3
+2. Shift 
+3. Team Number 
 4. Location
 5. APD Sector 
+6. Number of Officers
+7. Assignment Number
 
 
 
