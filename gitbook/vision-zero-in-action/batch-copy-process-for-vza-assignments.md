@@ -94,5 +94,15 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 21 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
 
+## Check/QAQC
+
+These fields need to be populated for the next steps in the process to work.
+
+1. Assignment Date and Time
+2. Shift - Morning, Afternoon, Evening
+3. Team Number - Team 1, Team 2, Team 3
+4. Location
+5. APD Sector 
+
 
 
