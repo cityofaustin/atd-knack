@@ -16,7 +16,7 @@ Contains core information about the performance measure, such as the ID, name, a
 
 * `performance_measures_fiscal`
 
-Contains information about the performance measure for the given fiscal year. This is the object that needs to be updated on an annual basis, and it contains formulas that roll up the **monthly/quarterly/fiscal** reporting. Performance measures reporting frequency \(monthly/quarterly/annually\) can change from year to year, so that information is also capture here. Relationship: Many performance\_measures\_fiscal relate to one performance\_measure.
+Contains information about the performance measure for the given fiscal year. This is the object that needs to be updated on an annual basis, and it contains formulas that roll up the **monthly/quarterly/fiscal** reporting. Performance measures reporting frequency \(monthly/quarterly/annually\) can change from year to year, so that information is also captured here. Relationship: Many performance\_measures\_fiscal relate to one performance\_measure.
 
 * `performance_measures_monthly`
 
