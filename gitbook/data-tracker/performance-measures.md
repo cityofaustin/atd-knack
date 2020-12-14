@@ -39,7 +39,7 @@ By following these steps you will export, modify, and re-import the performance 
 1. In the Knack builder, filter the `performance_measures_fiscal` object for the most recent available `FISCAL_YEAR` and export as CSV from the Data Tracker.
 2. Use Excel \(or similar\) to update the `FISCAL_YEAR` column in every row to the current fiscal year.
 3. Some of the columns in the CSV are calculated fields that do not need to be imported. Check the builder for the most current relevant fields, but the minimum fields you should include are `REPORT_STATUS`, `FISCAL_YEAR`, `MEASURE_ID`, `FREQUENCY`, `PROPOSED`, `APPROVED`, and `AMENDED`.
-4. ~~Optionally repeat these steps to include additional future fiscal years in your spreadsheet. E.g., you can do `FY20`, `21`, and `22` at the same time.~~
+4. There is some amount of change in the FY Performance Measures being tracked. Some measures get removed from a Fiscal Year, others get added. Ask contacts in Finance to provide an up-to-date dataset.
 5. Your spreadsheet is ready for import. Return to the Knack builder and import your spreadsheet into the `performance_measures_fiscal` object. 
 6. MAKE SURE YOU MAP fields properly! Most importantly, the `MEASURE_ID` field must map to the `MEASURE_ID` on the related `performance_measures` object.
 7. Finally, you must update the view which displays performance measures to the end-user. Currently this is located at `https://builder.knack.com/atd/amd#pages/scene_565/views/view_1735`. From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
