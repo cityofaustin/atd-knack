@@ -68,7 +68,7 @@ Now copy our **Public Certificate** from _1Password,_ and paste the key into the
 
 **ID Property**
 
-> `http://schemas.microsoft.com/ws/2008/06/identity/claims/windowsaccountname`
+> `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress`
 
 #### First Name Property
 
