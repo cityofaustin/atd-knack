@@ -83,6 +83,8 @@ Blank
 #### Email Address Property
 
 > http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress
+>
+> or Blank
 
 Click "Submit" to save the custom login, then click "Save Changes" again to save your changes to the Knack login form.
 
