@@ -34,7 +34,7 @@ User-submitted entries which provide the actual reported values for each perform
 
 The `performance_measures_fiscal` must be created on an annual basis so that end-users can append monthly/quarterly/annual reports to them. This is accomplished via batch import to Knack.
 
-By following these steps you will export, modify, and re-import the performance measure data to meet the current fiscal year need.
+By following these steps you will import the performance measure data to meet the current fiscal year needs.
 
 | Activity Code | Frequency | Measure ID | Measure Name | Measure Goal | Measure Division | Measure Type | If the measure is new? | Fiscal Year |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
