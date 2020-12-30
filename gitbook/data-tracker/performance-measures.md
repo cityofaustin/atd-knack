@@ -36,38 +36,35 @@ The `performance_measures_fiscal` must be created on an annual basis so that end
 
 By following these steps you will export, modify, and re-import the performance measure data to meet the current fiscal year need.
 
-| Activity Code | Frequency | Measure ID | Measure Name | Measure Goal | Measure Division | Fiscal Year | If the measure is new? | Measure Type |
+| Activity Code | Frequency | Measure ID | Measure Name | Measure Goal | Measure Division | Measure Type | If the measure is new? | Fiscal Year |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 32TP | Annually | 9195 | Percent of affordable housing available within 1/2 mile of transit and bicycle | 91 | Transportation Systems Development | 2021 | New | Average |
+| 32TP | Annually | 9195 | Percent of affordable housing available within 1/2 mile of transit and bicycle | 91 | Transportation Systems Development | Average | New | 2021 |
 
 1. Ask Finance to send the performance measures for the current fiscal year in the format specified above. Check if these fields are needed - 
 
-   `REPORT_STATUS`, `FISCAL_YEAR`, `MEASURE_ID`, `FREQUENCY`, `PROPOSED`, `APPROVED`, and `AMENDED`.
+   `REPORT_STATUS`, `PROPOSED`, and `AMENDED`.
 
-   Also ask Finance if any new division names need to be added, or if current measures have been moved to different divisions.
-
-2. Filter out the measures that are new and have been added to the current fiscal year.
-3. Add the new measures to the `performance_measures` object. You can do this by Adding a Record if there are not too many.
-4. Add a column to the spreadsheet sent by Finance. Name this field `Import_ID.`
-5. Calculate the entries in the Import ID field by concatenating `Measure ID,"$,Fiscal Year`
-6. You might also need to update all the entries under Fiscal Year.
-7. Open the performance\_measures fiscal object in the Records view.
-8. Import the CSV. 
-9. For Select a field to match records - select Import\_ID.
-10. Map the following fields. Most importantly, the `MEASURE_ID` field must map to the `MEASURE_ID` on the related `performance_measures` object.
-11. Measure ID - Measure ID&gt;Measure ID
-12. Frequency - Frequency
-13. Measure Name - Measure ID&gt;Measure Name
-14. Measure Type - Measure ID&gt;Measure&gt;Measure Type
-15. Measure Goal - Approved
-16. Fiscal Year - Fiscal Year
-17. Click Next
-18. For default fields, select Created By \(your name\), Created Date \(today's date\). \(This will help keep track of which records get added\).
-19. Let the process run. 
-20. Do some QAQC to make sure the right number of records got added, that there are no duplicates.
-21. Finally, you must update the view which displays performance measures to the end-user. Currently this is located at `https://builder.knack.com/atd/amd#pages/scene_565/views/view_1735`. From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
-
-![](../.gitbook/assets/image%20%2829%29.png)
+2. Also ask Finance if any new division names need to be added, or if current measures have been moved to different divisions.
+3. Filter out the measures that are new and have been added to the current fiscal year.
+4. Add the new measures to the `performance_measures` object. You can do this by Adding a Record if there are not too many.
+5. Add a column to the spreadsheet sent by Finance. Name this field `Import_ID.`
+6. Calculate the entries in the Import ID field by concatenating `Measure ID,"$,Fiscal Year`
+7. You might also need to update all the entries under Fiscal Year.
+8. Open the performance\_measures fiscal object in the Records view.
+9. Import the CSV. 
+10. For Select a field to match records - select Import\_ID.
+11. Map the following fields. Most importantly, the `MEASURE_ID` field must map to the `MEASURE_ID` on the related `performance_measures` object.
+12. Measure ID - Measure ID&gt;Measure ID
+13. Frequency - Frequency
+14. Measure Name - Measure ID&gt;Measure Name
+15. Measure Type - Measure ID&gt;Measure&gt;Measure Type
+16. Measure Goal - Approved
+17. Fiscal Year - Fiscal Year
+18. Click Next
+19. For default fields, select Created By \(your name\), Created Date \(today's date\). \(This will help keep track of which records get added\).
+20. Let the process run. 
+21. Do some QAQC to make sure the right number of records got added, that there are no duplicates.
+22. Finally, you must update the view which displays performance measures to the end-user. Currently this is located at `https://builder.knack.com/atd/amd#pages/scene_565/views/view_1735`. From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
 
 You're done!
 
