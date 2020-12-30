@@ -65,7 +65,7 @@ By following these steps you will import the performance measure data to meet th
 20. Let the process run. 
 21. Do some QAQC to make sure the right number of records got added, that there are no duplicates.
 22. Update the view which displays performance measures to the end-user. Currently this is located at `https://builder.knack.com/atd/amd#pages/scene_565/views/view_1735`. From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
-23. Update the view for eCombs reports. 
+23. Update the Fiscal Year filters for the three eCombs reports. Here is the link to the scene - [`https://builder.knack.com/atd/amd#pages/scene_833`](https://builder.knack.com/atd/amd#pages/scene_833)\`\`
 
 You're done!
 
