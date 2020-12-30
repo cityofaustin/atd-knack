@@ -52,7 +52,7 @@ These steps ensure that the certificate information is properly formatted to mee
 
 Locate our self-signed SSL \(X.509\) certificate for your app. It is stored in 1Password as _Self-Signed x509 SSL Certificates for SAML/ADFS._ 
 
-Start by copying our **Private Key** from _1Password_, and paste it into the [Private Key formatter](https://www.samltool.com/format_privatekey.php). Click the "Format Private Key" button to formate the key, and copy the contents of output box labeled "Private Key with header".
+Start by copying our **Private Key** from _1Password_, and paste it into the [Private Key formatter](https://www.samltool.com/format_privatekey.php). Click the "Format Private Key" button to format the key, and copy the contents of output box labeled "Private Key with header".
 
 Now copy and paste the formatted private key into the **Decryption private certificate** field in the Knack login config.
 
