@@ -36,9 +36,9 @@ The `performance_measures_fiscal` must be created on an annual basis so that end
 
 By following these steps you will export, modify, and re-import the performance measure data to meet the current fiscal year need.
 
-| Activity Code | Frequency | Measure ID | Measure Name | Measure Goal | Measure Status | Proposed | Amended | Measure Division | Fiscal Year | If the measure is new? |  |  | Measure Type |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| 32TP | Annually | 9195 | Percent of affordable housing available within 1/2 mile of transit and bicycle | 91 |  |  |  | Transportation Systems Development | 2021 | New |  |  | Average |
+| Activity Code | Frequency | Measure ID | Measure Name | Measure Goal | Measure Division | Fiscal Year | If the measure is new? | Measure Type |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 32TP | Annually | 9195 | Percent of affordable housing available within 1/2 mile of transit and bicycle | 91 | Transportation Systems Development | 2021 | New | Average |
 
 1. Ask Finance to send the performance measures for the current fiscal year in the format specified above.
 2. Also ask Finance if any new division names need to be added, or if current measures have been moved to different divisions.
@@ -61,9 +61,7 @@ By following these steps you will export, modify, and re-import the performance 
 19. For default fields, select Created By \(your name\), Created Date \(today's date\). \(This will help keep track of which records get added\).
 20. Let the process run. 
 21. Do some QAQC to make sure the right number of records got added, that there are no duplicates.
-22. 23. 24. 25. 26. 
-27. Some of the columns in the CSV are calculated fields that do not need to be imported. Check the builder for the most current relevant fields, but the minimum fields you should include are `REPORT_STATUS`, `FISCAL_YEAR`, `MEASURE_ID`, `FREQUENCY`, `PROPOSED`, `APPROVED`, and `AMENDED`.
-28. Finally, you must update the view which displays performance measures to the end-user. Currently this is located at `https://builder.knack.com/atd/amd#pages/scene_565/views/view_1735`. From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
+22. Finally, you must update the view which displays performance measures to the end-user. Currently this is located at `https://builder.knack.com/atd/amd#pages/scene_565/views/view_1735`. From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
 
 ![](../.gitbook/assets/image%20%2829%29.png)
 
