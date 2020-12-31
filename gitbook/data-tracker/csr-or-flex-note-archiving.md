@@ -47,6 +47,8 @@ In the event that a user wants to view any flex notes which are no longer in the
 
 We have a template to use in the atd-data-tech repo
 
+Use the current month to name the issue, for example January 2020 for the November 1st 2019 date referenced below.
+
 ![Issue description](../.gitbook/assets/flexnotearchivingissue.png)
 
 ![Issue to document deletion confirmation](../.gitbook/assets/flexnotearchivingissue_2.png)
