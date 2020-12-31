@@ -23,7 +23,7 @@ Flex notes can be deleted under these conditions:
 * The service request is in a **Closed** status
 * The service request is **more than two months old**
 
-### Retreive Flex Notes
+### Retrieve Flex Notes
 
 In the event that a user wants to view any flex notes which are no longer in the Data Tracker, we have two options:
 
