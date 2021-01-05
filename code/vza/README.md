@@ -2,6 +2,89 @@
 
 ## Custom table and sign up/cancel buttons (view_466) and cancel-only buttons (view_439 and view_447)
 
+### Creating groups of assignments for the UI workflow
+
+To group officer assignments into shifts, there are two steps executed in the custom JS.
+
+1. In the first step, an object is created with keys that are `field_724` (Officer Shift Label) and values that are arrays of records with that shift label. This step is carried out by the `groupRecordsIntoAssignments` function.
+
+```
+{
+  "01/04/2021 - Vision Zero - Morning - Team 1": [
+    {
+      field_131: 4540,
+      field_131_raw: 4540,
+      field_133:
+        "<span class='5ff346135a9530001c918c50'>01/04/2021 01:00 to 03:00</span>",
+      field_133_raw: [
+        {
+          id: "5ff346135a9530001c918c50",
+          identifier: "01/04/2021 01:00 to 03:00",
+        },
+      ],
+      field_139: "01:00 to 03:00",
+      field_139_raw: {
+        date: "01/04/2021",
+        date_formatted: "01/04/2021",
+        hours: "01",
+        minutes: "00",
+        am_pm: "AM",
+      },
+      field_154: "01/04/2021 01:00 to 03:00",
+      field_154_raw: {
+        date: "01/04/2021",
+        date_formatted: "01/04/2021",
+        hours: "01",
+        minutes: "00",
+        am_pm: "AM",
+      },
+      field_205: "01/04/2021",
+      field_205_raw: {
+        date: "01/04/2021",
+        date_formatted: "01/04/2021",
+        hours: "12",
+        minutes: "00",
+        am_pm: "AM",
+      },
+      field_560: "",
+      field_561: "",
+      field_584: "",
+      field_656:
+        "<span class='5fb542c53cf306067bb049d6'>Adam - Signal -  ANDERSON MILL RD / MILLWRIGHT PKWY (OLSON DR)</span>",
+      field_656_raw: [{ id: "5fb542c53cf306067bb049d6" }],
+      field_669: "",
+      field_669_raw: [],
+      field_671: "",
+      field_704:
+        "<span class='5ebef4d0682bfc0015c9e0f4'>No Officer Assigned</span>",
+      field_704_raw: [
+        { id: "5ebef4d0682bfc0015c9e0f4", identifier: "No Officer Assigned" },
+      ],
+      field_711: "No",
+      field_711_raw: false,
+      field_712: "",
+      field_724: "01/04/2021 -  Vision Zero - Morning  - Team 1 ",
+      field_724_raw: "01/04/2021 -  Vision Zero - Morning  - Team 1 ",
+      field_734: 0,
+      field_734_raw: 0,
+      id: "5ff3560dfdfd9c0675256e85",
+    },
+    ...<Other records>
+  ],
+}
+```
+
+2. Once the assignments are grouped by `field_724` (Officer Shift Label), the next step organizes these nested array values into nested arrays that contain sets of replicates. Replicates exist because, for each shift, multiple officers can sign up for the same assignments to form teams. Although these replicates records share some properties, each `officer_assignment` record has a unique identifier so that it can be associated with a single officer. This grouping is necessary to enable a single button in the UI to handle sign up for multiple `officer_assignments` by one officer. This step is carried out by the `buildAndAppendShiftSection` function.
+
+```
+// First dimension is officer_assignments with same label (grouped in the first step)
+// Second dimension is array of officer_assignments within shift (grouped in the second step)
+// [A,A,B,B,C,C] => [[A,B,C], [A,B,C]]
+//      ^               ^        ^
+//  All assignments    1st      2nd
+//  (all replicates)  button   button
+```
+
 ### Create API view for fetching `officer_assignments`
 
 1. Add new page and title it "API views" and use the following settings
