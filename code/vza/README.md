@@ -1,3 +1,10 @@
+# Update app-specific details in the custom JS upon creating a new app instance
+
+When adding this code to a new instance, the following variables defined in the `appSpecifics` object must be updated.
+
+- `knackAppId` must be updated with the Application ID. This can be found in the Knack Builder view settings cog dropdown > API & Code > API tab.
+- `apiTableScene` and `apiTableView` must be updated to reflect the API scene and view IDs that exposes the `officer_assignment` records in the UI. More details about this API view can be [below](#create-API-view-for-fetching-officer_assignments). **Before creating a new API view, be sure to check if one exists already. A copied instance will already have this view present.** The scene and view IDs can be found in the URL of this API view in the Knack Builder UI.
+
 # Sign up / Available Assignments (scene_208) and Cancel My/Future Assignments (scene_180)
 
 ## Custom table and sign up/cancel buttons (view_466) and cancel-only buttons (view_439 and view_447)
@@ -122,10 +129,6 @@ To group officer assignments into shifts, there are two steps executed in the cu
 ![Action Link setup](images/action_link_setup.png)
 
 ![Action Link details](images/action_link_details.png)
-
-### Update app-specific details in the custom JS
-
-1. When adding this code to a new instance, the variables defined in the `appSpecifics` object must be updated. The `view` and `scene` for the API view can be found in the `officer_assignments` table settings within the API view page (in the url).
 
 ### Triggering the action links in the `officer_assignments` API view table
 
