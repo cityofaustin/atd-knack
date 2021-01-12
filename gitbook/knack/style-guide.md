@@ -140,7 +140,7 @@ You can find the original banner assets and a template for creating a new applic
 
 
 
-![CSS Code - screen shot](../.gitbook/assets/image%20%2811%29.png)
+![CSS Code - screen shot](../.gitbook/assets/image%20%289%29%20%281%29.png)
 
 #### CSS Code: 
 
@@ -199,7 +199,7 @@ Looks like this in the live app
 
 Number of Resident Decals `<a href="https://atd.knack.com/parking#permit-costs/"></i class="fa fa-info-circle"></i></a>`
 
-![](../.gitbook/assets/image%20%287%29.png)
+![](../.gitbook/assets/image%20%288%29.png)
 
 **Option 3:** Link and icon that opens in new tab
 

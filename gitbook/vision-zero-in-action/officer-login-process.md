@@ -14,38 +14,15 @@ To enable officers to login to the VZA application with Active Directory credent
 
 A user with an Officer role in the application and  APD Active Directory credentials  will be able to carry out this process.
 
-## Process
+## Account creation process
 
-Officers will attend an introductory training session and then register to create an account in the application. The username should be _first name.last name@austintexas.gov._ 
+Officers will attend an introductory training session and then register to create an account in the application at [http://bit.ly/apd-vza](http://bit.ly/apd-vza). 
+
+The username should be _firstname.lastname@austintexas.gov._ 
 
 They will receive a link to the application after creating the account.
 
-Here are the steps to follow after receiving the link.
+## Officer documentation
 
-* Click on the link to the application.
-* When the application opens in Safari or another browser, click on the icon in the middle of the bottom footer menu.
-
-![](../.gitbook/assets/image%20%2824%29.png)
-
-* Select the option called 'Add to the Home Screen'.
-* Go to the home screen, and tap on the VZA application icon.
-* You should see the login screen below
-
-
-
-![](../.gitbook/assets/image%20%2822%29.png)
-
-* Click on Sign in with COACD
-
-![](../.gitbook/assets/image%20%2825%29.png)
-
-
-
-* You will be directed to the City of Austin Secure Authentication Portal
-* For Email Address, put in your badge number that starts with AP
-* For Password, put in the password you use to access your email in Outlook.
-* You may be asked for a token number or another way to authenticate this login.
-* Once you are successfully signed in, you will see a screen like the one below.
-
-![](../.gitbook/assets/image%20%2826%29.png)
+Documentation for the officers on logging in and creating a bookmark for their home screen is in [this Google Doc](https://docs.google.com/document/d/1VHhR9pe3oJLZAUsZyoV_huMMXkVnQEzLltwU1klAvpU/edit#). This doc is published for users at [http://bit.ly/apd-vza-login](http://bit.ly/apd-vza-login).  
 
