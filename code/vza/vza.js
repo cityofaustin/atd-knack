@@ -17,7 +17,7 @@ var appSpecifics = {
   startButtonView: "view_449", // Assignment Details view
   endButtonView: "view_450", // Assignment Details view
   noOfficerAssignedId: "5ebef4d0682bfc0015c9e0f4", // For conditional styles based on officer assigned
-  assignmentDetailsTimes: "view_538" // Assignment Details view
+  assignmentDetailsTimes: "view_538", // Assignment Details view
 };
 
 // officer_assignment object fields
@@ -35,7 +35,7 @@ var fields = {
   assignmentStatus: "field_584",
   startTime: "field_560",
   endTime: "field_561",
-  observationsField: "field_734"
+  observationsField: "field_734",
 };
 
 // Shared code
@@ -59,34 +59,34 @@ var filters = {
   all: [
     {
       field: fields.dateField,
-      operator: "is today or after"
+      operator: "is today or after",
     },
     {
       field: fields.assignmentDateTimeField,
-      operator: "is not blank"
-    }
+      operator: "is not blank",
+    },
   ],
   today: [
     {
       field: fields.dateField,
-      operator: "is today"
+      operator: "is today",
     },
     {
       field: fields.assignedOfficerField,
       operator: "is",
-      value: userId
-    }
+      value: userId,
+    },
   ],
   future: [
     {
       field: fields.dateField,
-      operator: "is after today"
+      operator: "is after today",
     },
     {
       field: fields.assignedOfficerField,
       operator: "is",
-      value: userId
-    }
+      value: userId,
+    },
   ],
   week: [
     {
@@ -95,8 +95,8 @@ var filters = {
       operator: "is during the next",
       field: fields.dateField,
       type: "weeks",
-      range: "1"
-    }
+      range: "1",
+    },
   ],
   month: [
     {
@@ -104,9 +104,9 @@ var filters = {
       operator: "is during the next",
       text: "Next Month",
       type: "months",
-      range: "1"
-    }
-  ]
+      range: "1",
+    },
+  ],
 };
 
 // Endpoints for officer_assignments API view
@@ -209,7 +209,7 @@ function requestRecords(filterConfig, view, tableConfig) {
   var headers = {
     "X-Knack-Application-ID": appSpecifics.knackAppId,
     Authorization: user,
-    "content-type": "application/json"
+    "content-type": "application/json",
   };
 
   var url =
@@ -261,7 +261,7 @@ function requestRecords(filterConfig, view, tableConfig) {
 
       // Remove spinner
       $("#" + view + "-table-spinner").remove();
-    }
+    },
   });
 
   // Helper functions that all need view arg to target correct table in view
@@ -486,14 +486,14 @@ function requestRecords(filterConfig, view, tableConfig) {
                 type: "PUT",
                 data: JSON.stringify({
                   action_link_index: 0,
-                  id: recordId
+                  id: recordId,
                 }),
                 headers: headers,
                 success: function (res) {
                   console.log(res);
-                }
+                },
               });
-            }
+            },
           });
         });
       });
@@ -616,7 +616,7 @@ function requestRecords(filterConfig, view, tableConfig) {
             [fields.assignedOfficerField]: appSpecifics.noOfficerAssignedId, // Add unassigned officer ID
             [fields.unassignedOfficerField]: userId, // Add current user as unassigned officer to track who cancelled
             [fields.addToMyAssignmentsField]: "No", // Add to My Assignments
-            [fields.dateTimeOfCancellationField]: now // DateTime of cancellation
+            [fields.dateTimeOfCancellationField]: now, // DateTime of cancellation
           }),
           headers: headers,
           success: function (res) {
@@ -645,7 +645,7 @@ function requestRecords(filterConfig, view, tableConfig) {
             if (tableConfig.isCancelOnly) {
               requestRecords(filterConfig, view, tableConfig);
             }
-          }
+          },
         });
       });
     });
@@ -855,10 +855,10 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
       },
       Location: function (record) {
         return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
-      }
+      },
     },
-    addTimeFilters: true,
-    isCancelOnly: false
+    addTimeFilters: false,
+    isCancelOnly: false,
   };
 
   var recordsTable = createRecordsTable(view.key, tableConfig);
@@ -894,7 +894,7 @@ function addRecordLinkToTableConfig(view, config) {
 
   return {
     ...config,
-    columns: { Details: createFolderIconLink, ...config.columns }
+    columns: { Details: createFolderIconLink, ...config.columns },
   };
 }
 
@@ -917,10 +917,10 @@ $(document).on(
         },
         Observations: function (record) {
           return record[fields.observationsField];
-        }
+        },
       },
       addTimeFilters: false,
-      isCancelOnly: true
+      isCancelOnly: true,
     };
 
     var updatedTableConfig = addRecordLinkToTableConfig(view, tableConfig);
@@ -948,10 +948,10 @@ $(document).on(
         },
         Location: function (record) {
           return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
-        }
+        },
       },
       addTimeFilters: false,
-      isCancelOnly: true
+      isCancelOnly: true,
     };
 
     var recordsTable = createRecordsTable(view.key, tableConfig);
@@ -992,7 +992,7 @@ waitForAllEvents(
   [
     "knack-view-render." + appSpecifics.assignmentDetailsTimes,
     "knack-view-render." + appSpecifics.startButtonView,
-    "knack-view-render." + appSpecifics.endButtonView
+    "knack-view-render." + appSpecifics.endButtonView,
   ],
   function () {
     var $startTimeInput = $(startTimeInputSelector);
@@ -1047,7 +1047,7 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login"
+    id: "coacd-button-login",
   });
   $coacdButton.appendTo("#" + viewId);
 
