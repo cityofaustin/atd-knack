@@ -56,10 +56,12 @@ var userId = Knack.getUserAttributes().id;
 
 // Filter for records for assignments time windows
 var filters = {
-  all: [
+  nextFourWeeks: [
     {
       field: fields.dateField,
-      operator: "is today or after",
+      operator: "is during the next",
+      type: "weeks",
+      range: "4",
     },
     {
       field: fields.assignmentDateTimeField,
@@ -86,25 +88,6 @@ var filters = {
       field: fields.assignedOfficerField,
       operator: "is",
       value: userId,
-    },
-  ],
-  week: [
-    {
-      value: "",
-      text: "Next Week",
-      operator: "is during the next",
-      field: fields.dateField,
-      type: "weeks",
-      range: "1",
-    },
-  ],
-  month: [
-    {
-      field: fields.dateField,
-      operator: "is during the next",
-      text: "Next Month",
-      type: "months",
-      range: "1",
     },
   ],
 };
@@ -809,7 +792,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.all, view.key, tableConfig);
+      requestRecords(filters.nextFourWeeks, view.key, tableConfig);
     });
 });
 
