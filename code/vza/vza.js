@@ -253,9 +253,6 @@ function requestRecords(filterConfig, view, tableConfig) {
       recordsInPage = initializePagination(completeRecords);
       buildAndAppendShiftSection(recordsInPage);
       prependShiftTableWithPagination();
-      if (tableConfig.addTimeFilters) {
-        prependPaginationWithTimeFilters();
-      }
       addOpenShiftButtonClickHandlers();
       addCancelMyShiftButtonClickHandlers();
 
@@ -771,60 +768,6 @@ function requestRecords(filterConfig, view, tableConfig) {
     addPaginationClickHandlers("prev-arrow", "next-arrow");
   }
 
-  // Add time filters once, add click handlers to add filters to record request and handle active/inactive button status
-  function prependPaginationWithTimeFilters() {
-    if ($("#" + view + " #time-filter-buttons").length) {
-      return;
-    }
-
-    var filterMenu = `
-    <div class="js-filter-menu tabs is-toggle is-flush">
-      <ul id="time-filter-buttons">
-        <li class="is-active" id="all">
-          <a>
-            <span>All</span>
-          </a>
-        </li>
-        <li id="week">
-          <a>
-            <span>Next Week</span>
-          </a>
-        </li>
-        <li id="month">
-          <a>
-            <span>Next Month</span>
-          </a>
-          </li>
-      </ul>
-    </div>`;
-
-    $("#" + view + " .pagination-controls")
-      .before(filterMenu)
-      .ready(function () {
-        $("#" + view + " #time-filter-buttons")
-          .children()
-          .each(function () {
-            // Request records with matching time filter on click
-            $(this).click(function () {
-              var clickedFilterButtonId = $(this).attr("id");
-              requestRecords(filters[clickedFilterButtonId], view, tableConfig);
-
-              // Add/remove active button status
-              $("#" + view + " #time-filter-buttons")
-                .children()
-                .each(function () {
-                  var thisFilterButtonId = $(this).attr("id");
-                  if (thisFilterButtonId === clickedFilterButtonId) {
-                    $(this).addClass("is-active");
-                  } else {
-                    $(this).removeClass("is-active");
-                  }
-                });
-            });
-          });
-      });
-  }
-
   function appendTableWithNoRecordsMessage() {
     if ($("#" + view + "#no-records-msg").length) {
       return;
@@ -857,7 +800,6 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
         return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
       },
     },
-    addTimeFilters: false,
     isCancelOnly: false,
   };
 
@@ -919,7 +861,6 @@ $(document).on(
           return record[fields.observationsField];
         },
       },
-      addTimeFilters: false,
       isCancelOnly: true,
     };
 
@@ -950,7 +891,6 @@ $(document).on(
           return record[fields.locationFieldRaw][0].identifier.split(" - ")[2];
         },
       },
-      addTimeFilters: false,
       isCancelOnly: true,
     };
 
