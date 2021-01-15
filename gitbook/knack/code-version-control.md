@@ -1,7 +1,13 @@
+---
+description: 'https://github.com/cityofaustin/atd-knack/tree/master/code'
+---
+
 # Code Version Control
 
+Go to Github repository: [https://github.com/cityofaustin/atd-knack/tree/master/code](https://github.com/cityofaustin/atd-knack/tree/master/code)
+
 1. From the Knack builder, copy the contents of the JS or CSS file that you have modified.
-2. Navigate to the ATD-Knack GitHub repo where all Knack app code is maintained. 
+2. Navigate to the [ATD-Knack GitHub repo](https://github.com/cityofaustin/atd-knack/tree/master/code) where all Knack app code is maintained. 
    1. **ATD-Knack**&gt;**Code**&gt;**App Name**&gt;.css or .js file
 3. Click on the **pencil** icon at the top right of the page.
 4. Replace the contents of the file with the new version that you copied in step 1.
