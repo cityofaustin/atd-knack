@@ -56,18 +56,21 @@ var userId = Knack.getUserAttributes().id;
 
 // Filter for records for assignments time windows
 var filters = {
-  nextFourWeeks: [
-    {
-      field: fields.dateField,
-      operator: "is during the next",
-      type: "weeks",
-      range: "4",
-    },
-    {
-      field: fields.assignmentDateTimeField,
-      operator: "is not blank",
-    },
-  ],
+  nextFourWeeks: {
+    match: "or",
+    rules: [
+      {
+        field: fields.dateField,
+        operator: "is today",
+      },
+      {
+        field: fields.dateField,
+        operator: "is during the next",
+        range: 28,
+        type: "days",
+      },
+    ],
+  },
   today: [
     {
       field: fields.dateField,
