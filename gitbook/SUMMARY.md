@@ -16,7 +16,8 @@
 * [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
-* [ArcGIS Online Integration](knack/arcgis-online-integration.md)
+* [Knack &lt;--&gt; ArcGIS Online Integration](knack/arcgis-online-integration.md)
+* [BEST PRACTICE: Importing records](knack/best-practice-importing-records.md)
 
 ## DATA TRACKER
 
