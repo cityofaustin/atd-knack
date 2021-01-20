@@ -120,7 +120,12 @@ To group officer assignments into shifts, there are two steps executed in the cu
 
 ![API view columns](images/api_view_columns.png)
 
-3. In the `officer_assignments` table settings, add the following sort parameters in the "Data Source" tab. **These options are crucial for the custom JS to group `officer_assignments` together into Officer Shifts for the sign up buttons on the front end.**
+3. In the `officer_assignments` table settings, add the following data and sort parameters in the "Data Source" tab.
+
+- **Data:** Assignment Date Time is not blank
+- **Sort:** by Date chronologically from oldest to newest then by Time chronologically from oldest to newest
+
+**These options are crucial for the custom JS to group `officer_assignments` together into Officer Shifts for the sign up buttons on the front end.**
 
 ![API view sorting](images/api_view_sorting.png)
 
