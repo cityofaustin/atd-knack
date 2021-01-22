@@ -6,7 +6,7 @@ description: >-
 
 # Use of Tasks
 
-## Create Child Records
+## Why create child records
 
 1. **Purpose** - The purpose of creating child records for officer assignments is to make the workflow for officers self assigning assignments as smooth as possible and to avoid user error as much as possible.
 2. **Relation between Objects** - In this instance, the assignment object is the parent object and the officer\_assignment object is the child object. 
@@ -15,7 +15,7 @@ description: >-
 5. **Changes to an Assignment** - Any changes that are made in the assignment record, especially pertaining to location and date-time, have to be passed along to the child record. If an officer has signed up for this assignment, the officer should receive a notification about any such changes. ****
 6. **Cancelling an Assignment -** If an assignment record is deleted \(the scheduler cancels an assignment\) that should be reflected in the officer task list and calendar, the officer  who has signed up for that officer\_assignment should also receive a notification regarding the cancellation.
 
-## **Use of Tasks to Create Child Records**
+## **Why use  Tasks to create child records**
 
 1. Vision Zero assignments are mostly scheduled through the calendar interface or batch copied from one month to another. The scheduler makes some changes to the batch-copied assignments as needed. In some cases,  assignments are cancelled.
 2. The most accessible way to create child records is to use the Record Rules functionality in the Form widget.
