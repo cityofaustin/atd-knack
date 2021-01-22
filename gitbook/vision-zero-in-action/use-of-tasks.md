@@ -67,7 +67,7 @@ description: >-
 
 When the scheduler makes changes to the assignment - location or date/time, these changes need to be reflected accurately in the officer-assignment child records. These changes were carried through when the child records were created using the Record Rules functionality in the Form widget. However, this does not happen with child records using Tasks, so a Task was created to look for any records that were modified and to carry over changes to associated child records.
 
-To make sure associated changes are carried over to the child records, run the task - Modify Child Records
+To make sure associated changes are carried over to the child records, this task has been created - Modify Child Records. A screenshot of the parameters in included below.
 
 ![](https://lh5.googleusercontent.com/lMZYtpefivXaXKgwMHkVvhyE-n3DzCxtss-yLHlhpGlqqxhcWUM_S8x5g-zYeGi_03bO_O9cfCSzX2tANQR7IgkpbVmMT150Gc8Vm0K-OKWKytCVHeCqmF914dbP_K23pS4mTFoJ)
 
