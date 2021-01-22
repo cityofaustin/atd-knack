@@ -1,3 +1,9 @@
+---
+description: >-
+  This page documents the use of the Tasks functionality in Knack Builder to
+  send email notifications and reminders.
+---
+
 # Use of Tasks for Notifications
 
 ## Notifications
