@@ -1,7 +1,7 @@
 ---
 description: >-
-  The process to batch copy Vision Zero assignments from one month to another is
-  documented below.
+  The document will guide you through the process to batch copy Vision Zero
+  assignments from one month to another.
 ---
 
 # Batch Copy Process for VZA Assignments
