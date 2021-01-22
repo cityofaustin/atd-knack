@@ -79,9 +79,13 @@ The notification functionality available in tasks is used for the following reas
 
  ****Officers are sent two reminder emails,
 
-a. The first one seven days prior to the assignment and 
+a. The first one seven days prior to the assignment.
+
+![](../.gitbook/assets/image%20%287%29.png)
 
 b. The second one a day before the assignment. 
+
+![](../.gitbook/assets/image%20%289%29.png)
 
 ### **2. Changes to an Assignment**  
 
