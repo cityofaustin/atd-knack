@@ -26,3 +26,31 @@ description: >-
 7. In a way this is helpful, since time taken to process a form when the form is used to create child records can be tiresome.
 8. Shifting the load to an after hours scheduled process can help alleviate that drawback.
 
+## Process
+
+1. In most cases, assignments have teams of two officers. In some cases, a team will be one officer. Signal Engineering assignments may have teams of five officers. 
+2. Since a Task cannot reference a field in the object to determine how many child records to create, it can only create one child record at a time. 
+3. To create multiple child records based on the field entry for ‘Number of Officers’ in the assignment object, 
+
+   a. A Count field was added to the assignment object -  _Count of Child records_, which counts the number of child records associated with the parent record. 
+
+   b. Two more fields were added to the officer\_assignment object
+
+   1. _Add to My Assignments_ 
+   2. _Child Record Number_.
+
+4. The When parameters looked for how many child records were to be created, and how many child records were already created. 
+5. When two child records needed to be created, two tasks are needed - 
+
+   a. the first task will look for
+
+   1. Number of Officers = 2
+   2. Count of Child Records = 0
+   3. It will then label the associated child record with a 2-1
+
+   b. The second task will look for
+
+   1. Number of Officers = 2
+   2. Count of Child Records = 1
+   3. It will then label the associated child record with a 2-2
+
