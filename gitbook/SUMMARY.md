@@ -80,7 +80,6 @@
 
 ## Shared Mobility Operations
 
-* [trial](shared-mobility-operations/trial.md)
 * [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
 
 ## Vision Zero in Action
