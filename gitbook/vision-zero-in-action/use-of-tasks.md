@@ -71,5 +71,25 @@ To make sure associated changes are carried over to the child records, this task
 
 ![](https://lh5.googleusercontent.com/lMZYtpefivXaXKgwMHkVvhyE-n3DzCxtss-yLHlhpGlqqxhcWUM_S8x5g-zYeGi_03bO_O9cfCSzX2tANQR7IgkpbVmMT150Gc8Vm0K-OKWKytCVHeCqmF914dbP_K23pS4mTFoJ)
 
+## Notifications
 
+The notification functionality available in tasks is used for the following reasons - 
+
+### **1. Reminders to the officers** 
+
+ ****Officers are sent two reminder emails,
+
+a. The first one seven days prior to the assignment and 
+
+b. The second one a day before the assignment. 
+
+### **2. Changes to an Assignment**  
+
+Any changes that are made in the assignment record, especially pertaining to location and date-time, have to be passed along to the child record. If an officer has signed up for this assignment, the officer should receive a notification about any such changes. 
+
+### **3. Cancelling an Assignment** 
+
+If an assignment record is deleted \(the scheduler cancels an assignment\) that should be reflected in the officer task list and calendar, the officer  who has signed up for that officer\_assignment should also receive a notification regarding the cancellation. ****
+
+1. \*\*\*\*
 
