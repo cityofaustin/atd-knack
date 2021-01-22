@@ -54,3 +54,10 @@ description: >-
    2. Count of Child Records = 1
    3. It will then label the associated child record with a 2-2
 
+6. At this point the Count of Child Records = 2, and this can be used to check if the right number of child records have been created by comparing with the entry in the Number of Officers Required field.
+7. For every child record that was created, the child record number is set to 1, 2-1, 2-2, 3-1, 3-2, 3-3…
+
+![](https://lh5.googleusercontent.com/OIC_VIM9v4st5kbr5xOIqrqd6EKXkICgLfp754l-ZliFxZeY6lOwGeRdO2L5BRxNbKpPfS5cw7DFClSMMI8RVbuNCh6rpBBwn6gaRKIZ_46FJr9TSjEMV_7pIA_dbf9QsEfS_-21)
+
+![](https://lh5.googleusercontent.com/DnxGFVxC7DpoSbcfE1J-S3adxAnHoMaQqEcrY1p8FpMsH1k1F0ZgwSqOq1ObhVINf6hXFCqQhJh7jRuyRWRtkQjSQoypSJ19P1bFzpgmS0p2RBklErTv457l6TPjJ7xpwJgJ5WTk)
+
