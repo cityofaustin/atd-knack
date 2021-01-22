@@ -91,5 +91,3 @@ Any changes that are made in the assignment record, especially pertaining to loc
 
 If an assignment record is deleted \(the scheduler cancels an assignment\) that should be reflected in the officer task list and calendar, the officer  who has signed up for that officer\_assignment should also receive a notification regarding the cancellation. ****
 
-1. \*\*\*\*
-
