@@ -21,8 +21,7 @@ description: >-
 4. However since the Form widget is not used when creating batch records, and the Record Rules functionality is not available when using the Calendar interface to create new assignment records, this approach was not chosen.
 5. The less accessible is to use Tasks associated with the object to create child records. 
 6. The drawback with using Tasks is that child records are not immediately created, and the changes/ deletion of officer\_assignment child records records does not happen automatically.
-7. In a way this is helpful, since time taken to process a form when the form is used to create child records can be tiresome.
-8. Shifting the load to an after hours scheduled process can help alleviate that drawback.
+7. In a way this is helpful, since time taken to process a form when the form is used to create child records can be tiresome. Shifting the load to an after hours scheduled process can help alleviate that drawback.
 
 ## Process to create child records 
 
