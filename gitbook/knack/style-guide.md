@@ -140,7 +140,7 @@ You can find the original banner assets and a template for creating a new applic
 
 
 
-![CSS Code - screen shot](../.gitbook/assets/image%20%289%29%20%281%29.png)
+![CSS Code - screen shot](../.gitbook/assets/image%20%289%29%20%281%29%20%281%29.png)
 
 #### CSS Code: 
 
