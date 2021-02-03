@@ -4,6 +4,7 @@ When adding this code to a new instance, the following variables defined in the 
 
 - `knackAppId` must be updated with the Application ID. This can be found in the Knack Builder view settings cog dropdown > API & Code > API tab.
 - `apiTableScene` and `apiTableView` must be updated to reflect the API scene and view IDs that exposes the `officer_assignment` records in the UI. More details about this API view can be [below](#create-API-view-for-fetching-officer_assignments). **Before creating a new API view, be sure to check if one exists already. A copied instance will already have this view present.** The scene and view IDs can be found in the URL of this API view in the Knack Builder UI.
+- The record ID for the "No officer assigned" officer. This officer is associated with `officer_assignments` when no officer has signed up for an assignment, and it is necessary for the UI to show which `officer_assignments` are available to users. It is populated in `field_704_raw` of an officer assignment record. **If this is not updated, it will appear as if all assignments are unavailable (grayed out).** This ID can be found by looking at the payload received in the "Available Assignments" view and finding a record with a value of `{identifier: "No Officer Assigned", id: "<the record id>"}` for `field_704_raw`. This value can then be added for the key named `noOfficerAssignedId`.
 
 # Sign up / Available Assignments (scene_208) and Cancel My/Future Assignments (scene_180)
 
