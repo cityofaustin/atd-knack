@@ -135,7 +135,10 @@ function groupRecordsIntoAssignments(records) {
     var record = records[i];
     var officerShift = record[fields.officerShiftField];
 
-    if (groupedRecords[officerShift]) {
+    // First check if this is a single officer assignment
+    if (record[fields.childRecordNumberField] === "1") {
+      groupedRecords[officerShift + "- Single"] = [record];
+    } else if (groupedRecords[officerShift]) {
       groupedRecords[officerShift].push(record);
     } else {
       groupedRecords[officerShift] = [record];
