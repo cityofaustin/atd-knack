@@ -117,6 +117,7 @@ To group officer assignments into shifts, there are two steps executed in the cu
 - Start Time
 - End Time
 - Number of Observations
+- Child Record Number
 - Send email action **(this column is setup in Step 4)**
 
 ![API view columns](images/api_view_columns.png)

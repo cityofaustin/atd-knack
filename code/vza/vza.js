@@ -36,6 +36,7 @@ var fields = {
   startTime: "field_560",
   endTime: "field_561",
   observationsField: "field_734",
+  childRecordNumberField: "field_666",
 };
 
 // Shared code
