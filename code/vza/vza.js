@@ -36,6 +36,7 @@ var fields = {
   startTime: "field_560",
   endTime: "field_561",
   observationsField: "field_734",
+  childRecordNumberField: "field_666",
 };
 
 // Shared code
@@ -135,7 +136,10 @@ function groupRecordsIntoAssignments(records) {
     var record = records[i];
     var officerShift = record[fields.officerShiftField];
 
-    if (groupedRecords[officerShift]) {
+    // First check if this is a single officer assignment
+    if (record[fields.childRecordNumberField] === "1") {
+      groupedRecords[officerShift + "- Single"] = [record];
+    } else if (groupedRecords[officerShift]) {
       groupedRecords[officerShift].push(record);
     } else {
       groupedRecords[officerShift] = [record];
