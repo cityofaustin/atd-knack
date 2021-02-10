@@ -2,25 +2,27 @@
 
 ### Adding New Fields to an Existing ArcGIS Online Dataset
 
-This doc describes the process for adding new fields to an existing ArcGIS dataset whose source is a Knack application.
+This doc describes the process for adding new fields to an existing ArcGIS dataset whose source is a Knack application. These integrations are powered by [`atd-knack-services`](https://github.com/cityofaustin/atd-knack-services) and are scheduled by Airflow.
+
+In a nutshell, this process involves:
+
+* Adding the new field to Knack API view that is the source for the integration
+* Adding the new field to the AGOL feature service that will receive the data
+* Asking a dev to manually trigger an ETL job to update the data in AGOL.
 
 #### 1. Locate the API View
 
 Locate the API view in the Knack application that serves as the source for the ArcGIS dataset. Each of our Knack applications will have a series of views \(aka, pages\) which we call "API Views" and are purpose-built for publishing data from Knack to external sources \(Socrata, ArcGIS Online, etc.\).
 
-If you're unsure which view is the source for a data set, you'll need a developer to review the ETL script which publishes the Knack data to the destination system. They will be able to confirm the page and scene which serves as the source.
-
-The majority of our Socrata and AGOL publishing scripts live in the `atd-data-publshing` repo, and are defined in [this configuration file](https://github.com/cityofaustin/atd-data-publishing/blob/master/transportation-data-publishing/config/knack/config.py).
+To locate the API view, review this [configuration file](https://github.com/cityofaustin/atd-knack-services/blob/production/services/config/knack.py) and locate the view ID for the dataset in question. This view ID will look something like this: `view_101`. You can use the [Knack Explorer](https://knack-explorer.austinmobility.io/) to search by this view ID and bring up the editing page in Knack builder.
 
 #### 2. Field Naming
 
-Field naming: In Knack parlance, field names are called "Labels". There are very few restrictions in Knack around how you can name a field. It can have spaces, numbers, mixed case, etc. This is because Knack maintains it's own unique field identifiers which you as a builder cannot modify, e.g. `field_101`, etc.
+In Knack parlance, field names are called "Labels". There are very few restrictions in Knack around how you can name a field. It can have spaces, numbers, mixed case, etc. This is because Knack maintains it's own unique field identifiers which you as a builder cannot modify, e.g. `field_101`, etc.
 
 Crucially, we use the user-defined Knack field label as the field name in the downstream system. In Socrata, these field names are called the "API Field Names", and they must be lower case, with no spaces or special characters. In ArcGIS Online, these fields may be upper or lower case, with no spaces or special characters.
 
-As such, the field "label" of any Knack field which is to be published to an external system should follow these same conventions. Typically, we follow the practice of labeling these fields in upper case with an underscore in lieu of spaces.
-
-_Our Knack &gt;_ ArcGIS _publishing script will convert any Knack field name to lowercase to match ArcGIS Online's expected field format._
+As such, the field "label" of any Knack field which is to be published to an external system should follow these same conventions. The field names in Knack need to exactly match, except for capitalization, the field names in AGOL and Socrata.
 
 #### 3. Update the Knack View
 
@@ -32,14 +34,12 @@ Once you've located the API view in the Knack builder, first verify \(1\) that t
 2. The Add Field window will open. Fill out the form as follows:
 3. **Field Name:** this is the "API Field Name which should exactly match the Knack field label
 4. **Display name:** can be the same as the Field Name or a human friendly field label, depending on the use of the feature layer
-5. **Type:** choose the appropriate field type
+5. **Type:** choose the appropriate field type. For text fields, be sure to set the right character limit. You should err on the side of more characters. 
 6. **Length:** choose the appropriate field length if the Type is a String
 7. **Default Value:** this is an optional field to fill out
 8. Click Add New Field to save your changes. The new field will appear at the bottom of the field list.
 
 #### 5. Refresh the Dataset <a id="5-refresh-the-dataset"></a>
 
-In order to refresh the AGOL dataset with values for the new columns, you should run a batch update in the Knack builder to set the modified date of all records to the current date. This will cause the integration script to update the destination datasets the next time it runs.
-
-If the dataset contains more than ~2k rows, ask a dev to manually run the dataset publishing script with a `--replace` command. Contact a dev for help.
+Ask a dev to manually run both the `metadata_to_postgrest` and `records_postgrest` scripts for this dataset, and let them know that the data needs to be fully refreshed. The dev should run the script by omitting the `--date` flag in run command.
 
