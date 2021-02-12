@@ -18,11 +18,13 @@ To locate the API view, review this [configuration file](https://github.com/city
 
 #### 2. Field Naming
 
+TL;DR: **The field names in Knack need to exactly match, except for capitalization, the field names in AGOL and Socrata**
+
 In Knack parlance, field names are called "Labels". There are very few restrictions in Knack around how you can name a field. It can have spaces, numbers, mixed case, etc. This is because Knack maintains it's own unique field identifiers which you as a builder cannot modify, e.g. `field_101`, etc.
 
 Crucially, we use the user-defined Knack field label as the field name in the downstream system. In Socrata, these field names are called the "API Field Names", and they must be lower case, with no spaces or special characters. In ArcGIS Online, these fields may be upper or lower case, with no spaces or special characters.
 
-As such, the field "label" of any Knack field which is to be published to an external system should follow these same conventions. The field names in Knack need to exactly match, except for capitalization, the field names in AGOL and Socrata.
+As such, the field "label" of any Knack field which is to be published to an external system should follow these same conventions.
 
 #### 3. Update the Knack View
 
