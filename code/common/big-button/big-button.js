@@ -1,19 +1,17 @@
 function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
-  // create a large button
   $("<div/>", {
     id: div_id,
   }).appendTo("#" + view_id);
 
   $("#" + div_id).append(
-    "<a class='big-button' href='" +
+    "<div class='big-button-container'><a class='big-button' href='" +
       url +
-      "'><div class='big-button-container'><span><i class='fa fa-" +
+      "'><span><i class='fa fa-" +
       fa_icon +
       "'></i></span><span> " +
       button_label +
-      "</span></div></a>"
+      "</span></a></div>"
   );
-
   if (callback) callback();
 }
 
