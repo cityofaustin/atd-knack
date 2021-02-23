@@ -1,17 +1,28 @@
-function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
-  $("<div/>", {
-    id: div_id,
-  }).appendTo("#" + view_id);
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  callback,
+  isDisabled
+) {
+  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
 
-  $("#" + div_id).append(
-    "<div class='big-button-container'><a class='big-button' href='" +
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button big-button-container" +
+      disabledClass +
+      " href='" +
       url +
       "'><span><i class='fa fa-" +
       fa_icon +
       "'></i></span><span> " +
       button_label +
-      "</span></a></div>"
-  );
+      "</span></a>"
+  ).appendTo("#" + view_id);
+
   if (callback) callback();
 }
 

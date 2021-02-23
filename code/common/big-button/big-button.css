@@ -5,11 +5,17 @@
   padding: 10px;
   margin: 20px;
   max-width: 12em;
+  display: block;
 }
 
 .big-button-container:hover {
   background-color: #f7f7f7;
   cursor: pointer;
+}
+
+.big-button-disabled {
+  pointer-events: none;
+  background-color: #f7f7f7;
 }
 
 .fa {
