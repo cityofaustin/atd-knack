@@ -4,15 +4,15 @@ function bigButton(
   url,
   fa_icon,
   button_label,
-  callback,
-  isDisabled
+  isDisabled,
+  callback
 ) {
   var disabledClass = isDisabled ? " big-button-disabled'" : "'";
 
   $(
     "<a id='" +
       id +
-      "' class='big-button big-button-container" +
+      "' class='big-button-container" +
       disabledClass +
       " href='" +
       url +
