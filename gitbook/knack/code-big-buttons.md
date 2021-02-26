@@ -10,53 +10,84 @@ Need to re-write this guide
 
 ####  Big Button JS code
 
-```text
-function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
-  // create a large button
-  
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
+Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button.
 
-  if(callback) callback();
+```text
+/********************************************/
+/*************** Big Buttons ****************/
+/********************************************/
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled, callback) 
+{
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+    $( "<a id='" + 
+    id + "' class='big-button-container" + 
+    disabledClass + 
+    " href='" + url + 
+    "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + 
+    button_label + "</span></a>" 
+    ).appendTo("#" + view_id);
+
+  if (callback) callback();
 }
-	//>>>HOME TAB BUTTONS
-$(document).on('knack-view-render.view_15', function(event, page) {
-  // create large button on the home page
-    bigButton('development-reviews', 'view_15', "https://atd.knack.com/development-services#home/development-reviews/", "list-ul", "Development Reviews");
+
+// create large Development Reviews button on the Home page
+$(document).on("knack-view-render.view_15", function(event, page) {
+    bigButton(
+    "development-reviews", 
+    "view_15", 
+    "https://atd.knack.com/development-services#home/development-reviews/", 
+    "list-ul", 
+    "Development Reviews"
+    );
 });
-$(document).on('knack-view-render.view_55', function(event, page) {
-    // create large button on the home page
-    bigButton('my-reviews', 'view_55', "https://atd.knack.com/development-services#my-reviews/", "male", "My Reviews");
+
+// create a DISABLED Development Reviews button on the Home page
+$(document).on("knack-view-render.view_15", function(event, page) {
+    bigButton(
+    "disabled-development-reviews", 
+    "view_15", 
+    "https://atd.knack.com/development-services#home/development-reviews/", 
+    "list-ul", 
+    "Disabled Development Reviews", 
+    true
+    );
 });
 ```
 
- $\(document\).on\('knack-view-render.view\_15', function\(event, page\) { 
-
-  // create large button on the home page 
-
-     bigButton\('development-reviews', 'view\_15', "[https://atd.knack.com/development-services\#home/development-reviews/](https://atd.knack.com/development-services#home/development-reviews/)", "list-ul", "Development Reviews"\); 
-
-}\); 
-
 #### Things to change in Javascript
 
-* Change the code in two places to match the corresponding view, ex. `view_15` to `view_100` 
-* Change the code where `development-review` is to be the page url plug, ex. `new-form`
-* Change the code where the page url is `https://atd.knack.com/development-services#home/development-reviews/`to the correct page url, ex. `https://atd.knack.com/new-app#home/new-form` 
-  * \(Remember this is hard coded!! so if you make a Test environment it will redirect to the Production environment\)
-* Change the icon that shows up beside the button, ex. `list-ul` to `plus-circle`
-* Change the name of the button `Development Reviews` to `New Form`
+* Change the Button ID code in the first set of parentheses to whatever is appropriate to name your button; 
 
-$\(document\).on\('knack-view-render.`view_15`', function\(event, page\) { 
+  ```text
+  "development-reviews"
+  ```
 
-  // create large button on the home page 
+* Change the View ID code to match the corresponding Rich Text view where the big button will live; 
 
-     bigButton\('`development-reviews`', '`view_15`', "[`https://atd.knack.com/development-services#home/development-reviews/`](https://atd.knack.com/development-services#home/development-reviews/)", "`list-ul`", "`Development Reviews`"\); 
+  ```text
+  "view_15"
+  ```
 
-}\); 
+* Change the URL code to the corresponding page that the button will redirect to; 
+
+  ```text
+  "https://atd.knack.com/development-services#home/development-reviews/"
+  ```
+
+* Change the Font Awesome icon to match the theme of the button. Knack currently supports FA version 4 icons. \([https://fontawesome.com/v4.7.0/](https://fontawesome.com/v4.7.0/)\) 
+
+  ```text
+  "list-ul"
+  ```
+
+* Change the Button Label code of the button to the text that will be visible; 
+
+  ```text
+  "Development Reviews"
+  ```
+
+
 
 #### Big Button CSS code
 
