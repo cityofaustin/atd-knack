@@ -1,6 +1,10 @@
+---
+description: Add Big Buttons to your Knack applications!
+---
+
 # CODE: Big Buttons
 
-Need to re-write this guide
+![](../.gitbook/assets/image%20%2830%29.png)
 
 ### Steps
 
@@ -85,6 +89,12 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 
   ```text
   "Development Reviews"
+  ```
+
+* Lastly, only add the true argument if you would like the button to be disabled.
+
+  ```text
+  true
   ```
 
 
