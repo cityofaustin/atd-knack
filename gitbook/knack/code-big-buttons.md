@@ -12,7 +12,7 @@ description: Add Big Buttons to your Knack applications!
 * There is a “Javascript” and “CSS” tab you can toggle to
   * There are 2 snippets of code: 1 for the Javascript tab and 1 for the CSS tab
 
-####  Big Button JS code
+###  Big Button JS code
 
 Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button.
 
@@ -99,7 +99,7 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 
 
 
-#### Big Button CSS code
+### Big Button CSS code
 
 ```text
 .big-button-container {
@@ -127,22 +127,23 @@ a.big-button {
 }
 ```
 
-#### Creating Page Buttons
+### Creating Page Buttons
 
-Create page or on the page your want to add the big button. Add a RICH TEXT widget. 
+1. Create a page or on the page your want to add the big button, add a RICH TEXT view. 
+2. Open the newly created Rich Text view and look at the URL. Take note of the view \#.
 
-When you open the RICH TEXT views, they have their own views. 
+   [https://builder.knack.com/atd/development-services\#pages/scene\_1/views/view\_15](https://builder.knack.com/atd/development-services#pages/scene_1/views/view_15)
 
-* Ex. “Development Reviews \| 15” 
-  * [`https://builder.knack.com/atd/development-services#pages/scene_1/views/view_15`](https://builder.knack.com/atd/development-services#pages/scene_1/views/view_15)\`\`
-* Reference the ex. `view_15` 
-* Normally rename the Rich Text box to ex. `Development Reviews | 15`
-
-![](../.gitbook/assets/image%20%2813%29.png)
+3. Edit the name of your Rich Text view and be sure to append the view \# to it to easily use it for code reference without having to look every time.
+4. You will then use this View ID \# when creating or updating the JS code above.
 
 #### Example
 
-My example: [`https://builder.knack.com/atd/development-services#pages/scene_1`](https://builder.knack.com/atd/development-services#pages/scene_1)\`\`
+[https://builder.knack.com/atd/development-services\#pages/scene\_1](https://builder.knack.com/atd/development-services#pages/scene_1)
+
+![](../.gitbook/assets/image%20%2813%29.png)
+
+
 
 
 
