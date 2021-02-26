@@ -101,29 +101,41 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 
 ### Big Button CSS code
 
+Big Buttons have shadow to show elevation and provide a 3D effect. They are also `display: block` so we can set width without clickable area extending the width of the page. We create a pointer hover and color effect when enabled and an opacity and cursor effect when disabled. These CSS classes only need to placed once on the CSS page and any buttons can use them. They can be called via JS or HTML.
+
 ```text
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
 .big-button-container {
-    border-radius: 2px;
-    box-shadow: 0px 1px 2px 0px gray;
-    font-size: 2.5em;
-    padding: 10px;
-    margin: 20px;
-    max-width: 12em;
+  padding: 10px 10px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  max-width: 12em;
+  display: block;
 }
  
 .big-button-container:hover {
     background-color: #f7f7f7;
     cursor: pointer;
 }
- 
- 
-.fa {
-vertical-align: middle;
-}
- 
+
+.big-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+} 
  
 a.big-button {
   text-decoration: none;
+}
+
+/****************************************/
+/************ Button Effects ************/
+/****************************************/
+.disabled { 
+  cursor: not-allowed; 
 }
 ```
 
