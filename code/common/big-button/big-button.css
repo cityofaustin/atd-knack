@@ -1,0 +1,27 @@
+.big-button-container {
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  padding: 10px;
+  margin: 20px;
+  max-width: 12em;
+  display: block;
+}
+
+.big-button-container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.big-button-disabled {
+  pointer-events: none;
+  background-color: #f7f7f7;
+}
+
+.fa {
+  vertical-align: middle;
+}
+
+a.big-button-container {
+  text-decoration: none;
+}
