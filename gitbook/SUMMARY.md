@@ -15,6 +15,7 @@
 * [CODE: Big Buttons](knack/code-big-buttons.md)
 * [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
 * [Banner Logos](knack/banner-logos.md)
+* [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
 * [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
 * [Knack &lt;--&gt; ArcGIS Online Integration](knack/arcgis-online-integration.md)
 * [BEST PRACTICE: Importing records](knack/best-practice-importing-records.md)
