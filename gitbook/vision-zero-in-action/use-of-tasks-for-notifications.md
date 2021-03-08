@@ -8,6 +8,12 @@ description: >-
 
 ## Purpose 
 
+The purpose of using tasks is to create notifications on an automated regular schedule to send reminders to officers on upcoming assignments and to send notifications in case changes are made in the assignments they have signed up for.
+
+## Permissions
+
+Only a Knack Builder / VZA System Administrator can create or edit Tasks.
+
 ## Notifications
 
 The notification functionality available in tasks is used for the following reasons - 
