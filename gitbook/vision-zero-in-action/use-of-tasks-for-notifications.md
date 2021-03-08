@@ -14,7 +14,7 @@ The purpose of using tasks is to create notifications on an automated regular sc
 
 Only a Knack Builder / VZA System Administrator can create or edit Tasks.
 
-## Notifications
+## Process
 
 The notification functionality available in tasks is used for the following reasons - 
 
