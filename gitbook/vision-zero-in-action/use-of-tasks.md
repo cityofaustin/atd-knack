@@ -23,6 +23,10 @@ description: >-
 6. The drawback with using Tasks is that child records are not immediately created, and the changes/ deletion of officer\_assignment child records records does not happen automatically.
 7. In a way this is helpful, since time taken to process a form when the form is used to create child records can be tiresome. Shifting the load to an after hours scheduled process can help alleviate that drawback.
 
+## Permissions 
+
+Only a Knack Builder / VZA System Administrator can create or edit Tasks.
+
 ## Process to create child records 
 
 1. In most cases, assignments have teams of two officers. In some cases, a team will be one officer. Signal Engineering assignments may have teams of five officers. 
