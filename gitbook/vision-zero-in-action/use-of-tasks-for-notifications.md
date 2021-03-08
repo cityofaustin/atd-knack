@@ -6,6 +6,8 @@ description: >-
 
 # Use of Tasks for Notifications
 
+## Purpose 
+
 ## Notifications
 
 The notification functionality available in tasks is used for the following reasons - 
