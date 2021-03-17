@@ -90,7 +90,7 @@
 * [Login Process for Officers](vision-zero-in-action/officer-login-process.md)
 * [Officer Records](vision-zero-in-action/officer-records.md)
 * [Use Tasks for Creating Child Records](vision-zero-in-action/use-of-tasks.md)
-* [Use of Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
+* [Use Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
 
 ## STREET BANNER PROGRAM
 

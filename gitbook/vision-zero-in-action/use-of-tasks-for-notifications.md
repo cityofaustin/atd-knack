@@ -4,7 +4,7 @@ description: >-
   send email notifications and reminders.
 ---
 
-# Use of Tasks for Notifications
+# Use Tasks for Notifications
 
 ## Purpose 
 
