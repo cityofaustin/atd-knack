@@ -56,3 +56,9 @@ These steps can be carried out either on a PC or in a web browser.
 
 ![](https://lh3.googleusercontent.com/i_CdBDn5tlFHH0zeeLAPTAjk3raoDMtR9gdYUnDlxqCGW-KGo_Rp125l8DKyepoHQFdV4HUF0KD7g-InIeFSvd2Hbe9igNyP6TAXWZtwXNaZzT1n0-YeTh71dp-bO3BceZbB4xzB)
 
+
+
+4. Put in your date range, select All for STEP, and select all for Officers.
+
+5. Click Finish.
+
