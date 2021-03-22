@@ -58,7 +58,9 @@ These steps can be carried out either on a PC or in a web browser.
 
 ![](https://lh6.googleusercontent.com/y-YcK8Y2nYlFU7JVm0GXlQ7_HXURwFZVIV05nZofRMXGfZaMykGtED_Rc7IzEPkBgHRqqK3cpXSWoHuGQywAlURdyA2BgPnvbsK3bfvOkBCOrVnQoQsEKO0KfHU3bJUAbUZaRO3k)
 
-### Access VZA officer assignments
+7. This table will be downloaded as Citation Audit by STEP, open it in Excel and save it as a CSV. Move the CSV to `OneDrive - City of Austin\Vision Zero Datasets`
+
+### Access Vision Zero officer assignments
 
 1. Open [https://atd.knack.com/vza\#api-views-private/](https://atd.knack.com/vza#api-views-private/)
 2. Filter the Officer Assignments table for all assignments that an officer signed up for after January 19, 2021. 
