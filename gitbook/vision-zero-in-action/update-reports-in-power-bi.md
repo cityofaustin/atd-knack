@@ -37,7 +37,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 ### Access reports in Brazos
 
-1. Open Brazos and navigate to reports.
+1. Open [Brazos](https://my.brazostech.com/Home/brazospg/36/ctl/Login/Default.aspx) and navigate to reports.
 2. Open the Audit by STEP report
 
 
