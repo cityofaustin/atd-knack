@@ -27,5 +27,9 @@ You will need access to the Reports section in the VZA application and will need
 
 ![](https://lh5.googleusercontent.com/AXTVNP2g8H7H4wLMkXiAuCpZ4I7PeWKp3cLI0i6hEcahJ4lk5U77Fv7WDknqg1wfaRZuuHEi843NVCKSvVEow2rC3fkCfA4ItzihbcOIo-giaGLav2KS9sz0j9K2ZvtNS5nfdEBu)
 
-\*\*\*\*
+2. Add a suffix to Citation Audit by STEP, Marched\_Assignments\_Citations\_Warnings, notes, vzaofficerassignments to denote the datasets are from previous weeks and can be archived.
+
+
+
+![](https://lh6.googleusercontent.com/sl_Uzd9SLazpAEjxoFsRWZ1MUt3gYQalPWWmmf5wbuZvy_3JRuE3rY1oeZ_xVSNZV20mgjNoKHiZ4pGD_swnYopaRPqSVcAwt_sDXDXWJvvXUccE-pnC2iUn7tKE8oRPA-Sahcbw)
 
