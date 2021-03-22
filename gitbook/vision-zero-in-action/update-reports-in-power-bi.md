@@ -66,3 +66,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 ![](https://lh6.googleusercontent.com/y-YcK8Y2nYlFU7JVm0GXlQ7_HXURwFZVIV05nZofRMXGfZaMykGtED_Rc7IzEPkBgHRqqK3cpXSWoHuGQywAlURdyA2BgPnvbsK3bfvOkBCOrVnQoQsEKO0KfHU3bJUAbUZaRO3k)
 
+### Access VZA officer assignments
+
+
+
