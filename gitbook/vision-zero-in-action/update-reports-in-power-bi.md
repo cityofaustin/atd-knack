@@ -58,7 +58,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 ![](https://lh6.googleusercontent.com/y-YcK8Y2nYlFU7JVm0GXlQ7_HXURwFZVIV05nZofRMXGfZaMykGtED_Rc7IzEPkBgHRqqK3cpXSWoHuGQywAlURdyA2BgPnvbsK3bfvOkBCOrVnQoQsEKO0KfHU3bJUAbUZaRO3k)
 
-7. This table will be downloaded as Citation Audit by STEP, open it in Excel and save it as a CSV. Copy the CSV to \`G:\ATD\ATD\_GIS\02\_ENT\_APPLICATIONS\app\_VZA\_Vision\_Zero\_in\_Action\Reports\Match\_Assigments\_Citations\Citation Audit by Step\` and `OneDrive - City of Austin\Vision Zero Datasets`
+7. This table will be downloaded as Citation Audit by STEP, open it in Excel and save it as a CSV. Copy the CSV to `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Reports\Match_Assigments_Citations\Citation Audit by Step`and `OneDrive - City of Austin\Vision Zero Datasets`
 
 ### Access Vision Zero officer assignments
 
