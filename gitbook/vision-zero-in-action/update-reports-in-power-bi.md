@@ -86,7 +86,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 1. Open `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_inAction\Reports\MatchAssigmentsCitations\Citations_Match_Assigments_2.fmw`
 
-2. Run the workbench
+2. Run the workbench.
 
 
 
