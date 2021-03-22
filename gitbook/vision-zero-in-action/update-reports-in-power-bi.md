@@ -19,6 +19,8 @@ You will need access to the Reports section in the VZA application and will need
 
 ### Preparatory Steps
 
+These steps can be carried out either on a PC or in a web browser.
+
 
 
 1. Open Vision Zero Datasets on One Drive. You will need to be given permission to access this location on One Drive.
@@ -32,4 +34,10 @@ You will need access to the Reports section in the VZA application and will need
 
 
 ![](https://lh6.googleusercontent.com/sl_Uzd9SLazpAEjxoFsRWZ1MUt3gYQalPWWmmf5wbuZvy_3JRuE3rY1oeZ_xVSNZV20mgjNoKHiZ4pGD_swnYopaRPqSVcAwt_sDXDXWJvvXUccE-pnC2iUn7tKE8oRPA-Sahcbw)
+
+3. Archive these datasets - Your One Drive - Vision Zero Datasets - Archive.
+
+
+
+![](https://lh4.googleusercontent.com/WD85CjVcPk-L0EBexp61vOdE8MNRNifKS8Kn-EX-OORRj_q_pNQODhb5ENLpbO3QgWCDUrT_RqiUgh89sAaYEF_GlQUq97maxOzCKbxTiZQx1mhsul6xoRpNQ4nKzbnffAuJJEmM)
 
