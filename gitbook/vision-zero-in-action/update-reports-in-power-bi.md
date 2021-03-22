@@ -21,23 +21,17 @@ You will need access to the Reports section in the VZA application and will need
 
 These steps can be carried out either on a PC or in a web browser.
 
-
-
 1. Open Vision Zero Datasets on One Drive. You will need to be given permission to access this location on One Drive.
-
-
 
 ![](https://lh5.googleusercontent.com/AXTVNP2g8H7H4wLMkXiAuCpZ4I7PeWKp3cLI0i6hEcahJ4lk5U77Fv7WDknqg1wfaRZuuHEi843NVCKSvVEow2rC3fkCfA4ItzihbcOIo-giaGLav2KS9sz0j9K2ZvtNS5nfdEBu)
 
+
+
 2. Add a suffix to Citation Audit by STEP, Marched\_Assignments\_Citations\_Warnings, notes, vzaofficerassignments to denote the datasets are from previous weeks and can be archived.
-
-
 
 ![](https://lh6.googleusercontent.com/sl_Uzd9SLazpAEjxoFsRWZ1MUt3gYQalPWWmmf5wbuZvy_3JRuE3rY1oeZ_xVSNZV20mgjNoKHiZ4pGD_swnYopaRPqSVcAwt_sDXDXWJvvXUccE-pnC2iUn7tKE8oRPA-Sahcbw)
 
 3. Archive these datasets - Your One Drive - Vision Zero Datasets - Archive.
-
-
 
 ![](https://lh4.googleusercontent.com/WD85CjVcPk-L0EBexp61vOdE8MNRNifKS8Kn-EX-OORRj_q_pNQODhb5ENLpbO3QgWCDUrT_RqiUgh89sAaYEF_GlQUq97maxOzCKbxTiZQx1mhsul6xoRpNQ4nKzbnffAuJJEmM)
 
@@ -51,8 +45,6 @@ These steps can be carried out either on a PC or in a web browser.
 ![](https://lh3.googleusercontent.com/po-wwqhhCa41dFpL00OUlG0jc8TL4D1nMhYu71X5WNlyIg5IuSt9Ns1eEtvDpW0OsiqSTAtcE8Zp6bWv5ZVoH2BQO7noBp50X_kY-f1jwI64q7NbcXY64Jltf7cRXitT-y-vW7q-)
 
 3. This will open a screen that looks like the screenshot below. It might take some time.
-
-
 
 ![](https://lh3.googleusercontent.com/i_CdBDn5tlFHH0zeeLAPTAjk3raoDMtR9gdYUnDlxqCGW-KGo_Rp125l8DKyepoHQFdV4HUF0KD7g-InIeFSvd2Hbe9igNyP6TAXWZtwXNaZzT1n0-YeTh71dp-bO3BceZbB4xzB)
 
@@ -68,5 +60,5 @@ These steps can be carried out either on a PC or in a web browser.
 
 ### Access VZA officer assignments
 
-
-
+1. Open [https://atd.knack.com/vza\#reports/](https://atd.knack.com/vza#reports/)
+2. 
