@@ -88,5 +88,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 2. Run the workbench.
 
+### Refresh Power BI Desktop report
+
 
 
