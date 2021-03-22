@@ -62,3 +62,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 5. Click Finish.
 
+6. Once the report loads, click on the icon in the top right corner. Select View in Excel options - View in CSV format.
+
+![](https://lh6.googleusercontent.com/y-YcK8Y2nYlFU7JVm0GXlQ7_HXURwFZVIV05nZofRMXGfZaMykGtED_Rc7IzEPkBgHRqqK3cpXSWoHuGQywAlURdyA2BgPnvbsK3bfvOkBCOrVnQoQsEKO0KfHU3bJUAbUZaRO3k)
+
