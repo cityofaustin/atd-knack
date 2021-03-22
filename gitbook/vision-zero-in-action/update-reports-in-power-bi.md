@@ -41,3 +41,14 @@ These steps can be carried out either on a PC or in a web browser.
 
 ![](https://lh4.googleusercontent.com/WD85CjVcPk-L0EBexp61vOdE8MNRNifKS8Kn-EX-OORRj_q_pNQODhb5ENLpbO3QgWCDUrT_RqiUgh89sAaYEF_GlQUq97maxOzCKbxTiZQx1mhsul6xoRpNQ4nKzbnffAuJJEmM)
 
+### Access reports in Brazos
+
+
+
+1. Open Brazos and navigate to reports.
+2. Open the Audit by STEP report
+
+
+
+![](https://lh3.googleusercontent.com/po-wwqhhCa41dFpL00OUlG0jc8TL4D1nMhYu71X5WNlyIg5IuSt9Ns1eEtvDpW0OsiqSTAtcE8Zp6bWv5ZVoH2BQO7noBp50X_kY-f1jwI64q7NbcXY64Jltf7cRXitT-y-vW7q-)
+
