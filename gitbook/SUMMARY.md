@@ -89,6 +89,7 @@
 * [Calculate School Closures](vision-zero-in-action/calculate-school-closure.md)
 * [Login Process for Officers](vision-zero-in-action/officer-login-process.md)
 * [Officer Records](vision-zero-in-action/officer-records.md)
+* [Update reports in Power BI](vision-zero-in-action/update-reports-in-power-bi.md)
 * [Use Tasks for Creating Child Records](vision-zero-in-action/use-of-tasks.md)
 * [Use Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
 
