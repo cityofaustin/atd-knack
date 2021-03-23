@@ -1,0 +1,48 @@
+# Custom Functionality - SMB
+
+### Pulling Requester division into the "Requester" field automatically 
+
+* LOCATION: New Signs Work Order - [`https://builder.knack.com/atd/signs-markings#pages/scene_1045/views/view_2633`](https://builder.knack.com/atd/signs-markings#pages/scene_1045/views/view_2633)
+* LOCATION: New Markings Work Order - 
+
+  [`https://builder.knack.com/atd/signs-markings#pages/scene_711/views/view_1880`](https://builder.knack.com/atd/signs-markings#pages/scene_711/views/view_1880)
+
+* BEHAVIOR:  User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user.
+* REASON: Users create so many work orders it is one less field they have to populate that we already capture when creating their accounts
+
+ex. User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user.
+
+### **Attachments, showing up as "Plans", "Regulations" instead of the file name**
+
+* LOCATION: Signs Work Order table \(Main\) - [`https://builder.knack.com/atd/signs-markings#pages/scene_1027`](https://builder.knack.com/atd/signs-markings#pages/scene_1027)
+* CUSTOMIZATION: File Type is populated and it replaces the File Name to reduce table bloat
+* REASON: File names can be long and take up lots of screen space, to save screen real estate and make table more simplified and readable
+
+### Work Order Details, Status colors, showing up in the details portion
+
+* LOCATION: Signs Work Order Details page - [`https://builder.knack.com/atd/signs-markings#pages/scene_1028`](https://builder.knack.com/atd/signs-markings#pages/scene_1028)
+* CUSTOMIZATION: Work Order Status has background color that matches the display colors on the Work Order tables
+* REASON: Users associate the work order colors to the work order statuses, easier to know what status a work order is at a glance
+
+### Geographic Map/Location Functionality
+
+* LOCATION: Signs Work Order Details page - [`https://builder.knack.com/atd/signs-markings#pages/scene_1028`](https://builder.knack.com/atd/signs-markings#pages/scene_1028)
+* BEHAVIOR: This affects only Signs Work Orders. Location map appears, Add Location fields are \(hidden\), When `Add location` button is clicked, it passes through the `Longitude`, `Latitude` fields and then creates map markers that links the `Location Details Page` , `Spatial ID`, `Latitude`, `Longitude` on the map instead of just the Locations table
+* REASON: This allows the user to not have to go to the Locations table to figure out which location to choose when added asset information. There are many times where there are more locations on a work order.
+
+![](../.gitbook/assets/image%20%2835%29.png)
+
+### "Back to Top" icon/enlarged text 
+
+* LOCATION: Signs Work Order Details page - [`https://builder.knack.com/atd/signs-markings#pages/scene_1028`](https://builder.knack.com/atd/signs-markings#pages/scene_1028)\(Visible at bottom of page\)
+* CUSTOMIZATION: Custom icon and enlarged text to navigate user back to top of page
+* REASON: to help user not have to scroll all the way up to review information or click submit
+
+![](../.gitbook/assets/image%20%2834%29.png)
+
+### "Back to View Work Order Details" icon/enlarged text 
+
+*  LOCATION: Signs Work Order Details page - [`https://builder.knack.com/atd/signs-markings#pages/scene_1039`](https://builder.knack.com/atd/signs-markings#pages/scene_1039)\(Visible at bottom of page\)
+* CUSTOMIZATION: Custom icon and enlarged text to navigate user back to previous page
+* REASON: to help user navigate back to previous page as it is not obvious at at the bottom of the page
+
