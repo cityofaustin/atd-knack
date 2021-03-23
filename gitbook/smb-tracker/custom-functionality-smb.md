@@ -1,5 +1,7 @@
 # Custom Functionality - SMB
 
+## Custom Code in Signs and Markings \(SMB\) Data Tracker
+
 ### Pulling Requester division into the "Requester" field automatically 
 
 * LOCATION: New Signs Work Order - [`https://builder.knack.com/atd/signs-markings#pages/scene_1045/views/view_2633`](https://builder.knack.com/atd/signs-markings#pages/scene_1045/views/view_2633)
@@ -30,7 +32,7 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * BEHAVIOR: This affects only Signs Work Orders. Location map appears, Add Location fields are \(hidden\), When `Add location` button is clicked, it passes through the `Longitude`, `Latitude` fields and then creates map markers that links the `Location Details Page` , `Spatial ID`, `Latitude`, `Longitude` on the map instead of just the Locations table
 * REASON: This allows the user to not have to go to the Locations table to figure out which location to choose when added asset information. There are many times where there are more locations on a work order.
 
-![](../.gitbook/assets/image%20%2835%29.png)
+![](../.gitbook/assets/image%20%2841%29.png)
 
 ### "Back to Top" icon/enlarged text 
 
@@ -45,4 +47,28 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 *  LOCATION: Signs Work Order Details page - [`https://builder.knack.com/atd/signs-markings#pages/scene_1039`](https://builder.knack.com/atd/signs-markings#pages/scene_1039)\(Visible at bottom of page\)
 * CUSTOMIZATION: Custom icon and enlarged text to navigate user back to previous page
 * REASON: to help user navigate back to previous page as it is not obvious at at the bottom of the page
+
+## Mobile Optimizations
+
+### Code to determine what environment a user was in to recognize when to enable mobile optimizations
+
+### Menu Buttons - Globally Enlarged
+
+![](../.gitbook/assets/image%20%2837%29.png)
+
+### Form Field Headings - Globally Enlarged
+
+![](../.gitbook/assets/image%20%2835%29.png)
+
+### Form Fields- Globally Enlarged
+
+![](../.gitbook/assets/image%20%2838%29.png)
+
+### Form Selections \(Drop downs\) - Global Enlarged
+
+![](../.gitbook/assets/image%20%2842%29.png)
+
+### Submit Button - Globally Enlarged
+
+![](../.gitbook/assets/image%20%2840%29.png)
 
