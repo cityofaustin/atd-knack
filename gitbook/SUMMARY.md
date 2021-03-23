@@ -6,6 +6,7 @@
 
 * [Application Overview](knack/application-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
+* [Custom Application Functionality](knack/custom-application-functionality.md)
 * [Style Guide](knack/style-guide.md)
 * [Code Version Control](knack/code-version-control.md)
 * [GitHub Code Workflow](knack/github-code-workflow.md)
@@ -49,7 +50,6 @@
 
 * [Data set inventory](dts-portal/dts-portal.md)
 * [Application Inventory](dts-portal/application-inventory.md)
-* [Custom Application Functionality](dts-portal/custom-application-functionality.md)
 
 ## Finance and Purchasing
 
