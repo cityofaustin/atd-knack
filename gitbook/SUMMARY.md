@@ -49,6 +49,7 @@
 
 * [Data set inventory](dts-portal/dts-portal.md)
 * [Application Inventory](dts-portal/application-inventory.md)
+* [Custom Application Functionality](dts-portal/custom-application-functionality.md)
 
 ## Finance and Purchasing
 
