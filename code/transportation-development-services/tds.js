@@ -405,16 +405,18 @@ Highcharts.setOptions({
 // Then, un-hide based on choice in field_495
 // var script = document.createElement('script');script.src = "https://code.jquery.com/jquery-3.4.1.min.js";document.getElementsByTagName('head')[0].appendChild(script);
 
-$(document).on("knack-view-render.view_628", function (event, view) {
-  var fieldsIdsShownOnLoad = {
-    // "field-id": "field-name"
-    "kn-input-field_639": "Mitigation Location",
-    "kn-input-field_326": "Mitigation Type",
-    "kn-input-field_495": "Improvement",
-    "kn-input-field_317": "Cost",
-    "kn-input-field_211": "Recommendation Notes",
-  };
+var fieldsIdsShownOnLoad = {
+  // "field-id": "field-name"
+  "kn-input-field_639": "Mitigation Location",
+  "kn-input-field_326": "Mitigation Type",
+  "kn-input-field_495": "Improvement",
+  "kn-input-field_317": "Cost",
+  "kn-input-field_211": "Recommendation Notes",
+};
 
+// Create map for fields to show by value of field_495
+
+function hideFormFields() {
   var $fields = $("#view_628").find(".kn-input");
 
   $fields.each(function (index, field) {
@@ -424,9 +426,20 @@ $(document).on("knack-view-render.view_628", function (event, view) {
       $("#" + fieldId).hide();
     }
   });
+}
+
+function showFormFieldsByValue(value) {
+  // Un-hide form fields in map
+}
+
+$(document).on("knack-view-render.view_628", function (event, view) {
+  hideFormFields();
 
   // Attach event listener to handle change in field_495 (Improvement)
   $("#view_628-field_495").on("change", function (event) {
     var fieldValue = event.target.value;
+
+    hideFormFields();
+    showFormFieldsByValue(fieldValue);
   });
 });
