@@ -414,7 +414,10 @@ var fieldsIdsShownOnLoad = {
   "kn-input-field_211": "Recommendation Notes",
 };
 
-// Create map for fields to show by value of field_495
+var fieldsIdsShownOnFieldSelect = {
+  // "Field Value": [...ids of fields to show on value select]
+  "Construct Turn Lane": ["field_494", "field_728", "field_496", "field_729"],
+};
 
 function hideFormFields() {
   var $fields = $("#view_628").find(".kn-input");
@@ -430,6 +433,9 @@ function hideFormFields() {
 
 function showFormFieldsByValue(value) {
   // Un-hide form fields in map
+  fieldsIdsShownOnFieldSelect[value].forEach(function (fieldId) {
+    $("#" + fieldId).show();
+  });
 }
 
 $(document).on("knack-view-render.view_628", function (event, view) {
