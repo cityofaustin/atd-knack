@@ -398,3 +398,29 @@ Highcharts.setOptions({
     plotBorderWidth: 2 /*for plot only. Helps user focus on data in the plot*/,
   },
 });
+
+/****************************************************/
+/**** Hide/show TIA Add Mitigation form elements ****/
+/****************************************************/
+// Then, un-hide based on choice in field_495
+// var script = document.createElement('script');script.src = "https://code.jquery.com/jquery-3.4.1.min.js";document.getElementsByTagName('head')[0].appendChild(script);
+
+$(document).on("knack-view-render.view_628", function (event, view) {
+  var fieldsIdsShownOnLoad = {
+    "kn-input-field_639": "Mitigation Location",
+    "kn-input-field_326": "Mitigation Type",
+    "kn-input-field_495": "Improvement",
+    "kn-input-field_317": "Cost",
+    "kn-input-field_211": "Recommendation Notes",
+  };
+
+  var $fields = $("#view_628").find(".kn-input");
+
+  $fields.each(function (index, field) {
+    var fieldId = field.id;
+
+    if (!fieldsIdsShownOnLoad.hasOwnProperty(fieldId) && fieldId) {
+      $("#" + fieldId).hide();
+    }
+  });
+});
