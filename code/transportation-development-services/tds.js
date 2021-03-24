@@ -402,11 +402,8 @@ Highcharts.setOptions({
 /****************************************************/
 /**** Hide/show TIA Add Mitigation form elements ****/
 /****************************************************/
-// Then, un-hide based on choice in field_495
-// var script = document.createElement('script');script.src = "https://code.jquery.com/jquery-3.4.1.min.js";document.getElementsByTagName('head')[0].appendChild(script);
-
 var fieldsIdsShownOnLoad = {
-  // "field-id": "field-name"
+  // "Field ID": "Field Name"
   "kn-input-field_639": "Mitigation Location",
   "kn-input-field_326": "Mitigation Type",
   "kn-input-field_495": "Improvement",
@@ -416,7 +413,12 @@ var fieldsIdsShownOnLoad = {
 
 var fieldsIdsShownOnFieldSelect = {
   // "Field Value": [...ids of fields to show on value select]
-  "Construct Turn Lane": ["field_494", "field_728", "field_496", "field_729"],
+  "Construct Turn Lane": [
+    "kn-input-field_494",
+    "kn-input-field_728",
+    "kn-input-field_496",
+    "kn-input-field_729",
+  ],
 };
 
 function hideFormFields() {
@@ -441,7 +443,7 @@ function showFormFieldsByValue(value) {
 $(document).on("knack-view-render.view_628", function (event, view) {
   hideFormFields();
 
-  // Attach event listener to handle change in field_495 (Improvement)
+  // Attach event listener to handle change in field_495 select (Improvement)
   $("#view_628-field_495").on("change", function (event) {
     var fieldValue = event.target.value;
 
