@@ -407,6 +407,7 @@ Highcharts.setOptions({
 
 $(document).on("knack-view-render.view_628", function (event, view) {
   var fieldsIdsShownOnLoad = {
+    // "field-id": "field-name"
     "kn-input-field_639": "Mitigation Location",
     "kn-input-field_326": "Mitigation Type",
     "kn-input-field_495": "Improvement",
@@ -422,5 +423,10 @@ $(document).on("knack-view-render.view_628", function (event, view) {
     if (!fieldsIdsShownOnLoad.hasOwnProperty(fieldId) && fieldId) {
       $("#" + fieldId).hide();
     }
+  });
+
+  // Attach event listener to handle change in field_495 (Improvement)
+  $("#view_628-field_495").on("change", function (event) {
+    var fieldValue = event.target.value;
   });
 });
