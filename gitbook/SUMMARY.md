@@ -15,6 +15,8 @@
 * [CODE: Mobile Optimization](knack/mobile-optimization.md)
 * [CODE: Big Buttons](knack/code-big-buttons.md)
 * [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
+* [CODE: Knack Functionality](knack/functionality.md)
+* [CODE: Knack Look & Feel](knack/looks.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
 * [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
