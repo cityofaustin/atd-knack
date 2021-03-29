@@ -6,3 +6,13 @@ description: >-
 
 # CODE: Knack Functionality
 
+### Table of Contents
+
+* Disable Trigger Buttons: 
+
+
+
+
+
+
+
