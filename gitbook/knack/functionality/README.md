@@ -8,7 +8,7 @@ description: >-
 
 ### Table of Contents
 
-* Disable Trigger Buttons: 
+* Disable Trigger Buttons: [https://app.gitbook.com/@atd-dts/s/atd-knack-operations/knack/functionality/disable-trigger-buttons](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/knack/functionality/disable-trigger-buttons)
 
 
 
