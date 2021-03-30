@@ -127,7 +127,7 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
   opacity: 0.6;
 } 
  
-a.big-button {
+a.big-button-container {
   text-decoration: none;
 }
 
