@@ -327,6 +327,8 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
   if ($("#lat-lon-form .view-header").length !== 0) {
     $("#lat-lon-form .view-header").remove();
   }
+  // Hide Latitude/Longitude fields and labels overlaying map
+  $("#kn-input-field_3300 > div").hide();
 });
 
 // END: Knack Geo Location Selector Plugin
