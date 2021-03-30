@@ -16,6 +16,7 @@
 * [CODE: Big Buttons](knack/code-big-buttons.md)
 * [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
 * [CODE: Knack Functionality](knack/functionality/README.md)
+  * [CODE: Highlight Details Widget Field Body](knack/functionality/code-highlight-details-widget-field-body.md)
   * [Disable Trigger Buttons](knack/functionality/disable-trigger-buttons.md)
 * [CODE: Knack Look & Feel](knack/looks.md)
 * [Banner Logos](knack/banner-logos.md)
