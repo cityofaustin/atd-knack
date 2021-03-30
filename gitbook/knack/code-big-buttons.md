@@ -137,6 +137,11 @@ a.big-button-container {
 .disabled { 
   cursor: not-allowed; 
 }
+
+/****************************************/
+/************* Icon Effects *************/
+/****************************************/
+.fa { vertical-align: baseline; }
 ```
 
 ### Creating Page Buttons
