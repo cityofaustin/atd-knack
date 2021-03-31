@@ -17,6 +17,8 @@ description: >-
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Simple Attachment Name |  |  |  | Yes | Yes |  |  |  |  |  |  |  |
+| Details&gt;Field Background highlight  |  |  |  | Yes |  |  |  |  |  | Yes |  |  |
 
 
 

@@ -9,10 +9,12 @@
 
   [`https://builder.knack.com/atd/signs-markings#pages/scene_711/views/view_1880`](https://builder.knack.com/atd/signs-markings#pages/scene_711/views/view_1880)
 
-* BEHAVIOR:  User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user.
+* BEHAVIOR:  User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user. \(**Viewer** roles only!\)
 * REASON: Users create so many work orders it is one less field they have to populate that we already capture when creating their accounts
 
 ex. User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user.
+
+![This division is being populated here under the &quot;Requester&quot; field, user doesn&apos;t have to populate it ](../.gitbook/assets/image%20%2846%29.png)
 
 ### **Attachments, showing up as "Plans", "Regulations" instead of the file name**
 
@@ -20,7 +22,9 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * CUSTOMIZATION: File Type is populated and it replaces the File Name to reduce table bloat
 * REASON: File names can be long and take up lots of screen space, to save screen real estate and make table more simplified and readable
 
-![](../.gitbook/assets/image%20%2845%29.png)
+![Simple Name for Attachments, using Attachment Type to show on main table](../.gitbook/assets/image%20%2852%29.png)
+
+![Real name of attachments, some a very long and take up too much space](../.gitbook/assets/image%20%2850%29.png)
 
 ### Work Order Details, Status colors, showing up in the details portion
 
