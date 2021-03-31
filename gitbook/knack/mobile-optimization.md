@@ -2,7 +2,14 @@
 
 This is our code documentation wiki page for Knack apps.
 
-## Forms
+## How to update CSS editor
+
+* Go to **Settings**
+* Under **API & Code**&gt; **CSS**
+* Update CSS `code`
+* Click **Save CSS**
+
+## Knack Forms
 
 ### Increase size of buttons \(ex. Submit buttons\)
 
@@ -130,6 +137,8 @@ This is our code documentation wiki page for Knack apps.
 ```
 
 ## **Full template for Mobile-friendly Knack Custom CSS**
+
+This code block has all the CSS knack form changes in it. Can copy and paste into CSS editor in Knack and will see the changes in the mobile environment.
 
 ```text
 /* Mobile Styles */

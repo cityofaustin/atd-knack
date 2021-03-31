@@ -62,7 +62,7 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 
 ### Form Fields- Globally Enlarged
 
-![](../.gitbook/assets/image%20%2838%29.png)
+![](../.gitbook/assets/image%20%2839%29.png)
 
 ### Form Selections \(Drop downs\) - Global Enlarged
 
