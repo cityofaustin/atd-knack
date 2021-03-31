@@ -398,3 +398,88 @@ Highcharts.setOptions({
     plotBorderWidth: 2 /*for plot only. Helps user focus on data in the plot*/,
   },
 });
+
+/****************************************************/
+/**** Hide/Show TIA Add Mitigation form elements ****/
+/****************************************************/
+var fieldsIdsShownOnLoad = {
+  // "Field ID": "Field Name"
+  "kn-input-field_639": "Mitigation Location",
+  "kn-input-field_326": "Mitigation Type",
+  "kn-input-field_495": "Improvement",
+  "kn-input-field_317": "Cost",
+  "kn-input-field_211": "Recommendation Notes",
+};
+
+var fieldsIdsShownOnFieldSelect = {
+  // "MC Field Value": [...ids of fields to show on value select]
+  "Construct Turn Lane": [
+    "kn-input-field_494",
+    "kn-input-field_728",
+    "kn-input-field_496",
+    "kn-input-field_729",
+  ],
+
+  "Construct New Road": [
+    "kn-input-field_496",
+    "kn-input-field_727",
+    "kn-input-field_737",
+  ],
+
+  "Install Traffic Signal": ["kn-input-field_730"],
+
+  "Construct Sidewalk": ["kn-input-field_496", "kn-input-field_727"],
+
+  "Construct Protected Bike Lane": [
+    "kn-input-field_496",
+    "kn-input-field_727",
+    "kn-input-field_731",
+  ],
+
+  "Stripe New Bike Lane": ["kn-input-field_732"],
+
+  "Relocate Bus Stop": [],
+
+  "Signal Modifications": ["kn-input-field_733"],
+
+  "Signal Timing Modifications": [],
+
+  "Construct Urban Trail": ["kn-input-field_496", "kn-input-field_727"],
+
+  "Install Pedestrian Crosswalk": ["kn-input-field_734"],
+
+  "Install Pedestrian Hybrid Beacon": [],
+
+  "Construct Curb Ramps": ["kn-input-field_735", "kn-input-field_736"],
+};
+
+function hideFormFields() {
+  var $fields = $("#view_628").find(".kn-input");
+
+  $fields.each(function (index, field) {
+    var fieldId = field.id;
+
+    if (!fieldsIdsShownOnLoad.hasOwnProperty(fieldId) && fieldId) {
+      $("#" + fieldId).hide();
+    }
+  });
+}
+
+function showFormFieldsByValue(value) {
+  // Un-hide form fields in map
+  fieldsIdsShownOnFieldSelect[value].forEach(function (fieldId) {
+    $("#" + fieldId).show();
+  });
+}
+
+$(document).on("knack-view-render.view_628", function (event, view) {
+  hideFormFields();
+
+  // Attach event listener to handle change in field_495 select (Improvement)
+  $("#view_628-field_495").on("change", function (event) {
+    var fieldValue = event.target.value;
+
+    hideFormFields();
+    showFormFieldsByValue(fieldValue);
+  });
+});
