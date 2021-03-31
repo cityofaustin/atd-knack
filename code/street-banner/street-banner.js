@@ -1,13 +1,19 @@
-function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
-  // create a large button
-  
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
+/********************************************/
+/*************** Big Buttons ****************/
+/********************************************/
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled, callback) 
+{
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+    $( "<a id='" + 
+    id + "' class='big-button-container" + 
+    disabledClass + 
+    " href='" + url + 
+    "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + 
+    button_label + "</span></a>" 
+    ).appendTo("#" + view_id);
 
-  if(callback) callback();
+  if (callback) callback();
 }
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_2390', function(event, page) {
