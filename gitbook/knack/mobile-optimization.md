@@ -136,6 +136,22 @@ This is our code documentation wiki page for Knack apps.
   }
 ```
 
+### Increase default size of "Choose File" button
+
+```text
+/* Increase font size of Choose File button */
+  input[type="file"] {
+    height: 48px !important;
+    font-size: 22px !important;
+}
+.custom-file-upload {
+    border: 3px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+```
+
 ## **Full template for Mobile-friendly Knack Custom CSS**
 
 This code block has all the CSS knack form changes in it. Can copy and paste into CSS editor in Knack and will see the changes in the mobile environment.
