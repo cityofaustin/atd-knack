@@ -4,7 +4,7 @@ You may want to highlight that field to visibility see the field better on the p
 
 If you have a several fields in the details widget, example `Status` field
 
-![](../../.gitbook/assets/highlight_details_widget_field.png)
+![](../.gitbook/assets/highlight_details_widget_field.png)
 
 ```text
 function changeFieldColor(field, color_map) {
