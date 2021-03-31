@@ -19,6 +19,8 @@ description: >-
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Simple Attachment Name |  |  |  | Yes | Yes |  |  |  |  |  |  |  |
 | Details&gt;Field Background highlight  |  |  |  | Yes |  |  |  |  |  | Yes |  |  |
+| MOBILE OPTIMIZATIONS |  |  |  |  |  |  |  |  |  |  |  |  |
+| Global Field  |  |  |  |  |  |  |  |  |  |  |  |  |
 
 
 
