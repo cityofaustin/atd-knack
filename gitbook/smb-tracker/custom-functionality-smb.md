@@ -20,11 +20,15 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * CUSTOMIZATION: File Type is populated and it replaces the File Name to reduce table bloat
 * REASON: File names can be long and take up lots of screen space, to save screen real estate and make table more simplified and readable
 
+![](../.gitbook/assets/image%20%2845%29.png)
+
 ### Work Order Details, Status colors, showing up in the details portion
 
 * LOCATION: Signs Work Order Details page - [`https://builder.knack.com/atd/signs-markings#pages/scene_1028`](https://builder.knack.com/atd/signs-markings#pages/scene_1028)
 * CUSTOMIZATION: Work Order Status has background color that matches the display colors on the Work Order tables
 * REASON: Users associate the work order colors to the work order statuses, easier to know what status a work order is at a glance
+
+![](../.gitbook/assets/image%20%2838%29.png)
 
 ### Geographic Map/Location Functionality
 
