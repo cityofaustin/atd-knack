@@ -134,11 +134,7 @@ a.big-button-container {
     width: 80%;
   }
 
-/* END BUTTONS */
-
-}
-
- /* Increase font size of Choose File button */
+   /* Increase font size of Choose File button */
   input[type="file"] {
     height: 48px !important;
     font-size: 22px !important;
@@ -149,3 +145,13 @@ a.big-button-container {
     padding: 6px 12px;
     cursor: pointer;
 }
+
+  /* Increase size of Font Awesome icons */
+  .icon .fa {
+      font-size: 24px !important;
+  }
+  
+/* END BUTTONS */
+
+}
+
