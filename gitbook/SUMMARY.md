@@ -26,7 +26,7 @@
 * [CODE: Knack Look & Feel](knack/looks/README.md)
   * [Convert Values to UPPERCASE](knack/looks/convert-values-to-uppercase.md)
 
-## DATA TRACKER
+## AMD \| DATA TRACKER <a id="data-tracker"></a>
 
 * [Asset Changes](data-tracker/asset-changes.md)
 * [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
@@ -45,14 +45,18 @@
   * [Signals Work Order \| FORM LOCATIONS](data-tracker/builder-notes/signals-work-order-or-form-locations.md)
   * [Editing Signals Work Order \| NEW FORMS](data-tracker/builder-notes/untitled.md)
 
-## SMB Tracker
+## Signs & Markings Operations <a id="signs-and-markings"></a>
 
-* [Custom Functionality - SMB](smb-tracker/custom-functionality-smb.md)
-* [Work Order Attachments](smb-tracker/work-order-attachments.md)
-* [Contractor Work Order Tracking](smb-tracker/contractor-work-order-tracking/README.md)
-  * [Process & Functionality](smb-tracker/contractor-work-order-tracking/process-and-functionality.md)
+* [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
+* [Work Order Attachments](signs-and-markings/work-order-attachments.md)
+* [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)
+  * [Process & Functionality](signs-and-markings/contractor-work-order-tracking/process-and-functionality.md)
 
-## DTS Portal
+## STREET BANNER PROGRAM
+
+* [Street Banner Program](street-banner-program/street-banner-program.md)
+
+## DTS \| Data & Technology Services Portal <a id="dts-portal"></a>
 
 * [Data set inventory](dts-portal/dts-portal.md)
 * [Application Inventory](dts-portal/application-inventory.md)
@@ -67,30 +71,26 @@
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
 
-## Transportation Development Services
+## TDS \| Transportation Development Services <a id="transportation-development-services"></a>
 
 * [Transportation Development Services Division](transportation-development-services/transportation-development-services-division.md)
 * [TIA Module](transportation-development-services/tia-module.md)
 
-## Residential Parking Permit \(RPP\) Program
+## RPP \| Residential Parking Permit Program <a id="residential-parking-permit-program"></a>
 
-* [Application Background](residential-parking-permit-rpp-program/application-background.md)
-* [RPP Migration](residential-parking-permit-rpp-program/rpp-migration.md)
+* [Application Background](residential-parking-permit-program/application-background.md)
+* [RPP Migration](residential-parking-permit-program/rpp-migration.md)
 
-## ROW Tracker
+## ROW \| Right of Way Portal <a id="row-portal"></a>
 
-* [TCP Tracking](row-tracker/tcp-tracking.md)
-* [Migration Best Practices](row-tracker/migration-best-practices.md)
+* [TCP Tracking](row-portal/tcp-tracking.md)
+* [Migration Best Practices](row-portal/migration-best-practices.md)
 
-## O365 Resources
-
-* [Resources](o365-resources/resources.md)
-
-## Shared Mobility Operations
+## SMO \| Shared Mobility Operations <a id="shared-mobility-operations"></a>
 
 * [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
 
-## Vision Zero in Action
+## VZA \| Vision Zero in Action <a id="vision-zero-in-action"></a>
 
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
 * [Calculate School Closures](vision-zero-in-action/calculate-school-closure.md)
@@ -100,7 +100,7 @@
 * [Use Tasks for Creating Child Records](vision-zero-in-action/use-of-tasks.md)
 * [Use Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
 
-## STREET BANNER PROGRAM
+## O365 Resources
 
-* [Street Banner Program](street-banner-program/street-banner-program.md)
+* [Resources](o365-resources/resources.md)
 
