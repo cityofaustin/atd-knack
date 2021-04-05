@@ -34,11 +34,19 @@ $(document).on('knack-page-render.any', function(event, page) {
 
 ### The CSS
 
-none needed 😎
+None needed 😎
 
 ### How to Implement
 
-Adjust field input type or field id and you are set 👍
+```text
+'.kn-input-name input'
+```
+
+```text
+'input#field_165'
+```
+
+Adjust field input type or Field ID and you are set 👍
 
 
 
