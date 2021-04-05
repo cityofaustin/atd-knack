@@ -1,10 +1,10 @@
 # Table of contents
 
-* [Table of Contents](README.md)
+* [TABLE OF CONTENTS](README.md)
 
 ## Knack
 
-* [Application Overview](knack/application-overview.md)
+* [Platform Overview](knack/platform-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
 * [Custom Application Functionality](knack/custom-application-functionality.md)
 * [Style Guide](knack/style-guide.md)
@@ -28,6 +28,7 @@
 
 ## AMD \| DATA TRACKER <a id="data-tracker"></a>
 
+* [Application Overview](data-tracker/application-overview.md)
 * [Asset Changes](data-tracker/asset-changes.md)
 * [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
 * [Cameras](data-tracker/cameras.md)
@@ -47,6 +48,7 @@
 
 ## Signs & Markings Operations <a id="signs-and-markings"></a>
 
+* [Application Overview](signs-and-markings/application-overview.md)
 * [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
 * [Work Order Attachments](signs-and-markings/work-order-attachments.md)
 * [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)
@@ -54,15 +56,18 @@
 
 ## STREET BANNER PROGRAM
 
+* [Application Overview](street-banner-program/application-overview.md)
 * [Street Banner Program](street-banner-program/street-banner-program.md)
 
 ## DTS \| Data & Technology Services Portal <a id="dts-portal"></a>
 
+* [Application Overview](dts-portal/application-overview.md)
 * [Data set inventory](dts-portal/dts-portal.md)
 * [Application Inventory](dts-portal/application-inventory.md)
 
 ## Finance & Purchasing
 
+* [Application Overview](finance-and-purchasing/application-overview.md)
 * [Finance & Purchasing](finance-and-purchasing/finance-and-purchasing/README.md)
   * [Training, Quiz, Account Access Process](finance-and-purchasing/finance-and-purchasing/training-quiz-account-access-process.md)
   * [Statuses](finance-and-purchasing/finance-and-purchasing/finance-and-purchasing-statuses.md)
@@ -71,27 +76,32 @@
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
 
-## TDS \| Transportation Development Services <a id="transportation-development-services"></a>
+## TDS \| Transportation Development Services <a id="tds-portal"></a>
 
-* [Transportation Development Services Division](transportation-development-services/transportation-development-services-division.md)
-* [TIA Module](transportation-development-services/tia-module.md)
+* [Application Overview](tds-portal/application-overview.md)
+* [Transportation Development Services Division](tds-portal/transportation-development-services-division.md)
+* [TIA Module](tds-portal/tia-module.md)
 
-## RPP \| Residential Parking Permit Program <a id="residential-parking-permit-program"></a>
+## RPP \| Residential Parking Permit Portal <a id="rpp-portal"></a>
 
-* [Application Background](residential-parking-permit-program/application-background.md)
-* [RPP Migration](residential-parking-permit-program/rpp-migration.md)
+* [Application Overview](rpp-portal/application-overview.md)
+* [Application Background](rpp-portal/application-background.md)
+* [RPP Migration](rpp-portal/rpp-migration.md)
 
 ## ROW \| Right of Way Portal <a id="row-portal"></a>
 
+* [Application Overview](row-portal/application-overview.md)
 * [TCP Tracking](row-portal/tcp-tracking.md)
 * [Migration Best Practices](row-portal/migration-best-practices.md)
 
 ## SMO \| Shared Mobility Operations <a id="shared-mobility-operations"></a>
 
+* [Application Overview](shared-mobility-operations/application-overview.md)
 * [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
 
 ## VZA \| Vision Zero in Action <a id="vision-zero-in-action"></a>
 
+* [Application Overview](vision-zero-in-action/application-overview.md)
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
 * [Calculate School Closures](vision-zero-in-action/calculate-school-closure.md)
 * [Login Process for Officers](vision-zero-in-action/officer-login-process.md)
@@ -102,15 +112,15 @@
 
 ## Parking Enterprise Portal <a id="parking-enterprise"></a>
 
-* [Untitled](parking-enterprise/untitled.md)
+* [Application Overview](parking-enterprise/application-overview.md)
 
 ## HR \| Human Resources <a id="human-resources"></a>
 
-* [Untitled](human-resources/untitled.md)
+* [Application Overview](human-resources/application-overview.md)
 
 ## ATD Forms
 
-* [Untitled](atd-forms/untitled.md)
+* [Application Overview](atd-forms/application-overview.md)
 
 ## O365 Resources
 
