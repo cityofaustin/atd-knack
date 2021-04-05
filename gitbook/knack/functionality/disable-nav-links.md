@@ -1,7 +1,5 @@
 ---
-description: >-
-  How to disable breadcrumb navigation links to prevent backwards navigation in
-  your Knack application
+description: How to disable breadcrumb navigation links to prevent backwards navigation
 ---
 
 # Disable Breadcrumb Navigation Links

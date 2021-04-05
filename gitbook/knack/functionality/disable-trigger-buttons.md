@@ -1,5 +1,5 @@
 ---
-description: How to disable trigger buttons in your Knack application
+description: How to disable trigger buttons
 ---
 
 # Disable Trigger Buttons
