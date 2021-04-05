@@ -1,7 +1,5 @@
 ---
-description: >-
-  How to convert all values input into a field to UPPERCASE for your Knack
-  application
+description: How to convert all values input into a field to UPPERCASE
 ---
 
 # Convert Values to UPPERCASE
