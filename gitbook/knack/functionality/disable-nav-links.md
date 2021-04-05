@@ -8,6 +8,8 @@ description: How to disable breadcrumb navigation links to prevent backwards nav
 
 ### The JS
 
+We have a function that checks the session token and disables the .kn-crumbtrail for a specified scene as called by the handler.
+
 ```text
 /*******************************************/
 /*** Disable Breadcrumb Navigation Links ***/
@@ -20,15 +22,23 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-//TIA Case Details page
+//Page to disable crumbtrail
 $(document).on("knack-scene-render.scene_58", function () {
   disableBreadCrumbsNonAdmin();
 });
 ```
 
+### The CSS
 
+None needed 😎
 
+### How to Implement
 
+```text
+"knack-scene-render.scene_58"
+```
+
+Adjust Scene ID and you are set 👍
 
 
 
