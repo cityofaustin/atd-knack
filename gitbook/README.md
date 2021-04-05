@@ -1,12 +1,18 @@
 # Table of Contents
 
-## Apps
+## Knack Apps
 
-* AMD \| Data Tracker
-* DTS Portal \| Data and Technology Services Portal
-* Parking Enterprise Reporting Portal
-* ROW Tracker 
-* Signs & Markings \| Data Tracker 
-* TDS Tracker \| Transportation Development Services Tracker
-* VZA \| Vision Zero Assignments
+* AMD \| Data Tracker : 
+* Signs & Markings Operations : 
+* Street Banner Program : 
+* DTS \| Data and Technology Services Portal :
+* Finance & Purchasing :
+* TDS \| Transportation Development Services :
+* RPP \| Residential Parking Permit Program :
+* ROW \| Right of Way Portal :
+* SMO \| Shared Mobility Operations :
+* VZA \| Vision Zero in Action :
+* Parking Enterprise Portal :
+* HR \| Human Resources :
+* ATD Forms :
 

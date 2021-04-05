@@ -61,7 +61,7 @@
 * [Data set inventory](dts-portal/dts-portal.md)
 * [Application Inventory](dts-portal/application-inventory.md)
 
-## Finance and Purchasing
+## Finance & Purchasing
 
 * [Finance & Purchasing](finance-and-purchasing/finance-and-purchasing/README.md)
   * [Training, Quiz, Account Access Process](finance-and-purchasing/finance-and-purchasing/training-quiz-account-access-process.md)
