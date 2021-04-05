@@ -23,6 +23,7 @@
 * [CODE: Highlight Details Widget Field Body](knack/code-highlight-details-widget-field-body.md)
 * [CODE: Knack Functionality](knack/functionality/README.md)
   * [Disable Trigger Buttons](knack/functionality/disable-trigger-buttons.md)
+  * [Disable Breadcrumb Navigation Links](knack/functionality/disable-nav-links.md)
 * [CODE: Knack Look & Feel](knack/looks/README.md)
   * [Convert Values to UPPERCASE](knack/looks/convert-values-to-uppercase.md)
 
