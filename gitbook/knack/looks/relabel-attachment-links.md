@@ -4,7 +4,9 @@ description: How to shorten attachment links to something more readable
 
 # Relabel Attachment Links
 
+![Attachment links](../../.gitbook/assets/image%20%2855%29.png)
 
+Without this code, when attachment file names display in tables they can be super long and distort the readability of the field and the table as a whole. Relabeling gives the column a consistent width. This code could be further updated to specify a certain view for your specific use case.
 
 ### The JS
 
