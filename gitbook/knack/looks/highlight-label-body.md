@@ -1,14 +1,21 @@
-# Highlight Details View Label Body
+---
+description: How to highlight a details view label body to bring attention to a field
+---
 
-You may want to highlight that field to visibility see the field better on the page
+# Highlight Details View Label Body & Table Value
 
-If you have a several fields in the details widget, example `Status` field
+This will give greater visibility to a field that is important to understand at a glance such as a status field and adjusting the highlight color based on the current status.
 
 ![In the Signs and Markings Tracker, Work Order Details page](../../.gitbook/assets/image%20%2851%29.png)
 
 ![In Parking Enterprise Portal, My Assignments page](../../.gitbook/assets/highlight_details_widget_field.png)
 
+### The JS
+
+This function allows us to identify the details view label body and set a background color value
+
 ```text
+//Change Label Body Background Color
 function changeFieldColor(field, color_map) {
   var child_field = $(field).find(".kn-detail-body");
   var value = child_field.text();
@@ -19,8 +26,12 @@ function changeFieldColor(field, color_map) {
     });
   }
 }
+```
 
-// Change table data background colors 
+This function allows us to identify a table field and set a background color value
+
+```text
+//Change Table Value Background Color
 function changeTableFieldColor(field, color_map) {
   var fields = $(field);
   fields.each(function() {
@@ -33,32 +44,41 @@ function changeTableFieldColor(field, color_map) {
     }
   });
 }
+```
 
+We set variables for each combination of background and text colors we want based on field values
+
+```text
+//Color Map Status Highlight
 var colorMapOne = {
   "Available": { background_color: "#80d07e", color: "#fff" },
   "Unavailable": { background_color: "#ff9b9c", color: "#fff" }
 };
+```
 
-// Color map for Status highlighting
-var colorMapServiceRequestsStatus = {
-  "Unavailable": { background_color: "#ff9b9c", color: "#fff" }
-};
+We create a handler that calls the function and sets a specified field to a specified variable
 
+```text
+//Highlighted Field
 $(document).on("knack-scene-render.any", function() {
-  // Details Status
   changeFieldColor(".field_236", colorMapOne);
-
 });
 ```
 
-You can change the HEX colors to match the statuses
+### The CSS
+
+None needed 😎
+
+### How to Implement
+
+Adjust the hex colors for each color map variable
 
 ```text
   "Available": { background_color: "#80d07e", color: "#fff" },
   "Unavailable": { background_color: "#ff9b9c", color: "#fff" }
 ```
 
-Make sure to find the field you want to highlight and find it's field ID, ex. `.field_236`
+Adjust the Field ID for each handler
 
 ```text
  changeFieldColor(".field_236", colorMapOne);

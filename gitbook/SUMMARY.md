@@ -29,7 +29,7 @@
 * [CODE: Knack Look & Feel](knack/looks/README.md)
   * [Relabel Attachment Links](knack/looks/relabel-attachment-links.md)
   * [Convert Values to UPPERCASE](knack/looks/convert-values-to-uppercase.md)
-  * [Highlight Details View Label Body](knack/looks/highlight-label-body.md)
+  * [Highlight Details View Label Body & Table Value](knack/looks/highlight-label-body.md)
 
 ## AMD \| DATA TRACKER <a id="data-tracker"></a>
 
