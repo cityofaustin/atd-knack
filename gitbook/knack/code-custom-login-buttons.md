@@ -6,6 +6,10 @@ description: >-
 
 # CODE: Custom Login Buttons
 
+{% hint style="info" %}
+HELP, THIS IS NEEDS TO UPDATE!!
+{% endhint %}
+
 ![The COA and non-COA login buttons that replace the default Knack button](../.gitbook/assets/customloginbuttons.png)
 
 ### Adding the custom code to the Knack application
