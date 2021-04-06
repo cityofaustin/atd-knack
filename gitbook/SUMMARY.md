@@ -30,6 +30,7 @@
   * [Relabel Attachment Links](knack/looks/relabel-attachment-links.md)
   * [Convert Values to UPPERCASE](knack/looks/convert-values-to-uppercase.md)
   * [Highlight Details View Label Body & Table Value](knack/looks/highlight-label-body.md)
+  * [HighCharts Report Styling](knack/looks/global-report-styling.md)
 
 ## AMD \| DATA TRACKER <a id="data-tracker"></a>
 
