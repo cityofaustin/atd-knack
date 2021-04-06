@@ -1,5 +1,7 @@
 ---
-description: How to redirect blank pages as a result of selecting a navigation menu header
+description: >-
+  How to redirect blank pages as a result of selecting a navigation menu header
+  (Knack Bug)
 ---
 
 # Redirect Blank Menu Pages
