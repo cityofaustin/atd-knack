@@ -24,6 +24,7 @@
   * [Disable Trigger Buttons](knack/functionality/disable-trigger-buttons.md)
   * [Disable Modal Background Click/Touch](knack/functionality/disable-modal-bg.md)
   * [Disable Breadcrumb Navigation Links](knack/functionality/disable-nav-links.md)
+  * [Return to Previous Page Button](knack/functionality/return-button.md)
 * [CODE: Knack Look & Feel](knack/looks/README.md)
   * [Relabel Attachment Links](knack/looks/relabel-attachment-links.md)
   * [Convert Values to UPPERCASE](knack/looks/convert-values-to-uppercase.md)
