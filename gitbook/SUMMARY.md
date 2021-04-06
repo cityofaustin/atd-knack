@@ -22,6 +22,7 @@
 * [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
 * [CODE: Knack Functionality](knack/functionality/README.md)
   * [Disable Trigger Buttons](knack/functionality/disable-trigger-buttons.md)
+  * [Disable Modal Background Click/Touch](knack/functionality/disable-modal-bg.md)
   * [Disable Breadcrumb Navigation Links](knack/functionality/disable-nav-links.md)
 * [CODE: Knack Look & Feel](knack/looks/README.md)
   * [Relabel Attachment Links](knack/looks/relabel-attachment-links.md)
