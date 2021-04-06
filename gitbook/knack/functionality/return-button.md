@@ -4,9 +4,9 @@ description: How to create a Return Button with a Rich Text view
 
 # Return to Previous Page Button
 
-![With disabled navigation, we provide a top of page return button for users](../../.gitbook/assets/image%20%2857%29.png)
+![With disabled navigation, we provide a top of page return button for users](../../.gitbook/assets/image%20%2858%29.png)
 
-![Return button allows user to escape a lengthy edit page without having to scroll to the bottom](../../.gitbook/assets/image%20%2856%29.png)
+![Return button allows user to escape a lengthy edit page without having to scroll to the bottom](../../.gitbook/assets/image%20%2857%29.png)
 
 There are instances where Knack's built in back link at the bottom of every page detract from the page experience or do not provide enough functionality. We create these return buttons to solve a couple problems; when a page's content is too long making it so the back link is too far from the top navigation resulting in more page scrolling, or when we disable top navigation to prevent a user from navigating to a specific page, but we still want the user to be able to navigate to their previous page. These previous pages tend to be major landing pages where important details or navigation are present, and therefore, easy access to these pages is important.
 
@@ -25,7 +25,7 @@ var l=appviews.length;
 for (var x=0; x<l; x++) {
 
 if (appviews[x]==key) {
-	$('#'+appviews[x]).prepend("<button id='return-button'>Return to Case Details</button>");
+	$('#'+appviews[x]).prepend("<button id='return-button'>Button Text</button>");
 	document.getElementById('return-button').addEventListener('click', function() {
       	window.history.back();
     });        
@@ -51,11 +51,31 @@ We mostly use Knack's built in styling for return buttons with a few exceptions.
 
 {% tabs %}
 {% tab title="First Step" %}
+Determine which pages you would like the return buttons to be present. A Rich Text view will need to be added at the top of each of these pages. We specifically add these views to the top of the page but there may be instances where you would want to include in the middle of a long page or below certain views. Adjust accordingly.
 
+![](../../.gitbook/assets/image%20%2855%29.png)
+
+Nothing will need to be placed inside this Rich Text view but you will need to know its View ID
 {% endtab %}
 
 {% tab title="Second Step" %}
+Once you have placed your rich text views and know their View ID's, adjust the View ID's in the JS accordingly. Add or remove views based on your need.
 
+```text
+appviews=["view_601","view_602","view_604","view_605"]
+```
+{% endtab %}
+
+{% tab title="Third Step" %}
+Next, adjust the button text for the specified views
+
+```text
+"<button id='return-button'>Button Text</button>"
+```
+{% endtab %}
+
+{% tab title="Fourth Step" %}
+Lastly, after updating the code in your app, if you wanted to customize the button look further, you could do so using the specified CSS ID Selector or utilizing a new or existing CSS Class Selector.
 {% endtab %}
 {% endtabs %}
 
