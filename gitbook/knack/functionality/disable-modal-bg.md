@@ -6,7 +6,7 @@ description: >-
 
 # Disable Modal Background Click/Touch
 
-![If we click/touch the black background the modal window stays open](../../.gitbook/assets/image%20%2856%29.png)
+![If we click/touch the black background the modal window stays open](../../.gitbook/assets/image%20%2857%29.png)
 
 Often we use modals to present forms/applications in a way that makes sense. This code will allow us prevent intentional or accidental closure of modal windows by touching or clicking the black background layer around the modal window. This is especially useful when a form or page has a lot of user entry where data entry can be lost if the modal window is accidentally closed before submitting.
 

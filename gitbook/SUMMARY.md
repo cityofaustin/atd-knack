@@ -21,6 +21,7 @@
 * [CODE: Mobile Optimization](knack/mobile-optimization.md)
 * [CODE: Custom Login Buttons](knack/code-custom-login-buttons.md)
 * [CODE: Knack Functionality](knack/functionality/README.md)
+  * [Redirect Blank Menu Pages](knack/functionality/redirect-blank-pages.md)
   * [Disable Trigger Buttons](knack/functionality/disable-trigger-buttons.md)
   * [Disable Modal Background Click/Touch](knack/functionality/disable-modal-bg.md)
   * [Disable Breadcrumb Navigation Links](knack/functionality/disable-nav-links.md)
