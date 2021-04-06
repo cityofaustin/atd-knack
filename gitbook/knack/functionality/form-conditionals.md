@@ -165,7 +165,48 @@ None needed 😎
 
 ### How to Implement
 
+For the variable arguments, you will need to adjust to your specific Field Names, Field ID's and Field Values
 
+```text
+// "Field ID": "Field Name"
+  "kn-input-field_639": "Mitigation Location",
+```
 
+```text
+// "MC Field Value": [...ids of fields to show on value select]
+  "Construct Turn Lane": [
+    "kn-input-field_494",
+    "kn-input-field_728",
+    "kn-input-field_496",
+    "kn-input-field_729",
+  ],
+```
 
+For each of the handlers, you will also need to adjust to your specific View ID's and Field ID's
+
+```text
+"knack-view-render.view_509"
+```
+
+```text
+"view_509"
+```
+
+```text
+"#view_509-field_495"
+```
+
+Lastly, if using an edit form, you can update the variable name for the if statement to be something more generic or more specific for your use case.
+
+```text
+improvementValue
+```
+
+to
+
+```text
+specificValue
+```
+
+for all 3 references to it in the if statement
 
