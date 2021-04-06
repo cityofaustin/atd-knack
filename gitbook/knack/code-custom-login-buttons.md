@@ -102,7 +102,7 @@ In the text field under the **CSS** tab, paste the following code. The purpose o
 }
 
 .fa {
-  vertical-align: middle;
+  vertical-align: baseline;
 }
 
 a.big-button {
