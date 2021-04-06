@@ -4,6 +4,8 @@ description: "Navigate to the content you need \U0001F6D2"
 
 # TABLE OF CONTENTS
 
+\*\*\*\*[**Gitbook Repo**](https://github.com/cityofaustin/atd-knack/tree/master/gitbook)\*\*\*\*
+
 ## Knack Apps
 
 * AMD \| Data Tracker
