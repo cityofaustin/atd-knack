@@ -88,9 +88,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 2. Run the workbench.
 
-![](../.gitbook/assets/image%20%2833%29.png)
-
-### Refresh Power BI Desktop report
+### 
 
 
 
