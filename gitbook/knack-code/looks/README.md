@@ -21,12 +21,6 @@ description: >-
 | Details&gt;Field Background highlight  |  |  |  | Yes |  |  |  |  |  | Yes |  |  |
 | "Back to Top" icon/enlarge text |  |  |  | Yes |  |  |  |  |  |  |  |  |
 | "Back to View Work Order Details" icon/enlarge text |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| **MOBILE OPTIMIZATIONS** |  |  |  |  |  |  |  |  |  |  |  |  |
-| Menu Buttons - enlarged  |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Form Field Headings - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Form Fields - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Form Selections - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Submit buttons - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
 
 
 
