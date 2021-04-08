@@ -1,7 +1,7 @@
 # Table of contents
 
 * [TABLE OF CONTENTS](README.md)
-* [View Knack Operations Read-Only](https://atd-dts.gitbook.io/atd-knack-operations/)
+* [Knack Operations Read-Only](https://atd-dts.gitbook.io/atd-knack-operations/)
 
 ## Knack
 
