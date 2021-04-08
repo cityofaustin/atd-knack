@@ -155,7 +155,7 @@ When placing the JS, the function only needs to be placed once but you will need
   "https://atd.knack.com/development-services#home/development-reviews/"
   ```
 
-* Change the Font Awesome icon to match the theme of the button. Knack currently supports [FA version 4 icons](https://fontawesome.com/v4.7.0/). You can also read more about FA icons here.
+* Change the Font Awesome icon to match the theme of the button. Knack currently supports [FA version 4 icons](https://fontawesome.com/v4.7.0/). You can also read more about [FA icons here](../looks/fa-icons.md).
 
   ```text
   "list-ul"
