@@ -1,18 +1,12 @@
 ---
-description: Add Big Buttons to your Knack applications!
+description: How to add big buttons to your application to improve navigation
 ---
 
-# CODE: Big Buttons
+# Big Buttons
 
-![](../.gitbook/assets/image%20%2830%29.png)
+![Some big buttons with fa icons](../../.gitbook/assets/image%20%2830%29.png)
 
-### Steps
-
-* Navigate to the settings cog on your application, click “API & Code”
-* There is a “Javascript” and “CSS” tab you can toggle to
-  * There are 2 snippets of code: 1 for the Javascript tab and 1 for the CSS tab
-
-###  Big Button JS code
+###  The JS
 
 Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button.
 
@@ -34,7 +28,11 @@ function bigButton(id, view_id, url, fa_icon, button_label, is_disabled, callbac
 
   if (callback) callback();
 }
+```
 
+A handler for each big button
+
+```text
 // create large Development Reviews button on the Home page
 $(document).on("knack-view-render.view_15", function(event, page) {
     bigButton(
@@ -45,7 +43,11 @@ $(document).on("knack-view-render.view_15", function(event, page) {
     "Development Reviews"
     );
 });
+```
 
+To disable a big button pass the `true` argument in the handler
+
+```text
 // create a DISABLED Development Reviews button on the Home page
 $(document).on("knack-view-render.view_15", function(event, page) {
     bigButton(
@@ -59,47 +61,9 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 });
 ```
 
-#### Things to change in Javascript
-
-* Change the Button ID code in the first set of parentheses to whatever is appropriate to name your button; 
-
-  ```text
-  "development-reviews"
-  ```
-
-* Change the View ID code to match the corresponding Rich Text view where the big button will live; 
-
-  ```text
-  "view_15"
-  ```
-
-* Change the URL code to the corresponding page that the button will redirect to; 
-
-  ```text
-  "https://atd.knack.com/development-services#home/development-reviews/"
-  ```
-
-* Change the Font Awesome icon to match the theme of the button. Knack currently supports FA version 4 icons. \([https://fontawesome.com/v4.7.0/](https://fontawesome.com/v4.7.0/)\) 
-
-  ```text
-  "list-ul"
-  ```
-
-* Change the Button Label code of the button to the text that will be visible; 
-
-  ```text
-  "Development Reviews"
-  ```
-
-* Lastly, only add the `true` argument if you would like the button to be disabled.
-
-  ```text
-  true
-  ```
 
 
-
-### Big Button CSS code
+### The CSS
 
 Big Buttons have shadow to show elevation and provide a 3D effect. They are also `display: block` so we can set width without clickable area extending the width of the page. We create a pointer hover and color effect when enabled and an opacity and cursor effect when disabled. These CSS classes only need to placed once on the CSS page and any buttons can use them. They can be called via JS or HTML.
 
@@ -126,11 +90,16 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
   background-color: #f7f7f7;
   opacity: 0.6;
 } 
- 
+
+//this prevents the natural underlining Knack does for links 
 a.big-button-container {
   text-decoration: none;
 }
+```
 
+Add these CSS classes if not already present
+
+```text
 /****************************************/
 /************ Button Effects ************/
 /****************************************/
@@ -144,21 +113,67 @@ a.big-button-container {
 .fa { vertical-align: baseline; }
 ```
 
-### Creating Page Buttons
+### How to Implement
 
-1. Create a page or on the page your want to add the big button, add a RICH TEXT view. 
-2. Open the newly created Rich Text view and look at the URL. Take note of the view \#.
+{% tabs %}
+{% tab title="First Step" %}
+Create a Rich Text view
 
-   [https://builder.knack.com/atd/development-services\#pages/scene\_1/views/view\_15](https://builder.knack.com/atd/development-services#pages/scene_1/views/view_15)
+![](../../.gitbook/assets/image%20%2865%29.png)
+{% endtab %}
 
-3. Edit the name of your Rich Text view and be sure to append the view \# to it to easily use it for code reference without having to look every time.
-4. You will then use this View ID \# when creating or updating the JS code above.
+{% tab title="Second Step" %}
+Open the Rich Text view to identify its View ID and update the view name to include it for easy reference
 
-#### Example
+![](../../.gitbook/assets/image%20%2864%29.png)
+{% endtab %}
 
-[https://builder.knack.com/atd/development-services\#pages/scene\_1](https://builder.knack.com/atd/development-services#pages/scene_1)
+{% tab title="Third Step" %}
+Make sure the CSS styling is in place. Update the CSS styling to meet your needs, sometimes buttons may need a larger width to accommodate your button text. Additionally, if you already have the `disabled` and `fa` CSS classes, be sure not to duplicate them.
+{% endtab %}
 
-![](../.gitbook/assets/image%20%2813%29.png)
+{% tab title="Fourth Step" %}
+When placing the JS, the function only needs to be placed once but you will need a new handler for each Rich Text view + Big Button that you have.
+
+#### Things to change in JavaScript
+
+* Change the Button ID in the first set of parentheses to whatever is appropriate to name your button; 
+
+  ```text
+  "development-reviews"
+  ```
+
+* Change the View ID to match the corresponding Rich Text view where the big button will live; 
+
+  ```text
+  "view_15"
+  ```
+
+* Change the URL to the corresponding page that the button will redirect to; 
+
+  ```text
+  "https://atd.knack.com/development-services#home/development-reviews/"
+  ```
+
+* Change the Font Awesome icon to match the theme of the button. Knack currently supports [FA version 4 icons](https://fontawesome.com/v4.7.0/). You can also read more about FA icons here.
+
+  ```text
+  "list-ul"
+  ```
+
+* Change the Button Label of the button to the text that will be visible; 
+
+  ```text
+  "Development Reviews"
+  ```
+
+* Lastly, only add the `true` argument if you would like the button to be disabled.
+
+  ```text
+  true
+  ```
+{% endtab %}
+{% endtabs %}
 
 
 
