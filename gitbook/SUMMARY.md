@@ -7,7 +7,6 @@
 
 * [Platform Overview](knack/platform-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
-* [Custom Application Functionality](knack/custom-application-functionality.md)
 * [Single Sign On](knack/single-sign-on/README.md)
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
