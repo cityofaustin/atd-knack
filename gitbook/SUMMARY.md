@@ -8,19 +8,19 @@
 * [Platform Overview](knack/platform-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
 * [Custom Application Functionality](knack/custom-application-functionality.md)
-* [Style Guide](knack/style-guide.md)
 * [Single Sign On](knack/single-sign-on/README.md)
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
 * [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
 * [Knack &lt;--&gt; ArcGIS Online Integration](knack/arcgis-online-integration.md)
-* [BEST PRACTICE: Importing records](knack/best-practice-importing-records.md)
+* [Importing Records](knack/best-practice-importing-records.md)
 
 ## Knack Code
 
 * [Code Version Control](knack-code/code-version-control.md)
 * [GitHub Code Workflow](knack-code/github-code-workflow.md)
+* [Style Guide](knack-code/style-guide.md)
 * [CODE: Mobile Optimization](knack-code/mobile-optimization.md)
 * [CODE: Custom Login Buttons](knack-code/code-custom-login-buttons.md)
 * [CODE: Knack Functionality](knack-code/functionality/README.md)

@@ -1,4 +1,8 @@
-# BEST PRACTICE: Importing records
+---
+description: How to successfully setup and import your records into a Knack object
+---
+
+# Importing Records
 
 ## Connections 
 
