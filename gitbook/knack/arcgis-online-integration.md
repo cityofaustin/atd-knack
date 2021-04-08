@@ -1,4 +1,4 @@
-# Knack &lt;-&gt; ArcGIS Online Integration
+# ArcGIS Online Integration
 
 ### Adding New Fields to an Existing ArcGIS Online Dataset
 
