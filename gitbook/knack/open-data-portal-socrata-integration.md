@@ -2,7 +2,7 @@
 description: 'How we publish Knack data to the the city''s Open Data Portal, aka Socrata.'
 ---
 
-# Open Data Portal \(Socrata\) Integration
+# Open Data Portal - Socrata Integration
 
 ### Adding New Fields to an Existing Socrata Datset
 

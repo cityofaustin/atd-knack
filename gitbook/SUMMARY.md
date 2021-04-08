@@ -12,7 +12,7 @@
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
-* [Open Data Portal \(Socrata\) Integration](knack/open-data-portal-socrata-integration.md)
+* [Open Data Portal - Socrata Integration](knack/open-data-portal-socrata-integration.md)
 * [Knack &lt;-&gt; ArcGIS Online Integration](knack/arcgis-online-integration.md)
 * [Importing Records](knack/best-practice-importing-records.md)
 
