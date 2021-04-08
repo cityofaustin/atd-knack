@@ -119,13 +119,13 @@ Add these CSS classes if not already present
 {% tab title="First Step" %}
 Create a Rich Text view
 
-![](../../.gitbook/assets/image%20%2865%29.png)
+![](../../.gitbook/assets/image%20%2866%29.png)
 {% endtab %}
 
 {% tab title="Second Step" %}
 Open the Rich Text view to identify its View ID and update the view name to include it for easy reference
 
-![](../../.gitbook/assets/image%20%2864%29.png)
+![](../../.gitbook/assets/image%20%2865%29.png)
 {% endtab %}
 
 {% tab title="Third Step" %}

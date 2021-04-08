@@ -4,11 +4,11 @@ description: How to insert and adjust Font Awesome Icon positioning
 
 # Font Awesome Icons
 
-![Map Marker Icon being used with a section title](../../.gitbook/assets/image%20%2866%29.png)
+![Map Marker Icon being used with a section title](../../.gitbook/assets/image%20%2867%29.png)
 
-![Home Icon being set with the icon selector for a Menu or Parent page](../../.gitbook/assets/image%20%2868%29.png)
+![Home Icon being set with the icon selector for a Menu or Parent page](../../.gitbook/assets/image%20%2869%29.png)
 
-![Plus Circle Icon being set with the icon selector for a Menu view \(button\)](../../.gitbook/assets/image%20%2867%29.png)
+![Plus Circle Icon being set with the icon selector for a Menu view \(button\)](../../.gitbook/assets/image%20%2868%29.png)
 
 Knack provides the Font Awesome 4 library as a way to incorporate icons into applications and help reinforce language and look of application elements such as menus or titles shown above.  
   
@@ -47,11 +47,11 @@ fa is the CSS class being called above followed by the fa-icon-name
 
 Simply select the icon you want with the icon selector for menus and parent pages
 
-![](../../.gitbook/assets/image%20%2869%29.png)
+![](../../.gitbook/assets/image%20%2870%29.png)
 
 or place within your application next to text \(or by themselves\) in titles or buttons
 
-![Placing the HTML in the View Title](../../.gitbook/assets/image%20%2870%29.png)
+![Placing the HTML in the View Title](../../.gitbook/assets/image%20%2872%29.png)
 
 ### To Note
 

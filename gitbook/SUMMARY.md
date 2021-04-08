@@ -28,6 +28,7 @@
   * [Return to Previous Page Button](knack/functionality/return-button.md)
   * [Conditionally Hide/Show Form Fields](knack/functionality/form-conditionals.md)
 * [CODE: Knack Look & Feel](knack/looks/README.md)
+  * [Modal Close Styling](knack/looks/modal-close-styling.md)
   * [Relabel Attachment Links](knack/looks/relabel-attachment-links.md)
   * [Convert Values to UPPERCASE](knack/looks/convert-values-to-uppercase.md)
   * [Highlight Details View Label Body & Table Value](knack/looks/highlight-label-body.md)
