@@ -11,7 +11,7 @@
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
-* [Importing Records](knack/best-practice-importing-records.md)
+* [Importing Records](knack/importing-records.md)
 
 ## Knack Integrations
 
