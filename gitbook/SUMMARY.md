@@ -12,9 +12,12 @@
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
-* [Open Data Portal - Socrata Integration](knack/open-data-portal-socrata-integration.md)
-* [ArcGIS Online Integration](knack/arcgis-online-integration.md)
 * [Importing Records](knack/best-practice-importing-records.md)
+
+## Knack Integrations
+
+* [Open Data Portal - Socrata Integration](knack-integrations/open-data-portal-socrata-integration.md)
+* [ArcGIS Online Integration](knack-integrations/arcgis-online-integration.md)
 
 ## Knack Code
 
@@ -38,7 +41,6 @@
   * [Highlight Details View Label Body & Table Value](knack-code/looks/highlight-label-body.md)
   * [HighCharts Report Styling](knack-code/looks/global-report-styling.md)
   * [Font Awesome Icons](knack-code/looks/fa-icons.md)
-* [Untitled](knack-code/untitled.md)
 
 ## AMD \| DATA TRACKER <a id="data-tracker"></a>
 
