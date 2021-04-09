@@ -495,6 +495,18 @@ function getLinkUrl(recordId, route) {
   return (`#tia-requests/tia-request-details/${recordId}/${route}/${recordId}`)
 }
 
+function dropdownMenuItem(recordId, route, iconName, linkName) {
+  return (
+    `<li>\
+      <a href=${getLinkUrl(recordId, route)}>\
+        <span class="icon is-small"> \
+          <i class="fa ${iconName}" /> \
+        </span>\
+        <span>${linkName}</span>\
+      </a>\
+    </li>`)
+}
+
 // Custom Dropdown Menu
 $(document).on('knack-view-render.view_163', function(event, view, record) {
   // var $test_chia = $("#view_163").find(".control");
@@ -510,46 +522,10 @@ $(document).on('knack-view-render.view_163', function(event, view, record) {
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-          <li>\
-            <a href=${getLinkUrl("60677899da9d57067ec52e34", "tia-case-management")}>\
-              <span class="icon is-small"> \
-                <i class="fa fa-archive" /> \
-                </span>\
-                <span>\
-                  Scope & Submissions \
-                </span>\
-            </a>\
-          </li>\
-          <li> \
-            <a href="#lnke">\
-              <span class="icon is-small"> \
-                <i class="fa fa-file-text-o" /> \
-              </span>\
-              <span>\
-                Mitigations \
-              </span>\
-            </a>\
-          </li>\
-          <li> \
-            <a href="#link">\
-              <span class="icon is-small"> \
-                <i class="fa fa-medium" /> \
-              </span>\
-              <span>\
-                Memo Builder \
-              </span>\
-            </a>\
-          </li>\
-          <li> \
-            <a href="#link">\
-              <span class="icon is-small"> \
-                <i class="fa fa-briefcase" /> \
-              </span>\
-              <span>\
-                Case Log \
-              </span>\
-            </a>\
-          </li>\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "tia-case-log", "fa-briefcase", "Case Log")}\
         </ul>\
       </li>\
       <li class="tia-dropdown-menu kn-dropdown-menu">\
@@ -558,64 +534,14 @@ $(document).on('knack-view-render.view_163', function(event, view, record) {
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-        <li>\
-            <a href="#link">\
-              <span class="icon is-small"> \
-                <i class="fa fa-edit" /> \
-                </span>\
-                <span>\
-                  Case Details \
-                </span>\
-            </a>\
-          </li>\
-          <li> \
-            <a href="#link">\
-              <span class="icon is-small"> \
-                <i class="fa fa-users" /> \
-              </span>\
-              <span>\
-                Assign Case Reviewers \
-              </span>\
-            </a>\
-          </li>\
-          <li> \
-            <a href="#link">\
-              <span class="icon is-small"> \
-                <i class="fa fa-retweet" /> \
-              </span>\
-              <span>\
-                Change Request Status \
-              </span>\
-            </a>\
-          </li>\
-          <li> \
-            <a href="#link">\
-              <span class="icon is-small"> \
-                <i class="fa fa-link" /> \
-              </span>\
-              <span>\
-                Connect Cases \
-              </span>\
-            </a>\
-          </li>\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "edit-tia-request-reviewer", "fa-edit", "Case Details")}\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "change-tia-request-status-reviewer", "fa-retweet", "Change Request Status")}\
+          ${dropdownMenuItem("60677899da9d57067ec52e34", "connected-cases", "fa-link", "Connect Cases")}\
         </ul>\
       </li>\
-      <li>\
-        <a href="#link">\
-          <span class="icon is-small"> \
-            <i class="fa fa-dollar" /> \
-          </span>\
-          Fees \
-        </a>\
-      </li>\
-      <li>\
-        <a href="#link">\
-          <span class="icon is-small"> \
-            <i class="fa fa-plus-circle" /> \
-          </span>\
-          Communication \
-        </a>\
-      </li>\
+      ${dropdownMenuItem("60677899da9d57067ec52e34", "edit-tia-fee-status-reviewer", "fa-dollar", "Fees")}\
+      ${dropdownMenuItem("60677899da9d57067ec52e34", "add-tia-communication", "fa-plus-circle", "Communication")}\
     </ul>\
   </div>`).appendTo("#view_163")
 })
