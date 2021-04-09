@@ -472,6 +472,7 @@ function showFormFieldsByValue(value) {
   });
 }
 
+//the Add Mitigation Form
 $(document).on("knack-view-render.view_628", function (event, view) {
   hideFormFields();
 
@@ -483,3 +484,140 @@ $(document).on("knack-view-render.view_628", function (event, view) {
     showFormFieldsByValue(fieldValue);
   });
 });
+
+
+
+/************************************/
+/**** Custom Dropdown Menu.      ****/
+/************************************/
+
+function getLinkUrl(recordId, route) {
+  return (`#tia-requests/tia-request-details/${recordId}/${route}/${recordId}`)
+}
+
+// Custom Dropdown Menu
+$(document).on('knack-view-render.view_163', function(event, view, record) {
+  // var $test_chia = $("#view_163").find(".control");
+  // $test_chia.hide();
+  var recordId = record.id;
+  console.log(record)
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu">\
+        <a href="#case-management" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          <li>\
+            <a href=${getLinkUrl("60677899da9d57067ec52e34", "tia-case-management")}>\
+              <span class="icon is-small"> \
+                <i class="fa fa-archive" /> \
+                </span>\
+                <span>\
+                  Scope & Submissions \
+                </span>\
+            </a>\
+          </li>\
+          <li> \
+            <a href="#lnke">\
+              <span class="icon is-small"> \
+                <i class="fa fa-file-text-o" /> \
+              </span>\
+              <span>\
+                Mitigations \
+              </span>\
+            </a>\
+          </li>\
+          <li> \
+            <a href="#link">\
+              <span class="icon is-small"> \
+                <i class="fa fa-medium" /> \
+              </span>\
+              <span>\
+                Memo Builder \
+              </span>\
+            </a>\
+          </li>\
+          <li> \
+            <a href="#link">\
+              <span class="icon is-small"> \
+                <i class="fa fa-briefcase" /> \
+              </span>\
+              <span>\
+                Case Log \
+              </span>\
+            </a>\
+          </li>\
+        </ul>\
+      </li>\
+      <li class="tia-dropdown-menu kn-dropdown-menu">\
+        <a href="#update-case-details" data-kn-slug="#update-case-details">\
+          <span class="nav-dropdown-link">Update Case Details</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+        <li>\
+            <a href="#link">\
+              <span class="icon is-small"> \
+                <i class="fa fa-edit" /> \
+                </span>\
+                <span>\
+                  Case Details \
+                </span>\
+            </a>\
+          </li>\
+          <li> \
+            <a href="#link">\
+              <span class="icon is-small"> \
+                <i class="fa fa-users" /> \
+              </span>\
+              <span>\
+                Assign Case Reviewers \
+              </span>\
+            </a>\
+          </li>\
+          <li> \
+            <a href="#link">\
+              <span class="icon is-small"> \
+                <i class="fa fa-retweet" /> \
+              </span>\
+              <span>\
+                Change Request Status \
+              </span>\
+            </a>\
+          </li>\
+          <li> \
+            <a href="#link">\
+              <span class="icon is-small"> \
+                <i class="fa fa-link" /> \
+              </span>\
+              <span>\
+                Connect Cases \
+              </span>\
+            </a>\
+          </li>\
+        </ul>\
+      </li>\
+      <li>\
+        <a href="#link">\
+          <span class="icon is-small"> \
+            <i class="fa fa-dollar" /> \
+          </span>\
+          Fees \
+        </a>\
+      </li>\
+      <li>\
+        <a href="#link">\
+          <span class="icon is-small"> \
+            <i class="fa fa-plus-circle" /> \
+          </span>\
+          Communication \
+        </a>\
+      </li>\
+    </ul>\
+  </div>`).appendTo("#view_163")
+})
+
+
