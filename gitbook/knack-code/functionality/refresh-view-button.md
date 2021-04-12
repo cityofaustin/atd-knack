@@ -22,15 +22,10 @@ description: >-
 /***************************/
 $(document).on("knack-view-render.view_2698", function (event, page) {
   var button = $(
-    "<span style='width: 2em'></span>
-    <button id='refresh-view_2698' 
-    style='border-radius: .35em !important' 
-    class='kn-button is-primary'>
-    <i class='fa fa-refresh'></i>
-    <span style='width: .5em'></span>Refresh</button>"
+    "<span style='width: 2em'></span><button id='refresh-view_2698' style='border-radius: .35em !important' class='kn-button is-primary'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Refresh</button>"
   );
 
-  button.insertAfter(
+  button.insertAfter( //places button next to keyword search option
     $("#view_2698").find("form.table-keyword-search").find("a")[0]
   );
 
