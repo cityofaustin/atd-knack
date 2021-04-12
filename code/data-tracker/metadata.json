@@ -1,1 +1,3370 @@
-
+{
+    "application": {
+        "HERE": {
+            "appCode": "VDqfJ3RxxtePSpaiTsDSWg",
+            "appId": "QBvaXS0u91tcN1qdwJ6U"
+        },
+        "account": {
+            "api_limit_extra": {
+                "quantity": 0
+            },
+            "beta_deadline": "2016-11-11T04:46:11.542Z",
+            "billing": {
+                "billing_address": {
+                    "city": "AUSTIN",
+                    "country": "US",
+                    "state": "TX",
+                    "street": "8700 Cameron Road",
+                    "zip": "78754"
+                },
+                "custom_info": null,
+                "customer_id": "cus_9T6cYoTII2nOmJ",
+                "email": null,
+                "has_paid": true,
+                "ignore_capacity_until": null,
+                "ignore_delinquency_until": null,
+                "last_freeze_date": null,
+                "notice_count": 0,
+                "notice_date": null,
+                "overrides": null,
+                "plans": [
+                    {
+                        "id": "enterprise_storage_austin_y",
+                        "quantity": 1,
+                        "subscription_id": "sub_Al3PqRUyamdzl7",
+                        "type": "product"
+                    }
+                ],
+                "status": "current"
+            },
+            "clientid": null,
+            "counts": {
+                "builders": 20
+            },
+            "gclid": null,
+            "id": "5812d81336acb3362e69d903",
+            "name": "atd",
+            "plan_limits": {
+                "api_limit": 99999999,
+                "applications": 9999,
+                "records": 99999999,
+                "storage": 9999
+            },
+            "product_plan": {
+                "api_limit": 99999999,
+                "apps": 9999,
+                "babu": {
+                    "unit": "months",
+                    "value": 3
+                },
+                "builders": 9999,
+                "frequency": "yearly",
+                "id": "enterprise_storage_austin_y",
+                "level": 6,
+                "name": "Enterprise (City of Austin)",
+                "price": 19500,
+                "records": 99999999,
+                "storage": "9999 GB",
+                "subscription_id": "sub_Al3PqRUyamdzl7",
+                "type": "custom"
+            },
+            "referral": "direct",
+            "session": {
+                "user": {
+                    "account_id": "5812d81336acb3362e69d903",
+                    "admin": null,
+                    "application_ids": [],
+                    "beta_tester": false,
+                    "created_on": "2016-10-28T04:46:11.515Z",
+                    "email": "transportation.data@austintexas.gov",
+                    "first_name": "Transportation",
+                    "id": "5812d81336acb3362e69d902",
+                    "inactivity_timeout": 15,
+                    "key": null,
+                    "last_name": "Data",
+                    "using_2fa": false,
+                    "utility_key": "1477629971516fhjyoyj8m2t9",
+                    "v3_beta": true
+                }
+            },
+            "settings": {
+                "agreements": null,
+                "force_region_for_new_apps": {
+                    "enabled": false,
+                    "region": null
+                },
+                "hasOpenBetaAccess": true,
+                "hasOptedIntoOpenBeta": true,
+                "hasProvidedBillingAddress": true,
+                "hipaa": {
+                    "enabled": false,
+                    "region": null
+                },
+                "new_apps_are_sql": false,
+                "rate_limit": {
+                    "login_requests": null
+                },
+                "security": {
+                    "builder_inactivity_message": null,
+                    "builder_inactivity_timeout": null,
+                    "builder_inactivity_timeout_enabled": null
+                },
+                "storage": {
+                    "mongo": null,
+                    "solr": null,
+                    "sql": null
+                },
+                "v3_only": false
+            },
+            "slug": "atd",
+            "sso": false,
+            "status": "active",
+            "user_id": "5812d81336acb3362e69d902"
+        },
+        "clientSubdomainMap": {
+            "read": [
+                "us-east-1-renderer-read"
+            ],
+            "write": [
+                "us-east-1-renderer-write"
+            ]
+        },
+        "counts": {
+            "asset_size": 305299268,
+            "object_10": 5,
+            "object_15": 1,
+            "object_18": 3,
+            "object_2": 3,
+            "object_3": 25,
+            "object_4": 6,
+            "object_6": 2,
+            "object_7": 4,
+            "total_entries": -10316
+        },
+        "description": "This app is used for development and testing of the Knackpy API client.https://github.com/cityofaustin/knackpy/",
+        "design": {
+            "colors": {
+                "button_bg_color": "#00396D",
+                "button_border_color": "#002547",
+                "button_hover_color": "#002D57",
+                "button_text_color": "#ffffff",
+                "button_textshadow_style": "-1px -1px 0 rgba(0, 0, 0, 0.3) ",
+                "header_bg_color": "#163f63",
+                "header_text_color": "#ffffff",
+                "header_textshadow_style": "1px 1px 0 rgba(0, 0, 0, 0.3) ",
+                "link_text_color": "#07467c",
+                "notification_bg_color": "#2f96b4",
+                "notification_text_color": "#ffffff"
+            }
+        },
+        "distributions": [],
+        "ecommerce": {
+            "enabled": false
+        },
+        "feature_flags": [
+            false
+        ],
+        "home_scene": {
+            "key": "scene_1",
+            "slug": "home"
+        },
+        "id": "5d79512148c4af00106d1507",
+        "layout": {
+            "app_fullwidth": false,
+            "app_menu_auth": true,
+            "entry_scene_menu": true,
+            "theme": "kn-beta"
+        },
+        "name": "Knackpy Development | PRODUCTION",
+        "objects": [
+            {
+                "_id": "5d79619aa6ca4c0010f305ed",
+                "connections": {
+                    "inbound": [],
+                    "outbound": [
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "customers",
+                                    "singular": "customer"
+                                },
+                                "name": "customer"
+                            },
+                            "has": "one",
+                            "key": "field_128",
+                            "name": "customer",
+                            "object": "object_7"
+                        }
+                    ]
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "5d796244112824001085a30f",
+                        "conditional": false,
+                        "key": "field_11",
+                        "name": "Auto Increment",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "auto_increment",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ed0f9f8031b3d00155e5ef6",
+                        "conditional": false,
+                        "default": "",
+                        "key": "field_125",
+                        "name": "id",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "short_text",
+                        "unique": true,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79621b31328e00107e139c",
+                        "conditional": false,
+                        "format": {
+                            "blank": "Select...",
+                            "default": "kn-blank",
+                            "options": [
+                                "Pepperoni",
+                                "Extra Cheese",
+                                "Jalape\u00f1os",
+                                "Mushrooms"
+                            ],
+                            "sorting": "alphabetical",
+                            "type": "single"
+                        },
+                        "key": "field_6",
+                        "name": "Multiple Choice",
+                        "object_key": "object_3",
+                        "required": true,
+                        "rules": null,
+                        "type": "multiple_choice",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d796236e9dd860012030d45",
+                        "conditional": false,
+                        "default": "",
+                        "key": "field_7",
+                        "name": "Short Text",
+                        "object_key": "object_3",
+                        "required": true,
+                        "rules": null,
+                        "type": "short_text",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7962396a771c00103a9f8a",
+                        "conditional": false,
+                        "default": "",
+                        "key": "field_8",
+                        "name": "Rich Text",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "rich_text",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79623f9603110010d65832",
+                        "conditional": false,
+                        "default": "0",
+                        "format": {
+                            "format": "",
+                            "mark_decimal": "none",
+                            "mark_thousands": "none",
+                            "post": "",
+                            "pre": "",
+                            "precision": "2",
+                            "rounding": "none"
+                        },
+                        "key": "field_10",
+                        "name": "Number",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "number",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79625aafeec8001045043f",
+                        "conditional": false,
+                        "format": {
+                            "calendar": false,
+                            "date_format": "mm/dd/yyyy",
+                            "default_date": "09/11/2019",
+                            "default_type": "none",
+                            "time_format": "Ignore Time",
+                            "time_type": "current"
+                        },
+                        "key": "field_12",
+                        "name": "Date/Time - No Time no default",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d796267017b0f0010aca59e",
+                        "conditional": false,
+                        "format": {
+                            "calendar": false,
+                            "date_format": "mm/dd/yyyy",
+                            "default_date": "09/11/2019",
+                            "default_time": "",
+                            "default_type": "current",
+                            "time_format": "HH MM (military)",
+                            "time_type": "current"
+                        },
+                        "key": "field_13",
+                        "name": "Date/Time - w/ Time default current",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79628bf5b1f90010bf58f8",
+                        "conditional": false,
+                        "format": {
+                            "calendar": false,
+                            "date_format": "Ignore Date",
+                            "default_time": "",
+                            "time_format": "HH:MM am",
+                            "time_type": "current"
+                        },
+                        "key": "field_14",
+                        "name": "Date/Time - No Date",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79629f112824001085a6d3",
+                        "conditional": false,
+                        "format": {
+                            "calendar": true,
+                            "date_format": "mm/dd/yyyy",
+                            "default_date": "09/11/2019",
+                            "default_time": "",
+                            "default_type": "current",
+                            "time_format": "HH:MM am",
+                            "time_type": "current"
+                        },
+                        "key": "field_15",
+                        "name": "Date/Time - Range",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7962af8797fb00108d5a80",
+                        "conditional": false,
+                        "format": {
+                            "date_format": "mm/dd/yyyy",
+                            "minutes": "1",
+                            "time_format": "HH:MM am",
+                            "total_format": "from-to"
+                        },
+                        "key": "field_16",
+                        "name": "Timer",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "timer",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7962fd453f570011f41a8d",
+                        "conditional": false,
+                        "format": {
+                            "secure": false
+                        },
+                        "key": "field_17",
+                        "name": "File",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "file",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7962ffc9217100101c15b9",
+                        "conditional": false,
+                        "format": {
+                            "source": "upload",
+                            "thumbs": []
+                        },
+                        "key": "field_18",
+                        "name": "Image",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "image",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7963057596350010eb8dfa",
+                        "conditional": false,
+                        "format": {
+                            "format": "Last, First Middle"
+                        },
+                        "key": "field_19",
+                        "name": "Name",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "name",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79631a8797fb00108d5b39",
+                        "conditional": false,
+                        "format": {
+                            "text_format": "url"
+                        },
+                        "key": "field_20",
+                        "name": "Email",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "email",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79631df7db870010c8973e",
+                        "conditional": false,
+                        "format": {
+                            "enable_address_autocomplete": false,
+                            "enable_geocoding": false,
+                            "format": "US",
+                            "input": "address"
+                        },
+                        "key": "field_21",
+                        "name": "Address USA",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "address",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79631fafeec800104504d7",
+                        "conditional": false,
+                        "default": "",
+                        "format": {
+                            "extension": false,
+                            "format": "(999) 999-9999"
+                        },
+                        "key": "field_22",
+                        "name": "Phone",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "phone",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7963212062500011e17ed6",
+                        "conditional": false,
+                        "key": "field_23",
+                        "name": "Signature",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "signature",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d796323631d4a0010fae065",
+                        "conditional": false,
+                        "default": "",
+                        "format": {
+                            "target": "_self",
+                            "text_format": "url"
+                        },
+                        "key": "field_24",
+                        "name": "Link",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "link",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d796326a6ca4c0010f306b5",
+                        "conditional": false,
+                        "format": {
+                            "allow_half": false,
+                            "max": "3"
+                        },
+                        "key": "field_25",
+                        "name": "Rating",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "rating",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d79623d1c07060010ac8228",
+                        "conditional": false,
+                        "format": {
+                            "count_field": "Connection",
+                            "equation": "left({field_7}, 2) two three (four)",
+                            "equation_type": "numeric",
+                            "formula_field": "Field",
+                            "mark_decimal": "period"
+                        },
+                        "key": "field_9",
+                        "name": "Text Formula simple",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "concatenation",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d796758092e7f00106c621c",
+                        "conditional": false,
+                        "default": false,
+                        "format": {
+                            "default": false,
+                            "format": "yes_no",
+                            "input": "dropdown",
+                            "required": false
+                        },
+                        "key": "field_29",
+                        "name": "Yes/No",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "boolean",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d796769f5b1f90010bf5bd4",
+                        "conditional": false,
+                        "default": "",
+                        "format": {
+                            "format": "$"
+                        },
+                        "key": "field_30",
+                        "name": "Currency",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "currency",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7afc364eaa8e0010a2f334",
+                        "conditional": false,
+                        "format": {
+                            "calendar": false,
+                            "date_format": "mm/dd/yyyy",
+                            "default_date": "09/12/2019",
+                            "default_time": "",
+                            "default_type": "none",
+                            "time_format": "HH:MM am",
+                            "time_type": "none"
+                        },
+                        "key": "field_37",
+                        "name": "PYTEST_MODIFIED_DATE",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5d7b0125962e940010cc97f0",
+                        "conditional": false,
+                        "default": false,
+                        "format": {
+                            "default": false,
+                            "format": "yes_no",
+                            "input": "dropdown",
+                            "required": false
+                        },
+                        "key": "field_38",
+                        "name": "PYTEST_RECORD",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "boolean",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5e9aa7d1b29fde00173dae2e",
+                        "conditional": false,
+                        "format": {
+                            "source": "url",
+                            "thumbs": []
+                        },
+                        "key": "field_50",
+                        "name": "Image from Web",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": [],
+                        "type": "image",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5e98c1d8e5e445001607877c",
+                        "conditional": false,
+                        "format": {
+                            "enable_address_autocomplete": false,
+                            "enable_geocoding": true,
+                            "format": "US",
+                            "input": "lat_long"
+                        },
+                        "key": "field_44",
+                        "name": "Address Lat Lon",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "address",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5eb4737b4e0bc40017223b81",
+                        "conditional": false,
+                        "format": {
+                            "count_field": "Connection",
+                            "equation": "getDateMonthOfYearName({field_13}) pizza getDateDayOfWeekName({field_13}) ",
+                            "equation_type": "numeric",
+                            "formula_field": "Field",
+                            "mark_decimal": "period"
+                        },
+                        "key": "field_76",
+                        "name": "text formula complex",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "concatenation",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5f14685ca7fcdd00152e9176",
+                        "conditional": false,
+                        "format": {
+                            "enable_address_autocomplete": false,
+                            "enable_geocoding": false,
+                            "format": "international",
+                            "input": "address"
+                        },
+                        "key": "field_126",
+                        "name": "address_international",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "address",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5f146868daaecc0015345e0f",
+                        "conditional": false,
+                        "format": {
+                            "enable_address_autocomplete": false,
+                            "enable_geocoding": false,
+                            "format": "international_country",
+                            "input": "address"
+                        },
+                        "key": "field_127",
+                        "name": "address_international_with_country",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "address",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5f14b2e6daaecc0015358892",
+                        "conditional": false,
+                        "key": "field_128",
+                        "name": "customer",
+                        "relationship": {
+                            "belongs_to": "many",
+                            "has": "one",
+                            "object": "object_7"
+                        },
+                        "required": false,
+                        "rules": [],
+                        "type": "connection",
+                        "unique": false,
+                        "user": false,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5f4341c782677f0019947cec",
+                        "conditional": false,
+                        "format": {
+                            "count_field": "Connection",
+                            "equation": "{field_11}*10",
+                            "equation_type": "numeric",
+                            "format": "",
+                            "formula_field": "Field",
+                            "mark_decimal": "none",
+                            "mark_thousands": "none",
+                            "post": "",
+                            "pre": "",
+                            "precision": "2",
+                            "rounding": "none"
+                        },
+                        "key": "field_129",
+                        "name": "Equation",
+                        "object_key": "object_3",
+                        "required": false,
+                        "rules": null,
+                        "type": "equation",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    }
+                ],
+                "identifier": "field_6",
+                "inflections": {
+                    "plural": "all_fields_tests",
+                    "singular": "all_fields_test"
+                },
+                "key": "object_3",
+                "name": "all_fields_test",
+                "sort": {
+                    "field": "field_11",
+                    "order": "asc"
+                },
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            },
+            {
+                "_id": "5e126ba0292778001505b26b",
+                "connections": {
+                    "inbound": [
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "customers",
+                                    "singular": "customer"
+                                },
+                                "name": "customer"
+                            },
+                            "has": "one",
+                            "key": "field_128",
+                            "name": "customer",
+                            "object": "object_3"
+                        },
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "customers",
+                                    "singular": "customer"
+                                },
+                                "name": "customer"
+                            },
+                            "has": "one",
+                            "key": "field_43",
+                            "name": "customer",
+                            "object": "object_4"
+                        }
+                    ],
+                    "outbound": []
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "5e126ba45e661100184f5a54",
+                        "conditional": false,
+                        "key": "field_42",
+                        "name": "Name",
+                        "object_key": "object_7",
+                        "required": false,
+                        "rules": null,
+                        "type": "name",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea46a51c5830600178ca197",
+                        "conditional": false,
+                        "format": {
+                            "enable_address_autocomplete": false,
+                            "enable_geocoding": false,
+                            "format": "US",
+                            "input": "address"
+                        },
+                        "key": "field_67",
+                        "name": "Address",
+                        "object_key": "object_7",
+                        "required": false,
+                        "rules": null,
+                        "type": "address",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea46a567ec4ca0015cc6595",
+                        "conditional": false,
+                        "default": "",
+                        "format": {
+                            "extension": false,
+                            "format": "(999) 999-9999"
+                        },
+                        "key": "field_68",
+                        "name": "Phone",
+                        "object_key": "object_7",
+                        "required": false,
+                        "rules": null,
+                        "type": "phone",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea46a8cefc9b6001573c380",
+                        "conditional": false,
+                        "format": {
+                            "connection": {
+                                "key": "field_43"
+                            },
+                            "field": {
+                                "key": "field_69"
+                            },
+                            "filters": [],
+                            "format": "",
+                            "formula_field": "field_69.field_43",
+                            "mark_decimal": "none",
+                            "mark_thousands": "none",
+                            "post": "",
+                            "pre": "",
+                            "precision": "2",
+                            "rounding": "none"
+                        },
+                        "key": "field_70",
+                        "name": "Average Spend",
+                        "object_key": "object_7",
+                        "required": false,
+                        "rules": null,
+                        "type": "average",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea4aba1c5830600178cd3b7",
+                        "conditional": false,
+                        "format": {
+                            "connection": "field_43",
+                            "count_field": "field_43",
+                            "filters": [],
+                            "format": "",
+                            "mark_decimal": "none",
+                            "mark_thousands": "none",
+                            "post": "",
+                            "pre": "",
+                            "precision": "2",
+                            "rounding": "none"
+                        },
+                        "key": "field_72",
+                        "name": "Count of Orders",
+                        "object_key": "object_7",
+                        "required": false,
+                        "rules": null,
+                        "type": "count",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    }
+                ],
+                "identifier": "field_42",
+                "inflections": {
+                    "plural": "customers",
+                    "singular": "customer"
+                },
+                "key": "object_7",
+                "name": "customers",
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            },
+            {
+                "_id": "5d7961b7d6086b0010bc8925",
+                "connections": {
+                    "inbound": [],
+                    "outbound": [
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "customers",
+                                    "singular": "customer"
+                                },
+                                "name": "customer"
+                            },
+                            "has": "one",
+                            "key": "field_43",
+                            "name": "customer",
+                            "object": "object_7"
+                        },
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "pizzas",
+                                    "singular": "pizza"
+                                },
+                                "name": "pizzas"
+                            },
+                            "has": "many",
+                            "key": "field_66",
+                            "name": "pizzas",
+                            "object": "object_2"
+                        },
+                        {
+                            "belongs_to": "one",
+                            "field": {
+                                "inflections": {
+                                    "plural": "parent orders",
+                                    "singular": "parent order"
+                                },
+                                "name": "parent order"
+                            },
+                            "has": "one",
+                            "key": "field_74",
+                            "name": "parent order",
+                            "object": "object_4"
+                        }
+                    ]
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "5ea0892ecdf2e9001a043b96",
+                        "conditional": false,
+                        "key": "field_55",
+                        "name": "Order ID",
+                        "object_key": "object_4",
+                        "required": false,
+                        "rules": null,
+                        "type": "auto_increment",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5e126bc47d2ebe001513bc10",
+                        "conditional": false,
+                        "key": "field_43",
+                        "name": "customer",
+                        "object_key": "object_4",
+                        "relationship": {
+                            "belongs_to": "many",
+                            "has": "one",
+                            "object": "object_7"
+                        },
+                        "required": false,
+                        "rules": [],
+                        "type": "connection",
+                        "unique": false,
+                        "user": false,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5ea46a38562c17001569172a",
+                        "conditional": false,
+                        "key": "field_66",
+                        "name": "pizzas",
+                        "object_key": "object_4",
+                        "relationship": {
+                            "belongs_to": "many",
+                            "has": "many",
+                            "object": "object_2"
+                        },
+                        "required": false,
+                        "rules": [],
+                        "type": "connection",
+                        "unique": false,
+                        "user": false,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5ea46a6f2e85f200152be211",
+                        "conditional": false,
+                        "format": {
+                            "connection": {
+                                "key": "field_66"
+                            },
+                            "field": {
+                                "key": "field_63"
+                            },
+                            "filters": [],
+                            "format": "",
+                            "formula_field": "field_63.field_66",
+                            "mark_decimal": "none",
+                            "mark_thousands": "none",
+                            "post": "",
+                            "pre": "",
+                            "precision": "2",
+                            "rounding": "none"
+                        },
+                        "key": "field_69",
+                        "name": "Order Total",
+                        "object_key": "object_4",
+                        "required": false,
+                        "rules": null,
+                        "type": "sum",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea46b79b6ce4b0015000b2f",
+                        "conditional": false,
+                        "format": {
+                            "calendar": false,
+                            "date_format": "mm/dd/yyyy",
+                            "default_date": "04/25/2020",
+                            "default_time": "",
+                            "default_type": "current",
+                            "time_format": "HH MM (military)",
+                            "time_type": "current"
+                        },
+                        "key": "field_71",
+                        "name": "Order Date",
+                        "object_key": "object_4",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea4e4fed642500015260661",
+                        "conditional": false,
+                        "format": {
+                            "blank": "Select...",
+                            "default": "kn-blank",
+                            "options": [
+                                "Normal",
+                                "Coupon",
+                                "Refund"
+                            ],
+                            "sorting": "alphabetical",
+                            "type": "single"
+                        },
+                        "key": "field_73",
+                        "name": "Order Type",
+                        "object_key": "object_4",
+                        "required": false,
+                        "rules": null,
+                        "type": "multiple_choice",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea4e5c7efc9b6001573fee4",
+                        "conditional": false,
+                        "format": {
+                            "count_field": "Connection",
+                            "equation": "{field_55} - {field_43.field_42}",
+                            "equation_type": "numeric",
+                            "formula_field": "Field",
+                            "mark_decimal": "period"
+                        },
+                        "key": "field_75",
+                        "name": "Order Name",
+                        "object_key": "object_4",
+                        "required": false,
+                        "rules": null,
+                        "type": "concatenation",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea4e50aefc9b6001573fe8e",
+                        "conditional": false,
+                        "format": {
+                            "conn_default": "none",
+                            "input": ""
+                        },
+                        "key": "field_74",
+                        "name": "parent order",
+                        "object_key": "object_4",
+                        "relationship": {
+                            "belongs_to": "one",
+                            "has": "one",
+                            "object": "object_4"
+                        },
+                        "required": false,
+                        "rules": null,
+                        "type": "connection",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5eb4acfa5ea5bf001547c240",
+                        "conditional": false,
+                        "format": {
+                            "count_field": "Connection",
+                            "equation": "{field_43.field_67} ",
+                            "equation_type": "numeric",
+                            "formula_field": "Field",
+                            "mark_decimal": "period"
+                        },
+                        "key": "field_77",
+                        "name": "customer address",
+                        "object_key": "object_4",
+                        "required": false,
+                        "rules": null,
+                        "type": "concatenation",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    }
+                ],
+                "identifier": "field_75",
+                "inflections": {
+                    "plural": "orders",
+                    "singular": "order"
+                },
+                "key": "object_4",
+                "name": "orders",
+                "sort": {
+                    "field": "field_75",
+                    "order": "asc"
+                },
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            },
+            {
+                "_id": "5d7961922f13b00010ee8130",
+                "connections": {
+                    "inbound": [
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "pizzas",
+                                    "singular": "pizza"
+                                },
+                                "name": "pizzas"
+                            },
+                            "has": "many",
+                            "key": "field_66",
+                            "name": "pizzas",
+                            "object": "object_4"
+                        }
+                    ],
+                    "outbound": [
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "toppings",
+                                    "singular": "topping"
+                                },
+                                "name": "toppings"
+                            },
+                            "has": "many",
+                            "key": "field_65",
+                            "name": "toppings",
+                            "object": "object_10"
+                        }
+                    ]
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "5d79674a017b0f0010aca95e",
+                        "conditional": false,
+                        "key": "field_27",
+                        "name": "Pizza ID",
+                        "object_key": "object_2",
+                        "required": false,
+                        "rules": null,
+                        "type": "auto_increment",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea4695525efdc001525d355",
+                        "conditional": false,
+                        "default": "",
+                        "key": "field_61",
+                        "name": "Pizza Name",
+                        "object_key": "object_2",
+                        "required": false,
+                        "rules": null,
+                        "type": "short_text",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea46967b6ce4b0015000a39",
+                        "conditional": false,
+                        "default": "",
+                        "format": {
+                            "format": "$"
+                        },
+                        "key": "field_63",
+                        "name": "Price",
+                        "object_key": "object_2",
+                        "required": false,
+                        "rules": null,
+                        "type": "currency",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea469bdc5830600178ca16b",
+                        "conditional": false,
+                        "key": "field_65",
+                        "name": "toppings",
+                        "object_key": "object_2",
+                        "relationship": {
+                            "belongs_to": "many",
+                            "has": "many",
+                            "object": "object_10"
+                        },
+                        "required": false,
+                        "rules": [],
+                        "type": "connection",
+                        "unique": false,
+                        "user": false,
+                        "validation": []
+                    }
+                ],
+                "identifier": "field_61",
+                "inflections": {
+                    "plural": "pizzas",
+                    "singular": "pizza"
+                },
+                "key": "object_2",
+                "name": "pizzas",
+                "sort": {
+                    "field": "field_27",
+                    "order": "asc"
+                },
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            },
+            {
+                "_id": "5ea468ef562c17001569167d",
+                "connections": {
+                    "inbound": [
+                        {
+                            "belongs_to": "many",
+                            "field": {
+                                "inflections": {
+                                    "plural": "toppings",
+                                    "singular": "topping"
+                                },
+                                "name": "toppings"
+                            },
+                            "has": "many",
+                            "key": "field_65",
+                            "name": "toppings",
+                            "object": "object_2"
+                        }
+                    ],
+                    "outbound": []
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "5ea469037ec4ca0015cc64ee",
+                        "conditional": false,
+                        "key": "field_60",
+                        "name": "Topping ID",
+                        "object_key": "object_10",
+                        "required": false,
+                        "rules": null,
+                        "type": "auto_increment",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "5ea468ef562c17001569167e",
+                        "conditional": false,
+                        "default": "",
+                        "key": "field_59",
+                        "name": "Topping Name",
+                        "object_key": "object_10",
+                        "required": true,
+                        "rules": null,
+                        "type": "short_text",
+                        "unique": true,
+                        "user": false,
+                        "validation": null
+                    }
+                ],
+                "identifier": "field_59",
+                "inflections": {
+                    "plural": "toppings",
+                    "singular": "topping"
+                },
+                "key": "object_10",
+                "name": "toppings",
+                "sort": {
+                    "field": "field_60",
+                    "order": "asc"
+                },
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            },
+            {
+                "_id": "5d7969eaa7c1b0001240839e",
+                "connections": {
+                    "inbound": [],
+                    "outbound": []
+                },
+                "fields": [
+                    {
+                        "_id": "5d7969eaa7c1b000124083a3",
+                        "conditional": false,
+                        "format": {
+                            "format": "First Last"
+                        },
+                        "immutable": true,
+                        "key": "field_32",
+                        "name": "Name",
+                        "required": true,
+                        "rules": [],
+                        "type": "name",
+                        "unique": false,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5d7969eaa7c1b000124083a2",
+                        "conditional": false,
+                        "format": {
+                            "label": "",
+                            "text_format": "url"
+                        },
+                        "immutable": true,
+                        "key": "field_33",
+                        "name": "Email",
+                        "required": true,
+                        "rules": [],
+                        "type": "email",
+                        "unique": true,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5d7969eaa7c1b000124083a1",
+                        "conditional": false,
+                        "format": null,
+                        "immutable": true,
+                        "key": "field_34",
+                        "name": "Password",
+                        "required": true,
+                        "rules": [],
+                        "type": "password",
+                        "unique": true,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5d7969eaa7c1b000124083a0",
+                        "conditional": false,
+                        "format": {
+                            "default": "active",
+                            "options": [
+                                "active",
+                                "inactive",
+                                "pending approval"
+                            ]
+                        },
+                        "immutable": true,
+                        "key": "field_35",
+                        "name": "User Status",
+                        "required": true,
+                        "rules": [],
+                        "type": "multiple_choice",
+                        "unique": false,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5d7969eaa7c1b0001240839f",
+                        "conditional": false,
+                        "immutable": true,
+                        "key": "field_36",
+                        "name": "User Roles",
+                        "required": false,
+                        "rules": [],
+                        "type": "user_roles",
+                        "unique": false,
+                        "user": true,
+                        "validation": []
+                    }
+                ],
+                "inflections": {
+                    "plural": "Accounts",
+                    "singular": "Account"
+                },
+                "key": "object_6",
+                "name": "Accounts",
+                "profile_key": "all_users",
+                "status": "current",
+                "tasks": [],
+                "type": "UserObject",
+                "user": true
+            },
+            {
+                "_id": "5eced1da114f400015bec0c8",
+                "connections": {
+                    "inbound": [],
+                    "outbound": []
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "5eced1da114f400015bec0cd",
+                        "conditional": false,
+                        "format": {
+                            "format": "First Last"
+                        },
+                        "immutable": true,
+                        "key": "field_120",
+                        "name": "Name",
+                        "required": true,
+                        "rules": [],
+                        "type": "name",
+                        "unique": false,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5eced1da114f400015bec0cc",
+                        "conditional": false,
+                        "format": {
+                            "label": "",
+                            "text_format": "url"
+                        },
+                        "immutable": true,
+                        "key": "field_121",
+                        "name": "Email",
+                        "required": true,
+                        "rules": [],
+                        "type": "email",
+                        "unique": true,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5eced1da114f400015bec0cb",
+                        "conditional": false,
+                        "format": null,
+                        "immutable": true,
+                        "key": "field_122",
+                        "name": "Password",
+                        "required": true,
+                        "rules": [],
+                        "type": "password",
+                        "unique": true,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5eced1da114f400015bec0ca",
+                        "conditional": false,
+                        "format": {
+                            "default": "active",
+                            "options": [
+                                "active",
+                                "inactive",
+                                "pending approval"
+                            ]
+                        },
+                        "immutable": true,
+                        "key": "field_123",
+                        "name": "User Status",
+                        "required": true,
+                        "rules": [],
+                        "type": "multiple_choice",
+                        "unique": false,
+                        "user": true,
+                        "validation": []
+                    },
+                    {
+                        "_id": "5eced1da114f400015bec0c9",
+                        "conditional": false,
+                        "immutable": true,
+                        "key": "field_124",
+                        "name": "User Roles",
+                        "required": false,
+                        "rules": [],
+                        "type": "user_roles",
+                        "unique": false,
+                        "user": true,
+                        "validation": []
+                    }
+                ],
+                "inflections": {
+                    "plural": "tests",
+                    "singular": "test"
+                },
+                "key": "object_15",
+                "name": "test",
+                "profile_key": "profile_15",
+                "status": "current",
+                "tasks": [],
+                "type": "UserObject",
+                "user": true
+            },
+            {
+                "_id": "6012fbc63fcdf8001c31bbc7",
+                "connections": {
+                    "inbound": [],
+                    "outbound": []
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "6012fc3a3934a4001cd24c70",
+                        "conditional": false,
+                        "format": {
+                            "blank": "Select...",
+                            "default": "kn-blank",
+                            "options": [
+                                "Upgrade",
+                                "Modification"
+                            ],
+                            "sorting": "alphabetical",
+                            "type": "single"
+                        },
+                        "key": "field_137",
+                        "name": "Type",
+                        "object_key": "object_18",
+                        "required": false,
+                        "rules": null,
+                        "type": "multiple_choice",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "6012fc65573318001faf1c38",
+                        "conditional": false,
+                        "format": {
+                            "blank": "Select...",
+                            "default": "kn-blank",
+                            "options": [
+                                "Install LPI",
+                                "Timing Change",
+                                "Install Audible Ped Push-Button",
+                                "Install Bicycle Signal"
+                            ],
+                            "sorting": "alphabetical",
+                            "type": "single"
+                        },
+                        "key": "field_138",
+                        "name": "Action",
+                        "object_key": "object_18",
+                        "required": false,
+                        "rules": null,
+                        "type": "multiple_choice",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "6012fc71aa0633001d605567",
+                        "conditional": false,
+                        "default": "",
+                        "key": "field_139",
+                        "name": "Description",
+                        "object_key": "object_18",
+                        "required": false,
+                        "rules": null,
+                        "type": "paragraph_text",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    },
+                    {
+                        "_id": "6012fc78480920001be69c47",
+                        "conditional": false,
+                        "format": {
+                            "calendar": false,
+                            "date_format": "mm/dd/yyyy",
+                            "default_date": "01/28/2021",
+                            "default_type": "current",
+                            "time_format": "Ignore Time"
+                        },
+                        "key": "field_140",
+                        "name": "Date",
+                        "object_key": "object_18",
+                        "required": false,
+                        "rules": null,
+                        "type": "date_time",
+                        "unique": false,
+                        "user": false,
+                        "validation": null
+                    }
+                ],
+                "identifier": "field_137",
+                "inflections": {
+                    "plural": "signal_modifications_demos",
+                    "singular": "signal_modifications_demo"
+                },
+                "key": "object_18",
+                "name": "signal_modifications_demo",
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            }
+        ],
+        "payment_processors": [],
+        "s3": {
+            "bucket": "assets.knackhq.com",
+            "domain": "s3.amazonaws.com"
+        },
+        "s3_secure": {
+            "bucket": "cdn.cloud-database.co",
+            "domain": "s3.amazonaws.com"
+        },
+        "scenes": [
+            {
+                "_id": "5d79512148c4af00106d1509",
+                "authenticated": false,
+                "groups": [],
+                "icon": {
+                    "align": "left",
+                    "icon": null
+                },
+                "ignore_entry_scene_menu": true,
+                "key": "scene_1",
+                "modal": false,
+                "name": "API Views - Private",
+                "page_menu_display": false,
+                "parent": null,
+                "print": false,
+                "slug": "home",
+                "views": [
+                    {
+                        "_id": "5d7969bd092e7f00106c64ad",
+                        "allow_exporting": false,
+                        "allow_limit": false,
+                        "allow_preset_filters": false,
+                        "child_child_views": [],
+                        "child_scenes": [],
+                        "child_views": [],
+                        "columns": [
+                            {
+                                "field": {
+                                    "key": "field_55"
+                                },
+                                "header": "Order ID",
+                                "object": {
+                                    "key": "object_4"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            }
+                        ],
+                        "description": "",
+                        "display_pagination_below": true,
+                        "filter_fields": "view",
+                        "filter_type": "fields",
+                        "hide_empty": false,
+                        "inputs": [],
+                        "key": "view_1",
+                        "keyword_search": true,
+                        "label": "Table",
+                        "links": [],
+                        "menu_filters": [
+                            {
+                                "field": "field_55",
+                                "operator": "is",
+                                "text": "",
+                                "value": ""
+                            }
+                        ],
+                        "name": "thing - many to many w/ parent",
+                        "no_data_text": "No Data",
+                        "options": {
+                            "cell_editor": false
+                        },
+                        "preset_filters": [
+                            {
+                                "field": "field_55",
+                                "operator": "is",
+                                "value": ""
+                            }
+                        ],
+                        "rows_per_page": "25",
+                        "source": {
+                            "criteria": {
+                                "groups": [],
+                                "match": "any",
+                                "rules": []
+                            },
+                            "fields": [
+                                "field_4"
+                            ],
+                            "limit": "",
+                            "object": "object_4",
+                            "page": 1,
+                            "sort": [
+                                {
+                                    "field": "field_55",
+                                    "order": "asc"
+                                }
+                            ],
+                            "type": "database"
+                        },
+                        "title": "thing - many to many w/ parent",
+                        "totals": [],
+                        "type": "table"
+                    },
+                    {
+                        "_id": "5d796a43e9dd8600120314fb",
+                        "allow_exporting": false,
+                        "allow_limit": false,
+                        "allow_preset_filters": false,
+                        "child_child_views": [],
+                        "child_scenes": [],
+                        "child_views": [],
+                        "columns": [
+                            {
+                                "field": {
+                                    "key": "field_27"
+                                },
+                                "header": "Pizza ID",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            }
+                        ],
+                        "description": "",
+                        "display_pagination_below": true,
+                        "filter_fields": "view",
+                        "filter_type": "fields",
+                        "hide_empty": false,
+                        "inputs": [],
+                        "key": "view_5",
+                        "keyword_search": true,
+                        "label": "Table",
+                        "links": [],
+                        "menu_filters": [
+                            {
+                                "field": "field_27",
+                                "operator": "is",
+                                "text": "",
+                                "value": ""
+                            }
+                        ],
+                        "name": "parent - many per customer",
+                        "no_data_text": "No Data",
+                        "options": {
+                            "cell_editor": false
+                        },
+                        "preset_filters": [
+                            {
+                                "field": "field_27",
+                                "operator": "is",
+                                "value": ""
+                            }
+                        ],
+                        "rows_per_page": "25",
+                        "source": {
+                            "criteria": {
+                                "groups": [],
+                                "match": "any",
+                                "rules": []
+                            },
+                            "fields": [
+                                "field_27",
+                                "field_31",
+                                "field_31",
+                                "field_18"
+                            ],
+                            "limit": "",
+                            "object": "object_2",
+                            "page": 1,
+                            "sort": [
+                                {
+                                    "field": "field_27",
+                                    "order": "asc"
+                                }
+                            ]
+                        },
+                        "title": "parent - many per customer",
+                        "totals": [],
+                        "type": "table"
+                    },
+                    {
+                        "_id": "5d796a4e218c350010a6d545",
+                        "allow_exporting": false,
+                        "allow_limit": false,
+                        "allow_preset_filters": false,
+                        "child_child_views": [],
+                        "child_scenes": [],
+                        "child_views": [],
+                        "columns": [
+                            {
+                                "field": {
+                                    "key": "field_11"
+                                },
+                                "header": "Auto Increment",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_6"
+                                },
+                                "header": "Multiple Choice",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_7"
+                                },
+                                "header": "Short Text",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_8"
+                                },
+                                "header": "Rich Text",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_10"
+                                },
+                                "header": "Number",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_12"
+                                },
+                                "header": "Date/Time - No Time no default",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_13"
+                                },
+                                "header": "Date/Time - w/ Time default current",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_14"
+                                },
+                                "header": "Date/Time - No Date",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_15"
+                                },
+                                "header": "Date/Time - Range",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_16"
+                                },
+                                "header": "Timer",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_17"
+                                },
+                                "header": "File",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_18"
+                                },
+                                "header": "Image",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_19"
+                                },
+                                "header": "Name",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_20"
+                                },
+                                "header": "Email",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_21"
+                                },
+                                "header": "Address USA",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_22"
+                                },
+                                "header": "Phone",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_23"
+                                },
+                                "header": "Signature",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_24"
+                                },
+                                "header": "Link",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_25"
+                                },
+                                "header": "Rating",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_9"
+                                },
+                                "header": "Text Formula simple",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_29"
+                                },
+                                "header": "Yes/No",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_30"
+                                },
+                                "header": "Currency",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_38"
+                                },
+                                "header": "PYTEST_RECORD",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            }
+                        ],
+                        "description": "this view is filtered for only records that are not PYTEST_RECORD = True. we destroy PYTEST records during tests, but if the test fails a record will remain here. we don't want to test those records, because our test suite evaluates records specifically created for testing, with all fields populated.",
+                        "display_pagination_below": true,
+                        "filter_fields": "view",
+                        "filter_type": "fields",
+                        "hide_empty": false,
+                        "inputs": [],
+                        "key": "view_6",
+                        "keyword_search": true,
+                        "label": "Table",
+                        "links": [],
+                        "menu_filters": [
+                            {
+                                "field": "field_11",
+                                "operator": "is",
+                                "text": "",
+                                "value": ""
+                            }
+                        ],
+                        "name": "all fields",
+                        "no_data_text": "No Data",
+                        "options": {
+                            "cell_editor": false
+                        },
+                        "preset_filters": [
+                            {
+                                "field": "field_11",
+                                "operator": "is",
+                                "value": ""
+                            }
+                        ],
+                        "rows_per_page": "25",
+                        "source": {
+                            "criteria": {
+                                "groups": [],
+                                "match": "any",
+                                "rules": []
+                            },
+                            "limit": "",
+                            "object": "object_3",
+                            "sort": [
+                                {
+                                    "field": "field_11",
+                                    "order": "asc"
+                                }
+                            ]
+                        },
+                        "title": "all fields",
+                        "totals": [],
+                        "type": "table"
+                    }
+                ]
+            },
+            {
+                "_id": "5d7969eaa7c1b000124083a4",
+                "allowed_profiles": [],
+                "groups": [],
+                "key": "scene_2",
+                "limit_profile_access": false,
+                "name": "Account Settings",
+                "parent": null,
+                "slug": "account-settings",
+                "type": "user",
+                "views": [
+                    {
+                        "_id": "5d7969eaa7c1b000124083a6",
+                        "action": "update",
+                        "columns": [],
+                        "description": "",
+                        "groups": [
+                            {
+                                "columns": [
+                                    {
+                                        "inputs": [
+                                            {
+                                                "field": {
+                                                    "key": "field_32"
+                                                },
+                                                "id": "field_32",
+                                                "key": "field_32",
+                                                "label": "Name",
+                                                "type": "name"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_33"
+                                                },
+                                                "id": "field_33",
+                                                "key": "field_33",
+                                                "label": "Email",
+                                                "type": "email"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "inputs": [],
+                        "key": "view_2",
+                        "links": [],
+                        "name": "Account Settings",
+                        "rules": {
+                            "submits": [
+                                {
+                                    "action": "message",
+                                    "is_default": true,
+                                    "key": "submit_1",
+                                    "message": "Your account settings have been updated.",
+                                    "reload_show": true
+                                }
+                            ]
+                        },
+                        "source": {
+                            "authenticated_user": true,
+                            "object": "object_6"
+                        },
+                        "title": "Account Settings",
+                        "type": "form"
+                    },
+                    {
+                        "_id": "5d7969eaa7c1b000124083a5",
+                        "action": "update",
+                        "columns": [],
+                        "description": "",
+                        "groups": [
+                            {
+                                "columns": [
+                                    {
+                                        "inputs": [
+                                            {
+                                                "action_authenticate": true,
+                                                "action_update": true,
+                                                "field": {
+                                                    "key": "field_34"
+                                                },
+                                                "id": "field_34",
+                                                "key": "field_34",
+                                                "label": "Password",
+                                                "label_authenticate": "Current Password",
+                                                "label_update": "New Password",
+                                                "type": "password"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "inputs": [],
+                        "key": "view_3",
+                        "links": [],
+                        "name": "Change Password",
+                        "rules": {
+                            "submits": [
+                                {
+                                    "action": "message",
+                                    "is_default": true,
+                                    "key": "submit_1",
+                                    "message": "Password successfully changed.",
+                                    "reload_show": true
+                                }
+                            ]
+                        },
+                        "source": {
+                            "authenticated_user": true,
+                            "object": "object_6"
+                        },
+                        "title": "Change Password",
+                        "type": "form"
+                    }
+                ]
+            },
+            {
+                "_id": "5eb604cf916cda00157b36b3",
+                "authenticated": true,
+                "authentication_profiles": null,
+                "groups": [],
+                "key": "scene_4",
+                "name": "Accounts",
+                "parent": null,
+                "slug": "accounts",
+                "type": "user",
+                "views": [
+                    {
+                        "_id": "5eb604cf916cda00157b36b5",
+                        "action": "update",
+                        "alert": "none",
+                        "columns": [],
+                        "description": "",
+                        "groups": [
+                            {
+                                "columns": [
+                                    {
+                                        "inputs": []
+                                    }
+                                ]
+                            }
+                        ],
+                        "inputs": [],
+                        "key": "view_7",
+                        "label": "Form",
+                        "links": [],
+                        "name": "Edit Account",
+                        "rules": {
+                            "submits": [
+                                {
+                                    "action": "message",
+                                    "is_default": true,
+                                    "key": "submit_1",
+                                    "message": "Form successfully submitted.",
+                                    "reload_show": true
+                                }
+                            ]
+                        },
+                        "source": {
+                            "authenticated_user": true,
+                            "object": "object_6",
+                            "type": "database"
+                        },
+                        "title": "Edit Account",
+                        "type": "form"
+                    },
+                    {
+                        "_id": "5eb604cf916cda00157b36b4",
+                        "columns": [
+                            {
+                                "groups": [
+                                    {
+                                        "columns": [
+                                            [
+                                                {
+                                                    "key": "field_32",
+                                                    "name": "Name"
+                                                },
+                                                {
+                                                    "key": "field_33",
+                                                    "name": "Email"
+                                                }
+                                            ]
+                                        ],
+                                        "label_format": "left"
+                                    }
+                                ],
+                                "width": 100
+                            }
+                        ],
+                        "description": "",
+                        "inputs": [],
+                        "key": "view_8",
+                        "label": "Details",
+                        "layout": "full",
+                        "links": [],
+                        "name": "Account Details",
+                        "source": {
+                            "authenticated_user": true,
+                            "object": "object_6",
+                            "type": "database"
+                        },
+                        "title": "Account Details",
+                        "type": "details"
+                    }
+                ]
+            },
+            {
+                "_id": "5ed6a5b60f8eed00152540d4",
+                "authenticated": true,
+                "authentication_profiles": null,
+                "groups": [],
+                "icon": {
+                    "align": "left",
+                    "icon": null
+                },
+                "ignore_entry_scene_menu": true,
+                "key": "scene_6",
+                "modal": false,
+                "name": "all_fields_tests public",
+                "page_menu_display": false,
+                "parent": null,
+                "print": false,
+                "slug": "all-fields-tests-public",
+                "views": [
+                    {
+                        "_id": "6010bc35c17443001be11e4b",
+                        "allow_exporting": false,
+                        "allow_limit": false,
+                        "allow_preset_filters": false,
+                        "columns": [
+                            {
+                                "field": {
+                                    "key": "field_11"
+                                },
+                                "header": "Auto Increment",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_125"
+                                },
+                                "header": "id",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_6"
+                                },
+                                "header": "Multiple Choice",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_7"
+                                },
+                                "header": "Short Text",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_8"
+                                },
+                                "header": "Rich Text",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_10"
+                                },
+                                "header": "Number",
+                                "type": "field",
+                                "width": {
+                                    "type": "default"
+                                }
+                            },
+                            {
+                                "field": {
+                                    "key": "field_12"
+                                },
+                                "header": "Date/Time - No Time no default",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_13"
+                                },
+                                "header": "Date/Time - w/ Time default current",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_14"
+                                },
+                                "header": "Date/Time - No Date",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_16"
+                                },
+                                "header": "Timer",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_15"
+                                },
+                                "header": "Date/Time - Range",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_17"
+                                },
+                                "header": "File",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_18"
+                                },
+                                "header": "Image",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_19"
+                                },
+                                "header": "Name",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_20"
+                                },
+                                "header": "Email",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_21"
+                                },
+                                "header": "Address USA",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_22"
+                                },
+                                "header": "Phone",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_23"
+                                },
+                                "header": "Signature",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_24"
+                                },
+                                "header": "Link",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_25"
+                                },
+                                "header": "Rating",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_9"
+                                },
+                                "header": "Text Formula simple",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_30"
+                                },
+                                "header": "Currency",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_37"
+                                },
+                                "header": "PYTEST_MODIFIED_DATE",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_38"
+                                },
+                                "header": "PYTEST_RECORD",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_50"
+                                },
+                                "header": "Image from Web",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_44"
+                                },
+                                "header": "Address Lat Lon",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_76"
+                                },
+                                "header": "text formula complex",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_126"
+                                },
+                                "header": "address_international",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_127"
+                                },
+                                "header": "address_international_with_country",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_128"
+                                },
+                                "header": "customer",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_128"
+                                },
+                                "header": "customer",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_129"
+                                },
+                                "header": "Equation",
+                                "object": {
+                                    "key": "object_3"
+                                },
+                                "sortable": true,
+                                "type": "field"
+                            }
+                        ],
+                        "description": "",
+                        "display_pagination_below": true,
+                        "filter_fields": "view",
+                        "filter_type": "fields",
+                        "hide_empty": false,
+                        "inputs": [],
+                        "key": "view_18",
+                        "keyword_search": true,
+                        "label": "Table",
+                        "links": [],
+                        "menu_filters": [
+                            {
+                                "field": "field_11",
+                                "operator": "is",
+                                "text": "",
+                                "value": ""
+                            }
+                        ],
+                        "name": "all_fields_tests",
+                        "no_data_text": "No Data",
+                        "options": {
+                            "cell_editor": false
+                        },
+                        "preset_filters": [
+                            {
+                                "field": "field_11",
+                                "operator": "is",
+                                "value": ""
+                            }
+                        ],
+                        "rows_per_page": "25",
+                        "source": {
+                            "criteria": {
+                                "groups": [],
+                                "match": "any",
+                                "rules": []
+                            },
+                            "limit": "",
+                            "object": "object_3",
+                            "sort": [
+                                {
+                                    "field": "field_11",
+                                    "order": "asc"
+                                }
+                            ]
+                        },
+                        "title": "all_fields_tests",
+                        "totals": [],
+                        "type": "table"
+                    }
+                ]
+            },
+            {
+                "_id": "5ee4c34980042500156ea5ae",
+                "authenticated": false,
+                "groups": [],
+                "icon": {
+                    "align": "left",
+                    "icon": null
+                },
+                "ignore_entry_scene_menu": true,
+                "key": "scene_7",
+                "modal": false,
+                "name": "all_fields_test",
+                "page_menu_display": false,
+                "print": false,
+                "slug": "all-fields-test",
+                "views": [
+                    {
+                        "_id": "5ee4c34980042500156ea5af",
+                        "action": "insert",
+                        "alert": "none",
+                        "child_child_views": [],
+                        "child_scenes": [],
+                        "child_views": [],
+                        "columns": [],
+                        "description": "",
+                        "ecommerce": false,
+                        "groups": [
+                            {
+                                "columns": [
+                                    {
+                                        "inputs": [
+                                            {
+                                                "field": {
+                                                    "key": "field_125"
+                                                },
+                                                "id": "field_125",
+                                                "label": "id",
+                                                "type": "short_text"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_6"
+                                                },
+                                                "id": "field_6",
+                                                "label": "Multiple Choice",
+                                                "type": "multiple_choice"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_7"
+                                                },
+                                                "id": "field_7",
+                                                "label": "Short Text",
+                                                "type": "short_text"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_8"
+                                                },
+                                                "id": "field_8",
+                                                "label": "Rich Text",
+                                                "type": "rich_text"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_10"
+                                                },
+                                                "id": "field_10",
+                                                "label": "Number",
+                                                "type": "number"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_12"
+                                                },
+                                                "id": "field_12",
+                                                "label": "Date/Time - No Time no default",
+                                                "type": "date_time"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_13"
+                                                },
+                                                "id": "field_13",
+                                                "label": "Date/Time - w/ Time default current",
+                                                "type": "date_time"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_14"
+                                                },
+                                                "id": "field_14",
+                                                "label": "Date/Time - No Date",
+                                                "type": "date_time"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_15"
+                                                },
+                                                "id": "field_15",
+                                                "label": "Date/Time - Range",
+                                                "type": "date_time"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_16"
+                                                },
+                                                "id": "field_16",
+                                                "label": "Timer",
+                                                "type": "timer"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_17"
+                                                },
+                                                "id": "field_17",
+                                                "label": "File",
+                                                "type": "file"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_18"
+                                                },
+                                                "id": "field_18",
+                                                "label": "Image",
+                                                "type": "image"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_19"
+                                                },
+                                                "id": "field_19",
+                                                "label": "Name",
+                                                "type": "name"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_20"
+                                                },
+                                                "id": "field_20",
+                                                "label": "Email",
+                                                "type": "email"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_21"
+                                                },
+                                                "id": "field_21",
+                                                "label": "Address USA",
+                                                "type": "address"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_22"
+                                                },
+                                                "id": "field_22",
+                                                "label": "Phone",
+                                                "type": "phone"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_23"
+                                                },
+                                                "id": "field_23",
+                                                "label": "Signature",
+                                                "type": "signature"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_24"
+                                                },
+                                                "id": "field_24",
+                                                "label": "Link",
+                                                "type": "link"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_25"
+                                                },
+                                                "id": "field_25",
+                                                "label": "Rating",
+                                                "type": "rating"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_29"
+                                                },
+                                                "id": "field_29",
+                                                "label": "Yes/No",
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_30"
+                                                },
+                                                "id": "field_30",
+                                                "label": "Currency",
+                                                "type": "currency"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_37"
+                                                },
+                                                "id": "field_37",
+                                                "label": "PYTEST_MODIFIED_DATE",
+                                                "type": "date_time"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_38"
+                                                },
+                                                "id": "field_38",
+                                                "label": "PYTEST_RECORD",
+                                                "type": "boolean"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_44"
+                                                },
+                                                "id": "field_44",
+                                                "label": "Address Lat Lon",
+                                                "type": "address"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_50"
+                                                },
+                                                "id": "field_50",
+                                                "label": "Image from Web",
+                                                "type": "image"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "inputs": [],
+                        "key": "view_12",
+                        "label": "Form",
+                        "links": [],
+                        "name": "all_fields_test",
+                        "reload_form_text": "Reload form",
+                        "rules": {
+                            "submits": [
+                                {
+                                    "action": "message",
+                                    "is_default": true,
+                                    "key": "submit_1",
+                                    "message": "Form successfully submitted.",
+                                    "reload_show": true
+                                }
+                            ]
+                        },
+                        "source": {
+                            "object": "object_3",
+                            "type": "database"
+                        },
+                        "submit_button_text": "Submit",
+                        "title": "Add all_fields_test",
+                        "type": "form"
+                    }
+                ]
+            },
+            {
+                "_id": "6012fcea573318001faf1cb8",
+                "authenticated": false,
+                "groups": [],
+                "key": "scene_9",
+                "name": "signal_modifications_demos",
+                "slug": "signal-modifications-demos",
+                "views": [
+                    {
+                        "_id": "6012fcea573318001faf1cb9",
+                        "allow_exporting": false,
+                        "allow_preset_filters": false,
+                        "columns": [
+                            {
+                                "field": {
+                                    "key": "field_137"
+                                },
+                                "header": "Type",
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_138"
+                                },
+                                "header": "Action",
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_139"
+                                },
+                                "header": "Description",
+                                "type": "field"
+                            },
+                            {
+                                "field": {
+                                    "key": "field_140"
+                                },
+                                "header": "Date",
+                                "type": "field"
+                            }
+                        ],
+                        "description": "",
+                        "display_pagination_below": true,
+                        "filter_type": "fields",
+                        "inputs": [],
+                        "key": "view_19",
+                        "keyword_search": true,
+                        "label": "Table",
+                        "links": [],
+                        "name": "signal_modifications_demos",
+                        "rows_per_page": "25",
+                        "source": {
+                            "criteria": [],
+                            "limit": null,
+                            "object": "object_18",
+                            "sort": [
+                                {
+                                    "field": "field_137",
+                                    "order": "asc"
+                                }
+                            ],
+                            "type": "database"
+                        },
+                        "title": "signal_modifications_demos",
+                        "type": "table"
+                    },
+                    {
+                        "_id": "6012fd029fa16c001b5f5d0c",
+                        "action": "insert",
+                        "alert": "none",
+                        "columns": [],
+                        "description": "",
+                        "groups": [
+                            {
+                                "columns": [
+                                    {
+                                        "inputs": [
+                                            {
+                                                "field": {
+                                                    "key": "field_137"
+                                                },
+                                                "label": "Type",
+                                                "type": "combo_box"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_138"
+                                                },
+                                                "label": "Action",
+                                                "type": "combo_box"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_139"
+                                                },
+                                                "label": "Description",
+                                                "type": "text_area"
+                                            },
+                                            {
+                                                "field": {
+                                                    "key": "field_140"
+                                                },
+                                                "label": "Date",
+                                                "type": "text_field"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "inputs": [],
+                        "key": "view_20",
+                        "label": "Form",
+                        "links": [],
+                        "name": "Add signal_modifications_demo",
+                        "rules": {
+                            "submits": [
+                                {
+                                    "action": "message",
+                                    "is_default": true,
+                                    "key": "submit_1",
+                                    "message": "Form successfully submitted.",
+                                    "reload_show": true
+                                }
+                            ]
+                        },
+                        "source": {
+                            "object": "object_18"
+                        },
+                        "title": "Add signal_modifications_demo",
+                        "type": "form"
+                    }
+                ]
+            }
+        ],
+        "session": {},
+        "settings": {
+            "cluster": "us-east",
+            "css": "%2F*%20Hide%20form%20inputs%20but%20still%20submit%20values%20*%2F%0A%23kn-input-field_131%2C%20%23kn-input-field_132%20%7B%0A%20%20%20%20visibility%3Ahidden%3B%0A%09height%3A%200px%3B%0A%7D",
+            "from_email": "transportation.data@austintexas.gov",
+            "geo": false,
+            "geoprovider_migrated": true,
+            "geoprovider_migrated_via_app_load": true,
+            "hasNewObjectTypes": true,
+            "hooks": true,
+            "https_redirect": true,
+            "inactivity_message": "Still there? If so, click \"Remain Logged In\" below.",
+            "inactivity_timeout": 1,
+            "inactivity_timeout_enabled": false,
+            "javascript": "%24(document).on(%22knack-view-render.view_17%22%2C%20function%20(event%2C%20view%2C%20data)%20%7B%0A%20%20var%20defaultValue%20%3D%20%24(%22%23field_134%22).val()%3B%0A%20%20%0A%20%20%2F%2F%20Set%20values%20of%20CSS-hidden%20elements%0A%20%20%24(%22%23field_131%22).attr('value'%2C%20defaultValue)%3B%0A%20%20%24(%22%23field_132%22).attr('value'%2C%20defaultValue)%3B%20%0A%7D)%3B",
+            "language": "",
+            "lockout_options": {
+                "lockout_attempt_window": "1",
+                "lockout_enforced": true,
+                "lockout_failed_attempts": "3",
+                "lockout_length": "60",
+                "lockout_message": "Account locked due to too many failed login attempts. Please wait before trying again.",
+                "lockout_password_reset": false,
+                "lockout_user_email": false,
+                "lockout_user_email_message": "For your security, we're alerting you to the fact that your account at https://atd.knack.com/knackpy-development-app-production has been locked out due to too many failed login attempts. If this was not you, please alert your admin right away: transportation.data@austintexas.gov",
+                "password_reset_message": "You may also <a href=\"#home/knack-password/forgot\">reset your password</a> to unlock your account."
+            },
+            "mapsAndGeocoderProvider": "here",
+            "mongo": "us-data-18",
+            "new_count": true,
+            "password_options": {
+                "password_minimum_character": true,
+                "password_require_expiration": false,
+                "password_require_expiration_message": "Your password has expired, please reset it below.",
+                "password_require_lowercase": true,
+                "password_require_no_common": true,
+                "password_require_no_reuse": false,
+                "password_require_no_reuse_message": "You cannot use a password you've previously used. Please try a different one.",
+                "password_require_number": true,
+                "password_require_uppercase": true,
+                "password_special_character": true
+            },
+            "powered_by_link": false,
+            "registration_migration_status": "completed",
+            "scriptProtectionEnabled": true,
+            "should_purge_record_history": false,
+            "solr": "aws_us_east_109_01",
+            "technical_contact": "transportation.data@austintexas.gov",
+            "timezone": "Central Time (US & Canada)",
+            "timezone_dst": "3600",
+            "timezone_offset": "-21600",
+            "use_multiple_api_subdomains": false,
+            "v3_beta": false
+        },
+        "slug": "knackpy-development-app-production",
+        "status": "active",
+        "subdomain": "us-api",
+        "users": {
+            "enabled": true,
+            "registration": "closed",
+            "scope": "scene",
+            "templates": {}
+        }
+    }
+}
