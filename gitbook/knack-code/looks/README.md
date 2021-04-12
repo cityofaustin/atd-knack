@@ -8,7 +8,12 @@ description: >-
 
 ### Table of Contents
 
-* Convert Values to UPPERCASE: [https://app.gitbook.com/@atd-dts/s/atd-knack-operations/knack/looks/convert-values-to-uppercase](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/knack/looks/convert-values-to-uppercase)
+* [Modal Close Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modal-close-styling)
+* [Relabel Attachment Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/relabel-attachment-links)
+* [Convert Values to UPPERCASE](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/convert-values-to-uppercase)
+* [Highlight Details View Label Body & Table Value](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/highlight-label-body)
+* [HighCharts Report Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/global-report-styling)
+* [Font Awesome Icons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/fa-icons)
 
 
 
@@ -16,11 +21,13 @@ description: >-
 
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Convert Values to UPPERCASE | Yes |  |  |  |  |  |  |  |  |  |  |  |
-| Simple Attachment Name |  |  |  | Yes | Yes |  |  |  |  |  |  |  |
-| Details&gt;Field Background highlight  |  |  |  | Yes |  |  |  |  |  | Yes |  |  |
-| "Back to Top" icon/enlarge text |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| "Back to View Work Order Details" icon/enlarge text |  |  |  | Yes |  |  |  |  |  |  |  |  |
+| Modal Close Styling | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Relabel Attachment Links | Yes |  |  | Yes | Yes |  |  |  |  |  |  |  |
+| Convert Values to UPPERCASE | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
+| Highlight Label Body | No |  |  | Yes |  |  |  |  |  | Yes |  |  |
+| Highlight Table Value | No |  |  | Yes |  |  |  |  |  | Yes |  |  |
+| HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
+| Font Awesome Icons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 
 
 

@@ -15,6 +15,7 @@ description: >-
 * [Disable Breadcrumb Navigation Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/disable-nav-links)
 * [Return to Previous Page Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/return-button)
 * [Conditionally Hide/Show Form Fields](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/form-conditionals)
+* Return to Top Button
 
 
 
@@ -22,13 +23,14 @@ description: >-
 
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | ---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Big Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Big Buttons | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Redirect Blank Menu Pages | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Modal BG | Yes |  |  |  |  |  |  |  |  |  |  |  |
-| Disable Nav Links | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Disable Nav Links | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Return to Prev Page Button | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Conditionally Hide/Show Form Fields | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Return to Top Button | No | No |  | Yes |  |  |  |  |  |  |  |  |
 
 
 
