@@ -16,18 +16,21 @@ Sometimes Knack will fail or be slow to update a record table, especially if you
 /***************************/
 /*** Refresh View Button ***/
 /***************************/
-$(document).on("knack-view-render.view_2698", function (event, page) {
+$(document).on("knack-view-render.view_321", function (event, page) {
   var button = $(
-    "<span style='width: 2em'></span><button id='refresh-view_2698' style='border-radius: .35em' class='kn-button is-primary'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Refresh</button>"
+    "<span style='width: 2em'></span>" +
+    "<button id='refresh-view_321' style='border-radius: .35em' class='kn-button is-primary'>" +
+    "<i class='fa fa-refresh'></i>" +
+    "<span style='width: .5em'></span>Refresh Table</button>"
   );
 
-  button.insertAfter( //places button next to keyword search option
-    $("#view_2698").find("form.table-keyword-search").find("a")[0]
+  button.insertAfter(//places button next to keyword search option
+    $("#view_321").find("form.table-keyword-search").find("a")[0]
   );
 
-  $("#refresh-view_2698").click(function (e) {
+  $("#refresh-view_321").click(function (e) {
     e.preventdefault();
-    Knack.views["view_2698"].model.fetch();
+    Knack.views["view_321"].model.fetch();
   });
 });
 ```
