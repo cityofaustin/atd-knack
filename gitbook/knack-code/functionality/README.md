@@ -15,7 +15,7 @@ description: >-
 * [Disable Breadcrumb Navigation Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/disable-nav-links)
 * [Return to Previous Page Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/return-button)
 * [Conditionally Hide/Show Form Fields](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/form-conditionals)
-* Return to Top Button
+* [Return to Top Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/return-to-top-button)
 
 
 
