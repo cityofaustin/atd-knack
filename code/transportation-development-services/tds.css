@@ -1224,7 +1224,7 @@ a.form-link:hover {
   border: none;
 }
 
-******************************************************************/
+/******************************************************************/
 /*** Styles the Customer Edit Scope Submission Attachment page ***/
 /*****************************************************************/
 #view_611 > form > ul:nth-child(n) > li {
@@ -1293,4 +1293,24 @@ a.form-link:hover {
 #view_712 .kn-detail-label {
   background-color: transparent;
   min-width: 0% !important;
+}
+
+/******************************************/
+/*** Styles the TIA Request Dropdown.   ***/
+/******************************************/
+
+
+#tia-menu-list {
+  border-bottom: 0 !important
+}
+
+#tia-menu-list li {
+  margin-right: .2em;
+}
+
+#tia-menu-list .kn-button a {
+  color: #163f6e;
+  font-size: 1.1em;
+  border-bottom: 0;
+  padding-top:3px;
 }

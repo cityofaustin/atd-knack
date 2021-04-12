@@ -498,7 +498,7 @@ function getLinkUrl(recordId, route) {
 function dropdownMenuItem(recordId, route, iconName, linkName) {
   return (
     `<li>\
-      <a href=${getLinkUrl(recordId, route)}>\
+      <a href="#tia-requests/tia-request-details/${recordId}/${route}/${recordId}>\
         <span class="icon is-small"> \
           <i class="fa ${iconName}" /> \
         </span>\
@@ -511,8 +511,7 @@ function dropdownMenuItem(recordId, route, iconName, linkName) {
 $(document).on('knack-view-render.view_163', function(event, view, record) {
   // var $test_chia = $("#view_163").find(".control");
   // $test_chia.hide();
-  var recordId = record.id;
-  console.log(record)
+  var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -522,10 +521,10 @@ $(document).on('knack-view-render.view_163', function(event, view, record) {
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "tia-case-management", "fa-archive", "Scope & Submissions")}\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "memo-builder", "fa-medium", "Memo Builder")}\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "tia-case-log", "fa-briefcase", "Case Log")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
         </ul>\
       </li>\
       <li class="tia-dropdown-menu kn-dropdown-menu">\
@@ -534,14 +533,14 @@ $(document).on('knack-view-render.view_163', function(event, view, record) {
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "edit-tia-request-reviewer", "fa-edit", "Case Details")}\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "change-tia-request-status-reviewer", "fa-retweet", "Change Request Status")}\
-          ${dropdownMenuItem("60677899da9d57067ec52e34", "connected-cases", "fa-link", "Connect Cases")}\
+          ${dropdownMenuItem(recordId, "edit-tia-request-reviewer", "fa-edit", "Case Details")}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
+          ${dropdownMenuItem(recordId, "change-tia-request-status-reviewer", "fa-retweet", "Change Request Status")}\
+          ${dropdownMenuItem(recordId, "connected-cases", "fa-link", "Connect Cases")}\
         </ul>\
       </li>\
-      ${dropdownMenuItem("60677899da9d57067ec52e34", "edit-tia-fee-status-reviewer", "fa-dollar", "Fees")}\
-      ${dropdownMenuItem("60677899da9d57067ec52e34", "add-tia-communication", "fa-plus-circle", "Communication")}\
+      ${dropdownMenuItem(recordId, "edit-tia-fee-status-reviewer", "fa-dollar", "Fees")}\
+      ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication")}\
     </ul>\
   </div>`).appendTo("#view_163")
 })
