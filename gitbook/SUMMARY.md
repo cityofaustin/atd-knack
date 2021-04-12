@@ -33,6 +33,7 @@
   * [Disable Breadcrumb Navigation Links](knack-code/functionality/disable-nav-links.md)
   * [Return to Previous Page Button](knack-code/functionality/return-button.md)
   * [Conditionally Hide/Show Form Fields](knack-code/functionality/form-conditionals.md)
+  * [Return to Top Button](knack-code/functionality/return-to-top-button.md)
 * [CODE: Knack Look & Feel](knack-code/looks/README.md)
   * [Modal Close Styling](knack-code/looks/modal-close-styling.md)
   * [Relabel Attachment Links](knack-code/looks/relabel-attachment-links.md)
