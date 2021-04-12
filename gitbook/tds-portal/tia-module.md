@@ -1,7 +1,5 @@
 ---
-description: >-
-  Traffic Impact Analysis module of the Transportation Development Services
-  (TDS) Tracker
+description: Traffic Impact Analysis Reviews
 ---
 
 # TIA Module
@@ -16,29 +14,6 @@ description: >-
 
 * _TIA Module&gt;workflow_ Google Drive: [`https://drive.google.com/drive/folders/13GdQBj5YNH0aNjw8GNNKOXXad_KZJBIn?usp=sharing`](https://drive.google.com/drive/folders/13GdQBj5YNH0aNjw8GNNKOXXad_KZJBIn?usp=sharing)\`\`
 * Workflow: [`https://drive.google.com/file/d/1L7bUt_935nsjEAG0fpQ41yuYjxUxjzeM/view`](https://drive.google.com/file/d/1L7bUt_935nsjEAG0fpQ41yuYjxUxjzeM/view)\`\`
-
-## Current State 7/23/20
-
-### Internal Usability Testing
-
-Lots of functionality has been built in the application and has been shown to the main stakeholders we are working with, but it hasn't been tested with other users. Tracy is supposed to set-up Usability Testing to confirm the features build out are accepted by the stakeholders. 
-
-If you go into ZenHub and filter `TIA Module` then you will see all the feature issues in the `Review/QA`pipeline. 47 issues are waiting for user acceptance. 
-
-I anticipate that Tracy will bring one of the App builders into this project, but I'm not certain.
-
-### In Progress tasks to keep an eye on
-
-* The last builder huddle meeting we had around TIA Mitigation Locations/mapping we talked about building out an ArcGIS Online \(AGOL\) web map/app. 
-  * Using the Vision Zero \(VZ\) polygon layers 
-* I got the polygon layer from Mateo
-* I have the polygon layer to Jaime in a geojsn format
-  * She's trying to convert it to ESRI geojson format, last I heard it wasn't converting
-* Might need to check in on this to see how this is going 
-
-### Backlog Features
-
-There are some backlog features in the `Backlog` pipeline that have to do with the Migitation mapping, External Group Commenting and a few other things. Not sure if you'll have to work on any of it or we'll wait until Phase 2 to build out these features.
 
 ## Requester
 

@@ -1,10 +1,3 @@
----
-description: >-
-  This application allows TDS Project Manager staff to track the Development
-  Reviews they are assigned in AMANDA and compile the comments from the various
-  ATD Divisions that need to provide input.
----
-
 # Transportation Development Services Division
 
 ## WORKFLOW
