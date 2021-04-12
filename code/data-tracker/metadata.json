@@ -1668,7 +1668,7 @@
                         "conditional": false,
                         "default": "",
                         "key": "field_139",
-                        "name": "Description",
+                        "name": "New Description Field Name",
                         "object_key": "object_18",
                         "required": false,
                         "rules": null,
@@ -3198,7 +3198,7 @@
                                 "field": {
                                     "key": "field_139"
                                 },
-                                "header": "Description",
+                                "header": "New Description Field Name",
                                 "type": "field"
                             },
                             {
@@ -3263,7 +3263,7 @@
                                                 "field": {
                                                     "key": "field_139"
                                                 },
-                                                "label": "Description",
+                                                "label": "New Description Field Name",
                                                 "type": "text_area"
                                             },
                                             {
