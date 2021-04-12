@@ -17,6 +17,9 @@ description: >-
 ### The JS
 
 ```text
+/***************************/
+/*** Refresh View Button ***/
+/***************************/
 $(document).on("knack-view-render.view_2698", function (event, page) {
   var button = $(
     "<span style='width: 2em'></span>
