@@ -8,15 +8,27 @@ description: >-
 
 ### Table of Contents
 
-* Disable Trigger Buttons: [https://app.gitbook.com/@atd-dts/s/atd-knack-operations/knack/functionality/disable-trigger-buttons](https://app.gitbook.com/@atd-dts/s/atd-knack-operations/knack/functionality/disable-trigger-buttons)
+* [Big Buttons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/big-buttons)
+* [Redirect Blank Menu Pages](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/redirect-blank-pages)
+* [Disable Trigger Buttons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/disable-trigger-buttons)
+* [Disable Modal Background Click/Touch](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/disable-modal-bg)
+* [Disable Breadcrumb Navigation Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/disable-nav-links)
+* [Return to Previous Page Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/return-button)
+* [Conditionally Hide/Show Form Fields](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/form-conditionals)
 
 
 
 ### Active in these Applications
 
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| ---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Big Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Redirect Blank Menu Pages | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Disable Modal BG | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Disable Nav Links | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Return to Prev Page Button | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Conditionally Hide/Show Form Fields | Yes |  |  |  |  |  |  |  |  |  |  |  |
 
 
 
