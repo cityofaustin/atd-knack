@@ -13,6 +13,9 @@ description: How to create a Return to Top link button at the bottom of a page
 ### The JS
 
 ```text
+/********************************************/
+/*** Add a Return to Top Button to a Page ***/
+/********************************************/
 $(document).on("knack-scene-render.scene_1028", function() {
   $backToTop = $(".kn-back-link").append(
     "<span class='back-to-top-link'> Back to top</span>"
