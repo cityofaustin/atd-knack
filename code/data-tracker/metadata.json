@@ -135,6 +135,7 @@
             "object_15": 1,
             "object_18": 3,
             "object_2": 3,
+            "object_21": 0,
             "object_3": 25,
             "object_4": 6,
             "object_6": 2,
@@ -1668,7 +1669,7 @@
                         "conditional": false,
                         "default": "",
                         "key": "field_139",
-                        "name": "New Description Field Name",
+                        "name": "Description",
                         "object_key": "object_18",
                         "required": false,
                         "rules": null,
@@ -1705,6 +1706,39 @@
                 },
                 "key": "object_18",
                 "name": "signal_modifications_demo",
+                "status": "current",
+                "tasks": [],
+                "type": "StandardObject",
+                "user": false
+            },
+            {
+                "_id": "6074ceb9b4266b001be06fcd",
+                "connections": {
+                    "inbound": [],
+                    "outbound": []
+                },
+                "conns": [],
+                "fields": [
+                    {
+                        "_id": "6074ceb9b4266b001be06fcf",
+                        "conditional": false,
+                        "key": "field_145",
+                        "name": "diff_checker_test Name",
+                        "required": true,
+                        "rules": [],
+                        "type": "short_text",
+                        "unique": false,
+                        "user": false,
+                        "validation": []
+                    }
+                ],
+                "identifier": "field_145",
+                "inflections": {
+                    "plural": "diff_checker_tests",
+                    "singular": "diff_checker_test"
+                },
+                "key": "object_21",
+                "name": "diff_checker_test",
                 "status": "current",
                 "tasks": [],
                 "type": "StandardObject",
@@ -3198,7 +3232,7 @@
                                 "field": {
                                     "key": "field_139"
                                 },
-                                "header": "New Description Field Name",
+                                "header": "Description",
                                 "type": "field"
                             },
                             {
@@ -3263,7 +3297,7 @@
                                                 "field": {
                                                     "key": "field_139"
                                                 },
-                                                "label": "New Description Field Name",
+                                                "label": "Description",
                                                 "type": "text_area"
                                             },
                                             {
