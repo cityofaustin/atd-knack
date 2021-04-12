@@ -24,7 +24,7 @@ description: >-
 
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | ---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Big Buttons | Yes | Yes |  |  | Yes |  |  | Yes | Yes | Yes |  |  |
+| Big Buttons | Yes | Yes | Yes | Yes | Yes |  | Yes | Yes | Yes | Yes | Yes | Yes |
 | Redirect Blank Menu Pages | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Modal BG | Yes |  |  |  |  |  |  |  |  |  |  |  |

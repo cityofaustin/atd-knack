@@ -24,8 +24,8 @@ description: >-
 | Modal Close Styling | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Relabel Attachment Links | Yes |  |  | Yes | Yes |  |  |  |  |  |  |  |
 | Convert Values to UPPERCASE | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Highlight Label Body | No |  |  | Yes |  |  |  |  | Yes | Yes |  |  |
-| Highlight Table Value | No |  |  | Yes |  |  |  |  | Yes | Yes |  |  |
+| Highlight Label Body | No |  | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
+| Highlight Table Value | No |  | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
 | HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Font Awesome Icons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 
