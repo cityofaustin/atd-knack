@@ -16,6 +16,7 @@ description: >-
 * [Return to Previous Page Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/return-button)
 * [Conditionally Hide/Show Form Fields](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/form-conditionals)
 * [Return to Top Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/return-to-top-button)
+* [Refresh View Button](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/refresh-view-button)
 * [Detect IE \(Internet Explorer Browser\)](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/detect-ie)
 
 
@@ -32,6 +33,7 @@ description: >-
 | Return to Prev Page Button | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Conditionally Hide/Show Form Fields | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Return to Top Button | No | No |  | Yes |  |  |  |  |  |  |  |  |
+| Refresh View Button |  |  | Yes |  |  |  |  |  |  |  |  |  |
 | Detect IE |  |  |  |  |  |  |  |  | Yes |  |  |  |
 
 
