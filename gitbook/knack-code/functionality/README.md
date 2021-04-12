@@ -33,7 +33,7 @@ description: >-
 | Return to Prev Page Button | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Conditionally Hide/Show Form Fields | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Return to Top Button | No | No |  | Yes |  |  |  |  |  |  |  |  |
-| Refresh View Button |  |  | Yes |  |  |  |  |  |  |  |  |  |
+| Refresh View Button | Yes |  | Yes |  |  |  |  |  |  |  |  |  |
 | Detect IE |  |  |  |  |  |  |  |  | Yes |  |  |  |
 
 
