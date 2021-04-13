@@ -1296,8 +1296,9 @@ a.form-link:hover {
 }
 
 /******************************************/
-/*** Styles the TIA Request Dropdown.   ***/
+/*** Styles Custom TIA Request Dropdown ***/
 /******************************************/
+
 
 
 #tia-menu-list {
@@ -1305,7 +1306,7 @@ a.form-link:hover {
 }
 
 #tia-menu-list li {
-  margin-right: .2em;
+  margin-right: .5em;
 }
 
 #tia-menu-list .kn-button a {
@@ -1313,4 +1314,17 @@ a.form-link:hover {
   font-size: 1.1em;
   border-bottom: 0;
   padding-top:3px;
+}
+
+.tia-dropdown-menu-list .kn-button {
+  border-radius: 0;
+}
+
+.tia-dropdown-menu-list li {
+  border: 0;
+  margin-right: 0 !important;
+} 
+
+.tia-dropdown-menu-list li:hover {
+  background-color: rgb(235,235,235);
 }

@@ -488,17 +488,14 @@ $(document).on("knack-view-render.view_628", function (event, view) {
 
 
 /************************************/
-/**** Custom Dropdown Menu.      ****/
+/* Custom TIA Request Dropdown Menu */
 /************************************/
 
-function getLinkUrl(recordId, route) {
-  return (`#tia-requests/tia-request-details/${recordId}/${route}/${recordId}`)
-}
 
 function dropdownMenuItem(recordId, route, iconName, linkName) {
   return (
-    `<li>\
-      <a href="#tia-requests/tia-request-details/${recordId}/${route}/${recordId}>\
+    `<li class="kn-button">\
+      <a href="#tia-requests/tia-request-details/${recordId}/${route}/${recordId}">\
         <span class="icon is-small"> \
           <i class="fa ${iconName}" /> \
         </span>\
@@ -509,14 +506,14 @@ function dropdownMenuItem(recordId, route, iconName, linkName) {
 
 // Custom Dropdown Menu
 $(document).on('knack-view-render.view_163', function(event, view, record) {
-  // var $test_chia = $("#view_163").find(".control");
-  // $test_chia.hide();
+  // var $buttonMenu = $("#view_163").find(".control");
+  // $buttonMenu.hide();
   var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
-      <li class="tia-dropdown-menu kn-dropdown-menu">\
-        <a href="#case-management" data-kn-slug="#case-management">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-request-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
           <span class="nav-dropdown-link">Case Management</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
@@ -527,8 +524,8 @@ $(document).on('knack-view-render.view_163', function(event, view, record) {
           ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
         </ul>\
       </li>\
-      <li class="tia-dropdown-menu kn-dropdown-menu">\
-        <a href="#update-case-details" data-kn-slug="#update-case-details">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-request-details/${recordId}/edit-tia-request-reviewer/${recordId}" data-kn-slug="#update-case-details">\
           <span class="nav-dropdown-link">Update Case Details</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
         </a>\
@@ -544,5 +541,3 @@ $(document).on('knack-view-render.view_163', function(event, view, record) {
     </ul>\
   </div>`).appendTo("#view_163")
 })
-
-
