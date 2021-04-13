@@ -118,22 +118,8 @@ $(document).on('knack-scene-render.any', function(event, view) {
   $blockContainerButton.removeClass("kn-action-link");
 })
 
-/****************************************************************/
-/** Convert Requester Name field to UPPER CASE for TIA Request **/
-/****************************************************************/
-/*$(document).on('knack-page-render.any', function(event, page) {
-   
-  $('.kn-input-name input').keyup(function(){
-      this.value = this.value.toUpperCase();
-  });
-  
-   $('input#field_181').keyup(function(){
-      this.value = this.value.toUpperCase();
-  });
-})*/
-
 /*********************************************************/
-/** Convert Case ID field to UPPER CASE for TIA Request **/
+/** Convert Case ID field to UPPERCASE for TIA Request **/
 /*********************************************************/
 $(document).on('knack-page-render.any', function(event, page) {
   
@@ -143,7 +129,7 @@ $(document).on('knack-page-render.any', function(event, page) {
 })
 
 /******************************************************************/
-/** Disable Navigation Breadcrumb Links for TIA Case Status page **/
+/** Disable Breadcrumb Navigation Links for TIA Case Status page **/
 /******************************************************************/
 function disableBreadCrumbsNonAdmin() {
   if (!Knack.user.session) {
@@ -182,7 +168,7 @@ $(document).on("knack-scene-render.scene_231", function () {
 });
 
 /***********************************************************/
-/*** Disable Navigation Breadcrumb Links for TIA Request ***/
+/*** Disable Breadcrumb Navigation Links for TIA Request ***/
 /***********************************************************/
 
 //TIA Requester Information page
@@ -207,10 +193,6 @@ $(document).on("knack-scene-render.scene_178", function () {
 });
 //TIA Edit Request page
 $(document).on("knack-scene-render.scene_179", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Edit Locations page
-$(document).on("knack-scene-render.scene_180", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Edit Attachments page
@@ -473,22 +455,23 @@ window.location.href = "https://atd.knack.com/development-services#customer-help
 /**** Save TIA Request Record ID ****/
 /************************************/
 // Function to Save Record ID
-function save_Record_ID(recordID) {
+function saveRecordId(recordId) {
   $.ajax({
-    url: "https://api.knack.com/v1/pages/scene_267/views/view_732/records/" + recordID, // Scene/View of Second Form
+    url: "https://api.knack.com/v1/pages/scene_269/views/view_740/records/" + recordId, // Scene/View of Second Form
     type: "PUT", 
     headers: {
       "X-Knack-Application-Id": Knack.application_id,
       "X-Knack-REST-API-Key": `knack`,
       "Authorization": Knack.getUserToken(),
+      "ContentType": "application/json"
     },
     data: {
-      field_824 : recordID, // Store Record ID in Knack Record ID field on TIA Request object
+      field_824 : recordId, // Store Record ID in Knack Record ID field on TIA Request object
     },
     tryCount: 0,
     retryLimit: 3,
     success: function(response) {
-      console.log("Captured Record ID"); // Success Message in Console Log
+      console.log("Captured Record ID"); // Success Message in Console
       Knack.hideSpinner();
     },
     error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -506,22 +489,120 @@ function save_Record_ID(recordID) {
           $.ajax(ajaxObject);
         }, timeout);
       } else {
-        console.log("Failed to Capture Record ID");
+        console.log("Failed to Capture Record ID"); // Failure Message in Console
       }
     }
   });
 }
 
-// Listen for record creation (Request Application Submit / First Form)
-// The comment line below also works
-//$(document).on('knack-form-submit.view_731' , function(event, view, record) {
-$(document).on('knack-record-create.view_731', function(event, view, record) {
+// Listen for record creation (TIA Request Application Submit / First Form)
+$(document).on('knack-record-create.view_393', function(event, view, record) {
   const recordId = record.id;
-  save_Record_Id(recordId);
+  console.log('CREATE')
+  saveRecordId(recordId);
 });
+
+/*
+$(document).on('knack-form-submit.view_393', function(event, view, record) {
+  console.log('SUBMIT')
+});
+*/
 
 // This is the Second Form.
 // This removes the view from HTML upon rendering to prevent data manipulation.
-$(document).on('knack-view-render.view_732', function (event, view, record) {
+$(document).on('knack-view-render.view_740', function (event, view, record) {
   $('#' + view.key).remove(); 
 });
+
+/***************************************************/
+/*** Refresh Mitigation Fee in Lieu Table Button ***/
+/***************************************************/
+$(document).on("knack-view-render.view_322", function (event, page) {
+  var button = $(
+    "<span style='width: 2em'></span>" +
+    "<button id='refresh-view_322' style='border-radius: .35em' class='kn-button is-primary'>" +
+    "<i class='fa fa-refresh'></i>" +
+    "<span style='width: .5em'></span>Refresh Table</button>"
+  );
+
+  button.insertAfter( //places button next to keyword search option
+    $("#view_322").find("form.table-keyword-search").find("a")[0]
+  );
+
+  $("#refresh-view_322").click(function (e) {
+    e.preventdefault();
+    Knack.views["view_322"].model.fetch();
+  });
+});
+
+/****************************************************/
+/*** Refresh Mitigation Construction Table Button ***/
+/****************************************************/
+$(document).on("knack-view-render.view_321", function (event, page) {
+  var button = $(
+    "<span style='width: 2em'></span>" +
+    "<button id='refresh-view_321' style='border-radius: .35em' class='kn-button is-primary'>" +
+    "<i class='fa fa-refresh'></i>" +
+    "<span style='width: .5em'></span>Refresh Table</button>"
+  );
+
+  button.insertAfter(//places button next to keyword search option
+    $("#view_321").find("form.table-keyword-search").find("a")[0]
+  );
+
+  $("#refresh-view_321").click(function (e) {
+    e.preventdefault();
+    Knack.views["view_321"].model.fetch();
+  });
+});
+
+/*************************************/
+/**** TIA Menu Buttons Navigation ****/
+/*************************************/
+
+function dropdownMenuItem(recordId, route, iconName, linkName) {
+  return (
+    `<li class="kn-button">\
+      <a href="#tia-requests/tia-request-details/${recordId}/${route}/${recordId}">\
+        <span class="icon is-small"> \
+          <i class="fa ${iconName}" /> \
+        </span>\
+        <span>${linkName}</span>\
+      </a>\
+    </li>`)
+}
+
+$(document).on('knack-view-render.view_744', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-request-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-request-details/${recordId}/edit-tia-request-reviewer/${recordId}" data-kn-slug="#update-case-details">\
+          <span class="nav-dropdown-link">Update Case Details</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "edit-tia-request-reviewer", "fa-edit", "Edit Case Details")}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
+          ${dropdownMenuItem(recordId, "change-tia-request-status-reviewer", "fa-retweet", "Change Request Status")}\
+          ${dropdownMenuItem(recordId, "connected-cases", "fa-link", "Connect Cases")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "edit-tia-fee-status-reviewer", "fa-dollar", "Fees")}\
+      ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication")}\
+    </ul>\
+  </div>`).appendTo("#view_744")
+})
