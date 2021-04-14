@@ -1300,6 +1300,19 @@ a.form-link:hover {
 /******************************************/
 
 
+/* hide dropdown if on mobile view */
+@media (max-width: 800px) {
+  #tia-menu-list {
+    display: none;
+  }
+}
+
+/* hide buttons if not on mobile view */
+@media (min-width: 800px) {
+  #view_163 {
+    display: none;
+  }
+}
 
 #tia-menu-list {
   border-bottom: 0 !important
