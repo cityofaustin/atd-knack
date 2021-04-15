@@ -370,49 +370,95 @@ function customButton(
   if (callback) callback();
 }
 
-function customLoginButton(app_url, view_id, page_name) {
-  // creates a custom login interface that minimizes the basic auth login
-  // and creates a large custom button for ADFS login
+/**
+ * Template and append a button link, disable it optionally, and invoke a callback function argument
+ * @parameter {string} id - id attribute of the a tag in the button link
+ * @parameter {string} view_id - Knack view id to append button link to
+ * @parameter {string} url - Destination to navigate to on click
+ * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
+ * @parameter {bool} isDisabled - Is button disabled (defaults to false)
+ * @parameter {function} callback - Function that is invoked after appending the button link
+ */
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  isDisabled = false,
+  callback = null
+) {
+  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
 
-  // special logic to generate URL and clean-up sign in page brefore creating large button
-  $(".kn-sso-container").hide();
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
+      url +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
-  $(".login_form").hide();
-
-  $("h2.kn-title").hide();
-
-  $("p.kn-description").hide();
-
-  var url = app_url + "#" + page_name + "/auth/COACD";
-
-  customButton(
-    "caocd-button-login",
-    view_id,
-    url,
-    "sign-in",
-    "Sign-In",
-    "big-button",
-    "big-button-container"
-  );
-
-  customButton(
-    "non-coacd-button-login",
-    view_id,
-    "javascript:void(0)",
-    "lock",
-    "Non-COA Sign-In",
-    "small-button",
-    "small-button-container",
-    function(divId = "non-coacd-button-login") {
-      setClickEvent(
-        divId,
-        showHideElements,
-        ".login_form",
-        ".small-button-container,.big-button-container"
-      );
-    }
-  );
+  if (callback) callback();
 }
+
+/**
+ * Enhance SSO button and hide/show default Knack login form with buttons
+ * @parameter {string} viewId - Knack view id to append button link to
+ */
+function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
+
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
+
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login",
+  });
+  $coacdButton.appendTo("#" + viewId);
+
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
+  );
+
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
+}
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
+
 
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
@@ -425,37 +471,6 @@ function showHideElements(showSelector, hideSelector) {
   $(showSelector).show();
   $(hideSelector).hide();
 }
-
-$(document).on("knack-view-render.any", function(event, page) {
-  //  wrapper to create large sign-in buttons
-  //  the views ojbect uses the view id of the login form element as each key
-  //  and the page url of the login page's **child page** as the value
-  //  note that each login page listed below must first be configured for ADFS login
-  var views = {
-    view_2642: "home",
-    view_1881: "new-work-order-markings",
-    view_1878: "work-orders-markings-login",
-    view_1896: "jobs",
-    view_2574: "service-requests-signs",
-    view_2631: "new-work-order-signs",
-    view_2622: "work-order-signs",
-    view_2743: "my-work-orders",
-    view_2806: "my-work-orders-created",
-    view_2943: "manage-attachments",
-    view_2945: "manage-materials",
-    view_2951: "manage-specifications",
-    view_2909: "gis-qa",
-    view_2219: "signs--markings--requester"
-  };
-
-  if (page.key in views) {
-    customLoginButton(
-      "https://atd.knack.com/signs-markings",
-      page.key,
-      views[page.key]
-    );
-  }
-});
 
 $(document).on("knack-view-render.view_2621", function(event, page) {
   // create large button on the home page
