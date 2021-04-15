@@ -71,6 +71,8 @@ You can find the original banner assets and a template for creating a new applic
 * ![\#ff9b9c](https://placehold.it/15/ff9b9c/000000?text=+) `#ff9b9c` - Inactive
 * ![\#80d07e](https://placehold.it/15/80d07e/000000?text=+) `#80d07e` - Active
 
+![](../.gitbook/assets/image%20%2881%29.png)
+
 ### Other Colors
 
 * ![\#f5901f](https://placehold.it/15/f5901f/000000?text=+) `#f5901f` - Orange
