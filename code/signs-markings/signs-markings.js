@@ -333,43 +333,6 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
 
 // END: Knack Geo Location Selector Plugin
 
-///////////////////////////
-//     Custom Buttons    //
-///////////////////////////
-
-function customButton(
-  div_id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  button_class,
-  container_class,
-  callback
-) {
-  // create a custom button
-
-  $("<div/>", {
-    id: div_id
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
-      url +
-      "'><div class='" +
-      container_class +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></div></a>"
-  );
-
-  if (callback) callback();
-}
-
 /**
  * Template and append a button link, disable it optionally, and invoke a callback function argument
  * @parameter {string} id - id attribute of the a tag in the button link
