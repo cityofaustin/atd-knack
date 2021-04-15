@@ -7,7 +7,7 @@
   font-size: 2.5em;
   padding: 10px;
   margin: 20px;
-  max-width: 12em;
+  max-width: 15em;
   display: block;
 }
 
@@ -29,7 +29,9 @@ a.big-button-container {
   text-decoration: none;
 }
 
-/* Small Buttons */
+/***************************************/
+/************* Small Buttons *************/
+/***************************************/
 .small-button-container {
   padding: 5px;
   margin: 20px;
