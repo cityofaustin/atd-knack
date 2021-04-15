@@ -34,39 +34,3 @@ function bigButton(
 
   if (callback) callback();
 }
-
-// Some examples
-
-//>>>HOME TAB BUTTONS
-$(document).on("knack-view-render.view_15", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "development-reviews",
-    "view_15",
-    "https://atd.knack.com/development-services#home/development-reviews/",
-    "list-ul",
-    "Development Reviews"
-  );
-});
-
-$(document).on("knack-view-render.view_55", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "my-reviews",
-    "view_55",
-    "https://atd.knack.com/development-services#my-reviews/",
-    "male",
-    "My Reviews"
-  );
-});
-
-$(document).on("knack-view-render.view_15", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "development-reviews",
-    "view_15",
-    "https://atd.knack.com/development-services#home/development-reviews/",
-    "list-ul",
-    "Development Reviews"
-  );
-});
