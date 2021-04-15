@@ -422,7 +422,6 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
-
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
   $("#" + divId).click(function() {
@@ -607,7 +606,7 @@ $(document).on('knack-form-submit.view_3158', function(event, view, txn) {
     // on submission of "assign to" form in markins SR manager
   	// posts to the work_order_flext_notes endpoint, which fires a script that
     // attaches flex notes to created work orders
-    var endpoint = "https://ywx4jkcwrh.execute-api.us-east-1.amazonaws.com/dev/work_order_flex_notes";
+    var endpoint = "https://knack-api.austinmobility.io/work_order_flex_notes";
     var src = Knack.application_id; // markings prod
     var url = endpoint + "?src=" + src;
 
@@ -616,3 +615,4 @@ $(document).on('knack-form-submit.view_3158', function(event, view, txn) {
         console.log(response);
     });
 })
+
