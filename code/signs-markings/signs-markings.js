@@ -474,92 +474,78 @@ function showHideElements(showSelector, hideSelector) {
 
 $(document).on("knack-view-render.view_2621", function(event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "work-orders-markings",
     "view_2621",
     "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
     "road",
     "Markings | Work Orders",
-    "big-button",
-    "big-button-container"
   );
 });
 
 $(document).on("knack-view-render.view_3178", function(event, page) {
   // create large button on the home page
-  customButton(
-    "work-orders-markings",
+  bigButton(
+    "work-orders-service-requests",
     "view_3178",
     "https://atd.knack.com/signs-markings#service-requests-markings/",
     "comments",
     "Markings | Service Requests",
-    "big-button",
-    "big-button-container"
   );
 });
 
 $(document).on("knack-view-render.view_2628", function(event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "work-orders-signs",
     "view_2628",
     "https://atd.knack.com/signs-markings#work-order-signs/",
     "flag",
     "Signs | Work Orders",
-    "big-button",
-    "big-button-container"
   );
 });
 
 $(document).on("knack-view-render.view_2629", function(event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "service-requests-signs",
     "view_2629",
     "https://atd.knack.com/signs-markings#service-requests-signs/",
     "comments",
     "Signs | Service Requests",
-    "big-button",
-    "big-button-container"
   );
 });
 
 $(document).on("knack-view-render.view_2630", function(event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "street-banners",
     "view_2630",
     "https://atd.knack.com/street-banners#home/",
     "flag-o",
     "Street Banners | Program",
-    "big-button",
-    "big-button-container"
   );
 });
 
 $(document).on("knack-view-render.view_2903", function(event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "signs-gis-qa",
     "view_2903",
     "https://atd.knack.com/signs-markings#signs-gis-qa/",
     "flag",
     "GIS QA | Signs",
-    "big-button",
-    "big-button-container"
   );
 });
 
 $(document).on("knack-view-render.view_2904", function(event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "markings-gis-qa",
     "view_2904",
     "https://atd.knack.com/signs-markings#markings-gis-qa/",
     "road",
     "GIS QA | Markings",
-    "big-button",
-    "big-button-container"
   );
 });
 // END: Custom Buttons
