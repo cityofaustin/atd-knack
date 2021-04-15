@@ -68,28 +68,40 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Status Colors
 
-* ![\#ff9b9c](https://placehold.it/15/ff9b9c/000000?text=+) `#ff9b9c` - Inactive
-* ![\#80d07e](https://placehold.it/15/80d07e/000000?text=+) `#80d07e` - Active
-
-![](../.gitbook/assets/image%20%2881%29.png)
+* [`#ff9b9c`](https://www.colorhexa.com/ff9b9c) - Inactive 
+* ![](../.gitbook/assets/image%20%2897%29.png)
+* [`#80d07e`](https://www.colorhexa.com/80d07e) - Active
+* ![](../.gitbook/assets/image%20%28102%29.png)
 
 ### Other Colors
 
-* ![\#f5901f](https://placehold.it/15/f5901f/000000?text=+) `#f5901f` - Orange
-* ![\#ff9b9c](https://placehold.it/15/ff9b9c/000000?text=+) `#ff9b9c` - Return to Requester
-* ![\#80d07e](https://placehold.it/15/80d07e/000000?text=+) `#80d07e` - Current
-* ![\#4daf4a](https://placehold.it/15/4daf4a/000000?text=+) `#4daf4a` - Approved
-* ![\#000000](https://placehold.it/15/000000/000000?text=+) `#000000` - Rejected
+*  [`#f5901f`](https://www.colorhexa.com/f5901f) - Orange
+* ![](../.gitbook/assets/image%20%2894%29.png)
+*  [`#ff9b9c`](www.colorhexa.com/ff9b9c) - Return to Requester
+* ![](../.gitbook/assets/image%20%2884%29.png)
+*  [`#80d07e`](https://www.colorhexa.com/80d07e) - Current
+* ![](../.gitbook/assets/image%20%28104%29.png)
+*  [`#4daf4a`](https://www.colorhexa.com/4daf4a) - Approved
+* ![](../.gitbook/assets/image%20%2888%29.png)
+*  [`#000000`](https://www.colorhexa.com/000000) - Rejected
+* ![](../.gitbook/assets/image%20%2882%29.png)
 
 ### Data Tracker Colors & Icons
 
-* ![\#E41A1C](https://placehold.it/15/E41A1C/000000?text=+) `#E41A1C` - Need To Be Issued `fa fa-exclamation-triangle`
-* ![\#367DB7](https://placehold.it/15/367DB7/000000?text=+) `#367DB7` - Issued `fa fa-truck` 
-* ![\#974DA2](https://placehold.it/15/974DA2/000000?text=+) `#974DA2` - Needs GIS `fa fa-map-marker`
-* ![\#4CAE49](https://placehold.it/15/4CAE49/000000?text=+) `#4CAE49` - Final Review `fa fa-flag-checkered`
-* ![\#ADADAD](https://placehold.it/15/ADADAD/000000?text=+) `#ADADAD` - On Hold `fa fa-clock-o`
-* ![\#777777](https://placehold.it/15/777777/000000?text=+) `#777777` - Closed `fa fa-check-circle`
-* ![\#777777](https://placehold.it/15/777777/000000?text=+) `#777777` - Cancelled `fa fa-close`
+*  [`#E41A1C`](https://www.colorhexa.com/e41a1c) - Need To Be Issued `fa fa-exclamation-triangle`
+* ![](../.gitbook/assets/image%20%2885%29.png)
+*  [`#367DB7`](https://www.colorhexa.com/367DB7) - Issued `fa fa-truck` 
+* ![](../.gitbook/assets/image%20%2895%29.png)
+*  [`#974DA2`](https://www.colorhexa.com/974DA2) - Needs GIS `fa fa-map-marker`
+* ![](../.gitbook/assets/image%20%2886%29.png)
+*  [`#4CAE49`](https://www.colorhexa.com/4CAE49) - Final Review `fa fa-flag-checkered`
+* ![](../.gitbook/assets/image%20%28103%29.png)
+*  [`#ADADAD`](https://www.colorhexa.com/ADADAD) - On Hold `fa fa-clock-o`
+* ![](../.gitbook/assets/image%20%2892%29.png)
+* [`#777777`](https://www.colorhexa.com/777777) - Closed `fa fa-check-circle`
+* ![](../.gitbook/assets/image%20%28100%29.png)
+*  [`#777777`](https://www.colorhexa.com/777777) - Cancelled `fa fa-close`
+* ![](../.gitbook/assets/image%20%28100%29.png)
 
 ### Finance and Purchasing Colors & Icons
 
