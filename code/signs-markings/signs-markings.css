@@ -1,3 +1,33 @@
+/* hide attachment type column (field contents are extracted via JS */
+div.view_2107 .field_2403 {
+  display: none;
+}
+div.view_2108 .field_2403 {
+  display: none;
+}
+div.view_2565 .field_2403 {
+  display: none;
+}
+
+/* move and style lat/lon fields and button to overlay React app map in View Work Order Details view (scene_1028) */
+#lat-lon-form {
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
+  margin-top: -145px;
+  padding-bottom: 40px;
+}
+
+#lat-lon-form button {
+  margin: -10px 0 0 10px;
+  color: #07467c !important;
+  background: white !important;
+  border: 3px solid #07467c;
+  font-size: 22px;
+  font-weight: bold;
+  height: 44px;
+  padding: 0 15px;
+}
+
 /***************************************/
 /************* Big Buttons *************/
 /***************************************/
@@ -49,41 +79,6 @@ a.big-button-container {
 }
 
 a.small-button {
-  text-decoration: none;
-}
-
-/* hide attachment type column (field contents are extracted via JS */
-div.view_2107 .field_2403 {
-  display: none;
-}
-div.view_2108 .field_2403 {
-  display: none;
-}
-div.view_2565 .field_2403 {
-  display: none;
-}
-
-/* move and style lat/lon fields and button to overlay React app map in View Work Order Details view (scene_1028) */
-#lat-lon-form {
-  color: white;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 1);
-  margin-top: -145px;
-  padding-bottom: 40px;
-}
-
-#lat-lon-form button {
-  margin: -10px 0 0 10px;
-  color: #07467c !important;
-  background: white !important;
-  border: 3px solid #07467c;
-  font-size: 22px;
-  font-weight: bold;
-  height: 44px;
-  padding: 0 15px;
-}
-
-/* this prevents the natural underlining Knack does for links */
-a.big-button-container {
   text-decoration: none;
 }
 
