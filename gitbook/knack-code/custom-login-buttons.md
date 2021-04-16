@@ -25,7 +25,7 @@ In the API & Code view, **Javascript** and **CSS** tabs can be selected to see t
 ![The API &amp; Code view](../.gitbook/assets/screen-shot-2020-11-10-at-5.15.08-pm.png)
 
 {% hint style="info" %}
-This code uses the custom Knack functionality from the custom Big Button code. Prior to adding this JS and CSS code, add the code from **CODE: Knack Functionality &gt; Big Buttons** in the sidebar.
+This code uses the custom Knack functionality from the custom Big Button code. Prior to adding this JS and CSS code, add the JS and CSS code from **CODE: Knack Functionality &gt; Big Buttons** in the sidebar.
 {% endhint %}
 
 In the text field under the **Javascript** tab, paste the following code. The purpose of this code is to find the Knack default single-sign on button and its Knack view ID in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), replace the button with the buttons shown above, and then hide the default Knack login form unless the user clicks the **Non-COA Sign-In** button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/custom-login-button).

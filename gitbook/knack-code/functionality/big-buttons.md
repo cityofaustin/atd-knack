@@ -8,23 +8,45 @@ description: How to add big buttons to your application to improve navigation
 
 ###  The JS
 
-Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button.
+Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/big-button).
 
 ```text
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled, callback) 
-{
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + 
-    id + "' class='big-button-container" + 
-    disabledClass + 
-    " href='" + url + 
-    "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + 
-    button_label + "</span></a>" 
-    ).appendTo("#" + view_id);
+/**
+ * Template and append a button link, disable it optionally, and invoke a callback function argument
+ * @parameter {string} id - id attribute of the a tag in the button link
+ * @parameter {string} view_id - Knack view id to append button link to
+ * @parameter {string} url - Destination to navigate to on click
+ * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
+ * @parameter {bool} isDisabled - Is button disabled (defaults to false)
+ * @parameter {function} callback - Function that is invoked after appending the button link
+ */
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  isDisabled = false,
+  callback = null
+) {
+  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
+
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
+      url +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
@@ -72,26 +94,29 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
 /************* Big Buttons *************/
 /***************************************/
 .big-button-container {
-  padding: 10px 10px;
-  margin: 20px;
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
+  padding: 10px;
+  margin: 20px;
   max-width: 12em;
   display: block;
 }
- 
+
 .big-button-container:hover {
-    background-color: #f7f7f7;
-    cursor: pointer;
+  background-color: #f7f7f7;
+  cursor: pointer;
 }
 
 .big-button-disabled {
+  pointer-events: none;
   background-color: #f7f7f7;
-  opacity: 0.6;
-} 
+}
 
-//this prevents the natural underlining Knack does for links 
+.fa {
+  vertical-align: middle;
+}
+
 a.big-button-container {
   text-decoration: none;
 }
