@@ -113,10 +113,6 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
   background-color: #f7f7f7;
 }
 
-.fa {
-  vertical-align: middle;
-}
-
 a.big-button-container {
   text-decoration: none;
 }
