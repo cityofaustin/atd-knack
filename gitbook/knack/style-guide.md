@@ -88,10 +88,10 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Data Tracker Colors & Icons
 
-*  [`#E41A1C`](https://www.colorhexa.com/e41a1c) - Need To Be Issued `fa fa-exclamation-triangle`
-* ![](../.gitbook/assets/image%20%2885%29.png)
-*  [`#367DB7`](https://www.colorhexa.com/367DB7) - Issued `fa fa-truck` 
-* ![](../.gitbook/assets/image%20%2895%29.png)
+*  [`#E41A1C`](https://www.colorhexa.com/e41a1c) - Need To Be Issued [`fa fa-exclamation-triangle`](https://fontawesome.com/v4.7.0/icon/exclamation-triangle)\`\`
+* ![](../.gitbook/assets/image%20%2885%29.png)![](../.gitbook/assets/image%20%28106%29.png)
+*  [`#367DB7`](https://www.colorhexa.com/367DB7) - Issued [`fa fa-truck`](https://fontawesome.com/v4.7.0/icon/truck) 
+* ![](../.gitbook/assets/image%20%2895%29.png)![](../.gitbook/assets/image%20%28105%29.png)
 *  [`#974DA2`](https://www.colorhexa.com/974DA2) - Needs GIS `fa fa-map-marker`
 * ![](../.gitbook/assets/image%20%2886%29.png)
 *  [`#4CAE49`](https://www.colorhexa.com/4CAE49) - Final Review `fa fa-flag-checkered`
