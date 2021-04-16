@@ -22,7 +22,7 @@ Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the 
  * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
  * @parameter {bool} isDisabled - Is button disabled (defaults to false)
  * @parameter {function} callback - Function that is invoked after appending the button link
- */
+ **/
 function bigButton(
   id,
   view_id,
