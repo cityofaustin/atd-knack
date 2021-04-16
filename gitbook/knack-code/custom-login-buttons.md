@@ -25,26 +25,16 @@ In the API & Code view, **Javascript** and **CSS** tabs can be selected to see t
 ![The API &amp; Code view](../.gitbook/assets/screen-shot-2020-11-10-at-5.15.08-pm.png)
 
 {% hint style="info" %}
-Prior to adding any code to a Knack application, check the existing code to see if any of the code that you are adding is already present. For example, the login button in this procedure uses the same CSS code as the **Big Buttons** and is not needed twice.
+This code uses the custom Knack functionality from the custom Big Button code. Prior to adding this JS and CSS code, add the code from **CODE: Knack Functionality &gt; Big Buttons** in the sidebar.
 {% endhint %}
 
-In the text field under the **Javascript** tab, paste the following code. The purpose of this code is to find the Knack default single-sign on button and its Knack view ID in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), replace the button with the buttons shown above, and then hide the default Knack login form unless the user clicks the **Non-COA Sign-In** button. 
+In the text field under the **Javascript** tab, paste the following code. The purpose of this code is to find the Knack default single-sign on button and its Knack view ID in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), replace the button with the buttons shown above, and then hide the default Knack login form unless the user clicks the **Non-COA Sign-In** button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/custom-login-button).
 
 ```text
-$(document).on("knack-view-render.any", function (event, page) {
-  // Find SSO button and existing custom button
-  var $ssoButton = $(".kn-sso-container");
-  var $coacdLoginDiv = $("#coacd-button-login");
-
-  // If SSO button exists on page and there isn't already a custom button
-  if ($ssoButton.length && !$coacdLoginDiv.length) {
-    var $ssoView = $ssoButton.closest("[id^=view_]");
-    var viewId = $ssoView.get(0).id;
-
-    customizeLoginButton(viewId);
-  }
-});
-
+/**
+ * Enhance SSO button and hide/show default Knack login form with buttons
+ * @parameter {string} viewId - Knack view id to append button link to
+ */
 function customizeLoginButton(viewId) {
   // Hide Knack default SSO button, login form, login title, and any other children
   $("#" + viewId)
@@ -55,16 +45,12 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login"
+    id: "coacd-button-login",
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  $coacdButton.append(
-    "<a class='big-button' href='" +
-      url +
-      "'><div class='big-button-container'><span><i class='fa fa-sign-in'></i></span><span> Sign-in</span></div></a>"
-  );
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
@@ -81,35 +67,29 @@ function customizeLoginButton(viewId) {
     $(".kn-sso-container").hide();
   });
 }
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
 ```
 
 In the text field under the **CSS** tab, paste the following code. The purpose of this code is to style the buttons that the Javascript code generates to look as shown above.
 
 ```text
-/* Big Buttons */
-.big-button-container {
-  border-radius: 2px;
-  box-shadow: 0px 1px 2px 0px gray;
-  font-size: 2.5em;
-  padding: 10px;
-  margin: 20px;
-  max-width: 12em;
-}
-
-.big-button-container:hover {
-  background-color: #f7f7f7;
-  cursor: pointer;
-}
-
-.fa {
-  vertical-align: baseline;
-}
-
-a.big-button {
-  text-decoration: none;
-}
-
-/* Small Buttons */
+/***************************************/
+/************* Small Buttons *************/
+/***************************************/
 .small-button-container {
   padding: 5px;
   margin: 20px;
