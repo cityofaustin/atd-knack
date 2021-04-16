@@ -91,7 +91,7 @@ In the text field under the **CSS** tab, paste the following code. The purpose o
 /************* Small Buttons *************/
 /***************************************/
 .small-button-container {
-  padding: 5px;
+  padding: 5px 5px;
   margin: 20px;
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
@@ -106,9 +106,12 @@ In the text field under the **CSS** tab, paste the following code. The purpose o
   cursor: pointer;
 }
 
-a.small-button {
-  text-decoration: none;
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
 }
+
+a.small-button-container { text-decoration: none; }
 ```
 
  
