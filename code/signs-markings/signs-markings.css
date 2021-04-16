@@ -82,7 +82,7 @@ div.view_2565 .field_2403 {
   padding: 0 15px;
 }
 
-//this prevents the natural underlining Knack does for links 
+/* this prevents the natural underlining Knack does for links */
 a.big-button-container {
   text-decoration: none;
 }
