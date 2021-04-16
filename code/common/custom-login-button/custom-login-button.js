@@ -17,11 +17,7 @@ function customizeLoginButton(viewId) {
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  $coacdButton.append(
-    "<a class='big-button' href='" +
-      url +
-      "'><div class='big-button-container'><span><i class='fa fa-sign-in'></i></span><span> Sign-in</span></div></a>"
-  );
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
