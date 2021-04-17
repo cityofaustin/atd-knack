@@ -4,11 +4,6 @@ $(document).on("knack-page-render.any", function (event, page) {
 
   // Rename confusing google maps link
   $('a[title="view in google maps"]').text("View on Google Maps");
-
-  //  remove signs/markings tabs/filter except on landing page
-  if (page.key != "scene_808" && page.key != "scene_809") {
-    $("#view_2106").remove();
-  }
 });
 
 $(document).on("knack-view-render.view_958", function (event, page) {
@@ -51,13 +46,6 @@ var colorMapOne = {
   "FINAL REVIEW": { background_color: "#4daf4a", color: "#fff" },
 };
 
-$(document).on("knack-scene-render.any", function () {
-  //  work orders signs/markings status
-  changeFieldColor(".field_2181", colorMapOne);
-
-  //  work orders signs/markings job status
-  changeFieldColor(".field_2190", colorMapOne);
-});
 
 $(document).on("knack-view-render.view_2107", function (event, page) {
   //  replace attachment filename with attachment type
@@ -114,78 +102,6 @@ $(document).on("knack-view-render.view_2108", function (event, page) {
   });
 });
 
-function modCrumbtrail() {
-  //  function to replace crumbtrail contents on signs/markings work orders when technician is viewing
-  // if user is a signs/markings tech
-
-  var techUserRole = "object_152";
-  if (Knack.getUserRoles(techUserRole)) {
-    $("div.kn-crumbtrail")
-      .find("a")
-      .each(function (index) {
-        var text = $(this).text().toUpperCase();
-
-        //  replace crumb pointer from work orders to jobs
-        if (text.indexOf("WORK ORDERS") >= 0) {
-          var href = this.href;
-          href = href.replace("work-orders-markings", "work-jobs-markings");
-          this.href = href;
-          $(this).text("Jobs");
-        }
-
-        // remove intermediary Markings or Signs work order landing page crumb entirely
-        if (text == "MARKINGS") {
-          $(this).remove();
-          //  remove extra "→" span
-          var span = $("div.kn-crumbtrail").find("span")[1];
-          $(span).remove();
-        } else if (text == "SIGNS") {
-          $(this).remove();
-          //  remove extra "→" span
-          var span = $("div.kn-crumbtrail").find("span")[1];
-        }
-      });
-  }
-}
-
-$(document).on("knack-scene-render.scene_713", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_716", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_724", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_751", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_753", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_762", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_763", function (event, page) {
-  modCrumbtrail();
-});
-
-//  remove default crumbtrail on signs/markings work orders when technician is viewing
-$(document).on("knack-scene-render.scene_720", function (event, page) {
-  modCrumbtrail();
-});
 
 //  replace 'Quantity' label with UOM of measure by parsing the select value contents
 //  was unable to use the chosen.js native events because of however Knack has implemented them
@@ -233,14 +149,6 @@ $(document).on("knack-view-render.view_1880", function (event, page) {
   setRequester();
 });
 
-$(document).on("knack-scene-render.scene_713", function (event, page) {
-  // remove "signs" dropdown from workgroup selection choices based when work order type is markings
-  var workType = $(".field_2292 .kn-value").text().toUpperCase();
-
-  if (workType == "MARKINGS") {
-    $("#view_1887-field_2173 option[value='SIGNS']").remove();
-  }
-});
 
 $(document).on("knack-scene-render.scene_1", function (event, page) {
   // redirect to embedded homepage from unembedded homepage login
