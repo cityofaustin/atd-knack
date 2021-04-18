@@ -247,7 +247,6 @@ $(document).on("knack-view-render.view_2486", function (event, page) {
       .find("a")
       .each(function (index) {
         var attachmentType = "";
-
         //  search the neighboring field (attachmenty type) and retrieve the corresponding type
         $(this)
           .closest("tr")
@@ -326,8 +325,8 @@ $(document).on("knack-view-render.view_2465", function (event, page) {
 });
 
 //////////////////////////////////////////////////////////////
-// set random password when adding an account.				//
-// the user will not use this pw. they login with ADFS		//
+// set random password when adding an account.        //
+// the user will not use this pw. they login with ADFS    //
 //////////////////////////////////////////////////////////////
 
 function generatePassword() {
@@ -538,10 +537,6 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     restockUnitCost
   ) {
     // returns new weighted unit cost based on old/new quantities/costs
-    // console.log("quantityOnHand: ", quantityOnHand);
-    // console.log("unitCost: ", unitCost);
-    // console.log("restockQuantity: ", restockQuantity);
-    // console.log("restockUnitCost: ", restockUnitCost);
     weightedUnitCost =
       (quantityOnHand * unitCost + restockQuantity * restockUnitCost) /
       (quantityOnHand + restockQuantity);
