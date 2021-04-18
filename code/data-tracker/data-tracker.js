@@ -618,18 +618,97 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   });
 });
 
-// Add "Refresh" button to inventory requests table
-$(document).on("knack-view-render.view_2698", function (event, page) {
-  var button = $(
-    "<span style='width: 2em'></span><button id='refresh-view_2698' style='border-radius: .35em !important' class='kn-button is-primary'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Refresh</button>"
-  );
 
-  button.insertAfter(
-    $("#view_2698").find("form.table-keyword-search").find("a")[0]
-  );
+//////////////////////////////////////////////////////
+// Disable editing of task order on work orders   ////
+//////////////////////////////////////////////////////
 
-  $("#refresh-view_2698").click(function (e) {
-    e.preventdefault();
-    Knack.views["view_2698"].model.fetch();
-  });
+/* 
+This logic ensures that a work order's task order cannot be edited if
+any inventory transactions have been financially processed. This is
+dependent on a view being added to the work order edit view which
+displays the `FieldSUM_JV_TRANSACTIONS_COMPLETED` field. This field
+indicates if any financial transactions have been processed.
+
+If financial txns have been processed, then the editable select field
+will be replaced with a static span of text.
+*/
+function getDetailsFieldValue(fieldKey) {
+  var spans = $("div." + fieldKey).find(".kn-detail-body span");
+  if (!spans || spans.length === 0) {
+    return null;
+  }
+  var span = spans[0];
+  if (!span) {
+    return null;
+  }
+  return $(span).text();
+}
+
+function removeParentDetails(fieldKey) {
+  var details = $("." + fieldKey).closest(".kn-details");
+  if (details) {
+    details.remove();
+  }
+}
+
+function getConnectionFieldValue(fieldKey) {
+  return $($("#connection-picker-chosen-" + fieldKey)[0]).find("span")[0]
+    .textContent;
+}
+
+function conditionallyDisableTaskOrderEditing() {
+  var JV_STATUS_FIELD_KEY = "field_3871";
+  var TK_FIELD_KEY = "field_2634";
+  var taskOrderValue = null;
+
+  // check if financial transactions have been processed
+  var jvStatus = getDetailsFieldValue(JV_STATUS_FIELD_KEY);
+  // always hide this details view, users don't need to see it
+  removeParentDetails(JV_STATUS_FIELD_KEY);
+
+  if (jvStatus && jvStatus > 0) {
+    // hide the the task order connection field
+    $("#kn-input-" + TK_FIELD_KEY)
+      .find(".control")
+      .addClass("hiddenFormField");
+    // attempt to get the current value of the task order connection field
+    // we're dealing with a race condition with the Chosen lib, which
+    // knack uses for async select inputs, and may still be rendering.
+    //
+    // side note: i did try to interface directly with jquery-chosen, which has
+    // a mechanism for disabling inputs, but i could not get it to work. i think
+    // it's a context issue
+    // https://stackoverflow.com/questions/17153417/disable-jquery-chosen-dropdown
+    var MAX_ATTEMPTS = 3;
+    var attempts = 0;
+    var loop = setInterval(function () {
+      // the connection field will have a value of "Select" until rendering is complete
+      // it may *actually* have a value of select (i.e., it's blank
+      // or we may be waiting for the field to render
+      attempts++;
+      taskOrderValue = getConnectionFieldValue(TK_FIELD_KEY);
+      if (taskOrderValue != "Select") {
+        clearInterval(loop);
+        $("#kn-input-" + TK_FIELD_KEY).append(
+          "<span>" + taskOrderValue + "</span>"
+        );
+      } else if (attempts === MAX_ATTEMPTS) {
+        $("#kn-input-" + TK_FIELD_KEY).append("<span>(none)</span>");
+        clearInterval(loop);
+      }
+    }, 1000);
+  }
+}
+
+$(document).on("knack-scene-render.scene_1130", function (event, scene) {
+  conditionallyDisableTaskOrderEditing();
 });
+
+// $(document).on("knack-scene-render.scene_1048", function (event, scene) {
+//   conditionallyDisableTaskOrderEditing();
+// });
+
+////////////////////////////////////////////
+////// End Disable Task Order Editing //////
+////////////////////////////////////////////
