@@ -657,6 +657,10 @@ function getDetailsFieldValue(fieldKey) {
 }
 
 function removeParentDetails(fieldKey) {
+  /*
+  Given a field key known to be present in a detailss view on the page, remove
+  the entire cotaining view. Assumes that only one instance of the field is present.
+  */
   var details = $("." + fieldKey).closest(".kn-details");
   if (details) {
     details.remove();
