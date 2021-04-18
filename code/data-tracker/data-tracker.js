@@ -643,7 +643,7 @@ $(document).on("knack-view-render.view_2698", function (event, page) {
 This logic ensures that a work order's task order cannot be edited if
 any inventory transactions have been financially processed. This is
 dependent on a view being added to the work order edit view which
-displays the `FieldSUM_JV_TRANSACTIONS_COMPLETED` field. This field
+displays the `SUM_JV_TRANSACTIONS_COMPLETED` field. This field
 indicates if any financial transactions have been processed.
 
 If financial txns have been processed, then the editable select field
@@ -678,19 +678,15 @@ function conditionallyDisableTaskOrderEditing() {
   var TK_FIELD_KEY = "field_2634";
   var taskOrderValue = null;
 
-  // check if financial transactions have been processed
   var jvStatus = getDetailsFieldValue(JV_STATUS_FIELD_KEY);
   // always hide this details view, users don't need to see it
   removeParentDetails(JV_STATUS_FIELD_KEY);
 
   if (jvStatus && jvStatus > 0) {
     // hide the the task order connection field
-    $("#kn-input-" + TK_FIELD_KEY)
-      .find(".control")
-      .addClass("hiddenFormField");
     // attempt to get the current value of the task order connection field
     // we're dealing with a race condition with the Chosen lib, which
-    // knack uses for async select inputs, and may still be rendering.
+    // knack uses for async select inputs.
     //
     // side note: i did try to interface directly with jquery-chosen, which has
     // a mechanism for disabling inputs, but i could not get it to work. i think
@@ -700,17 +696,29 @@ function conditionallyDisableTaskOrderEditing() {
     var attempts = 0;
     var loop = setInterval(function () {
       // the connection field will have a value of "Select" until rendering is complete
-      // it may *actually* have a value of select (i.e., it's blank
+      // it may *actually* have a value of select (i.e., it's blank)
       // or we may be waiting for the field to render
       attempts++;
       taskOrderValue = getConnectionFieldValue(TK_FIELD_KEY);
       if (taskOrderValue != "Select") {
-        clearInterval(loop);
+        // append TK field value as text
         $("#kn-input-" + TK_FIELD_KEY).append(
           "<span>" + taskOrderValue + "</span>"
         );
+        // hide TK connection input
+        // it's important that we hide—-not remove--this field, because removing
+        // could have weird side effects when the form is submitted
+        $("#kn-input-" + TK_FIELD_KEY)
+          .find(".control")
+          .addClass("hiddenFormField");
+        clearInterval(loop);
       } else if (attempts === MAX_ATTEMPTS) {
+        // append TK field value as text
         $("#kn-input-" + TK_FIELD_KEY).append("<span>(none)</span>");
+        // hide TK connection input
+        $("#kn-input-" + TK_FIELD_KEY)
+          .find(".control")
+          .addClass("hiddenFormField");
         clearInterval(loop);
       }
     }, 1000);
@@ -721,9 +729,16 @@ $(document).on("knack-scene-render.scene_1130", function (event, scene) {
   conditionallyDisableTaskOrderEditing();
 });
 
-// $(document).on("knack-scene-render.scene_1048", function (event, scene) {
-//   conditionallyDisableTaskOrderEditing();
-// });
+$(document).on("knack-scene-render.scene_1048", function (event, scene) {
+  conditionallyDisableTaskOrderEditing();
+});
+
+$(document).on("knack-scene-render.scene_297", function (event, scene) {
+  conditionallyDisableTaskOrderEditing();
+});
+$(document).on("knack-scene-render.scene_634", function (event, scene) {
+  conditionallyDisableTaskOrderEditing();
+});
 
 ////////////////////////////////////////////
 ////// End Disable Task Order Editing //////
