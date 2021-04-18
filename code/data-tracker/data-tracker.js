@@ -645,6 +645,10 @@ If financial txns have been processed, then the editable select field
 will be replaced with a static span of text.
 */
 function getDetailsFieldValue(fieldKey) {
+  /*
+  Given a field key known to be present in a detailss view on the page, remove
+  the entire cotaining view. Assumes that only one instance of the field is present.
+  */
   var spans = $("div." + fieldKey).find(".kn-detail-body span");
   if (!spans || spans.length === 0) {
     return null;
