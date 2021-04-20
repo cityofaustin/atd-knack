@@ -445,11 +445,13 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   // If there is an existing value, show associated fields
   if(fieldsIdsShownOnFieldSelect.hasOwnProperty(improvementValue)){	
      showFormFieldsByValue(improvementValue);
+     showFormFieldsByMitigationType(mitigationType);
   }
 
   // Attach event listener to handle change in field_495 select (Improvement)
   $("#view_509-field_495").on("change", function (event) {
     var fieldValue = event.target.value;
+    var mitigationType = $("#view_509-field_326").val();
 
     hideFormFields("view_509");
     showFormFieldsByValue(fieldValue);
