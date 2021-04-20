@@ -406,7 +406,7 @@ function hideFormFields(fieldViewId) {
   });
 }
 
-function showFormFieldsByValue(value) {
+function showFormFieldsByImprovementType(value) {
   // Un-hide form fields in map
   if(fieldsIdsShownOnImprovementSelect.hasOwnProperty(value)){
   	fieldsIdsShownOnImprovementSelect[value].forEach(function (fieldId) {
@@ -429,7 +429,7 @@ function showFieldsByImprovementAndType(viewId){
   var mitigationType = $("#" + viewId + "-field_326").val();
 
   hideFormFields(viewId);
-  showFormFieldsByValue(improvementType);
+  showFormFieldsByImprovementType(improvementType);
   showFormFieldsByMitigationType(mitigationType);
 }
 
@@ -457,7 +457,7 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   
   // If there is an existing value, show associated fields
   if(fieldsIdsShownOnImprovementSelect.hasOwnProperty(improvementValue)){	
-     showFormFieldsByValue(improvementValue);
+     showFormFieldsByImprovementType(improvementValue);
   }
   
   // If there is an existing value, show associated fields
