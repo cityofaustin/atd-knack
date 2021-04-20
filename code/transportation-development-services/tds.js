@@ -324,7 +324,7 @@ var fieldsIdsShownOnLoad = {
   "kn-input-field_211": "Recommendation Notes",
 };
 
-var fieldsIdsShownOnFieldSelect = {
+var fieldsIdsShownOnImprovementSelect = {
   // "MC Field Value": [...ids of fields to show on value select]
   "Construct Turn Lane": [
     "kn-input-field_494",
@@ -389,6 +389,11 @@ var fieldsIdsShownOnFieldSelect = {
   ],
 };
 
+var fieldsIdsShownOnMitigationTypeSelect = {
+  // "MC Field Value": [...ids of fields to show on value select]
+  "Mitigation Fee in Lieu": ["kn-input-field_488"]
+};
+
 function hideFormFields(fieldViewId) {
   var $fields = $("#" + fieldViewId).find(".kn-input");
 
@@ -403,7 +408,14 @@ function hideFormFields(fieldViewId) {
 
 function showFormFieldsByValue(value) {
   // Un-hide form fields in map
-  fieldsIdsShownOnFieldSelect[value].forEach(function (fieldId) {
+  fieldsIdsShownOnImprovementSelect[value].forEach(function (fieldId) {
+    $("#" + fieldId).show();
+  });
+}
+
+function showFormFieldsByMitigationType(value) {
+  // Un-hide form fields in map
+  fieldsIdsShownOnMitigationTypeSelect[value].forEach(function (fieldId) {
     $("#" + fieldId).show();
   });
 }
@@ -426,6 +438,7 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   hideFormFields("view_509");
   
   var improvementValue = $("#view_509-field_495").val();
+  var mitigationType = $("#view_509-field_326").val();
   
   // If there is an existing value, show associated fields
   if(fieldsIdsShownOnFieldSelect.hasOwnProperty(improvementValue)){	
@@ -438,6 +451,7 @@ $(document).on("knack-view-render.view_509", function (event, view) {
 
     hideFormFields("view_509");
     showFormFieldsByValue(fieldValue);
+    showFormFieldsByMitigationType(mitigationType);
   });
 });
 
