@@ -408,39 +408,52 @@ function hideFormFields(fieldViewId) {
 
 function showFormFieldsByValue(value) {
   // Un-hide form fields in map
-  fieldsIdsShownOnImprovementSelect[value].forEach(function (fieldId) {
-    $("#" + fieldId).show();
-  });
+  if(fieldsIdsShownOnImprovementSelect.hasOwnProperty(value)){
+  	fieldsIdsShownOnImprovementSelect[value].forEach(function (fieldId) {
+    	$("#" + fieldId).show();
+  	});
+  }
 }
 
 function showFormFieldsByMitigationType(value) {
   // Un-hide form fields in map
-  fieldsIdsShownOnMitigationTypeSelect[value].forEach(function (fieldId) {
-    $("#" + fieldId).show();
-  });
+  if(fieldsIdsShownOnMitigationTypeSelect.hasOwnProperty(value)){
+  	fieldsIdsShownOnMitigationTypeSelect[value].forEach(function (fieldId) {
+    	$("#" + fieldId).show();
+  	});
+  }
+}
+
+function showFieldsByImprovementAndType(viewId){
+  var improvementType = $("#" + viewId + "-field_495").val();
+  var mitigationType = $("#" + viewId + "-field_326").val();
+
+  hideFormFields(viewId);
+  showFormFieldsByValue(improvementType);
+  showFormFieldsByMitigationType(mitigationType);
 }
 
 //the Add Mitigation Form
 $(document).on("knack-view-render.view_628", function (event, view) {
-  hideFormFields("view_628");
+  hideFormFields(view.key);
 
   // Attach event listener to handle change in field_495 select (Improvement)
   $("#view_628-field_495").on("change", function (event) {
-    var fieldValue = event.target.value;
-    var mitigationType = $("#view_509-field_326").val();
+    showFieldsByImprovementAndType(view.key);
+  });
 
-    hideFormFields("view_628");
-    showFormFieldsByValue(fieldValue);
-    showFormFieldsByMitigationType(mitigationType);
+  // Attach event listener to handle change in field_326 select (Mitigation Type)
+  $("#view_628-field_326").on("change", function (event) {
+    showFieldsByImprovementAndType(view.key);
   });
 });
 
 //the Edit Mitigation Form
 $(document).on("knack-view-render.view_509", function (event, view) {
-  hideFormFields("view_509");
+  hideFormFields(view.key);
   
-  var improvementValue = $("#view_509-field_495").val();
-  var mitigationType = $("#view_509-field_326").val();
+  var improvementValue = $("#" + view.key +"-field_495").val();
+  var mitigationType = $("#" + view.key +"-field_326").val();
   
   // If there is an existing value, show associated fields
   if(fieldsIdsShownOnImprovementSelect.hasOwnProperty(improvementValue)){	
@@ -453,13 +466,13 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   }
 
   // Attach event listener to handle change in field_495 select (Improvement)
-  $("#view_509-field_495").on("change", function (event) {
-    var fieldValue = event.target.value;
-    var mitigationType = $("#view_509-field_326").val();
+  $("#" + view.key + "-field_495").on("change", function (event) {
+    showFieldsByImprovementAndType(view.key);
+  });
 
-    hideFormFields("view_509");
-    showFormFieldsByValue(fieldValue);
-    showFormFieldsByMitigationType(mitigationType);
+  // Attach event listener to handle change in field_326 select (Mitigation Type)
+  $("#" + view.key + "-field_326").on("change", function (event) {
+    showFieldsByImprovementAndType(view.key);
   });
 });
 
