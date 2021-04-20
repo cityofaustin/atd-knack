@@ -443,8 +443,12 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   var mitigationType = $("#view_509-field_326").val();
   
   // If there is an existing value, show associated fields
-  if(fieldsIdsShownOnFieldSelect.hasOwnProperty(improvementValue)){	
+  if(fieldsIdsShownOnImprovementSelect.hasOwnProperty(improvementValue)){	
      showFormFieldsByValue(improvementValue);
+  }
+  
+  // If there is an existing value, show associated fields
+  if(fieldsIdsShownOnMitigationTypeSelect.hasOwnProperty(mitigationType)){	
      showFormFieldsByMitigationType(mitigationType);
   }
 
