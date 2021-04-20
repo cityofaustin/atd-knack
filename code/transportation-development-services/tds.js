@@ -427,9 +427,11 @@ $(document).on("knack-view-render.view_628", function (event, view) {
   // Attach event listener to handle change in field_495 select (Improvement)
   $("#view_628-field_495").on("change", function (event) {
     var fieldValue = event.target.value;
+    var mitigationType = $("#view_509-field_326").val();
 
     hideFormFields("view_628");
     showFormFieldsByValue(fieldValue);
+    showFormFieldsByMitigationType(mitigationType);
   });
 });
 
