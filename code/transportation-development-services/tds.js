@@ -315,6 +315,9 @@ Highcharts.setOptions({
 /****************************************************/
 /**** Hide/Show TIA Add Mitigation form elements ****/
 /****************************************************/
+var improvementField = "field_495";
+var mitigationField = "field_326";
+
 var fieldsIdsShownOnLoad = {
   // "Field ID": "Field Name"
   "kn-input-field_639": "Mitigation Location",
@@ -425,8 +428,8 @@ function showFormFieldsByMitigationType(value) {
 }
 
 function showFieldsByImprovementAndType(viewId){
-  var improvementType = $("#" + viewId + "-field_495").val();
-  var mitigationType = $("#" + viewId + "-field_326").val();
+  var improvementType = $("#" + viewId + "-" + improvementField).val();
+  var mitigationType = $("#" + viewId + "-" + mitigationField).val();
 
   hideFormFields(viewId);
   showFormFieldsByImprovementType(improvementType);
@@ -438,12 +441,12 @@ $(document).on("knack-view-render.view_628", function (event, view) {
   hideFormFields(view.key);
 
   // Attach event listener to handle change in field_495 select (Improvement)
-  $("#view_628-field_495").on("change", function (event) {
+  $("#" + view.key + "-" + improvementField).on("change", function (event) {
     showFieldsByImprovementAndType(view.key);
   });
 
   // Attach event listener to handle change in field_326 select (Mitigation Type)
-  $("#view_628-field_326").on("change", function (event) {
+  $("#" + view.key + "-" + mitigationField).on("change", function (event) {
     showFieldsByImprovementAndType(view.key);
   });
 });
@@ -452,8 +455,8 @@ $(document).on("knack-view-render.view_628", function (event, view) {
 $(document).on("knack-view-render.view_509", function (event, view) {
   hideFormFields(view.key);
   
-  var improvementValue = $("#" + view.key +"-field_495").val();
-  var mitigationType = $("#" + view.key +"-field_326").val();
+  var improvementValue = $("#" + view.key + "-" + improvementField).val();
+  var mitigationType = $("#" + view.key + "-" + mitigationField).val();
   
   // If there is an existing value, show associated fields
   if(fieldsIdsShownOnImprovementSelect.hasOwnProperty(improvementValue)){	
@@ -466,12 +469,12 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   }
 
   // Attach event listener to handle change in field_495 select (Improvement)
-  $("#" + view.key + "-field_495").on("change", function (event) {
+  $("#" + view.key + "-" + improvementField).on("change", function (event) {
     showFieldsByImprovementAndType(view.key);
   });
 
   // Attach event listener to handle change in field_326 select (Mitigation Type)
-  $("#" + view.key + "-field_326").on("change", function (event) {
+  $("#" + view.key + "-" + mitigationField).on("change", function (event) {
     showFieldsByImprovementAndType(view.key);
   });
 });
