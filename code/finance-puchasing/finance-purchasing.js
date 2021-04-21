@@ -387,39 +387,6 @@ $(document).on("knack-scene-render.scene_1", function () {
   }
 });
 
-function customButton(
-  div_id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  button_class,
-  container_class,
-  callback
-) {
-  // create a custom button
-
-  $("<div/>", {
-    id: div_id,
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
-      url +
-      "'><div class='" +
-      container_class +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></div></a>"
-  );
-
-  if (callback) callback();
-}
-
 //////// Inventory Checkboxes (scene_4) /////////
 
 // Set scenes and views
