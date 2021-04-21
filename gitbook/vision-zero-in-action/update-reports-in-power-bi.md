@@ -127,9 +127,15 @@ This datasource is used to connect to the citations/warning dataset from Brazos.
 9. Create a custom column with this formula - \[Officer Badge No\]&" "&\[\#"Date - Copy"\]&" "&\[\#"Top of the Start Hour - Copy"\].
 10. Rename the field Assignment Join ID.
 
+### Create the relationship between the two datasets
+
+1. Close and Apply in Power Query Editor to apply and save the queries and data transformations. 
+2. Click on Modeling and then select Manage Relationships.
+3. Set a relationship between VZA Assignments 1 and Citation Audit by Step using the Assignment Join ID fields and set the cardinality as One to Many \(one VZA Assignment record to many Citation Audit by STEP records\).
 
 
-### 
+
+
 
 
 
