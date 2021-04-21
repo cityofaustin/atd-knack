@@ -23,10 +23,6 @@ These steps can be carried out either on a PC or in a web browser.
 
 1. Open Vision Zero Datasets on One Drive. You will need to be given permission to access this location on One Drive.
 
-![](https://lh5.googleusercontent.com/AXTVNP2g8H7H4wLMkXiAuCpZ4I7PeWKp3cLI0i6hEcahJ4lk5U77Fv7WDknqg1wfaRZuuHEi843NVCKSvVEow2rC3fkCfA4ItzihbcOIo-giaGLav2KS9sz0j9K2ZvtNS5nfdEBu)
-
-
-
 2. Add a suffix to Citation Audit by STEP, Marched\_Assignments\_Citations\_Warnings, notes, vzaofficerassignments to denote the datasets are from previous weeks and can be archived.
 
 ![](https://lh6.googleusercontent.com/sl_Uzd9SLazpAEjxoFsRWZ1MUt3gYQalPWWmmf5wbuZvy_3JRuE3rY1oeZ_xVSNZV20mgjNoKHiZ4pGD_swnYopaRPqSVcAwt_sDXDXWJvvXUccE-pnC2iUn7tKE8oRPA-Sahcbw)
@@ -120,7 +116,16 @@ This datasource is used to connect to the citations/warning dataset from Brazos.
 
 #### **For Citation Audit by Step**
 
-
+1. Connect to the Citations Audit by STEP csv in One Drive. 
+2. Change the field type for Unique ID to Text. 
+3. Duplicate the Time field to create Time-Copy.
+4. Rename the Date field to Citation Date.
+5. Rename the Time field to Citation Time.
+6. Select the Time-Copy field and then navigate to Transform - Hour - Start of the Hour.
+7. Rename this field Top of the Start Hour.
+8. Duplicate the field Top of the Start Hour and convert it to a text field.
+9. Create a custom column with this formula - \[Officer Badge No\]&" "&\[\#"Date - Copy"\]&" "&\[\#"Top of the Start Hour - Copy"\].
+10. Rename the field Assignment Join ID.
 
 
 
