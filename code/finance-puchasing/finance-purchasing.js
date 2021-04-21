@@ -171,45 +171,57 @@ function hideDetailsLink(dest_id, src_field) {
   $(".kn-details-link." + src_field).remove();
 }
 
-function customLoginButton(view_id, page_name) {
-  //  special logic to generate URL and clean-up sign in page brefore creating large button
-  $(".kn-sso-container").hide();
+/**
+ * Enhance SSO button and hide/show default Knack login form with buttons
+ * @parameter {string} viewId - Knack view id to append button link to
+ */
+ function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
 
-  $(".login_form").hide();
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
 
-  $("h2.kn-title").hide();
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login",
+  });
+  $coacdButton.appendTo("#" + viewId);
 
-  var url =
-    "https://atd.knack.com/finance-purchasing#" + page_name + "/auth/COACD";
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
-  customButton(
-    "caocd-button-login",
-    view_id,
-    url,
-    "sign-in",
-    "Sign-In",
-    "big-button",
-    "big-button-container"
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
   );
 
-  customButton(
-    "non-coacd-button-login",
-    view_id,
-    "javascript:void(0)",
-    "lock",
-    "Non-COA Sign-In",
-    "small-button",
-    "small-button-container",
-    function (divId = "non-coacd-button-login") {
-      setClickEvent(
-        divId,
-        showHideElements,
-        ".login_form",
-        ".small-button-container,.big-button-container"
-      );
-    }
-  );
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
 }
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
 
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
