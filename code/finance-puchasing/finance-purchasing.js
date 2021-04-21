@@ -72,79 +72,75 @@ $(document).on("knack-scene-render.scene_4", function () {
   insertIcon(".field_17", colorMapOne);
 });
 
-function customButton(
-  div_id,
+/**
+ * Template and append a button link, disable it optionally, and invoke a callback function argument
+ * @parameter {string} id - id attribute of the a tag in the button link
+ * @parameter {string} view_id - Knack view id to append button link to
+ * @parameter {string} url - Destination to navigate to on click
+ * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
+ * @parameter {bool} isDisabled - Is button disabled (defaults to false)
+ * @parameter {function} callback - Function that is invoked after appending the button link
+ */
+ function bigButton(
+  id,
   view_id,
   url,
   fa_icon,
   button_label,
-  button_class,
-  container_class,
-  callback
+  isDisabled = false,
+  callback = null
 ) {
-  // create a custom button
+  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
 
-  $("<div/>", {
-    id: div_id,
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
       url +
-      "'><div class='" +
-      container_class +
       "'><span><i class='fa fa-" +
       fa_icon +
       "'></i></span><span> " +
       button_label +
-      "</span></div></a>"
-  );
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
 
 $(document).on("knack-view-render.view_167", function (event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "all",
     "view_167",
     "https://atd.knack.com/finance-purchasing#purchase-requests/",
     "archive",
     "All Purchase Requests",
-    "big-button",
-    "big-button-container"
   );
 
-  customButton(
+  bigButton(
     "create",
     "view_167",
     "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
     "plus-circle",
     "New Purchase Request",
-    "big-button",
-    "big-button-container"
   );
 
-  customButton(
+  bigButton(
     "review",
     "view_167",
     "https://atd.knack.com/finance-purchasing#reviews/",
     "check-square-o",
     "Review Purchase Requests",
-    "big-button",
-    "big-button-container"
   );
 
-  customButton(
+  bigButton(
     "my",
     "view_167",
     "https://atd.knack.com/finance-purchasing#my-purchase-requests/",
     "male",
     "My Purchase Requests",
-    "big-button",
-    "big-button-container"
   );
 });
 
@@ -152,14 +148,12 @@ $(document).on("knack-page-render.scene_68", function (event, page) {
   // render Review Details page
 
   //  Create big PR details button and hide the small link
-  customButton(
+  bigButton(
     "viewPR",
     "view_247",
     "https://atd.knack.com/finance-purchasing#purchase-requests/",
     "list-alt",
     "View Request Details",
-    "big-button",
-    "big-button-container"
   );
 
   hideDetailsLink("viewPR", "field_11");
