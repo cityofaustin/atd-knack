@@ -84,6 +84,40 @@ These steps can be carried out either on a PC or in a web browser.
 
 ### Join VZA assignments and Brazos citations/warnings
 
+To update the Power BI report, click on Refresh in the top ribbon of the Power BI report in Power BI Desktop.
+
+The process needed to get to this point is documented below in case any changes need to be made in the future. 
+
+#### VZA Assignments 1
+
+This datasource is used to connect to the citations/warning dataset from Brazos. The process needed to create a common key to connect to the citations/ warnings is documented below. 
+
+1. Connect to the vzaofficerassignments csv in the Vision Zero folder in One Drive.
+2. Extract the length of the Officer Assignments Date Time field.
+3. Depending on if the assignment starts and ends on the same day, or over two days, the length of the string in that field will be 25 or 36 characters. \(mm:dd:yyyy hh:mm:ss to hh:mm:ss or mm:dd:yyyy hh:mm:ss to mm:dd:yyyy hh:mm:ss\). We will use this field to create a conditional column later in this process. 
+4. Extract the text before the first space delimiter from the Officer Assignments Date Time field. Rename this field to Assignment Start Date 1
+5. Extract the text between the first space and second space delimiter from the Start of the input in the Officer Assignments Date Time field. Rename this field to Assignment Start Time 1.
+6. Extract the text before the first space delimiter from the end of the input in the Officer Assignments Date Time field. Rename this field to Assignment End Time.
+7. Extract the text after the ‘to’ delimiter. Rename this column Assignment End Date and Time 1.
+8. Create a custom column by concatenating Assignment Start Date and Assignment End Time to create Assignment End Date and Time 1.
+9. Create a conditional column Assignment End Date and Time with the condition if Length is 25, then point to Assignment End Date and Time 1, if not then point to Assignment End Date and Time 2.
+10. Create a custom column with Assignment Start Date 1 and Assignment Start Time 1. Rename it to Assignment Start Date and Time. 
+11. Convert the Assignment Start Date and Time, and Assignment End Date and Time to Date and Time format. 
+12. Create a custom field Assignment Duration 1 to calculate the hours in each assignment by subtracting Assignment Start Date and Time 1 from Assignment End Date and Time. 
+13. Convert this field to Hours format.
+14. Create a custom field call Create List with this formula = List.DateTimes\(\[Assignment Start Date and Time\],\[Hours\],\#duration\(0,1,0,0\)\)
+15. Explode the list by expanding to new rows.
+16. Copy the Create List field using the Duplicate Column function.
+17. Convert the field to a Date and Time field. While holding the field selected, click on Date in the model ribbon, select Date Only. Rename this field Assignment Date.Convert to a Text field. 
+18. Copy the Create List field again using the Duplicate Column function. 
+19. Convert the field to a Date and Time field. While holding the field selected, click on Time in the model ribbon and select Time Only. Rename this field Top of the Start Hour. Convert to a text field. 
+20. Create a Custom Column by concatenating Badge Number Assignment Date and Top of the Start Hour. Rename this field Assignment Join ID. 
+21. Run remove duplicates on the Assignment Join ID field.
+
+#### **For Citation Audit by Step**
+
+
+
 
 
 ### 
