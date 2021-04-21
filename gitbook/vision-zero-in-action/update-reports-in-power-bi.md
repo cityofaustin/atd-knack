@@ -15,7 +15,7 @@ To update reports in Power BI related to VZA assignments and citations/warnings 
 
 You will need access to the [Reports](https://atd.knack.com/vza#api-views-private/?view_539_page=1) section in the VZA application and will need an account  set up to access [reports in Brazos](https://my.brazostech.com/PublicSafety/Reports.aspx). Brazos is administered by the Austin Police Department. 
 
-## Process 
+## Process to update reports in Power BI
 
 ### Preparatory Steps
 
@@ -86,9 +86,13 @@ These steps can be carried out either on a PC or in a web browser.
 
 To update the Power BI report, click on Refresh in the top ribbon of the Power BI report in Power BI Desktop.
 
+
+
+## Process to create reports in Power BI
+
 The process needed to get to this point is documented below in case any changes need to be made in the future. 
 
-#### 1. For VZA Assignments 1
+### 1. For VZA Assignments 1
 
 This datasource is used to connect to the citations/warning dataset from Brazos. The process needed to create a common key to connect to the citations/ warnings is documented below. 
 
