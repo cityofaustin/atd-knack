@@ -235,27 +235,6 @@ function showHideElements(showSelector, hideSelector) {
   $(hideSelector).hide();
 }
 
-$(document).on("knack-view-render.any", function (event, page) {
-  //  wrapper to create large sign-in buttons
-  //  the views ojbect uses the view id of the login form element as each key
-  //  and the page url of the login page's **chile page** as the value
-  var views = {
-    view_39: "home",
-    view_5: "purchase-requests",
-    view_82: "purchasing-budget-review",
-    view_52: "account-administration",
-    view_322: "commodity-codes",
-    view_31: "reviews",
-    view_387: "invoice-details",
-    view_379: "add-invoice",
-    view_77: "my-purchase-requests",
-  };
-
-  if (page.key in views) {
-    customLoginButton(page.key, views[page.key]);
-  }
-});
-
 // replace "Add New Option" with custom text
 $(document).on("knack-page-render.any", function (event, view) {
   var addNew = $("#kn-input-field_217")
