@@ -63,9 +63,9 @@ These steps can be carried out either on a PC or in a web browser.
 ### Access Vision Zero officer assignments
 
 1. Open [https://atd.knack.com/vza\#api-views-private/](https://atd.knack.com/vza#api-views-private/)
-2. Filter the Officer Assignments table for all assignments that an officer signed up for after January 19, 2021. 
+2. Filter the Officer Assignments table for all assignments after January 19, 2021. 
 
-![](../.gitbook/assets/image%20%2831%29.png)
+![](../.gitbook/assets/image%20%28107%29.png)
 
 3. Export this table as a CSV. It will download as vzaofficerassignments.csv
 
