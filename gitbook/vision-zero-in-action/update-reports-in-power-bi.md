@@ -92,7 +92,7 @@ To update the Power BI report, click on Refresh in the top ribbon of the Power B
 
 The process needed to get to this point is documented below in case any changes need to be made in the future. 
 
-### 1. For VZA Assignments 1
+### For VZA Assignments 1
 
 This datasource is used to connect to the citations/warning dataset from Brazos. The process needed to create a common key to connect to the citations/ warnings is documented below. 
 
