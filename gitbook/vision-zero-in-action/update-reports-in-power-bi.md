@@ -114,7 +114,7 @@ This datasource is used to connect to the citations/warning dataset from Brazos.
 20. Create a Custom Column by concatenating Badge Number Assignment Date and Top of the Start Hour. Rename this field Assignment Join ID. 
 21. Run remove duplicates on the Assignment Join ID field.
 
-#### **For Citation Audit by Step**
+### **For Citation Audit by Step**
 
 1. Connect to the Citations Audit by STEP csv in One Drive. 
 2. Change the field type for Unique ID to Text. 
