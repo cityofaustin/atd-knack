@@ -2,7 +2,7 @@
 
 ### About the Application
 
-
+Information about this application, it's key stakeholders, and functionality can be found [here](https://austinmobility.io/projects/145). 
 
 ### Key Features / Table of Contents
 
