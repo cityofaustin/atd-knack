@@ -13,7 +13,7 @@ To update reports in Power BI related to VZA assignments and citations/warnings 
 
 ## Permissions 
 
-You will need access to the [Reports](https://atd.knack.com/vza#api-views-private/?view_539_page=1) section in the VZA application and will need an account  set up to access reports in Brazos. Brazos is administered by the Austin Police Department. 
+You will need access to the [Reports](https://atd.knack.com/vza#api-views-private/?view_539_page=1) section in the VZA application and will need an account  set up to access [reports in Brazos](https://my.brazostech.com/PublicSafety/Reports.aspx). Brazos is administered by the Austin Police Department. 
 
 ## Process 
 
