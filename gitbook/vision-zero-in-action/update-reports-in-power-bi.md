@@ -69,7 +69,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 3. Export this table as a CSV. It will download as vzaofficerassignments.csv
 
-4. Move this csv to `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Vision_Zero_in_Action\Reports\Match_Assigments_Citations\VZA Officer Assignments`
+4. Move this csv to the Vision Zero Datasets folder in One Drive.
 
 ### Access Notes
 
