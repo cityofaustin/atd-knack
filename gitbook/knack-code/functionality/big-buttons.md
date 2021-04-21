@@ -99,7 +99,7 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
-  max-width: 12em;
+  max-width: 15em;
   display: block;
 }
 
