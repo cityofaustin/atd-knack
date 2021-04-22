@@ -8,7 +8,7 @@ Information about this application, it's key stakeholders, and functionality can
 
 ### Workflow
 
-The workflow for this application is documented on this [Miro Board](https://miro.com/app/board/o9J_lPd0yrU=/).
+The workflow for this application is in the process of being documented on this [Miro Board](https://miro.com/app/board/o9J_lPd0yrU=/).
 
 ### Enhancements
 
