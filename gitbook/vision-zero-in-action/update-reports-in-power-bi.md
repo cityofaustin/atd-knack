@@ -28,7 +28,6 @@ Another factor related to time to bear in mind is that officers don't always syn
 These steps can be carried out either on a PC or in a web browser.
 
 1. Open Vision Zero Datasets on One Drive. You will need to be given permission to access this location on One Drive.
-
 2. Add a suffix to Citation Audit by STEP, Marched\_Assignments\_Citations\_Warnings, notes, vzaofficerassignments to denote the datasets are from previous weeks and can be archived.
 
 ![](https://lh6.googleusercontent.com/sl_Uzd9SLazpAEjxoFsRWZ1MUt3gYQalPWWmmf5wbuZvy_3JRuE3rY1oeZ_xVSNZV20mgjNoKHiZ4pGD_swnYopaRPqSVcAwt_sDXDXWJvvXUccE-pnC2iUn7tKE8oRPA-Sahcbw)
