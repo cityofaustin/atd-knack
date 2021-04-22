@@ -19,7 +19,7 @@ You will need access to the [Reports](https://atd.knack.com/vza#api-views-privat
 
 Right now, the process is run manually each week. The need to do this process depends on officers having signed up for assignments in the previous weeks. If no officers signed up for assignments in the prior week, there is no need to update the reports. 
 
-Another factor related to time to bear in mind is that officers don't always sync their devices at the cadence required for weekly updates to the reports. Sometimes the officer might have issued citations and warning during an assignment, but those do not get recorded in Brazos till they sync their devices. So reports need to be renewed completely instead of adding snapshots over time.
+Another factor related to time to bear in mind is that officers don't always sync their devices at the cadence required for weekly updates to the reports. Sometimes the officers might have issued citations and warning during an assignment, but those do not get recorded in Brazos till they sync their device. So reports need to be renewed completely instead of adding snapshots over time.
 
 ## Process to update reports in Power BI
 
