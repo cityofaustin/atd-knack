@@ -15,6 +15,12 @@ To update reports in Power BI related to VZA assignments and citations/warnings 
 
 You will need access to the [Reports](https://atd.knack.com/vza#api-views-private/?view_539_page=1) section in the VZA application and will need an account  set up to access [reports in Brazos](https://my.brazostech.com/PublicSafety/Reports.aspx). Brazos is administered by the Austin Police Department. 
 
+## Timeline
+
+Right now, the process is run manually each week. The need to do this process depends on officers having signed up for assignments in the previous weeks. If no officers signed up for assignments in the prior week, there is no need to update the reports. 
+
+Another factor related to time to bear in mind is that officers don't always sync their devices at the cadence required for weekly updates to the reports. Sometimes the officer might have issued citations and warning during an assignment, but those do not get recorded in Brazos till they sync their devices. So reports need to be renewed completely instead of adding snapshots over time.
+
 ## Process to update reports in Power BI
 
 ### Preparatory Steps
