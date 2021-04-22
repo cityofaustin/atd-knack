@@ -76,9 +76,7 @@ These steps can be carried out either on a PC or in a web browser.
 
 1. Open [https://atd.knack.com/vza\#api-views-private/](https://atd.knack.com/vza#api-views-private/)
 2. Filter the Time Logs - Notes table to show all notes after January 19, 2021.
-
 3. Export this table out as a CSV. The table will be downloaded as notes.csv
-
 4. Move this CSV to `OneDrive - City of Austin\Vision Zero Datasets` \(You will need to be granted permission to access this location.
 
 ### Join VZA assignments and Brazos citations/warnings
