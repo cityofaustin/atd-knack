@@ -96,6 +96,8 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 });
 ```
 
+Save Code/Screen space by using this condensed handler block instead of above
+
 ```text
 // create large Reviewer Dashboard button on the Home page
 $(document).on("knack-view-render.view_55", function(event, page) {
