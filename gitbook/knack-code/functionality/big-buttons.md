@@ -52,6 +52,19 @@ function bigButton(
 }
 ```
 
+Save Code/Screen space by using this condensed function block instead of above
+
+```text
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+
+  if (callback) callback();
+}
+```
+
 A handler for each big button
 
 ```text
@@ -83,7 +96,12 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 });
 ```
 
-
+```text
+// create large Reviewer Dashboard button on the Home page
+$(document).on("knack-view-render.view_55", function(event, page) {
+    bigButton("reviewer-dashboard", "view_55", "https://atd.knack.com/development-services#reviewer-dashboard/", "dashboard", "Reviewer Dashboard");
+});
+```
 
 ### The CSS
 
@@ -194,8 +212,6 @@ When placing the JS, the function only needs to be placed once but you will need
   ```
 {% endtab %}
 {% endtabs %}
-
-
 
 
 
