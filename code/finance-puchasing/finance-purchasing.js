@@ -72,79 +72,75 @@ $(document).on("knack-scene-render.scene_4", function () {
   insertIcon(".field_17", colorMapOne);
 });
 
-function customButton(
-  div_id,
+/**
+ * Template and append a button link, disable it optionally, and invoke a callback function argument
+ * @parameter {string} id - id attribute of the a tag in the button link
+ * @parameter {string} view_id - Knack view id to append button link to
+ * @parameter {string} url - Destination to navigate to on click
+ * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
+ * @parameter {bool} isDisabled - Is button disabled (defaults to false)
+ * @parameter {function} callback - Function that is invoked after appending the button link
+ */
+ function bigButton(
+  id,
   view_id,
   url,
   fa_icon,
   button_label,
-  button_class,
-  container_class,
-  callback
+  isDisabled = false,
+  callback = null
 ) {
-  // create a custom button
+  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
 
-  $("<div/>", {
-    id: div_id,
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
       url +
-      "'><div class='" +
-      container_class +
       "'><span><i class='fa fa-" +
       fa_icon +
       "'></i></span><span> " +
       button_label +
-      "</span></div></a>"
-  );
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
 
 $(document).on("knack-view-render.view_167", function (event, page) {
   // create large button on the home page
-  customButton(
+  bigButton(
     "all",
     "view_167",
     "https://atd.knack.com/finance-purchasing#purchase-requests/",
     "archive",
     "All Purchase Requests",
-    "big-button",
-    "big-button-container"
   );
 
-  customButton(
+  bigButton(
     "create",
     "view_167",
     "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
     "plus-circle",
     "New Purchase Request",
-    "big-button",
-    "big-button-container"
   );
 
-  customButton(
+  bigButton(
     "review",
     "view_167",
     "https://atd.knack.com/finance-purchasing#reviews/",
     "check-square-o",
     "Review Purchase Requests",
-    "big-button",
-    "big-button-container"
   );
 
-  customButton(
+  bigButton(
     "my",
     "view_167",
     "https://atd.knack.com/finance-purchasing#my-purchase-requests/",
     "male",
     "My Purchase Requests",
-    "big-button",
-    "big-button-container"
   );
 });
 
@@ -152,14 +148,12 @@ $(document).on("knack-page-render.scene_68", function (event, page) {
   // render Review Details page
 
   //  Create big PR details button and hide the small link
-  customButton(
+  bigButton(
     "viewPR",
     "view_247",
     "https://atd.knack.com/finance-purchasing#purchase-requests/",
     "list-alt",
     "View Request Details",
-    "big-button",
-    "big-button-container"
   );
 
   hideDetailsLink("viewPR", "field_11");
@@ -177,45 +171,57 @@ function hideDetailsLink(dest_id, src_field) {
   $(".kn-details-link." + src_field).remove();
 }
 
-function customLoginButton(view_id, page_name) {
-  //  special logic to generate URL and clean-up sign in page brefore creating large button
-  $(".kn-sso-container").hide();
+/**
+ * Enhance SSO button and hide/show default Knack login form with buttons
+ * @parameter {string} viewId - Knack view id to append button link to
+ */
+ function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
 
-  $(".login_form").hide();
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
 
-  $("h2.kn-title").hide();
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login",
+  });
+  $coacdButton.appendTo("#" + viewId);
 
-  var url =
-    "https://atd.knack.com/finance-purchasing#" + page_name + "/auth/COACD";
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
-  customButton(
-    "caocd-button-login",
-    view_id,
-    url,
-    "sign-in",
-    "Sign-In",
-    "big-button",
-    "big-button-container"
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
   );
 
-  customButton(
-    "non-coacd-button-login",
-    view_id,
-    "javascript:void(0)",
-    "lock",
-    "Non-COA Sign-In",
-    "small-button",
-    "small-button-container",
-    function (divId = "non-coacd-button-login") {
-      setClickEvent(
-        divId,
-        showHideElements,
-        ".login_form",
-        ".small-button-container,.big-button-container"
-      );
-    }
-  );
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
 }
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
 
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
@@ -228,27 +234,6 @@ function showHideElements(showSelector, hideSelector) {
   $(showSelector).show();
   $(hideSelector).hide();
 }
-
-$(document).on("knack-view-render.any", function (event, page) {
-  //  wrapper to create large sign-in buttons
-  //  the views ojbect uses the view id of the login form element as each key
-  //  and the page url of the login page's **chile page** as the value
-  var views = {
-    view_39: "home",
-    view_5: "purchase-requests",
-    view_82: "purchasing-budget-review",
-    view_52: "account-administration",
-    view_322: "commodity-codes",
-    view_31: "reviews",
-    view_387: "invoice-details",
-    view_379: "add-invoice",
-    view_77: "my-purchase-requests",
-  };
-
-  if (page.key in views) {
-    customLoginButton(page.key, views[page.key]);
-  }
-});
 
 // replace "Add New Option" with custom text
 $(document).on("knack-page-render.any", function (event, view) {
@@ -386,39 +371,6 @@ $(document).on("knack-scene-render.scene_1", function () {
     );
   }
 });
-
-function customButton(
-  div_id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  button_class,
-  container_class,
-  callback
-) {
-  // create a custom button
-
-  $("<div/>", {
-    id: div_id,
-  }).appendTo("#" + view_id);
-
-  $("#" + div_id).append(
-    "<a class='" +
-      button_class +
-      "' href='" +
-      url +
-      "'><div class='" +
-      container_class +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></div></a>"
-  );
-
-  if (callback) callback();
-}
 
 //////// Inventory Checkboxes (scene_4) /////////
 
