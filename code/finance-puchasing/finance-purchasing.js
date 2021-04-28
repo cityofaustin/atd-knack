@@ -146,18 +146,6 @@ $(document).on("knack-view-render.view_167", function (event, page) {
 
 $(document).on("knack-page-render.scene_68", function (event, page) {
   // render Review Details page
-
-  //  Create big PR details button and hide the small link
-  bigButton(
-    "viewPR",
-    "view_247",
-    "https://atd.knack.com/finance-purchasing#purchase-requests/",
-    "list-alt",
-    "View Request Details",
-  );
-
-  hideDetailsLink("viewPR", "field_11");
-
   //  Remove unwanted select options from approval authority list
   $("option[value='8 | Budget Review']").remove();
   $("option[value='7 | Purchase Review']").remove();
