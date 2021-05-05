@@ -547,7 +547,7 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   var unitCostField = "field_245";
   var quantiyOnHandField = "field_3579"; // details
   var previousUnitCostField = "field_3786"; // used to capture previous state on form submit
-  var previousOnHandQuantiyField = "field_3787"; // used to capture previous state on form submit
+  var previousOnHandQuantiyField = "field_3906"; // used to capture previous state on form submit
   var restockQuantityField = "field_3785";
   var restockUnitCostField = "field_3783";
   var newUnitCostField = "field_245";
@@ -557,13 +557,14 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   // prevent editing of new unit cost field. this will be set programmatically
   $("#" + newUnitCostField).prop("disabled", true);
 
-  var quantityOnHand = dollarsToNum(
+  var quantityOnHand = parseInt(
     $(
       $("#" + detailsView)
         .find("div.kn-detail." + quantiyOnHandField)
         .find(".kn-detail-body span")[0]
     ).text()
   );
+
   // handle situation where stock levels are negative (this should not but prob will happen)
   quantityOnHand = quantityOnHand > 0 ? quantityOnHand : 0;
 
@@ -587,8 +588,12 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     .val(quantityOnHand)
     .prop("disabled", true);
 
-  //   $("#kn-input-" + previousUnitCostField).attr("hidden", true);
-  //   $("#kn-input-" + previousOnHandQuantiyField).attr("hidden", true);
+  // clear out pre-existing values from these form fields. these fields are used to "translate"
+  // values to the related unit_cost_history records that are created by form rule on submission,
+  // there may be values in these fields from previous restocking
+  $("#" + restockUnitCostField).val("")
+
+  $("#" + restockQuantityField).val("")
 
   $("#" + restockUnitCostField).on("input", function () {
     restockUnitCost = parseFloat($(this).val());
@@ -657,10 +662,6 @@ function getDetailsFieldValue(fieldKey) {
 }
 
 function removeParentDetails(fieldKey) {
-  /*
-  Given a field key known to be present in a detailss view on the page, remove
-  the entire cotaining view. Assumes that only one instance of the field is present.
-  */
   var details = $("." + fieldKey).closest(".kn-details");
   if (details) {
     details.remove();
