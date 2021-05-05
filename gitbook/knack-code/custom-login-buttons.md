@@ -88,7 +88,7 @@ In the text field under the **CSS** tab, paste the following code. The purpose o
 
 ```text
 /***************************************/
-/************* Small Buttons *************/
+/************ Small Buttons ************/
 /***************************************/
 .small-button-container {
   padding: 5px 5px;
@@ -111,7 +111,9 @@ In the text field under the **CSS** tab, paste the following code. The purpose o
   opacity: 0.6;
 }
 
-a.small-button-container { text-decoration: none; }
+a.small-button {
+  text-decoration: none;
+}
 ```
 
  

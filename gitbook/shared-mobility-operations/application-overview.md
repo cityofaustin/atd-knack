@@ -1,8 +1,6 @@
 # Application Overview
 
-### About the Application
+## About the Application
 
-
-
-### Key Features / Table of Contents
+## Key Features / Table of Contents
 

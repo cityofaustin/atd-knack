@@ -4,7 +4,7 @@ description: How to disable trigger buttons
 
 # Disable Trigger Buttons
 
-![Disabling a Submission Button](../../.gitbook/assets/image%20%2847%29.png)
+![Disabling a Submission Button](../../.gitbook/assets/image%20%2847%29%20%281%29.png)
 
 
 
@@ -58,7 +58,7 @@ For all the disabled buttons in the application, we will utilize this disabled b
 {% tab title="First Step" %}
 Create two separate Details views on a page, one for the Enabled button and the other for the Disabled button.
 
-![](../../.gitbook/assets/image%20%2843%29%20%281%29.png)
+![](../../.gitbook/assets/image%20%2843%29%20%281%29%20%281%29.png)
 {% endtab %}
 
 {% tab title="Second Step" %}
