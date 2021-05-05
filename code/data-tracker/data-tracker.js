@@ -588,6 +588,13 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     .val(quantityOnHand)
     .prop("disabled", true);
 
+  // clear out pre-existing values from these form fields. these fields are used to "translate"
+  // values to the related unit_cost_history records that are created by form rule on submission,
+  // there may be values in these fields from previous restocking
+  $("#" + restockUnitCostField).val("")
+
+  $("#" + restockQuantityField).val("")
+
   //   $("#kn-input-" + previousUnitCostField).attr("hidden", true);
   //   $("#kn-input-" + previousOnHandQuantiyField).attr("hidden", true);
 
