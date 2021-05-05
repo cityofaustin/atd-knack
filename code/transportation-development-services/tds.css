@@ -1,6 +1,6 @@
-/****************************************/
-/************* Icon Effects *************/
-/****************************************/
+/***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
 .fa { vertical-align: baseline; }
 
 .fa-bot { vertical-align: text-bottom; }
@@ -31,7 +31,7 @@
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
-  max-width: 12em;
+  max-width: 15em;
   display: block;
 }
  
@@ -43,9 +43,12 @@
 .big-button-disabled {
   background-color: #f7f7f7;
   opacity: 0.6;
+  pointer-events: none;
 }
  
-a.big-button-container { text-decoration: none; }
+a.big-button-container { 
+  text-decoration: none;
+}
 
 /***************************************/
 /************ Small Buttons ************/
@@ -71,8 +74,13 @@ a.big-button-container { text-decoration: none; }
   opacity: 0.6;
 }
 
-a.small-button-container { text-decoration: none; }
+a.small-button {
+  text-decoration: none;
+}
 
+/****************************************/
+/************ Return Buttons ************/
+/****************************************/
 #return-button {
   padding: 5px 10px;
   cursor: pointer;
@@ -247,12 +255,33 @@ a.form-link:hover {text-decoration:underline;}
   background-color: transparent; color: #367DB7; text-align: center; display: inline-block; }
 #kn-scene_255 .kn-back-link:hover { opacity: 0.8; cursor: pointer; }
 
+/*Mitigations Reporting Page*/
+#kn-scene_268 .kn-back-link { padding: 5px 10px; border-width: 1px; border-color: black; border-radius: 4px; box-shadow: 0px 2px 4px 0px gray; font-size: 1em; 
+  background-color: transparent; color: #367DB7; text-align: center; display: inline-block; }
+#kn-scene_268 .kn-back-link:hover { opacity: 0.8; cursor: pointer; }
+
+/*Submissions Reporting Page*/
+#kn-scene_284 .kn-back-link { padding: 5px 10px; border-width: 1px; border-color: black; border-radius: 4px; box-shadow: 0px 2px 4px 0px gray; font-size: 1em; 
+  background-color: transparent; color: #367DB7; text-align: center; display: inline-block; }
+#kn-scene_284 .kn-back-link:hover { opacity: 0.8; cursor: pointer; }
+
 /*******************************************/
 /** Remove Table Header for Announcements **/
 /*******************************************/
-#view_688 .kn-table th {
-  display: none;
-}
+/*Reviewer Home Page*/
+#view_688 .kn-table th { display: none; }
+
+/*Reviewer Dashboard*/
+#view_751 .kn-table th { display: none; }
+
+/*Development Reviews*/
+#view_752 .kn-table th { display: none; }
+
+/*TIA Requests*/
+#view_753 .kn-table th { display: none; }
+
+/*TDA Reviews*/
+#view_775 .kn-table th { display: none; }
 
 /***************************************/
 /** Remove Back Links for TIA Request **/
@@ -320,19 +349,10 @@ a.form-link:hover {text-decoration:underline;}
 /*PAGE 1 - Requester Information*/
 #view_393 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_393 > form > ul:nth-child(2n) > li { border: none; }
 
 /*PAGE 2 - Project Information*/
-#view_395 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
-  border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_395 > form > ul:nth-child(2n) > li { border: none; }
-
-#view_396 { max-width: 60%; }
-#view_396 .kn-table { border: solid 2px #367DB7; }
-
 #view_397 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_397 > form > ul:nth-child(2n) > li { border: none; }
 
 #kn-input-field_174 /*Case Type field*/
   .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
@@ -341,14 +361,12 @@ a.form-link:hover {text-decoration:underline;}
 /*PAGE 3 - Required Documents*/
 #view_614 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_614 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_419 { max-width: 60%; }
 #view_419 .kn-table { border: solid 2px #367DB7; }
 
 #view_420 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_420 > form > ul:nth-child(2n) > li { border: none; }
 
 /*PAGE 4 - Review Request*/
 /*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
@@ -356,36 +374,23 @@ a.form-link:hover {text-decoration:underline;}
 #view_425 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_427 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
-#view_428 { max-width: 60%; }
-#view_428 .kn-table { border: solid 2px #367DB7; }
-
 #view_618 { max-width: 60%; }
 #view_618 .kn-table { border: solid 2px #367DB7; }
 
 #view_424 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_424 > form > ul:nth-child(2n) > li { border: none; }
 
 /****************************************/
 /*** Styles the Edit TIA Request page ***/
 /****************************************/
 #view_431 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_431 > form > ul:nth-child(2n) > li { border: none; }
-
-/*************************************************/
-/*** Styles the Edit TIA Request Location page ***/
-/*************************************************/
-#view_434 { max-width: 80%; }
-#view_434 .kn-table { border: solid 2px #367DB7; }
 
 /***************************************************/
 /*** Styles the Edit TIA Request Attachment page ***/
 /***************************************************/
 #view_620 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_620 > form > ul:nth-child(2n) > li { border: none; }
-
 #view_619 { max-width: 80%; }
 #view_619 .kn-table { border: solid 2px #367DB7; }
 
@@ -405,7 +410,6 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_518 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_518 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_513 { max-width: 75%; }
 #view_513 .kn-table { border: solid 2px #367DB7; }
@@ -415,11 +419,9 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_519 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_519 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_520 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_520 > form > ul:nth-child(2n) > li { border: none; }
 
 /*************************************************************/
 /*** Styles the TIA New Submission Comment/Attachment page ***/
@@ -432,7 +434,6 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_651 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_651 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_584 { max-width: 75%; }
 #view_584 .kn-table { border: solid 2px #367DB7; }
@@ -442,11 +443,9 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_652 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_652 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_472 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_472 > form > ul:nth-child(2n) > li { border: none; }
 
 /************************************************/
 /*** Styles the TIA New Scope Submission page ***/
@@ -459,7 +458,6 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_579 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_579 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_576 { max-width: 75%; }
 #view_576 .kn-table { border: solid 2px #367DB7; }
@@ -469,11 +467,9 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_580 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_580 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_581 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_581 > form > ul:nth-child(2n) > li { border: none; }
 
 /*******************************************************************/
 /*** Styles the TIA New Scope Submission Comment/Attachment page ***/
@@ -483,46 +479,27 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_641 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_641 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_642 { max-width: 75%; }
 #view_642 .kn-table { border: solid 2px #367DB7; }
 
 #view_643 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_643 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_645 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_645 > form > ul:nth-child(2n) > li { border: none; }
 
 /*******************************************/
 /*** Styles the Edit TIA Attachment page ***/
 /*******************************************/
 #view_383 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_383 > form > ul:nth-child(2n) > li { border: none; }
-
-/******************************************/
-/**** Styles the Add TIA Location page ****/
-/******************************************/
-#view_345 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
-  border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_345 > form > ul:nth-child(2n) > li { border: none; }
-
-/*****************************************/
-/*** Styles the Edit TIA Location page ***/
-/*****************************************/
-#view_347 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
-  border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_347 > form > ul:nth-child(2n) > li { border: none; }
 
 /*********************************************/
 /*** Styles the Add TIA Communication page ***/
 /*********************************************/
 #view_462 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
-#view_462 > form > ul:nth-child(2n) > li { border: none; }
 
 /**********************************************/
 /*** Styles the TIA Submission Details page ***/
@@ -539,9 +516,6 @@ a.form-link:hover {text-decoration:underline;}
 /*******************************************/
 #kn-scene_105 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
-#view_270 { max-width: 75%; }
-#view_270 .kn-table { border: solid 2px #367DB7; }
-
 #view_322 { max-width: 100%; }
 #view_322 .kn-table { border: solid 2px #367DB7; }
 
@@ -549,30 +523,16 @@ a.form-link:hover {text-decoration:underline;}
 #view_321 .kn-table { border: solid 2px #367DB7; }
 
 /******************************************/
-/****** Align Mitigation Menu Center ******/
-/******************************************/
-#view_507 .control { text-align: center; }
-
-/******************************************/
 /*** Styles the Add TIA Mitigation page ***/
 /******************************************/
 #view_628 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
-#view_628 > form > ul:nth-child(2n) > li { border: none; }
 
 /*******************************************/
 /*** Styles the Edit TIA Mitigation page ***/
 /*******************************************/
 #view_509 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
-#view_509 > form > ul:nth-child(2n) > li { border: none; }
-
-/****************************************/
-/*** Styles the Location Details page ***/
-/****************************************/
-/*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
-#view_271 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
-
 /********************************************/
 /*** Styles the Customer TIA Details page ***/
 /********************************************/
@@ -583,28 +543,23 @@ a.form-link:hover {text-decoration:underline;}
 /**********************************************************/
 #view_598 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_598 > form > ul:nth-child(2n) > li { border: none; }
-
 #view_608 { max-width: 80%; }
 #view_608 .kn-table { border: solid 2px #367DB7; }
 
 #view_596 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_596 > form > ul:nth-child(2n) > li { border: none; }
 
 /*****************************************************************/
 /*** Styles the Customer New Scope Submission Attachment page ***/
 /*****************************************************************/
 #view_534 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_534 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_532 { max-width: 80%; }
 #view_532 .kn-table { border: solid 2px #367DB7; }
 
 #view_533 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_533 > form > ul:nth-child(2n) > li { border: none; }
 
 /***************************************************/
 /*** Styles the Customer Submission Details page ***/
@@ -627,14 +582,12 @@ a.form-link:hover {text-decoration:underline;}
 /***********************************************************/
 #view_610 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_610 > form > ul:nth-child(2n) > li { border: none; }
 
-******************************************************************/
+/*****************************************************************/
 /*** Styles the Customer Edit Scope Submission Attachment page ***/
 /*****************************************************************/
 #view_611 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_611 > form > ul:nth-child(2n) > li { border: none; }
 
 /******************************************/
 /*** Styles the Reviewer Dashboard page ***/
@@ -655,37 +608,120 @@ a.form-link:hover {text-decoration:underline;}
 #view_705 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_706 .kn-detail-label { background-color: transparent; min-width: 10% !important; }
 #view_707 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_774 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_710 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_711 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_712 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_746 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_747 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_748 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_749 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_750 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /********************************************/
 /****** Prevent Memo Table Page Breaks ******/
 /********************************************/
-/*knack tables*/
-@media print {
-  .kn-table {page-break-inside: avoid;}
-}
-
-/*rich text tables*/
-@media print {
-  tables {page-break-inside: avoid;}
-}
+@media print { .kn-table {page-break-inside: avoid;} } //Knack Tables
+@media print { tables {page-break-inside: avoid;} } //RichText Tables
+@media print { h2 {page-break-before: auto;} } //h2 Headers
 
 /*******************************************/
 /********* Create Memo Page Breaks *********/
 /*******************************************/
 /*knack details views*/
-@media print {
-  #view_707 {page-break-before: always;}//Proposed Conditions section
+@media print { #view_707 {page-break-before: auto;} }//Proposed Conditions section
+@media print { #view_712 {page-break-before: always;} }//Exhibit A section
+@media print { #view_746 {page-break-before: auto;} }//Exhibit B section
+@media print { #view_747 {page-break-before: auto;} }//Exhibit C section
+@media print { #view_748 {page-break-before: auto;} }//Exhibit D section
+@media print { #view_749 {page-break-before: auto;} }//Exhibit E section
+@media print { #view_750 {page-break-before: auto;} }//Exhibit F section
+
+/******************************************/
+/*** Custom TIA Menu Buttons Navigation ***/
+/******************************************/
+
+/* hide custom menu if on mobile */
+@media (max-width: 799px) {
+  #tia-menu-list {
+    display: none;
+  }
 }
 
-/*******************************************/
-/****** Hides the Save Record ID form ******/
-/*******************************************/
-/* Hide Second Form Just Incase. Don't substitute this with display:none */
-/*#view_732 {
-   position: absolute; 
-   top: -9999px; 
-   left: -9999px;
-} */
+/* hide knack menu buttons if on desktop */
+@media (min-width: 799px) {
+  #view_163 {
+    display: none;
+  }
+}
+
+#tia-menu-list {
+  border-bottom: 0 !important
+}
+
+#tia-menu-list li {
+  margin-right: .5em;
+}
+
+#tia-menu-list .kn-button a {
+  color: #163f6e;
+  font-size: 1.1em;
+  border-bottom: 0;
+  padding-top:3px;
+}
+
+.tia-dropdown-menu-list .kn-button {
+  border-radius: 0;
+}
+
+.tia-dropdown-menu-list li {
+  border: 0;
+  margin-right: 0 !important;
+} 
+
+.tia-dropdown-menu-list li:hover {
+  background-color: rgb(235,235,235);
+}
+
+/**********************************/
+/********* Report Styling *********/
+/**********************************/
+/*Prevents Report Filters from increasing report container size and pushing 2nd report down*/
+#view_679 .kn-records-nav { max-width: 630px; }
+#view_680 .kn-records-nav { max-width: 630px; }
+#view_681 .kn-records-nav { max-width: 630px; }
+#view_682 .kn-records-nav { max-width: 630px; }
+#view_683 .kn-records-nav { max-width: 630px; }
+#view_735 .kn-records-nav { max-width: 630px; }
+#view_736 .kn-records-nav { max-width: 630px; }
+
+/*Overrides default Knack blue color with default HighCharts colors for Bar Charts*/
+/*TIA Cases Reporting */
+/*Current Year*/
+/*Total Cases by Type*/
+#kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+
+/*Total Cases by Status*/
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Total Cases by Review Area*/
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*TIA Mitigations Reporting */
+/*Current Year*/
+/*Total Mitigations by Type*/
+#kn-report-view_735-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_735-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+
+/*Total Pro Rata $ by Mitigation Type*/
+#kn-report-view_736-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_736-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
