@@ -1,20 +1,6 @@
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
-$(document).on("knack-view-render.any", function (event, page) {
-  // Find SSO button and existing custom button
-  var $ssoButton = $(".kn-sso-container");
-  var $coacdLoginDiv = $("#coacd-button-login");
-
-  // If SSO button exists on page and there isn't already a custom button
-  if ($ssoButton.length && !$coacdLoginDiv.length) {
-    var $ssoView = $ssoButton.closest("[id^=view_]");
-    var viewId = $ssoView.get(0).id;
-
-    customizeLoginButton(viewId);
-  }
-});
-
 function customizeLoginButton(viewId) {
   // Hide Knack default SSO button, login form, login title, and any other children
   $("#" + viewId)
@@ -30,11 +16,7 @@ function customizeLoginButton(viewId) {
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  $coacdButton.append(
-    "<a class='big-button' href='" +
-      url +
-      "'><div class='big-button-container'><span><i class='fa fa-sign-in'></i></span><span> Sign-in</span></div></a>"
-  );
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
@@ -52,12 +34,26 @@ function customizeLoginButton(viewId) {
   });
 }
 
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
 
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled, callback) {
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
     $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
       "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
@@ -279,6 +275,7 @@ if (appviews[x]==key) {
 /***************************************/
 Highcharts.setOptions({
     chart: {  
+
       backgroundColor: {
             linearGradient: [500, 500, 500, 500], /*for report container, set to same value for no gradient*/
             stops: [
@@ -461,34 +458,6 @@ $(document).on("knack-view-render.view_509", function (event, view) {
   });
 });
 
-/**************************************/
-/*** Redirect from Blank Menu Pages ***/
-/**************************************/
-//Development Reviews Menu
-$(document).on('knack-scene-render.scene_28', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#development-reviews/";
-});
-
-//TIA Reviews Menu
-$(document).on('knack-scene-render.scene_108', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#tia-requests/";
-});
-
-//TDA Reviews Menu
-$(document).on('knack-scene-render.scene_260', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#tda-reviews/";
-});
-
-//Customer Portal Menu
-$(document).on('knack-scene-render.scene_137', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#customer-home/";
-});
-
-//Help Menu
-$(document).on('knack-scene-render.scene_240', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#customer-help/";
-});
-
 /************************************/
 /**** Save TIA Request Record ID ****/
 /************************************/
@@ -643,4 +612,44 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
       ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication")}\
     </ul>\
   </div>`).appendTo("#view_744")
+})
+
+
+/***************************************************/
+/* Change or Hide Summary Row on Mitigation Tables */
+/***************************************************/
+
+function hideSummaryNameMitigationTable(view_id, replacementText) {
+  var $tableRowTotals = $(`#${view_id}`).find("tr.kn-table-totals")
+  $tableRowTotals.map(function (index) {
+    if (index !== $tableRowTotals.length-1) {
+      $(this).find("td:eq(2)").html(`<strong>${replacementText}</strong>`)
+    }
+  })
+}
+
+function hideSummaryNameMitigationMemo(view_id, replacementText) {
+  var $tableRowTotals = $(`#${view_id}`).find("tr.kn-table-totals")
+  $tableRowTotals.map(function (index) {
+    if (index !== $tableRowTotals.length-1) {
+      // The tables on memos omit the edit column and notes column, the summary total cell is the first cell
+      $(this).find("td:eq(0)").html(`<strong>${replacementText}</strong>`)
+    }
+  })
+}
+
+// Change Summary Name for Mitigation Tables
+$(document).on('knack-scene-render.scene_105', (event) => {
+  // Waiting for scene to render instead of view
+  // View finishes rendering before table data is loaded
+  hideSummaryNameMitigationTable("view_322", "Location Total")
+  hideSummaryNameMitigationTable("view_321", "Location Total")
+})
+
+// Change Summary Name for Mitigation Tables on Memos
+$(document).on('knack-scene-render.scene_255', (event) => {
+  // // Waiting for scene to render instead of view
+  // // View finishes rendering before table data is loaded
+  hideSummaryNameMitigationMemo("view_708", "Location Total")
+  hideSummaryNameMitigationMemo("view_709", "Location Total")
 })
