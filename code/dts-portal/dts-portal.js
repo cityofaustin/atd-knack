@@ -1,19 +1,6 @@
-function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
-  // create a large button
-  
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='big-button' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
-
-  if(callback) callback();
-}
-
-/**
- * Enhance SSO button and hide/show default Knack login form with buttons
- * @parameter {string} viewId - Knack view id to append button link to
- */
+/********************************************/
+/******** COACD Single Sign On Login ********/
+/********************************************/
 function customizeLoginButton(viewId) {
   // Hide Knack default SSO button, login form, login title, and any other children
   $("#" + viewId)
@@ -24,7 +11,7 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
+    id: "coacd-button-login"
   });
   $coacdButton.appendTo("#" + viewId);
 
@@ -62,71 +49,46 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
-
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-/**
- * Template and append a button link, disable it optionally, and invoke a callback function argument
- * @parameter {string} id - id attribute of the a tag in the button link
- * @parameter {string} view_id - Knack view id to append button link to
- * @parameter {string} url - Destination to navigate to on click
- * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
- * @parameter {bool} isDisabled - Is button disabled (defaults to false)
- * @parameter {function} callback - Function that is invoked after appending the button link
- **/
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  isDisabled = false,
-  callback = null
-) {
-  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
-
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
 
-
-
-
-
-
-$(document).on('knack-view-render.view_127', function(event, page) {
-  // create large button on the home page
-    bigButton('new-service-request', 'view_127', "https://atd.knack.com/dts#new-service-request/", "phone-square", "Service Requests");
+// create large Service Requests button on the home page
+$(document).on("knack-view-render.view_127", function(event, page) {
+    bigButton("new-service-request", "view_127", "https://atd.knack.com/dts#new-service-request/", "phone-square", "Service Requests");
 });
 
-$(document).on('knack-view-render.view_128', function(event, page) {
-    // create large button on the home page
-    bigButton('datasets', 'view_128', "https://atd.knack.com/dts#datasets/", "database", "Datasets");
-});
-$(document).on('knack-view-render.view_146', function(event, page) {
-   // create large button on the home page
-    bigButton('equipment', 'view_146', "https://atd.knack.com/dts#my-equipment/", "desktop", "My Equipment");
+// create large Datasets button on the home page
+$(document).on("knack-view-render.view_128", function(event, page) {
+    bigButton("datasets", "view_128", "https://atd.knack.com/dts#datasets/", "database", "Datasets");
 });
 
-$(document).on('knack-view-render.view_312', function(event, page) {
-   // create large button on the home page
-    bigButton('applications', 'view_312', "https://atd.knack.com/dts#applications/", "laptop", "Applications");
+// create large My Equipment button on the home page
+$(document).on("knack-view-render.view_146", function(event, page) {
+    bigButton("equipment", "view_146", "https://atd.knack.com/dts#my-equipment/", "desktop", "My Equipment");
 });
 
+// create large Applications button on the home page
+$(document).on("knack-view-render.view_312", function(event, page) {
+    bigButton("applications", "view_312", "https://atd.knack.com/dts#applications/", "laptop", "Applications");
+});
+
+// create large Technician Equipment Tracker button on the home page
+$(document).on("knack-view-render.view_176", function(event, page) {
+    bigButton("all", "view_176", "https://atd.knack.com/dts#technician-equipment-tracker/", "wrench", "Technician Equipment Tracker");
+});
+
+/********************************************/
+/********* Click Event / Selector ***********/
+/********************************************/
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
   $("#" + divId).click(function(){
@@ -138,17 +100,3 @@ function showHideElements(showSelector, hideSelector) {
   $(showSelector).show();
   $(hideSelector).hide();
 }
-
-
-$(document).on('knack-view-render.view_176', function(event, page) {
-  // create large button on the home page
-    bigButton(
-        "all",
-        "view_176",
-        "https://atd.knack.com/dts#technician-equipment-tracker/",
-        "wrench",
-        "Technician Equipment Tracker"
-
-    );
-
-});
