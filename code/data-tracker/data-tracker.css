@@ -131,3 +131,10 @@ a.big-button {
  a.small-button {
   text-decoration: none;
 }
+
+
+.hiddenFormField {
+    visibility: hidden;
+    height: 0px;
+    margin-bottom: 0 !important;
+}

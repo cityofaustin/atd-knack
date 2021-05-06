@@ -28,7 +28,7 @@ None needed 😎
 {% tab title="First Step" %}
 Create a Rich Text View for the Header
 
-![](../../.gitbook/assets/image%20%2878%29.png)
+![](../../.gitbook/assets/image%20%2878%29%20%281%29.png)
 {% endtab %}
 
 {% tab title="Second Step" %}

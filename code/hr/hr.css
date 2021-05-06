@@ -78,49 +78,13 @@ a.small-button {
   text-decoration: none;
 }
 
-/***************************************/
-/************ Input Styling ************/
-/***************************************/
-.kn-input input.knack-date {
-    width: 7em !important;
+/**********************************************/
+/*** Telework Form: Your Name Styling ***/
+/**********************************************/
+div#view_99_field_147_chzn {
+ pointer-events: none !important;
 }
 
-.kn-input input.kn-time {
-    width: 7em !important;
-}
-
-#kn-input-field_165 > div.kn-datetime > div:nth-child(1){ 
-    width: 200px;display: inline;
-}
-
-#kn-input-field_165 > div.kn-datetime > div:nth-child(2){
-  text-align: left !important;
-  width: 80px;
-  display: inline;
-}
-
-#kn-input-field_165 > div.kn-datetime > div:nth-child(3){
-  width: 200px;
-  display: inline;
-}
-
-/***************************************/
-/********* Filter Menu Styling *********/
-/***************************************/
-#view_133 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(2) > a{
-  color: white;
-  background-color: red;
-}
-
-#view_133 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(3) > a{
-  color: white;
-  background-color: blue;
-}
-#view_133 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(4) > a{
-  color: white;
-  background-color: #47a65a;
-}
-#view_133 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(5) > a{
-  color: white;
-  background-color: #ff8800;
+div#view_99_field_147_chzn a {
+  color: grey !important;
 }

@@ -61,42 +61,30 @@ function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false,
   if (callback) callback();
 }
 
-// create large Service Requests button on the home page
-$(document).on("knack-view-render.view_127", function(event, page) {
-    bigButton("new-service-request", "view_127", "https://atd.knack.com/dts#new-service-request/", "phone-square", "Service Requests");
+// create large Add New Telework Request button on the home page
+$(document).on("knack-view-render.view_96", function(event, page) {
+    bigButton("new-telework", "view_96", "https://atd.knack.com/hr#new-telework-request", "plus-circle", "Add New Telework Request");
 });
-
-// create large Datasets button on the home page
-$(document).on("knack-view-render.view_128", function(event, page) {
-    bigButton("datasets", "view_128", "https://atd.knack.com/dts#datasets/", "database", "Datasets");
-});
-
-// create large My Equipment button on the home page
-$(document).on("knack-view-render.view_146", function(event, page) {
-    bigButton("equipment", "view_146", "https://atd.knack.com/dts#my-equipment/", "desktop", "My Equipment");
-});
-
-// create large Applications button on the home page
-$(document).on("knack-view-render.view_312", function(event, page) {
-    bigButton("applications", "view_312", "https://atd.knack.com/dts#applications/", "laptop", "Applications");
-});
-
-// create large Technician Equipment Tracker button on the home page
-$(document).on("knack-view-render.view_176", function(event, page) {
-    bigButton("all", "view_176", "https://atd.knack.com/dts#technician-equipment-tracker/", "wrench", "Technician Equipment Tracker");
+// create large Add Coded Time button on the home page
+$(document).on("knack-view-render.view_97", function(event, page) {
+    bigButton("add-time", "view_97", "https://atd.knack.com/hr#add-time/", "plus-circle", "Add Coded Time");
 });
 
 /********************************************/
-/********* Click Event / Selector ***********/
+/******* Auto Populate Telework Form ********/
 /********************************************/
-function setClickEvent(divId, func, param1, param2) {
-  // TODO make these args less weird
-  $("#" + divId).click(function(){
-    func(param1, param2);
-  })
-}
-
-function showHideElements(showSelector, hideSelector) {
-  $(showSelector).show();
-  $(hideSelector).hide();
-}
+// Add Time Form: Set "Employee Name" to logged in user name
+$(document).on("knack-view-render.view_32", function(event, page) {
+  var attrs = Knack.getUserAttributes();
+  console.log(attrs)
+  $('#view_32-field_105').val(attrs.id);
+  $('#view_32-field_105').trigger("liszt:updated");
+});
+  
+// Auto-fill user name on new TLC request form
+$(document).on("knack-view-render.view_99", function(event, page) {
+  var attrs = Knack.getUserAttributes();
+  console.log(attrs)
+  $('#view_99-field_147').val(attrs.id);
+  $('#view_99-field_147').trigger("liszt:updated");
+});

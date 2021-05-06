@@ -614,6 +614,7 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
   </div>`).appendTo("#view_744")
 })
 
+
 /***************************************************/
 /* Change or Hide Summary Row on Mitigation Tables */
 /***************************************************/
