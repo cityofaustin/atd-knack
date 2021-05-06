@@ -208,7 +208,6 @@ a.small-button {
 #view_1191 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
 /* Application Invoice page */
 #view_1196 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-
 #view_1212 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
 #view_1256 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
 #view_1257 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
@@ -760,4 +759,3 @@ a.small-button {
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
-

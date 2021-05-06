@@ -69,14 +69,14 @@ You can find the original banner assets and a template for creating a new applic
 ### Status Colors
 
 * [`#ff9b9c`](https://www.colorhexa.com/ff9b9c) - Inactive 
-* ![](../.gitbook/assets/image%20%2897%29.png)
+* ![](../.gitbook/assets/image%20%2897%29%20%281%29.png)
 * [`#80d07e`](https://www.colorhexa.com/80d07e) - Active
 * ![](../.gitbook/assets/image%20%28102%29.png)
 
 ### Other Colors
 
 *  [`#f5901f`](https://www.colorhexa.com/f5901f) - Orange
-* ![](../.gitbook/assets/image%20%2894%29.png)
+* ![](../.gitbook/assets/image%20%2894%29%20%283%29.png)
 *  [`#ff9b9c`](www.colorhexa.com/ff9b9c) - Return to Requester
 * ![](../.gitbook/assets/image%20%2884%29.png)
 *  [`#80d07e`](https://www.colorhexa.com/80d07e) - Current
@@ -89,11 +89,11 @@ You can find the original banner assets and a template for creating a new applic
 ### Data Tracker Colors & Icons
 
 *  [`#E41A1C`](https://www.colorhexa.com/e41a1c) - Need To Be Issued [`fa fa-exclamation-triangle`](https://fontawesome.com/v4.7.0/icon/exclamation-triangle)\`\`
-* ![](../.gitbook/assets/image%20%2885%29.png)![](../.gitbook/assets/image%20%28106%29.png)
+* ![](../.gitbook/assets/image%20%2887%29.png)![](../.gitbook/assets/image%20%28106%29.png)
 *  [`#367DB7`](https://www.colorhexa.com/367DB7) - Issued [`fa fa-truck`](https://fontawesome.com/v4.7.0/icon/truck) 
 * ![](../.gitbook/assets/image%20%2895%29.png)![](../.gitbook/assets/image%20%28105%29.png)
 *  [`#974DA2`](https://www.colorhexa.com/974DA2) - Needs GIS `fa fa-map-marker`
-* ![](../.gitbook/assets/image%20%2886%29.png)
+* ![](../.gitbook/assets/image%20%2898%29.png)
 *  [`#4CAE49`](https://www.colorhexa.com/4CAE49) - Final Review `fa fa-flag-checkered`
 * ![](../.gitbook/assets/image%20%28103%29.png)
 *  [`#ADADAD`](https://www.colorhexa.com/ADADAD) - On Hold `fa fa-clock-o`

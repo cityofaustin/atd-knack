@@ -6,7 +6,7 @@ description: How to highlight a details view label body to bring attention to a 
 
 This will give greater visibility to a field that is important to understand at a glance such as a status field and adjusting the highlight color based on the current status.
 
-![In the Signs and Markings Tracker, Work Order Details page](../../.gitbook/assets/image%20%2851%29.png)
+![In the Signs and Markings Tracker, Work Order Details page](../../.gitbook/assets/image%20%2851%29%20%281%29.png)
 
 ![In Parking Enterprise Portal, My Assignments page](../../.gitbook/assets/highlight_details_widget_field.png)
 

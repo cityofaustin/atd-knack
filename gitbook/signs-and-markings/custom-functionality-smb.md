@@ -32,7 +32,7 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * CUSTOMIZATION: Work Order Status has background color that matches the display colors on the Work Order tables
 * REASON: Users associate the work order colors to the work order statuses, easier to know what status a work order is at a glance
 
-![](../.gitbook/assets/image%20%2838%29.png)
+![](../.gitbook/assets/image%20%2851%29.png)
 
 ### Geographic Map/Location Functionality
 
