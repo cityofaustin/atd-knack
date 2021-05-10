@@ -81,6 +81,8 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Signs & Markings Data Tracker Colors & Icons
 
+![](../.gitbook/assets/image%20%28106%29.png)
+
 <table>
   <thead>
     <tr>
@@ -105,10 +107,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-exclamation-triangle&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <p></p>
-        <p>
-          <img src="../.gitbook/assets/image (106).png" alt/>
-        </p>
+        <img src="../.gitbook/assets/image (106).png" alt/>
       </td>
     </tr>
     <tr>
@@ -128,7 +127,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (99).png" alt/>
+          <img src="../.gitbook/assets/image (109).png" alt/>
         </p>
       </td>
     </tr>
@@ -161,7 +160,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">Needs GIS</td>
       <td style="text-align:left"></td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (109).png" alt/>
+        <img src="../.gitbook/assets/image (112).png" alt/>
       </td>
     </tr>
     <tr>
@@ -171,7 +170,17 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (109).png" alt/>
+        <img src="../.gitbook/assets/image (112).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (91).png" alt/>
       </td>
     </tr>
     <tr>
@@ -184,33 +193,25 @@ You can find the original banner assets and a template for creating a new applic
         <img src="../.gitbook/assets/image (89).png" alt/>
       </td>
     </tr>
-    <tr>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left">
-        <img src="../.gitbook/assets/image (86).png" alt/>
-      </td>
-    </tr>
   </tbody>
 </table>
+
+
 
 *  [\#974DA2](https://www.colorhexa.com/974DA2) `#974DA2` - Needs GIS 
 * ![](../.gitbook/assets/image%20%2898%29.png)
 * [fa fa-map-marker](https://fontawesome.com/v4.7.0/icon/map-marker) `fa fa-map-marker` 
-* ![](../.gitbook/assets/image%20%28109%29.png)
+* ![](../.gitbook/assets/image%20%28112%29.png)
 *  [\#4CAE49](https://www.colorhexa.com/4CAE49)`#4CAE49` - Final Review 
 * ![](../.gitbook/assets/image%20%28103%29.png)
 * * [\#ADADAD](https://www.colorhexa.com/ADADAD) `#ADADAD` - On Hold 
 * ![](../.gitbook/assets/image%20%2892%29.png)
 * [fa fa-clock-o](https://fontawesome.com/v4.7.0/icon/clock-o) `fa fa-clock-o`
-* ![](../.gitbook/assets/image%20%2889%29.png)
+* ![](../.gitbook/assets/image%20%2891%29.png)
 *  [\#777777](https://www.colorhexa.com/777777)`#777777`  - Closed 
 * ![](../.gitbook/assets/image%20%28100%29.png)
 * [fa fa-check-circle](https://fontawesome.com/v4.7.0/icon/check-circle) `fa fa-check-circle`
-* ![](../.gitbook/assets/image%20%2886%29.png)
+* ![](../.gitbook/assets/image%20%2889%29.png)
 *  [\#777777](https://www.colorhexa.com/777777)`#777777` - Cancelled 
 * ![](../.gitbook/assets/image%20%28100%29.png)
 
@@ -240,7 +241,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-asterisk&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (99).png" alt/>
+        <img src="../.gitbook/assets/image (109).png" alt/>
       </td>
     </tr>
     <tr>
@@ -257,7 +258,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (43).png" alt/>
+          <img src="../.gitbook/assets/image (47).png" alt/>
         </p>
       </td>
     </tr>
@@ -293,7 +294,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (108).png" alt/>
+          <img src="../.gitbook/assets/image (111).png" alt/>
         </p>
       </td>
     </tr>
@@ -311,7 +312,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (86).png" alt/>
+          <img src="../.gitbook/assets/image (89).png" alt/>
         </p>
         <p></p>
       </td>
@@ -334,11 +335,11 @@ You can find the original banner assets and a template for creating a new applic
 ### Service Request Colors
 
 * \_\_[\#cd7070](https://www.colorhexa.com/cd7070) `#cd7070` - New
-* ![](../.gitbook/assets/image%20%2881%29.png)
+* ![](../.gitbook/assets/image%20%2883%29.png)
 * [\#5c68ff](https://www.colorhexa.com/5c68ff) `#5c68ff` - In Progress
-* ![](../.gitbook/assets/image%20%28101%29.png)
+* ![](../.gitbook/assets/image%20%28110%29.png)
 * [\#67b36a](https://www.colorhexa.com/67b36a) `#67b36a`- Repairs Completed
-* ![](../.gitbook/assets/image%20%2847%29.png)
+* ![](../.gitbook/assets/image%20%2877%29.png)
 
 ### Finance and Purchasing Colors & Icons
 
@@ -379,7 +380,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (85).png" alt/>
+          <img src="../.gitbook/assets/image (86).png" alt/>
         </p>
       </td>
       <td style="text-align:left">
@@ -390,7 +391,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (91).png" alt/>
+          <img src="../.gitbook/assets/image (99).png" alt/>
         </p>
       </td>
     </tr>
@@ -409,7 +410,7 @@ You can find the original banner assets and a template for creating a new applic
         <p>Purchase Review</p>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (85).png" alt/>
+        <img src="../.gitbook/assets/image (86).png" alt/>
       </td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -435,29 +436,29 @@ You can find the original banner assets and a template for creating a new applic
 * * \#6a6565 `#6a6565` - Cancelled
 * * \#377eb8  `#377eb8` - Waiting for Approval
 * * \#41ae76 `#41ae76` - Purchase Review
-* ![](../.gitbook/assets/image%20%2885%29.png)
+* ![](../.gitbook/assets/image%20%2886%29.png)
 * fa fa-clipboard `fa fa-clipboard`
-* ![](../.gitbook/assets/image%20%2891%29.png)
+* ![](../.gitbook/assets/image%20%2899%29.png)
 * \#41ae76 `#41ae76` - Budget Review
-* ![](../.gitbook/assets/image%20%2885%29.png)
+* ![](../.gitbook/assets/image%20%2886%29.png)
 * fa fa-money `fa fa-money`
-* ![](../.gitbook/assets/image%20%2890%29.png)
+* ![](../.gitbook/assets/image%20%2893%29.png)
 * \#41ae76 `#41ae76` - Processing \| Purchasing
-* ![](../.gitbook/assets/image%20%2885%29.png)
+* ![](../.gitbook/assets/image%20%2886%29.png)
 *  fa fa-gears `fa fa-cog`\(gear\)
-* ![](../.gitbook/assets/image%20%2877%29.png)
+* ![](../.gitbook/assets/image%20%2880%29.png)
 * \#f5901f  `#f5901f` - Pending Invoice
 * ![](../.gitbook/assets/image%20%2894%29%20%283%29.png)
 *  [fa fa-clock-o](https://fontawesome.com/v4.7.0/icon/clock-o) `fa fa-clock-o`
-* ![](../.gitbook/assets/image%20%2889%29.png)
+* ![](../.gitbook/assets/image%20%2891%29.png)
 * \#41ae76  `#41ae76` - Processing \| Accounts Payable
-* ![](../.gitbook/assets/image%20%2885%29.png)
+* ![](../.gitbook/assets/image%20%2886%29.png)
 *  fa fa-credit-card `fa fa-credit-card`
-* ![](../.gitbook/assets/image%20%2880%29.png)
+* ![](../.gitbook/assets/image%20%2881%29.png)
 * \#adadad `#adadad` - Closed
 * ![](../.gitbook/assets/image%20%2892%29.png)
 *  [fa fa-check-circle](https://fontawesome.com/v4.7.0/icon/check-circle) `fa fa-check-circle`
-* ![](../.gitbook/assets/image%20%2886%29.png)
+* ![](../.gitbook/assets/image%20%2889%29.png)
 
 ## Layout
 
