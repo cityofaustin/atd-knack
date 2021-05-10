@@ -149,12 +149,10 @@ You can find the original banner assets and a template for creating a new applic
       <th style="text-align:left"></th>
       <th style="text-align:left"></th>
       <th style="text-align:left"></th>
-      <th style="text-align:left"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -184,11 +182,7 @@ You can find the original banner assets and a template for creating a new applic
       </td>
       <td style="text-align:left">
         <p></p>
-        <p>fa fa-clipboard</p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>fa fa-clipboard</code>
+        <p><code>&lt;i class= fa fa-clipboard&gt;&lt;/i&gt;</code>
         </p>
       </td>
       <td style="text-align:left">
@@ -217,7 +211,6 @@ You can find the original banner assets and a template for creating a new applic
       </td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left"></td>
@@ -225,7 +218,6 @@ You can find the original banner assets and a template for creating a new applic
         <p></p>
         <p></p>
       </td>
-      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
