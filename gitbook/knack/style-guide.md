@@ -70,14 +70,14 @@ You can find the original banner assets and a template for creating a new applic
 
 | Link | HEX Code | Swatch | Name | HTML Code | Font Awesome Icons |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| [\#ff9b9c](https://www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2897%29%20%281%29.png) | Inactive/No |  |  |
-| [\#80d07e](https://www.colorhexa.com/80d07e)  | `#80d07e` | ![](../.gitbook/assets/image%20%28102%29.png) | Active/Yes |  |  |
-|  |  |  |  |  |  |
-| [\#f5901f](https://www.colorhexa.com/f5901f) | `#f5901f`  | ![](../.gitbook/assets/image%20%2894%29%20%283%29.png) | Orange |  |  |
-| [\#ff9b9c](www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2884%29.png) | Return to Requester |  |  |
-| [\#80d07e](https://www.colorhexa.com/80d07e) | `#80d07e` | ![](../.gitbook/assets/image%20%28104%29.png) | Current |  |  |
-| [\#4daf4a](https://www.colorhexa.com/4daf4a)  | `#4daf4a` | ![](../.gitbook/assets/image%20%2888%29.png) | Approved |  |  |
-| [\#000000](https://www.colorhexa.com/000000)  | `#000000` | ![](../.gitbook/assets/image%20%2882%29.png) | Rejected |  |  |
+| [\#ff9b9c](https://www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2897%29%20%281%29.png) | Inactive/No | ------------ | ------------ |
+| [\#80d07e](https://www.colorhexa.com/80d07e)  | `#80d07e` | ![](../.gitbook/assets/image%20%28102%29.png) | Active/Yes | ------------ | ------------ |
+|  |  |  |  | ------------ | ------------ |
+| [\#f5901f](https://www.colorhexa.com/f5901f) | `#f5901f`  | ![](../.gitbook/assets/image%20%2894%29%20%283%29.png) | Orange | ------------ | ------------ |
+| [\#ff9b9c](www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2884%29.png) | Return to Requester | ------------ | ------------ |
+| [\#80d07e](https://www.colorhexa.com/80d07e) | `#80d07e` | ![](../.gitbook/assets/image%20%28104%29.png) | Current | ------------ | ------------ |
+| [\#4daf4a](https://www.colorhexa.com/4daf4a)  | `#4daf4a` | ![](../.gitbook/assets/image%20%2888%29.png) | Approved | ------------ | ------------ |
+| [\#000000](https://www.colorhexa.com/000000)  | `#000000` | ![](../.gitbook/assets/image%20%2882%29.png) | Rejected | ------------ | ------------ |
 
 ### Signs & Markings Data Tracker Colors & Icons
 
