@@ -68,57 +68,142 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Status Colors
 
-* [\#ff9b9c](https://www.colorhexa.com/ff9b9c) `#ff9b9c` - Inactive 
-* ![](../.gitbook/assets/image%20%2897%29%20%281%29.png)
-* [\#80d07e](https://www.colorhexa.com/80d07e) `#80d07e` - Active
-* ![](../.gitbook/assets/image%20%28102%29.png)
+| Link | HEX Code | Swatch | Name |  |  |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| [\#ff9b9c](https://www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2897%29%20%281%29.png) | Inactive/No |  |  |
+| [\#80d07e](https://www.colorhexa.com/80d07e)  | `#80d07e` | ![](../.gitbook/assets/image%20%28102%29.png) | Active/Yes |  |  |
+|  |  |  |  |  |  |
+| [\#f5901f](https://www.colorhexa.com/f5901f) | `#f5901f`  | ![](../.gitbook/assets/image%20%2894%29%20%283%29.png) | Orange |  |  |
+| [\#ff9b9c](www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2884%29.png) | Return to Requester |  |  |
+| [\#80d07e](https://www.colorhexa.com/80d07e) | `#80d07e` | ![](../.gitbook/assets/image%20%28104%29.png) | Current |  |  |
+| [\#4daf4a](https://www.colorhexa.com/4daf4a)  | `#4daf4a` | ![](../.gitbook/assets/image%20%2888%29.png) | Approved |  |  |
+| [\#000000](https://www.colorhexa.com/000000)  | `#000000` | ![](../.gitbook/assets/image%20%2882%29.png) | Rejected |  |  |
 
-### Other Colors
+### Signs & Markings Data Tracker Colors & Icons
 
-* [\#f5901f](https://www.colorhexa.com/f5901f) `#f5901f` - Orange
-* ![](../.gitbook/assets/image%20%2894%29%20%283%29.png)
-* [\#ff9b9c](www.colorhexa.com/ff9b9c)  `#ff9b9c` - Return to Requester
-* ![](../.gitbook/assets/image%20%2884%29.png)
-*  [\#80d07e](https://www.colorhexa.com/80d07e) `#80d07e` - Current
-* ![](../.gitbook/assets/image%20%28104%29.png)
-*  [\#4daf4a](https://www.colorhexa.com/4daf4a) `#4daf4a` - Approved
-* ![](../.gitbook/assets/image%20%2888%29.png)
-* [\#000000](https://www.colorhexa.com/000000) `#000000` - Rejected
-* ![](../.gitbook/assets/image%20%2882%29.png)
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Link</th>
+      <th style="text-align:left">HEX Code</th>
+      <th style="text-align:left">Swatch</th>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">HTML Code</th>
+      <th style="text-align:left">Font Awesome Icons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/e41a1c">#E41A1C</a> 
+      </td>
+      <td style="text-align:left"><code>#E41A1C</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (87).png" alt/>
+      </td>
+      <td style="text-align:left">Need To Be Issued</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-exclamation-triangle&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (106).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">Unassigned</td>
+      <td style="text-align:left">
+        <p></p>
+        <p><code>&lt;i class=&quot;fa fa-asterisk&quot;&gt;&lt;/i&gt;</code>
+        </p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (99).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p></p>
+        <p><a href="https://www.colorhexa.com/367DB7">#367DB7</a>&lt;code&gt;&lt;/code&gt;</p>
+      </td>
+      <td style="text-align:left"><code>#367DB7</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (95).png" alt/>
+      </td>
+      <td style="text-align:left">Issued</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-truck&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (105).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (98).png" alt/>
+      </td>
+      <td style="text-align:left">Needs GIS</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (109).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (109).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (89).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (86).png" alt/>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-### Data Tracker Colors & Icons
-
-* [\#E41A1C](https://www.colorhexa.com/e41a1c) `#E41A1C` - Need To Be Issued 
-* ![](../.gitbook/assets/image%20%2887%29.png)
-* [fa fa-exclamation-triangle](https://fontawesome.com/v4.7.0/icon/exclamation-triangle)`fa fa-exclamation-triangle`
-* ![](../.gitbook/assets/image%20%28106%29.png)
-* [\#777777](https://www.colorhexa.com/777777)`#777777`  - Unassigned
-* ![](../.gitbook/assets/image%20%28100%29.png)
-* [fa fa-asterisk ](https://fontawesome.com/v4.7.0/icon/asterisk)`fa fa-asterisk`
-* ![](../.gitbook/assets/image%20%2899%29.png)
-*  [\#367DB7](https://www.colorhexa.com/367DB7)`#367DB7` - Issued 
-* ![](../.gitbook/assets/image%20%2895%29.png)
-* [fa fa-truck](https://fontawesome.com/v4.7.0/icon/truck) `fa fa-truck` 
-* ![](../.gitbook/assets/image%20%28105%29.png)
-* [\#777777](https://www.colorhexa.com/777777)`#777777`  - In Progress
-* ![](../.gitbook/assets/image%20%28100%29.png)
-* [fa fa-wrench](https://fontawesome.com/v4.7.0/icon/wrench) `fa fa-wrench`
-* ![](../.gitbook/assets/image%20%2843%29.png)
-*  [\#777777](https://www.colorhexa.com/777777)`#777777`  - Assigned
-* ![](../.gitbook/assets/image%20%28100%29.png)
-* [fa fa-bullhorn](https://fontawesome.com/v4.7.0/icon/bullhorn) `fa fa-bullhorn`
-* ![](../.gitbook/assets/image%20%2838%29.png)
 *  [\#974DA2](https://www.colorhexa.com/974DA2) `#974DA2` - Needs GIS 
 * ![](../.gitbook/assets/image%20%2898%29.png)
 * [fa fa-map-marker](https://fontawesome.com/v4.7.0/icon/map-marker) `fa fa-map-marker` 
 * ![](../.gitbook/assets/image%20%28109%29.png)
 *  [\#4CAE49](https://www.colorhexa.com/4CAE49)`#4CAE49` - Final Review 
 * ![](../.gitbook/assets/image%20%28103%29.png)
-*  [\#777777](https://www.colorhexa.com/777777)`#777777`  - Submit
-* ![](../.gitbook/assets/image%20%28100%29.png)
-* [fa fa-flag-checkered](https://fontawesome.com/v4.7.0/icon/flag-checkered) `fa fa-flag-checkered`
-* ![](../.gitbook/assets/image%20%28108%29.png)
-* [\#ADADAD](https://www.colorhexa.com/ADADAD) `#ADADAD` - On Hold 
+* * [\#ADADAD](https://www.colorhexa.com/ADADAD) `#ADADAD` - On Hold 
 * ![](../.gitbook/assets/image%20%2892%29.png)
 * [fa fa-clock-o](https://fontawesome.com/v4.7.0/icon/clock-o) `fa fa-clock-o`
 * ![](../.gitbook/assets/image%20%2889%29.png)
@@ -128,6 +213,123 @@ You can find the original banner assets and a template for creating a new applic
 * ![](../.gitbook/assets/image%20%2886%29.png)
 *  [\#777777](https://www.colorhexa.com/777777)`#777777` - Cancelled 
 * ![](../.gitbook/assets/image%20%28100%29.png)
+
+### Arterial Management Data Tracker Colors & Icons
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Link</th>
+      <th style="text-align:left">HEX Code</th>
+      <th style="text-align:left">Swatch</th>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">HTML Code</th>
+      <th style="text-align:left">Font Awesome Icons</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">Unassigned</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-asterisk&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (99).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">In Progress</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-wrench&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (43).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">Assigned</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-bullhorn&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (38).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">Submit</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-flag-checkered&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (108).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">Closed</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-checked-circle&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (86).png" alt/>
+        </p>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
+      </td>
+      <td style="text-align:left"><code>#777777</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (100).png" alt/>
+      </td>
+      <td style="text-align:left">Cancelled</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+  </tbody>
+</table>
 
 ### Service Request Colors
 
@@ -182,7 +384,7 @@ You can find the original banner assets and a template for creating a new applic
       </td>
       <td style="text-align:left">
         <p></p>
-        <p><code>&lt;i class= fa fa-clipboard&gt;&lt;/i&gt;</code>
+        <p><code>&lt;i class=&quot;fa fa-clipboard&quot;&gt;&lt;/i&gt;</code>
         </p>
       </td>
       <td style="text-align:left">
