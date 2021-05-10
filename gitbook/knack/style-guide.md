@@ -68,7 +68,7 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Status Colors
 
-| Link | HEX Code | Swatch | Name |  |  |
+| Link | HEX Code | Swatch | Name | HTML Code | Font Awesome Icons |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | [\#ff9b9c](https://www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2897%29%20%281%29.png) | Inactive/No |  |  |
 | [\#80d07e](https://www.colorhexa.com/80d07e)  | `#80d07e` | ![](../.gitbook/assets/image%20%28102%29.png) | Active/Yes |  |  |
