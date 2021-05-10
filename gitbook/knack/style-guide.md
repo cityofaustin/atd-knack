@@ -68,61 +68,108 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Status Colors
 
-* [`#ff9b9c`](https://www.colorhexa.com/ff9b9c) - Inactive 
+* [\#ff9b9c](https://www.colorhexa.com/ff9b9c) `#ff9b9c` - Inactive 
 * ![](../.gitbook/assets/image%20%2897%29%20%281%29.png)
-* [`#80d07e`](https://www.colorhexa.com/80d07e) - Active
+* [\#80d07e](https://www.colorhexa.com/80d07e) `#80d07e` - Active
 * ![](../.gitbook/assets/image%20%28102%29.png)
 
 ### Other Colors
 
-*  [`#f5901f`](https://www.colorhexa.com/f5901f) - Orange
+* [\#f5901f](https://www.colorhexa.com/f5901f) `#f5901f` - Orange
 * ![](../.gitbook/assets/image%20%2894%29%20%283%29.png)
-*  [`#ff9b9c`](www.colorhexa.com/ff9b9c) - Return to Requester
+* [\#ff9b9c](www.colorhexa.com/ff9b9c)  `#ff9b9c` - Return to Requester
 * ![](../.gitbook/assets/image%20%2884%29.png)
-*  [`#80d07e`](https://www.colorhexa.com/80d07e) - Current
+*  [\#80d07e](https://www.colorhexa.com/80d07e) `#80d07e` - Current
 * ![](../.gitbook/assets/image%20%28104%29.png)
-*  [`#4daf4a`](https://www.colorhexa.com/4daf4a) - Approved
+*  [\#4daf4a](https://www.colorhexa.com/4daf4a) `#4daf4a` - Approved
 * ![](../.gitbook/assets/image%20%2888%29.png)
-*  [`#000000`](https://www.colorhexa.com/000000) - Rejected
+* [\#000000](https://www.colorhexa.com/000000) `#000000` - Rejected
 * ![](../.gitbook/assets/image%20%2882%29.png)
 
 ### Data Tracker Colors & Icons
 
-*  [`#E41A1C`](https://www.colorhexa.com/e41a1c) - Need To Be Issued [`fa fa-exclamation-triangle`](https://fontawesome.com/v4.7.0/icon/exclamation-triangle)\`\`
-* ![](../.gitbook/assets/image%20%2887%29.png)![](../.gitbook/assets/image%20%28106%29.png)
-*  [`#367DB7`](https://www.colorhexa.com/367DB7) - Issued [`fa fa-truck`](https://fontawesome.com/v4.7.0/icon/truck) 
-* ![](../.gitbook/assets/image%20%2895%29.png)![](../.gitbook/assets/image%20%28105%29.png)
-*  [`#974DA2`](https://www.colorhexa.com/974DA2) - Needs GIS `fa fa-map-marker`
+* [\#E41A1C](https://www.colorhexa.com/e41a1c) `#E41A1C` - Need To Be Issued 
+* ![](../.gitbook/assets/image%20%2887%29.png)
+* [fa fa-exclamation-triangle](https://fontawesome.com/v4.7.0/icon/exclamation-triangle)`fa fa-exclamation-triangle`
+* ![](../.gitbook/assets/image%20%28106%29.png)
+* [\#777777](https://www.colorhexa.com/777777)`#777777`  - Unassigned
+* ![](../.gitbook/assets/image%20%28100%29.png)
+* [fa fa-asterisk ](https://fontawesome.com/v4.7.0/icon/asterisk)`fa fa-asterisk`
+* ![](../.gitbook/assets/image%20%2899%29.png)
+*  [\#367DB7](https://www.colorhexa.com/367DB7)`#367DB7` - Issued 
+* ![](../.gitbook/assets/image%20%2895%29.png)
+* [fa fa-truck](https://fontawesome.com/v4.7.0/icon/truck) `fa fa-truck` 
+* ![](../.gitbook/assets/image%20%28105%29.png)
+* [\#777777](https://www.colorhexa.com/777777)`#777777`  - In Progress
+* ![](../.gitbook/assets/image%20%28100%29.png)
+* [fa fa-wrench](https://fontawesome.com/v4.7.0/icon/wrench) `fa fa-wrench`
+* ![](../.gitbook/assets/image%20%2843%29.png)
+*  [\#777777](https://www.colorhexa.com/777777)`#777777`  - Assigned
+* ![](../.gitbook/assets/image%20%28100%29.png)
+* [fa fa-bullhorn](https://fontawesome.com/v4.7.0/icon/bullhorn) `fa fa-bullhorn`
+* ![](../.gitbook/assets/image%20%2838%29.png)
+*  [\#974DA2](https://www.colorhexa.com/974DA2) `#974DA2` - Needs GIS 
 * ![](../.gitbook/assets/image%20%2898%29.png)
-*  [`#4CAE49`](https://www.colorhexa.com/4CAE49) - Final Review `fa fa-flag-checkered`
+* [fa fa-map-marker](https://fontawesome.com/v4.7.0/icon/map-marker) `fa fa-map-marker` 
+* ![](../.gitbook/assets/image%20%28109%29.png)
+*  [\#4CAE49](https://www.colorhexa.com/4CAE49)`#4CAE49` - Final Review 
 * ![](../.gitbook/assets/image%20%28103%29.png)
-*  [`#ADADAD`](https://www.colorhexa.com/ADADAD) - On Hold `fa fa-clock-o`
+*  [\#777777](https://www.colorhexa.com/777777)`#777777`  - Submit
+* ![](../.gitbook/assets/image%20%28100%29.png)
+* [fa fa-flag-checkered](https://fontawesome.com/v4.7.0/icon/flag-checkered) `fa fa-flag-checkered`
+* ![](../.gitbook/assets/image%20%28108%29.png)
+* [\#ADADAD](https://www.colorhexa.com/ADADAD) `#ADADAD` - On Hold 
 * ![](../.gitbook/assets/image%20%2892%29.png)
-* [`#777777`](https://www.colorhexa.com/777777) - Closed `fa fa-check-circle`
+* [fa fa-clock-o](https://fontawesome.com/v4.7.0/icon/clock-o) `fa fa-clock-o`
+* ![](../.gitbook/assets/image%20%2889%29.png)
+*  [\#777777](https://www.colorhexa.com/777777)`#777777`  - Closed 
 * ![](../.gitbook/assets/image%20%28100%29.png)
-*  [`#777777`](https://www.colorhexa.com/777777) - Cancelled `fa fa-close`
+* [fa fa-check-circle](https://fontawesome.com/v4.7.0/icon/check-circle) `fa fa-check-circle`
+* ![](../.gitbook/assets/image%20%2886%29.png)
+*  [\#777777](https://www.colorhexa.com/777777)`#777777` - Cancelled 
 * ![](../.gitbook/assets/image%20%28100%29.png)
-
-### Finance and Purchasing Colors & Icons
-
-* ![\#f5901f](https://placehold.it/15/f5901f/000000?text=+) `#f5901f` - Orange
-* ![\#ff9b9c](https://placehold.it/15/ff9b9c/000000?text=+) `#ff9b9c` - Not Submitted
-* ![\#ff9b9c](https://placehold.it/15/ff9b9c/000000?text=+) `#ff9b9c` - Returned
-* ![\#\#6a6565](https://placehold.it/15/6a6565/000000?text=+) `#6a6565` - Rejected
-* ![\#\#6a6565](https://placehold.it/15/6a6565/000000?text=+) `#6a6565` - Cancelled
-* ![\#377eb8](https://placehold.it/15/377eb8/000000?text=+) `#377eb8` - Waiting for Approval
-* ![\#41ae76](https://placehold.it/15/41ae76/000000?text=+) `#41ae76` - Purchase Review  `fa fa-clipboard`
-* ![\#41ae76](https://placehold.it/15/41ae76/000000?text=+) `#41ae76` - Budget Review `fa fa-money`
-* ![\#41ae76](https://placehold.it/15/41ae76/000000?text=+) `#41ae76` - Processing \| Purchasing `fa fa-gears`
-* ![\#f5901f](https://placehold.it/15/f5901f/000000?text=+) `#f5901f` - Pending Invoice `fa fa-clock-o`
-* ![\#41ae76](https://placehold.it/15/41ae76/000000?text=+) `#41ae76` - Processing \| Accounts Payable `fa fa-credit-card`
-* ![\#adadad](https://placehold.it/15/adadad/000000?text=+) `#adadad` - Closed `fa fa-check-circle`
 
 ### Service Request Colors
 
-* ![\#cd7070](https://placehold.it/15/cd7070/000000?text=+) `#cd7070` - New
-* ![\#5c68ff](https://placehold.it/15/5c68ff/000000?text=+) `#5c68ff` - In Progress
-* ![\#67b36a](https://placehold.it/15/67b36a/000000?text=+) `#67b36a` - Repairs Completed
+* \_\_[\#cd7070](https://www.colorhexa.com/cd7070) `#cd7070` - New
+* ![](../.gitbook/assets/image%20%2881%29.png)
+* [\#5c68ff](https://www.colorhexa.com/5c68ff) `#5c68ff` - In Progress
+* ![](../.gitbook/assets/image%20%28101%29.png)
+* [\#67b36a](https://www.colorhexa.com/67b36a) `#67b36a`- Repairs Completed
+* ![](../.gitbook/assets/image%20%2847%29.png)
+
+### Finance and Purchasing Colors & Icons
+
+* [\#f5901f ](https://www.colorhexa.com/f5901f)`#f5901f` - Orange
+* * \#ff9b9c `#ff9b9c` - Not Submitted
+* * \#ff9b9c  `#ff9b9c` - Returned
+* * \#6a6565 `#6a6565` - Rejected
+* * \#6a6565 `#6a6565` - Cancelled
+* * \#377eb8  `#377eb8` - Waiting for Approval
+* * \#41ae76 `#41ae76` - Purchase Review
+* ![](../.gitbook/assets/image%20%2885%29.png)
+* fa fa-clipboard `fa fa-clipboard`
+* ![](../.gitbook/assets/image%20%2891%29.png)
+* \#41ae76 `#41ae76` - Budget Review
+* ![](../.gitbook/assets/image%20%2885%29.png)
+* fa fa-money `fa fa-money`
+* ![](../.gitbook/assets/image%20%2890%29.png)
+* \#41ae76 `#41ae76` - Processing \| Purchasing
+* ![](../.gitbook/assets/image%20%2885%29.png)
+*  fa fa-gears `fa fa-cog`\(gear\)
+* ![](../.gitbook/assets/image%20%2877%29.png)
+* \#f5901f  `#f5901f` - Pending Invoice
+* ![](../.gitbook/assets/image%20%2894%29%20%283%29.png)
+*  [fa fa-clock-o](https://fontawesome.com/v4.7.0/icon/clock-o) `fa fa-clock-o`
+* ![](../.gitbook/assets/image%20%2889%29.png)
+* \#41ae76  `#41ae76` - Processing \| Accounts Payable
+* ![](../.gitbook/assets/image%20%2885%29.png)
+*  fa fa-credit-card `fa fa-credit-card`
+* ![](../.gitbook/assets/image%20%2880%29.png)
+* \#adadad `#adadad` - Closed
+* ![](../.gitbook/assets/image%20%2892%29.png)
+*  [fa fa-check-circle](https://fontawesome.com/v4.7.0/icon/check-circle) `fa fa-check-circle`
+* ![](../.gitbook/assets/image%20%2886%29.png)
 
 ## Layout
 
