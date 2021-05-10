@@ -140,6 +140,100 @@ You can find the original banner assets and a template for creating a new applic
 
 ### Finance and Purchasing Colors & Icons
 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left"></th>
+      <th style="text-align:left"></th>
+      <th style="text-align:left"></th>
+      <th style="text-align:left"></th>
+      <th style="text-align:left"></th>
+      <th style="text-align:left"></th>
+      <th style="text-align:left"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p></p>
+        <p>#ff9b9c</p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p><code>f5901f</code>
+        </p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>Purchase Review</p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (85).png" alt/>
+        </p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>fa fa-clipboard</p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p><code>fa fa-clipboard</code>
+        </p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>
+          <img src="../.gitbook/assets/image (91).png" alt/>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p></p>
+        <p>#ff9b9c</p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p><code>f5901f</code>
+        </p>
+      </td>
+      <td style="text-align:left">
+        <p></p>
+        <p>Purchase Review</p>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (85).png" alt/>
+      </td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <p></p>
+        <p></p>
+      </td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+  </tbody>
+</table>
+
 * [\#f5901f ](https://www.colorhexa.com/f5901f)`#f5901f` - Orange
 * * \#ff9b9c `#ff9b9c` - Not Submitted
 * * \#ff9b9c  `#ff9b9c` - Returned
