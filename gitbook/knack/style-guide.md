@@ -109,21 +109,6 @@ You can find the original banner assets and a template for creating a new applic
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><a href="https://www.colorhexa.com/777777">#777777</a>
-      </td>
-      <td style="text-align:left"><code>#777777</code>
-      </td>
-      <td style="text-align:left">
-        <img src="../.gitbook/assets/image (100).png" alt/>
-      </td>
-      <td style="text-align:left">Unassigned</td>
-      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-asterisk&quot;&gt;&lt;/i&gt;</code>
-      </td>
-      <td style="text-align:left">
-        <img src="../.gitbook/assets/image (110).png" alt/>
-      </td>
-    </tr>
-    <tr>
       <td style="text-align:left"><a href="https://www.colorhexa.com/367DB7">#367DB7</a>
       </td>
       <td style="text-align:left"><code>#367DB7</code>
@@ -153,7 +138,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-clock-o&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (93).png" alt/>
+        <img src="../.gitbook/assets/image (113).png" alt/>
       </td>
     </tr>
     <tr>
@@ -168,7 +153,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-map-marker&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (113).png" alt/>
+        <img src="../.gitbook/assets/image (125).png" alt/>
       </td>
     </tr>
     <tr>
@@ -183,7 +168,7 @@ You can find the original banner assets and a template for creating a new applic
         <td style="text-align:left"><code>&lt;i class=&quot;fa fa-flag-checkered&quot;&gt;&lt;/i&gt;</code>
         </td>
         <td style="text-align:left">
-          <img src="../.gitbook/assets/image (112).png" alt/>
+          <img src="../.gitbook/assets/image (124).png" alt/>
         </td>
     </tr>
     <tr>
@@ -198,7 +183,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-checked-circle&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (89).png" alt/>
+        <img src="../.gitbook/assets/image (109).png" alt/>
       </td>
     </tr>
     <tr>
@@ -213,7 +198,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-times&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (90).png" alt/>
+        <img src="../.gitbook/assets/image (110).png" alt/>
       </td>
     </tr>
   </tbody>
@@ -245,7 +230,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-asterisk&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (110).png" alt/>
+        <img src="../.gitbook/assets/image (120).png" alt/>
       </td>
     </tr>
     <tr>
@@ -262,7 +247,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (47).png" alt/>
+          <img src="../.gitbook/assets/image (80).png" alt/>
         </p>
       </td>
     </tr>
@@ -298,7 +283,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (112).png" alt/>
+          <img src="../.gitbook/assets/image (124).png" alt/>
         </p>
       </td>
     </tr>
@@ -316,7 +301,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (89).png" alt/>
+          <img src="../.gitbook/assets/image (109).png" alt/>
         </p>
         <p></p>
       </td>
@@ -340,9 +325,9 @@ You can find the original banner assets and a template for creating a new applic
 
 | Link | HEX Code | Swatch | Name | HMTL Code | Font Awesome Icons |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| [\#cd7070](https://www.colorhexa.com/cd7070) | `#cd7070` | ![](../.gitbook/assets/image%20%2883%29.png) | New | ------------ | ------------ |
-| [\#5c68ff](https://www.colorhexa.com/5c68ff) | `#5c68ff` | ![](../.gitbook/assets/image%20%28111%29.png) | In Progress | ------------ | ------------ |
-| [\#67b36a](https://www.colorhexa.com/67b36a)  | `#67b36a` | ![](../.gitbook/assets/image%20%2877%29.png) | Repairs Completed | ------------ | ------------ |
+| [\#cd7070](https://www.colorhexa.com/cd7070) | `#cd7070` | ![](../.gitbook/assets/image%20%2890%29.png) | New | ------------ | ------------ |
+| [\#5c68ff](https://www.colorhexa.com/5c68ff) | `#5c68ff` | ![](../.gitbook/assets/image%20%28123%29.png) | In Progress | ------------ | ------------ |
+| [\#67b36a](https://www.colorhexa.com/67b36a)  | `#67b36a` | ![](../.gitbook/assets/image%20%2881%29.png) | Repairs Completed | ------------ | ------------ |
 | ------------ | ------------ | ------------ | Close \(Resolved\) | ------------ | ------------ |
 | ------------ | ------------ | ------------ | Close \(Duplicate\) | ------------ | ------------ |
 
@@ -351,119 +336,156 @@ You can find the original banner assets and a template for creating a new applic
 <table>
   <thead>
     <tr>
-      <th style="text-align:left"></th>
-      <th style="text-align:left"></th>
-      <th style="text-align:left"></th>
-      <th style="text-align:left"></th>
-      <th style="text-align:left"></th>
-      <th style="text-align:left"></th>
+      <th style="text-align:left">Link</th>
+      <th style="text-align:left">HEX Code</th>
+      <th style="text-align:left">Swatch</th>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">HTML Code</th>
+      <th style="text-align:left">Font Awesome Icons</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">#ff9b9c</td>
+      <td style="text-align:left"><code>#ff9b9c</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (119).png" alt/>
+      </td>
+      <td style="text-align:left">Not Submitted</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">------------</td>
     </tr>
     <tr>
-      <td style="text-align:left">
-        <p></p>
-        <p>#ff9b9c</p>
+      <td style="text-align:left">#377eb8</td>
+      <td style="text-align:left"><code>#377eb8</code>
       </td>
       <td style="text-align:left">
-        <p></p>
-        <p><code>f5901f</code>
-        </p>
+        <img src="../.gitbook/assets/image (111).png" alt/>
+      </td>
+      <td style="text-align:left">Waiting for Approval</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">------------------------</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">#ff9b9c</td>
+      <td style="text-align:left"><code>#ff9b9c</code>
       </td>
       <td style="text-align:left">
-        <p></p>
-        <p>Purchase Review</p>
+        <img src="../.gitbook/assets/image (99).png" alt/>
+      </td>
+      <td style="text-align:left">Returned</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">------------</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">#6a6565</td>
+      <td style="text-align:left"><code>#6a6565</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (121).png" alt/>
+      </td>
+      <td style="text-align:left">Rejected</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">------------</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><code>#41ae76</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (115).png" alt/>
+      </td>
+      <td style="text-align:left">Budget Review</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-money&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (86).png" alt/>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p><code>&lt;i class=&quot;fa fa-clipboard&quot;&gt;&lt;/i&gt;</code>
-        </p>
-      </td>
-      <td style="text-align:left">
-        <p></p>
-        <p>
-          <img src="../.gitbook/assets/image (101).png" alt/>
+          <img src="../.gitbook/assets/image (114).png" alt/>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">
-        <p></p>
-        <p>#ff9b9c</p>
+      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><code>#41ae76</code>
       </td>
       <td style="text-align:left">
-        <p></p>
-        <p><code>f5901f</code>
-        </p>
+        <img src="../.gitbook/assets/image (101).png" alt/>
+      </td>
+      <td style="text-align:left">Purchase Review</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-clipboard&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <p></p>
-        <p>Purchase Review</p>
+        <img src="../.gitbook/assets/image (116).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><code>#41ae76</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (93).png" alt/>
+      </td>
+      <td style="text-align:left">Processing| Purchasing</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-cogs&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (122).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><code>#41ae76</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (85).png" alt/>
+      </td>
+      <td style="text-align:left">Processing| Accounts Payable</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-credit-card&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
         <img src="../.gitbook/assets/image (86).png" alt/>
       </td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
     </tr>
     <tr>
-      <td style="text-align:left"></td>
-      <td style="text-align:left">
-        <p></p>
-        <p></p>
+      <td style="text-align:left">#f5901f</td>
+      <td style="text-align:left"><code>#f5901f</code>
       </td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (89).png" alt/>
+      </td>
+      <td style="text-align:left">Pending Invoice</td>
+      <td style="text-align:left"><code>&lt;i class=&quot;fa fa-clock-o&quot;&gt;&lt;/i&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (113).png" alt/>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">#6a6565</td>
+      <td style="text-align:left"><code>#6a6565</code>
+      </td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (77).png" alt/>
+      </td>
+      <td style="text-align:left">Cancelled</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">------------</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left">
+        <img src="../.gitbook/assets/image (47).png" alt/>
+      </td>
+      <td style="text-align:left">Closed</td>
+      <td style="text-align:left">------------</td>
+      <td style="text-align:left"><code>#ADADAD </code>
+        <img src="../.gitbook/assets/image (109).png" alt/>&lt;code&gt;&lt;/code&gt;</td>
     </tr>
   </tbody>
 </table>
-
-* [\#f5901f ](https://www.colorhexa.com/f5901f)`#f5901f` - Orange
-* * \#ff9b9c `#ff9b9c` - Not Submitted
-* * \#ff9b9c  `#ff9b9c` - Returned
-* * \#6a6565 `#6a6565` - Rejected
-* * \#6a6565 `#6a6565` - Cancelled
-* * \#377eb8  `#377eb8` - Waiting for Approval
-* * \#41ae76 `#41ae76` - Purchase Review
-* ![](../.gitbook/assets/image%20%2886%29.png)
-* fa fa-clipboard `fa fa-clipboard`
-* ![](../.gitbook/assets/image%20%28101%29.png)
-* \#41ae76 `#41ae76` - Budget Review
-* ![](../.gitbook/assets/image%20%2886%29.png)
-* fa fa-money `fa fa-money`
-* ![](../.gitbook/assets/image%20%2899%29.png)
-* \#41ae76 `#41ae76` - Processing \| Purchasing
-* ![](../.gitbook/assets/image%20%2886%29.png)
-*  fa fa-gears `fa fa-cog`\(gear\)
-* ![](../.gitbook/assets/image%20%2880%29.png)
-* \#f5901f  `#f5901f` - Pending Invoice
-* ![](../.gitbook/assets/image%20%2894%29%20%283%29.png)
-*  [fa fa-clock-o](https://fontawesome.com/v4.7.0/icon/clock-o) `fa fa-clock-o`
-* ![](../.gitbook/assets/image%20%2893%29.png)
-* \#41ae76  `#41ae76` - Processing \| Accounts Payable
-* ![](../.gitbook/assets/image%20%2886%29.png)
-*  fa fa-credit-card `fa fa-credit-card`
-* ![](../.gitbook/assets/image%20%2881%29.png)
-* \#adadad `#adadad` - Closed
-* ![](../.gitbook/assets/image%20%2892%29.png)
-*  [fa fa-check-circle](https://fontawesome.com/v4.7.0/icon/check-circle) `fa fa-check-circle`
-* ![](../.gitbook/assets/image%20%2889%29.png)
 
 ## Layout
 
