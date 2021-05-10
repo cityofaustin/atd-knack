@@ -365,7 +365,7 @@ You can find the original banner assets and a template for creating a new applic
       </td>
       <td style="text-align:left">Waiting for Approval</td>
       <td style="text-align:left">------------</td>
-      <td style="text-align:left">------------------------</td>
+      <td style="text-align:left">------------</td>
     </tr>
     <tr>
       <td style="text-align:left">#ff9b9c</td>
