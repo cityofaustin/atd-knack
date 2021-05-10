@@ -73,11 +73,8 @@ You can find the original banner assets and a template for creating a new applic
 | [\#ff9b9c](https://www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2897%29%20%281%29.png) | Inactive/No | ------------ | ------------ |
 | [\#80d07e](https://www.colorhexa.com/80d07e)  | `#80d07e` | ![](../.gitbook/assets/image%20%28102%29.png) | Active/Yes | ------------ | ------------ |
 |  |  |  |  |  |  |
-| [\#f5901f](https://www.colorhexa.com/f5901f) | `#f5901f`  | ![](../.gitbook/assets/image%20%2894%29%20%283%29.png) | Orange | ------------ | ------------ |
-| [\#ff9b9c](www.colorhexa.com/ff9b9c)  | `#ff9b9c` | ![](../.gitbook/assets/image%20%2884%29.png) | Return to Requester | ------------ | ------------ |
-| [\#80d07e](https://www.colorhexa.com/80d07e) | `#80d07e` | ![](../.gitbook/assets/image%20%28104%29.png) | Current | ------------ | ------------ |
-| [\#4daf4a](https://www.colorhexa.com/4daf4a)  | `#4daf4a` | ![](../.gitbook/assets/image%20%2888%29.png) | Approved | ------------ | ------------ |
-| [\#000000](https://www.colorhexa.com/000000)  | `#000000` | ![](../.gitbook/assets/image%20%2882%29.png) | Rejected | ------------ | ------------ |
+| [\#f6fa6b](https://www.colorhexa.com/f6fa6b) | `#f6fa6b` | ![](../.gitbook/assets/image%20%28123%29.png) | Yellow  | ------------ | ------------ |
+| [\#0028ff ](https://www.colorhexa.com/0028ff) | `#0028ff` | ![](../.gitbook/assets/image%20%28127%29.png) | Blue | ------------ | ------------ |
 
 ### Signs & Markings Data Tracker Colors & Icons
 
@@ -153,7 +150,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left"><code>&lt;i class=&quot;fa fa-map-marker&quot;&gt;&lt;/i&gt;</code>
       </td>
       <td style="text-align:left">
-        <img src="../.gitbook/assets/image (125).png" alt/>
+        <img src="../.gitbook/assets/image (126).png" alt/>
       </td>
     </tr>
     <tr>
@@ -168,7 +165,7 @@ You can find the original banner assets and a template for creating a new applic
         <td style="text-align:left"><code>&lt;i class=&quot;fa fa-flag-checkered&quot;&gt;&lt;/i&gt;</code>
         </td>
         <td style="text-align:left">
-          <img src="../.gitbook/assets/image (124).png" alt/>
+          <img src="../.gitbook/assets/image (125).png" alt/>
         </td>
     </tr>
     <tr>
@@ -283,7 +280,7 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">
         <p></p>
         <p>
-          <img src="../.gitbook/assets/image (124).png" alt/>
+          <img src="../.gitbook/assets/image (125).png" alt/>
         </p>
       </td>
     </tr>
@@ -326,7 +323,7 @@ You can find the original banner assets and a template for creating a new applic
 | Link | HEX Code | Swatch | Name | HMTL Code | Font Awesome Icons |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | [\#cd7070](https://www.colorhexa.com/cd7070) | `#cd7070` | ![](../.gitbook/assets/image%20%2890%29.png) | New | ------------ | ------------ |
-| [\#5c68ff](https://www.colorhexa.com/5c68ff) | `#5c68ff` | ![](../.gitbook/assets/image%20%28123%29.png) | In Progress | ------------ | ------------ |
+| [\#5c68ff](https://www.colorhexa.com/5c68ff) | `#5c68ff` | ![](../.gitbook/assets/image%20%28124%29.png) | In Progress | ------------ | ------------ |
 | [\#67b36a](https://www.colorhexa.com/67b36a)  | `#67b36a` | ![](../.gitbook/assets/image%20%2881%29.png) | Repairs Completed | ------------ | ------------ |
 | ------------ | ------------ | ------------ | Close \(Resolved\) | ------------ | ------------ |
 | ------------ | ------------ | ------------ | Close \(Duplicate\) | ------------ | ------------ |
