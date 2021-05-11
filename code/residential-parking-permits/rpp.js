@@ -1,179 +1,138 @@
-function bigButton(div_id, view_id, url, fa_icon, button_label, callback) {
-  // create a large button
+/********************************************/
+/******** COACD Single Sign On Login ********/
+/********************************************/
+function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
 
-  $("<div/>", {
-    id: div_id,
-  }).appendTo("#" + view_id);
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
 
-  $("#" + div_id).append(
-    "<a class='big-button' href='" +
-      url +
-      "'><div class='big-button-container'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></div></a>"
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login"
+  });
+  $coacdButton.appendTo("#" + viewId);
+
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
   );
+
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
+}
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
+
+/********************************************/
+/*************** Big Buttons ****************/
+/********************************************/
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
-//>>>RPP TAB BUTTONS
-$(document).on("knack-view-render.view_4", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "verify",
-    "view_518",
-    "https://atd.knack.com/parking#verify/",
-    "map-marker",
-    "Am I Eligible?"
-  );
+
+/*********** Customer RPP Portal ***********/
+// create large Get Started button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_4", function(event, page) {
+  bigButton( "get-started", "view_4", "https://atd.knack.com/parking#get-started/", "file-text", "Get Started");
+});
+// create large Am I Eligible button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_518", function(event, page) {
+  bigButton("verify", "view_518", "https://atd.knack.com/parking#verify/", "map-marker", "Am I Eligible?");
+});
+// create large Help button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_5", function(event, page) {
+  bigButton( "faq", "view_5", "https://atd.knack.com/parking#faq/", "info-circle", "Help");
+});
+// create large About the Program button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_455", function(event, page) {
+  bigButton( "learn-more", "view_455", "http://www.austintexas.gov/department/residential-permit-parking", "book", "About the Program");
+});
+/************ FAQ Page ************/
+// create large Home button on the FAQ page that navigates back to RPP Portal
+$(document).on("knack-view-render.view_236", function(event, page) {
+  bigButton( "rpp", "view_236", "https://atd.knack.com/parking#rpp", "home", "Home");
+});
+/********** Payment Options Page **********/
+// create large Home button on the Payment Options page that navigates back to RPP Portal
+$(document).on("knack-view-render.view_273", function(event, page) {
+  bigButton( "rpp", "view_273", "https://atd.knack.com/parking#rpp", "home", "Home");
+});
+/********** Get Started Page **********/
+// create large Home button on the Get Started page
+$(document).on("knack-view-render.view_1599", function(event, page) {
+  bigButton( "rpp", "view_1599", "https://atd.knack.com/parking#rpp", "home", "Home");
+});
+// create large Start Application button on the Get Started page
+$(document).on("knack-view-render.view_127", function(event, page) {
+  bigButton( "apply", "view_127", "https://atd.knack.com/parking#apply-for-permits/", "arrow-right", "Start Application");
+});
+/********** Am I Eligible Page **********/
+// create large Home button on the Am I Eligible page that navigates back to RPP Portal
+$(document).on("knack-view-render.view_226", function(event, page) {
+  bigButton( "rpp", "view_226", "https://atd.knack.com/parking#rpp", "home", "Home");
+});
+/********** Staff Home Page **********/
+// create large Applications button on the Home page
+$(document).on("knack-view-render.view_27", function(event, page) {
+  bigButton( "applications", "view_27", "https://atd.knack.com/parking#applications/", "files-o", "Applications");
+});
+// create large Permits button on the Home page
+$(document).on("knack-view-render.view_28", function(event, page) {
+  bigButton( "permits", "view_28", "https://atd.knack.com/parking#permits", "tags", "Permits");
+});
+// create large Transactions button on the Home page
+$(document).on("knack-view-render.view_267", function(event, page) {
+  bigButton( "transactions", "view_267", "https://atd.knack.com/parking#transactions", "credit-card", "Transactions");
+});
+// create large Advanced Search button on the Home page
+$(document).on("knack-view-render.view_184", function(event, page) {
+  bigButton( "advanced-search", "view_184", "https://atd.knack.com/parking#advanced-search/", "search", "Advanced Search");
+});
+// create large Am I Eligible button on the Home page
+$(document).on("knack-view-render.view_396", function(event, page) {
+  bigButton( "verify", "view_396", "https://atd.knack.com/parking#verify/", "map-marker", "Am I Eligible?");
+});
+// create large Reports button on the Home page
+$(document).on('knack-view-render.view_208', function(event, page) {
+  bigButton( "reports", "view_208", "https://atd.knack.com/parking#reports", "bar-chart", "Reports");
 });
 
-$(document).on("knack-view-render.view_4", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "get-started",
-    "view_4",
-    "https://atd.knack.com/parking#get-started/",
-    "file-text",
-    "Get Started"
-  );
-});
-
-$(document).on("knack-view-render.view_5", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "faq",
-    "view_5",
-    "https://atd.knack.com/parking#faq/",
-    "info-circle",
-    "Help"
-  );
-});
-
-$(document).on("knack-view-render.view_455", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "learn-more",
-    "view_455",
-    "http://www.austintexas.gov/department/residential-permit-parking",
-    "book",
-    "About the Program"
-  );
-});
-
-//>>>FAQ TAB BUTTONS
-$(document).on("knack-view-render.view_236", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "rpp",
-    "view_236",
-    "https://atd.knack.com/parking#rpp",
-    "home",
-    "Home"
-  );
-});
-
-//>>>GET STARTED TAB BUTTONS
-$(document).on("knack-view-render.view_127", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "apply",
-    "view_127",
-    "https://atd.knack.com/parking#apply-for-permits/",
-    "arrow-right",
-    "Start Application"
-  );
-});
-
-//>>>HOME TAB BUTTONS
-$(document).on("knack-view-render.view_27", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "applications",
-    "view_27",
-    "https://atd.knack.com/parking#applications/",
-    "files-o",
-    "Applications"
-  );
-});
-
-$(document).on("knack-view-render.view_28", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "permits",
-    "view_28",
-    "https://atd.knack.com/parking#permits",
-    "tags",
-    "Permits"
-  );
-});
-
-$(document).on("knack-view-render.view_267", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "transactions",
-    "view_267",
-    "https://atd.knack.com/parking#transactions",
-    "credit-card",
-    "Transactions"
-  );
-});
-
-$(document).on("knack-view-render.view_184", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "advanced-search",
-    "view_184",
-    "https://atd.knack.com/parking#advanced-search/",
-    "search",
-    "Advanced Search"
-  );
-});
-
-$(document).on("knack-view-render.view_396", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "verify",
-    "view_396",
-    "https://atd.knack.com/parking#verify/",
-    "map-marker",
-    "Am I Eligible?"
-  );
-});
-
-//$(document).on('knack-view-render.view_208', function(event, page) {
-// create large button on the home page
-bigButton(
-  "reports",
-  "view_208",
-  "https://atd.knack.com/parking#reports",
-  "bar-chart",
-  "Reports"
-);
-//});
-
-//>>>PAYMENT OPTIONS TAB BUTTONS
-$(document).on("knack-view-render.view_273", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "rpp",
-    "view_273",
-    "https://atd.knack.com/parking#rpp",
-    "home",
-    "Home"
-  );
-});
-
-//>>>APPLICATION SUBMIT BUTTONS
-//$(document).on('knack-view-render.view_755', function(event, page) {
-// create large button on the review application page
-//bigButton('continue', 'view_755', "https://atd.knack.com/parking#apply/permit-information2/required-documents/review-application/", "check", "Save & Continue");
-//});
-
+/*****************************************/
+/*** Convert Field/Inputs to UpperCase ***/
+/*****************************************/
+/*Convert all name, address, and license plate entries*/
 $(document).on("knack-page-render.any", function (event, page) {
-  // Convert all name, address, and license plate entries to upper case
-  //  This is required in addition to the uppercase css text transform, which is superficial
   $(".kn-input-name input").keyup(function () {
     this.value = this.value.toUpperCase();
   });
@@ -205,19 +164,30 @@ $(document).on("knack-page-render.any", function (event, page) {
   $("input#field_398").keyup(function () {
     this.value = this.value.toUpperCase();
   });
+
+  $("input#field_595").keyup(function () {
+    this.value = this.value.toUpperCase();
+  });
 });
 
-//$(document).on('knack-view-render.any', function(event, view, data) {
-//  autofill city and state on any address form except permit information on customer application
-//if (view === "view_713") {
-//  return;
-//}
-//$("#city").val('AUSTIN');
-//$("#state").val('TX');
-//});
+/********************************************************/
+/** Relabel Attachment Links in Tables to 'Attachment' **/
+/********************************************************/
+$(document).on('knack-view-render.any', function(event, view, data) {
+  $("a.kn-view-asset").html("Attachment");
+});
 
+/*************************************************************************************/
+/** Disable the ability to Click/Touch outside a Modal Page (accidentally close it) **/
+/*************************************************************************************/
+$(document).on('knack-scene-render.any', function(event, scene) {
+    $('.kn-modal-bg').off('click');
+});
+
+/*************************************/
+/********** RPP Eligibility **********/
+/*************************************/
 function updateVerifyIframe(x, y, street) {
-  // RPP Eligibility
   // update iframe src from detail field
   // see AGOL URL Params: https://doc.arcgis.com/en/arcgis-online/reference/use-url-parameters.htm
   var baseUrl =
@@ -281,7 +251,7 @@ $(document).on("knack-form-submit.view_163", function (event, view, record) {
           "<li><h5><i>Maximum Resident Decals: <b>" +
           maxResidents +
           "</b></i></h5></li>" +
-          "<li><h5><i>Maximum Visitor Hang-tags: <b>" +
+          "<li><h5><i>Maximum Visitor Hangtags: <b>" +
           maxVisitorHangTagHouseh +
           "</b></i></h5></li>" +
           "<li><h5><i>Permit Renewal Period: <b>" +
@@ -473,7 +443,9 @@ function getMapUrl(lat, lon, address) {
   );
 }
 
-// Disable breadcrumb links
+/***************************************************************/
+/*** Disable Breadcrumb Navigation Links for RPP Application ***/
+/***************************************************************/
 function disableBreadCrumbsNonAdmin() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
@@ -481,98 +453,38 @@ function disableBreadCrumbsNonAdmin() {
     });
   }
 }
-//no longer exists
-$(document).on("knack-scene-render.scene_3", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_13", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//delete view
-$(document).on("knack-scene-render.scene_123", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//delete view
-$(document).on("knack-scene-render.scene_176", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//delete view
-$(document).on("knack-scene-render.scene_179", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//delete view
-$(document).on("knack-scene-render.scene_140", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//delete view
-$(document).on("knack-scene-render.scene_142", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_186", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_163", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_226", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_227", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_231", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_237", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_244", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//no longer exists
-$(document).on("knack-scene-render.scene_262", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//apply for permits-rpp app
+//apply for permits page
 $(document).on("knack-scene-render.scene_309", function () {
   disableBreadCrumbsNonAdmin();
 });
-//permit information-rpp app
+//permit information page
 $(document).on("knack-scene-render.scene_310", function () {
   disableBreadCrumbsNonAdmin();
 });
-//required documents-rpp app
+//required documents page
 $(document).on("knack-scene-render.scene_312", function () {
   disableBreadCrumbsNonAdmin();
 });
-//review application-rpp app
+//review application page
 $(document).on("knack-scene-render.scene_313", function () {
   disableBreadCrumbsNonAdmin();
 });
-//application invoice-rpp app
+//application invoice page
 $(document).on("knack-scene-render.scene_314", function () {
   disableBreadCrumbsNonAdmin();
 });
-//edit application-rpp app
+//edit application page
 $(document).on("knack-scene-render.scene_315", function () {
   disableBreadCrumbsNonAdmin();
 });
 
-/////////////////////////////////////////////////////////////
-//// Begin Set Weighted Unit Cost ///////////////////////////
-/////////////////////////////////////////////////////////////
+/***************************************/
+/*** Calculate RPP Application Costs ***/
+/***************************************/
 function setCostFields(viewId, options) {
   var NUM_DECALS_FIELD = "field_394"; // Resident Decals Application Choice
   var NUM_HANGTAGS_FIELD = "field_395"; // Visitor Hangtags Application Choice
-  var NUM_DAY_PASSES_FIELD = "field_396"; //  day passes choice
+  var NUM_DAY_PASSES_FIELD = "field_396"; //  Day Passes Choice
   var NUM_EXISTING_PERMITS_FIELD = "field_546";
   var COMBINED_PERMIT_COST_FIELD = "field_530";
   var DAY_PASS_BASE_COST_FIELD = "field_505";
@@ -719,7 +631,7 @@ $("#kn-input-field_419").closest("ul");
 
 function recalcCostsButton(clickEvent, viewKey, options) {
   var button = $(
-    "<span style='width: 2em'></span><button id='recalc-costs-button' style='border-radius: .35em !important' class='kn-button'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Re-Calculate Costs</button>"
+    "<span style='width: 2em'></span><button id='recalc-costs-button' style='border-radius: .35em !important' class='kn-button'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Calculate Costs</button>"
   );
 
   var placeHolder = $("h3:contains('$replace_with_javascript')");
@@ -741,10 +653,20 @@ $(document).on("knack-view-render.view_1301", function (event, view) {
   });
 });
 
+$(document).on("knack-view-render.view_666", function (event, view) {
+  // back office add Permit application view
+  // creates a "Re-calculate Costs" button which updates the Edit Permit App form
+  // with calculated cost values
+  recalcCostsButton(setCostFields, view.key, {
+    hideFromUser: false,
+    autoUpdate: false,
+  });
+});
+
 $(document).on("knack-view-render.view_1175", function (event, view) {
   // "permit information" page of customer application workflow
     for (var i = 3; i < 7; i++) {
-    // remove number of hangtag chocies higher than 2. only staff can pick more than 2
+    // remove number of hangtag choices higher than 2. only staff can pick more than 2
     // hangtags
     $("#view_1175-field_395 option[value='" + i + "']").remove();
   }
@@ -755,11 +677,29 @@ $(document).on("knack-view-render.view_1175", function (event, view) {
 $(document).on("knack-view-render.view_1194", function (event, view) {
   // "edit application" page of customer application workflow
   for (var i = 3; i < 7; i++) {
-    // remove number of hangtag chocies higher than 2. only staff can pick more than 2
+    // remove number of hangtag choices higher than 2. only staff can pick more than 2
     // hangtags
     $("#view_1175-field_395 option[value='" + i + "']").remove();
   }
-
   setCostFields(view.key, { hideFromUser: true, autoUpdate: true });
 });
 
+/***************************************/
+/**** Global Reporting Page Styling ****/
+/***************************************/
+Highcharts.setOptions({
+    chart: {  
+      backgroundColor: {
+            linearGradient: [500, 500, 500, 500], /*for report container, set to same value for no gradient*/
+            stops: [
+                [0, 'rgb(255, 255, 255)'],
+                [1, 'rgb(240, 240, 255)'] /*we create a light blue report container background to contrast the data with the white plot area and white page*/
+            ]
+        },
+        borderWidth: 0, /*border width for report container, does not include title, print/download, or filter menu*/
+        plotBackgroundColor: 'rgba(255, 255, 255, .9)', /*how much lighter you want the plot background to be compared to report background color. 
+        We make the plot background almost transparent to be similar as the page color and contrast with the light blue report container color*/
+        plotShadow: false, /*adds shadow to bottom and right of plot and gives a 3D effect. We make it flat.*/
+        plotBorderWidth: 2 /*for plot only. Helps user focus on data in the plot*/
+    }
+});

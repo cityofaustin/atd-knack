@@ -283,6 +283,21 @@ a.form-link:hover {text-decoration:underline;}
 /*TDA Reviews*/
 #view_775 .kn-table th { display: none; }
 
+/*Reviewer Dashboard*/
+#view_751 .kn-table th {
+  display: none;
+}
+
+/*Development Reviews*/
+#view_752 .kn-table th {
+  display: none;
+}
+
+/*TIA Requests*/
+#view_753 .kn-table th {
+  display: none;
+}
+
 /***************************************/
 /** Remove Back Links for TIA Request **/
 /***************************************/
@@ -533,6 +548,7 @@ a.form-link:hover {text-decoration:underline;}
 /*******************************************/
 #view_509 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
+
 /********************************************/
 /*** Styles the Customer TIA Details page ***/
 /********************************************/
@@ -625,6 +641,10 @@ a.form-link:hover {text-decoration:underline;}
 @media print { tables {page-break-inside: avoid;} } //RichText Tables
 @media print { h2 {page-break-before: auto;} } //h2 Headers
 
+@media print {
+  h2 {page-break-before: auto;}
+}
+
 /*******************************************/
 /********* Create Memo Page Breaks *********/
 /*******************************************/
@@ -636,6 +656,17 @@ a.form-link:hover {text-decoration:underline;}
 @media print { #view_748 {page-break-before: auto;} }//Exhibit D section
 @media print { #view_749 {page-break-before: auto;} }//Exhibit E section
 @media print { #view_750 {page-break-before: auto;} }//Exhibit F section
+
+/******************************************/
+/*** Custom TIA Menu Buttons Navigation ***/
+/******************************************/
+
+/* hide custom menu if on mobile */
+@media (max-width: 799px) {
+  #tia-menu-list {
+    display: none;
+  }
+}
 
 /******************************************/
 /*** Custom TIA Menu Buttons Navigation ***/
