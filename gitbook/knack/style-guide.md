@@ -27,7 +27,7 @@ You can find the original banner assets and a template for creating a new applic
   `Gimp may automatically bold the second line due to the text formatting of the first line so be sure to un-bold it`
 
 * Font Color: White
-* Font Size: 45px for first line \(bolded\), 36px for second line
+* Font Size: 45px for first line \(bold\), 36px for second line
   * If text length exceeds banner size, adjust font size smaller until it fits appropriately
 * Layout: City Logo left side, first line: Name of Application, second line: Austin Transportation Department
 * Save as .xcf GIMP file in the logo folder for the application on the G Drive
@@ -343,7 +343,8 @@ You can find the original banner assets and a template for creating a new applic
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left">#ff9b9c</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/ff9b9c">#ff9b9c </a>
+      </td>
       <td style="text-align:left"><code>#ff9b9c</code>
       </td>
       <td style="text-align:left">
@@ -354,7 +355,8 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">------------</td>
     </tr>
     <tr>
-      <td style="text-align:left">#377eb8</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/377eb8">#377eb8</a>
+      </td>
       <td style="text-align:left"><code>#377eb8</code>
       </td>
       <td style="text-align:left">
@@ -365,7 +367,8 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">------------</td>
     </tr>
     <tr>
-      <td style="text-align:left">#ff9b9c</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/ff9b9c">#ff9b9c </a> 
+      </td>
       <td style="text-align:left"><code>#ff9b9c</code>
       </td>
       <td style="text-align:left">
@@ -376,7 +379,8 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">------------</td>
     </tr>
     <tr>
-      <td style="text-align:left">#6a6565</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/6a6565">#6a6565</a>
+      </td>
       <td style="text-align:left"><code>#6a6565</code>
       </td>
       <td style="text-align:left">
@@ -387,7 +391,8 @@ You can find the original banner assets and a template for creating a new applic
       <td style="text-align:left">------------</td>
     </tr>
     <tr>
-      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/41ae76">#41ae76</a>
+      </td>
       <td style="text-align:left"><code>#41ae76</code>
       </td>
       <td style="text-align:left">
@@ -404,7 +409,8 @@ You can find the original banner assets and a template for creating a new applic
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/41ae76">#41ae76</a>
+      </td>
       <td style="text-align:left"><code>#41ae76</code>
       </td>
       <td style="text-align:left">
@@ -418,7 +424,8 @@ You can find the original banner assets and a template for creating a new applic
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/41ae76">#41ae76</a>
+      </td>
       <td style="text-align:left"><code>#41ae76</code>
       </td>
       <td style="text-align:left">
@@ -432,7 +439,8 @@ You can find the original banner assets and a template for creating a new applic
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">#41ae76</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/41ae76">#41ae76</a>
+      </td>
       <td style="text-align:left"><code>#41ae76</code>
       </td>
       <td style="text-align:left">
@@ -446,7 +454,8 @@ You can find the original banner assets and a template for creating a new applic
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">#f5901f</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/f5901f">#f5901f</a>
+      </td>
       <td style="text-align:left"><code>#f5901f</code>
       </td>
       <td style="text-align:left">
@@ -460,7 +469,8 @@ You can find the original banner assets and a template for creating a new applic
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">#6a6565</td>
+      <td style="text-align:left"><a href="https://www.colorhexa.com/6a6565">#6a6565</a>
+      </td>
       <td style="text-align:left"><code>#6a6565</code>
       </td>
       <td style="text-align:left">
