@@ -264,6 +264,7 @@ a.form-link:hover {text-decoration:underline;}
 /** Remove Table Header for Announcements **/
 /*******************************************/
 /*Reviewer Home Page*/
+<<<<<<< HEAD
 #view_688 .kn-table th { display: none; }
 
 /*Reviewer Dashboard*/
@@ -277,6 +278,26 @@ a.form-link:hover {text-decoration:underline;}
 
 /*TDA Reviews*/
 #view_775 .kn-table th { display: none; }
+=======
+#view_688 .kn-table th {
+  display: none;
+}
+>>>>>>> master
+
+/*Reviewer Dashboard*/
+#view_751 .kn-table th {
+  display: none;
+}
+
+/*Development Reviews*/
+#view_752 .kn-table th {
+  display: none;
+}
+
+/*TIA Requests*/
+#view_753 .kn-table th {
+  display: none;
+}
 
 /***************************************/
 /** Remove Back Links for TIA Request **/
@@ -380,6 +401,10 @@ a.form-link:hover {text-decoration:underline;}
 /****************************************/
 #view_431 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
+<<<<<<< HEAD
+=======
+#view_431 > form > ul:nth-child(2n) > li { border: none; }
+>>>>>>> master
 
 /***************************************************/
 /*** Styles the Edit TIA Request Attachment page ***/
@@ -489,6 +514,10 @@ a.form-link:hover {text-decoration:underline;}
 /*******************************************/
 #view_383 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
+<<<<<<< HEAD
+=======
+#view_383 > form > ul:nth-child(2n) > li { border: none; }
+>>>>>>> master
 
 /*********************************************/
 /*** Styles the Add TIA Communication page ***/
@@ -528,6 +557,11 @@ a.form-link:hover {text-decoration:underline;}
 /*******************************************/
 #view_509 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
+<<<<<<< HEAD
+=======
+#view_509 > form > ul:nth-child(2n) > li { border: none; }
+
+>>>>>>> master
 /********************************************/
 /*** Styles the Customer TIA Details page ***/
 /********************************************/
@@ -620,10 +654,14 @@ a.form-link:hover {text-decoration:underline;}
 @media print { tables {page-break-inside: avoid;} } //RichText Tables
 @media print { h2 {page-break-before: auto;} } //h2 Headers
 
+@media print {
+  h2 {page-break-before: auto;}
+}
 /*******************************************/
 /********* Create Memo Page Breaks *********/
 /*******************************************/
 /*knack details views*/
+<<<<<<< HEAD
 @media print { #view_707 {page-break-before: auto;} }//Proposed Conditions section
 @media print { #view_712 {page-break-before: always;} }//Exhibit A section
 @media print { #view_746 {page-break-before: auto;} }//Exhibit B section
@@ -643,6 +681,47 @@ a.form-link:hover {text-decoration:underline;}
   }
 }
 
+=======
+@media print {
+  #view_707 {page-break-before: auto;}//Proposed Conditions section
+}
+
+@media print {
+  #view_712 {page-break-before: always;}//Exhibit A section
+}
+
+@media print {
+  #view_746 {page-break-before: auto;}//Exhibit B section
+}
+
+@media print {
+  #view_747 {page-break-before: auto;}//Exhibit C section
+}
+
+@media print {
+  #view_748 {page-break-before: auto;}//Exhibit D section
+}
+
+@media print {
+  #view_749 {page-break-before: auto;}//Exhibit E section
+}
+
+@media print {
+  #view_750 {page-break-before: auto;}//Exhibit F section
+}
+
+/******************************************/
+/*** Custom TIA Menu Buttons Navigation ***/
+/******************************************/
+
+/* hide custom menu if on mobile */
+@media (max-width: 799px) {
+  #tia-menu-list {
+    display: none;
+  }
+}
+
+>>>>>>> master
 /* hide knack menu buttons if on desktop */
 @media (min-width: 799px) {
   #view_163 {
@@ -689,3 +768,7 @@ a.form-link:hover {text-decoration:underline;}
 #view_683 .kn-records-nav { max-width: 630px; }
 #view_735 .kn-records-nav { max-width: 630px; }
 #view_736 .kn-records-nav { max-width: 630px; }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master

@@ -1,29 +1,112 @@
+/***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+.fa { vertical-align: baseline; }
+
+.fa-bot { vertical-align: text-bottom; }
+
+.fa-top { vertical-align: text-top; }
+
+/****************************************/
+/************ Button Effects ************/
+/****************************************/
+.disabled { cursor: not-allowed; }
+
+.centered-text { text-align: center; }
+
+.delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
+
+.close-modal {border: #495057 !important; background-color: #495057 !important;}
+
+.delete:before { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+
+.delete:after { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
 .big-button-container {
-    border-radius: 2px;
-    box-shadow: 0px 1px 2px 0px gray;
-    font-size: 2.5em;
-    padding: 10px;
-    margin: 20px;
-    max-width: 12em;
+  padding: 10px 10px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  max-width: 12em;
+  display: block;
 }
  
 .big-button-container:hover {
-    background-color: #f7f7f7;
-    cursor: pointer;
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.big-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+  pointer-events: none;
 }
  
- 
-.fa {
-vertical-align: middle;
-}
- 
- 
-a.big-button {
+a.big-button-container { 
   text-decoration: none;
 }
 
-/* Remove Back Links */
+/***************************************/
+/************ Small Buttons ************/
+/***************************************/
+.small-button-container {
+  padding: 5px 5px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #babbbc;
+  color: white;
+}
 
+.small-button-container:hover {
+  background-color: #4c4c4c;
+  cursor: pointer;
+}
+
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+}
+
+a.small-button {
+  text-decoration: none;
+}
+
+/****************************************/
+/************ Return Buttons ************/
+/****************************************/
+
+#return-button {
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 0px 2px 4px 0px gray;
+}
+
+/**************************************/
+/*********** Submit Buttons ***********/
+/**************************************/
+.submit-button { 
+  display: submit-button; 
+  width: 30%; 
+  border: solid 1px black; 
+  border-radius: 10px 10px 10px 10px; 
+  background-color: #367DB7; 
+  color: white; 
+  padding: 10px 10px; 
+  font-size: 24px; 
+  cursor: pointer; 
+  text-align: center; 
+}
+
+/*************************************/
+/********* Remove Back Links *********/
+/*************************************/
 #kn-scene_3 .kn-back-link {
   display: none;
 }
@@ -69,7 +152,10 @@ a.big-button {
 #kn-scene_262 .kn-back-link {
   display: none;
 }
-/* Remove Back Links for RPP Application */
+
+/*******************************************/
+/** Remove Back Links for RPP Application **/
+/*******************************************/
 #kn-scene_309 .kn-back-link {
   display: none;
 }
@@ -89,9 +175,587 @@ a.big-button {
   display: none;
 }
 
+/***********************************************/
+/*** Formats Cost Tables without extra space ***/
+/***********************************************/
+/*RPP Portal*/
+#view_702 { max-width: 50%; }
+/*Permit Costs*/
+#view_1605 { max-width: 80%; }
+
+/*********************************/
+/******* Hides a Form Field ******/
+/*********************************/
 /* Used in combo w/ custom code that sets the field value */
 .hiddenFormField {
     visibility: hidden;
     height: 0px;
     margin-bottom: 0 !important;
 }
+
+/********************************************/
+/******** Styles the RPP Application ********/
+/********************************************/
+/* Review Application page */
+#view_1181 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_1606 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_1255 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1254 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1253 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1252 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1251 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1189 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1191 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+/* Application Invoice page */
+#view_1196 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_1212 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1256 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1257 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1258 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1259 .kn-detail-label { background-color: transparent; min-width: 45% !important; max-width: 10% !important; }
+#view_1201 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*********************************/
+/********* Mobile Styling ********/
+/*********************************/
+@media (max-width: 800px) {
+
+/* Form Views */
+  /* Increase size of buttons with type="submit" */
+  button[type="submit"] {
+    height: 64px !important;
+    font-size: 32px !important;
+    min-width: fit-content;
+    width: 100%;
+  }
+  /* Increase font size of form field labels */
+  .kn-label {
+    font-size: 22px;
+  }
+  .kn-detail-body {
+    font-size: 22px;
+  }
+  .kn-read-only {
+    font-size: 22px;
+  }
+  /* Increase height of text fields */
+  input[type="text"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* Increase height of email fields */
+  input[type="email"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+   /* Increase font size of checkbox options */
+  .option.checkbox {
+    font-size: 22px;
+  }
+ /* Increase font size of Choose File button */
+  input[type="file"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  .custom-file-upload {
+    border: 3px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+
+/* Screen Selection */
+  /* Increase size of back links at bottom of pages */
+  a.ang-link {
+      font-size: 22px !important;
+  }
+  /* Increase height of selected field */
+  .chzn-single {
+    height: 48px !important;
+  }
+  .kn-select {
+    height: 48px !important;
+  }
+  select {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* Increase height of container surrounding selected field */
+  .chzn-container {
+    height: 48px;
+    font-size: 22px !important;
+  }
+  .chzn-container > a > span {
+    font-size: 22px !important;
+  }
+  /* Increase font size of dropdown text in selected field */
+  .chzn-drop {
+    font-size: 22px !important;
+  }
+
+/* FA Icons */
+  /* Increase size of Font Awesome icons */
+  .icon .fa {
+      font-size: 22px !important;
+  }
+
+/* Buttons */
+  /* Increase size of search button */
+  .kn-button.search {
+    height: 48px;
+  }
+   /* Increase default menu button size */
+  .kn-button
+  {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+}/* End Mobile Styling */
+
+/**********************************/
+/*** Styles the Reporting Pages ***/
+/**********************************/
+/*Overrides default HighCharts colors with associated District colors for Completed Applications by District Pie Chart*/
+/*All Zones*/
+/*Current Year*/
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(1) {fill: DodgerBlue;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(1).highcharts-legend-item rect{fill: DodgerBlue;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(2) {fill: #b29700;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(2).highcharts-legend-item rect{fill: #b29700;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(3) {fill: Green;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(3).highcharts-legend-item rect{fill: Green;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(4) {fill: Orange;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(4).highcharts-legend-item rect{fill: Orange;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(5) {fill: LightPink;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(5).highcharts-legend-item rect{fill: LightPink;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(6) {fill: Purple;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(6).highcharts-legend-item rect{fill: Purple;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(7) {fill: Red;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(7).highcharts-legend-item rect{fill: Red;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(8) {fill: Turquoise;}
+#kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(8).highcharts-legend-item rect{fill: Turquoise;}
+
+/*Previous Year*/
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(1) {fill: DodgerBlue;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(1).highcharts-legend-item rect{fill: DodgerBlue;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(2) {fill: #b29700;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(2).highcharts-legend-item rect{fill: #b29700;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(3) {fill: Green;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(3).highcharts-legend-item rect{fill: Green;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(4) {fill: Orange;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(4).highcharts-legend-item rect{fill: Orange;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(5) {fill: LightPink;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(5).highcharts-legend-item rect{fill: LightPink;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(6) {fill: Purple;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(6).highcharts-legend-item rect{fill: Purple;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(7) {fill: Red;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(7).highcharts-legend-item rect{fill: Red;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(8) {fill: Turquoise;}
+#kn-report-view_1324-2 div.highcharts-container svg g.highcharts-legend g:nth-child(8).highcharts-legend-item rect{fill: Turquoise;}
+
+/*Overrides default Knack blue color with default HighCharts colors for Bar Charts*/
+/*All Zones*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1316-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1316-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1316-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1315-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1315-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1315-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by District - we use our custom colors here associated by District*/
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: DodgerBlue;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #b29700;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: Green;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: Orange;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: LightPink;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: Purple;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: Red;}
+#kn-report-view_1317-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(8){fill: Turquoise;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1318-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1318-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1318-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1318-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1319-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1320-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Previous Year*/
+/*Total Permits Issued by Type*/
+#kn-report-view_1323-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1323-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1323-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by District - we use our custom colors here associated by District*/
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: DodgerBlue;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #b29700;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: Green;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: Orange;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: LightPink;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: Purple;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: Red;}
+#kn-report-view_1324-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(8){fill: Turquoise;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1325-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1325-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1325-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1325-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1326-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1327-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Overrides default Knack blue color with default HighCharts colors for Bar Charts*/
+/*Pink Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1329-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1329-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1329-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1330-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1330-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1330-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1332-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1332-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1332-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1332-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1333-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1595-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Green Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1335-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1335-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1335-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1342-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1342-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1342-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1349-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1349-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1349-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1349-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1356-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1594-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Blue Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1336-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1336-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1336-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1343-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1343-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1343-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1350-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1350-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1350-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1350-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1357-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1593-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Purple Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1337-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1337-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1337-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1344-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1344-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1344-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1351-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1351-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1351-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1351-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1358-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1592-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Orange Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1338-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1338-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1338-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1345-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1345-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1345-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1352-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1352-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1352-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1352-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1359-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1591-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Red Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1339-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1339-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1339-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1346-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1346-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1346-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1353-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1353-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1353-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1353-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1360-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1590-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Teal Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1340-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1340-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1340-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1347-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1347-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1347-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1354-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1354-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1354-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1354-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1361-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1368-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Gold Zone*/
+/*Current Year*/
+/*Active Permits by Type*/
+#kn-report-view_1341-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1341-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1341-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Total Permits Issued by Type*/
+#kn-report-view_1348-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1348-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1348-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*Completed Applications by Type*/
+#kn-report-view_1355-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1355-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1355-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1355-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+
+/*Completed Applications by Payment Type*/
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_1362-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Completed Applications by Transaction Amount - we repeat the first 10 HighChart colors for up to a possible 27+ different Transaction Amounts*/
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}

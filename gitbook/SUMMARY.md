@@ -25,6 +25,7 @@
 * [GitHub Code Workflow](knack-code/github-code-workflow.md)
 * [CODE: Mobile Optimization](knack-code/mobile-optimization.md)
 * [CODE: Custom Login Buttons](knack-code/custom-login-buttons.md)
+* [CODE: Vision Zero in Action](knack-code/code-vision-zero-in-action.md)
 * [CODE: Knack Functionality](knack-code/functionality/README.md)
   * [Big Buttons](knack-code/functionality/big-buttons.md)
   * [Redirect Blank Menu Pages](knack-code/functionality/redirect-blank-pages.md)

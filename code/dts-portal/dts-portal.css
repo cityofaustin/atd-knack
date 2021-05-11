@@ -1,39 +1,60 @@
 /***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+.fa { vertical-align: baseline; }
+
+.fa-bot { vertical-align: text-bottom; }
+
+.fa-top { vertical-align: text-top; }
+
+/****************************************/
+/************ Button Effects ************/
+/****************************************/
+.disabled { cursor: not-allowed; }
+
+.centered-text { text-align: center; }
+
+.delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
+
+.close-modal {border: #495057 !important; background-color: #495057 !important;}
+
+.delete:before { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+
+.delete:after { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+
+/***************************************/
 /************* Big Buttons *************/
 /***************************************/
 .big-button-container {
+  padding: 10px 10px;
+  margin: 20px;
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
-  padding: 10px;
-  margin: 20px;
   max-width: 15em;
   display: block;
 }
-
+ 
 .big-button-container:hover {
   background-color: #f7f7f7;
   cursor: pointer;
 }
 
 .big-button-disabled {
-  pointer-events: none;
   background-color: #f7f7f7;
+  opacity: 0.6;
+  pointer-events: none;
 }
-
-.fa {
-  vertical-align: middle;
-}
-
-a.big-button-container {
+ 
+a.big-button-container { 
   text-decoration: none;
 }
 
 /***************************************/
-/************* Small Buttons *************/
+/************ Small Buttons ************/
 /***************************************/
 .small-button-container {
-  padding: 5px;
+  padding: 5px 5px;
   margin: 20px;
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
@@ -48,11 +69,18 @@ a.big-button-container {
   cursor: pointer;
 }
 
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+}
+
 a.small-button {
   text-decoration: none;
 }
 
-
+/***************************************/
+/************ Input Styling ************/
+/***************************************/
 .kn-input input.knack-date {
     width: 7em !important;
 }
@@ -76,6 +104,9 @@ a.small-button {
   display: inline;
 }
 
+/***************************************/
+/********* Filter Menu Styling *********/
+/***************************************/
 #view_133 > div.kn-records-nav > div.js-filter-menu.tabs.is-toggle.is-flush > ul > li:nth-child(2) > a{
   color: white;
   background-color: red;
