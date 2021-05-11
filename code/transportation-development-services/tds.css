@@ -260,6 +260,11 @@ a.form-link:hover {text-decoration:underline;}
   background-color: transparent; color: #367DB7; text-align: center; display: inline-block; }
 #kn-scene_268 .kn-back-link:hover { opacity: 0.8; cursor: pointer; }
 
+/*Submissions Reporting Page*/
+#kn-scene_284 .kn-back-link { padding: 5px 10px; border-width: 1px; border-color: black; border-radius: 4px; box-shadow: 0px 2px 4px 0px gray; font-size: 1em; 
+  background-color: transparent; color: #367DB7; text-align: center; display: inline-block; }
+#kn-scene_284 .kn-back-link:hover { opacity: 0.8; cursor: pointer; }
+
 /*******************************************/
 /** Remove Table Header for Announcements **/
 /*******************************************/
@@ -639,6 +644,7 @@ a.form-link:hover {text-decoration:underline;}
 @media print {
   h2 {page-break-before: auto;}
 }
+
 /*******************************************/
 /********* Create Memo Page Breaks *********/
 /*******************************************/
@@ -661,7 +667,6 @@ a.form-link:hover {text-decoration:underline;}
     display: none;
   }
 }
-
 
 /******************************************/
 /*** Custom TIA Menu Buttons Navigation ***/
@@ -721,3 +726,33 @@ a.form-link:hover {text-decoration:underline;}
 #view_735 .kn-records-nav { max-width: 630px; }
 #view_736 .kn-records-nav { max-width: 630px; }
 
+/*Overrides default Knack blue color with default HighCharts colors for Bar Charts*/
+/*TIA Cases Reporting */
+/*Current Year*/
+/*Total Cases by Type*/
+#kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+
+/*Total Cases by Status*/
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+
+/*Total Cases by Review Area*/
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+
+/*TIA Mitigations Reporting */
+/*Current Year*/
+/*Total Mitigations by Type*/
+#kn-report-view_735-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_735-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+
+/*Total Pro Rata $ by Mitigation Type*/
+#kn-report-view_736-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_736-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
