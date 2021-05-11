@@ -264,9 +264,19 @@ a.form-link:hover {text-decoration:underline;}
 /** Remove Table Header for Announcements **/
 /*******************************************/
 /*Reviewer Home Page*/
-#view_688 .kn-table th {
-  display: none;
-}
+#view_688 .kn-table th { display: none; }
+
+/*Reviewer Dashboard*/
+#view_751 .kn-table th { display: none; }
+
+/*Development Reviews*/
+#view_752 .kn-table th { display: none; }
+
+/*TIA Requests*/
+#view_753 .kn-table th { display: none; }
+
+/*TDA Reviews*/
+#view_775 .kn-table th { display: none; }
 
 /*Reviewer Dashboard*/
 #view_751 .kn-table th {
@@ -349,12 +359,10 @@ a.form-link:hover {text-decoration:underline;}
 /*PAGE 1 - Requester Information*/
 #view_393 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_393 > form > ul:nth-child(2n) > li { border: none; }
 
 /*PAGE 2 - Project Information*/
 #view_397 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_397 > form > ul:nth-child(2n) > li { border: none; }
 
 #kn-input-field_174 /*Case Type field*/
   .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
@@ -363,14 +371,12 @@ a.form-link:hover {text-decoration:underline;}
 /*PAGE 3 - Required Documents*/
 #view_614 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_614 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_419 { max-width: 60%; }
 #view_419 .kn-table { border: solid 2px #367DB7; }
 
 #view_420 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_420 > form > ul:nth-child(2n) > li { border: none; }
 
 /*PAGE 4 - Review Request*/
 /*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
@@ -383,22 +389,18 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_424 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_424 > form > ul:nth-child(2n) > li { border: none; }
 
 /****************************************/
 /*** Styles the Edit TIA Request page ***/
 /****************************************/
 #view_431 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_431 > form > ul:nth-child(2n) > li { border: none; }
 
 /***************************************************/
 /*** Styles the Edit TIA Request Attachment page ***/
 /***************************************************/
 #view_620 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_620 > form > ul:nth-child(2n) > li { border: none; }
-
 #view_619 { max-width: 80%; }
 #view_619 .kn-table { border: solid 2px #367DB7; }
 
@@ -418,7 +420,6 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_518 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_518 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_513 { max-width: 75%; }
 #view_513 .kn-table { border: solid 2px #367DB7; }
@@ -428,11 +429,9 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_519 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_519 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_520 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_520 > form > ul:nth-child(2n) > li { border: none; }
 
 /*************************************************************/
 /*** Styles the TIA New Submission Comment/Attachment page ***/
@@ -445,7 +444,6 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_651 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_651 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_584 { max-width: 75%; }
 #view_584 .kn-table { border: solid 2px #367DB7; }
@@ -455,11 +453,9 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_652 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_652 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_472 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_472 > form > ul:nth-child(2n) > li { border: none; }
 
 /************************************************/
 /*** Styles the TIA New Scope Submission page ***/
@@ -472,7 +468,6 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_579 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_579 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_576 { max-width: 75%; }
 #view_576 .kn-table { border: solid 2px #367DB7; }
@@ -482,11 +477,9 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_580 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_580 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_581 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_581 > form > ul:nth-child(2n) > li { border: none; }
 
 /*******************************************************************/
 /*** Styles the TIA New Scope Submission Comment/Attachment page ***/
@@ -496,32 +489,27 @@ a.form-link:hover {text-decoration:underline;}
 
 #view_641 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_641 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_642 { max-width: 75%; }
 #view_642 .kn-table { border: solid 2px #367DB7; }
 
 #view_643 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_643 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_645 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_645 > form > ul:nth-child(2n) > li { border: none; }
 
 /*******************************************/
 /*** Styles the Edit TIA Attachment page ***/
 /*******************************************/
 #view_383 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_383 > form > ul:nth-child(2n) > li { border: none; }
 
 /*********************************************/
 /*** Styles the Add TIA Communication page ***/
 /*********************************************/
 #view_462 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
-#view_462 > form > ul:nth-child(2n) > li { border: none; }
 
 /**********************************************/
 /*** Styles the TIA Submission Details page ***/
@@ -549,14 +537,12 @@ a.form-link:hover {text-decoration:underline;}
 /******************************************/
 #view_628 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
-#view_628 > form > ul:nth-child(2n) > li { border: none; }
 
 /*******************************************/
 /*** Styles the Edit TIA Mitigation page ***/
 /*******************************************/
 #view_509 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 75% }
-#view_509 > form > ul:nth-child(2n) > li { border: none; }
 
 /********************************************/
 /*** Styles the Customer TIA Details page ***/
@@ -568,28 +554,23 @@ a.form-link:hover {text-decoration:underline;}
 /**********************************************************/
 #view_598 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_598 > form > ul:nth-child(2n) > li { border: none; }
-
 #view_608 { max-width: 80%; }
 #view_608 .kn-table { border: solid 2px #367DB7; }
 
 #view_596 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_596 > form > ul:nth-child(2n) > li { border: none; }
 
 /*****************************************************************/
 /*** Styles the Customer New Scope Submission Attachment page ***/
 /*****************************************************************/
 #view_534 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_534 > form > ul:nth-child(2n) > li { border: none; }
 
 #view_532 { max-width: 80%; }
 #view_532 .kn-table { border: solid 2px #367DB7; }
 
 #view_533 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_533 > form > ul:nth-child(2n) > li { border: none; }
 
 /***************************************************/
 /*** Styles the Customer Submission Details page ***/
@@ -612,14 +593,12 @@ a.form-link:hover {text-decoration:underline;}
 /***********************************************************/
 #view_610 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_610 > form > ul:nth-child(2n) > li { border: none; }
 
-******************************************************************/
+/*****************************************************************/
 /*** Styles the Customer Edit Scope Submission Attachment page ***/
 /*****************************************************************/
 #view_611 > form > ul:nth-child(n) > li { border-left: solid 4px #367DB7; border-right: solid 4px #367DB7; border-top: solid 4px #367DB7; border-bottom: solid 4px #367DB7; 
   border-radius: 8px 8px 8px 8px; padding:10px; max-width: 60% }
-#view_611 > form > ul:nth-child(2n) > li { border: none; }
 
 /******************************************/
 /*** Styles the Reviewer Dashboard page ***/
@@ -640,6 +619,7 @@ a.form-link:hover {text-decoration:underline;}
 #view_705 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_706 .kn-detail-label { background-color: transparent; min-width: 10% !important; }
 #view_707 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#view_774 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_710 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_711 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_712 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
@@ -652,15 +632,9 @@ a.form-link:hover {text-decoration:underline;}
 /********************************************/
 /****** Prevent Memo Table Page Breaks ******/
 /********************************************/
-/*knack tables*/
-@media print {
-  .kn-table {page-break-inside: avoid;}
-}
-
-/*rich text tables*/
-@media print {
-  tables {page-break-inside: avoid;}
-}
+@media print { .kn-table {page-break-inside: avoid;} } //Knack Tables
+@media print { tables {page-break-inside: avoid;} } //RichText Tables
+@media print { h2 {page-break-before: auto;} } //h2 Headers
 
 @media print {
   h2 {page-break-before: auto;}
@@ -669,33 +643,25 @@ a.form-link:hover {text-decoration:underline;}
 /********* Create Memo Page Breaks *********/
 /*******************************************/
 /*knack details views*/
-@media print {
-  #view_707 {page-break-before: auto;}//Proposed Conditions section
+@media print { #view_707 {page-break-before: auto;} }//Proposed Conditions section
+@media print { #view_712 {page-break-before: always;} }//Exhibit A section
+@media print { #view_746 {page-break-before: auto;} }//Exhibit B section
+@media print { #view_747 {page-break-before: auto;} }//Exhibit C section
+@media print { #view_748 {page-break-before: auto;} }//Exhibit D section
+@media print { #view_749 {page-break-before: auto;} }//Exhibit E section
+@media print { #view_750 {page-break-before: auto;} }//Exhibit F section
+
+/******************************************/
+/*** Custom TIA Menu Buttons Navigation ***/
+/******************************************/
+
+/* hide custom menu if on mobile */
+@media (max-width: 799px) {
+  #tia-menu-list {
+    display: none;
+  }
 }
 
-@media print {
-  #view_712 {page-break-before: always;}//Exhibit A section
-}
-
-@media print {
-  #view_746 {page-break-before: auto;}//Exhibit B section
-}
-
-@media print {
-  #view_747 {page-break-before: auto;}//Exhibit C section
-}
-
-@media print {
-  #view_748 {page-break-before: auto;}//Exhibit D section
-}
-
-@media print {
-  #view_749 {page-break-before: auto;}//Exhibit E section
-}
-
-@media print {
-  #view_750 {page-break-before: auto;}//Exhibit F section
-}
 
 /******************************************/
 /*** Custom TIA Menu Buttons Navigation ***/
