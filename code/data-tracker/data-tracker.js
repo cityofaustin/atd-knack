@@ -1,11 +1,6 @@
 $(document).on("knack-page-render.any", function (event, page) {
   // Hide the entire "Repeat" checkbox and label
   $("label:contains('Repeat')").hide();
-});
-
-$(document).on("knack-page-render.any", function (event, page) {
-  // Hide the entire "Repeat" checkbox and label
-  $("label:contains('Repeat')").hide();
 
   // Rename confusing google maps link
   $('a[title="view in google maps"]').text("View on Google Maps");
@@ -599,9 +594,6 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   $("#" + restockUnitCostField).val("")
 
   $("#" + restockQuantityField).val("")
-
-  //   $("#kn-input-" + previousUnitCostField).attr("hidden", true);
-  //   $("#kn-input-" + previousOnHandQuantiyField).attr("hidden", true);
 
   $("#" + restockUnitCostField).on("input", function () {
     restockUnitCost = parseFloat($(this).val());
