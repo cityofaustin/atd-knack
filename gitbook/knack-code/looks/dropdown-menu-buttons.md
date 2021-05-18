@@ -122,13 +122,13 @@ We style the menu buttons to be similar to how the default Knack styling is. We 
 ### How to Implement
 
 {% tabs %}
-{% tab title="First Step" %}
+{% tab title="1️⃣" %}
 Create a Menu view as normal and update it accordingly with your navigation. Create a second Menu view without any buttons, this will house the custom dropdown menu.
 
 ![](../../.gitbook/assets/image%20%28139%29.png)
 {% endtab %}
 
-{% tab title="Second Step" %}
+{% tab title="2️⃣" %}
 Update the url route in the JS function so it matches your page navigation
 
 ```text
@@ -136,7 +136,7 @@ Update the url route in the JS function so it matches your page navigation
 ```
 {% endtab %}
 
-{% tab title="Third Step" %}
+{% tab title="3️⃣" %}
 Update the JS handler with the correct View ID of the empty view for the custom dropdown menu
 
 ```text
@@ -150,7 +150,7 @@ and also at the bottom of the handler for the View ID that it appends to
 ```
 {% endtab %}
 
-{% tab title="Fourth Step" %}
+{% tab title="4️⃣" %}
 Update the div class and the unordered list ID to what you would like to call them
 
 ```text
@@ -165,7 +165,7 @@ If the class or ID are updated, be sure to update the corresponding CSS for all 
 ```
 {% endtab %}
 
-{% tab title="Fifth Step" %}
+{% tab title="5️⃣" %}
 Update the list class and unordered list classes to what you would like to call them
 
 ```text
@@ -177,7 +177,7 @@ Update the list class and unordered list classes to what you would like to call 
 ```
 {% endtab %}
 
-{% tab title="Sixth Step" %}
+{% tab title="6️⃣" %}
 Update the url route and slug for each of your lists \(dropdown buttons\). In this example, we have 2.
 
 ```text
@@ -192,7 +192,7 @@ Additionally, update the span classes for each of these lists \(dropdown buttons
 ```
 {% endtab %}
 
-{% tab title="Seventh Step" %}
+{% tab title="7️⃣" %}
 We now update the JS handlers for each individual list item / button with the appropriate page url,  fa icon, and button label.
 
 ```text
@@ -200,7 +200,7 @@ ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submi
 ```
 {% endtab %}
 
-{% tab title="Eighth Step" %}
+{% tab title="8️⃣" %}
 Lastly, we update the View ID for the original menu view that we will be hiding in the CSS
 
 ```text
