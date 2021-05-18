@@ -212,9 +212,9 @@ $(document).on('knack-scene-render.any', function(event, scene) {
     $('.kn-modal-bg').off('click');
 });
 
-/*********************************************************/
-/** Add Return to Case Details Button to specific views **/
-/*********************************************************/
+/**************************************************/
+/** Add Previous Window Button to specific views **/
+/**************************************************/
 $(document).on("knack-view-render.any", function(event, view) {
 var appviews=["view_601","view_602","view_604","view_605"];
 var key=(view.key!=undefined)?view.key.toLowerCase().trim():"";
@@ -222,7 +222,7 @@ var l=appviews.length;
 for (var x=0; x<l; x++) {
 
 if (appviews[x]==key) {
-	$('#'+appviews[x]).prepend("<button id='return-button'>Return to Case Details</button>");
+	$('#'+appviews[x]).prepend("<button id='return-button'>Previous Window</button>");
 	document.getElementById('return-button').addEventListener('click', function() {
       	window.history.back();
     });        
@@ -231,9 +231,9 @@ if (appviews[x]==key) {
 };	// for
 });
 
-/********************************************************************/
-/** Add Return to Submission Cycle Button to Edit Attachment Pages **/
-/********************************************************************/
+/******************************************************************/
+/** Add Previous Window Button to Customer Edit Attachment Pages **/
+/******************************************************************/
 $(document).on("knack-view-render.any", function(event, view) {
 var appviews=["view_612","view_613"];
 var key=(view.key!=undefined)?view.key.toLowerCase().trim():"";
@@ -241,7 +241,7 @@ var l=appviews.length;
 for (var x=0; x<l; x++) {
 
 if (appviews[x]==key) {
-	$('#'+appviews[x]).prepend("<button id='return-button'>Return to Submission Cycle</button>");
+	$('#'+appviews[x]).prepend("<button id='return-button'>Previous Window</button>");
 	document.getElementById('return-button').addEventListener('click', function() {
       	window.history.back();
     });        
@@ -250,9 +250,9 @@ if (appviews[x]==key) {
 };	// for
 });
 
-/***********************************************************/
-/*** Add Return to Memo Builder Button to New Memo Pages ***/
-/***********************************************************/
+/****************************************************/
+/*** Add Previous Window Button to New Memo Pages ***/
+/****************************************************/
 $(document).on("knack-view-render.any", function(event, view) {
 var appviews=["view_713","view_714","view_715"];
 var key=(view.key!=undefined)?view.key.toLowerCase().trim():"";
@@ -260,7 +260,7 @@ var l=appviews.length;
 for (var x=0; x<l; x++) {
 
 if (appviews[x]==key) {
-	$('#'+appviews[x]).prepend("<button id='return-button'>Return to Memo Builder</button>");
+	$('#'+appviews[x]).prepend("<button id='return-button'>Previous Window</button>");
 	document.getElementById('return-button').addEventListener('click', function() {
       	window.history.back();
     });        
@@ -373,7 +373,7 @@ var fieldsIdsShownOnImprovementSelect = {
 
 var fieldsIdsShownOnMitigationTypeSelect = {
   // "MC Field Value": [...ids of fields to show on value select]
-  "Mitigation Fee in Lieu": ["kn-input-field_488"]
+  "Mitigation Fee-in-Lieu": ["kn-input-field_488"]
 };
 
 function hideFormFields(fieldViewId) {
@@ -570,7 +570,7 @@ $(document).on("knack-view-render.view_321", function (event, page) {
 function dropdownMenuItem(recordId, route, iconName, linkName) {
   return (
     `<li class="kn-button">\
-      <a href="#tia-requests/tia-request-details/${recordId}/${route}/${recordId}">\
+      <a href="#tia-requests/tia-case-details/${recordId}/${route}/${recordId}">\
         <span class="icon is-small"> \
           <i class="fa ${iconName}" /> \
         </span>\
@@ -585,7 +585,7 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
       <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#tia-requests/tia-request-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
           <span class="nav-dropdown-link">Case Management</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
@@ -597,14 +597,14 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
         </ul>\
       </li>\
       <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#tia-requests/tia-request-details/${recordId}/edit-tia-request-reviewer/${recordId}" data-kn-slug="#update-case-details">\
+        <a href="#tia-requests/tia-case-details/${recordId}/edit-tia-case-details/${recordId}" data-kn-slug="#update-case-details">\
           <span class="nav-dropdown-link">Update Case Details</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-          ${dropdownMenuItem(recordId, "edit-tia-request-reviewer", "fa-edit", "Edit Case Details")}\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes")}\
           ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
-          ${dropdownMenuItem(recordId, "change-tia-request-status-reviewer", "fa-retweet", "Change Request Status")}\
+          ${dropdownMenuItem(recordId, "change-tia-case-status", "fa-retweet", "Approve or Change Case Status")}\
           ${dropdownMenuItem(recordId, "connected-cases", "fa-link", "Connect Cases")}\
         </ul>\
       </li>\
@@ -613,7 +613,6 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
     </ul>\
   </div>`).appendTo("#view_744")
 })
-
 
 /***************************************************/
 /* Change or Hide Summary Row on Mitigation Tables */
