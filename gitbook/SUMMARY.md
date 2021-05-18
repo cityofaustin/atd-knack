@@ -42,6 +42,7 @@
 * [CODE: Knack Look & Feel](knack-code/looks/README.md)
   * [Modal Close Styling](knack-code/looks/modal-close-styling.md)
   * [Relabel Attachment Links](knack-code/looks/relabel-attachment-links.md)
+  * [Dropdown Menu Buttons](knack-code/looks/dropdown-menu-buttons.md)
   * [Convert Values to UPPERCASE](knack-code/looks/convert-values-to-uppercase.md)
   * [Highlight Details View Label Body & Table Value](knack-code/looks/highlight-label-body.md)
   * [Report Headers](knack-code/looks/report-headers.md)
