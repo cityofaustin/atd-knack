@@ -89,6 +89,8 @@ If you were to have only a two column table for example with column summary as t
 if (index !== $tableRowTotals.length-1) {
       $(this).find("td:eq(0)").html(`<strong>${replacementText}</strong>`)
 ```
+
+with 0 indicating the first column in the index.
 {% endtab %}
 {% endtabs %}
 
