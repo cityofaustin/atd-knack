@@ -76,7 +76,7 @@ On our mitigation page, we have 2 tables so we do it for both views. If you only
 {% endtab %}
 
 {% tab title="4️⃣" %}
-The JS function uses an index to identify where to put the replacement text. This will be adjusted based on how many field columns you may have in your table. We want the text to show up on the field column before the field that has the column summary, the Cost field in our example. The function uses an `:eq()` selector to indicate how many columns we have before the column we want to use for the text. In the mitigation table, this would be the Notes column where we have 2 columns before it, the Improvement and Edit columns \(2\).
+The JS function uses an index to identify where to put the replacement text. This will be adjusted based on how many columns you may have in your table. We want the text to show up on the field column before the field that has the column summary, the Cost field in our example. The function uses an `:eq()` selector to indicate how many columns we have before the column we want to use for the text. In the mitigation table, this would be the Notes column where we have 2 columns before it, the Improvement and Edit columns \(2\).
 
 ```text
 if (index !== $tableRowTotals.length-1) {
