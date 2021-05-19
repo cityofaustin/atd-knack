@@ -33,8 +33,6 @@ $(document).on('knack-scene-render.scene_105', (event) => {
 })
 ```
 
-
-
 ### The CSS
 
 None needed 😎
