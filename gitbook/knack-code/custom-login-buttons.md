@@ -6,29 +6,21 @@ description: >-
 
 # CODE: Custom Login Buttons
 
-![The COA and non-COA login buttons that replace the default Knack button](../.gitbook/assets/customloginbuttons.png)
+![The COA and non-COA login buttons that replace the default Knack sign-in](../.gitbook/assets/customloginbuttons.png)
 
 ### Adding the custom code to the Knack application
 
 This code will replace the default Knack single sign-on button and login form shown below with the buttons shown above. In the above experience, the form shown below will only appear if a user clicks the button titled **Non-COA Sign-In**.
 
-![Default Knack login form and Single Sign-on button](../.gitbook/assets/screen-shot-2020-11-10-at-5.11.12-pm.png)
+![Default Knack login form with the Single Sign-on button on the right](../.gitbook/assets/screen-shot-2020-11-10-at-5.11.12-pm.png)
 
-### Steps
-
-Navigate to the settings cog on your application, click **API & Code**.
-
-![](../.gitbook/assets/knackappsettings.png)
-
-In the API & Code view, **Javascript** and **CSS** tabs can be selected to see text fields where custom code can be added. 
-
-![The API &amp; Code view](../.gitbook/assets/screen-shot-2020-11-10-at-5.15.08-pm.png)
+### The JS
 
 {% hint style="info" %}
-This code uses the custom Knack functionality from the custom Big Button code. Prior to adding this JS and CSS code, add the JS and CSS code from **CODE: Knack Functionality &gt; Big Buttons** in the sidebar.
+This code uses the custom Knack functionality from the custom Big Button code. Prior to adding this code, add the JS and CSS code from [**CODE: Knack Functionality &gt; Big Buttons**](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/functionality/big-buttons).
 {% endhint %}
 
-In the text field under the **Javascript** tab, paste the following code. The purpose of this code is to find the Knack default single-sign on button and its Knack view ID in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), replace the button with the buttons shown above, and then hide the default Knack login form unless the user clicks the **Non-COA Sign-In** button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/custom-login-button).
+The purpose of this code is to find the Knack default single-sign on button and its Knack view ID in the [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model), replace the button with the buttons shown above, and then hide the default Knack login form unless the user clicks the **Non-COA Sign-In** button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/custom-login-button).
 
 ```text
 /**
@@ -84,16 +76,18 @@ $(document).on("knack-view-render.any", function (event, page) {
 });
 ```
 
-In the text field under the **CSS** tab, paste the following code. The purpose of this code is to style the buttons that the Javascript code generates to look as shown above.
+### The CSS - Small Buttons
+
+This styles the smaller Non-COA Sign-In button. Do not duplicate this code if already in your app
 
 ```text
 /***************************************/
 /************ Small Buttons ************/
 /***************************************/
 .small-button-container {
-  padding: 5px 5px;
-  margin: 20px;
-  border-radius: 2px;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 1em;
   max-width: 15em;
