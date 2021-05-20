@@ -30,7 +30,7 @@ description: >-
 | Save Knack Record ID | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Redirect Blank Menu Pages | No |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
-| Disable Modal BG | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Disable Modal BG | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Disable Nav Links | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Return to Prev Page Button | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Conditionally Hide/Show Form Fields | Yes |  |  |  |  |  |  |  |  |  |  |  |
