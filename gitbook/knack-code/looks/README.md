@@ -14,6 +14,8 @@ description: >-
 * [Modify Table Summary Rows](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modify-table-summary-row)
 * [Convert Values to UPPERCASE](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/convert-values-to-uppercase)
 * [Highlight Details View Label Body & Table Value](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/highlight-label-body)
+* [Report Headers](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-headers)
+* [Report Filters Container Size](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-filter-container)
 * [HighCharts Report Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/global-report-styling)
 * [Font Awesome Icons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/fa-icons)
 
@@ -30,6 +32,8 @@ description: >-
 | Convert Values to UPPERCASE | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Highlight Label Body | No |  | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
 | Highlight Table Value | No |  | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
+| Report Headers | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
+| Report Filters Container Size | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Font Awesome Icons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 
