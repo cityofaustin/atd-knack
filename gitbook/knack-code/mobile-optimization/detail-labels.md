@@ -14,6 +14,8 @@ None needed 😎
 
 ### The CSS
 
+We override the default background and spacing
+
 ```text
 #view_1606 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
