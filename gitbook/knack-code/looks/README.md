@@ -26,18 +26,18 @@ description: >-
 
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Modal Close Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Relabel Attachment Links | Yes | Yes |  | Yes | Yes |  |  |  |  |  |  |  |
-| Dropdown Menu Buttons | Yes | No |  |  |  |  |  |  |  |  |  |  |
-| Modify Table Summary Row | Yes | No |  |  |  |  |  |  |  |  |  |  |
-| Convert Values to UPPERCASE | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Highlight Label Body | No | No | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
-| Highlight Table Value | No | No | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
-| Report Headers | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Report Filters Container Size | Yes | No |  |  |  |  |  |  |  |  |  |  |
-| Report Element Colors | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Font Awesome Icons | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
+| Modal Close Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+| Relabel Attachment Links | Yes | Yes |  | Yes | Yes | No |  |  |  |  |  |  |
+| Dropdown Menu Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Modify Table Summary Row | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Convert Values to UPPERCASE | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+| Highlight Label Body | No | No | Yes | Yes |  | No |  |  | Yes | Yes |  |  |
+| Highlight Table Value | No | No | Yes | Yes |  | No |  |  | Yes | Yes |  |  |
+| Report Headers | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+| Report Filters Container Size | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Report Element Colors | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+| HighCharts Report Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+| Font Awesome Icons | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 
 
 
