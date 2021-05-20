@@ -112,3 +112,7 @@ Select the cog and set the legend order to be in reverse alphabetical
 
 Counter-intuitive to what you would expect, doing this displays the pie chart legend in proper alphabetical order so the legend colors match the pie slice colors which in turn will match the bar chart colors if you apply the default HighChart colors.
 
+### More Info
+
+If you want to see more about [`:nth-child()` Pseudo Class Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#example_selectors) in the Mozilla developer docs.
+
