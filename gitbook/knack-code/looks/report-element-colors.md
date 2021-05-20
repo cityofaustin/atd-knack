@@ -8,7 +8,7 @@ description: How to apply matching colors between different chart types
 
 ![With matching bar colors](../../.gitbook/assets/image%20%28141%29.png)
 
-Unfortunately Knack does not apply the default HighCharts colors for bar charts and only gives the bar elements the first blue color. To increase clarity when comparing charts, we manipulate each individual bar so that is matches its corresponding pie chart color. Below is the list of the first 10 HighChart colors.
+Unfortunately Knack does not apply the default HighCharts colors for bar charts and only gives the bar elements the first blue color. To increase clarity when comparing charts, we manipulate each individual bar so that is matches its corresponding pie chart color. Below is the list of the [Default HighChart Colors](https://api.highcharts.com/highcharts/colors).
 
 1. \#7cb5ec
 2. \#434348
@@ -48,7 +48,7 @@ If you have 10 or more elements \(values\) being calculated, you can use a simpl
 {% endtab %}
 
 {% tab title="Incremental Bar Chart" %}
-We use incremental notation if we have less than 10 elements
+We use incremental notation if we have 10 or fewer elements
 
 ```text
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
@@ -90,7 +90,17 @@ Or if you would like to modify the colors to a pie chart, you need to change the
 
 ### How to Implement
 
+You can simply copy the CSS above that is applicable depending on how many elements you have, what chart you are manipulating, and what colors are being used.
 
+The report View ID will need to be updated for each line. Additionally, the number after the View ID indicates which report in the report view you are manipulating. For example if you had 2 reports in a view, the first would be 1, the second would be 2. With the New Knack Builder, it is not recommended to have more than 2 reports per report view so that report views can easily be managed and copied.
+
+```text
+/*Report 1 in the View*/
+#kn-report-view_1317-1
+
+/*Report 2 in the View*/
+#kn-report-view_1317-2
+```
 
 
 
