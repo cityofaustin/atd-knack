@@ -1,17 +1,14 @@
+---
+description: How to make your Knack app more mobile friendly
+---
+
 # CODE: Mobile Optimization
 
-This is our code documentation wiki page for Knack apps.
+Navigate to the bottom of this article if you would like to copy and paste the entire mobile template
 
-## How to update CSS editor
+## Form Views
 
-* Go to **Settings**
-* Under **API & Code**&gt; **CSS**
-* Update CSS `code`
-* Click **Save CSS**
-
-## Knack Forms
-
-### Increase size of buttons \(ex. Submit buttons\)
+### Increase size of form submit buttons
 
 ```text
     /* Increase size of buttons with type="submit" */
@@ -23,7 +20,7 @@ This is our code documentation wiki page for Knack apps.
   }
 ```
 
-### Increase font size for form field label \(ex. Form fields for data entry\)
+### Increase font size for form field labels
 
 ```text
  /* Increase font size of form field labels */
@@ -32,6 +29,10 @@ This is our code documentation wiki page for Knack apps.
   }
 
   .kn-detail-body {
+    font-size: 22px;
+  }
+  
+  .kn-read-only {
     font-size: 22px;
   }
 ```
@@ -46,6 +47,16 @@ This is our code documentation wiki page for Knack apps.
   }
 ```
 
+### Increase height of email fields
+
+```text
+/* Increase height of email fields */
+  input[type="email"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+```
+
 ### Increase font size of checkbox options
 
 ```text
@@ -55,18 +66,18 @@ This is our code documentation wiki page for Knack apps.
   }
 ```
 
-## Navigation
+## Screen Selection
 
-### Increase size of "back" links at bottom of pages
+### Increase size of back links at bottom of pages
 
 ```text
- /* Increase size of "back" links at bottom of pages */
+ /* Increase size of back links at bottom of pages */
   a.ang-link {
       font-size: 22px !important;
   }
 ```
 
-### Increase height of select fields
+### Increase height of selected fields
 
 ```text
 /* Increase height of select fields */
@@ -84,7 +95,7 @@ This is our code documentation wiki page for Knack apps.
   }
 ```
 
-### Increase height of container surrounding select fields
+### Increase height of container surrounding selected fields
 
 ```text
 /* Increase height of container surrounding select fields */
@@ -103,7 +114,7 @@ This is our code documentation wiki page for Knack apps.
   }
 ```
 
-## Icons
+## FA Icons
 
 ### Increase size of Font Awesome icons
 
@@ -152,16 +163,17 @@ This is our code documentation wiki page for Knack apps.
 }
 ```
 
-## **Full template for Mobile-friendly Knack Custom CSS**
+## **CSS Full Template**
 
 This code block has all the CSS knack form changes in it. Can copy and paste into CSS editor in Knack and will see the changes in the mobile environment.
 
 ```text
-/* Mobile Styles */
+/*********************************/
+/********* Mobile Styling ********/
+/*********************************/
 @media (max-width: 800px) {
 
-/* FORMS */
-
+/* Form Views */
   /* Increase size of buttons with type="submit" */
   button[type="submit"] {
     height: 64px !important;
@@ -169,83 +181,82 @@ This code block has all the CSS knack form changes in it. Can copy and paste int
     min-width: fit-content;
     width: 100%;
   }
-
   /* Increase font size of form field labels */
   .kn-label {
     font-size: 22px;
   }
-
   .kn-detail-body {
     font-size: 22px;
   }
-
+  .kn-read-only {
+    font-size: 22px;
+  }
   /* Increase height of text fields */
   input[type="text"] {
     height: 48px !important;
     font-size: 22px !important;
   }
-
+  /* Increase height of email fields */
+  input[type="email"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
    /* Increase font size of checkbox options */
   .option.checkbox {
     font-size: 22px;
   }
+ /* Increase font size of Choose File button */
+  input[type="file"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  .custom-file-upload {
+    border: 3px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
 
-/* END FORMS */
-
-/* NAVIGATION */
-
-  /* Increase size of "back" links at bottom of pages */
+/* Screen Selection */
+  /* Increase size of back links at bottom of pages */
   a.ang-link {
       font-size: 22px !important;
   }
-
-  /* Increase height of select fields */
+  /* Increase height of selected field */
   .chzn-single {
     height: 48px !important;
   }
-
   .kn-select {
     height: 48px !important;
   }
-
   select {
     height: 48px !important;
     font-size: 22px !important;
   }
-
-  /* Increase height of container surrounding select fields */
+  /* Increase height of container surrounding selected field */
   .chzn-container {
     height: 48px;
     font-size: 22px !important;
   }
-
   .chzn-container > a > span {
     font-size: 22px !important;
   }
-
-  /* Increase font size of dropdown text in select fields */
+  /* Increase font size of dropdown text in selected field */
   .chzn-drop {
     font-size: 22px !important;
   }
 
-/* END NAVIGATION */
-
-/* ICONS */
-
+/* FA Icons */
   /* Increase size of Font Awesome icons */
   .icon .fa {
       font-size: 22px !important;
   }
 
-/* END ICONS */
-
-/* BUTTONS */
-
+/* Buttons */
   /* Increase size of search button */
   .kn-button.search {
     height: 48px;
   }
-
    /* Increase default menu button size */
   .kn-button
   {
@@ -253,20 +264,21 @@ This code block has all the CSS knack form changes in it. Can copy and paste int
     font-size: 22px !important;
   }
 
-/* END BUTTONS */
-
-}
+}/* End Mobile Styling */
 ```
 
 ### Active in these Applications
 
 | Mobile Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Menu Buttons - enlarged  |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Form Field Headings - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Form Fields - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Form Selections - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
-| Submit buttons - enlarged |  |  |  | Yes |  |  |  |  |  |  |  |  |
+| Submit Buttons | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| Form Labels | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| Form Fields | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| Screen Selections | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| FA Icons | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| File Buttons | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| Menu Buttons | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
+| Search Buttons | No | Yes |  | Yes |  |  |  |  |  |  |  |  |
 
 
 
