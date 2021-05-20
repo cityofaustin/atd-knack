@@ -47,6 +47,7 @@
   * [Convert Values to UPPERCASE](knack-code/looks/convert-values-to-uppercase.md)
   * [Highlight Details View Label Body & Table Value](knack-code/looks/highlight-label-body.md)
   * [Report Headers](knack-code/looks/report-headers.md)
+  * [Report Filters Container Size](knack-code/looks/report-filter-container.md)
   * [HighCharts Report Styling](knack-code/looks/global-report-styling.md)
   * [Font Awesome Icons](knack-code/looks/fa-icons.md)
 
