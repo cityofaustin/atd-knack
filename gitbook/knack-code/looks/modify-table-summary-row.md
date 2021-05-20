@@ -4,7 +4,7 @@ description: How to change or hide summary rows for table groups
 
 # Modify Table Summary Rows
 
-![Mitigation table, grouped by mitigation location, with modified summary rows](../../.gitbook/assets/image%20%28141%29.png)
+![Mitigation table, grouped by mitigation location, with modified summary rows](../../.gitbook/assets/image%20%28143%29.png)
 
 Grouping records in tables is great for usability, organization, and data points. It allows a user to quickly identify averages and totals \(sums\), or compare and contrast related records. The one downside is that group summary rows duplicate the group name creating a lot of clutter on the table. To simplify this, we remove that group header name from the group summary row and we can either hide it completely or add something that makes more sense. In the mitigation table example above, instead of it being "Header Name \(Mitigation Location\) + Total \(Group Sum\)" we set it to "Location Total".
 
@@ -43,17 +43,17 @@ None needed 😎
 {% tab title="1️⃣" %}
 When setting up your table, you will need to identify a field you like like to group the object records by and of course add the appropriate filters if applicable. For the mitigation table we sort by the mitigation location and filter by mitigation type for example.
 
-![](../../.gitbook/assets/image%20%28146%29.png)
+![](../../.gitbook/assets/image%20%28148%29.png)
 {% endtab %}
 
 {% tab title="2️⃣" %}
 Next, when building your table, you will need to identify a field to use as the summary column. For the mitigation table, we use Cost.
 
-![](../../.gitbook/assets/image%20%28145%29.png)
+![](../../.gitbook/assets/image%20%28147%29.png)
 
 Additionally, you will need to update the table settings to include a Column Summary
 
-![](../../.gitbook/assets/image%20%28144%29.png)
+![](../../.gitbook/assets/image%20%28146%29.png)
 {% endtab %}
 
 {% tab title="3️⃣" %}

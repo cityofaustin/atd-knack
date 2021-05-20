@@ -4,7 +4,7 @@ description: How to condense a Knack Menu into a categorized Dropdown Menu
 
 # Dropdown Menu Buttons
 
-![The TIA Module Dropdown Menu condensed into only 4 buttons, 2 with dropdown navigation](../../.gitbook/assets/image%20%28139%29.png)
+![The TIA Module Dropdown Menu condensed into only 4 buttons, 2 with dropdown navigation](../../.gitbook/assets/image%20%28140%29.png)
 
 ### The JS
 
@@ -125,7 +125,7 @@ We style the menu buttons to be similar to how the default Knack styling is. We 
 {% tab title="1️⃣" %}
 Create a Menu view as normal and update it accordingly with your navigation. Create a second Menu view without any buttons, this will house the custom dropdown menu.
 
-![](../../.gitbook/assets/image%20%28140%29.png)
+![](../../.gitbook/assets/image%20%28142%29.png)
 {% endtab %}
 
 {% tab title="2️⃣" %}

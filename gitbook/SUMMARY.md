@@ -48,6 +48,7 @@
   * [Highlight Details View Label Body & Table Value](knack-code/looks/highlight-label-body.md)
   * [Report Headers](knack-code/looks/report-headers.md)
   * [Report Filters Container Size](knack-code/looks/report-filter-container.md)
+  * [Report Element Colors](knack-code/looks/report-element-colors.md)
   * [HighCharts Report Styling](knack-code/looks/global-report-styling.md)
   * [Font Awesome Icons](knack-code/looks/fa-icons.md)
 
