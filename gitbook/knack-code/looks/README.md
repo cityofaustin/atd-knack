@@ -25,7 +25,7 @@ description: >-
 
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Modal Close Styling | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Modal Close Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Relabel Attachment Links | Yes |  |  | Yes | Yes |  |  |  |  |  |  |  |
 | Dropdown Menu Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Modify Table Summary Row | Yes |  |  |  |  |  |  |  |  |  |  |  |
@@ -35,7 +35,7 @@ description: >-
 | Report Headers | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Report Filters Container Size | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Font Awesome Icons | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Font Awesome Icons | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 
 
 
