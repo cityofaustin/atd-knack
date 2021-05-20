@@ -16,6 +16,7 @@ description: >-
 * [Highlight Details View Label Body & Table Value](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/highlight-label-body)
 * [Report Headers](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-headers)
 * [Report Filters Container Size](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-filter-container)
+* [Report Element Colors](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-element-colors)
 * [HighCharts Report Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/global-report-styling)
 * [Font Awesome Icons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/fa-icons)
 
@@ -34,6 +35,7 @@ description: >-
 | Highlight Table Value | No | No | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
 | Report Headers | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Report Filters Container Size | Yes | No |  |  |  |  |  |  |  |  |  |  |
+| Report Element Colors | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Font Awesome Icons | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 
