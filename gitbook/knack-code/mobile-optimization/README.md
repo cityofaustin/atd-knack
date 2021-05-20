@@ -279,6 +279,7 @@ This code block has all the CSS knack form changes in it. Can copy and paste int
 | File Buttons | No | Yes |  | Yes |  | No |  |  |  |  |  |  |
 | Menu Buttons | No | Yes |  | Yes |  | No |  |  |  |  |  |  |
 | Search Buttons | No | Yes |  | Yes |  | No |  |  |  |  |  |  |
+| Detail Labels | No | Yes |  | No |  | No |  |  |  |  |  |  |
 
 
 
