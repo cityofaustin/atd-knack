@@ -6,7 +6,7 @@ description: How to apply matching colors between different chart types
 
 ![Without matching colors](../../.gitbook/assets/image%20%28139%29.png)
 
-![With matching bar colors](../../.gitbook/assets/image%20%28141%29.png)
+![With matching colors; bars, pie slices, and pie legend](../../.gitbook/assets/image%20%28142%29.png)
 
 Unfortunately Knack does not apply the default HighCharts colors for bar charts and only gives the bar elements the first blue color. To increase clarity when comparing charts, we manipulate each individual bar so that is matches its corresponding pie chart color. Below is the list of the [Default HighChart Colors](https://api.highcharts.com/highcharts/colors).
 
@@ -102,7 +102,13 @@ The report View ID will need to be updated for each line. Additionally, the numb
 #kn-report-view_1317-2
 ```
 
+Lastly, if you have both a bar chart and pie chart next to each other where you want to match colors, there is one final thing that must be done. Navigate to the pie chart Chart Properties data section
 
+![](../../.gitbook/assets/image%20%28143%29.png)
 
+Select the cog and set the legend order to be in reverse alphabetical
 
+![](../../.gitbook/assets/image%20%28140%29.png)
+
+Counter-intuitive to what you would expect, doing this displays the pie chart legend in proper alphabetical order so the legend colors match the pie slice colors which in turn will match the bar chart colors if you apply the default HighChart colors.
 

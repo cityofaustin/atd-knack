@@ -6,7 +6,7 @@ description: >-
 
 # Report Filters Container Size
 
-![Two reports side by side no matter how many filters are added](../../.gitbook/assets/image%20%28149%29.png)
+![Two reports side by side no matter how many filters are added](../../.gitbook/assets/image%20%28151%29.png)
 
 ### The JS
 
@@ -23,7 +23,7 @@ None needed 😎
 
 We simple define the `max-width` of the left report \(our Bar chart\) to its defined dimensions under Chart Properties.
 
-![](../../.gitbook/assets/image%20%28144%29.png)
+![](../../.gitbook/assets/image%20%28146%29.png)
 
 The View ID will need to be updated accordingly
 
@@ -33,5 +33,5 @@ The View ID will need to be updated accordingly
 
 For reference the second report, our Pie chart in the example above, is sized so both reports can fit side by side on the page.
 
-![](../../.gitbook/assets/image%20%28145%29.png)
+![](../../.gitbook/assets/image%20%28147%29.png)
 
