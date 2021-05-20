@@ -42,6 +42,7 @@
   * [Detect IE](knack-code/functionality/detect-ie.md)
 * [CODE: Knack Look & Feel](knack-code/looks/README.md)
   * [Modal Close Styling](knack-code/looks/modal-close-styling.md)
+  * [Remove Back Links](knack-code/looks/remove-back-link.md)
   * [Relabel Attachment Links](knack-code/looks/relabel-attachment-links.md)
   * [Dropdown Menu Buttons](knack-code/looks/dropdown-menu-buttons.md)
   * [Modify Table Summary Rows](knack-code/looks/modify-table-summary-row.md)
