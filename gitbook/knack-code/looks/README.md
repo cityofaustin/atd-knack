@@ -9,6 +9,7 @@ description: >-
 ### Table of Contents
 
 * [Modal Close Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modal-close-styling)
+* [Remove Back Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/remove-back-link)
 * [Relabel Attachment Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/relabel-attachment-links)
 * [Dropdown Menu Buttons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/dropdown-menu-buttons)
 * [Modify Table Summary Rows](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modify-table-summary-row)
@@ -27,6 +28,7 @@ description: >-
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Modal Close Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+| Remove Back Links | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Relabel Attachment Links | Yes | Yes |  | Yes | Yes | No |  |  |  |  |  |  |
 | Dropdown Menu Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Modify Table Summary Row | Yes | No |  |  |  | No |  |  |  |  |  |  |
