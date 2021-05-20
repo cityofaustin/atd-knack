@@ -36,7 +36,7 @@ Highcharts.setOptions({
 
 ### The CSS
 
-See \[link\] to style individual reports and elements
+See [Report Element Colors](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-element-colors) to style individual reports and elements
 
 ### How to Implement
 
