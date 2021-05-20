@@ -80,7 +80,7 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 });
 ```
 
-To disable a big button pass the `true` argument in the handler
+To disable a big button pass the `true` argument in the handler like this
 
 ```text
 // create a DISABLED Development Reviews button on the Home page
@@ -114,10 +114,9 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
 /************* Big Buttons *************/
 /***************************************/
 .big-button-container {
-  padding: 10px 10px;
-  margin: 20px;
-  border-radius: 2px;
-  box-shadow: 0px 1px 2px 0px gray;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px 0px gray;
   font-size: 2.5em;
   max-width: 15em;
   display: block;
