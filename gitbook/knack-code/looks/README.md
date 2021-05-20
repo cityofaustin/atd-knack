@@ -26,7 +26,7 @@ description: >-
 | Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Modal Close Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Relabel Attachment Links | Yes |  |  | Yes | Yes |  |  |  |  |  |  |  |
+| Relabel Attachment Links | Yes | Yes |  | Yes | Yes |  |  |  |  |  |  |  |
 | Dropdown Menu Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Modify Table Summary Row | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Convert Values to UPPERCASE | Yes | Yes |  |  |  |  |  |  |  |  |  |  |

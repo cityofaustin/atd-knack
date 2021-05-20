@@ -28,7 +28,7 @@ description: >-
 | ---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Big Buttons | Yes | Yes | Yes | Yes | Yes |  | Yes | Yes | Yes | Yes | Yes | Yes |
 | Save Knack Record ID | Yes |  |  |  |  |  |  |  |  |  |  |  |
-| Redirect Blank Menu Pages | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Redirect Blank Menu Pages | No |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Trigger Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Modal BG | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Disable Nav Links | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
@@ -36,7 +36,7 @@ description: >-
 | Conditionally Hide/Show Form Fields | Yes |  |  |  |  |  |  |  |  |  |  |  |
 | Return to Top Button | No | No |  | Yes |  |  |  |  |  |  |  |  |
 | Refresh View Button | Yes |  | Yes |  |  |  |  |  |  |  |  |  |
-| Detect IE |  |  |  |  |  |  |  |  | Yes |  |  |  |
+| Detect IE | No |  |  |  |  |  |  |  | Yes |  |  |  |
 
 
 
