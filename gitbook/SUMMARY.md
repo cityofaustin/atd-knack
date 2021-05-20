@@ -24,7 +24,8 @@
 
 * [Code Version Control](knack-code/code-version-control.md)
 * [GitHub Code Workflow](knack-code/github-code-workflow.md)
-* [CODE: Mobile Optimization](knack-code/mobile-optimization.md)
+* [CODE: Mobile Optimization](knack-code/mobile-optimization/README.md)
+  * [Detail Labels](knack-code/mobile-optimization/detail-labels.md)
 * [CODE: Custom Login Buttons](knack-code/custom-login-buttons.md)
 * [CODE: Vision Zero in Action](knack-code/code-vision-zero-in-action.md)
 * [CODE: Knack Functionality](knack-code/functionality/README.md)
