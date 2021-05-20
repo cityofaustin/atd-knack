@@ -27,13 +27,13 @@ description: >-
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | Modal Close Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Relabel Attachment Links | Yes | Yes |  | Yes | Yes |  |  |  |  |  |  |  |
-| Dropdown Menu Buttons | Yes |  |  |  |  |  |  |  |  |  |  |  |
-| Modify Table Summary Row | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Dropdown Menu Buttons | Yes | No |  |  |  |  |  |  |  |  |  |  |
+| Modify Table Summary Row | Yes | No |  |  |  |  |  |  |  |  |  |  |
 | Convert Values to UPPERCASE | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Highlight Label Body | No |  | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
-| Highlight Table Value | No |  | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
+| Highlight Label Body | No | No | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
+| Highlight Table Value | No | No | Yes | Yes |  |  |  |  | Yes | Yes |  |  |
 | Report Headers | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
-| Report Filters Container Size | Yes |  |  |  |  |  |  |  |  |  |  |  |
+| Report Filters Container Size | Yes | No |  |  |  |  |  |  |  |  |  |  |
 | HighCharts Report Styling | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 | Font Awesome Icons | Yes | Yes |  |  |  |  |  |  |  |  |  |  |
 
