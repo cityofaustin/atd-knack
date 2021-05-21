@@ -25,19 +25,19 @@ None needed 😎
 ### How to Implement
 
 {% tabs %}
-{% tab title="First Step" %}
+{% tab title="1️⃣" %}
 Create a Rich Text View for the Header
 
 ![](../../.gitbook/assets/image%20%2878%29%20%281%29.png)
 {% endtab %}
 
-{% tab title="Second Step" %}
+{% tab title="2️⃣" %}
 Toggle to the HTML view in the Rich Text View editor and adjust the code
 
 ![](../../.gitbook/assets/image%20%2876%29.png)
 {% endtab %}
 
-{% tab title="Third Step" %}
+{% tab title="3️⃣" %}
 Adjust the colors, sizing, and text as necessary
 
 ```text
