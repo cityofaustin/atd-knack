@@ -55,25 +55,25 @@ For all the disabled buttons in the application, we will utilize this disabled b
 
 
 {% tabs %}
-{% tab title="First Step" %}
+{% tab title="1️⃣" %}
 Create two separate Details views on a page, one for the Enabled button and the other for the Disabled button.
 
 ![](../../.gitbook/assets/image%20%2843%29%20%281%29%20%281%29.png)
 {% endtab %}
 
-{% tab title="Second Step" %}
+{% tab title="2️⃣" %}
 Select Trigger an action and select the pencil to edit the field on the right
 
 ![](../../.gitbook/assets/image%20%2849%29.png)
 {% endtab %}
 
-{% tab title="Third Step" %}
+{% tab title="3️⃣" %}
 At the top, there is a Link Text field where you will put the HTML to call the CSS Button class
 
 ![](../../.gitbook/assets/image%20%2848%29.png)
 {% endtab %}
 
-{% tab title="Fourth Step" %}
+{% tab title="4️⃣" %}
 We will customize this HTML with any FA icons, images, or text that we want to appear on the Trigger button. We call both of the CSS classes mentioned above.
 
 ```text
@@ -83,7 +83,7 @@ We will customize this HTML with any FA icons, images, or text that we want to a
 For our other view, we simply do the same thing but use our regular enabled button classes. So that this view will only show the disabled button while the other will only show the enabled button. It is important they are separated for our last step.
 {% endtab %}
 
-{% tab title="Fifth Step" %}
+{% tab title="5️⃣" %}
 Lastly, we set page rules based on the specific criteria set by your app. In our current example, we use a Sum field for instance to see if any of our Submissions are set to 1 instead of 0 \(Binary Boolean\) by its Status. 
 
 In this scenario we hide the Enabled button view if our Sum field is 1 or more so that only our Disabled button view will show.
