@@ -86,19 +86,19 @@ None needed 😎
 ### How to Implement
 
 {% tabs %}
-{% tab title="First Step" %}
+{% tab title="1️⃣" %}
 Create a short text field for the parent object to capture the Knack Record ID
 
 ![](../../.gitbook/assets/image%20%28131%29.png)
 {% endtab %}
 
-{% tab title="Second Step" %}
+{% tab title="2️⃣" %}
 Create a text formula field on the child object that is set to the Knack Record ID field on the parent object
 
 ![](../../.gitbook/assets/image%20%28134%29.png)
 {% endtab %}
 
-{% tab title="Third Step" %}
+{% tab title="3️⃣" %}
 Create a new page to Save the Record ID
 
 ![](../../.gitbook/assets/image%20%28137%29.png)
@@ -114,13 +114,13 @@ Add a parent object form view to the page that will only show the Knack Record I
 ![](../../.gitbook/assets/image%20%28129%29.png)
 {% endtab %}
 
-{% tab title="Fourth Step" %}
+{% tab title="4️⃣" %}
 Establish a form submit page or multi-page application where the parent object is created if there is not one already. For example, in the TDS TIA Module there is a parent object multi-page application. The TIA Requester Information is the first page in this application where the parent object is created. This is the form view that will save the Knack Record ID.
 
 ![](../../.gitbook/assets/image%20%28128%29.png)
 {% endtab %}
 
-{% tab title="Fifth Step" %}
+{% tab title="5️⃣" %}
 Update the JS for data section where the Record ID is stored with the correct Field ID
 
 ```text
@@ -131,7 +131,7 @@ data: {
 ```
 {% endtab %}
 
-{% tab title="Sixth Step" %}
+{% tab title="6️⃣" %}
 Update the JS handlers for both the first and second forms with the correct View IDs
 
 ```text
@@ -152,7 +152,7 @@ $(document).on('knack-view-render.view_740', function (event, view, record) {
 ```
 {% endtab %}
 
-{% tab title="Seventh Step" %}
+{% tab title="7️⃣" %}
 Lastly, the url in the function will need to be updated with the Scene and View IDs of the Save Record ID page
 
 ```text
