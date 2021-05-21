@@ -36,6 +36,7 @@
   * [Disable Modal Background Click/Touch](knack-code/functionality/disable-modal-bg.md)
   * [Disable Breadcrumb Navigation Links](knack-code/functionality/disable-nav-links.md)
   * [Remove Back Links](knack-code/functionality/remove-back-link.md)
+  * [Back Link Buttons](knack-code/functionality/back-link-button.md)
   * [Return to Previous Page Button](knack-code/functionality/return-button.md)
   * [Conditionally Hide/Show Form Fields](knack-code/functionality/form-conditionals.md)
   * [Return to Top Button](knack-code/functionality/return-to-top-button.md)
