@@ -46,6 +46,7 @@
   * [Modal Close Styling](knack-code/looks/modal-close-styling.md)
   * [Relabel Attachment Links](knack-code/looks/relabel-attachment-links.md)
   * [Dropdown Menu Buttons](knack-code/looks/dropdown-menu-buttons.md)
+  * [Remove Table Header](knack-code/looks/remove-table-header.md)
   * [Modify Table Summary Rows](knack-code/looks/modify-table-summary-row.md)
   * [Convert Values to UPPERCASE](knack-code/looks/convert-values-to-uppercase.md)
   * [Highlight Details View Label Body & Table Value](knack-code/looks/highlight-label-body.md)
