@@ -11,6 +11,7 @@ description: >-
 * [Modal Close Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modal-close-styling)
 * [Relabel Attachment Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/relabel-attachment-links)
 * [Dropdown Menu Buttons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/dropdown-menu-buttons)
+* [Remove Table Headers](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/remove-table-header)
 * [Modify Table Summary Rows](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modify-table-summary-row)
 * [Convert Values to UPPERCASE](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/convert-values-to-uppercase)
 * [Highlight Details View Label Body & Table Value](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/highlight-label-body)
@@ -29,6 +30,7 @@ description: >-
 | Modal Close Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Relabel Attachment Links | Yes | Yes |  | Yes | Yes | No |  |  |  |  |  |  |
 | Dropdown Menu Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Remove Table Header | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Modify Table Summary Row | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Convert Values to UPPERCASE | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Highlight Label Body | No | No | Yes | Yes |  | No |  |  | Yes | Yes |  |  |
