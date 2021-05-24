@@ -4,7 +4,11 @@ description: How to change or hide summary rows for table groups
 
 # Modify Table Summary Rows
 
+![Before](../../.gitbook/assets/image%20%28155%29.png)
+
 ![Mitigation table, grouped by mitigation location, with modified summary rows](../../.gitbook/assets/image%20%28145%29.png)
+
+
 
 Grouping records in tables is great for usability, organization, and data points. It allows a user to quickly identify averages and totals \(sums\), or compare and contrast related records. The one downside is that group summary rows duplicate the group name creating a lot of clutter on the table. To simplify this, we remove that group header name from the group summary row and we can either hide it completely or add something that makes more sense. In the mitigation table example above, instead of it being "Header Name \(Mitigation Location\) + Total \(Group Sum\)" we set it to "Location Total".
 
