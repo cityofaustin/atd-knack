@@ -82,7 +82,9 @@
 * [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
 * [Work Order Attachments](signs-and-markings/work-order-attachments.md)
 * [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)
-  * [Process & Functionality](signs-and-markings/contractor-work-order-tracking/process-and-functionality.md)
+  * [Process & Functionality](signs-and-markings/contractor-work-order-tracking/contractor-process-and-functionality.md)
+* [Sign Fabrication Work Orders](signs-and-markings/sign-fabrication-work-orders/README.md)
+  * [Process and Functionality](signs-and-markings/sign-fabrication-work-orders/process-and-functionality.md)
 
 ## STREET BANNER PROGRAM
 
