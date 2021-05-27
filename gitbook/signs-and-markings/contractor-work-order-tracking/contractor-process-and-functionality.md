@@ -107,5 +107,9 @@ Allows staff to update any work order information that may be incorrect
 
 SMB staff can change status from "Approved" to "Closed"
 
+## Workflow 
 
+Network Location: G:\ATD\ATD\_GIS\02\_ENT\_APPLICATIONS\app\_Signs\_and\_Markings
+
+PDF Workflow: SMB\_Tracker\_contractor\_workflow\_20201113 \(Is going to be updated by SMB 5/27/21\)
 
