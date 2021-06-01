@@ -53,3 +53,9 @@
 * \(DIGITIZE\) Sign shop clicks "Invoice" reviews it, then clicks "Email Invoice" submits to Finance Staff for processing
 * \(DIGITIZE\) Finance staff reviews invoice details, clicks "Invoice Processed" - triggers status to "Closed"
 
+### Workflow
+
+{% embed url="https://miro.com/app/board/o9J\_lBIkNxs=/" %}
+
+![](../../.gitbook/assets/image%20%28157%29.png)
+
