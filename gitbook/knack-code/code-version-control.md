@@ -73,10 +73,21 @@ You will receive an email from GitHub if you're assigned to review a pull reques
 Remember: Pull request authors can't "**Approve**" their own pull requests!
 {% endhint %}
 
+### Pull Request Approved - Add Code to Production
+
+* Wait for the pull request to be approved
+* once it’s approved, copy/paste your code in the Knack TEST environment to PROD environment
+* make sure the code is working
+* merge the pull request
+
 ### Merging Branch
 
 * Merge pull request - create a merge commit?
 * Squash and merge?
 
 ### Deleting Branch
+
+
+
+
 
