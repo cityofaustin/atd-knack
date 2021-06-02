@@ -57,5 +57,5 @@
 
 {% embed url="https://miro.com/app/board/o9J\_lBIkNxs=/" %}
 
-![](../../.gitbook/assets/image%20%28157%29.png)
+![](../../.gitbook/assets/image%20%28158%29.png)
 

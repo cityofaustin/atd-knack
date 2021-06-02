@@ -39,7 +39,7 @@ description: 'https://github.com/cityofaustin/atd-knack/tree/master/code'
 
 * A pull request is automatically created on the next screen, confirm your pull request by clicking the green **"Create pull request"** button.
 
-### Assigned a Reviewer
+### Assign a Reviewer
 
 * Lastly, you should assign a reviewer to check your code. 
 * On the right side of the page find the **cog** icon next to "**Reviewers",** and select one of your colleagues to review the code \(preferably from your own team first, then Dev team\)
@@ -48,13 +48,35 @@ description: 'https://github.com/cityofaustin/atd-knack/tree/master/code'
 Post a slack on the "**atd-knack**" channel to see if one of your colleagues is available to review
 {% endhint %}
 
+![Example of a pull request with an assigned Reviewer](../.gitbook/assets/image%20%28160%29.png)
+
 ### Reviewing a Pull Request
 
+You will receive an email from GitHub if you're assigned to review a pull request
 
+![Example of email received when you&apos;ve been assigned](../.gitbook/assets/image%20%28157%29.png)
 
 ### Approving Pull Request
 
+* Navigate to the pull request
+* Under the "Commit" tab, click the commit name to open
+* Click the "**+**" sign beside the green highlighted code to "**Add a single comment**" or "**Start a review**"
+
+![](../.gitbook/assets/image%20%28159%29.png)
+
+* Once you're done reviewing, click the "**Finish your review**" button on the top right
+* Enter in some comments, click "**Approve**" and click "**Submit review**"
+
+![](../.gitbook/assets/image%20%28161%29.png)
+
+{% hint style="warning" %}
+Remember: Pull request authors can't "**Approve**" their own pull requests!
+{% endhint %}
+
 ### Merging Branch
+
+* Merge pull request - create a merge commit?
+* Squash and merge?
 
 ### Deleting Branch
 
