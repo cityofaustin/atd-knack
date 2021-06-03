@@ -150,15 +150,6 @@ $(document).on("knack-view-render.view_1880", function (event, page) {
 });
 
 
-$(document).on("knack-scene-render.scene_1", function (event, page) {
-  // redirect to embedded homepage from unembedded homepage login
-  var url = window.location.href;
-
-  if (url.indexOf("knack.com") >= 0) {
-    // window.location.replace('http://transportation.austintexas.io/data-tracker');
-  }
-});
-
 // remove empty "select..." choices from advanced signal search
 $(document).on("knack-view-render.view_1169", function (event, page) {
   // id*="_moComments_"
@@ -594,9 +585,6 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
   $("#" + restockUnitCostField).val("")
 
   $("#" + restockQuantityField).val("")
-
-  //   $("#kn-input-" + previousUnitCostField).attr("hidden", true);
-  //   $("#kn-input-" + previousOnHandQuantiyField).attr("hidden", true);
 
   $("#" + restockUnitCostField).on("input", function () {
     restockUnitCost = parseFloat($(this).val());
