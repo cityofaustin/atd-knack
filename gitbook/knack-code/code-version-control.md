@@ -81,7 +81,7 @@ Remember: Pull request authors can't "**Approve**" their own pull requests!
 * once it’s approved, copy/paste your code in the Knack TEST environment to PROD environment
 * make sure the code is working
 
-### Merging Branch
+### Merging Branches
 
 * Click "**Merge pull request**" to merge your changes to the master branch
 
@@ -97,7 +97,7 @@ Remember: Pull request authors can't "**Approve**" their own pull requests!
 
 ![](../.gitbook/assets/image%20%28163%29.png)
 
-### Deleting Branch
+### Deleting Branches
 
 1. Option 1: Click the "**Delete branch**" in the message prompt
 2. Option 2: Navigate to main repo page "**atd-knack**"
