@@ -595,6 +595,9 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
 
   $("#" + restockQuantityField).val("")
 
+  //   $("#kn-input-" + previousUnitCostField).attr("hidden", true);
+  //   $("#kn-input-" + previousOnHandQuantiyField).attr("hidden", true);
+
   $("#" + restockUnitCostField).on("input", function () {
     restockUnitCost = parseFloat($(this).val());
     var newUnitCost = getWeightedUnitCost(
