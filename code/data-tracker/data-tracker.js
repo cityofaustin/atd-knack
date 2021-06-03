@@ -46,7 +46,6 @@ var colorMapOne = {
   "FINAL REVIEW": { background_color: "#4daf4a", color: "#fff" },
 };
 
-
 $(document).on("knack-view-render.view_2107", function (event, page) {
   //  replace attachment filename with attachment type
   //  find each attachment cell
@@ -101,7 +100,6 @@ $(document).on("knack-view-render.view_2108", function (event, page) {
       });
   });
 });
-
 
 //  replace 'Quantity' label with UOM of measure by parsing the select value contents
 //  was unable to use the chosen.js native events because of however Knack has implemented them
@@ -488,97 +486,168 @@ function showHideElements(showSelector, hideSelector) {
 //// Begin Set Weighted Unit Cost ///////////////////////////
 /////////////////////////////////////////////////////////////
 $(document).on("knack-scene-render.scene_1171", function (event, page) {
-  function dollarsToNum(val) {
-    return parseFloat(val.replace("$", "").replaceAll(",", ""));
+  function appendErrorMessage(msg) {
+    var errorDiv = $(
+      '<div id="' +
+        page.key +
+        '-fail" class="kn-message is-error"><span class="kn-message-body"><p><strong>' +
+        msg +
+        "</strong></p></span></div>"
+    );
+    errorDiv.insertBefore($(".kn-submit")[0]);
   }
 
-  function getWeightedUnitCost(
-    quantityOnHand,
-    unitCost,
-    restockQuantity,
-    restockUnitCost
-  ) {
-    // returns new weighted unit cost based on old/new quantities/costs
-    weightedUnitCost =
-      (quantityOnHand * unitCost + restockQuantity * restockUnitCost) /
-      (quantityOnHand + restockQuantity);
-    return weightedUnitCost.toFixed(4);
+  function dollarsToNum(val) {
+    // Attempts to parse a float from a dollar string. Returns a float or NaN.
+    if (!isNaN(val)) {
+      // if val is a number, return it
+      return val;
+    }
+    if (!typeof val === "string") {
+      return NaN;
+    }
+    // we use Number here (and elsewhere) instead of parseFloat, because we don't want to tolerate any
+    // unexpected text in the value we're parsing. e.g. parseFloat("23abcd12") would return `23`
+    return Number(val.replace("$", "").replaceAll(",", "").trim());
+  }
+
+  function getWeightedUnitCost(state) {
+    var weightedUnitCost =
+      (state.quantity.current * state.cost.current +
+        state.quantity.restock * state.cost.restock) /
+      (state.quantity.current + state.quantity.restock);
+    return Number(weightedUnitCost.toFixed(4));
+  }
+
+  function handleWeightedUnitcCostChange(state) {
+    if (!state.isValid() && !state.errorIsShowing) {
+      // show error banner
+      appendErrorMessage(
+        "Unable to submit. Please verify that all fields are populated correctly."
+      );
+      // hide submit button
+      $(".kn-button").hide();
+      state.errorIsShowing = true;
+    } else if (state.isValid()) {
+      // remove error banner
+      $("#" + page.key + "-fail").remove();
+      // show submit button
+      $(".kn-button").show();
+      state.errorIsShowing = false;
+    } else {
+      // leave existing error banner up
+      return;
+    }
+  }
+
+  function isWeightedUnitCostValid() {
+    // the weighted cost may not be valid due to any of the cost/quantity fields
+    // being empty or containing strings characters
+    var weightedUnitCost = this.cost.updated;
+    if (
+      isNaN(weightedUnitCost) ||
+      typeof weightedUnitCost !== "number" ||
+      weightedUnitCost === 0
+    ) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   var detailsView = "view_2865";
-  var unitCostField = "field_245";
-  var quantiyOnHandField = "field_3579"; // details
-  var previousUnitCostField = "field_3786"; // used to capture previous state on form submit
-  var previousOnHandQuantiyField = "field_3906"; // used to capture previous state on form submit
-  var restockQuantityField = "field_3785";
-  var restockUnitCostField = "field_3783";
-  var newUnitCostField = "field_245";
-  var restockQuantity = dollarsToNum($("#" + restockQuantityField).val());
-  var restockUnitCost = parseFloat($("#" + restockUnitCostField).val());
+
+  var fields = {
+    cost: {
+      current: "field_245",
+      previous: "field_3786",
+      restock: "field_3783",
+      updated: "field_245",
+    },
+    quantity: {
+      current: "field_3579",
+      previous: "field_3906",
+      restock: "field_3785",
+    },
+  };
+
+  var state = {
+    quantity: {
+      restock: null,
+      current: null,
+    },
+    cost: {
+      restock: null,
+      current: null,
+      updated: null,
+    },
+    isValid: isWeightedUnitCostValid,
+    errorIsShowing: false,
+  };
+
+  // clear out pre-existing values from these form fields. these fields are used to "translate"
+  // values to the related unit_cost_history records that are created by form rule on submission,
+  // there may be values in these fields from previous restocking
+  $("#" + fields.cost.restock).val("");
+  $("#" + fields.quantity.restock).val("");
+  $("#" + fields.cost.updated).val("");
 
   // prevent editing of new unit cost field. this will be set programmatically
-  $("#" + newUnitCostField).prop("disabled", true);
+  $("#" + fields.cost.updated).prop("disabled", true);
 
-  var quantityOnHand = parseInt(
+  state.quantity.current = parseInt(
     $(
       $("#" + detailsView)
-        .find("div.kn-detail." + quantiyOnHandField)
+        .find("div.kn-detail." + fields.quantity.current)
         .find(".kn-detail-body span")[0]
     ).text()
   );
 
   // handle situation where stock levels are negative (this should not but prob will happen)
-  quantityOnHand = quantityOnHand > 0 ? quantityOnHand : 0;
+  state.quantity.current =
+    state.quantity.current > 0 ? state.quantity.current : 0;
 
-  var unitCost = dollarsToNum(
+  state.cost.current = dollarsToNum(
     $(
       $("#" + detailsView)
-        .find("div.kn-detail." + unitCostField)
+        .find("div.kn-detail." + fields.cost.current)
         .find(".kn-detail-body span")[0]
     ).text()
   );
-
   /*
       set the value of the preivous unit cost and quanity. these fields are hidden to the 
       user and we pass these values via submit rule that inserts them into a log record
     */
-  $("#" + previousUnitCostField)
-    .val(unitCost)
+  $("#" + fields.cost.previous)
+    .val(state.cost.current)
     .prop("disabled", true);
 
-  $("#" + previousOnHandQuantiyField)
-    .val(quantityOnHand)
+  $("#" + fields.quantity.previous)
+    .val(state.quantity.current)
     .prop("disabled", true);
 
-  // clear out pre-existing values from these form fields. these fields are used to "translate"
-  // values to the related unit_cost_history records that are created by form rule on submission,
-  // there may be values in these fields from previous restocking
-  $("#" + restockUnitCostField).val("")
+  // we call handleWeightedUnitcCostChange to initialize the error state and hide submit button
+  // until all fields are populated
+  handleWeightedUnitcCostChange(state);
 
-  $("#" + restockQuantityField).val("")
-
-  $("#" + restockUnitCostField).on("input", function () {
-    restockUnitCost = parseFloat($(this).val());
-    var newUnitCost = getWeightedUnitCost(
-      quantityOnHand,
-      unitCost,
-      restockQuantity,
-      restockUnitCost
-    );
-    $("#" + newUnitCostField).val(newUnitCost);
+  $("#" + fields.cost.restock).on("input", function () {
+    state.cost.restock = dollarsToNum($(this).val());
+    state.cost.updated = getWeightedUnitCost(state);
+    $("#" + fields.cost.updated).val(state.cost.updated);
+    handleWeightedUnitcCostChange(state);
   });
 
-  $("#" + restockQuantityField).on("input", function () {
-    restockQuantity = parseFloat($(this).val());
-    var newUnitCost = getWeightedUnitCost(
-      quantityOnHand,
-      unitCost,
-      restockQuantity,
-      restockUnitCost
-    );
-    $("#" + newUnitCostField).val(newUnitCost);
+  $("#" + fields.quantity.restock).on("input", function () {
+    state.quantity.restock = Number($(this).val());
+    state.cost.updated = getWeightedUnitCost(state);
+    $("#" + fields.cost.updated).val(state.cost.updated);
+    handleWeightedUnitcCostChange(state);
   });
 });
+
+///////////////////////////////////////////////////////////
+//// End Set Weighted Unit Cost ///////////////////////////
+///////////////////////////////////////////////////////////
 
 // Add "Refresh" button to inventory requests table
 $(document).on("knack-view-render.view_2698", function (event, page) {
@@ -595,7 +664,6 @@ $(document).on("knack-view-render.view_2698", function (event, page) {
     Knack.views["view_2698"].model.fetch();
   });
 });
-
 
 //////////////////////////////////////////////////////
 // Disable editing of task order on work orders   ////
