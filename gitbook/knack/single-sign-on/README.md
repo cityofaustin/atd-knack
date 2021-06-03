@@ -124,5 +124,7 @@ Paste that url into the **Provider Entry Point** field in the Knack config. Clic
 
 That's it. You're done!
 
-Note - If you see this error \(_AADSTS50011: The reply URL specified in the request does not match the reply URLs configured for the application: 'atd.knack.com/_'\), write back to CTM and ask them to update the Azure Instance \(ACS URL\) with the US included in the URL.
+{% hint style="info" %}
+If you see this error \(_AADSTS50011: The reply URL specified in the request does not match the reply URLs configured for the application: 'atd.knack.com/_'\), write back to CTM and ask them to update the Azure Instance \(ACS URL\) with `US` included in the URL.
+{% endhint %}
 

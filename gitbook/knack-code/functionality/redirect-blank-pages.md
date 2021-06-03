@@ -1,14 +1,12 @@
 ---
-description: >-
-  How to redirect blank pages as a result of selecting a navigation menu header
-  (Knack Bug)
+description: How to redirect blank pages as a result of selecting a navigation menu header
 ---
 
 # Redirect Blank Menu Pages
 
 ![Blank page resulting from selecting the menu header](../../.gitbook/assets/image%20%2856%29.png)
 
-This code helps alleviate a current Knack bug that causes a menu to direct you to a blank page that is not editable in the builder.
+This code helps alleviate a current Knack bug that causes a menu to direct you to a blank page that is not editable in the builder. \(No longer a bug as of May 2021\)
 
 ### The JS
 

@@ -50,7 +50,7 @@ We mostly use Knack's built in styling for return buttons with a few exceptions.
 ### How to Implement
 
 {% tabs %}
-{% tab title="First Step" %}
+{% tab title="1️⃣" %}
 Determine which pages you would like the return buttons to be present. A Rich Text view will need to be added at the top of each of these pages. We specifically add these views to the top of the page but there may be instances where you would want to include in the middle of a long page or below certain views. Adjust accordingly.
 
 ![](../../.gitbook/assets/image%20%2855%29.png)
@@ -58,7 +58,7 @@ Determine which pages you would like the return buttons to be present. A Rich Te
 Nothing will need to be placed inside this Rich Text view but you will need to know its View ID
 {% endtab %}
 
-{% tab title="Second Step" %}
+{% tab title="2️⃣" %}
 Once you have placed your rich text views and know their View ID's, adjust the View ID's in the JS accordingly. Add or remove views based on your need.
 
 ```text
@@ -66,7 +66,7 @@ appviews=["view_601","view_602","view_604","view_605"]
 ```
 {% endtab %}
 
-{% tab title="Third Step" %}
+{% tab title="3️⃣" %}
 Next, adjust the button text for the specified views
 
 ```text
@@ -74,7 +74,7 @@ Next, adjust the button text for the specified views
 ```
 {% endtab %}
 
-{% tab title="Fourth Step" %}
+{% tab title="4️⃣" %}
 Lastly, after updating the code in your app, if you wanted to customize the button look further, you could do so using the specified CSS ID Selector or utilizing a new or existing CSS Class Selector.
 {% endtab %}
 {% endtabs %}

@@ -510,6 +510,17 @@ $(document).on("knack-view-render.view_2904", function(event, page) {
     "GIS QA | Markings",
   );
 });
+
+$(document).on("knack-view-render.view_3495", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "sign-fabrication-work-orders",
+    "view_3495",
+    "https://atd.knack.com/signs-markings#work-orders-contractor/",
+    "wrench",
+    "Contractor | Work Orders",
+  ); 
+})
 // END: Custom Buttons
 
 function hideFieldIfRole(selector, roleObjectId) {
@@ -615,4 +626,3 @@ $(document).on('knack-form-submit.view_3158', function(event, view, txn) {
         console.log(response);
     });
 })
-

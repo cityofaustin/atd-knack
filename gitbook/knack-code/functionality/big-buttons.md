@@ -80,7 +80,7 @@ $(document).on("knack-view-render.view_15", function(event, page) {
 });
 ```
 
-To disable a big button pass the `true` argument in the handler
+To disable a big button pass the `true` argument in the handler like this
 
 ```text
 // create a DISABLED Development Reviews button on the Home page
@@ -114,10 +114,9 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
 /************* Big Buttons *************/
 /***************************************/
 .big-button-container {
-  padding: 10px 10px;
-  margin: 20px;
-  border-radius: 2px;
-  box-shadow: 0px 1px 2px 0px gray;
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px 0px gray;
   font-size: 2.5em;
   max-width: 15em;
   display: block;
@@ -156,23 +155,23 @@ Add these CSS classes if not already present
 ### How to Implement
 
 {% tabs %}
-{% tab title="First Step" %}
+{% tab title="1️⃣" %}
 Create a Rich Text view
 
 ![](../../.gitbook/assets/image%20%2866%29.png)
 {% endtab %}
 
-{% tab title="Second Step" %}
+{% tab title="2️⃣" %}
 Open the Rich Text view to identify its View ID and update the view name to include it for easy reference
 
 ![](../../.gitbook/assets/image%20%2865%29.png)
 {% endtab %}
 
-{% tab title="Third Step" %}
+{% tab title="3️⃣" %}
 Make sure the CSS styling is in place. Update the CSS styling to meet your needs, sometimes buttons may need a larger width to accommodate your button text. Additionally, if you already have the `disabled` and `fa` CSS classes, be sure not to duplicate them.
 {% endtab %}
 
-{% tab title="Fourth Step" %}
+{% tab title="4️⃣" %}
 When placing the JS, the function only needs to be placed once but you will need a new handler for each Rich Text view + Big Button that you have.
 
 #### Things to change in JavaScript
