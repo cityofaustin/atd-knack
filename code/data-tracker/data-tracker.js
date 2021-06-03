@@ -150,14 +150,6 @@ $(document).on("knack-view-render.view_1880", function (event, page) {
 });
 
 
-// remove empty "select..." choices from advanced signal search
-$(document).on("knack-view-render.view_1169", function (event, page) {
-  // id*="_moComments_"
-  // $("#kn_filter_7_field_1513_chzn_c_0").remove();
-  // $("#kn_filter_8_field_491_chzn_c_0").remove();
-  // $("#kn_filter_4_field_2437_chzn_c_0").remove();
-});
-
 //////////////////////////////////////////////////
 // Remove whitespace from street segment inputs///
 //////////////////////////////////////////////////
