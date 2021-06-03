@@ -129,27 +129,6 @@ $(document).on("knack-scene-render.scene_716", function (event, page) {
   });
 });
 
-function setRequester() {
-  //  function to set a requester field by an attribute value associated with the logged-in user
-
-  var divisionField = "field_2186";
-
-  var requesterSelectorId = "#view_1880-field_2162";
-
-  if (!Knack.getUserRoles("object_151")) {
-    //  ignore if user is supervisor role
-    var userAttrs = Knack.getUserAttributes();
-    var division = userAttrs.values[divisionField];
-    $(requesterSelectorId).val(division).change();
-    $(requesterSelectorId).prop("disabled", "true");
-  }
-}
-
-$(document).on("knack-view-render.view_1880", function (event, page) {
-  setRequester();
-});
-
-
 //////////////////////////////////////////////////
 // Remove whitespace from street segment inputs///
 //////////////////////////////////////////////////
