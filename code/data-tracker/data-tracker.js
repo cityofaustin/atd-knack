@@ -499,11 +499,11 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
 
   function dollarsToNum(val) {
     // Attempts to parse a float from a dollar string. Returns a float or NaN.
-    if (!isNaN(val)) {
+    if (typeof val === "number") {
       // if val is a number, return it
       return val;
-    }
-    if (!typeof val === "string") {
+    } else if (!typeof val === "string") {
+      // not a number or string, set it to NaN and let validation catch it
       return NaN;
     }
     // we use Number here (and elsewhere) instead of parseFloat, because we don't want to tolerate any
@@ -519,8 +519,9 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     return Number(weightedUnitCost.toFixed(4));
   }
 
-  function handleWeightedUnitcCostChange(state) {
-    if (!state.isValid() && !state.errorIsShowing) {
+  function handleWeightedUnitCostChange(state) {
+    var isValid = state.isValid();
+    if (!isValid && !state.errorIsShowing) {
       // show error banner
       appendErrorMessage(
         "Unable to submit. Please verify that all fields are populated correctly."
@@ -528,7 +529,7 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
       // hide submit button
       $(".kn-button").hide();
       state.errorIsShowing = true;
-    } else if (state.isValid()) {
+    } else if (isValid) {
       // remove error banner
       $("#" + page.key + "-fail").remove();
       // show submit button
@@ -540,19 +541,22 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     }
   }
 
-  function isWeightedUnitCostValid() {
-    // the weighted cost may not be valid due to any of the cost/quantity fields
-    // being empty or containing strings characters
-    var weightedUnitCost = this.cost.updated;
-    if (
-      isNaN(weightedUnitCost) ||
-      typeof weightedUnitCost !== "number" ||
-      weightedUnitCost === 0
-    ) {
-      return false;
-    } else {
-      return true;
-    }
+  function areInputsValid() {
+    // ensure that the user-input values are valid. the restock unit cost, quantity
+    // and, as a safegaurd, the calculated weighted unit cost, must be non-zero numbers
+    var valsToTest = [
+      this.cost.updated,
+      this.quantity.restock,
+      this.cost.restock,
+    ];
+    return valsToTest.every((val) => {
+      if (isNaN(val) || typeof val !== "number" || val === 0) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    return results;
   }
 
   var detailsView = "view_2865";
@@ -581,7 +585,7 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
       current: null,
       updated: null,
     },
-    isValid: isWeightedUnitCostValid,
+    isValid: areInputsValid,
     errorIsShowing: false,
   };
 
@@ -626,22 +630,22 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     .val(state.quantity.current)
     .prop("disabled", true);
 
-  // we call handleWeightedUnitcCostChange to initialize the error state and hide submit button
+  // we call handleWeightedUnitCostChange to initialize the error state and hide submit button
   // until all fields are populated
-  handleWeightedUnitcCostChange(state);
+  handleWeightedUnitCostChange(state);
 
   $("#" + fields.cost.restock).on("input", function () {
     state.cost.restock = dollarsToNum($(this).val());
     state.cost.updated = getWeightedUnitCost(state);
     $("#" + fields.cost.updated).val(state.cost.updated);
-    handleWeightedUnitcCostChange(state);
+    handleWeightedUnitCostChange(state);
   });
 
   $("#" + fields.quantity.restock).on("input", function () {
     state.quantity.restock = Number($(this).val());
     state.cost.updated = getWeightedUnitCost(state);
     $("#" + fields.cost.updated).val(state.cost.updated);
-    handleWeightedUnitcCostChange(state);
+    handleWeightedUnitCostChange(state);
   });
 });
 
