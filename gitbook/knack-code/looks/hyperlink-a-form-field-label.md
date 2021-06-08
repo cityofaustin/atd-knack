@@ -24,7 +24,7 @@ a.form-link:hover {text-decoration: underline;}
 
 ### The HTML
 
-The html lives in the field label itself and can wrap whatever text or icon you would like to link. We used the external link icon to reinforce the idea that this is an external link.
+The html lives in the field label itself and can wrap whatever text you would like to link. We used the external link icon to reinforce the idea that this is an external link.
 
 ```text
 <a class="form-link" href="https://www.austintexas.gov/GIS/CouncilDistrictMap/" target="_blank"> Look up Council District </a><i class="fa fa-external-link"></i>
