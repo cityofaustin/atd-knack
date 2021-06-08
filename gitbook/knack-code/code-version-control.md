@@ -75,7 +75,7 @@ Remember: Pull request authors can't "**Approve**" their own pull requests!
 
 ### Pull Request Approved - Add Code to Production
 
-![Example of &quot;Approved&quot; pull request](../.gitbook/assets/image%20%28169%29.png)
+![Example of &quot;Approved&quot; pull request](../.gitbook/assets/image%20%28170%29.png)
 
 * Wait for the pull request to be approved
 * once it’s approved, copy/paste your code in the Knack TEST environment to PROD environment
@@ -85,13 +85,13 @@ Remember: Pull request authors can't "**Approve**" their own pull requests!
 
 * Click "**Merge pull request**" to merge your changes to the master branch
 
-![](../.gitbook/assets/image%20%28165%29.png)
+![](../.gitbook/assets/image%20%28166%29.png)
 
 * Will be prompted to "**Confirm merge**"
 
 
 
-![](../.gitbook/assets/image%20%28166%29.png)
+![](../.gitbook/assets/image%20%28167%29.png)
 
 * You will see this next message that your pull request was successfully merged and closed
 
@@ -102,7 +102,7 @@ Remember: Pull request authors can't "**Approve**" their own pull requests!
 1. Option 1: Click the "**Delete branch**" in the message prompt
 2. Option 2: Navigate to main repo page "**atd-knack**"
 
-![](../.gitbook/assets/image%20%28167%29.png)
+![](../.gitbook/assets/image%20%28168%29.png)
 
 * Beside the "master" drop down, click "**branches**"
 * Find the branch you name and click the "Delete" icon
