@@ -4,9 +4,9 @@ description: How to hyperlink a field label on a form to make a link look like a
 
 # Hyperlink a Form Field Label
 
-![Link to an external site for the Council District field](../../.gitbook/assets/image%20%28172%29.png)
+![Link to an external site for the Council District field](../../.gitbook/assets/image%20%28176%29.png)
 
-![Without link color, underline, and icon](../../.gitbook/assets/image%20%28168%29.png)
+![Without link color, underline, and icon](../../.gitbook/assets/image%20%28169%29.png)
 
 ### The CSS
 

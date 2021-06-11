@@ -46,6 +46,7 @@
   * [Modal Close Styling](knack-code/looks/modal-close-styling.md)
   * [Relabel Attachment Links](knack-code/looks/relabel-attachment-links.md)
   * [Dropdown Menu Buttons](knack-code/looks/dropdown-menu-buttons.md)
+  * [Trigger Buttons](knack-code/looks/trigger-buttons.md)
   * [Hyperlink a Form Field Label](knack-code/looks/hyperlink-form-field-label.md)
   * [Remove Table Header](knack-code/looks/remove-table-header.md)
   * [Modify Table Summary Rows](knack-code/looks/modify-table-summary-row.md)
