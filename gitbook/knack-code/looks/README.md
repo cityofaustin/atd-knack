@@ -11,6 +11,7 @@ description: >-
 * [Modal Close Styling](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modal-close-styling)
 * [Relabel Attachment Links](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/relabel-attachment-links)
 * [Dropdown Menu Buttons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/dropdown-menu-buttons)
+* [Trigger Buttons](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/trigger-buttons)
 * [Hyperlink a Form Field Label](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/hyperlink-form-field-label)
 * [Remove Table Headers](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/remove-table-header)
 * [Modify Table Summary Rows](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modify-table-summary-row)
@@ -31,6 +32,7 @@ description: >-
 | Modal Close Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Relabel Attachment Links | Yes | Yes |  | Yes | Yes | No |  |  |  |  |  |  |
 | Dropdown Menu Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Trigger Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Hyperlink Form Field Label | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Remove Table Header | No | No |  |  |  | No |  |  |  |  |  |  |
 | Modify Table Summary Row | Yes | No |  |  |  | No |  |  |  |  |  |  |
