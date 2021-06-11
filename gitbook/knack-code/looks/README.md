@@ -32,7 +32,7 @@ description: >-
 | Relabel Attachment Links | Yes | Yes |  | Yes | Yes | No |  |  |  |  |  |  |
 | Dropdown Menu Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Hyperlink Form Field Label | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Remove Table Header | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Remove Table Header | No | No |  |  |  | No |  |  |  |  |  |  |
 | Modify Table Summary Row | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Convert Values to UPPERCASE | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Highlight Label Body | No | No | Yes | Yes |  | No |  |  | Yes | Yes |  |  |
