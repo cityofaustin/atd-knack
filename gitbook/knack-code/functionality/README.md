@@ -37,9 +37,9 @@ description: >-
 | Remove Back Links | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
 | Back Link Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
 | Return to Prev Page Button | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Conditionally Hide/Show Form Fields | Yes | No |  |  |  | No |  |  |  |  |  |  |
+| Conditionally Hide/Show Form Fields | No | No |  |  |  | No |  |  |  |  |  |  |
 | Return to Top Button | No | No |  | Yes |  | No |  |  |  |  |  |  |
-| Refresh View Button | Yes | No | Yes |  |  | No |  |  |  |  |  |  |
+| Refresh View Button | No | No | Yes |  |  | No |  |  |  |  |  |  |
 | Detect IE | No | No |  |  |  | No |  |  | Yes |  |  |  |
 
 
