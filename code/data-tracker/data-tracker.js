@@ -777,3 +777,135 @@ $(document).on("knack-scene-render.scene_634", function (event, scene) {
 ////////////////////////////////////////////
 ////// End Disable Task Order Editing //////
 ////////////////////////////////////////////
+
+////////////////////////////////////////////
+/// Begin Technician Time Log Validation ///
+////////////////////////////////////////////
+
+
+function appendErrorMessage(viewKey, formDiv, msg) {
+  // remove existing error msg if present
+  var errorDiv = $(
+    '<div id="' +
+      viewKey +
+      '-fail" class="kn-message is-error"><span class="kn-message-body"><p><strong>' +
+      msg +
+      "</strong></p></span></div>"
+  );
+  errorDiv.insertBefore(formDiv);
+  setTimeout(function () {
+    $("#" + viewKey + "-fail").remove();
+  }, 6000);
+}
+
+function highlightErrorField(inputId) {
+  $(inputId).addClass("input-error");
+  $(inputId + "-time").addClass("input-error");
+
+  setTimeout(function () {
+    $(inputId).removeClass("input-error");
+    $(inputId + "-time").removeClass("input-error");
+  }, 6000);
+}
+
+function getDatetime(inputId) {
+  // Date-time field has two inputs, one for date, and one for time
+  var dt = $("#" + inputId).val();
+
+  if (!dt) return undefined;
+
+  var [hoursStr, minutesStr] = $("#" + inputId + "-time")
+    .val()
+    .split(":");
+
+  if (!(hoursStr && minutesStr)) {
+    // we'll do like knack does and handle an absent or un-parseable time as 0:00
+    hoursStr = "0";
+    minutesStr = "0";
+  }
+
+  var hours = parseInt(hoursStr);
+  var amPm = minutesStr.slice(-2).toLowerCase();
+
+  // extract 'am' or 'pm' if present
+  if (amPm !== "am" && amPm !== "pm") {
+    amPm = null;
+  } else {
+    // remove am/pm string from string so that we can parse it as an int
+    minutesStr = minutesStr.replace(amPm, "");
+  }
+
+  minutes = parseInt(minutesStr) || 0;
+
+  if (isNaN(hours) || isNaN(minutes)) {
+    return undefined;
+  }
+
+  // adjust hours for am/pm
+  if (amPm == "pm" && hours < 12) {
+    hours = hours + 12;
+  } else if (amPm == "am" && hours == 12) {
+    hours = 0;
+  }
+  return new Date(dt + " " + hours + ":" + minutes);
+}
+
+function formatErrorMessage(startField, endField) {
+  return `<u>${startField.name}</u> must be earlier than <u>${endField.name}</u><br/>`;
+}
+
+$(document).on("knack-view-render.view_1252", function (event, page) {
+  var viewKey = page.key;
+
+  // each date field must be ordred chronologically, earliest to latest
+  var dateFields = [
+    { key: "field_2020", name: "Issue Recevied" }, // issue received
+    { key: "field_1437", name: "Arrive at Worksite" }, // arrive on-site
+    { key: "field_1438", name: "Leave Work Site" }, // leave site
+    { key: "field_1425", name: "Return to Shop" }, // return to shop
+  ];
+
+  $(`#${viewKey} .kn-button`).on("click", function () {
+    var passesValidation = true;
+    var formDiv = $(this).closest("div")[0];
+    var errorMsgs = "";
+
+    for (var i = 1; i < 4; i++) {
+      var startField = dateFields[i - 1];
+      var endField = dateFields[i];
+      var startDateTime = getDatetime(`${viewKey}-${startField.key}`);
+      var endDateTime = getDatetime(`${viewKey}-${endField.key}`);
+
+      if (startDateTime === undefined || endDateTime === undefined) {
+        // this only happens when a date or time field is blank
+        // in which case we do not validate start/end. Knack validations
+        // will step in if these fields are required
+        continue;
+      }
+      if (startDateTime > endDateTime) {
+        passesValidation = false;
+        // highlight errored fields with red border
+        highlightErrorField(`#${viewKey}-${startField.key}`);
+        highlightErrorField(`#${viewKey}-${endField.key}`);
+
+        errorMsgs = `${errorMsgs}${formatErrorMessage(
+          startField,
+          endField
+        )}`;
+      }
+    }
+    if (!passesValidation) {
+              // show red error banner
+              appendErrorMessage(
+                viewKey,
+                formDiv,
+                errorMsgs
+              );
+    }
+    return passesValidation;
+  });
+});
+
+////////////////////////////////////////////
+/// End Technician Time Log Validation ///
+////////////////////////////////////////////
