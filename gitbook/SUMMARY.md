@@ -67,7 +67,6 @@
 * [Fix Broken CCTV Device Status Page Links](data-tracker/fix-broken-cctv-device-status-page-links.md)
 * [Performance Measures](data-tracker/performance-measures.md)
 * [Builder Notes](data-tracker/builder-notes/README.md)
-  * [Warehouse Inventory  - Updating Journal Vouchers \(JV\) information](data-tracker/builder-notes/warehouse-inventory-updating-journal-vouchers-jv-information.md)
   * [Data Tracker \| Annual Signal and PHB Request Ranking](data-tracker/builder-notes/data-tracker-or-annual-signal-and-phb-request-ranking.md)
   * [Page Rules \(TMC\) CSR](data-tracker/builder-notes/page-rules-tmc-csr.md)
   * [NOTIFICATION \| Construction Status Email](data-tracker/builder-notes/notification-or-construction-status-email.md)
@@ -78,6 +77,10 @@
   * [Signals Work Order \| EDIT FORMS](data-tracker/builder-notes/signals-work-order-or-edit-forms.md)
   * [Signals Work Order \| FORM LOCATIONS](data-tracker/builder-notes/signals-work-order-or-form-locations.md)
   * [Editing Signals Work Order \| NEW FORMS](data-tracker/builder-notes/untitled.md)
+
+---
+
+* [Warehouse Inventory  - Updating Journal Vouchers \(JV\) information](warehouse-inventory-updating-journal-vouchers-jv-information.md)
 
 ## Signs & Markings Operations <a id="signs-and-markings"></a>
 
