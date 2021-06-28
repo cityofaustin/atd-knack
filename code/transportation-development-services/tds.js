@@ -567,10 +567,21 @@ $(document).on("knack-view-render.view_321", function (event, page) {
 /**** TIA Menu Buttons Navigation ****/
 /*************************************/
 
-function dropdownMenuItem(recordId, route, iconName, linkName) {
+function dropdownMenuItem(recordId, route, iconName, linkName, newTab = false) {
+  if (newTab) {
+    return (
+      `<li class="kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
+          <span class="icon is-small"> \
+            <i class="fa ${iconName}" /> \
+          </span>\
+          <span>${linkName}</span>\
+        </a>\
+      </li>`)
+  }
   return (
     `<li class="kn-button">\
-      <a href="#tia-requests/tia-request-details/${recordId}/${route}/${recordId}">\
+      <a href="#tia-requests/tia-case-details/${recordId}/${route}/${recordId}">\
         <span class="icon is-small"> \
           <i class="fa ${iconName}" /> \
         </span>\
@@ -579,17 +590,19 @@ function dropdownMenuItem(recordId, route, iconName, linkName) {
     </li>`)
 }
 
+/* Case Details Page */
 $(document).on('knack-view-render.view_744', function(event, view, record) {
   var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
       <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#tia-requests/tia-request-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
           <span class="nav-dropdown-link">Case Management</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
           ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
           ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
           ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
@@ -597,14 +610,14 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
         </ul>\
       </li>\
       <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#tia-requests/tia-request-details/${recordId}/edit-tia-request-reviewer/${recordId}" data-kn-slug="#update-case-details">\
+        <a href="#tia-requests/tia-case-details/${recordId}/edit-tia-case-details/${recordId}" data-kn-slug="#update-case-details">\
           <span class="nav-dropdown-link">Update Case Details</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
         </a>\
         <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-          ${dropdownMenuItem(recordId, "edit-tia-request-reviewer", "fa-edit", "Edit Case Details")}\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes")}\
           ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
-          ${dropdownMenuItem(recordId, "change-tia-request-status-reviewer", "fa-retweet", "Change Request Status")}\
+          ${dropdownMenuItem(recordId, "change-tia-case-status", "fa-retweet", "Approve or Change Case Status")}\
           ${dropdownMenuItem(recordId, "connected-cases", "fa-link", "Connect Cases")}\
         </ul>\
       </li>\
@@ -614,6 +627,251 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
   </div>`).appendTo("#view_744")
 })
 
+/* Case Management Page */
+$(document).on('knack-view-render.view_887', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-advanced-search/" data-kn-slug="#advanced-search">\
+          <span class="nav-dropdown-link">Advanced Search</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "search-tia-submissions", "fa-search", "Search Submissions")}\
+          ${dropdownMenuItem(recordId, "search-tia-scopes", "fa-search", "Search Scopes")}\
+          ${dropdownMenuItem(recordId, "search-tia-submission-content", "fa-search", "Search Submission Content")}\
+          ${dropdownMenuItem(recordId, "search-tia-scope-content", "fa-search", "Search Scope Content")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "tia-submissions-reporting", "fa-bar-chart", "Submissions Reporting")}\
+      ${dropdownMenuItem(recordId, "review-tia-case-status", "fa-child", "Customer's View")}\
+    </ul>\
+  </div>`).appendTo("#view_887")
+})
+
+/* Mitigation Page */
+$(document).on('knack-view-render.view_886', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "edit-mitigation-fee-status", "fa-dollar", "Mitigation Fees")}\
+      ${dropdownMenuItem(recordId, "feature-map", "fa-road", "Segment & Intersection Map", true)}\
+      ${dropdownMenuItem(recordId, "tia-mitigation-reporting", "fa-bar-chart", "Mitigation Reporting")}\
+      ${dropdownMenuItem(recordId, "search-tia-mitigations", "fa-search", "Search Mitigations")}\
+    </ul>\
+  </div>`).appendTo("#view_886")
+})
+
+/* Feature Map Page */
+$(document).on('knack-view-render.view_926', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+    </ul>\
+  </div>`).appendTo("#view_926")
+})
+
+/* Memo Builder Page */
+$(document).on('knack-view-render.view_889', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "new-final-memo", "fa-plus-square", "New Final Memo")}\
+    </ul>\
+  </div>`).appendTo("#view_889")
+})
+
+/* Case Log Page */
+$(document).on('knack-view-render.view_893', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+    </ul>\
+  </div>`).appendTo("#view_893")
+})
+
+/* Scope Submission Details Page */
+$(document).on('knack-view-render.view_901', function(event, view, record) {
+  // regex: match the 24 digit record id that comes in hash part of url after "/"
+  const recordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0]
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "assign-scope-submission-reviewer", "fa-hand-o-up", "Assign Reviewer")}\
+      ${dropdownMenuItem(recordId, "begin-scope-submission-review", "fa-play-circle-o", "Begin Review")}\
+      ${dropdownMenuItem(recordId, "complete-scope-submission-review", "fa-exchange", "Reject/Approve")}\
+      ${dropdownMenuItem(recordId, "scope-submission-change-log", "fa-list-ol", "Submission Log")}\
+    </ul>\
+  </div>`).appendTo("#view_901")
+})
+
+/* Submission Details Page */
+$(document).on('knack-view-render.view_902', function(event, view, record) {
+  // regex: match the 24 digit record id that comes in hash part of url after "/"
+  const recordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0]
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder")}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer")}\
+      ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review")}\
+      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-exchange", "Reject/Approve")}\
+      ${dropdownMenuItem(recordId, "submission-change-log", "fa-list-ol", "Submission Log")}\
+    </ul>\
+  </div>`).appendTo("#view_902")
+})
+
+/***************************************************/
+/* Change or Hide Summary Row on Mitigation Tables */
+/***************************************************/
+
+function hideSummaryNameMitigationEditTable(view_id, replacementText) {
+  var $tableRowTotals = $(`#${view_id}`).find("tr.kn-table-totals")
+  $tableRowTotals.map(function (index) {
+    if (index !== $tableRowTotals.length-1) {
+      $(this).find("td:eq(5)").html(`<strong>${replacementText}</strong>`)
+    }
+  })
+}
+
+function hideSummaryNameMitigationExportTable(view_id, replacementText) {
+  var $tableRowTotals = $(`#${view_id}`).find("tr.kn-table-totals")
+  $tableRowTotals.map(function (index) {
+    if (index !== $tableRowTotals.length-1) {
+      $(this).find("td:eq(1)").html(`<strong>${replacementText}</strong>`)
+    }
+  })
+}
+
+function hideSummaryNameMitigationMemo(view_id, replacementText) {
+  var $tableRowTotals = $(`#${view_id}`).find("tr.kn-table-totals")
+  $tableRowTotals.map(function (index) {
+    if (index !== $tableRowTotals.length-1) {
+      // The tables on memos omit the edit column and notes column, the summary total cell is the first cell
+      $(this).find("td:eq(0)").html(`<strong>${replacementText}</strong>`)
+    }
+  })
+}
+
+// Change Summary Name for Mitigation Tables
+$(document).on('knack-scene-render.scene_290', (event) => {
+  // Waiting for scene to render instead of view
+  // View finishes rendering before table data is loaded
+  hideSummaryNameMitigationEditTable("view_854", "Location Total")
+  hideSummaryNameMitigationEditTable("view_857", "Location Total")
+})
+
+// Change Summary Name for Mitigation Tables
+$(document).on('knack-scene-render.scene_314', (event) => {
+  // Waiting for scene to render instead of view
+  // View finishes rendering before table data is loaded
+  hideSummaryNameMitigationExportTable("view_911", "Location Total")
+  hideSummaryNameMitigationExportTable("view_914", "Location Total")
+})
+
+// Change Summary Name for Mitigation Tables on Memos
+$(document).on('knack-scene-render.scene_255', (event) => {
+  // Waiting for scene to render instead of view
+  // View finishes rendering before table data is loaded
+  hideSummaryNameMitigationMemo("view_708", "Location Total")
+  hideSummaryNameMitigationMemo("view_709", "Location Total")
+})
 
 /***************************************************/
 /* Change or Hide Summary Row on Mitigation Tables */
