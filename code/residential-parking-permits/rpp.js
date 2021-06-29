@@ -133,39 +133,35 @@ $(document).on('knack-view-render.view_208', function(event, page) {
 /*****************************************/
 /*Convert all name, address, and license plate entries*/
 $(document).on("knack-page-render.any", function (event, page) {
-  $(".kn-input-name input").keyup(function () {
+  $(".kn-input-name input").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $(".kn-input-address input").keyup(function () {
+  $("input#field_232").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $("input#field_232").keyup(function () {
+  $("input#field_235").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $("input#field_235").keyup(function () {
+  $("input#field_237").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $("input#field_237").keyup(function () {
+  $("input#field_239").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $("input#field_239").keyup(function () {
+  $("input#field_397").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $("input#field_397").keyup(function () {
+  $("input#field_398").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 
-  $("input#field_398").keyup(function () {
-    this.value = this.value.toUpperCase();
-  });
-
-  $("input#field_595").keyup(function () {
+  $("input#field_595").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 });
