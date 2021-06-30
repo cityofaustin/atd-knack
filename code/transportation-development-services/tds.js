@@ -764,7 +764,8 @@ $(document).on('knack-view-render.view_893', function(event, view, record) {
 /* Scope Submission Details Page */
 $(document).on('knack-view-render.view_901', function(event, view, record) {
   // regex: match the 24 digit record id that comes in hash part of url after "/"
-  const recordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0]
+  const parentRecordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0];
+  const recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -792,7 +793,8 @@ $(document).on('knack-view-render.view_901', function(event, view, record) {
 /* Submission Details Page */
 $(document).on('knack-view-render.view_902', function(event, view, record) {
   // regex: match the 24 digit record id that comes in hash part of url after "/"
-  const recordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0]
+  const parentRecordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0]
+  const recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
