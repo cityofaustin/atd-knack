@@ -151,6 +151,7 @@
 ## Parking Enterprise Portal <a id="parking-enterprise"></a>
 
 * [Application Overview](parking-enterprise/application-overview.md)
+* [Dispatch Resource Tracking Log Archiving](parking-enterprise/dispatch-resource-tracking-log-archiving.md)
 
 ## HR \| Human Resources <a id="human-resources"></a>
 
