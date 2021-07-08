@@ -30,6 +30,8 @@ We have a template to use in the atd-data-tech repo
 
 Use the `<current month>` to name the issue, for example January 2020 for the November 1st 2019 date referenced below.
 
+![](../.gitbook/assets/image%20%28178%29.png)
+
 ![](../.gitbook/assets/image%20%28177%29.png)
 
 
