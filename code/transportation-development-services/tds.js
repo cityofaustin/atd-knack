@@ -567,7 +567,7 @@ $(document).on("knack-view-render.view_321", function (event, page) {
 /**** TIA Menu Buttons Navigation ****/
 /*************************************/
 
-function dropdownMenuItem(recordId, route, iconName, linkName, newTab = false, mobile=false) {
+function dropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
   const buttonClass = mobile ? "tia-button" : "kn-button";
   if (newTab) {
     return (
@@ -644,11 +644,11 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
           Case Management Menu\
         </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
-          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", false, true)}\
-          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions", false, true)}\
-          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", false, true)}\
-          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder", false, true)}\
-          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log", false, true)}\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", true)}\
+          ${dropdownMenuItem(recordId, "memo-builder", "fa-medium", "Memo Builder", true)}\
+          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log", true)}\
         </ul>\
       </li>\
       <li class="tia-mobile-dropdown-menu">\
@@ -657,14 +657,14 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
           Update Case Details Menu\
         </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
-          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes", false, true)}\
-          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers", false, true)}\
-          ${dropdownMenuItem(recordId, "change-tia-case-status", "fa-retweet", "Approve or Change Case Status", false, true)}\
-          ${dropdownMenuItem(recordId, "connected-cases", "fa-link", "Connect Cases", false, true)}\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes", true)}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers", true)}\
+          ${dropdownMenuItem(recordId, "change-tia-case-status", "fa-retweet", "Approve or Change Case Status", true)}\
+          ${dropdownMenuItem(recordId, "connected-cases", "fa-link", "Connect Cases", true)}\
         </ul>\
       </li>\
-      ${dropdownMenuItem(recordId, "edit-tia-fee-status-reviewer", "fa-dollar", "Fees", false, true)}\
-      ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication", false, true)}\
+      ${dropdownMenuItem(recordId, "edit-tia-fee-status-reviewer", "fa-dollar", "Fees", true)}\
+      ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication", true)}\
     </ul>\
   </div>`).appendTo("#view_744")
 })
@@ -726,7 +726,7 @@ $(document).on('knack-view-render.view_886', function(event, view, record) {
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "edit-mitigation-fee-status", "fa-dollar", "Mitigation Fees")}\
-      ${dropdownMenuItem(recordId, "feature-map", "fa-road", "Segment & Intersection Map", true)}\
+      ${dropdownMenuItem(recordId, "feature-map", "fa-road", "Segment & Intersection Map", false, true)}\
       ${dropdownMenuItem(recordId, "tia-mitigation-reporting", "fa-bar-chart", "Mitigation Reporting")}\
       ${dropdownMenuItem(recordId, "search-tia-mitigations", "fa-search", "Search Mitigations")}\
     </ul>\
