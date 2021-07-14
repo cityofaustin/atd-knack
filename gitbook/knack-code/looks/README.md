@@ -15,7 +15,8 @@ description: >-
 * [Hyperlink a Form Field Label](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/hyperlink-form-field-label)
 * [Remove Table Headers](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/remove-table-header)
 * [Modify Table Summary Rows](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/modify-table-summary-row)
-* [Convert Values to UPPERCASE](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/convert-values-to-uppercase)
+* [Convert Values to UPPERCASE \(Option A\)](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/convert-values-to-uppercase-a)
+* [Convert Values to UPPERCASE \(Option B\)](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/convert-values-to-uppercase-b)
 * [Highlight Details View Label Body & Table Value](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/highlight-label-body)
 * [Report Headers](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-headers)
 * [Report Filters Container Size](https://atd-dts.gitbook.io/atd-knack-operations/knack-code/looks/report-filter-container)
@@ -27,23 +28,270 @@ description: >-
 
 ### Active in these Applications
 
-| Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Modal Close Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Relabel Attachment Links | Yes | Yes |  | Yes | Yes | No |  |  |  |  |  |  |
-| Dropdown Menu Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Trigger Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Hyperlink Form Field Label | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Remove Table Header | No | No |  |  |  | No |  |  |  |  |  |  |
-| Modify Table Summary Row | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Convert Values to UPPERCASE | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Highlight Label Body | No | No | Yes | Yes |  | No |  |  | Yes | Yes |  |  |
-| Highlight Table Value | No | No | Yes | Yes |  | No |  |  | Yes | Yes |  |  |
-| Report Headers | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Report Filters Container Size | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Report Element Colors | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| HighCharts Report Styling | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Font Awesome Icons | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Code</th>
+      <th style="text-align:left">TDS</th>
+      <th style="text-align:left">RPP</th>
+      <th style="text-align:left">Data Tracker</th>
+      <th style="text-align:left">Signs &amp; Markings</th>
+      <th style="text-align:left">Banners</th>
+      <th style="text-align:left">ROW</th>
+      <th style="text-align:left">DTS</th>
+      <th style="text-align:left">HR</th>
+      <th style="text-align:left">Finance</th>
+      <th style="text-align:left">Parking Enterprise</th>
+      <th style="text-align:left">VZA</th>
+      <th style="text-align:left">SMO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">Modal Close Styling</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Relabel Attachment Links</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Dropdown Menu Buttons</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Trigger Buttons</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Hyperlink Form Field Label</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Remove Table Header</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Modify Table Summary Row</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Convert Values to UPPERCASE Option A</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p>Convert Values to UPPERCASE</p>
+        <p>Option B</p>
+      </td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Highlight Label Body</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Highlight Table Value</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Report Headers</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Report Filters Container Size</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Report Element Colors</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">HighCharts Report Styling</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">Font Awesome Icons</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+  </tbody>
+</table>
 
 
 
