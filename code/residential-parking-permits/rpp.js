@@ -131,41 +131,38 @@ $(document).on('knack-view-render.view_208', function(event, page) {
 /*****************************************/
 /*** Convert Field/Inputs to UpperCase ***/
 /*****************************************/
-/*Convert all name, address, and license plate entries*/
+/*Convert all name and license plate entries*/
 $(document).on("knack-page-render.any", function (event, page) {
-  $(".kn-input-name input").keyup(function () {
+//Name Field
+  $(".kn-input-name input").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $(".kn-input-address input").keyup(function () {
+//License Plate 1
+  $("input#field_232").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $("input#field_232").keyup(function () {
+//License Plate 2
+  $("input#field_235").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $("input#field_235").keyup(function () {
+//License Plate 3
+  $("input#field_237").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $("input#field_237").keyup(function () {
+//License Plate 4
+  $("input#field_239").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $("input#field_239").keyup(function () {
+//License Plate 5
+  $("input#field_397").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $("input#field_397").keyup(function () {
+//License Plate 6
+  $("input#field_398").focusout(function () {
     this.value = this.value.toUpperCase();
   });
-
-  $("input#field_398").keyup(function () {
-    this.value = this.value.toUpperCase();
-  });
-
-  $("input#field_595").keyup(function () {
+//Electronic Signature
+  $("input#field_595").focusout(function () {
     this.value = this.value.toUpperCase();
   });
 });
