@@ -773,10 +773,11 @@ a.form-link:hover {text-decoration:underline;}
   color: #163f6e;
   line-height: 32px;
   text-decoration: none;
+  display: block;
 }
 
 .tia-button .icon {
-  line-height: 28px;
+  vertical-align: baseline;
 }
 
 /**********************************/
