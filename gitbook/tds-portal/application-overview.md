@@ -10,6 +10,7 @@ This application allows TDS staff to manage Development Reviews, Traffic Impact 
 * Case Management
 * Account Management
 * Public Application Process
+* Announcements
 * Advanced Search
   * Cases
   * Submissions
