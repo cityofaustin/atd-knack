@@ -118,13 +118,14 @@
 ## TDS \| Transportation Development Services <a id="tds-portal"></a>
 
 * [Application Overview](tds-portal/application-overview.md)
-* [Transportation Development Services Division](tds-portal/transportation-development-services-division.md)
-* [TIA Module](tds-portal/tia-module.md)
+* [DR \| Development Reviews](tds-portal/transportation-development-services-division.md)
+* [TIA \| Traffic Impact Analysis](tds-portal/tia-module.md)
+* [TDA \| Transportation Development Assessments](tds-portal/tda-or-transportation-development-assessments.md)
 
 ## RPP \| Residential Parking Permit Portal <a id="rpp-portal"></a>
 
 * [Application Overview](rpp-portal/application-overview.md)
-* [Application Background](rpp-portal/application-background.md)
+* [Residential Parking Permits](rpp-portal/application-background.md)
 * [RPP Migration](rpp-portal/rpp-migration.md)
 
 ## ROW \| Right of Way Portal <a id="row-portal"></a>
