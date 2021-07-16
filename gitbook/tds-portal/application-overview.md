@@ -2,7 +2,7 @@
 
 ### About the Application
 
-This application allows TDS staff to manage Development Reviews, Traffic Impact Analysis Reviews, and Development Assessments.
+This application allows TDS staff to manage Development Reviews, Traffic Impact Analysis Reviews \(TIA\), and Development Assessments \(TDA\).
 
 ### Key Features / Table of Contents
 
