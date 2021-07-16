@@ -771,7 +771,6 @@ a.form-link:hover {text-decoration:underline;}
 .tia-button a {
   padding: .5em;
   color: #163f6e;
-  line-height: 32px;
   text-decoration: none;
   display: block;
 }
