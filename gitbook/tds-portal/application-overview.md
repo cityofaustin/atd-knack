@@ -9,6 +9,7 @@ This application allows TDS staff to manage Development Reviews, Traffic Impact 
 * Reviewer Dashboard
 * Case Management
 * Account Management
+* Public Application Process
 * Advanced Search
   * Cases
   * Submissions
@@ -17,10 +18,11 @@ This application allows TDS staff to manage Development Reviews, Traffic Impact 
 * Customer Portal
   * Create & Review Submissions
 * Assign Reviewers
-* Connect Map Segment ID's
+* Connect Map Segments & Intersections
 * Connect Cases
-* Memo Builder
-* Case Reporting
+* Reviewer Communication
+* Memo Data
+* Case, Submission, & Mitigation Reporting
 * Case Log
 * Help Menu
 
