@@ -118,20 +118,20 @@
 ## TDS \| Transportation Development Services <a id="tds-portal"></a>
 
 * [Application Overview](tds-portal/application-overview.md)
-* [DR \| Development Reviews](tds-portal/transportation-development-services-division.md)
-* [TIA \| Traffic Impact Analysis](tds-portal/tia-module.md)
-* [TDA \| Transportation Development Assessments](tds-portal/tda-or-transportation-development-assessments.md)
+* [DR \| Development Reviews](tds-portal/dr-build.md)
+* [TIA \| Traffic Impact Analysis](tds-portal/tia-build.md)
+* [TDA \| Transportation Development Assessments](tds-portal/tda-build.md)
 
 ## RPP \| Residential Parking Permit Portal <a id="rpp-portal"></a>
 
 * [Application Overview](rpp-portal/application-overview.md)
-* [Residential Parking Permits](rpp-portal/application-background.md)
+* [Residential Parking Permits](rpp-portal/rpp-build.md)
 * [RPP Migration](rpp-portal/rpp-migration.md)
 
 ## ROW \| Right of Way Portal <a id="row-portal"></a>
 
 * [Application Overview](row-portal/application-overview.md)
-* [TCP Tracking](row-portal/tcp-tracking.md)
+* [TCP \| Traffic Control Plans](row-portal/tcp-build.md)
 
 ## SMO \| Shared Mobility Operations <a id="shared-mobility-operations"></a>
 
