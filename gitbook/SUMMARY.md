@@ -131,7 +131,6 @@
 
 * [Application Overview](row-portal/application-overview.md)
 * [TCP Tracking](row-portal/tcp-tracking.md)
-* [Migration Best Practices](row-portal/migration-best-practices.md)
 
 ## SMO \| Shared Mobility Operations <a id="shared-mobility-operations"></a>
 
