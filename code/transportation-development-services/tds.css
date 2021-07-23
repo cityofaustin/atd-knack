@@ -668,17 +668,6 @@ a.form-link:hover {text-decoration:underline;}
   }
 }
 
-/******************************************/
-/*** Custom TIA Menu Buttons Navigation ***/
-/******************************************/
-
-/* hide custom menu if on mobile */
-@media (max-width: 799px) {
-  #tia-menu-list {
-    display: none;
-  }
-}
-
 /* hide knack menu buttons if on desktop */
 @media (min-width: 799px) {
   #view_163 {
@@ -712,6 +701,82 @@ a.form-link:hover {text-decoration:underline;}
 
 .tia-dropdown-menu-list li:hover {
   background-color: rgb(235,235,235);
+}
+
+/*
+  Styling for TIA dropdown menu on mobile
+*/
+@media (min-width: 799px) {
+  .mobile-details-dropdown-menu {
+    display: none;
+  }
+}
+
+.mobile-details-dropdown-menu ul {
+  margin-left: .25em;
+}
+
+#tia-mobile-menu-list {
+  list-style-type: none;
+  margin: 0;
+} 
+
+#tia-mobile-menu-list ul {
+  list-style-type: none;
+}
+
+.tia-mobile-dropdown-menu span {
+  margin-top: .25em;
+}
+
+.mobile-dropdown-button {
+  display: flex;
+}
+
+.mobile-dropdown-button i {
+  display: none;
+}
+
+.mobile-dropdown-button.show-icon i {
+  display: inherit;
+  width: 16px;
+}
+
+.mobile-dropdown-button:not(.show-icon)::before {
+  content: "\203A";
+  font-size: 18px;
+  font-weight: 800;
+  width: 16px;
+  line-height: 16px;
+}
+
+.tia-dropdown-menu-list {
+  margin-top: 1em;
+  display: none;
+}
+
+.tia-dropdown-menu-list.active {
+  display: inherit;
+}
+
+.tia-button {
+  background-color: rgba(0,0,0,.08);
+  color: #163f6e;
+  font-size: 1.1em;
+  padding: .4em .8em;
+  height: 32px;
+  border-radius: .35em
+}
+
+.tia-button a {
+  padding: .5em;
+  color: #163f6e;
+  text-decoration: none;
+  display: block;
+}
+
+.tia-button .icon {
+  vertical-align: baseline;
 }
 
 /**********************************/
