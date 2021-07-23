@@ -28,6 +28,10 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 Ex. `Assignment Date Time` is after 07/5/2021 and `Assignment Date Time` is before 07/11/2021 
 
+{% hint style="warning" %}
+Make sure to filter so that Sundays are also accounted for!! :\)
+{% endhint %}
+
 ![](../.gitbook/assets/image%20%28192%29.png)
 
 4 \) Export records to CSV., Save on Network Drive `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Schedules\Assignments`
