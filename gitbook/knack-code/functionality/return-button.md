@@ -4,9 +4,7 @@ description: How to create a Return Button with a Rich Text view
 
 # Return to Previous Page Button
 
-![With disabled navigation, we provide a top of page return button for users](../../.gitbook/assets/image%20%2859%29.png)
-
-![Return button allows user to escape a lengthy edit page without having to scroll to the bottom](../../.gitbook/assets/image%20%2858%29.png)
+![With disabled navigation, we provide a top of page return button for users](../../.gitbook/assets/image%20%28200%29.png)
 
 There are instances where Knack's built in back link at the bottom of every page detract from the page experience or do not provide enough functionality. We create these return buttons to solve a couple problems; when a page's content is too long making it so the back link is too far from the top navigation resulting in more page scrolling, or when we disable top navigation to prevent a user from navigating to a specific page, but we still want the user to be able to navigate to their previous page. These previous pages tend to be major landing pages where important details or navigation are present, and therefore, easy access to these pages is important.
 
