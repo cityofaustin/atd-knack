@@ -14,12 +14,12 @@ We define the stylings below so they mimic the look of Knack menu buttons
 
 ```text
 /***************************************/
-/******** Block/Trigger Buttons ********/
+/*********** Trigger Buttons ***********/
 /***************************************/
-.block-container-kn {
+.trigger-button {
   border-style: solid;
   border-width: 1px;
-  border-color: #ebebeb;
+  border-color: #dddddd;
   border-radius: 4px;
   box-shadow: 0px 0px 0px 0px gray;
   background-color: #ebebeb;
@@ -30,7 +30,7 @@ We define the stylings below so they mimic the look of Knack menu buttons
   display: inline-block;
 }
 
-.block-container-kn:hover {
+.trigger-button:hover {
   cursor: pointer;
   opacity: 0.9;
   border-color: gray;
@@ -42,7 +42,7 @@ We define the stylings below so they mimic the look of Knack menu buttons
 We call the button class we have above, include an fa icon, and set the button label
 
 ```text
-<button class="block-container-kn"><i class="fa fa-plus-square"></i> New Record</button>
+<button class="trigger-button"><i class="fa fa-plus-square"></i> New Record</button>
 ```
 
 ### How to Implement
@@ -52,10 +52,10 @@ We call the button class we have above, include an fa icon, and set the button l
 Copy pasta the CSS. This styling will apply to all trigger buttons where you apply the html
 
 ```text
-.block-container-kn {
+.trigger-button {
   border-style: solid;
   border-width: 1px;
-  border-color: #ebebeb;
+  border-color: #dddddd;
   border-radius: 4px;
   box-shadow: 0px 0px 0px 0px gray;
   background-color: #ebebeb;
@@ -66,7 +66,7 @@ Copy pasta the CSS. This styling will apply to all trigger buttons where you app
   display: inline-block;
 }
 
-.block-container-kn:hover {
+.trigger-button:hover {
   cursor: pointer;
   opacity: 0.9;
   border-color: gray;
@@ -82,7 +82,7 @@ Select the Trigger you want to update with html
 Use a `<button>` tag to set the button class
 
 ```text
-<button class="block-container-kn">
+<button class="trigger-button">
 ```
 {% endtab %}
 
