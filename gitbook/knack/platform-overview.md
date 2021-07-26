@@ -108,15 +108,20 @@ See [here](https://github.com/cityofaustin/transportation-data-tech/wiki/Knack-%
 
 ### Current Supported Applications
 
-* Austin Transportation Data Tracker
+* AMD Data Tracker
 * ATD Visitor Sign-In
 * ATD Forms
-* Data and Technology Services Portal
-* Finance and Purchasing System
-* ROW Portal
-* Parking Enterprise Reporting Portal
-* Street Banners Program Portal
-* Signs and Markings Data Tracker
+* DTS \| Data and Technology Services Portal
+* Finance and Purchasing
+* HR \| Human Resources
+* RPP \| Residential Parking Permits Portal
+* ROW \| Right of Way Portal
+* Parking Enterprise Portal
+* SMO \| Shared Mobility Operations
+* Street Banners Portal
+* Signs and Markings
+* TDS \| Transportation Development Services
+* VZA \| Vision Zero in Action
 
 ### Knack Change Log
 
