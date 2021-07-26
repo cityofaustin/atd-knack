@@ -4,7 +4,7 @@ description: How to disable trigger buttons
 
 # Disable Trigger Buttons
 
-![Disabling a Submission Button](../../.gitbook/assets/image%20%2847%29%20%281%29.png)
+![Disabling a Submission Button](../../.gitbook/assets/image%20%28201%29.png)
 
 
 
