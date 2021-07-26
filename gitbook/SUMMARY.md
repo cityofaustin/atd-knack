@@ -119,7 +119,7 @@
 ## TDS \| Transportation Development Services <a id="tds-portal"></a>
 
 * [Application Overview](tds-portal/application-overview.md)
-* [Status Palette](tds-portal/status-palette.md)
+* [Color Palette](tds-portal/status-palette.md)
 * [DR \| Development Reviews](tds-portal/dr-build.md)
 * [TIA \| Traffic Impact Analysis](tds-portal/tia-build.md)
 * [TDA \| Transportation Development Assessments](tds-portal/tda-build.md)
