@@ -115,9 +115,9 @@ Add a parent object form view to the page that will only show the Knack Record I
 {% endtab %}
 
 {% tab title="4️⃣" %}
-Establish a form submit page or multi-page application where the parent object is created if there is not one already. For example, in the TDS TIA Module there is a parent object multi-page application. The TIA Requester Information is the first page in this application where the parent object is created. This is the form view that will save the Knack Record ID.
+Establish a form submit page or multi-page application where the parent object is created if there is not one already. For example, in the TDS TIA Module there is a parent object multi-page application. The TIA Applicant Information is the first page in this application where the parent object is created. This is the form view that will save the Knack Record ID.
 
-![](../../.gitbook/assets/image%20%28128%29.png)
+![](../../.gitbook/assets/image%20%28200%29.png)
 {% endtab %}
 
 {% tab title="5️⃣" %}
