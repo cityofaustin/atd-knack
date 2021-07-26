@@ -76,7 +76,7 @@ At the top, there is a Link Text field where you will put the HTML to call the C
 We will customize this HTML with any FA icons, images, or text that we want to appear on the Trigger button. We call both of the CSS classes mentioned above.
 
 ```text
-<button class="block-container-disabled disabled"><i class="fa fa-plus-circle"></i><strong> New Submission</strong></button>
+<button class="trigger-button-disabled disabled"><i class="fa fa-plus-circle"></i><strong> New Submission</strong></button>
 ```
 
 For our other view, we simply do the same thing but use our regular enabled button classes. So that this view will only show the disabled button while the other will only show the enabled button. It is important they are separated for our last step.
