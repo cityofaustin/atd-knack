@@ -17,8 +17,8 @@ This allows us to disable the knack action link that makes these Knack trigger b
 /*** Disable Trigger buttons from being Clickable ***/
 /****************************************************/
 $(document).on('knack-scene-render.any', function(event, view) {
-  var $blockContainerButton = $(".block-container-disabled").parent();
-  $blockContainerButton.removeClass("kn-action-link");
+  var $disabledTriggerButton = $(".trigger-button-large-disabled").parent();
+  $disabledTriggerButton.removeClass("kn-action-link");
 })
 ```
 
@@ -26,15 +26,14 @@ $(document).on('knack-scene-render.any', function(event, view) {
 
 ### The CSS
 
-We create another block-container class here to give our disabled trigger buttons a different look from active block-container buttons. Notably, we set the border color and outline color to transparent so when a disabled button is selected, it does not bring attention to itself or shift content on the page by those few pixels. Additionally, we set the button to a lighter gray color and give it some opacity.
+We create another trigger-button class here to give our disabled trigger buttons a different look from active trigger buttons. Notably, we set the border color and outline color to transparent so when a disabled button is selected, it does not bring attention to itself or shift content on the page by those few pixels. Additionally, we set the button to a lighter gray color and give it some opacity.
 
 ```text
-.block-container-disabled {
-  width: 25%;
+.trigger-button-disabled {
   border-color: transparent;
   border-radius: 4px;
   background-color: #cbcbcb;
-  color: white;
+  color: #777777;
   padding: 10px 10px;
   font-size: 18px;
   text-align: center;
