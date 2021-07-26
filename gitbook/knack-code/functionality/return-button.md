@@ -25,8 +25,8 @@ var l=appviews.length;
 for (var x=0; x<l; x++) {
 
 if (appviews[x]==key) {
-	$('#'+appviews[x]).prepend("<button id='return-button'>Button Text</button>");
-	document.getElementById('return-button').addEventListener('click', function() {
+	$('#'+appviews[x]).prepend("<button id='previous-window-button'><i class='fa fa-arrow-left'/> Previous Window</button>");
+	document.getElementById('previous-window-button').addEventListener('click', function() {
       	window.history.back();
     });        
 
@@ -37,13 +37,26 @@ if (appviews[x]==key) {
 
 ### The CSS
 
-We mostly use Knack's built in styling for return buttons with a few exceptions. We call it by its specific ID Selector.
+We style the previous window buttons just like Knack buttons. We call it by its specific ID Selector.
 
 ```text
-#return-button {
+#previous-window-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
   padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+#previous-window-button:hover {
   cursor: pointer;
-  box-shadow: 0px 2px 4px 0px gray;
+  opacity: 0.9;
+  border-color: gray;
 }
 ```
 
@@ -70,7 +83,7 @@ appviews=["view_601","view_602","view_604","view_605"]
 Next, adjust the button text for the specified views
 
 ```text
-"<button id='return-button'>Button Text</button>"
+"<button id='previous-window-button'><i class='fa fa-arrow-left'/> Previous Window</button>"
 ```
 {% endtab %}
 
