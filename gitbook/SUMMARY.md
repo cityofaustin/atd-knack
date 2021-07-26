@@ -42,6 +42,7 @@
   * [Return to Top Button](knack-code/functionality/return-to-top-button.md)
   * [Refresh View Button](knack-code/functionality/refresh-view-button.md)
   * [Detect IE](knack-code/functionality/detect-ie.md)
+  * [Set Map iFrame Source URL](knack-code/functionality/map-src-url.md)
 * [CODE: Knack Look & Feel](knack-code/looks/README.md)
   * [Modal Close Styling](knack-code/looks/modal-close-styling.md)
   * [Relabel Attachment Links](knack-code/looks/relabel-attachment-links.md)
