@@ -69,7 +69,7 @@ Select Trigger an action and select the pencil to edit the field on the right
 {% tab title="3️⃣" %}
 At the top, there is a Link Text field where you will put the HTML to call the CSS Button class
 
-![](../../.gitbook/assets/image%20%2848%29.png)
+![](../../.gitbook/assets/image%20%28198%29.png)
 {% endtab %}
 
 {% tab title="4️⃣" %}
