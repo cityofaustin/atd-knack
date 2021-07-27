@@ -27,21 +27,24 @@ description: 'Statuses, Display Rules, and UI Design'
 | \#367db7 | ![](../.gitbook/assets/image%20%28235%29.png)  | App |  | Table Icon Trigger Button Border, Form Links |
 | \#f5901f | ![](../.gitbook/assets/image%20%28233%29.png)  | TIA | Needs Case Review |  |
 | \#f5901f | ![](../.gitbook/assets/image%20%28233%29.png)  | TIA | Submitted - Pending Review \(Reviewer\) |  |
+| \#74b3ff | ![](../.gitbook/assets/image%20%28212%29.png) | TIA | Pending Customer Action |  |
 | \#74b3ff | ![](../.gitbook/assets/image%20%28212%29.png)  | TIA | Submitted - Pending Review \(Customer\) |  |
 | \#74b3ff | ![](../.gitbook/assets/image%20%28212%29.png)  | TIA | Under Review \(Customer\) |  |
 | \#ffe09a | ![](../.gitbook/assets/image%20%28227%29.png)  | TIA | Under Creation - Not Yet Submitted \(Customer\) | Warning Message Fill |
 | \#ffe09a | ![](../.gitbook/assets/image%20%28227%29.png)  | TIA | Under Review \(Reviewer\) | Warning Message Fill |
+| \#ffe09a | ![](../.gitbook/assets/image%20%28227%29.png) | TIA | Pending Response Memo | Warning Message Fill |
+| \#ffe09a | ![](../.gitbook/assets/image%20%28227%29.png) | TIA | Pending Final Memo | Warning Message Fill |
 | \#caf4bc | ![](../.gitbook/assets/image%20%28222%29.png)  | TIA | Approved \(Reviewer\) | Confirmation Message Fill |
 | \#b0e3a9 | ![](../.gitbook/assets/image%20%28236%29.png)  | TIA | Approved \(Customer\) |  |
 | \#ffafaf | ![](../.gitbook/assets/image%20%28217%29.png)  | TIA | Revision Required | Red Alert Message Fill |
-|  |  | TIA | Inactive |  |
+| \#adadad | ![](../.gitbook/assets/image%20%28214%29.png) | TIA | Inactive |  |
 | \#ffe09a | ![](../.gitbook/assets/image%20%28227%29.png)  | TIA | Mitigation Fields are Blank | Warning Message Fill |
 | \#e41a1c | ![](../.gitbook/assets/image%20%28213%29.png)  | DR | Open |  |
 | \#67b36a | ![](../.gitbook/assets/image%20%28208%29.png)  | DR | Closed |  |
 | \#adadad | ![](../.gitbook/assets/image%20%28214%29.png)  | DR | On Hold |  |
-| \#e69900 | ![](../.gitbook/assets/image%20%28210%29.png)  | DR | North Review Area |  |
-| \#74b3ff | ![](../.gitbook/assets/image%20%28212%29.png)  | DR | Central Review Area |  |
-| \#6f6088 | ![](../.gitbook/assets/image%20%28205%29.png)  | DR | South Review Area |  |
+| \#e69900 | ![](../.gitbook/assets/image%20%28210%29.png)  | DR & TIA | North Review Area |  |
+| \#74b3ff | ![](../.gitbook/assets/image%20%28212%29.png)  | DR & TIA | Central Review Area |  |
+| \#6f6088 | ![](../.gitbook/assets/image%20%28205%29.png)  | DR & TIA | South Review Area |  |
 | \#adadad | ![](../.gitbook/assets/image%20%28214%29.png)  | DR | Due Date Normal |  |
 | \#ff9b9c | ![](../.gitbook/assets/image%20%28211%29.png)  | DR | Due Date Expiring |  |
 | \#ff9b9c | ![](../.gitbook/assets/image%20%28211%29.png)  | DR | Rejected |  |
