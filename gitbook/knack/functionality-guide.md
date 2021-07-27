@@ -25,7 +25,7 @@
 ### **Approval Workflow Process**
 
 * Reference \[Finance and Purchasing System\]
-* Reference \[Transportation Development Services\]
+* Reference TDS
 * Reference \[Signs and Markings Contractor Work Orders\]
 
 ### **Comment functionality**
@@ -33,7 +33,7 @@
 * Reference \[Signs and Markings Operations app\]
 * Reference: Finance and Purchasing
 * Reference: RPP
-* Reference: TDS Tracker
+* Reference: TDS
 
 ### **Copy table records onto table**
 

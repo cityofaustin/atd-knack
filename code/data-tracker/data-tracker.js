@@ -46,7 +46,6 @@ var colorMapOne = {
   "FINAL REVIEW": { background_color: "#4daf4a", color: "#fff" },
 };
 
-
 $(document).on("knack-view-render.view_2107", function (event, page) {
   //  replace attachment filename with attachment type
   //  find each attachment cell
@@ -102,7 +101,6 @@ $(document).on("knack-view-render.view_2108", function (event, page) {
   });
 });
 
-
 //  replace 'Quantity' label with UOM of measure by parsing the select value contents
 //  was unable to use the chosen.js native events because of however Knack has implemented them
 //  so listening for click which is a bit wonky
@@ -127,44 +125,6 @@ $(document).on("knack-scene-render.scene_716", function (event, page) {
     var element = $("#view_1929_field_2220_chzn")["0"];
     setUOM(element);
   });
-});
-
-function setRequester() {
-  //  function to set a requester field by an attribute value associated with the logged-in user
-
-  var divisionField = "field_2186";
-
-  var requesterSelectorId = "#view_1880-field_2162";
-
-  if (!Knack.getUserRoles("object_151")) {
-    //  ignore if user is supervisor role
-    var userAttrs = Knack.getUserAttributes();
-    var division = userAttrs.values[divisionField];
-    $(requesterSelectorId).val(division).change();
-    $(requesterSelectorId).prop("disabled", "true");
-  }
-}
-
-$(document).on("knack-view-render.view_1880", function (event, page) {
-  setRequester();
-});
-
-
-$(document).on("knack-scene-render.scene_1", function (event, page) {
-  // redirect to embedded homepage from unembedded homepage login
-  var url = window.location.href;
-
-  if (url.indexOf("knack.com") >= 0) {
-    // window.location.replace('http://transportation.austintexas.io/data-tracker');
-  }
-});
-
-// remove empty "select..." choices from advanced signal search
-$(document).on("knack-view-render.view_1169", function (event, page) {
-  // id*="_moComments_"
-  // $("#kn_filter_7_field_1513_chzn_c_0").remove();
-  // $("#kn_filter_8_field_491_chzn_c_0").remove();
-  // $("#kn_filter_4_field_2437_chzn_c_0").remove();
 });
 
 //////////////////////////////////////////////////
@@ -526,97 +486,172 @@ function showHideElements(showSelector, hideSelector) {
 //// Begin Set Weighted Unit Cost ///////////////////////////
 /////////////////////////////////////////////////////////////
 $(document).on("knack-scene-render.scene_1171", function (event, page) {
-  function dollarsToNum(val) {
-    return parseFloat(val.replace("$", "").replaceAll(",", ""));
+  function appendErrorMessage(msg) {
+    var errorDiv = $(
+      '<div id="' +
+        page.key +
+        '-fail" class="kn-message is-error"><span class="kn-message-body"><p><strong>' +
+        msg +
+        "</strong></p></span></div>"
+    );
+    errorDiv.insertBefore($(".kn-submit")[0]);
   }
 
-  function getWeightedUnitCost(
-    quantityOnHand,
-    unitCost,
-    restockQuantity,
-    restockUnitCost
-  ) {
-    // returns new weighted unit cost based on old/new quantities/costs
-    weightedUnitCost =
-      (quantityOnHand * unitCost + restockQuantity * restockUnitCost) /
-      (quantityOnHand + restockQuantity);
-    return weightedUnitCost.toFixed(4);
+  function dollarsToNum(val) {
+    // Attempts to parse a float from a dollar string. Returns a float or NaN.
+    if (typeof val === "number") {
+      // if val is a number, return it
+      return val;
+    } else if (!typeof val === "string") {
+      // not a number or string, set it to NaN and let validation catch it
+      return NaN;
+    }
+    // we use Number here (and elsewhere) instead of parseFloat, because we don't want to tolerate any
+    // unexpected text in the value we're parsing. e.g. parseFloat("23abcd12") would return `23`
+    return Number(val.replace("$", "").replaceAll(",", "").trim());
+  }
+
+  function getWeightedUnitCost(state) {
+    var weightedUnitCost =
+      (state.quantity.current * state.cost.current +
+        state.quantity.restock * state.cost.restock) /
+      (state.quantity.current + state.quantity.restock);
+    return Number(weightedUnitCost.toFixed(4));
+  }
+
+  function handleWeightedUnitCostChange(state) {
+    var isValid = state.isValid();
+    if (!isValid && !state.errorIsShowing) {
+      // show error banner
+      appendErrorMessage(
+        "Unable to submit. Please verify that all fields are populated correctly."
+      );
+      // hide submit button
+      $(".kn-button").hide();
+      state.errorIsShowing = true;
+    } else if (isValid) {
+      // remove error banner
+      $("#" + page.key + "-fail").remove();
+      // show submit button
+      $(".kn-button").show();
+      state.errorIsShowing = false;
+    } else {
+      // leave existing error banner up
+      return;
+    }
+  }
+
+  function areInputsValid() {
+    // ensure that the user-input values are valid. the restock unit cost, quantity
+    // and, as a safegaurd, the calculated weighted unit cost, must be non-zero numbers
+    var valsToTest = [
+      this.cost.updated,
+      this.quantity.restock,
+      this.cost.restock,
+    ];
+    return valsToTest.every((val) => {
+      if (isNaN(val) || typeof val !== "number" || val === 0) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    return results;
   }
 
   var detailsView = "view_2865";
-  var unitCostField = "field_245";
-  var quantiyOnHandField = "field_3579"; // details
-  var previousUnitCostField = "field_3786"; // used to capture previous state on form submit
-  var previousOnHandQuantiyField = "field_3906"; // used to capture previous state on form submit
-  var restockQuantityField = "field_3785";
-  var restockUnitCostField = "field_3783";
-  var newUnitCostField = "field_245";
-  var restockQuantity = dollarsToNum($("#" + restockQuantityField).val());
-  var restockUnitCost = parseFloat($("#" + restockUnitCostField).val());
+
+  var fields = {
+    cost: {
+      current: "field_245",
+      previous: "field_3786",
+      restock: "field_3783",
+      updated: "field_245",
+    },
+    quantity: {
+      current: "field_3579",
+      previous: "field_3906",
+      restock: "field_3785",
+    },
+  };
+
+  var state = {
+    quantity: {
+      restock: null,
+      current: null,
+    },
+    cost: {
+      restock: null,
+      current: null,
+      updated: null,
+    },
+    isValid: areInputsValid,
+    errorIsShowing: false,
+  };
+
+  // clear out pre-existing values from these form fields. these fields are used to "translate"
+  // values to the related unit_cost_history records that are created by form rule on submission,
+  // there may be values in these fields from previous restocking
+  $("#" + fields.cost.restock).val("");
+  $("#" + fields.quantity.restock).val("");
+  $("#" + fields.cost.updated).val("");
 
   // prevent editing of new unit cost field. this will be set programmatically
-  $("#" + newUnitCostField).prop("disabled", true);
+  $("#" + fields.cost.updated).prop("disabled", true);
 
-  var quantityOnHand = parseInt(
+  state.quantity.current = parseInt(
     $(
       $("#" + detailsView)
-        .find("div.kn-detail." + quantiyOnHandField)
+        .find("div.kn-detail." + fields.quantity.current)
         .find(".kn-detail-body span")[0]
     ).text()
   );
 
   // handle situation where stock levels are negative (this should not but prob will happen)
-  quantityOnHand = quantityOnHand > 0 ? quantityOnHand : 0;
+  state.quantity.current =
+    state.quantity.current > 0 ? state.quantity.current : 0;
 
-  var unitCost = dollarsToNum(
+  state.cost.current = dollarsToNum(
     $(
       $("#" + detailsView)
-        .find("div.kn-detail." + unitCostField)
+        .find("div.kn-detail." + fields.cost.current)
         .find(".kn-detail-body span")[0]
     ).text()
   );
-
   /*
       set the value of the preivous unit cost and quanity. these fields are hidden to the 
       user and we pass these values via submit rule that inserts them into a log record
     */
-  $("#" + previousUnitCostField)
-    .val(unitCost)
+  $("#" + fields.cost.previous)
+    .val(state.cost.current)
     .prop("disabled", true);
 
-  $("#" + previousOnHandQuantiyField)
-    .val(quantityOnHand)
+  $("#" + fields.quantity.previous)
+    .val(state.quantity.current)
     .prop("disabled", true);
 
-  // clear out pre-existing values from these form fields. these fields are used to "translate"
-  // values to the related unit_cost_history records that are created by form rule on submission,
-  // there may be values in these fields from previous restocking
-  $("#" + restockUnitCostField).val("")
+  // we call handleWeightedUnitCostChange to initialize the error state and hide submit button
+  // until all fields are populated
+  handleWeightedUnitCostChange(state);
 
-  $("#" + restockQuantityField).val("")
-
-  $("#" + restockUnitCostField).on("input", function () {
-    restockUnitCost = parseFloat($(this).val());
-    var newUnitCost = getWeightedUnitCost(
-      quantityOnHand,
-      unitCost,
-      restockQuantity,
-      restockUnitCost
-    );
-    $("#" + newUnitCostField).val(newUnitCost);
+  $("#" + fields.cost.restock).on("input", function () {
+    state.cost.restock = dollarsToNum($(this).val());
+    state.cost.updated = getWeightedUnitCost(state);
+    $("#" + fields.cost.updated).val(state.cost.updated);
+    handleWeightedUnitCostChange(state);
   });
 
-  $("#" + restockQuantityField).on("input", function () {
-    restockQuantity = parseFloat($(this).val());
-    var newUnitCost = getWeightedUnitCost(
-      quantityOnHand,
-      unitCost,
-      restockQuantity,
-      restockUnitCost
-    );
-    $("#" + newUnitCostField).val(newUnitCost);
+  $("#" + fields.quantity.restock).on("input", function () {
+    state.quantity.restock = Number($(this).val());
+    state.cost.updated = getWeightedUnitCost(state);
+    $("#" + fields.cost.updated).val(state.cost.updated);
+    handleWeightedUnitCostChange(state);
   });
 });
+
+///////////////////////////////////////////////////////////
+//// End Set Weighted Unit Cost ///////////////////////////
+///////////////////////////////////////////////////////////
 
 // Add "Refresh" button to inventory requests table
 $(document).on("knack-view-render.view_2698", function (event, page) {
@@ -633,7 +668,6 @@ $(document).on("knack-view-render.view_2698", function (event, page) {
     Knack.views["view_2698"].model.fetch();
   });
 });
-
 
 //////////////////////////////////////////////////////
 // Disable editing of task order on work orders   ////
@@ -742,4 +776,136 @@ $(document).on("knack-scene-render.scene_634", function (event, scene) {
 
 ////////////////////////////////////////////
 ////// End Disable Task Order Editing //////
+////////////////////////////////////////////
+
+////////////////////////////////////////////
+/// Begin Technician Time Log Validation ///
+////////////////////////////////////////////
+
+
+function appendErrorMessage(viewKey, formDiv, msg) {
+  // remove existing error msg if present
+  var errorDiv = $(
+    '<div id="' +
+      viewKey +
+      '-fail" class="kn-message is-error"><span class="kn-message-body"><p><strong>' +
+      msg +
+      "</strong></p></span></div>"
+  );
+  errorDiv.insertBefore(formDiv);
+  setTimeout(function () {
+    $("#" + viewKey + "-fail").remove();
+  }, 6000);
+}
+
+function highlightErrorField(inputId) {
+  $(inputId).addClass("input-error");
+  $(inputId + "-time").addClass("input-error");
+
+  setTimeout(function () {
+    $(inputId).removeClass("input-error");
+    $(inputId + "-time").removeClass("input-error");
+  }, 6000);
+}
+
+function getDatetime(inputId) {
+  // Date-time field has two inputs, one for date, and one for time
+  var dt = $("#" + inputId).val();
+
+  if (!dt) return undefined;
+
+  var [hoursStr, minutesStr] = $("#" + inputId + "-time")
+    .val()
+    .split(":");
+
+  if (!(hoursStr && minutesStr)) {
+    // we'll do like knack does and handle an absent or un-parseable time as 0:00
+    hoursStr = "0";
+    minutesStr = "0";
+  }
+
+  var hours = parseInt(hoursStr);
+  var amPm = minutesStr.slice(-2).toLowerCase();
+
+  // extract 'am' or 'pm' if present
+  if (amPm !== "am" && amPm !== "pm") {
+    amPm = null;
+  } else {
+    // remove am/pm string from string so that we can parse it as an int
+    minutesStr = minutesStr.replace(amPm, "");
+  }
+
+  minutes = parseInt(minutesStr) || 0;
+
+  if (isNaN(hours) || isNaN(minutes)) {
+    return undefined;
+  }
+
+  // adjust hours for am/pm
+  if (amPm == "pm" && hours < 12) {
+    hours = hours + 12;
+  } else if (amPm == "am" && hours == 12) {
+    hours = 0;
+  }
+  return new Date(dt + " " + hours + ":" + minutes);
+}
+
+function formatErrorMessage(startField, endField) {
+  return `<u>${startField.name}</u> must be earlier than <u>${endField.name}</u><br/>`;
+}
+
+$(document).on("knack-view-render.view_1252", function (event, page) {
+  var viewKey = page.key;
+
+  // each date field must be ordred chronologically, earliest to latest
+  var dateFields = [
+    { key: "field_2020", name: "Issue Recevied" }, // issue received
+    { key: "field_1437", name: "Arrive at Worksite" }, // arrive on-site
+    { key: "field_1438", name: "Leave Work Site" }, // leave site
+    { key: "field_1425", name: "Return to Shop" }, // return to shop
+  ];
+
+  $(`#${viewKey} .kn-button`).on("click", function () {
+    var passesValidation = true;
+    var formDiv = $(this).closest("div")[0];
+    var errorMsgs = "";
+
+    for (var i = 1; i < 4; i++) {
+      var startField = dateFields[i - 1];
+      var endField = dateFields[i];
+      var startDateTime = getDatetime(`${viewKey}-${startField.key}`);
+      var endDateTime = getDatetime(`${viewKey}-${endField.key}`);
+
+      if (startDateTime === undefined || endDateTime === undefined) {
+        // this only happens when a date or time field is blank
+        // in which case we do not validate start/end. Knack validations
+        // will step in if these fields are required
+        continue;
+      }
+      if (startDateTime > endDateTime) {
+        passesValidation = false;
+        // highlight errored fields with red border
+        highlightErrorField(`#${viewKey}-${startField.key}`);
+        highlightErrorField(`#${viewKey}-${endField.key}`);
+
+        errorMsgs = `${errorMsgs}${formatErrorMessage(
+          startField,
+          endField
+        )}`;
+      }
+    }
+    if (!passesValidation) {
+              // show red error banner
+              appendErrorMessage(
+                viewKey,
+                formDiv,
+                errorMsgs
+              );
+    }
+    return passesValidation;
+  });
+});
+
+////////////////////////////////////////////
+/// End Technician Time Log Validation ///
 ////////////////////////////////////////////

@@ -16,95 +16,98 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 ## Process
 
-1 \) Open the Assignments object in Records View in the app
+1 \) Open the `Assignments` object in Records View in the app
 
-![](https://lh3.googleusercontent.com/ER-fwo6369NFuztrX94iomEAMloZqwcqs1-a_cHxUFQqQdBMcUdjUezIgKAKuAO0VFChM_LhnADyu6AkDs1RCw_3nfbs6AcEfE4bVQJ4K_BJxTISkEQekjtRQQ4d9d9EYhpxcb5Z)
+![](../.gitbook/assets/image%20%28185%29.png)
 
 2 \) Exports all records as CSV to create a backup.
 
-![](https://lh3.googleusercontent.com/Hp8zTk-c8ppMkvFCFrM_7oyFHinwxQ5274fe3TxDTwDLzGQ0MX3w6caMmaCs49dUag4lsNMbqpIMxFj0rTNmgXBYS5SRFMHgiSJfAWjehf7X8YfJWm_5z1khA9rW2aosm7iz4G7s)
+![](../.gitbook/assets/image%20%28181%29.png)
 
 3 \) Filter assignments for a week \(Monday through Sunday\) using the Assignment Date Time field.
 
-![](https://lh5.googleusercontent.com/rAFuGD_738wxqDo3qaJNk2Uo-Izp311hwChrrlgDsiaC4SEMRwtLNfFB1dOc2mn2d_Qh7tfsbdo1ohbHufRM9XAnVZVaBf2Kvoe5F8LMdpwtSxyEd761ca6tZrKWogmlm8zaazPt)
+Ex. `Assignment Date Time` is after 07/5/2021 and `Assignment Date Time` is before 07/11/2021 
 
-4 \) Export records to CSV.
+{% hint style="warning" %}
+Make sure to filter so that Sundays are also accounted for!! :\)
+{% endhint %}
 
-![](https://lh6.googleusercontent.com/tHdFWwyxY4ksdjmThRCfP4-KxUCcxmtelhBQ932su3j7cvMQzxE756BSVHL5a566_HogPt-bcPuSiCnwjNqTgZRjPaNyTe4BGgs6K9ehkUrm5uKeDVHumqS6lRF4Fn7uvKcMo27g)
+![](../.gitbook/assets/image%20%28195%29.png)
+
+4 \) Export records to CSV., Save on Network Drive `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Schedules\Assignments`
+
+![](../.gitbook/assets/image%20%28182%29.png)
 
 5 \) Open CSV in Excel
 
-6 \) Look for the highest Assignment ID in the Knack assignment object. 
+6 \) Add 1 fields to the left of `Assignment Date Time` column, enter formula: `=left(C2,10)`this will capture the date from the original field. Use the "Fill Down" function or drag the field to populate the rest of the records. 
 
-![](https://lh4.googleusercontent.com/NBmn1HHM8iIYZm2ixmbVx1U0DX6X2e6iYwuj3vB1DiRSx25BfGi5_Xc4eVSmUN3in4oYH3RSN71Y9aYudgtFfYXXNYDHoYXDBADMxHyTstmuZ2h2IrrldV7cn7oxODgs7NqdxHOg)
+![](../.gitbook/assets/image%20%28189%29.png)
 
-7 \) Number Assignment IDs in the CSV in a series starting from \(Highest Knack Assignment ID +1\).
+7 \) Add 1 field to the right of the "New date field", enter formula: `B2+28` this will create a new date for 28 days later. Use the "Fill Down" function or drag the field to populate the rest of the records. Copy and Paste records As Value. Delete the "New date field".
 
-![](https://lh4.googleusercontent.com/NHPUyEkpNK8B_7aQ7I7Mj0MaTLUmlhcxuKKCn7r8Dd5EuFwkb5_tOjyPOTb6-AG4eO49zunxHU0naKTr_BL6uJfr5Ek46XEpx690C59v_lEVi2VJehfn0ptvVDa-6WMr_ejnB5Nk)
+![](../.gitbook/assets/image%20%28191%29.png)
 
-![](https://lh5.googleusercontent.com/fqsDsHfNMW072OTG7z-zR0WVrv_VxgZFbb0RyAovT25zY0HMWVIZtl9A-jJNKJlTPsAtJ3NlBPT7qmmMhtr7Qf5NgIf2zK1vrWPrQSOyRsri5IOOpgZlJPpVIqFB9A5MmcXySjPo)
+8 \) Add 1 field to the right of "Date +28 days" column, enter formula: `=RIGHT(D2,14)` this will capture the time you need to have.
 
-8 \) Replace the dates in the Assignment Date Time field with dates for the next batch. 
+![](../.gitbook/assets/image%20%28187%29.png)
 
-![](https://lh3.googleusercontent.com/ngZC47DUYlYM7Jl4mpvP_ftTgqFXac-VpHmWbVCIH_5joowdcvDuj4E74cLMis4V8hmQ-GnQcIhiFgJCEH6k9zuvawXluQzZNtKTQvxzQdnBt4IBGUEF6EdsiEDUhK5MGdbAAmLi)
+9 \) Add 1 field to the right of the "Time" column, enter formula: `=concatenate(text(B2,"mm/dd/yyyy")&" "&text(C2,"hh:mm:ss"))`Use the "Fill Down" function or drag the field to populate the rest of the records. Copy and Paste records As Value. Delete the "Date+28 days" and "Time" columns.
 
-![](https://lh5.googleusercontent.com/Cyu35bieavPvYMBHiHCSEY1-GlEavbhYd3y0KivkZM5-RhbuGZKElKkT4sTZ9hUwXAiR6AE4l_U1c1NjowW_rRUVncMxOWR73CmXPQwkLDHJj2Dcktujxo1Fztpxjn_SLEJ3Ub5F)
+![](../.gitbook/assets/image%20%28196%29.png)
 
-9 \) Import the CSV for a week into the Assignments object by clicking on Import in the Assignments object Records view. 
+{% hint style="info" %}
+Look for shifts that are overnight shifts, see example below. These must be manually updated. Find and Replace is the best tool to use.
+{% endhint %}
 
-![](https://lh6.googleusercontent.com/FNwDOO_AOFOxnjn2yASkks6X6o62Mg5CPVxmDUn7C166fHV-8g7UzQmR6sTlTvAid_1bBeyNpHeNOqREiD-V-UJhCiNrzHwy2LRp6lksh7lET4U9gJmVr1TSyqq_umz0GrbL7rtU)
+![](../.gitbook/assets/image%20%28197%29.png)
+
+10 \) Delete the old "Assignment Date Time" cell records and Title the new column "Assignment Date Time". Deleted "Modified By", "Modified Date", "Shift Label". 
+
+
+
+11 \) Fill in "Created Date", copy same date for all records. Add your email to the "Created By" field. Then Save and Close .csv
+
+12 \) Import the CSV for a week into the Assignments object by clicking on Import in the Assignments object Records view. 
+
+![](../.gitbook/assets/image%20%28183%29.png)
 
 10 \) Click Upload CSV and navigate to the CSV you modified earlier.
 
-![](https://lh6.googleusercontent.com/Sm3p6wP-A-GWMWXeHuJKHNry3yRQTou8_uJU0rsWFY7xS9Zo6MFlQ3dOSnOiZiaZe3xPL5dw8m0xiOYrooL7XkJ2UDLZKxSCtyiDE5gpPnkPfhORS9tCGizQ8wt18N9J1klGoLjZ)
+![](../.gitbook/assets/image%20%28190%29.png)
 
 11 \) For _Does the CSV have a row at the top with a name for each column?_ Choose - Yes, the headers are on Row 1
 
-![](https://lh3.googleusercontent.com/LP6xYQ0lo0Gsug9o1MTC5gtWquvBCX-c0CvRLd3hWbASDDAld-IXiiSuD8-_yXo5g3YPzMAmkCu3l4_sYwOIstrKrNTfzWjKGHULJSyNISKB6rrA69UJU-nfXXJlKmWEqgfVrTf-)
+![](../.gitbook/assets/image%20%28184%29.png)
 
-12 \) For Select a field to match Records - Choose Assignment ID
+12 \) Do you want to update existing assignments records with this import? Choose - No, you want to each row as a new record
 
-![](https://lh3.googleusercontent.com/LP6xYQ0lo0Gsug9o1MTC5gtWquvBCX-c0CvRLd3hWbASDDAld-IXiiSuD8-_yXo5g3YPzMAmkCu3l4_sYwOIstrKrNTfzWjKGHULJSyNISKB6rrA69UJU-nfXXJlKmWEqgfVrTf-)
+![](../.gitbook/assets/image%20%28193%29.png)
 
-13 \) Click Next
+13 \) Confirm the field mapping of the columns. 
 
-14 \) The Assignment ID will be checked. 
+![](../.gitbook/assets/image%20%28186%29.png)
 
-![](https://lh5.googleusercontent.com/TnGriKInvoA0RofmGKumZGs3A56ylhmwVvhmvl4UKglPTFFdPLCnWjZIiOaQoQm4Y18V-fSS4RKcONKZvESB1nLzoMwXKH_fQcK-9gvWnuf1P01oMRFxLYmXNw2YSx1rT0-y7Ic7)
+14 \) Exclude all calculated fields - text formulas, equations and conditional fields. 
 
-15 \) Click Next
-
-![](https://lh6.googleusercontent.com/JEGBhgEdZklNmu5n3pLQ4d6gngBrjfK3EVc-2ifvFpXllGnwFkadfxYcNVtdd9NwimixcDcmKg0g0WD-K57zA0jBGX5Tb2EuPGC7KUnVHprePffGZZJ2EwE4m71n6T5yBnU9uy0M)
-
-![](https://lh3.googleusercontent.com/NK3m1Q3VYWbkthW3Smn5Mjp-TdmybH6Hl9PE2z8HpbIesWR81GNtX7niZrzt5zDYKIFhzpRnw1HQLr43iRUHNaeg-d1DnXPt1HgHitrVfoBl0A9YAAqYzAaLIPyg932Uzk6T7BG_)
-
-16 \) Exclude all calculated fields - text formulas, equations and conditional fields.
-
-17 \) Exclude Additional Information and Additional Information URL \(since this is field which needs an uploaded file\).
-
-18\) Here is a list of the fields that will need to be matched - 
+Here is a list of the fields that will need to be matched - 
 
 1. Assignment Date and Time
-2. Assignment Number
-3. Shift
-4. Team Number
+2. Team Number
+3. Assignment Type
+4. Shift
 5. Vision Zero Location - Vision Zero Location &lt;Display Name
-6. APD Sector 1 - Vision Zero Location &lt; APD Sector
-7. Location Type 1 - Vision Zero Location &lt; Location Type
-8. Council District - Vision Zero Location &lt; Council District
-9. Zip Code - Vision Zero Location &lt; Zip
+6. Assignment Number
+7. Description
+8. No of Officers Required
 
-19 \) Click Next
+15 \) Go down to "**Created By**" and choose "**Email**"
 
-20 \) Fill out Field Defaults for Created By and Created Date. 
+![](../.gitbook/assets/image%20%28188%29.png)
 
-1. Created Date - Today
-2. Assignment Type - Vision Zero
-3. Created By - your name
+19 \) Click **Next**. The records will be imported into the object. 
 
-21 \) Click Next. The records will be imported into the object. 
-
-![](https://lh4.googleusercontent.com/l2FdRI9Is9AawPsUDqVJphIOSKARG4f-pzqDuzOL_27bdTQKjzhcrPZmMuZ93u-2rThkFndnS_D7kw11ijyil1Irh5lYU0f6Bbmcm-FXHifWRzzhvLbrTGZU_3wQ14BcjW8fLZH9)
+![](../.gitbook/assets/image%20%28180%29.png)
 
 22 \) Confirm the records have been imported by checking Assignment IDs and the Calendar. 
 
