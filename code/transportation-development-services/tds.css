@@ -240,117 +240,117 @@ a.ang-link:link {text-decoration: none;}
 /****** Style Back Links as Buttons ******/
 /*****************************************/
 /*Area Case Load Page*/
-#kn-scene_273 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_273 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_273 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Reviewer Case Load Page*/
-#kn-scene_271 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_271 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_271 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Case Details Page*/
-#kn-scene_49 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_49 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_49 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Mitigations Page*/
-#kn-scene_290 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_290 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_290 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Mitigation Segment & Intersections Feature Map Page*/
-#kn-scene_294 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_294 .kn-back-link{ padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_294 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Case Log Page*/
-#kn-scene_196 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_196 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_196 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Case Management Page*/
-#kn-scene_186 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_186 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_186 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Submission Details Page*/
-#kn-scene_187 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_187 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_187 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Scope Submission Details Page*/
-#kn-scene_234 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_234 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_234 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Customer Submission Details Page*/
-#kn-scene_194 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_194 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_194 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Customer Scope Submission Details Page*/
-#kn-scene_214 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_214 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_214 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Memo Details Page*/
-#kn-scene_248 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_248 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_248 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Memo Data Page*/
-#kn-scene_320 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_320 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_320 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Mitigations Reporting Page*/
-#kn-scene_268 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_268 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_268 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Submissions Reporting Page*/
-#kn-scene_284 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_284 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_284 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Cases Search Page*/
-#kn-scene_301 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_301 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_301 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Mitigations Search Page*/
-#kn-scene_302 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_302 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_302 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Submissions Search Page*/
-#kn-scene_303 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_303 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_303 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Scope Submissions Search Page*/
-#kn-scene_304 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_304 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_304 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Submission Content Search Page*/
-#kn-scene_305 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_305 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_305 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Scope Submission Content Search Page*/
-#kn-scene_306 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_306 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_306 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Communication Search Page*/
-#kn-scene_308 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_308 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_308 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Case Logs Search Page*/
-#kn-scene_307 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #ebebeb; border-radius: 4px; 
+#kn-scene_307 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; display: inline-block; }
 #kn-scene_307 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
@@ -593,82 +593,6 @@ a.ang-link:link {text-decoration: none;}
 
 .tia-button a {
   padding: 0.5em;
-  color: #163f6e;
-  text-decoration: none;
-  display: block;
-}
-
-.tia-button .icon {
-  vertical-align: baseline;
-}
-
-/*
-  Styling for TIA dropdown menu on mobile
-*/
-@media (min-width: 799px) {
-  .mobile-details-dropdown-menu {
-    display: none;
-  }
-}
-
-.mobile-details-dropdown-menu ul {
-  margin-left: .25em;
-}
-
-#tia-mobile-menu-list {
-  list-style-type: none;
-  margin: 0;
-} 
-
-#tia-mobile-menu-list ul {
-  list-style-type: none;
-}
-
-.tia-mobile-dropdown-menu span {
-  margin-top: .25em;
-}
-
-.mobile-dropdown-button {
-  display: flex;
-}
-
-.mobile-dropdown-button i {
-  display: none;
-}
-
-.mobile-dropdown-button.show-icon i {
-  display: inherit;
-  width: 16px;
-}
-
-.mobile-dropdown-button:not(.show-icon)::before {
-  content: "\203A";
-  font-size: 18px;
-  font-weight: 800;
-  width: 16px;
-  line-height: 16px;
-}
-
-.tia-dropdown-menu-list {
-  margin-top: 1em;
-  display: none;
-}
-
-.tia-dropdown-menu-list.active {
-  display: inherit;
-}
-
-.tia-button {
-  background-color: rgba(0,0,0,.08);
-  color: #163f6e;
-  font-size: 1.1em;
-  padding: .4em .8em;
-  height: 32px;
-  border-radius: .35em
-}
-
-.tia-button a {
-  padding: .5em;
   color: #163f6e;
   text-decoration: none;
   display: block;
