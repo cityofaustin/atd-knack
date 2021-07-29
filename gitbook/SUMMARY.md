@@ -121,6 +121,7 @@
 * [Application Overview](tds-portal/application-overview.md)
 * [Color Palette](tds-portal/status-palette.md)
 * [Role Permissions Guide](tds-portal/permissions.md)
+* [App Logic](tds-portal/app-logic.md)
 * [Incrementing Review Cycle Automatically](tds-portal/review-cycle-automation.md)
 * [Calculating Review Time](tds-portal/review-time-automation.md)
 * [Extracting Location Coordinates to add Map Markers](tds-portal/coordinates-to-markers.md)
