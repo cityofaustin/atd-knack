@@ -16,9 +16,9 @@ description: How specific roles interact with the app and what they have access 
 
 ### Account Management
 
-![](../.gitbook/assets/image%20%28237%29.png)
+![](../.gitbook/assets/image%20%28238%29.png)
 
-![Only Admin and PM&apos;s have access to the Account Management page](../.gitbook/assets/image%20%28258%29.png)
+![Only Admin and PM&apos;s have access to the Account Management page](../.gitbook/assets/image%20%28259%29.png)
 
 ![](../.gitbook/assets/image%20%28212%29.png)
 
@@ -34,25 +34,25 @@ description: How specific roles interact with the app and what they have access 
 
 ![](../.gitbook/assets/image%20%28218%29.png)
 
-![Customer Portal is not behind a login and is viewable to all](../.gitbook/assets/image%20%28226%29.png)
+![Customer Portal is not behind a login and is viewable to all](../.gitbook/assets/image%20%28227%29.png)
 
-![As a public page without a login, we give TDS users that land here the ability to navigate to the SSO login](../.gitbook/assets/image%20%28234%29.png)
+![As a public page without a login, we give TDS users that land here the ability to navigate to the SSO login](../.gitbook/assets/image%20%28235%29.png)
 
 ### Development Reviews
 
-![](../.gitbook/assets/image%20%28247%29.png)
+![](../.gitbook/assets/image%20%28248%29.png)
 
-![](../.gitbook/assets/image%20%28228%29.png)
+![](../.gitbook/assets/image%20%28229%29.png)
 
-![](../.gitbook/assets/image%20%28250%29.png)
+![](../.gitbook/assets/image%20%28251%29.png)
 
 {% hint style="info" %}
 Adding/Creating new Development Reviews
 {% endhint %}
 
-![Only Admin and PM&apos;s have access to create new Development Reviews](../.gitbook/assets/image%20%28246%29.png)
+![Only Admin and PM&apos;s have access to create new Development Reviews](../.gitbook/assets/image%20%28247%29.png)
 
-![](../.gitbook/assets/image%20%28248%29.png)
+![](../.gitbook/assets/image%20%28249%29.png)
 
 {% hint style="info" %}
 Viewing Development Reviews
@@ -60,7 +60,7 @@ Viewing Development Reviews
 
 ![PM&apos;s &amp; Dev Reviewers have different tables for viewing Dev Reviews](../.gitbook/assets/image%20%28213%29.png)
 
-![The Dev Reviewer only sees Case Status, Case ID, AMANDA ROW ID, &amp; Project Name](../.gitbook/assets/image%20%28262%29.png)
+![The Dev Reviewer only sees Case Status, Case ID, AMANDA ROW ID, &amp; Project Name](../.gitbook/assets/image%20%28263%29.png)
 
 {% hint style="info" %}
 Editing Development Reviews
@@ -70,9 +70,9 @@ Editing Development Reviews
 
 ### TIA Reviews
 
-![](../.gitbook/assets/image%20%28235%29.png)
+![](../.gitbook/assets/image%20%28236%29.png)
 
-![](../.gitbook/assets/image%20%28233%29.png)
+![](../.gitbook/assets/image%20%28234%29.png)
 
 ![](../.gitbook/assets/image%20%28220%29.png)
 
@@ -80,7 +80,7 @@ Editing Development Reviews
 
 ![](../.gitbook/assets/image%20%28217%29.png)
 
-![](../.gitbook/assets/image%20%28225%29.png)
+![](../.gitbook/assets/image%20%28226%29.png)
 
-![](../.gitbook/assets/image%20%28257%29.png)
+![](../.gitbook/assets/image%20%28258%29.png)
 
