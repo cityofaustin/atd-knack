@@ -1,8 +1,8 @@
 ---
-description: The Equations and Formulas
+description: How to automate the review cycle number for each submission record
 ---
 
-# Incrementing Cycle Automatically
+# Incrementing Review Cycle Automatically
 
 ### Incrementing Cycle Automatically
 
