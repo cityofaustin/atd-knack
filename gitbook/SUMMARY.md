@@ -127,6 +127,7 @@
   * [Calculating Review Time](tds-portal/app-logic/review-time-automation.md)
   * [Roll up Child Object Conditionals](tds-portal/app-logic/summing-child-booleans.md)
   * [Calculating an Expiration Date](tds-portal/app-logic/expiration-automation.md)
+  * [Converting an Entered Percentage to a Percentage Value](tds-portal/app-logic/percentage-conversion.md)
   * [Create a Connection Link Field to View a Searched Record](tds-portal/app-logic/searched-record-link.md)
   * [Extracting Location Coordinates to add Map Markers](tds-portal/app-logic/coordinates-to-markers.md)
 * [DR \| Development Reviews](tds-portal/dr-build.md)
