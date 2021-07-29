@@ -34,7 +34,7 @@ description: How to automate the review cycle number for each submission record
 
 #### Set Number Field to Text Formula if Blank
 
-![](../../.gitbook/assets/image%20%28225%29.png)
+![](../../.gitbook/assets/image%20%28228%29.png)
 
 {% hint style="warning" %}
 Be aware that duplicate cycle numbers can be created if a previous cycle is deleted, therefore reducing the count value.
