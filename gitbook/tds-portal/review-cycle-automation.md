@@ -2,7 +2,7 @@
 description: The Equations and Formulas
 ---
 
-# The Maths
+# Incrementing Cycle Automatically
 
 ### Incrementing Cycle Automatically
 
