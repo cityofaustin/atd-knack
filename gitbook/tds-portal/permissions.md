@@ -16,71 +16,71 @@ description: How specific roles interact with the app and what they have access 
 
 ### Account Management
 
-![](../.gitbook/assets/image%20%28246%29.png)
+![](../.gitbook/assets/image%20%28248%29.png)
 
-![Only Admin and PM&apos;s have access to the Account Management page](../.gitbook/assets/image%20%28268%29.png)
+![Only Admin and PM&apos;s have access to the Account Management page](../.gitbook/assets/image%20%28272%29.png)
 
-![](../.gitbook/assets/image%20%28217%29.png)
+![](../.gitbook/assets/image%20%28218%29.png)
 
 ### Reviewer Dashboard
 
-![](../.gitbook/assets/image%20%28229%29.png)
+![](../.gitbook/assets/image%20%28230%29.png)
 
-![All app users have access to the Reviewer Dashboard page](../.gitbook/assets/image%20%28220%29.png)
+![All app users have access to the Reviewer Dashboard page](../.gitbook/assets/image%20%28221%29.png)
 
 ![](../.gitbook/assets/image%20%28206%29.png)
 
 ### Customer Portal
 
-![](../.gitbook/assets/image%20%28224%29.png)
+![](../.gitbook/assets/image%20%28225%29.png)
 
-![Customer Portal is not behind a login and is viewable to all](../.gitbook/assets/image%20%28233%29.png)
+![Customer Portal is not behind a login and is viewable to all](../.gitbook/assets/image%20%28234%29.png)
 
-![As a public page without a login, we give TDS users that land here the ability to navigate to the SSO login](../.gitbook/assets/image%20%28243%29.png)
+![As a public page without a login, we give TDS users that land here the ability to navigate to the SSO login](../.gitbook/assets/image%20%28244%29.png)
 
 ### Development Reviews
 
-![](../.gitbook/assets/image%20%28256%29.png)
+![](../.gitbook/assets/image%20%28259%29.png)
 
-![](../.gitbook/assets/image%20%28236%29.png)
+![](../.gitbook/assets/image%20%28237%29.png)
 
-![](../.gitbook/assets/image%20%28260%29.png)
+![](../.gitbook/assets/image%20%28263%29.png)
 
 {% hint style="info" %}
 Adding/Creating new Development Reviews
 {% endhint %}
 
-![Only Admin and PM&apos;s have access to create new Development Reviews](../.gitbook/assets/image%20%28255%29.png)
+![Only Admin and PM&apos;s have access to create new Development Reviews](../.gitbook/assets/image%20%28258%29.png)
 
-![](../.gitbook/assets/image%20%28257%29.png)
+![](../.gitbook/assets/image%20%28260%29.png)
 
 {% hint style="info" %}
 Viewing Development Reviews
 {% endhint %}
 
-![PM&apos;s &amp; Dev Reviewers have different tables for viewing Dev Reviews](../.gitbook/assets/image%20%28218%29.png)
+![PM&apos;s &amp; Dev Reviewers have different tables for viewing Dev Reviews](../.gitbook/assets/image%20%28219%29.png)
 
-![The Dev Reviewer only sees Case Status, Case ID, AMANDA ROW ID, &amp; Project Name](../.gitbook/assets/image%20%28272%29.png)
+![The Dev Reviewer only sees Case Status, Case ID, AMANDA ROW ID, &amp; Project Name](../.gitbook/assets/image%20%28276%29.png)
 
 {% hint style="info" %}
 Editing Development Reviews
 {% endhint %}
 
-![Dev Reviewers have limited access to edit or add records to the development review](../.gitbook/assets/image%20%28214%29.png)
+![Dev Reviewers have limited access to edit or add records to the development review](../.gitbook/assets/image%20%28215%29.png)
 
 ### TIA Reviews
 
-![](../.gitbook/assets/image%20%28244%29.png)
+![](../.gitbook/assets/image%20%28245%29.png)
 
-![](../.gitbook/assets/image%20%28242%29.png)
+![](../.gitbook/assets/image%20%28243%29.png)
 
-![](../.gitbook/assets/image%20%28226%29.png)
+![](../.gitbook/assets/image%20%28227%29.png)
 
 ### TDA Reviews
 
-![](../.gitbook/assets/image%20%28223%29.png)
+![](../.gitbook/assets/image%20%28224%29.png)
 
-![](../.gitbook/assets/image%20%28232%29.png)
+![](../.gitbook/assets/image%20%28233%29.png)
 
-![](../.gitbook/assets/image%20%28267%29.png)
+![](../.gitbook/assets/image%20%28271%29.png)
 

@@ -58,7 +58,7 @@ If the Review Started Date is blank, we used the netWorkDays function to calcula
 
 We setup this field as a Multiple Choice instead of a Yes/No in case there becomes a third option in the future. Right now we want to figure out if a review is on time or not on time. We setup two conditionals based on the Days Idle equation to determine if the review started less than 28 days after being submitted or if the review started after 28 days of being submitted.
 
-![](../../.gitbook/assets/image%20%28235%29.png)
+![](../../.gitbook/assets/image%20%28236%29.png)
 
 {% hint style="info" %}
 The On Time field could also be setup to determine if the Days Under Review or the Total Days values exceed certain day thresholds.
@@ -75,5 +75,31 @@ The On Time field could also be setup to determine if the Days Under Review or t
 * Equation - Percentage of On Time Reviews
 * Number - Reviews On Time %
 
+#### Average Fields
 
+For these Average fields we set them up with 1 decimal place and some filters to make sure the value is not 0 or blank. We use these averages for reporting to give us a general sense of how long reviews are taking on average during different stages of the process.
+
+![](../../.gitbook/assets/image%20%28246%29.png)
+
+#### Number of On Time Reviews
+
+We simply just count the number of review records where the Review On Time value is On Time
+
+#### Percentage of On Time Reviews
+
+We take the count field Number of On Time Reviews and divide it by the count field Number of Reviews \(the total\). We make sure to set this to two Decimal Places to give us a more precise percentage.
+
+#### Reviews On Time %
+
+We set the Number Format to % and set it the the Percentage of On Time Reviews equation
+
+![](../../.gitbook/assets/image%20%28257%29.png)
+
+{% hint style="info" %}
+The On Time % can be used for an entire case or per reviewer for example.
+{% endhint %}
+
+![](../../.gitbook/assets/image%20%28264%29.png)
+
+![](../../.gitbook/assets/image%20%28213%29.png)
 
