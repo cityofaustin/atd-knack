@@ -30,7 +30,7 @@ If Percentage Entry field is blank we set it to 100% by default. This is specifi
 
 Make sure to setup this Number field to the % Number Format.
 
-![](../../.gitbook/assets/image%20%28256%29.png)
+![](../../.gitbook/assets/image%20%28258%29.png)
 
 And set it to the Equation field
 
