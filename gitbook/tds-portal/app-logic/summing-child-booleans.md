@@ -36,3 +36,7 @@ For the above example, when Scope Submission is Approved \(greater than 0\) we h
 
 ![](../../.gitbook/assets/image%20%28277%29.png)
 
+{% hint style="info" %}
+This is more elaborate than just adding actual Yes/No Boolean fields but regular Boolean fields do not allow us the flexibility to create conditional rules with them. Additionally, this method allows us to have multiple records with the same status and the Sum field will accurately reflect that whereas Yes's and No's cannot be summed.
+{% endhint %}
+
