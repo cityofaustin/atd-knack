@@ -1,5 +1,5 @@
 ---
-description: How to calculate and set an expiration date
+description: How to calculate and set an expiration date or due date
 ---
 
 # Calculating an Expiration Date
