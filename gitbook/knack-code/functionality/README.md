@@ -27,22 +27,22 @@ description: >-
 
 ### Active in these Applications
 
-| Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO |
-| ---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Big Buttons | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| Save Knack Record ID | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Redirect Blank Menu Pages | No | No |  |  |  | No |  |  |  |  |  |  |
-| Disable Trigger Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Disable Modal BG | Yes | Yes |  |  |  | Yes |  |  |  |  |  |  |
-| Disable Nav Links | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Remove Back Links | Yes | Yes |  |  |  | No |  |  |  |  |  |  |
-| Back Link Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Return to Prev Page Button | Yes | No |  |  |  | No |  |  |  |  |  |  |
-| Conditionally Hide/Show Form Fields | No | No |  |  |  | No |  |  |  |  |  |  |
-| Return to Top Button | No | No |  | Yes |  | No |  |  |  |  |  |  |
-| Refresh View Button | No | No | Yes |  |  | No |  |  |  |  |  |  |
-| Detect IE | No | No |  |  |  | No |  |  | Yes |  |  |  |
-| Map iFrame Source URL | Yes |  |  |  |  | No |  |  |  | Yes |  |  |
+| Code | TDS | RPP | Data Tracker | Signs & Markings | Banners | ROW | DTS | HR | Finance | Parking Enterprise | VZA | SMO | Visitor Sign In |
+| ---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Big Buttons | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |  |
+| Save Knack Record ID | Yes | No |  |  |  | No |  |  |  |  |  |  |  |
+| Redirect Blank Menu Pages | No | No |  |  |  | No |  |  |  |  |  |  |  |
+| Disable Trigger Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |  |
+| Disable Modal BG | Yes | Yes |  |  |  | Yes |  |  |  |  |  |  |  |
+| Disable Nav Links | Yes | Yes |  |  |  | No |  |  |  |  |  |  |  |
+| Remove Back Links | Yes | Yes |  |  |  | No |  |  |  |  |  |  |  |
+| Back Link Buttons | Yes | No |  |  |  | No |  |  |  |  |  |  |  |
+| Return to Prev Page Button | Yes | No |  |  |  | No |  |  |  |  |  |  |  |
+| Conditionally Hide/Show Form Fields | No | No |  |  |  | No |  |  |  |  |  |  |  |
+| Return to Top Button | No | No |  | Yes |  | No |  |  |  |  |  |  |  |
+| Refresh View Button | No | No | Yes |  |  | No |  |  |  |  |  |  |  |
+| Detect IE | No | No |  |  |  | No |  |  | Yes |  |  |  |  |
+| Map iFrame Source URL | Yes |  |  |  |  | No |  |  |  | Yes |  |  |  |
 
 
 
