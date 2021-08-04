@@ -44,6 +44,7 @@ description: >-
       <th style="text-align:left">Parking Enterprise</th>
       <th style="text-align:left">VZA</th>
       <th style="text-align:left">SMO</th>
+      <th style="text-align:left">Visitor Sign In</th>
     </tr>
   </thead>
   <tbody>
@@ -54,7 +55,8 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">No</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -76,6 +78,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Dropdown Menu Buttons</td>
@@ -85,6 +88,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -106,6 +110,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Hyperlink Form Field Label</td>
@@ -115,6 +120,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -136,6 +142,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Modify Table Summary Row</td>
@@ -151,6 +158,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Convert Values to UPPERCASE Option A</td>
@@ -160,6 +168,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -184,6 +193,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Highlight Label Body</td>
@@ -197,6 +207,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left">Yes</td>
       <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
     </tr>
@@ -214,6 +225,7 @@ description: >-
       <td style="text-align:left">Yes</td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Report Headers</td>
@@ -223,6 +235,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -244,6 +257,7 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
     </tr>
     <tr>
       <td style="text-align:left">Report Element Colors</td>
@@ -252,7 +266,8 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">No</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -262,12 +277,13 @@ description: >-
     </tr>
     <tr>
       <td style="text-align:left">HighCharts Report Styling</td>
-      <td style="text-align:left">Yes</td>
+      <td style="text-align:left">No</td>
       <td style="text-align:left">Yes</td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left">No</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
@@ -282,7 +298,8 @@ description: >-
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">No</td>
+      <td style="text-align:left">Yes</td>
+      <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
