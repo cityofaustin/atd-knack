@@ -8,7 +8,7 @@
 * [Platform Overview](knack/platform-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
 * [Style Guide](knack/style-guide.md)
-* [Single Sign On](knack/single-sign-on/README.md)
+* [Single Sign On \(SSO\)](knack/single-sign-on/README.md)
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
