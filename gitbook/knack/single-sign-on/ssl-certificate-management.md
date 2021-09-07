@@ -18,7 +18,7 @@ You may also be interested in our [wiki page](https://atd-dts.gitbook.io/atd-kna
 * `Organization Unit Name`: Austin Transportation
 * `State`: Texas
 * `Country`: us
-* `Valid Days:`365
+* `Valid Days:`365 or 720
 * `Email Address`: transportation.data@austintexas.gov
 * `Bits to generate the private key`: 1024 bits
 * `Digest Algorithm:`SHA512
