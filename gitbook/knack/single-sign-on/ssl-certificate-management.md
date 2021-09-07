@@ -4,7 +4,7 @@ description: How to create new certificates for our Knack apps
 
 # SSL Certificate Management
 
-This will guide you through creating a new self-signed certificate which can be installed in Knack applications \(or elsewhere\) for SSL authentication.
+This will guide you through creating a new self-signed X.509 certificate which can be installed in Knack applications \(or elsewhere\) for SSL authentication.
 
 Note that as a best practice we use the same certificate across all knack apps. So, if you do need to generate a new certificate, you should do this for every Knack application. _Consult the application team before embarking on this._
 
