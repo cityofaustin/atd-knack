@@ -4,11 +4,9 @@ description: How to create new certificates for our Knack apps
 
 # SSL Certificate Management
 
-This will guide you through creating a new self-signed X.509 certificate which can be installed in Knack applications \(or elsewhere\) for SSL authentication.
+This will guide you through creating a new self-signed certificate which can be installed in Knack applications \(or elsewhere\) for SSL authentication.
 
 Note that as a best practice we use the same certificate across all knack apps. So, if you do need to generate a new certificate, you should do this for every Knack application. _Consult the application team before embarking on this._
-
-You may also be interested in our [wiki page](https://atd-dts.gitbook.io/atd-knack-operations/knack/single-sign-on) about configuring ADFS logins in Knack.
 
 1. Before you begin, make sure you have looked at our existing SSL certificate in 1Password. It's saved as **Self-Signed x509 SSL Certificates for SAML/ADFS**. The expiration date is noted there as well.
 
