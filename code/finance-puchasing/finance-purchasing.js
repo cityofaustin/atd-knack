@@ -365,6 +365,9 @@ var invoicesView = "view_282";
 // Invoice Items API view form scene and view
 var invoicesAPIViewConfig = { scene: "scene_123", view: "view_698" };
 
+// Invoice Items API view form scene and view
+var itemsAPIViewConfig = { scene: "scene_336", view: "view_802" };
+
 // Set auth and headers for API calls
 var knackUserToken = Knack.getUserToken();
 var headers = {
@@ -727,9 +730,9 @@ function handleCreateInvoiceClick(event, id, view) {
       type: "PUT",
       url:
         "https://api.knack.com/v1/scenes/" +
-        invoicesAPIViewConfig.scene +
+        itemsAPIViewConfig.scene +
         "/views/" +
-        invoicesAPIViewConfig.view +
+        itemsViewConfig.view +
         "/records/" +
         item.id,
       headers: headers,
