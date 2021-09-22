@@ -732,7 +732,7 @@ function handleCreateInvoiceClick(event, id, view) {
         "https://api.knack.com/v1/scenes/" +
         itemsAPIViewConfig.scene +
         "/views/" +
-        itemsViewConfig.view +
+        itemsAPIViewConfig.view +
         "/records/" +
         item.id,
       headers: headers,
