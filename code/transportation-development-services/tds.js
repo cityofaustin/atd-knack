@@ -246,69 +246,6 @@ if (appviews[x]==key) {
 };	// for
 });
 
-/************************************/
-/**** Save TIA Knack Record ID ****/
-/************************************/
-// Function to Save Record ID
-function saveRecordId(recordId) {
-  $.ajax({
-    url: "https://api.knack.com/v1/pages/scene_269/views/view_740/records/" + recordId, // Scene/View of Second Form
-    type: "PUT", 
-    headers: {
-      "X-Knack-Application-Id": Knack.application_id,
-      "X-Knack-REST-API-Key": `knack`,
-      "Authorization": Knack.getUserToken(),
-      "ContentType": "application/json"
-    },
-    data: {
-      field_824 : recordId, // Store Record ID in Knack Record ID field on TIA Request object
-    },
-    tryCount: 0,
-    retryLimit: 3,
-    success: function(response) {
-      console.log("Captured Record ID"); // Success Message in Console
-      Knack.hideSpinner();
-    },
-    error : function(XMLHttpRequest, textStatus, errorThrown) {
-      this.tryCount++;
-      let tryCount = this.tryCount, retryLimit = this.retryLimit, seconds; 
-      if (tryCount <= retryLimit) { //try again
-        switch(tryCount) {
-          case 1:
-          case 2: seconds = 5; break;
-          case 3: seconds = 10; break; }
-        let timeout = seconds * 1000;
-        console.log("Error: " + XMLHttpRequest.status + " " + XMLHttpRequest.statusText + "\nRetry Count: " + tryCount + "\nRetrying in " + seconds + " seconds")
-        let ajaxObject = this;
-        window.setTimeout(function(){
-          $.ajax(ajaxObject);
-        }, timeout);
-      } else {
-        console.log("Failed to Capture Record ID"); // Failure Message in Console
-      }
-    }
-  });
-}
-
-// Listen for record creation (TIA Request Application Submit / First Form)
-$(document).on('knack-record-create.view_393', function(event, view, record) {
-  const recordId = record.id;
-  console.log('CREATE')
-  saveRecordId(recordId);
-});
-
-/*
-$(document).on('knack-form-submit.view_393', function(event, view, record) {
-  console.log('SUBMIT')
-});
-*/
-
-// This is the Second Form.
-// This removes the view from HTML upon rendering to prevent data manipulation.
-$(document).on('knack-view-render.view_740', function (event, view, record) {
-  $('#' + view.key).remove(); 
-});
-
 /*************************************/
 /**** TIA Menu Buttons Navigation ****/
 /*************************************/
@@ -650,7 +587,7 @@ $(document).on('knack-view-render.view_901', function(event, view, record) {
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
       <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#tia-reviews/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+        <a href="#tia-reviews/tia-case-details/${parentRecordId}/tia-case-management/${parentRecordId}" data-kn-slug="#case-management">\
           <span class="nav-dropdown-link">Case Management</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
@@ -678,11 +615,11 @@ $(`<div class="mobile-details-dropdown-menu">\
           Case Management Menu\
         </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
-          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
-          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
-          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", true)}\
-          ${dropdownMenuItem(recordId, "tia-memo-details", "fa-medium", "Memo Details", true)}\
-          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-memo-details", "fa-medium", "Memo Details", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-log", "fa-briefcase", "Case Log", true)}\
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "begin-scope-submission-review", "fa-play-circle-o", "Begin Review", true)}\
@@ -702,7 +639,7 @@ $(document).on('knack-view-render.view_902', function(event, view, record) {
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
       <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#tia-reviews/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+        <a href="#tia-reviews/tia-case-details/${parentRecordId}/tia-case-management/${parentRecordId}" data-kn-slug="#case-management">\
           <span class="nav-dropdown-link">Case Management</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" />\
         </a>\
@@ -730,11 +667,11 @@ $(`<div class="mobile-details-dropdown-menu">\
           Case Management Menu\
         </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
-          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
-          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
-          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", true)}\
-          ${dropdownMenuItem(recordId, "tia-memo-details", "fa-medium", "Memo Details", true)}\
-          ${dropdownMenuItem(recordId, "tia-case-log", "fa-briefcase", "Case Log", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-memo-details", "fa-medium", "Memo Details", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-log", "fa-briefcase", "Case Log", true)}\
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review", true)}\
