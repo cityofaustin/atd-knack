@@ -115,6 +115,11 @@ You will be taken back to the Provider page where you can click the "Details" li
 1. From the “Home” page: [https://atd.knack.com/smo\#home/](https://atd.knack.com/smo#home/)
 2. You can view all fees/payments by clicking under “Fees/Payments” tab
 
+There are menu buttons for: 
+
+* **ACH Information**: This page shows the ACH Information so it's easy to reference when speaking to a Provider
+* **Impoundments**: This is a page that tracks any impoundment events that happen with provider devices. Tracks the dates, number of units to be impounded, fee amount and fee due dates. 
+
 ​On this page you can see all provider Invoices and individual Transactions. The transactions are filtered by the transaction type: 
 
 * Investigative Fee
@@ -122,4 +127,58 @@ You will be taken back to the Provider page where you can click the "Details" li
 * Permit Renewal Fee
 * Impoundment Fee
 * Monthly Trip Fee
+
+## TRIP DATA
+
+1. From the “Home” page: [https://atd.knack.com/smo\#home/](https://atd.knack.com/smo#home/)
+2. You can view all Monthly Trip data by clicking under “**Trip Data**” tab
+
+There are menu buttons for:
+
+* **Add New Monthly Trip Record**
+
+The first table "Monthly Trip Comparison" shows the Trip Totals from the COA Total Trips, Ride Report Total Trips, Provider - Reported Total Trips, Official Total Trips and the Source - Official Total Trips.
+
+The second table "City of Austin \(CoA\) Monthly Trips Stats" shows the trip information like Total Trips Distance, Average Trip Distance, Trips - Zero Distance, Trips - Long Distance, CoA Total Trips. 
+
+## REPORTS
+
+1. From the “Home” page: [https://atd.knack.com/smo\#home/](https://atd.knack.com/smo#home/)
+2. You can view Report data by clicking under “**Reports**” tab
+
+There is a table "Total Active Permits by Provider" that shows the active permits for each Provider annually.   
+
+
+There is also an Advanced Search permits function to allow a user to search for permits by various fields.
+
+Search Fields:
+
+* Provider
+* Device Type
+* Permit Type
+* Permit Status
+* Zone
+* Keyword Search
+* License ID
+* Permit ID
+* Permit Start Date
+* Permit Expiration Date
+* Date Last Renewed
+
+Search results show table that can be exported 
+
+## MY LICENSE
+
+1. From the “Home” page: [https://atd.knack.com/finance-purchasing\#home/](https://atd.knack.com/finance-purchasing#home/)
+2. You can view provider license by clicking under “**My License**” tab
+
+This page is specifically for the Providers \(if/when they are granted access t​o the system\)
+
+They would be able to see: 
+
+* **Bonds**: What bonds they have and when they are expiring
+* **Insurances**: What Insurances they have and when they are expiring
+* **Provider Contacts**: Who is listed as the provider contact for the company
+* **Active Permits**: Any permits that are in "Active" statuses
+* **Expired Permits**: Any permits that are in an "Expired" status
 
