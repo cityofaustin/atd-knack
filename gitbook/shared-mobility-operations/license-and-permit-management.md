@@ -33,11 +33,27 @@ When you add a Provider, there is a section when you enter the **Start Date** an
 
 ## ADD A PERMIT
 
- From the "View Providers Details page"
+1. From the "View Providers Details page"
 
-2. Click the "**Add New Provider**" button
+2. Click the "**Add Permit**" button
+
+3. Fill out the Permit information on the form:
+
+* **Device Type:** the type of dock-less mobility device
+* **Number of Devices:** the number of units being deployed 
+* **Amount Paid:** The amount the permit will be \(custom amount because can prorate permit amounts\)
+* **Zone:** The geographic zone/area that the provider will be deploying units
+* **Notes:** any additional notes about the permit
+* **Permit Start Date:** This is the first date the permit started regardless of the renewal cycle or the license renewal period.
+* `RENEWAL PERIOD - for BACK DATING`
+* `EXPIRED - for BACK DATING`
+* **Permit Expiration Date:** The date the permit should expire
+
+4. Click the “**Submit**” button to submit the form.
 
 ## RENEW A PERMIT/LICENSE
+
+
 
 ## CREATE AN INVOICE
 
