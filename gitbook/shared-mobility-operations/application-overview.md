@@ -6,11 +6,24 @@ Information about this application, it's key stakeholders, and functionality can
 
 ### Key Features / Table of Contents
 
+* About Licenses & Permits
+* Home Page
+* Providers
+  * Add a New Provider
+  * Add a License
+  * Add Permits
+  * How to Renew Permits
+  * Creating Invoices
+* Fees/Payments
+* Trip Data
+* Reports
+* My License
+
 ### Workflow
 
 The workflow for this application is in the process of being documented on this [Miro Board](https://miro.com/app/board/o9J_lU6H3zc=/).
 
 ### Enhancements
 
-Code for the enhancements made to this application can be found here. 
+Code for the enhancements made to this application can be found [here](https://github.com/cityofaustin/atd-knack/tree/master/code). 
 
