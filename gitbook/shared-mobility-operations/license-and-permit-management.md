@@ -51,9 +51,106 @@ When you add a Provider, there is a section when you enter the **Start Date** an
 
 4. Click the “**Submit**” button to submit the form.
 
-## RENEW A PERMIT/LICENSE
+## RENEW PERMIT\(S\) & LICENSE
 
+Each Provider/License record has a **Start Date** and **Expiration Date** associated, the system will run a task to change the permit field "Renewal Period" \(Yes/No\). If the Expiration date is within the current month and the permit is active it'll switch the "Renewal Period" to "Yes". 
 
+An email task is set up so that a provider is notified by email 30 days before the Provider's Expiration date. The provider should communicate with the SMO team to determine which permits to "renew" and which to "set to expire". 
+
+This allows the staff \(or Provider, depending on the SMO team\) to renew the permits they would like or set them to expire. 
+
+![](../.gitbook/assets/image%20%28309%29.png)
+
+![](../.gitbook/assets/image%20%28312%29.png)
+
+After the permits have been added, renewed or set to expire the SMO team can go to the License Renewal at the bottom of the page. 
+
+![](../.gitbook/assets/image%20%28307%29.png)
+
+When the user clicks "Start License Renewal Process" button a dialog box will appear asking if they have reviewed all the permits up for renewal.   
+
+![](../.gitbook/assets/image%20%28308%29.png)
+
+If a user clicks "**No**", the dialog box will disappear and the user must review the permits and add, renew or set to expire any licenses. 
+
+If a user click "**Yes**", will continue with the renewal process.
+
+The form will ask you to enter the **Start Date** and the **Expiration Date** for the new license renewal cycle.
+
+![](../.gitbook/assets/image%20%28311%29.png)
+
+Click "**Submit**" when finished. The Provider object table will update the **Start Date** and the **Expiration Date** and make a copy of the license renewal information in the "archived\_license" object table. 
 
 ## CREATE AN INVOICE
+
+When the permits and licenses have been renewed, then an invoice can be created. 
+
+1. From the "View Provider Details page"
+
+2. Click the "**Invoices**" button, will bring you to an Invoices page.
+
+3. Click the "**Create Invoice**" button, a new invoice record will be create. The invoice date will be generated which is the date of creation, this can be edited later.
+
+4. Click the Invoice "**Details**" link
+
+5. From the "View Providers Details page"
+
+### Edit Invoice
+
+1. From the "View Invoice Details page"
+
+2. Click the "**Edit Invoice**" button
+
+3. Edit the Invoice information on the form:
+
+* **Invoice Period:** the date range the invoice is for
+* **Invoice Number:** this field can be used to enter a custom invoice number \(ex. from Finance\)
+* **Invoice Date:** this is the created date of the invoice, it can be edited
+* **Use Renewal Date?** 
+  * **Yes:** This allows you to enter in a custom date, used for License and Permit Renewals
+  * **No:** This is defaulted, it generated the 30 day due date. \(Invoice Date-30 days\)
+* **Date Payment Received:** Date payment was made
+* **Payment Type:** 
+  * Check
+  * ACH
+* **Invoice Status:** 
+  * UNPAID
+  * PENDING
+  * PAID
+
+Click "**Submit**" when finished.
+
+### Add Invoice Items
+
+1. From the "View Invoice Details page"
+
+2. Click the "**Add Invoice Item**" button
+
+3. Fill out the Invoice Item information on the form:
+
+* **Provider:** Select the provider the invoice is for, should isolate only one provider on the form \(the one this invoice is associated to\)
+* **Transaction Type:** If a provider isn't checked, you will not see the associated Transaction Types belonging to the provider.
+  * License Renewal Fee
+  * Permit Renewal Fee
+  * Monthly Trip Fee
+  * Investigative Fee
+  * Impoundment Fee
+* **Cost Per Unit**: used to be $30 but is now $40 - adding "$" is unnecessary, just whole number is fine
+* **Transaction Note**: this is for internal office staff to leave a note about the transaction
+
+Click "**Submit**" when finished. Add as many invoice items to the invoice as each line will appear on the invoice. 
+
+### Generate Invoice
+
+When all line items have been entered. 
+
+1. From the "View Invoice Details page"
+
+2. Click the "**Invoice**" button
+
+It will open up an Invoice page where staff can review the invoice. If staff would like to print, on the top right hand corner of the page is a "Print" page. In Chrome, it will open a Print Preview page. 
+
+![](../.gitbook/assets/image%20%28310%29.png)
+
+
 
