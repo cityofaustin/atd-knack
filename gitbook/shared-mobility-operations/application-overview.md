@@ -102,14 +102,6 @@ From the “Providers” [page](https://atd.knack.com/smo#providers/) you can vi
 4. Click the “**Submit**” button to submit the form.  
 You will be taken back to the Provider page where you can click the "Details" link.
 
-## ADD A LICENSE
-
-## ADD A PERMIT
-
-## RENEW A PERMIT/LICENSE
-
-## CREATE AN INVOICE
-
 ## FEES/PAYMENTS
 
 1. From the “Home” page: [https://atd.knack.com/smo\#home/](https://atd.knack.com/smo#home/)

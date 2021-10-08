@@ -148,6 +148,7 @@
 ## SMO \| Shared Mobility Operations <a id="shared-mobility-operations"></a>
 
 * [Application Overview](shared-mobility-operations/application-overview.md)
+* [License & Permit Management](shared-mobility-operations/license-and-permit-management.md)
 * [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
 
 ## VZA \| Vision Zero in Action <a id="vision-zero-in-action"></a>
