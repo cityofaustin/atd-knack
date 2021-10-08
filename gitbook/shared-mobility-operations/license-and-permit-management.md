@@ -29,25 +29,13 @@ Ex. 100 devices in DAPCZ
 
 When you add a Provider, there is a section when you enter the **Start Date** and **Expiration Date** for the provider. This "provider" record generates a License ID number and that license will be tied to the provider. The duration Start/Expiration dates determine the license period. 
 
-### ADD A NEW PROVIDER
-
-1. From the "View Providers page"
-
-2. Click the "**Add New Provider**" button
-
-3. Fill out the Provider information on the form:
-
-* **Doing Business As:** alternate name company goes by \| _Required_.
-* **Company Name:** Legal Name of company
-* **Address**: Company Address
-* **Start Date:** The date the company's license was activated \| _Required_.
-* **Expiration Date**: The date the company's license expires \| _Required_.
-* **Provider License Status:** Company's license status \| _Required_.
-
-4. Click the “**Submit**” button to submit the form.  
-You will be taken back to the Provider page where you can click the "Details" link.
+### Steps on how to - [ADD A NEW PROVIDER](https://atd-dts.gitbook.io/atd-knack-operations/shared-mobility-operations/application-overview#add-a-new-provider)
 
 ## ADD A PERMIT
+
+ From the "View Providers Details page"
+
+2. Click the "**Add New Provider**" button
 
 ## RENEW A PERMIT/LICENSE
 

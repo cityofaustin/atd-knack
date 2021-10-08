@@ -73,7 +73,7 @@ From the “Providers” [page](https://atd.knack.com/smo#providers/) you can vi
 
 ### ADD A NOTE
 
-1. From the "View Providers page"
+1. From the "View Providers Details page"
 
 2. Click the "**Add Notes**" button
 
@@ -86,7 +86,7 @@ From the “Providers” [page](https://atd.knack.com/smo#providers/) you can vi
 
 ### ADD A NEW PROVIDER
 
-1. From the "View Providers page"
+1. From the "View Providers Details page"
 
 2. Click the "**Add New Provider**" button
 
@@ -161,7 +161,8 @@ Search results show table that can be exported
 
 ## MY LICENSE
 
-1. From the “Home” page: [https://atd.knack.com/finance-purchasing\#home/](https://atd.knack.com/finance-purchasing#home/)
+1. From the “Home” page: [https://atd.knack.com/smo\#home/](https://atd.knack.com/smo#home/)
+
 2. You can view provider license by clicking under “**My License**” tab
 
 This page is specifically for the Providers \(if/when they are granted access t​o the system\)
