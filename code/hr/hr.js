@@ -83,7 +83,7 @@ function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = fals
 }
 
 /********************************************/
-/******* Auto Populate Telework Form ********/
+/******* Auto Populate Add Time Form ********/
 /********************************************/
 // Add Time Form: Set "Employee Name" to logged in user name
 $(document).on("knack-view-render.view_32", function(event, page) {
@@ -91,12 +91,4 @@ $(document).on("knack-view-render.view_32", function(event, page) {
   console.log(attrs)
   $('#view_32-field_105').val(attrs.id);
   $('#view_32-field_105').trigger("liszt:updated");
-});
-  
-// Auto-fill user name on new TLC request form
-$(document).on("knack-view-render.view_99", function(event, page) {
-  var attrs = Knack.getUserAttributes();
-  console.log(attrs)
-  $('#view_99-field_147').val(attrs.id);
-  $('#view_99-field_147').trigger("liszt:updated");
 });
