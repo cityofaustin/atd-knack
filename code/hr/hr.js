@@ -71,7 +71,19 @@ $(document).on("knack-view-render.view_97", function(event, page) {
 });
 
 /********************************************/
-/******* Auto Populate Telework Form ********/
+/************** Small Buttons ***************/
+/********************************************/
+//Create Small Button nested in a block
+function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+
+  if (callback) callback();
+}
+
+/********************************************/
+/******* Auto Populate Add Time Form ********/
 /********************************************/
 // Add Time Form: Set "Employee Name" to logged in user name
 $(document).on("knack-view-render.view_32", function(event, page) {
@@ -79,12 +91,4 @@ $(document).on("knack-view-render.view_32", function(event, page) {
   console.log(attrs)
   $('#view_32-field_105').val(attrs.id);
   $('#view_32-field_105').trigger("liszt:updated");
-});
-  
-// Auto-fill user name on new TLC request form
-$(document).on("knack-view-render.view_99", function(event, page) {
-  var attrs = Knack.getUserAttributes();
-  console.log(attrs)
-  $('#view_99-field_147').val(attrs.id);
-  $('#view_99-field_147').trigger("liszt:updated");
 });

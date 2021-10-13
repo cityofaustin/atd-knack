@@ -77,14 +77,3 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
-
-/**********************************************/
-/*** Telework Form: Your Name Styling ***/
-/**********************************************/
-div#view_99_field_147_chzn {
- pointer-events: none !important;
-}
-
-div#view_99_field_147_chzn a {
-  color: grey !important;
-}
