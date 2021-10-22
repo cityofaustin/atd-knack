@@ -4,15 +4,15 @@ description: How to style action triggers like Knack Buttons instead of a text l
 
 # Trigger Buttons
 
-![Before](../../.gitbook/assets/image%20%28174%29.png)
+![Before](<../../../.gitbook/assets/image (174).png>)
 
-![As a Button](../../.gitbook/assets/image%20%28170%29.png)
+![As a Button](<../../../.gitbook/assets/image (170).png>)
 
 ### The CSS
 
 We define the stylings below so they mimic the look of Knack menu buttons
 
-```text
+```
 /***************************************/
 /*********** Trigger Buttons ***********/
 /***************************************/
@@ -41,7 +41,7 @@ We define the stylings below so they mimic the look of Knack menu buttons
 
 We call the button class we have above, include an fa icon, and set the button label
 
-```text
+```
 <button class="trigger-button"><i class="fa fa-plus-square"></i> New Record</button>
 ```
 
@@ -51,7 +51,7 @@ We call the button class we have above, include an fa icon, and set the button l
 {% tab title="1️⃣" %}
 Copy pasta the CSS. This styling will apply to all trigger buttons where you apply the html
 
-```text
+```
 .trigger-button {
   border-style: solid;
   border-width: 1px;
@@ -77,11 +77,11 @@ Copy pasta the CSS. This styling will apply to all trigger buttons where you app
 {% tab title="2️⃣" %}
 Select the Trigger you want to update with html
 
-![](../../.gitbook/assets/image%20%28167%29.png)
+![](<../../../.gitbook/assets/image (167).png>)
 
 Use a `<button>` tag to set the button class
 
-```text
+```
 <button class="trigger-button">
 ```
 {% endtab %}
@@ -89,7 +89,7 @@ Use a `<button>` tag to set the button class
 {% tab title="3️⃣" %}
 Set your fa icon
 
-```text
+```
 <i class="fa fa-plus-square"></i>
 ```
 {% endtab %}
@@ -97,15 +97,14 @@ Set your fa icon
 {% tab title="4️⃣" %}
 Set your trigger text after your icon if not already present
 
-```text
+```
 New Record
 ```
 
 Lastly, be sure to close your `<button>` tag
 
-```text
+```
 </button>
 ```
 {% endtab %}
 {% endtabs %}
-

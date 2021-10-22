@@ -4,15 +4,15 @@ description: How to adjust Global HighCharts report styling
 
 # HighCharts Report Styling
 
-Overall, the base report styling in Knack is pretty bland. Knack uses a [HighCharts](https://www.highcharts.com/) integration, an interactive JavaScript reporting tool to supply its Report views.
+Overall, the base report styling in Knack is pretty bland. Knack uses a [HighCharts](https://www.highcharts.com) integration, an interactive JavaScript reporting tool to supply its Report views.
 
-![A light blue report background and a more defined plot transparency and border](../../.gitbook/assets/image%20%2861%29.png)
+![A light blue report background and a more defined plot transparency and border](<../../../.gitbook/assets/image (61).png>)
 
 ### The JS
 
 The code allows us to modify the global setOptions styling specified in the [HighCharts documentation](https://www.highcharts.com/docs/getting-started/how-to-set-options). We can customize the report container and the plot by adjusting color, shadow, and borders. This allows our reports to look more well-defined and bring attention to the data being displayed.
 
-```text
+```
 /***************************************/
 /**** Global Reporting Page Styling ****/
 /***************************************/
@@ -41,8 +41,6 @@ See [Report Element Colors](https://atd-dts.gitbook.io/atd-knack-operations/knac
 ### How to Implement
 
 Remember these global options apply to all reports. We use them to apply a consistent look and feel that is more readable to our users or alternatively, more thematic to the application colors or content.
-
-
 
 
 

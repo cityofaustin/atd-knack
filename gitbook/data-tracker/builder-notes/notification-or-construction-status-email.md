@@ -1,10 +1,10 @@
-# NOTIFICATION \| Construction Status Email
+# NOTIFICATION | Construction Status Email
 
 We have an email notification configured on the `signals` object table. There are 2 tasks configured to send custom email notifications to people on distribution list.
 
 Example of settings:
 
-##  Task 1:
+## &#x20;Task 1:
 
 * Task Name: `Send Construction Status Email`
 * Schedule: `Daily`
@@ -13,11 +13,11 @@ Example of settings:
 
 Action: `Send custom email` When:
 
-*  `CONSTRUCTION NOTE TRANSMITTED` - is `No`
+* &#x20;`CONSTRUCTION NOTE TRANSMITTED` - is `No`
 
 ### **Send**
 
-To: custom email to - \[INSERT EMAIL HERE\]
+To: custom email to - \[INSERT EMAIL HERE]
 
 ### **Message**
 
@@ -28,9 +28,9 @@ To: custom email to - \[INSERT EMAIL HERE\]
 
 Construction status of {SIGNAL\_NAME} has been updated Signal Type: {SIGNAL\_TYPE} Status: {SIGNAL\_STATUS} Note: {CONSTRUCTION\_NOTE} Location: {LOCATION\_NAME} [Signal Construction Project Map](https://data.mobility.austin.gov/signal-projects/)
 
-_This message has been generated automatically by the ATD Data Tracker. To unsubscribe, contact_ [_diana.martin@austintexas.gov_](mailto:diana.martin@austintexas.gov)_._
+_This message has been generated automatically by the ATD Data Tracker. To unsubscribe, contact _[_diana.martin@austintexas.gov_](mailto:diana.martin@austintexas.gov)_._
 
-##  Task 2:
+## &#x20;Task 2:
 
 * Task Name: `Reset Construction Status`
 * Schedule: `Daily`
@@ -39,14 +39,13 @@ _This message has been generated automatically by the ATD Data Tracker. To unsub
 
 Action: `update each record` When:
 
-*  `CONSTRUCTION NOTE TRANSMITTED` - is `No`
+* &#x20;`CONSTRUCTION NOTE TRANSMITTED` - is `No`
 
 ### **Send**
 
-To: custom email to - \[INSERT EMAIL HERE\]
+To: custom email to - \[INSERT EMAIL HERE]
 
 ### **Values**
 
-*  `CONSTRUCTION NOTE PREVIOUS` - to a field value - `CONSTRUCTION NOTE`
-*  `SIGNAL STATUS PREVIOUS` - to a field value - `SIGNAL STATUS`
-
+* &#x20;`CONSTRUCTION NOTE PREVIOUS` - to a field value - `CONSTRUCTION NOTE`
+* &#x20;`SIGNAL STATUS PREVIOUS` - to a field value - `SIGNAL STATUS`

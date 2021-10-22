@@ -2,31 +2,30 @@
 description: (TMC) Transportation Management Center (AMD CSR)
 ---
 
-# Page Rules \(TMC\) CSR
+# Page Rules (TMC) CSR
 
-Knack back end:  
- **Pages**  
+Knack back end:\
+&#x20;**Pages**\
 
 
-TMC&gt;Details  
- **Page rules:** [https://builder.knack.com/atd/amd\#pages/scene\_428/rules](https://builder.knack.com/atd/amd#pages/scene_428/rules)
+TMC>Details\
+&#x20;**Page rules:** [https://builder.knack.com/atd/amd#pages/scene\_428/rules](https://builder.knack.com/atd/amd#pages/scene\_428/rules)
 
 \*\*This page has 14 rules. \*\*
 
-| \# | Rule Details |
-| :--- | :--- |
-| 1 | When `COUNT_FLEX_NOTES` is `0` Action `Hide Views`  Views `Show flex notes menu` |
-| 2 | When `CSR_Y_VALUE` is `blank`  Action `Hide Views`  Views `IFRAME - DO NOT MODIFY rich_text` |
-| 3 | When `ASSET_ATTACHED` is `No`  Action `Hide Views`  Views:  \* `Add tmc_activity form` \* `Add work_order form` |
-| 4 | When `ISSUE_STATUS_DESC` is `NOT` `Closed (Resolved)`  When `ISSUE_STATUS_DESC` is `NOT` `Closed (Duplicate)`  Action `Hide Views`  Views `Re-Open Menu menu` |
-| 5 | When `CSR_Y_VALUE` is `0`  Action `Hide Views`  Views `IFRAME - DO NOT MODIFY rich_text` |
-| 6 | When `ASSET_ATTACHED` is `No`  Action `Show a message`  Message \(Warning\) `This issue does not have an asset identified` |
-| 7 | When `ASSET_ATTACHED` is `Yes`  Action `Hide Views`  Views `Assign Asset form` |
-| 8 | When `Accounts > User Roles` `does not contain` `Program Editor`  `Accounts > User Roles` `does not contain` "Technician \| AMD"  `Accounts > User Roles` `does not contain` "Supervisor \| AMD"  Action `Hide Views`  Views: \* `Re-Open Menu menu`  \* `Assign Asset form`  \* `Add tmc_activity form` \* `Add work_order form` |
-| 9 | When `ISSUE_STATUS_CODE` is `closed_resolved` Action `Hide Views`  Views `Add tmc_activity form` `Add work_order form` |
-| 10 | When `ISSUE_STATUS_CODE` is `closed_duplicate`  Action `Hide Views`  Views: \* `Assign Asset form` \* `Add work_order form` |
-| 11 | When `ISSUE_STATUS_CODE` is `closed_resolved`  Action `Hide Views`  Views `Assign Asset form` |
-| 12 | When `ISSUE_STATUS_CODE` is `closed_duplicate`  Action `Hide Views`  Views `Assign Asset form` |
-| 13 | When `ISSUE_STATUS_CODE` is `closed_311_feedback`  Action `Hide Views`  Views `Re-Open Menu menu` |
-| 14 | When `Accounts > User Roles` `does not contain` `System Administrator`  Action `Hide Views`  Views `ASSIGN ASSET - api form` |
-
+| #  | Rule Details                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| -- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1  | <p>When <code>COUNT_FLEX_NOTES</code> is <code>0</code><br>Action <code>Hide Views</code><br> Views <code>Show flex notes menu</code></p>                                                                                                                                                                                                                                                                                                                                                      |
+| 2  | <p>When <code>CSR_Y_VALUE</code> is <code>blank</code><br> Action <code>Hide Views</code><br> Views <code>IFRAME - DO NOT MODIFY rich_text</code></p>                                                                                                                                                                                                                                                                                                                                          |
+| 3  | <p>When <code>ASSET_ATTACHED</code> is <code>No</code><br> Action <code>Hide Views</code><br> Views:<br> * <code>Add tmc_activity form</code><br>* <code>Add work_order form</code></p>                                                                                                                                                                                                                                                                                                        |
+| 4  | <p>When <code>ISSUE_STATUS_DESC</code> is <code>NOT</code> <code>Closed (Resolved)</code><br> When <code>ISSUE_STATUS_DESC</code> is <code>NOT</code> <code>Closed (Duplicate)</code><br> Action <code>Hide Views</code><br> Views <code>Re-Open Menu menu</code></p>                                                                                                                                                                                                                          |
+| 5  | <p>When <code>CSR_Y_VALUE</code> is <code>0</code><br> Action <code>Hide Views</code><br> Views <code>IFRAME - DO NOT MODIFY rich_text</code></p>                                                                                                                                                                                                                                                                                                                                              |
+| 6  | <p>When <code>ASSET_ATTACHED</code> is <code>No</code><br> Action <code>Show a message</code><br> Message (Warning) <code>This issue does not have an asset identified</code></p>                                                                                                                                                                                                                                                                                                              |
+| 7  | <p>When <code>ASSET_ATTACHED</code> is <code>Yes</code><br> Action <code>Hide Views</code><br> Views <code>Assign Asset form</code></p>                                                                                                                                                                                                                                                                                                                                                        |
+| 8  | <p>When <code>Accounts > User Roles</code> <code>does not contain</code> <code>Program Editor</code><br> <code>Accounts > User Roles</code> <code>does not contain</code> "Technician | AMD"<br> <code>Accounts > User Roles</code> <code>does not contain</code> "Supervisor | AMD"<br> Action <code>Hide Views</code><br> Views:<br>* <code>Re-Open Menu menu</code><br> * <code>Assign Asset form</code><br> * <code>Add tmc_activity form</code><br>* <code>Add work_order form</code></p> |
+| 9  | <p>When <code>ISSUE_STATUS_CODE</code> is <code>closed_resolved</code><br>Action <code>Hide Views</code><br> Views <code>Add tmc_activity form</code> <code>Add work_order form</code></p>                                                                                                                                                                                                                                                                                                     |
+| 10 | <p>When <code>ISSUE_STATUS_CODE</code> is <code>closed_duplicate</code><br> Action <code>Hide Views</code><br> Views:<br>* <code>Assign Asset form</code><br>* <code>Add work_order form</code></p>                                                                                                                                                                                                                                                                                            |
+| 11 | <p>When <code>ISSUE_STATUS_CODE</code> is <code>closed_resolved</code><br> Action <code>Hide Views</code><br> Views <code>Assign Asset form</code></p>                                                                                                                                                                                                                                                                                                                                         |
+| 12 | <p>When <code>ISSUE_STATUS_CODE</code> is <code>closed_duplicate</code><br> Action <code>Hide Views</code><br> Views <code>Assign Asset form</code></p>                                                                                                                                                                                                                                                                                                                                        |
+| 13 | <p>When <code>ISSUE_STATUS_CODE</code> is <code>closed_311_feedback</code><br> Action <code>Hide Views</code><br> Views <code>Re-Open Menu menu</code></p>                                                                                                                                                                                                                                                                                                                                     |
+| 14 | <p>When <code>Accounts > User Roles</code> <code>does not contain</code> <code>System Administrator</code><br> Action <code>Hide Views</code><br> Views <code>ASSIGN ASSET - api form</code></p>                                                                                                                                                                                                                                                                                               |

@@ -6,9 +6,9 @@ description: >-
 
 # Conditionally Hide/Show Form Fields
 
-![The Improvement field value will determine which additional fields show or hide](../../.gitbook/assets/image%20%2862%29.png)
+![The Improvement field value will determine which additional fields show or hide](<../../../.gitbook/assets/image (62).png>)
 
-![For this specific Improvement, we have four new fields show on the form](../../.gitbook/assets/image%20%2863%29.png)
+![For this specific Improvement, we have four new fields show on the form](<../../../.gitbook/assets/image (63).png>)
 
 
 
@@ -16,7 +16,7 @@ description: >-
 
 Create two variables, one that determines which fields to display on load, and the other for which fields to display on the field's value selection. We create an argument for each possible value.
 
-```text
+```
 var improvementField = "field_495";
 var mitigationField = "field_326";
 
@@ -102,7 +102,7 @@ var fieldsIdsShownOnMitigationTypeSelect = {
 
 We create two functions, one that will hide the specified fields for us, and the other to show the specified fields.
 
-```text
+```
 function hideFormFields(fieldViewId) {
   var $fields = $("#" + fieldViewId).find(".kn-input");
 
@@ -145,7 +145,7 @@ function showFieldsByImprovementAndType(viewId){
 
 For each of our form views where the selection occurs, we create a handler with an event listener for a change in the field value that determines which fields show or hide.
 
-```text
+```
 //the Add Mitigation Form
 $(document).on("knack-view-render.view_628", function (event, view) {
   hideFormFields(view.key);
@@ -164,7 +164,7 @@ $(document).on("knack-view-render.view_628", function (event, view) {
 
 On an Edit form specifically, we add an if statement to check if the field already has a value and show the appropriate fields based on the existing value.
 
-```text
+```
 //the Edit Mitigation Form
 $(document).on("knack-view-render.view_509", function (event, view) {
   hideFormFields(view.key);
@@ -202,12 +202,12 @@ None needed 😎
 
 For the variable arguments, you will need to adjust to your specific Field Names, Field ID's and Field Values
 
-```text
+```
 // "Field ID": "Field Name"
   "kn-input-field_639": "Mitigation Location",
 ```
 
-```text
+```
 // "MC Field Value": [...ids of fields to show on value select]
   "Construct Turn Lane": [
     "kn-input-field_494",
@@ -219,29 +219,28 @@ For the variable arguments, you will need to adjust to your specific Field Names
 
 For each of the handlers, you will also need to adjust to your specific View ID's and Field ID's
 
-```text
+```
 "knack-view-render.view_509"
 ```
 
-```text
+```
 "view_509"
 ```
 
-```text
+```
 "#view_509-field_495"
 ```
 
 Lastly, if using an edit form, you can update the variable name for the if statement to be something more generic or more specific for your use case.
 
-```text
+```
 improvementValue
 ```
 
 to
 
-```text
+```
 specificValue
 ```
 
 for all 3 references to it in the if statement
-

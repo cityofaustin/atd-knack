@@ -8,7 +8,7 @@
 * [Platform Overview](knack/platform-overview.md)
 * [Functionality Guide](knack/functionality-guide.md)
 * [Style Guide](knack/style-guide.md)
-* [Single Sign On \(SSO\)](knack/single-sign-on/README.md)
+* [Single Sign On (SSO)](knack/single-sign-on/README.md)
   * [SSL Certificate Management](knack/single-sign-on/ssl-certificate-management.md)
 * [Banner Logos](knack/banner-logos.md)
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
@@ -51,8 +51,8 @@
   * [Hyperlink a Form Field Label](knack-code/looks/hyperlink-form-field-label.md)
   * [Remove Table Header](knack-code/looks/remove-table-header.md)
   * [Modify Table Summary Rows](knack-code/looks/modify-table-summary-row.md)
-  * [Convert Values to UPPERCASE \(Option A\)](knack-code/looks/convert-values-to-uppercase-a.md)
-  * [Convert Values to UPPERCASE \(Option B\)](knack-code/looks/convert-values-to-uppercase-b.md)
+  * [Convert Values to UPPERCASE (Option A)](knack-code/looks/convert-values-to-uppercase-a.md)
+  * [Convert Values to UPPERCASE (Option B)](knack-code/looks/convert-values-to-uppercase-b.md)
   * [Highlight Details View Label Body & Table Value](knack-code/looks/highlight-label-body.md)
   * [Report Headers](knack-code/looks/report-headers.md)
   * [Report Filters Container Size](knack-code/looks/report-filter-container.md)
@@ -60,31 +60,31 @@
   * [HighCharts Report Styling](knack-code/looks/global-report-styling.md)
   * [Font Awesome Icons](knack-code/looks/fa-icons.md)
 
-## AMD \| DATA TRACKER <a id="data-tracker"></a>
+## AMD | DATA TRACKER <a href="data-tracker" id="data-tracker"></a>
 
 * [Application Overview](data-tracker/application-overview.md)
 * [Asset Changes](data-tracker/asset-changes.md)
-* [CSR \| Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
+* [CSR | Flex Note Archiving](data-tracker/csr-or-flex-note-archiving.md)
 * [Cameras](data-tracker/cameras.md)
 * [Fix Broken CCTV Device Status Page Links](data-tracker/fix-broken-cctv-device-status-page-links.md)
 * [Performance Measures](data-tracker/performance-measures.md)
 * [Builder Notes](data-tracker/builder-notes/README.md)
-  * [Data Tracker \| Annual Signal and PHB Request Ranking](data-tracker/builder-notes/data-tracker-or-annual-signal-and-phb-request-ranking.md)
-  * [Page Rules \(TMC\) CSR](data-tracker/builder-notes/page-rules-tmc-csr.md)
-  * [NOTIFICATION \| Construction Status Email](data-tracker/builder-notes/notification-or-construction-status-email.md)
-  * [NOTIFICATION \| One Day Signal Engineer Due Date](data-tracker/builder-notes/notification-or-one-day-signal-engineer-due-date.md)
-  * [DETAILS \| Preventative Maintenance \(PM\)](data-tracker/builder-notes/details-or-preventative-maintenance-pm.md)
-  * [DETAILS \| Signal Detectors Object Tables, Reports, misc..](data-tracker/builder-notes/details-or-signal-detectors-object-tables-reports-misc...md)
-  * [DETAILS \| Signals](data-tracker/builder-notes/details-or-signals.md)
-  * [Signals Work Order \| EDIT FORMS](data-tracker/builder-notes/signals-work-order-or-edit-forms.md)
-  * [Signals Work Order \| FORM LOCATIONS](data-tracker/builder-notes/signals-work-order-or-form-locations.md)
-  * [Editing Signals Work Order \| NEW FORMS](data-tracker/builder-notes/untitled.md)
+  * [Data Tracker | Annual Signal and PHB Request Ranking](data-tracker/builder-notes/data-tracker-or-annual-signal-and-phb-request-ranking.md)
+  * [Page Rules (TMC) CSR](data-tracker/builder-notes/page-rules-tmc-csr.md)
+  * [NOTIFICATION | Construction Status Email](data-tracker/builder-notes/notification-or-construction-status-email.md)
+  * [NOTIFICATION | One Day Signal Engineer Due Date](data-tracker/builder-notes/notification-or-one-day-signal-engineer-due-date.md)
+  * [DETAILS | Preventative Maintenance (PM)](data-tracker/builder-notes/details-or-preventative-maintenance-pm.md)
+  * [DETAILS | Signal Detectors Object Tables, Reports, misc..](data-tracker/builder-notes/details-or-signal-detectors-object-tables-reports-misc...md)
+  * [DETAILS | Signals](data-tracker/builder-notes/details-or-signals.md)
+  * [Signals Work Order | EDIT FORMS](data-tracker/builder-notes/signals-work-order-or-edit-forms.md)
+  * [Signals Work Order | FORM LOCATIONS](data-tracker/builder-notes/signals-work-order-or-form-locations.md)
+  * [Editing Signals Work Order | NEW FORMS](data-tracker/builder-notes/untitled.md)
 
----
+***
 
-* [Warehouse Inventory  - Updating Journal Vouchers \(JV\) information](warehouse-inventory-updating-journal-vouchers-jv-information.md)
+* [Warehouse Inventory - Updating Journal Vouchers (JV) information](warehouse-inventory-updating-journal-vouchers-jv-information.md)
 
-## Signs & Markings Operations <a id="signs-and-markings"></a>
+## Signs & Markings Operations <a href="signs-and-markings" id="signs-and-markings"></a>
 
 * [Application Overview](signs-and-markings/application-overview.md)
 * [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
@@ -99,7 +99,7 @@
 * [Application Overview](street-banner-program/application-overview.md)
 * [Street Banner Program](street-banner-program/street-banner-program.md)
 
-## DTS \| Data & Technology Services Portal <a id="dts-portal"></a>
+## DTS | Data & Technology Services Portal <a href="dts-portal" id="dts-portal"></a>
 
 * [Application Overview](dts-portal/application-overview.md)
 * [Data set inventory](dts-portal/dts-portal.md)
@@ -116,7 +116,7 @@
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
 
-## TDS \| Transportation Development Services <a id="tds-portal"></a>
+## TDS | Transportation Development Services <a href="tds-portal" id="tds-portal"></a>
 
 * [Application Overview](tds-portal/application-overview.md)
 * [Color Palette](tds-portal/status-palette.md)
@@ -130,28 +130,28 @@
   * [Converting an Entered Percentage to a Percentage Value](tds-portal/app-logic/percentage-conversion.md)
   * [Create a Connection Link Field to View a Searched Record](tds-portal/app-logic/searched-record-link.md)
   * [Extracting Location Coordinates to add Map Markers](tds-portal/app-logic/coordinates-to-markers.md)
-* [DR \| Development Reviews](tds-portal/dr-build.md)
-* [TIA \| Traffic Impact Analysis](tds-portal/tia-build.md)
-* [TDA \| Transportation Development Assessments](tds-portal/tda-build.md)
+* [DR | Development Reviews](tds-portal/dr-build.md)
+* [TIA | Traffic Impact Analysis](tds-portal/tia-build.md)
+* [TDA | Transportation Development Assessments](tds-portal/tda-build.md)
 
-## RPP \| Residential Parking Permit Portal <a id="rpp-portal"></a>
+## RPP | Residential Parking Permit Portal <a href="rpp-portal" id="rpp-portal"></a>
 
 * [Application Overview](rpp-portal/application-overview.md)
 * [Residential Parking Permits](rpp-portal/rpp-build.md)
 * [RPP Migration](rpp-portal/rpp-migration.md)
 
-## ROW \| Right of Way Portal <a id="row-portal"></a>
+## ROW | Right of Way Portal <a href="row-portal" id="row-portal"></a>
 
 * [Application Overview](row-portal/application-overview.md)
-* [TCP \| Traffic Control Plans](row-portal/tcp-build.md)
+* [TCP | Traffic Control Plans](row-portal/tcp-build.md)
 
-## SMO \| Shared Mobility Operations <a id="shared-mobility-operations"></a>
+## SMS| Shared Mobility Services <a href="shared-mobility-services" id="shared-mobility-services"></a>
 
-* [Application Overview](shared-mobility-operations/application-overview.md)
-* [License & Permit Management](shared-mobility-operations/license-and-permit-management.md)
-* [Sources for Monthly Trip Records](shared-mobility-operations/sources-monthly-trip-records.md)
+* [Application Overview](shared-mobility-services/application-overview.md)
+* [License & Permit Management](shared-mobility-services/license-and-permit-management.md)
+* [Sources for Monthly Trip Records](shared-mobility-services/sources-monthly-trip-records.md)
 
-## VZA \| Vision Zero in Action <a id="vision-zero-in-action"></a>
+## VZA | Vision Zero in Action <a href="vision-zero-in-action" id="vision-zero-in-action"></a>
 
 * [Application Overview](vision-zero-in-action/application-overview.md)
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
@@ -162,12 +162,12 @@
 * [Use Tasks for Creating Child Records](vision-zero-in-action/use-of-tasks.md)
 * [Use Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
 
-## Parking Enterprise Portal <a id="parking-enterprise"></a>
+## Parking Enterprise Portal <a href="parking-enterprise" id="parking-enterprise"></a>
 
 * [Application Overview](parking-enterprise/application-overview.md)
 * [Dispatch Resource Tracking Log Archiving](parking-enterprise/dispatch-resource-tracking-log-archiving.md)
 
-## HR \| Human Resources <a id="human-resources"></a>
+## HR | Human Resources <a href="human-resources" id="human-resources"></a>
 
 * [Application Overview](human-resources/application-overview.md)
 
@@ -178,4 +178,3 @@
 ## O365 Resources
 
 * [Resources](o365-resources/resources.md)
-

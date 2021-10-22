@@ -4,13 +4,13 @@ description: How to disable breadcrumb navigation links to prevent backwards nav
 
 # Disable Breadcrumb Navigation Links
 
-![Disabled navigation for the TIA Request](../../.gitbook/assets/image%20%2854%29.png)
+![Disabled navigation for the TIA Request](<../../../.gitbook/assets/image (54).png>)
 
 ### The JS
 
 We have a function that checks the session token and disables the .kn-crumbtrail for a specified scene as called by the handler.
 
-```text
+```
 /*******************************************/
 /*** Disable Breadcrumb Navigation Links ***/
 /*******************************************/
@@ -34,13 +34,11 @@ None needed 😎
 
 ### How to Implement
 
-```text
+```
 "knack-scene-render.scene_58"
 ```
 
 Adjust Scene ID and you are set 👍
-
-
 
 
 

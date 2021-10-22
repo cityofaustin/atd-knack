@@ -22,7 +22,7 @@ Setup the Number field as a whole number with no decimals
 
 If Percentage Entry field is blank we set it to 100% by default. This is specific to the app so that reviewers dont have to enter 100 for everything that is 100%. If the Percentage Entry does have a value, we multiply it by 0.01 to get our decimal value.
 
-```text
+```
 {Mitigation Share % Entry} == 0 ? {Mitigation Share % Entry} + 1.00 : {Mitigation Share % Entry} * 0.01
 ```
 
@@ -30,9 +30,8 @@ If Percentage Entry field is blank we set it to 100% by default. This is specifi
 
 Make sure to setup this Number field to the % Number Format.
 
-![](../../.gitbook/assets/image%20%28261%29.png)
+![](<../../../.gitbook/assets/image (261).png>)
 
 And set it to the Equation field
 
-![](../../.gitbook/assets/image%20%28209%29.png)
-
+![](<../../../.gitbook/assets/image (209).png>)

@@ -4,11 +4,11 @@ description: How to condense a Knack Menu into a categorized Dropdown Menu
 
 # Dropdown Menu Buttons
 
-![The TIA Module Dropdown Menu condensed into only 4 buttons, 2 with dropdown navigation](../../.gitbook/assets/image%20%28141%29.png)
+![The TIA Module Dropdown Menu condensed into only 4 buttons, 2 with dropdown navigation](<../../../.gitbook/assets/image (141).png>)
 
 ### The JS
 
-```text
+```
 /****************************************/
 /*** Dropdown Menu Buttons Navigation ***/
 /****************************************/
@@ -67,7 +67,7 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
 
 We style the menu buttons to be similar to how the default Knack styling is. We also hide the original menu view if screen size is 800px or larger but hide our custom dropdown menu on smaller screens. This allows for easier navigation on mobile without the dropdowns, but also easier navigation on desktop with the dropdowns.
 
-```text
+```
 /****************************************/
 /*** Dropdown Menu Buttons Navigation ***/
 /****************************************/
@@ -125,13 +125,13 @@ We style the menu buttons to be similar to how the default Knack styling is. We 
 {% tab title="1️⃣" %}
 Create a Menu view as normal and update it accordingly with your navigation. Create a second Menu view without any buttons, this will house the custom dropdown menu.
 
-![](../../.gitbook/assets/image%20%28144%29.png)
+![](<../../../.gitbook/assets/image (144).png>)
 {% endtab %}
 
 {% tab title="2️⃣" %}
 Update the url route in the JS function so it matches your page navigation
 
-```text
+```
 <a href="#tia-requests/tia-case-details/${recordId}/${route}/${recordId}">\
 ```
 {% endtab %}
@@ -139,13 +139,13 @@ Update the url route in the JS function so it matches your page navigation
 {% tab title="3️⃣" %}
 Update the JS handler with the correct View ID of the empty view for the custom dropdown menu
 
-```text
+```
 $(document).on('knack-view-render.view_744', function(event, view, record) {
 ```
 
 and also at the bottom of the handler for the View ID that it appends to
 
-```text
+```
 </div>`).appendTo("#view_744")
 ```
 {% endtab %}
@@ -153,14 +153,14 @@ and also at the bottom of the handler for the View ID that it appends to
 {% tab title="4️⃣" %}
 Update the div class and the unordered list ID to what you would like to call them
 
-```text
+```
 <div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
 ```
 
 If the class or ID are updated, be sure to update the corresponding CSS for all instances
 
-```text
+```
 #tia-menu-list {
 ```
 {% endtab %}
@@ -168,25 +168,25 @@ If the class or ID are updated, be sure to update the corresponding CSS for all 
 {% tab title="5️⃣" %}
 Update the list class and unordered list classes to what you would like to call them
 
-```text
+```
 <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
 ```
 
-```text
+```
 <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
 ```
 {% endtab %}
 
 {% tab title="6️⃣" %}
-Update the url route and slug for each of your lists \(dropdown buttons\). In this example, we have 2.
+Update the url route and slug for each of your lists (dropdown buttons). In this example, we have 2.
 
-```text
+```
 <a href="#tia-requests/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
 ```
 
-Additionally, update the span classes for each of these lists \(dropdown buttons\) with the appropriate button label and icon
+Additionally, update the span classes for each of these lists (dropdown buttons) with the appropriate button label and icon
 
-```text
+```
 <span class="nav-dropdown-link">Case Management</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" />\
 ```
@@ -195,7 +195,7 @@ Additionally, update the span classes for each of these lists \(dropdown buttons
 {% tab title="7️⃣" %}
 We now update the JS handlers for each individual list item / button with the appropriate page url,  fa icon, and button label.
 
-```text
+```
 ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
 ```
 {% endtab %}
@@ -203,7 +203,7 @@ ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submi
 {% tab title="8️⃣" %}
 Lastly, we update the View ID for the original menu view that we will be hiding in the CSS
 
-```text
+```
 /* hide knack menu buttons if on desktop */
 @media (min-width: 799px) {
   #view_163 {
@@ -213,8 +213,6 @@ Lastly, we update the View ID for the original menu view that we will be hiding 
 ```
 {% endtab %}
 {% endtabs %}
-
-
 
 
 

@@ -6,15 +6,15 @@ description: How to highlight a details view label body to bring attention to a 
 
 This will give greater visibility to a field that is important to understand at a glance such as a status field and adjusting the highlight color based on the current status.
 
-![In the Signs and Markings Tracker, Work Order Details page](../../.gitbook/assets/image%20%2851%29%20%281%29.png)
+![In the Signs and Markings Tracker, Work Order Details page](<../../../.gitbook/assets/image (51) (1).png>)
 
-![In Parking Enterprise Portal, My Assignments page](../../.gitbook/assets/highlight_details_widget_field.png)
+![In Parking Enterprise Portal, My Assignments page](../../../.gitbook/assets/highlight\_details\_widget\_field.png)
 
 ### The JS
 
 This function allows us to identify the details view label body and set a background color value
 
-```text
+```
 //Change Label Body Background Color
 function changeFieldColor(field, color_map) {
   var child_field = $(field).find(".kn-detail-body");
@@ -30,7 +30,7 @@ function changeFieldColor(field, color_map) {
 
 This function allows us to identify a table field and set a background color value
 
-```text
+```
 //Change Table Value Background Color
 function changeTableFieldColor(field, color_map) {
   var fields = $(field);
@@ -48,7 +48,7 @@ function changeTableFieldColor(field, color_map) {
 
 We set variables for each combination of background and text colors we want based on field values
 
-```text
+```
 //Color Map Status Highlight
 var colorMapOne = {
   "Available": { background_color: "#80d07e", color: "#fff" },
@@ -58,7 +58,7 @@ var colorMapOne = {
 
 We create a handler that calls the function and sets a specified field to a specified variable
 
-```text
+```
 //Highlighted Field
 $(document).on("knack-scene-render.any", function() {
   changeFieldColor(".field_236", colorMapOne);
@@ -73,16 +73,14 @@ None needed 😎
 
 Adjust the hex colors for each color map variable
 
-```text
+```
   "Available": { background_color: "#80d07e", color: "#fff" },
   "Unavailable": { background_color: "#ff9b9c", color: "#fff" }
 ```
 
 Adjust the Field ID for each handler
 
-```text
+```
  changeFieldColor(".field_236", colorMapOne);
 ```
-
-
 

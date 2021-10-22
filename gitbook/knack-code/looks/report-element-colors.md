@@ -4,9 +4,9 @@ description: How to apply matching colors between different chart types
 
 # Report Element Colors
 
-![Without matching colors](../../.gitbook/assets/image%20%28139%29.png)
+![Without matching colors](<../../../.gitbook/assets/image (139).png>)
 
-![With matching colors; bars, pie slices, and pie legend](../../.gitbook/assets/image%20%28142%29.png)
+![With matching colors; bars, pie slices, and pie legend](<../../../.gitbook/assets/image (142).png>)
 
 Unfortunately Knack does not apply the default HighCharts colors for bar charts and only gives the bar elements the first blue color. To increase clarity when comparing charts, we manipulate each individual bar so that is matches its corresponding pie chart color. Below is the list of the [Default HighChart Colors](https://api.highcharts.com/highcharts/colors).
 
@@ -31,9 +31,9 @@ There are several different situations, based on the number of calculated elemen
 
 {% tabs %}
 {% tab title="10+ Element Bar Chart" %}
-If you have 10 or more elements \(values\) being calculated, you can use a simplified notation the negates the need for more than 10 lines of code
+If you have 10 or more elements (values) being calculated, you can use a simplified notation the negates the need for more than 10 lines of code
 
-```text
+```
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
@@ -50,7 +50,7 @@ If you have 10 or more elements \(values\) being calculated, you can use a simpl
 {% tab title="Incremental Bar Chart" %}
 We use incremental notation if we have 10 or fewer elements
 
-```text
+```
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
 #kn-report-view_1369-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
@@ -67,7 +67,7 @@ We use incremental notation if we have 10 or fewer elements
 {% tab title="Pie Chart" %}
 Or if you would like to modify the colors to a pie chart, you need to change the color for both the pie slice and the `rect` legend element. In this example we specify unique colors that match the RPP zone colors.
 
-```text
+```
 #kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(1) {fill: DodgerBlue;}
 #kn-report-view_1317-2 div.highcharts-container svg g.highcharts-legend g:nth-child(1).highcharts-legend-item rect{fill: DodgerBlue;}
 #kn-report-view_1317-2 div.highcharts-container svg g.highcharts-series-group g.highcharts-series path:nth-child(2) {fill: #b29700;}
@@ -94,7 +94,7 @@ You can simply copy the CSS above that is applicable depending on how many eleme
 
 The report View ID will need to be updated for each line. Additionally, the number after the View ID indicates which report in the report view you are manipulating. For example if you had 2 reports in a view, the first would be 1, the second would be 2. With the New Knack Builder, it is not recommended to have more than 2 reports per report view so that report views can easily be managed and copied.
 
-```text
+```
 /*Report 1 in the View*/
 #kn-report-view_1317-1
 
@@ -104,15 +104,14 @@ The report View ID will need to be updated for each line. Additionally, the numb
 
 Lastly, if you have both a bar chart and pie chart next to each other where you want to match colors, there is one final thing that must be done. Navigate to the pie chart Chart Properties data section
 
-![](../../.gitbook/assets/image%20%28143%29.png)
+![](<../../../.gitbook/assets/image (143).png>)
 
 Select the cog and set the legend order to be in reverse alphabetical
 
-![](../../.gitbook/assets/image%20%28140%29.png)
+![](<../../../.gitbook/assets/image (140).png>)
 
 Counter-intuitive to what you would expect, doing this displays the pie chart legend in proper alphabetical order so the legend colors match the pie slice colors which in turn will match the bar chart colors if you apply the default HighChart colors.
 
 ### More Info
 
-If you want to see more about [`:nth-child()` Pseudo Class Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#example_selectors) in the Mozilla developer docs.
-
+If you want to see more about [`:nth-child()` Pseudo Class Selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child#example\_selectors) in the Mozilla developer docs.

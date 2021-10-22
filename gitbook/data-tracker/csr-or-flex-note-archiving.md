@@ -2,7 +2,7 @@
 description: 311 Service Request Flex Note Archiving
 ---
 
-# CSR \| Flex Note Archiving
+# CSR | Flex Note Archiving
 
 ## Background
 
@@ -14,7 +14,7 @@ To save storage space, we have a python script which copies all flex notes to ou
 
 ### Script Location
 
-That script lives here: [https://github.com/cityofaustin/transportation-data-publishing/blob/master/transportation-data-publishing/data\_tracker/knack\_postgrest\_pub.py](https://github.com/cityofaustin/transportation-data-publishing/blob/master/transportation-data-publishing/data_tracker/knack_postgrest_pub.py)
+That script lives here: [https://github.com/cityofaustin/transportation-data-publishing/blob/master/transportation-data-publishing/data\_tracker/knack\_postgrest\_pub.py](https://github.com/cityofaustin/transportation-data-publishing/blob/master/transportation-data-publishing/data\_tracker/knack\_postgrest\_pub.py)
 
 With the flex notes backed up, we have agreed with business owners that we will **delete** the flex note records from the Data Tracker.
 
@@ -39,7 +39,7 @@ In the event that a user wants to view any flex notes which are no longer in the
 5. `CREATED_DATE` is before `<two months ago>`
 6. After applying the filters, verify that the results appear as expected, and _note how many records will be deleted_.
 7. Now it's time to batch delete the flex note records. From the `csr_flex_notes` records view in the builder, click on the **Delete** drop-down, and choose **Batch Delete**
-8. Apply the same filters as defined in step 3, and click **Next**. On the next screen you will be prompted to confirm the delete. Verify that the \# of records to be deleted matches the results from step 4.
+8. Apply the same filters as defined in step 3, and click **Next**. On the next screen you will be prompted to confirm the delete. Verify that the # of records to be deleted matches the results from step 4.
 9. Click **Delete Records** to confirm your delete.
 10. Lastly, update the [DTS Change Log](http://atd.knack.com/dts#change-log/) and note how many records were deleted.
 
@@ -49,7 +49,6 @@ We have a template to use in the atd-data-tech repo
 
 Use the current month to name the issue, for example January 2020 for the November 1st 2019 date referenced below.
 
-![Issue description](../.gitbook/assets/flexnotearchivingissue.png)
+![Issue description](../../.gitbook/assets/flexnotearchivingissue.png)
 
-![Issue to document deletion confirmation](../.gitbook/assets/flexnotearchivingissue_2.png)
-
+![Issue to document deletion confirmation](../../.gitbook/assets/flexnotearchivingissue\_2.png)
