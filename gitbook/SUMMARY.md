@@ -145,11 +145,11 @@
 * [Application Overview](row-portal/application-overview.md)
 * [TCP | Traffic Control Plans](row-portal/tcp-build.md)
 
-## SMS| Shared Mobility Services <a href="shared-mobility-services" id="shared-mobility-services"></a>
+## SMS| Shared Mobility Reporting Tracker <a href="shared-mobility-reporting-tracker" id="shared-mobility-reporting-tracker"></a>
 
-* [Application Overview](shared-mobility-services/application-overview.md)
-* [License & Permit Management](shared-mobility-services/license-and-permit-management.md)
-* [Sources for Monthly Trip Records](shared-mobility-services/sources-monthly-trip-records.md)
+* [Application Overview](shared-mobility-reporting-tracker/application-overview.md)
+* [License & Permit Management](shared-mobility-reporting-tracker/license-and-permit-management.md)
+* [Sources for Monthly Trip Records](shared-mobility-reporting-tracker/sources-monthly-trip-records.md)
 
 ## VZA | Vision Zero in Action <a href="vision-zero-in-action" id="vision-zero-in-action"></a>
 

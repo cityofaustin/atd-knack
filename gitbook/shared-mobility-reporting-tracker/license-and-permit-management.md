@@ -17,17 +17,17 @@ Ex. 100 devices in DAPCZ
 
 | `LICENSE STATUS`     | `DESCRIPTION`                                                                                                                                                                                                                                    |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **ACTIVE**           | <p>The license has been deemed active by the SMO Team<br></p>                                                                                                                                                                                    |
-| **PENDING APPROVAL** | The license is under review of the SMO Team                                                                                                                                                                                                      |
-| **NOT OPERATIONAL**  | At times the provider/SMO Team decide that the provider is to not do any business and will "freeze" the status of the license and all the current permits associated to a provider.                                                              |
+| **ACTIVE**           | <p>The license has been deemed active by the SMS Team<br></p>                                                                                                                                                                                    |
+| **PENDING APPROVAL** | The license is under review of the SMS Team                                                                                                                                                                                                      |
+| **NOT OPERATIONAL**  | At times the provider/SMS Team decide that the provider is to not do any business and will "freeze" the status of the license and all the current permits associated to a provider.                                                              |
 | `PERMIT STATUS`      | `DESCRIPTION`                                                                                                                                                                                                                                    |
-| **ACTIVE**           | When SMO Team has added a permit to a provider and that provider is able to do business in the specified area with the specified number of units                                                                                                 |
+| **ACTIVE**           | When SMS Team has added a permit to a provider and that provider is able to do business in the specified area with the specified number of units                                                                                                 |
 | **EXPIRED**          | The permit has expired due to the permit not being renewed                                                                                                                                                                                       |
-| **NOT OPERATIONAL**  | At times the provider/SMO Team decide that the provider is to not do any business and will "freeze" the status of the license and all the current permits associated to a provider. This status is when the license has become "Not Operational" |
+| **NOT OPERATIONAL**  | At times the provider/SMS Team decide that the provider is to not do any business and will "freeze" the status of the license and all the current permits associated to a provider. This status is when the license has become "Not Operational" |
 
 ## ADD A LICENSE
 
-When you add a Provider, there is a section when you enter the **Start Date** and **Expiration Date** for the provider. This "provider" record generates a License ID number and that license will be tied to the provider. The duration Start/Expiration dates determine the license period. 
+When you add a Provider, there is a section when you enter the **Start Date** and **Expiration Date** for the provider. This "provider" record generates a License ID number and that license will be tied to the provider. The duration Start/Expiration dates determine the license period.&#x20;
 
 ### Steps on how to - [ADD A NEW PROVIDER](https://atd-dts.gitbook.io/atd-knack-operations/shared-mobility-operations/application-overview#add-a-new-provider)
 
@@ -40,7 +40,7 @@ When you add a Provider, there is a section when you enter the **Start Date** an
 3\. Fill out the Permit information on the form:
 
 * **Device Type:** the type of dock-less mobility device
-* **Number of Devices: **the number of units being deployed 
+* **Number of Devices: **the number of units being deployed&#x20;
 * **Amount Paid: **The amount the permit will be (custom amount because can prorate permit amounts)
 * **Zone:** The geographic zone/area that the provider will be deploying units
 * **Notes: **any additional notes about the permit
@@ -53,25 +53,25 @@ When you add a Provider, there is a section when you enter the **Start Date** an
 
 ## RENEW PERMIT(S) & LICENSE
 
-Each Provider/License record has a **Start Date** and **Expiration Date** associated, the system will run a task to change the permit field "Renewal Period" (Yes/No). If the Expiration date is within the current month and the permit is active it'll switch the "Renewal Period" to "Yes". 
+Each Provider/License record has a **Start Date** and **Expiration Date** associated, the system will run a task to change the permit field "Renewal Period" (Yes/No). If the Expiration date is within the current month and the permit is active it'll switch the "Renewal Period" to "Yes".&#x20;
 
-An email task is set up so that a provider is notified by email 30 days before the Provider's Expiration date. The provider should communicate with the SMO team to determine which permits to "renew" and which to "set to expire". 
+An email task is set up so that a provider is notified by email 30 days before the Provider's Expiration date. The provider should communicate with the SMS team to determine which permits to "renew" and which to "set to expire".&#x20;
 
-This allows the staff (or Provider, depending on the SMO team) to renew the permits they would like or set them to expire. 
+This allows the staff (or Provider, depending on the SMS team) to renew the permits they would like or set them to expire.&#x20;
 
 ![](<../../.gitbook/assets/image (309).png>)
 
 ![](<../../.gitbook/assets/image (312).png>)
 
-After the permits have been added, renewed or set to expire the SMO team can go to the License Renewal at the bottom of the page. 
+After the permits have been added, renewed or set to expire the SMS team can go to the License Renewal at the bottom of the page.&#x20;
 
 ![](<../../.gitbook/assets/image (307).png>)
 
-When the user clicks "Start License Renewal Process" button a dialog box will appear asking if they have reviewed all the permits up for renewal.   
+When the user clicks "Start License Renewal Process" button a dialog box will appear asking if they have reviewed all the permits up for renewal.  &#x20;
 
 ![](<../../.gitbook/assets/image (308).png>)
 
-If a user clicks "**No**", the dialog box will disappear and the user must review the permits and add, renew or set to expire any licenses. 
+If a user clicks "**No**", the dialog box will disappear and the user must review the permits and add, renew or set to expire any licenses.&#x20;
 
 If a user click "**Yes**", will continue with the renewal process.
 
@@ -79,11 +79,11 @@ The form will ask you to enter the **Start Date** and the **Expiration Date **fo
 
 ![](<../../.gitbook/assets/image (311).png>)
 
-Click "**Submit**" when finished. The Provider object table will update the **Start Date** and the **Expiration Date **and make a copy of the license renewal information in the "archived_license" object table. 
+Click "**Submit**" when finished. The Provider object table will update the **Start Date** and the **Expiration Date **and make a copy of the license renewal information in the "archived\_license" object table.&#x20;
 
 ## CREATE AN INVOICE
 
-When the permits and licenses have been renewed, then an invoice can be created. 
+When the permits and licenses have been renewed, then an invoice can be created.&#x20;
 
 1\. From the "View Provider Details page"
 
@@ -113,7 +113,7 @@ When the permits and licenses have been renewed, then an invoice can be created.
 * **Payment Type: **
   * Check
   * ACH
-* **Invoice Status:** 
+* **Invoice Status:**&#x20;
   * UNPAID
   * PENDING
   * PAID
@@ -138,17 +138,17 @@ Click "**Submit**" when finished.
 * **Cost Per Unit**: used to be $30 but is now $40 - adding "$" is unnecessary, just whole number is fine
 * **Transaction Note**: this is for internal office staff to leave a note about the transaction
 
-Click "**Submit**" when finished. Add as many invoice items to the invoice as each line will appear on the invoice. 
+Click "**Submit**" when finished. Add as many invoice items to the invoice as each line will appear on the invoice.&#x20;
 
 ### Generate Invoice
 
-When all line items have been entered. 
+When all line items have been entered.&#x20;
 
 1\. From the "View Invoice Details page"
 
 2\. Click the "**Invoice**" button
 
-It will open up an Invoice page where staff can review the invoice. If staff would like to print, on the top right hand corner of the page is a "Print" page. In Chrome, it will open a Print Preview page. 
+It will open up an Invoice page where staff can review the invoice. If staff would like to print, on the top right hand corner of the page is a "Print" page. In Chrome, it will open a Print Preview page.&#x20;
 
 ![](<../../.gitbook/assets/image (310).png>)
 
