@@ -568,7 +568,7 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
       $("#" + detailsView)
         .find("div.kn-detail." + fields.quantity.current)
         .find(".kn-detail-body span")[0]
-    ).text()
+    ).text().replaceAll(",", "").trim()
   );
 
   // handle situation where stock levels are negative (this should not but prob will happen)
