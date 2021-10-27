@@ -73,3 +73,54 @@ $(document).on('knack-scene-render.any', function(event, scene) {
   $('.kn-modal-bg').off('click');
 });
 
+
+/*************************************************************************************/
+/***********************Cost of Service Checkboxes************************************/
+/*************************************************************************************/
+// Function that adds checkboxes
+var addCheckboxes = function (view) {
+  // Add the checkbox to to the header to select/unselect all
+  $("#" + view.key + ".kn-table thead tr").prepend(
+    '<th><input type="checkbox"></th>'
+  );
+  $("#" + view.key + ".kn-table thead input").change(function () {
+    $("." + view.key + ".kn-table tbody tr input").each(function () {
+      $(this).attr(
+        "checked",
+        $("#" + view.key + ".kn-table thead input").attr("checked") != undefined
+      );
+    });
+  });
+  // Add a checkbox to each row in the table body
+  $("#" + view.key + ".kn-table tbody tr").each(function () {
+    $(this).prepend('<td class="custom-checkbox"><input type="checkbox"></td>');
+  });
+};
+
+// // Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
+// $("#view_5 tbody input[type=checkbox]:checked").each(function () {
+//   // add code here to get record id or row value
+//   var id = $(this).closest("tr").attr("id"); // record id
+// });
+
+$(document).on("knack-view-render.view_49", function (event, view) {
+  addCheckboxes(view);
+  var button = $(
+    "<span style='width: 2em'></span><button id='refresh-view_49' style='border-radius: .35em !important' class='kn-button is-primary'><i class='fa fa-refresh'></i><span style='width: .5em'></span>Update selected records</button>"
+  );
+  button.insertAfter(
+    $("#" + view.key)
+      .find("form.table-keyword-search")
+      .find("a")[0]
+  );
+  $("#refresh-view_49").click(function (e) {
+    e.preventdefault();
+  });
+  $("#view_49 tbody td.custom-checkbox").on("click", function () {
+    // add code here to get record id or row value
+    // var isChecked = $(this).find("input").attr("checked");
+    // console.log();
+    // $(this).find("input").attr("checked", !isChecked);
+    console.log($(this).closest("tr").attr("id")); // record id
+  });
+});
