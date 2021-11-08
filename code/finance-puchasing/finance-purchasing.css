@@ -105,9 +105,9 @@ a.small-button {
   visibility: hidden;
 }
 
-#view_16 tr.kn-table-totals > td:nth-child(13) {
+/*#view_16 tr.kn-table-totals > td:nth-child(13) {
   visibility: hidden;
-}
+}*/
 
 /* Purchase Requests | Purchase Request Details | Received Items table spacing */
 #add-to-selected-invoice {
