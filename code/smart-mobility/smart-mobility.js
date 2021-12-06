@@ -40,5 +40,5 @@ function bigButton(
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large button on the home page
-    bigButton('metrobike-employee-benefit', 'view_16', "https://atd.knack.com/smart-mobility#metrobike-employee-benefit/", "bike", "Bike Share Benefits");
+    bigButton('metrobike-employee-benefit', 'view_16', "https://atd.knack.com/smart-mobility#metrobike-employee-benefit/", "bicycle", "MetroBike Employee Benefit");
 });
