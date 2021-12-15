@@ -60,7 +60,7 @@
   * [HighCharts Report Styling](knack-code/looks/global-report-styling.md)
   * [Font Awesome Icons](knack-code/looks/fa-icons.md)
 
-## AMD | DATA TRACKER <a href="data-tracker" id="data-tracker"></a>
+## AMD | DATA TRACKER <a href="#data-tracker" id="data-tracker"></a>
 
 * [Application Overview](data-tracker/application-overview.md)
 * [Asset Changes](data-tracker/asset-changes.md)
@@ -84,7 +84,7 @@
 
 * [Warehouse Inventory - Updating Journal Vouchers (JV) information](warehouse-inventory-updating-journal-vouchers-jv-information.md)
 
-## Signs & Markings Operations <a href="signs-and-markings" id="signs-and-markings"></a>
+## Signs & Markings Operations <a href="#signs-and-markings" id="signs-and-markings"></a>
 
 * [Application Overview](signs-and-markings/application-overview.md)
 * [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
@@ -99,7 +99,7 @@
 * [Application Overview](street-banner-program/application-overview.md)
 * [Street Banner Program](street-banner-program/street-banner-program.md)
 
-## DTS | Data & Technology Services Portal <a href="dts-portal" id="dts-portal"></a>
+## DTS | Data & Technology Services Portal <a href="#dts-portal" id="dts-portal"></a>
 
 * [Application Overview](dts-portal/application-overview.md)
 * [Data set inventory](dts-portal/dts-portal.md)
@@ -116,7 +116,7 @@
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
 
-## TDS | Transportation Development Services <a href="tds-portal" id="tds-portal"></a>
+## TDS | Transportation Development Services <a href="#tds-portal" id="tds-portal"></a>
 
 * [Application Overview](tds-portal/application-overview.md)
 * [Color Palette](tds-portal/status-palette.md)
@@ -124,7 +124,7 @@
 * [App Logic](tds-portal/app-logic/README.md)
   * [Calculating Date Values for Reporting](tds-portal/app-logic/reporting-dates.md)
   * [Incrementing Review Cycle Automatically](tds-portal/app-logic/review-cycle-automation.md)
-  * [Calculating Review Time](tds-portal/app-logic/review-time-automation.md)
+  * [Calculating Review Time & On Time Percentage](tds-portal/app-logic/review-time-automation.md)
   * [Roll up Child Object Conditionals](tds-portal/app-logic/summing-child-booleans.md)
   * [Calculating an Expiration Date](tds-portal/app-logic/expiration-automation.md)
   * [Converting an Entered Percentage to a Percentage Value](tds-portal/app-logic/percentage-conversion.md)
@@ -134,24 +134,24 @@
 * [TIA | Traffic Impact Analysis](tds-portal/tia-build.md)
 * [TDA | Transportation Development Assessments](tds-portal/tda-build.md)
 
-## RPP | Residential Parking Permit Portal <a href="rpp-portal" id="rpp-portal"></a>
+## RPP | Residential Parking Permit Portal <a href="#rpp-portal" id="rpp-portal"></a>
 
 * [Application Overview](rpp-portal/application-overview.md)
 * [Residential Parking Permits](rpp-portal/rpp-build.md)
 * [RPP Migration](rpp-portal/rpp-migration.md)
 
-## ROW | Right of Way Portal <a href="row-portal" id="row-portal"></a>
+## ROW | Right of Way Portal <a href="#row-portal" id="row-portal"></a>
 
 * [Application Overview](row-portal/application-overview.md)
 * [TCP | Traffic Control Plans](row-portal/tcp-build.md)
 
-## SMS| Shared Mobility Reporting Tracker <a href="shared-mobility-reporting-tracker" id="shared-mobility-reporting-tracker"></a>
+## SMS| Shared Mobility Reporting Tracker <a href="#shared-mobility-reporting-tracker" id="shared-mobility-reporting-tracker"></a>
 
 * [Application Overview](shared-mobility-reporting-tracker/application-overview.md)
 * [License & Permit Management](shared-mobility-reporting-tracker/license-and-permit-management.md)
 * [Sources for Monthly Trip Records](shared-mobility-reporting-tracker/sources-monthly-trip-records.md)
 
-## VZA | Vision Zero in Action <a href="vision-zero-in-action" id="vision-zero-in-action"></a>
+## VZA | Vision Zero in Action <a href="#vision-zero-in-action" id="vision-zero-in-action"></a>
 
 * [Application Overview](vision-zero-in-action/application-overview.md)
 * [Batch Copy Process for VZA Assignments](vision-zero-in-action/batch-copy-process-for-vza-assignments.md)
@@ -162,12 +162,12 @@
 * [Use Tasks for Creating Child Records](vision-zero-in-action/use-of-tasks.md)
 * [Use Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
 
-## Parking Enterprise Portal <a href="parking-enterprise" id="parking-enterprise"></a>
+## Parking Enterprise Portal <a href="#parking-enterprise" id="parking-enterprise"></a>
 
 * [Application Overview](parking-enterprise/application-overview.md)
 * [Dispatch Resource Tracking Log Archiving](parking-enterprise/dispatch-resource-tracking-log-archiving.md)
 
-## HR | Human Resources <a href="human-resources" id="human-resources"></a>
+## HR | Human Resources <a href="#human-resources" id="human-resources"></a>
 
 * [Application Overview](human-resources/application-overview.md)
 
