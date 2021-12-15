@@ -129,7 +129,7 @@
   * [Calculating an Expiration Date](tds-portal/app-logic/expiration-automation.md)
   * [Converting an Entered Percentage to a Percentage Value](tds-portal/app-logic/percentage-conversion.md)
   * [Create a Connection Link Field to View a Searched Record](tds-portal/app-logic/searched-record-link.md)
-  * [Extracting Location Coordinates to add Map Markers](tds-portal/app-logic/coordinates-to-markers.md)
+  * [Extracting Location Coordinates to add a Map Marker Map](tds-portal/app-logic/coordinates-to-markers.md)
 * [DR | Development Reviews](tds-portal/dr-build.md)
 * [TIA | Traffic Impact Analysis](tds-portal/tia-build.md)
 * [TDA | Transportation Development Assessments](tds-portal/tda-build.md)
