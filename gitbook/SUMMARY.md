@@ -83,6 +83,7 @@
 ***
 
 * [Warehouse Inventory - Updating Journal Vouchers (JV) information](warehouse-inventory-updating-journal-vouchers-jv-information.md)
+* [Cancel Transactions & Replenishments](cancel-transactions-and-replenishments.md)
 
 ## Signs & Markings Operations <a href="#signs-and-markings" id="signs-and-markings"></a>
 
