@@ -11,12 +11,18 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login"
+    id: "coacd-button-login",
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+  bigButton(
+    "coacd-big-button",
+    "coacd-button-login",
+    url,
+    "sign-in",
+    "Sign-In"
+  );
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
@@ -53,10 +59,29 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
+      url +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
@@ -68,7 +93,7 @@ $(document).on("knack-view-render.view_167", function (event, page) {
     "view_167",
     "https://atd.knack.com/finance-purchasing#purchase-requests/",
     "archive",
-    "All Purchase Requests",
+    "All Purchase Requests"
   );
 
   bigButton(
@@ -76,7 +101,7 @@ $(document).on("knack-view-render.view_167", function (event, page) {
     "view_167",
     "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
     "plus-circle",
-    "New Purchase Request",
+    "New Purchase Request"
   );
 
   bigButton(
@@ -84,7 +109,7 @@ $(document).on("knack-view-render.view_167", function (event, page) {
     "view_167",
     "https://atd.knack.com/finance-purchasing#reviews/",
     "check-square-o",
-    "Review Purchase Requests",
+    "Review Purchase Requests"
   );
 
   bigButton(
@@ -92,7 +117,7 @@ $(document).on("knack-view-render.view_167", function (event, page) {
     "view_167",
     "https://atd.knack.com/finance-purchasing#my-purchase-requests/",
     "male",
-    "My Purchase Requests",
+    "My Purchase Requests"
   );
 });
 
@@ -100,10 +125,29 @@ $(document).on("knack-view-render.view_167", function (event, page) {
 /************** Small Buttons ***************/
 /********************************************/
 //Create Small Button nested in a block
-function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function smallButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  $(
+    "<a id='" +
+      id +
+      "' class='back-button" +
+      disabledClass +
+      " href='" +
+      url +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
@@ -173,6 +217,21 @@ var colorMapOne = {
     background_color: "#f5901f",
     color: "#fff",
     icon: null,
+  },
+  Submitted: {
+    background_color: "#377eb8",
+    color: "#fff",
+    icon: null,
+  },
+  "In progress": {
+    background_color: "#41ae76",
+    color: "#fff",
+    icon: "cogs",
+  },
+  Complete: {
+    background_color: "#ffffff",
+    color: "#000",
+    icon: "check-circle",
   },
 };
 
@@ -366,7 +425,7 @@ var invoicesView = "view_282";
 var invoicesAPIViewConfig = { scene: "scene_123", view: "view_698" };
 
 // Invoice Items API view form scene and view
-var itemsAPIViewConfig = { scene: "scene_336", view: "view_802" };
+var itemsAPIViewConfig = { scene: "scene_336", view: "view_804" };
 
 // Set auth and headers for API calls
 var knackUserToken = Knack.getUserToken();
@@ -457,7 +516,6 @@ function addCheckboxes(view) {
 // Append a submit button and add event handler to element by selector
 function appendSubmitButton(buttonString, selector, handler, view) {
   var id = buttonString.toLowerCase().split(" ").join("-");
-
   $(selector).append(
     '<a id="' +
       id +
@@ -535,8 +593,9 @@ function handleMarkAsReceivedClick(event, id, view) {
         tableColumnIndex = 2;
       }
 
-      var isInventoryItem = $(this).closest("tr").children()[tableColumnIndex]
-        .innerText;
+      var isInventoryItem = $(this).closest("tr").children()[
+        tableColumnIndex
+      ].innerText;
       checkedItemIds.push({ id: id, isInventoryItem: isInventoryItem });
     });
     return checkedItemIds;
@@ -853,5 +912,10 @@ $(document).on("knack-view-render.view_794", function (event, page) {
   $("#field_720").on("change", function () {
     var val = $("#field_720").val();
     $("#field_720").val(val.trim());
-  })
+  });
+});
+
+// change color of service request status
+$(document).on("knack-scene-render.scene_340", function () {
+  changeFieldColor(".field_930", colorMapOne);
 });
