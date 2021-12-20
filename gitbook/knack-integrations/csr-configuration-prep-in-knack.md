@@ -1,12 +1,12 @@
 # CSR configuration prep in Knack
 
-{csr\_activity csr\_issue.ATD\_ISSUE\_ID}This doc describes the process for adding new tables and pages to an existing Knack application to prep for CSR integration.&#x20;
+This doc describes the process for adding new tables and pages to an existing Knack application to prep for CSR integration.&#x20;
 
 This process involves:
 
 * Importing 3 tables
 * Setting up field matching during import
-* Reviewing all 3 tables again to configure text formulas, equations, multiple choice seletions and connection fields
+* Reviewing all 3 tables again to configure text formulas, equations, multiple choice selections and connection fields
 
 ### Importing tables
 
