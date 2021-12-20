@@ -15,7 +15,7 @@
   * Select `Source`
   * Add `Comment`
 * Record is created status `Submitted to Warehouse`
-  * Can `Cancel `request
+  * Can `Cancel` request
 * When you `Cancel`
   * Record status is `Cancelled`
   * Can `Edit` request
@@ -23,7 +23,7 @@
     * Add `Quantity`
     * Select `Source`
     * Add `Comment`
-  * When a line item is `Cancelled `that item on the Warehouse Inventory module is also `Cancelled`
+  * When a line item is `Cancelled` that item on the Warehouse Inventory module is also `Cancelled`
 * When you `Edit` the record
 * The new line item is sent, the `Cancelled` item is no longer there
 
@@ -39,12 +39,12 @@
   * Items status is `New`&#x20;
 *   Can `Edit` or `Issue` or `Cancel` Inventory line item&#x20;
 
-    **Edit **button allows user to edit
+    **Edit** button allows user to edit
 
     * Choose `Item`
     * Add `Quantity`
     * Add `Comment`
-* **Issue **button allows user to
+* **Issue** button allows user to
   * Choose `Issued From`
   * Choose `Issued To`
   * Add `Quantity`
@@ -81,7 +81,7 @@
 | ----------------------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------- |
 | **Submitted to Warehouse**                                  | **New**                                               | **Ready to Issue**                                                                |
 | **Cancelled**                                               | **Cancelled**                                         | **Ready to Issue** (if there is an inventory item that is still in a "New" status |
-| **Cancelled**                                               | **Cancelled**                                         | **Cancelled **(if all inventory items are cancelled)                              |
+| **Cancelled**                                               | **Cancelled**                                         | **Cancelled** (if all inventory items are cancelled)                              |
 | **Returned**                                                | **Returned**                                          | **Ready to Issue**                                                                |
 | **Issued**                                                  | **Issued**                                            | **Review Needed** (if using back-chargeable Task Order #)                         |
 | **Issued**                                                  | **Issued**                                            | **Needs AIMs entry** (if Task Order # IS NOT back-chargeable)                     |
@@ -93,7 +93,7 @@
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Not Submitted**    | As a customer, added new inventory request but have yet to submit it (NOT CURRENTLY USING..)                                                                            |
 | **Ready to Issue**   | Request has been submitted for warehouse staff to review                                                                                                                |
-| **Review Needed**    | When warehouse staff has completed the request and inventory has been issued to a technician. Inventory Request as a "**Task Order**" and "**FDU #" **that needs review |
+| **Review Needed**    | When warehouse staff has completed the request and inventory has been issued to a technician. Inventory Request as a "**Task Order**" and "**FDU #"** that needs review |
 | **Needs AIMS entry** | When warehouse staff has completed the request and inventory has been issued to a technician, but the inventory item needs to have an AIMS # associated to it.          |
 | **Completed**        | When warehouse staff has completed the request and inventory has been issued to a technician. Inventory Item has an AIMS # associated to it.                            |
 | **Cancelled**        |  If request is no longer required or needed.                                                                                                                            |

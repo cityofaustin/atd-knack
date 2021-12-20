@@ -26,11 +26,11 @@ description: https://github.com/cityofaustin/atd-knack/tree/master/code
 ### Creating a Commit
 
 * Replace the contents of the file with the new code version that you copied from the test application
-* At the bottom of the page, write a descriptive **title **and **summary **of what changes you made, and why.
+* At the bottom of the page, write a descriptive **title** and **summary** of what changes you made, and why.
 
 ### Creating a branch from a commit
 
-1. Choose the option **"**Create **a new branch **for this commit and start a pull request"
+1. Choose the option **"**Create **a new branch** for this commit and start a pull request"
 2. Give the new branch a meaningful name,&#x20;
    1. "name-issue ID-simple-title-of-change" - `dianamartin-6100-css-code-change-to-document`
 3. Click **"Propose changes"**
@@ -42,7 +42,7 @@ description: https://github.com/cityofaustin/atd-knack/tree/master/code
 ### Assign a Reviewer
 
 * Lastly, you should assign a reviewer to check your code.&#x20;
-* On the right side of the page find the **cog **icon next to "**Reviewers",** and select one of your colleagues to review the code (preferably from your own team first, then Dev team)
+* On the right side of the page find the **cog** icon next to "**Reviewers",** and select one of your colleagues to review the code (preferably from your own team first, then Dev team)
 
 {% hint style="info" %}
 Post a slack on the "**atd-knack**" channel to see if one of your colleagues is available to review

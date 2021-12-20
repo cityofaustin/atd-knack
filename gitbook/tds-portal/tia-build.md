@@ -4,7 +4,7 @@ description: Builder Information
 
 # TIA | Traffic Impact Analysis
 
-## WORKFLOW <a href="workflow" id="workflow"></a>
+## WORKFLOW <a href="#workflow" id="workflow"></a>
 
 *   Network File Location:&#x20;
 
@@ -72,7 +72,7 @@ description: Builder Information
 
 ### IN KNACK
 
-* Requester changes `Fee Status `and added `Fee Paid Date`
+* Requester changes `Fee Status` and added `Fee Paid Date`
 * Requester can now click button to `Request Submission`
   * Generates email to requester
     * EMAIL: Requester receives email notice of Scope Approved and now can submit TIA submission
@@ -106,14 +106,14 @@ description: Builder Information
     * Submit Scope Approval memo to requester
     * EMAIL: Requester receives an email notification that TIA submission has been `Completed`
 * Reviewer can create **Project Mitigation** records
-  * `Mitigation Type `
-  * `Location `
+  * `Mitigation Type`&#x20;
+  * `Location`&#x20;
   * `Location ID`
-  * `Improvement `
+  * `Improvement`&#x20;
   * `Recommendation Notes`
 * Reviewer can edit **Project Mitigation** details to indicate **Mitigation Fees Paid**
-* Reviewer can edit **TIA Request **and change the status to `Approved`
-* Reviewer can edit **TIA Request **and change the status to `Withdrawn/Cancelled`at any time
+* Reviewer can edit **TIA Request** and change the status to `Approved`
+* Reviewer can edit **TIA Request** and change the status to `Withdrawn/Cancelled`at any time
 
 
 

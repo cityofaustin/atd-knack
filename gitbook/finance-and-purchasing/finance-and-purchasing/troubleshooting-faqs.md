@@ -12,7 +12,7 @@ The user has a Purchase Request (PR) and they have associated an "invoice" recor
 
 I'm looking at the PR. I think you need to submit the Process Purchasing Request form and put a status decision.
 
-It's currently blank. The final status for this step is to select "Processing Complete" and click the "Submit" button_**. **_
+It's currently blank. The final status for this step is to select "Processing Complete" and click the "Submit" button_**.**_&#x20;
 
 So what I noticed is that you receive the PR in a "`Processing- Purchasing`" status, but since you're also doing the Account Payable (AP) work you don't move it to the next status before you add the invoices information. So that step is being left out so I think that's the reason the PR's aren't closing as you're expecting it to.&#x20;
 

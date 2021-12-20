@@ -42,7 +42,7 @@
 * Ability to quickly "**Issue**" from the table view
   * modal, select `Assigned To` - contractor system account, will update `Assigned Contractor` field
 
-**Contractor **
+**Contractor**&#x20;
 
 * Only assigned work order records compiled on table view (won't see other contractor records)
 

@@ -17,12 +17,12 @@
 #### Existing tables used
 
 * `work_orders_signs_markings_attachments` (for inspection photo images)
-* `work_orders_signs_markings_time_logs `(bc Kati A. was already pulling date from Work History page and the existing date resided in this object table)
+* `work_orders_signs_markings_time_logs` (bc Kati A. was already pulling date from Work History page and the existing date resided in this object table)
 
 **Connections**
 
-* **street\_names **(for contractor work order object - Street, From/To Street in order to not have typos on location names.
-* **accounts **(audit fields: Created Date/By, Modified Date/By)
+* **street\_names** (for contractor work order object - Street, From/To Street in order to not have typos on location names.
+* **accounts** (audit fields: Created Date/By, Modified Date/By)
 
 [SMB Contractor Status Matrix](https://drive.google.com/file/d/1OTWQ8NzBe0\_7QojCVpS9YN8qZ-0o01kA/view)
 

@@ -18,9 +18,9 @@ Only a Knack Builder / VZA System Administrator can create or edit Tasks.
 
 The notification functionality available in tasks is used for the following reasons -&#x20;
 
-### **1. Reminders to the officers **
+### **1. Reminders to the officers**&#x20;
 
-** **Officers are sent two reminder emails,
+&#x20;**** Officers are sent two reminder emails,
 
 a. The first one seven days prior to the assignment.
 
@@ -38,6 +38,6 @@ Any changes that are made in the assignment record, especially pertaining to loc
 
 ### **3. Cancelling an Assignment**&#x20;
 
-When the scheduler cancels an assignment, the connection between the parent and child is broken and the assignment date time in the officer\_assignment object is no longer populated. If an assignment record is deleted (the scheduler cancels an assignment) that should be reflected in the officer task list and calendar, the officer  who has signed up for that officer\_assignment should also receive a notification regarding the cancellation.** **
+When the scheduler cancels an assignment, the connection between the parent and child is broken and the assignment date time in the officer\_assignment object is no longer populated. If an assignment record is deleted (the scheduler cancels an assignment) that should be reflected in the officer task list and calendar, the officer  who has signed up for that officer\_assignment should also receive a notification regarding the cancellation. ****&#x20;
 
 ![](<../../.gitbook/assets/image (23).png>)

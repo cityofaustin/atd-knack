@@ -40,14 +40,14 @@ When you add a Provider, there is a section when you enter the **Start Date** an
 3\. Fill out the Permit information on the form:
 
 * **Device Type:** the type of dock-less mobility device
-* **Number of Devices: **the number of units being deployed&#x20;
-* **Amount Paid: **The amount the permit will be (custom amount because can prorate permit amounts)
+* **Number of Devices:** the number of units being deployed&#x20;
+* **Amount Paid:** The amount the permit will be (custom amount because can prorate permit amounts)
 * **Zone:** The geographic zone/area that the provider will be deploying units
-* **Notes: **any additional notes about the permit
+* **Notes:** any additional notes about the permit
 * **Permit Start Date:** This is the first date the permit started regardless of the renewal cycle or the license renewal period.
 * `RENEWAL PERIOD - for BACK DATING` - this field is to indicate whether or not a permit is in the Renewal Period allowing a user to access the "Renewal" button. This should be used only if adding historical permits. Should remove from form once licenses & permits are update for all providers.
 * `EXPIRED - for BACK DATING` - This is used when entering historical permits, to indicate
-* **Permit Expiration Date: **The date the permit should expire
+* **Permit Expiration Date:** The date the permit should expire
 
 4\. Click the “**Submit**” button to submit the form.
 
@@ -75,11 +75,11 @@ If a user clicks "**No**", the dialog box will disappear and the user must revie
 
 If a user click "**Yes**", will continue with the renewal process.
 
-The form will ask you to enter the **Start Date** and the **Expiration Date **for the new license renewal cycle.
+The form will ask you to enter the **Start Date** and the **Expiration Date** for the new license renewal cycle.
 
 ![](<../../.gitbook/assets/image (311).png>)
 
-Click "**Submit**" when finished. The Provider object table will update the **Start Date** and the **Expiration Date **and make a copy of the license renewal information in the "archived\_license" object table.&#x20;
+Click "**Submit**" when finished. The Provider object table will update the **Start Date** and the **Expiration Date** and make a copy of the license renewal information in the "archived\_license" object table.&#x20;
 
 ## CREATE AN INVOICE
 
@@ -104,13 +104,13 @@ When the permits and licenses have been renewed, then an invoice can be created.
 3\. Edit the Invoice information on the form:
 
 * **Invoice Period:** the date range the invoice is for
-* **Invoice Number: **this field can be used to enter a custom invoice number (ex. from Finance)
+* **Invoice Number:** this field can be used to enter a custom invoice number (ex. from Finance)
 * **Invoice Date:** this is the created date of the invoice, it can be edited
-* **Use Renewal Date? **
-  * **Yes: **This allows you to enter in a custom date, used for License and Permit Renewals
-  * **No: **This is defaulted, it generated the 30 day due date. (Invoice Date-30 days)
-* **Date Payment Received: **Date payment was made
-* **Payment Type: **
+* **Use Renewal Date?**&#x20;
+  * **Yes:** This allows you to enter in a custom date, used for License and Permit Renewals
+  * **No:** This is defaulted, it generated the 30 day due date. (Invoice Date-30 days)
+* **Date Payment Received:** Date payment was made
+* **Payment Type:**&#x20;
   * Check
   * ACH
 * **Invoice Status:**&#x20;

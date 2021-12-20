@@ -18,7 +18,7 @@ A user with an Officer role in the application and  APD Active Directory credent
 
 Officers will attend an introductory training session and then register to create an account in the application at [http://bit.ly/apd-vza](http://bit.ly/apd-vza).&#x20;
 
-The username should be_ firstname.lastname@austintexas.gov. _
+The username should be _firstname.lastname@austintexas.gov._&#x20;
 
 They will receive a link to the application after creating the account.
 

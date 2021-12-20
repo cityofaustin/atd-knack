@@ -22,7 +22,7 @@ Note that as a best practice we use the same certificate across all knack apps. 
 * `Bits to generate the private key`: 1024 bits
 * `Digest Algorithm:`SHA512
 
-4\. Click the **Generate Self-Signed Certs **
+4\. Click the **Generate Self-Signed Certs**&#x20;
 
 5\. Store the Private Key and Public X.509 Key in 1Password, formatted with headers, following the conventions for the existing 1Password entry.
 

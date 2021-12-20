@@ -8,7 +8,7 @@
 *   LOCATION: New Markings Work Order -&#x20;
 
     [`https://builder.knack.com/atd/signs-markings#pages/scene_711/views/view_1880`](https://builder.knack.com/atd/signs-markings#pages/scene\_711/views/view\_1880)
-* BEHAVIOR:  User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user. (**Viewer **roles only!)
+* BEHAVIOR:  User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user. (**Viewer** roles only!)
 * REASON: Users create so many work orders it is one less field they have to populate that we already capture when creating their accounts
 
 ex. User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user.

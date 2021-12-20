@@ -19,18 +19,18 @@ Navigate to this folder on the network drive:&#x20;
 
 Fields are currently in this order:&#x20;
 
-* **Name **- Extract to use for Customer spreadsheet import
+* **Name** - Extract to use for Customer spreadsheet import
   * There are excel comments/notes that have customer **phone numbers** used for the Customer spreadsheet import
-* **Street Name **- Extract to use for Permit Application spreadsheet import
-* **Home Address **- Extract to use for Permit Application spreadsheet import
-* **Zone # **-  FIELD NOT USED IN IMPORT
-* **"# of Decals" **- Extract to use for Permit Application spreadsheet import
+* **Street Name** - Extract to use for Permit Application spreadsheet import
+* **Home Address** - Extract to use for Permit Application spreadsheet import
+* **Zone #** -  FIELD NOT USED IN IMPORT
+* **"# of Decals"** - Extract to use for Permit Application spreadsheet import
 * **Serial #** (this field contains the permit serial # and the license plate number)
   * Should be combined to one column field
-* **"# of Hang-Tags" **- Extract to use for Permit Application spreadsheet import
+* **"# of Hang-Tags"** - Extract to use for Permit Application spreadsheet import
 * **Serial #** (this field contains the hang tag serials)
   * Should be combined to one column field
-* **Day Passes **(Used to fill out "Visitor Day Pass" field)
+* **Day Passes** (Used to fill out "Visitor Day Pass" field)
 * **Serial #** (this field contains the day pass serials)
   * Should be combined to one column field
 * **Total Permits** - FIELD NOT USED IN IMPORT
@@ -90,7 +90,7 @@ Reference "**Customers\_GREEN\_163.csv**" - as the format of the Knack `Customer
 
 
 {% hint style="info" %}
-ADD THE REST OF THE** **STEPS WHEN CONFIGURING "**PINK**" ZONE
+ADD THE REST OF THE **** STEPS WHEN CONFIGURING "**PINK**" ZONE
 {% endhint %}
 
 ### Export Zone contacts from "Customer" object table
@@ -187,7 +187,7 @@ Reference "**Customer\_import\_GREEN\_with\_appID.csv**" - is the format of the 
 
 Fields to have on spreadsheet:&#x20;
 
-* `Name `(Which shows the Display Name: `Ex. 488 | Adam Lescalleet`
+* `Name` (Which shows the Display Name: `Ex. 488 | Adam Lescalleet`
 * `Application ID`
 
 1. Open builder
@@ -202,7 +202,7 @@ See these configurations:
 * Select a field to match records "`Display Name`" (first page of "Import new records"), click "Next"
 * Select "match column", click "Next"
 * Map "**Application ID**" to `"permit_application>Application ID"`
-* **Remove all other unnecessary or blank fields **
+* **Remove all other unnecessary or blank fields**&#x20;
 
 ## Permits Spreadsheet
 
@@ -210,20 +210,20 @@ See these configurations:
 
 Fields are currently in this order:&#x20;
 
-* **Name **- The concatenated 'customer ID | customer name' from the "Customer Export" spreadsheet
-* **Renewal Year **- Actually a month value. The same value for the entire zone
-* **Permit Type **- One of 3 types: 'Residential Parking Permit | decal', Residential Parking Permit | hang tag', or 'Day Pass'
-* **Total Day Passes **- The total number of Day Passes for that customer. If more than 20, create a new record for the remaining day passes and corresponding serial numbers
+* **Name** - The concatenated 'customer ID | customer name' from the "Customer Export" spreadsheet
+* **Renewal Year** - Actually a month value. The same value for the entire zone
+* **Permit Type** - One of 3 types: 'Residential Parking Permit | decal', Residential Parking Permit | hang tag', or 'Day Pass'
+* **Total Day Passes** - The total number of Day Passes for that customer. If more than 20, create a new record for the remaining day passes and corresponding serial numbers
 * **Serial Numbers** - The 4 or 5 digit serial number that corresponds with an individual pass. For Day Passes, this value will be a range of serial number that corresponds with the total number of Day passes
-* **Issued Date **- Is actually the 'Date Received' value for the customer application
+* **Issued Date** - Is actually the 'Date Received' value for the customer application
 * **Date Received** - FIELD NOT USED IN IMPORT. Copied to the 'Issued Date' column
-* **Total Permits **- FIELD NOT USED IN IMPORT. Total of Decal and Hang Tag permits. You may update to include the Day Passes in the total as reference but be aware this column will be removed.
-* **"# of Decals" **- FIELD NOT USED IN IMPORT. Number of Decal Permits for customer. Max 4 Decal Permits per application with some exceptions made for 6
+* **Total Permits** - FIELD NOT USED IN IMPORT. Total of Decal and Hang Tag permits. You may update to include the Day Passes in the total as reference but be aware this column will be removed.
+* **"# of Decals"** - FIELD NOT USED IN IMPORT. Number of Decal Permits for customer. Max 4 Decal Permits per application with some exceptions made for 6
   * Some areas within a zone may have alternate restrictions such as the Mueller area in Pink zone, which has a Max of 2 Decal Permits. Some exceptions may apply
 * **Serial #** - FIELD NOT USED IN IMPORT. Serial Numbers and License Plate Numbers for each Decal Permit
-* **"# of Hang-Tags" **- FIELD NOT USED IN IMPORT. Number of Hang Tag Permits for customer. Max 4 Hang Tag Permits per application with some exceptions made for 6
+* **"# of Hang-Tags"** - FIELD NOT USED IN IMPORT. Number of Hang Tag Permits for customer. Max 4 Hang Tag Permits per application with some exceptions made for 6
   * Some areas within a zone may have alternate restrictions such as the Mueller area in Pink zone, which has a Max of 2 Hang Tag Permits. Some exceptions may apply
-* **Serial # **- FIELD NOT USED IN IMPORT. Serial Numbers for each Hang Tag Permit. May show as a range value and and must be entered individually when copied over to the 'Serial Numbers' column for each Hang Tag permit record row for the customer
+* **Serial #** - FIELD NOT USED IN IMPORT. Serial Numbers for each Hang Tag Permit. May show as a range value and and must be entered individually when copied over to the 'Serial Numbers' column for each Hang Tag permit record row for the customer
 * **Day Passes** - FIELD NOT USED IN IMPORT. Number of Day Passes for customer. Max 20 Day Pass Permits per application with some exceptions made for 40
   * Day Passes are usually allotted to customers who represent organizations, property management, or business entities
 * **Serial #**- FIELD NOT USED IN IMPORT. A range of Serial Numbers for all Day Pass Permits

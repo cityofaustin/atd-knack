@@ -11,7 +11,7 @@ description: Creating Knack application banner logos
 3. Open the file: **banner\_cropped\_small\_TEMPLATE.xcf**
 4. Change the font to Arial _(Roboto preferred, but if unavailable use Arial)_
 5. Export As .png
-6. Save As in new folder in _G:\ATD\ATD\_GIS\02\_ENT\_APPLICATIONS\ _- create a new folder "app\_**Application Name**"_ (ex. app\_My\_Cool\_Application)_
+6. Save As in new folder in _G:\ATD\ATD\_GIS\02\_ENT\_APPLICATIONS\\_ - create a new folder "app\_**Application Name**" _(ex. app\_My\_Cool\_Application)_
 
 ## Uploading banner log to application
 

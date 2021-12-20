@@ -2,10 +2,10 @@
 
 **CTM:  Migration from Skype to Teams**
 
-* **What will happen to my existing scheduled Skype meetings? **Existing Skype meetings will get automatically converted to a Teams meeting.  You will then need to use the Teams app to facilitate any screen sharing in the meeting.
-* **What will happen when I launch Skype? **If you try to launch Skype without an active license you will get an error that says: 'Your organization is now using Microsoft Teams!'
-* **What will happen if someone with Skype tries to chat with me? **The chat should magically appear in your Teams chat window as if you were both using Teams.  However, file sharing via the chat session will no longer work.
-* **Will I still be able to schedule a Skype meeting in Outlook? **No the option in the ribbon for a Skype meeting will no longer be available.\
+* **What will happen to my existing scheduled Skype meetings?** Existing Skype meetings will get automatically converted to a Teams meeting.  You will then need to use the Teams app to facilitate any screen sharing in the meeting.
+* **What will happen when I launch Skype?** If you try to launch Skype without an active license you will get an error that says: 'Your organization is now using Microsoft Teams!'
+* **What will happen if someone with Skype tries to chat with me?** The chat should magically appear in your Teams chat window as if you were both using Teams.  However, file sharing via the chat session will no longer work.
+* **Will I still be able to schedule a Skype meeting in Outlook?** No the option in the ribbon for a Skype meeting will no longer be available.\
   \
   &#x20;[**FAQ on Sharepoint**](https://gcc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Faustintexas.us17.list-manage.com%2Ftrack%2Fclick%3Fu%3Dcb5ac7bfbd884d8cbb0a0a396%26id%3D61a18d8578%26e%3D9697e45e1d\&data=02%7C01%7CDiana.Martin%40austintexas.gov%7C8f1bf34b20624154451508d7c6ad6cf9%7C5c5e19f6a6ab4b45b1d0be4608a9a67f%7C0%7C0%7C637196320464977837\&sdata=E8CWLikgraUePjnKwiB3grUw6jr4FUtLEKYBsQsr0SA%3D\&reserved=0)\
   &#x20;[**Office 365 training site**](https://gcc01.safelinks.protection.outlook.com/?url=https%3A%2F%2Faustintexas.us17.list-manage.com%2Ftrack%2Fclick%3Fu%3Dcb5ac7bfbd884d8cbb0a0a396%26id%3D767cf0708e%26e%3D9697e45e1d\&data=02%7C01%7CDiana.Martin%40austintexas.gov%7C8f1bf34b20624154451508d7c6ad6cf9%7C5c5e19f6a6ab4b45b1d0be4608a9a67f%7C0%7C0%7C637196320464977837\&sdata=pm7ur3HXcwGCbD0JbanPCTR8GmA322QrJ9GrDIK4Ims%3D\&reserved=0)

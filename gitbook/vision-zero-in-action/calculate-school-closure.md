@@ -7,11 +7,11 @@ description: >-
 
 # Calculate School Closures
 
-## **Purpose **
+## **Purpose**&#x20;
 
-To remove AISD schools  that may be closed due to construction from the drop down list available to the Scheduler when scheduling **/ **editing VZA assignments.
+To remove AISD schools  that may be closed due to construction from the drop down list available to the Scheduler when scheduling **/** editing VZA assignments.
 
-## **Permissions **
+## **Permissions**&#x20;
 
 Only a VZA system administrator /Knack Builder can carry out this process.\
 

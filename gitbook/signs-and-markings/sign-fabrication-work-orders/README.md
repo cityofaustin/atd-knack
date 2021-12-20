@@ -14,9 +14,9 @@
 
 * `work_orders_signs_markings_attachments` (for work order images)
 * `work_orders_signs_markings_comments` (for work order comments)
-* `work_orders_signs_markings_time_logs `(bc wanted to track labor and add to sign fabrication invoice)
+* `work_orders_signs_markings_time_logs` (bc wanted to track labor and add to sign fabrication invoice)
 * `invoice_items` (to generate line items for the invoice, similar to reimbursement process)
 
 **Connections**
 
-* **accounts **(audit fields: Created Date/By, Modified Date/By)
+* **accounts** (audit fields: Created Date/By, Modified Date/By)

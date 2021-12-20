@@ -54,7 +54,7 @@ Select the pencil icon for the Single Sign On to open the modal page with the se
 {% endtab %}
 
 {% tab title="3️⃣" %}
-In this scenario, since we already have the app setup in Azure with CTM, the Identity Provider's certificate will stay as is and we make no changes to the Private signing certificate. We are simply taking the Decryption private and public certificates saved in 1Password as _Self-Signed x509 SSL Certificates for SAML/ADFS _and adding them here. Be sure to clear the boxes before adding the formatted certificates.
+In this scenario, since we already have the app setup in Azure with CTM, the Identity Provider's certificate will stay as is and we make no changes to the Private signing certificate. We are simply taking the Decryption private and public certificates saved in 1Password as _Self-Signed x509 SSL Certificates for SAML/ADFS_ and adding them here. Be sure to clear the boxes before adding the formatted certificates.
 
 ![](<../../../.gitbook/assets/image (285).png>)
 
@@ -62,7 +62,7 @@ And be sure to Save.
 {% endtab %}
 
 {% tab title="4️⃣" %}
-If for some reason the Identity Provider's certificate is missing or needs to be re-added, these are saved in 1Password as Knack _ADFS X.509 IP Certificates _for each app.
+If for some reason the Identity Provider's certificate is missing or needs to be re-added, these are saved in 1Password as Knack _ADFS X.509 IP Certificates_ for each app.
 
 ![](<../../../.gitbook/assets/image (298).png>)
 
@@ -156,7 +156,7 @@ In CTM's metadata file, find the Identity Provider certificate in the metadata u
 
 ![](<../../../.gitbook/assets/image (287).png>)
 
-Copy and paste the contents of the `X509Certificate` tag into the [X509 Formatter](https://www.samltool.com/format\_x509cert.php). Click the "Format X.509 Certificate" button, then copy the contents of output box labeled "X.509 cert with header". Paste the formatted certificate into the **Identity Provider's certificate **field in the Knack login config.
+Copy and paste the contents of the `X509Certificate` tag into the [X509 Formatter](https://www.samltool.com/format\_x509cert.php). Click the "Format X.509 Certificate" button, then copy the contents of output box labeled "X.509 cert with header". Paste the formatted certificate into the **Identity Provider's certificate** field in the Knack login config.
 
 ![](<../../../.gitbook/assets/image (301).png>)
 

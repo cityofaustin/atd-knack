@@ -122,7 +122,7 @@ You can find the original banner assets and a template for creating a new applic
 | [#41ae76](https://www.colorhexa.com/41ae76)   | `#41ae76`    | ![](<../../.gitbook/assets/image (85).png>)  | Processing\| Accounts Payable | `<i class="fa fa-credit-card"></i>` | ![](<../../.gitbook/assets/image (86).png>)                            |
 | [#f5901f](https://www.colorhexa.com/f5901f)   | `#f5901f`    | ![](<../../.gitbook/assets/image (89).png>)  | Pending Invoice               | `<i class="fa fa-clock-o"></i>`     | ![](<../../.gitbook/assets/image (113).png>)                           |
 | [#6a6565](https://www.colorhexa.com/6a6565)   | `#6a6565`    | ![](<../../.gitbook/assets/image (77).png>)  | Cancelled                     | ------------                        | ------------                                                           |
-| ------------                                  | ------------ | ![](<../../.gitbook/assets/image (47).png>)  | Closed                        | ------------                        | `#ADADAD `![](<../../.gitbook/assets/image (109).png>)``               |
+| ------------                                  | ------------ | ![](<../../.gitbook/assets/image (47).png>)  | Closed                        | ------------                        | `#ADADAD` ![](<../../.gitbook/assets/image (109).png>)``               |
 
 ## Layout
 
@@ -147,7 +147,7 @@ You can find the original banner assets and a template for creating a new applic
 
 * Add Menu>Link to a **new page**
 * Add Menu>Link to a **existing page**
-* Choose **icon **for button
+* Choose **icon** for button
   * Knack references[ Font Awesome 4.7.0](https://fontawesome.com/v4.7.0/icons/)
 
 #### HTML Buttons
@@ -165,8 +165,8 @@ You can find the original banner assets and a template for creating a new applic
   * ![#80d07e](https://placehold.it/15/80d07e/000000?text=+) `#80d07e`&#x20;
   * &#x20;![#367DB7](https://placehold.it/15/367DB7/000000?text=+) `#367DB7`
 * `padding` is the top and bottom border of the HTML Button
-  * first number: `5px `(top)
-  * second number: `5px `(bottom)
+  * first number: `5px` (top)
+  * second number: `5px` (bottom)
 *   `font-size` can change font to different size
 
 
@@ -178,7 +178,7 @@ You can find the original banner assets and a template for creating a new applic
 
 ![](<../../.gitbook/assets/image (5).png>)
 
-Enter into `Link Text `field:
+Enter into `Link Text` field:
 
 `<h2><button class="block><i class="fa fa-plus-circle"></i><strong> New Submission</strong></button></h2>`
 
@@ -192,11 +192,11 @@ Looks like this in the live app
 
 **Option 1:** Add Menu>Link to a **URL**
 
-**Option 2: **Add Rich Text
+**Option 2:** Add Rich Text
 
 *
   * Add text for link
-  * Click **link **icon on toolbar
+  * Click **link** icon on toolbar
   * Click **Insert link**
     * Enter **URL**
     * Enter **Text**
@@ -208,17 +208,17 @@ Looks like this in the live app
 
 **Option 1:** Link, Link Text and Icon
 
-`<a href="https://atd.knack.com/parking#verify/"> Look up address <i class="fa fa-search"><i></a> `
+`<a href="https://atd.knack.com/parking#verify/"> Look up address <i class="fa fa-search"><i></a>`&#x20;
 
 ![](<../../.gitbook/assets/image (6).png>)
 
-**Option 2: **Form field label text, link that is an icon
+**Option 2:** Form field label text, link that is an icon
 
-Number of Resident Decals` <a href="https://atd.knack.com/parking#permit-costs/"></i class="fa fa-info-circle"></i></a>`
+Number of Resident Decals `<a href="https://atd.knack.com/parking#permit-costs/"></i class="fa fa-info-circle"></i></a>`
 
 ![](<../../.gitbook/assets/image (8).png>)
 
-**Option 3: **Link and icon that opens in new tab
+**Option 3:** Link and icon that opens in new tab
 
 `<a href="https://purchweb.austintexas.gov/search/RTMATSSelect.cfm" target=_blank> Contract Agreement </i class="fa fa-external-link-square"></i></a>`
 
