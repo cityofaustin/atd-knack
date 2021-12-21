@@ -873,3 +873,14 @@ $(document).on("knack-view-render.view_1252", function (event, page) {
 ////////////////////////////////////////////
 /// End Technician Time Log Validation ///
 ////////////////////////////////////////////
+
+//// Update link text to cabinet details page from signal detals
+$(document).on("knack-view-render.view_1261", function (event, page) {
+    console.log("hello")
+    // find cabinet ID field div   
+    var el = $(".field_1789");
+    // find child <a>
+    var a = $(el).find("a");
+    // update text
+    $(a).text("Cabinet details");
+});
