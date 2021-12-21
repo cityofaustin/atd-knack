@@ -915,11 +915,13 @@ $(document).on("knack-view-render.view_1252", function (event, page) {
 
 //// Update link text to cabinet details page from signal detals
 $(document).on("knack-view-render.view_1261", function (event, page) {
-  console.log("hello");
   // find cabinet ID field div
   var el = $(".field_1789");
   // find child <a>
   var a = $(el).find("a");
   // update text
-  $(a).text("Cabinet details");
+  $(a).addClass("kn-link kn-link-1 kn-link-page kn-button");
+  $(a).html(
+    "<span class='icon is-small'><i class='fa fa-list'></i></span><span>Cabinet details</span>"
+  );
 });
