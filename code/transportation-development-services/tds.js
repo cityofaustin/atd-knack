@@ -63,42 +63,32 @@ function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false,
 
 // create large Reviewer Dashboard button on the Home page
 $(document).on("knack-view-render.view_55", function(event, page) {
-  bigButton("reviewer-dashboard", "view_55", "https://atd.knack.com/development-services#reviewer-dashboard/", "dashboard", "Reviewer Dashboard");
+  bigButton("reviewer-dashboard", "view_55", "https://atd.knack.com/development-services#rd-assigned-work/", "dashboard", "Reviewer Dashboard");
 });
 // create large Development Reviews button on the Home page
 $(document).on("knack-view-render.view_15", function(event, page) {
-  bigButton("development-reviews", "view_15", "https://atd.knack.com/development-services#home/development-reviews/", "list-ul", "Development Reviews");
+  bigButton("tdr-reviews", "view_15", "https://atd.knack.com/development-services#home/tdr-reviews/", "list-ul", "TDR Reviews");
 });
 // create large TIA Reviews button on the Home page
 $(document).on("knack-view-render.view_719", function(event, page) {
   bigButton("tia-reviews", "view_719", "https://atd.knack.com/development-services#tia-reviews/", "list-ul", "TIA Reviews");
 });
 // create large TDA Reviews button on the Home page
-/*$(document).on("knack-view-render.view_724", function(event, page) {
-  bigButton("tda-reviews", "view_724", "https://atd.knack.com/development-services#tda-reviews/", "list-ul", "Pre-Assessment Reviews");
-});*/
+$(document).on("knack-view-render.view_724", function(event, page) {
+  bigButton("tda-reviews", "view_724", "https://atd.knack.com/development-services#tda-reviews/", "list-ul", "TDA Reviews");
+});
 // create large Advanced Search button on the Home page
 $(document).on("knack-view-render.view_56", function(event, page) {
-  bigButton("advanced-search", "view_56", "https://atd.knack.com/development-services#advanced-search/", "search", "Advanced Search");
+  bigButton("tia-portal", "view_56", "https://atd.knack.com/development-services#tia-portal/", "car", "TIA Portal");
 });
 // create large Account Managment button on the Home page
 $(document).on("knack-view-render.view_720", function(event, page) {
   bigButton("account-management", "view_720", "https://atd.knack.com/development-services#account-management/", "gears", "Account Management");
 });
 // create large Reviewer Help button on the Home page
-$(document).on("knack-view-render.view_721", function(event, page) {
+/*$(document).on("knack-view-render.view_721", function(event, page) {
   bigButton("reviewer-help", "view_721", "https://atd.knack.com/development-services#reviewer-help/", "question", "Reviewer Help");
-});
-
-
-// create large Search Reviews button on the Advanced Search page
-$(document).on("knack-view-render.view_60", function(event, page) {
-  bigButton("search-reviews", "view_60", "https://atd.knack.com/development-services#search-reviews/", "search", "Search | Reviews");
-});
-// create large Search Comments button on the Advanced Search page
-$(document).on("knack-view-render.view_61", function(event, page) {
-  bigButton("search-comments", "view_61", "https://atd.knack.com/development-services#search-comments/", "search", "Search | Comments");
-});
+});*/
 
 
 // create large Start TIA Application button on the TIA Portal page
