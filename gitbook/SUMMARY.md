@@ -19,7 +19,7 @@
 
 * [Open Data Portal - Socrata Integration](knack-integrations/open-data-portal-socrata-integration.md)
 * [ArcGIS Online Integration](knack-integrations/arcgis-online-integration.md)
-* [CSR configuration prep in Knack](knack-integrations/csr-configuration-prep-in-knack/README.md)
+* [CSR configuration prep in Knack](knack-integrations/csr-configuration-prep-in-knack.md)
   * [Creating CSR Page components](knack-integrations/csr-configuration-prep-in-knack/creating-csr-page-components.md)
 
 ## Knack Code

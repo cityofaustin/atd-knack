@@ -15,3 +15,26 @@ The fun part begins creating the table/page/form components
 * [ ] Activity table
 * [ ] Flex Notes - modal page
 * [ ] Other components - like creation of work order
+
+### Main Service Request page/table
+
+This is Service Request page for Markings
+
+![](<../../.gitbook/assets/image (5).png>)
+
+This is Service Request page for Signs - signs has more pre-filters on their menu
+
+![](../../.gitbook/assets/image.png)
+
+### Service Request Details page
+
+****![](<../../.gitbook/assets/image (3).png>)****
+
+### **Flex Notes - modal page**
+
+****![](<../../.gitbook/assets/image (4).png>)****
+
+**Closed** status
+
+![](<../../.gitbook/assets/image (2).png>)
+
