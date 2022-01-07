@@ -90,19 +90,11 @@ When importing from a table the "Map Columns" section auto defaults everything t
   * repairs\_complete
 * [ ] For field `PROCESS_STATE_ESB`
 
-{% tabs %}
-{% tab title="First Tab" %}
+```
 SENT
-
-DO\_NOT\_SEND
-
-READY\_TO\_SEND
-{% endtab %}
-
-{% tab title="Second Tab" %}
-
-{% endtab %}
-{% endtabs %}
+DO_NOT_SEND
+READY_TO_SEND
+```
 
 SENT
 
