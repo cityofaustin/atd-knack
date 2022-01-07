@@ -83,11 +83,15 @@ When importing from a table the "Map Columns" section auto defaults everything t
   * CENTRAL
   * SOUTH
 * [ ] For field `ISSUE_STATUS_CODE_SNAPSHOT`
-  * csr\_feedback
-  * closed\_duplicate
-  * closed\_resolved
-  * in\_progress
-  * repairs\_complete
+
+```
+csr_feedback
+closed_duplicate
+closed_resolved
+in_progress
+repairs_complete
+```
+
 * [ ] For field `PROCESS_STATE_ESB`
 
 ```
@@ -96,13 +100,7 @@ DO_NOT_SEND
 READY_TO_SEND
 ```
 
-SENT
 
-DO\_NOT\_SEND
-
-READY\_TO\_SEND
-
-* [ ] ``
 
 ### Connections - csr\_activities
 
