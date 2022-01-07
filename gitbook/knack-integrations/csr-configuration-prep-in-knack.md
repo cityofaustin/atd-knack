@@ -89,9 +89,13 @@ When importing from a table the "Map Columns" section auto defaults everything t
   * in\_progress
   * repairs\_complete
 * [ ] For field `PROCESS_STATE_ESB`
-  * SENT&#x20;
-  * DO\_NOT\_SEND&#x20;
-  * READY\_TO\_SEND
+
+SENT
+
+DO\_NOT\_SEND
+
+READY\_TO\_SEND
+
 * [ ] ``
 
 ### Connections - csr\_activities
