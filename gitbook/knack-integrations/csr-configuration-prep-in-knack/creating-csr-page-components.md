@@ -24,7 +24,7 @@ This is Service Request page for Markings
 
 This is Service Request page for Signs - signs has more pre-filters on their menu
 
-![](../../.gitbook/assets/image.png)
+![](<../../.gitbook/assets/image (1).png>)
 
 ### Service Request Details page
 

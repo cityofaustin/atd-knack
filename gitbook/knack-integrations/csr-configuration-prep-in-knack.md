@@ -64,24 +64,32 @@ When importing from a table the "Map Columns" section auto defaults everything t
 
 ## csr\_activities
 
-![](<../.gitbook/assets/image (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1).png>)
 
 ### Multiple Choice- csr\_activities
 
 * [ ] For field `CSR_ACTIVITY` (see standard choices)
-  * Conduct Investigation
-  * Contact Citizen
-  * Dispatch Technician/Crew
-  * Repair/Replace
-  * Attach Image
-  * Send Email
-  * Close Issue (Duplicate)
-  * Close Issue (Resolved)
-  * 311 Feedback
+
+```
+Conduct Investigation
+Contact Citizen
+Dispatch Technician/Crew
+Repair/Replace
+Attach Image
+Send Email
+Close Issue (Duplicate)
+Close Issue (Resolved)
+311 Feedback
+```
+
 * [ ] For field `ENGINEER_AREA`
-  * NORTH
-  * CENTRAL
-  * SOUTH
+
+```
+NORTH
+CENTRAL 
+SOUTH
+```
+
 * [ ] For field `ISSUE_STATUS_CODE_SNAPSHOT`
 
 ```
@@ -99,8 +107,6 @@ SENT
 DO_NOT_SEND
 READY_TO_SEND
 ```
-
-
 
 ### Connections - csr\_activities
 
@@ -134,3 +140,13 @@ READY_TO_SEND
 
 * SR\_NUMBER is **blank**
   * Set **to custom value -** `DO_NOT_SEND`
+
+## csr\_issues
+
+![](../.gitbook/assets/image.png)
+
+### Multiple Choice - csr\_issues
+
+### Text Formulas - csr\_issues
+
+### Conditional Rules - csr\_issues
