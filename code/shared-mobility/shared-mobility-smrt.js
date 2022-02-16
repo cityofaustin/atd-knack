@@ -72,3 +72,23 @@ function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = fals
 
   if (callback) callback();
 }
+$(document).on("knack-scene-render.scene_257", function (event, page) {
+  // update iframe src from detail field
+  var iframe_url = $('a[href*="webappviewer"]').attr("href");
+  $(".view_534").hide();
+  $("#csr_view").attr("src", iframe_url);
+});
+
+$(document).on("knack-scene-render.scene_260", function (event, page) {
+  // update iframe src from detail field
+  var iframe_url = $('a[href*="webappviewer"]').attr("href");
+  $(".view_547").hide();
+  $("#csr_view").attr("src", iframe_url);
+});
+
+$(document).on("knack-scene-render.scene_264", function (event, page) {
+  // update iframe src from detail field
+  var iframe_url = $('a[href*="webappviewer"]').attr("href");
+  $(".view_558").hide();
+  $("#csr_view").attr("src", iframe_url);
+});
