@@ -1,7 +1,7 @@
 ---
 description: >-
   The document will guide you through the process to batch copy Vision Zero
-  assignments from one month to another.
+  assignments.
 ---
 
 # Batch Copy Process for VZA Assignments
@@ -14,11 +14,11 @@ To copy a batch of assignments from one month to another. This helps cut down on
 
 ## Permission
 
-Only a VZA System Administrator /Knack Builder can carry out this process.
+Only a VZA Admin / Knack Builder can carry out this process.
 
 ## Process
 
-1 ) Open the `Assignments` object in Records View in the app
+1 ) Open the `Assignments` object in Records View
 
 ![](<../../.gitbook/assets/image (185).png>)
 
@@ -26,19 +26,13 @@ Only a VZA System Administrator /Knack Builder can carry out this process.
 
 ![](<../../.gitbook/assets/image (181).png>)
 
-3 ) Filter assignments for a week (Monday through Sunday) using the Assignment Date Time field.
+3 ) Filter assignments for the previous 8 weeks (Monday to Sunday) using the Assignment Date Time field.
 
-Ex. `Assignment Date Time` is after 07/5/2021 and `Assignment Date Time` is before 07/11/2021&#x20;
+Ex. `Assignment Date Time` is after 01/02/2022 23:59 and `Assignment Date Time` is before 02/28/2022 00:00
 
-{% hint style="warning" %}
-Make sure to filter so that Sundays are also accounted for!! :)
-{% endhint %}
+![](<../.gitbook/assets/image (5).png>)
 
-![](<../../.gitbook/assets/image (195).png>)
-
-4 ) Export records to CSV., Save on Network Drive `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Schedules\Assignments`
-
-![](<../../.gitbook/assets/image (182).png>)
+4 ) Export records to CSV., Save on Network Drive as Assignments\__Export_\_Date `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Schedules\Assignments`
 
 5 ) Open CSV in Excel
 
