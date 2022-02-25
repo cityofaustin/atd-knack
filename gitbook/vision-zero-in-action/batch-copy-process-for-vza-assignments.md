@@ -64,13 +64,13 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 ![](<../.gitbook/assets/image (7).png>)
 
-12\) Update and Fill the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark>. <mark style="color:blue;">Created By</mark> should be your email.
+12\) Update and Fill the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark>. <mark style="color:blue;">Created By</mark> should be your email. Delete the <mark style="color:blue;">Modified Date</mark> & <mark style="color:blue;">Modified By</mark> columns.
 
 13\) Save and Import the CSV  into the Assignments object by clicking on Import in the Assignments object Records view.&#x20;
 
 ![](<../../.gitbook/assets/image (183).png>)
 
-14\) Click Upload CSV and navigate to the CSV you modified earlier.
+14\) Import the modified CSV import file.
 
 ![](<../../.gitbook/assets/image (190).png>)
 
@@ -78,7 +78,7 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 ![](<../../.gitbook/assets/image (184).png>)
 
-16\) Do you want to update existing assignments records with this import? Choose - No, you want to each row as a new record
+16\) Do you want to update existing assignments records with this import? Choose - No, you want to insert each row as a new record
 
 ![](<../../.gitbook/assets/image (193).png>)
 
@@ -86,24 +86,22 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 ![](<../../.gitbook/assets/image (186).png>)
 
-18\) Exclude all calculated fields - text formulas, equations and conditional fields.&#x20;
-
-Here is a list of the fields that will need to be matched -&#x20;
+18\)  Make sure all listed columns are mapping correctly:
 
 1. Assignment Date and Time
 2. Team Number
 3. Assignment Type
 4. Shift
-5. Vision Zero Location - Vision Zero Location \<Display Name
+5. Vision Zero Location - Vision Zero Location > set as Display Name
 6. Assignment Number
 7. Description
 8. No of Officers Required
-
-19\) Go down to "**Created By**" and choose "**Email**"
+9. Created Date
+10. Created By > set as Email
 
 ![](<../../.gitbook/assets/image (188).png>)
 
-20\) Click **Next**. The records will be imported into the object.&#x20;
+20\) Click **Next** and **Start Import**. The records will be imported into the object.&#x20;
 
 ![](<../../.gitbook/assets/image (180).png>)
 
