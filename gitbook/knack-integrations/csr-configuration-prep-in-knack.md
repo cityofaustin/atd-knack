@@ -64,7 +64,7 @@ When importing from a table the "Map Columns" section auto defaults everything t
 
 ## csr\_activities
 
-![](<../.gitbook/assets/image (1) (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (1) (1).png>)
 
 ### Multiple Choice- csr\_activities
 
@@ -143,7 +143,7 @@ READY_TO_SEND
 
 ## csr\_issues
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (1).png>)
 
 ### Multiple Choice - csr\_issues
 

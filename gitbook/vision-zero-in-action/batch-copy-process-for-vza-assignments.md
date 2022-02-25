@@ -18,73 +18,75 @@ Only a VZA Admin / Knack Builder can carry out this process.
 
 ## Process
 
-1 ) Open the `Assignments` object in Records View
+1\) Open the Assignments object in Records View
 
 ![](<../../.gitbook/assets/image (185).png>)
 
-2 ) Exports all records as CSV to create a backup.
+2\) Exports all records as CSV to create a backup.
 
 ![](<../../.gitbook/assets/image (181).png>)
 
-3 ) Filter assignments for the previous 8 weeks (Monday to Sunday) using the Assignment Date Time field.
+3\) Filter assignments for the previous 8 weeks (Monday to Sunday) using the <mark style="color:blue;">Assignment Date Time</mark> field.
 
-Ex. `Assignment Date Time` is after 01/02/2022 23:59 and `Assignment Date Time` is before 02/28/2022 00:00
+Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 23:59 and <mark style="color:blue;">Assignment Date Time</mark> is before 02/28/2022 00:00
 
 ![](<../.gitbook/assets/image (5).png>)
 
-4 ) Export records to CSV., Save on Network Drive as Assignments\__Export_\_Date `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Schedules\Assignments`
+4\) Export records to CSV
 
-5 ) Open CSV in Excel
+5\) Open CSV in Excel and save on the Network Drive as Assignments\_Export\_Date
 
-6 ) Add 1 fields to the left of `Assignment Date Time` column, enter formula: `=left(C2,10)`this will capture the date from the original field. Use the "Fill Down" function or drag the field to populate the rest of the records.&#x20;
+`G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_VZA_Vision_Zero_in_Action\Schedules\Assignments`
+
+6\) Save As Assignments\_Import\_Date
+
+7\) Autofit spreadsheet so you can see all columns. Insert a column left of `Assignment Date Time` column, enter formula: `=left(C2,10)`this will capture the date from the original field. Fill Down the column.&#x20;
 
 ![](<../../.gitbook/assets/image (189).png>)
 
-7 ) Add 1 field to the right of the "New date field", enter formula: `B2+28` this will create a new date for 28 days later. Use the "Fill Down" function or drag the field to populate the rest of the records. Copy and Paste records As Value. Delete the "New date field".
+8\) Insert another column, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column.
 
-![](<../../.gitbook/assets/image (191).png>)
+![](<../.gitbook/assets/image (8).png>)
 
-8 ) Add 1 field to the right of "Date +28 days" column, enter formula: `=RIGHT(D2,14)` this will capture the time you need to have.
+9\) Insert another column, enter formula: `=RIGHT(E2,14)` this will capture the time. Fill Down the column.
 
 ![](<../../.gitbook/assets/image (187).png>)
 
-9 ) Add 1 field to the right of the "Time" column, enter formula: `=concatenate(text(B2,"mm/dd/yyyy")&" "&text(C2,"hh:mm:ss"))`Use the "Fill Down" function or drag the field to populate the rest of the records. Copy and Paste records As Value. Delete the "Date+28 days" and "Time" columns.
+10\) Insert another column, enter formula: `=concatenate(text(C2,"mm/dd/yyyy")&" "&text(D2,"hh:mm:ss"))`Fill Down the column.
 
 ![](<../../.gitbook/assets/image (196).png>)
 
-{% hint style="info" %}
-Look for shifts that are overnight shifts, see example below. These must be manually updated. Find and Replace is the best tool to use.
-{% endhint %}
+Find all overnight shifts that span two days. Simply copy and paste the <mark style="color:blue;">Assignment Date Time</mark> field into column E and adjust the dates to match the sequencing.
 
-![](<../../.gitbook/assets/image (197).png>)
+![](<../.gitbook/assets/image (3).png>)
 
-10 ) Delete the old "Assignment Date Time" cell records and Title the new column "Assignment Date Time". Deleted "Modified By", "Modified Date", "Shift Label".&#x20;
+11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 
+![](<../.gitbook/assets/image (7).png>)
 
+12\) Update and Fill the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark>. <mark style="color:blue;">Created By</mark> should be your email.
 
-11 ) Fill in "Created Date", copy same date for all records. Add your email to the "Created By" field. Then Save and Close .csv
-
-12 ) Import the CSV for a week into the Assignments object by clicking on Import in the Assignments object Records view.&#x20;
+13\) Save and Import the CSV  into the Assignments object by clicking on Import in the Assignments object Records view.&#x20;
 
 ![](<../../.gitbook/assets/image (183).png>)
 
-10 ) Click Upload CSV and navigate to the CSV you modified earlier.
+14\) Click Upload CSV and navigate to the CSV you modified earlier.
 
 ![](<../../.gitbook/assets/image (190).png>)
 
-11 ) For _Does the CSV have a row at the top with a name for each column?_ Choose - Yes, the headers are on Row 1
+15\) For _Does the CSV have a row at the top with a name for each column?_ Choose - Yes, the headers are on Row 1
 
 ![](<../../.gitbook/assets/image (184).png>)
 
-12 ) Do you want to update existing assignments records with this import? Choose - No, you want to each row as a new record
+16\) Do you want to update existing assignments records with this import? Choose - No, you want to each row as a new record
 
 ![](<../../.gitbook/assets/image (193).png>)
 
-13 ) Confirm the field mapping of the columns.&#x20;
+17\) Confirm the field mapping of the columns.&#x20;
 
 ![](<../../.gitbook/assets/image (186).png>)
 
-14 ) Exclude all calculated fields - text formulas, equations and conditional fields.&#x20;
+18\) Exclude all calculated fields - text formulas, equations and conditional fields.&#x20;
 
 Here is a list of the fields that will need to be matched -&#x20;
 
@@ -97,15 +99,15 @@ Here is a list of the fields that will need to be matched -&#x20;
 7. Description
 8. No of Officers Required
 
-15 ) Go down to "**Created By**" and choose "**Email**"
+19\) Go down to "**Created By**" and choose "**Email**"
 
 ![](<../../.gitbook/assets/image (188).png>)
 
-19 ) Click **Next**. The records will be imported into the object.&#x20;
+20\) Click **Next**. The records will be imported into the object.&#x20;
 
 ![](<../../.gitbook/assets/image (180).png>)
 
-22 ) Confirm the records have been imported by checking Assignment IDs and the Calendar.&#x20;
+21\) Confirm the records have been imported by checking Assignment IDs and the Calendar.&#x20;
 
 ## Check - QAQC
 
