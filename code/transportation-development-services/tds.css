@@ -360,6 +360,11 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_307 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*TIA Determination Details Page*/
+#kn-scene_407 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_407 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*TDR */
 /*TDR Vision Team Dashboard Completed Work Page*/
 #kn-scene_347 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
@@ -386,6 +391,11 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_37 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*TDR Edit Vision Team Reviewer Page*/
+#kn-scene_333 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_333 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*TDR Search Cases Page*/
 #kn-scene_345 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
@@ -402,35 +412,123 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_277 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*******************************************/
-/** Remove Back Links for TIA Application **/
-/*******************************************/
+/*********************************************/
+/** Remove Back Links for TIA Determination **/
+/*********************************************/
+/*Determination PDF Page*/
+#kn-scene_398 .kn-back-link {
+  display: none;
+}
+/*Determination Information Page*/
+#kn-scene_412 .kn-back-link {
+  display: none;
+}
+/*Review Determination Page*/
+#kn-scene_413 .kn-back-link {
+  display: none;
+}
+/*Edit Determination Page*/
+#kn-scene_414 .kn-back-link {
+  display: none;
+}
+/*Determination Confirmation Page*/
+#kn-scene_417 .kn-back-link {
+  display: none;
+}
+
+/************************************************/
+/** Remove Back Links for Full TIA Application **/
+/************************************************/
 /*TIA Applicant Information Page*/
-#kn-scene_166 .kn-back-link {
+#kn-scene_385 .kn-back-link {
   display: none;
 }
 /*TIA Project Information Page*/
-#kn-scene_167 .kn-back-link {
+#kn-scene_386 .kn-back-link {
   display: none;
 }
 /*TIA Required Documents Page*/
-#kn-scene_176 .kn-back-link {
+#kn-scene_388 .kn-back-link {
   display: none;
 }
 /*Review TIA Application Page*/
-#kn-scene_177 .kn-back-link {
+#kn-scene_389 .kn-back-link {
   display: none;
 }
 /*TIA Application Confirmation Page*/
-#kn-scene_178 .kn-back-link {
+#kn-scene_392 .kn-back-link {
   display: none;
 }
 /*TIA Edit Information Page*/
-#kn-scene_179 .kn-back-link {
+#kn-scene_390 .kn-back-link {
   display: none;
 }
 /*TIA Edit Attachments Page*/
-#kn-scene_181 .kn-back-link {
+#kn-scene_391 .kn-back-link {
+  display: none;
+}
+
+/******************************************************/
+/** Remove Back Links for TIA Compliance Application **/
+/******************************************************/
+/*TIA Applicant Information Page*/
+#kn-scene_381 .kn-back-link {
+  display: none;
+}
+/*TIA Project Information Page*/
+#kn-scene_387 .kn-back-link {
+  display: none;
+}
+/*TIA Required Documents Page*/
+#kn-scene_393 .kn-back-link {
+  display: none;
+}
+/*Review TIA Application Page*/
+#kn-scene_394 .kn-back-link {
+  display: none;
+}
+/*TIA Application Confirmation Page*/
+#kn-scene_397 .kn-back-link {
+  display: none;
+}
+/*TIA Edit Information Page*/
+#kn-scene_395 .kn-back-link {
+  display: none;
+}
+/*TIA Edit Attachments Page*/
+#kn-scene_396 .kn-back-link {
+  display: none;
+}
+
+/***********************************************/
+/** Remove Back Links for TIA NTA Application **/
+/***********************************************/
+/*TIA Applicant Information Page*/
+#kn-scene_384 .kn-back-link {
+  display: none;
+}
+/*TIA Project Information Page*/
+#kn-scene_419 .kn-back-link {
+  display: none;
+}
+/*TIA Required Documents Page*/
+#kn-scene_420 .kn-back-link {
+  display: none;
+}
+/*Review TIA Application Page*/
+#kn-scene_421 .kn-back-link {
+  display: none;
+}
+/*TIA Application Confirmation Page*/
+#kn-scene_424 .kn-back-link {
+  display: none;
+}
+/*TIA Edit Information Page*/
+#kn-scene_422 .kn-back-link {
+  display: none;
+}
+/*TIA Edit Attachments Page*/
+#kn-scene_423 .kn-back-link {
   display: none;
 }
 
@@ -458,52 +556,53 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
-/**********************************/
-/*** Styles the TIA Application ***/
-/**********************************/
-
-/*PAGE 3 - Required Documents*/
-/*Max Width of Table*/
-#view_805 { max-width: 60%; }
-
-/*PAGE 4 - Review Application*/
+/***********************************/
+/*** Styles all TIA Applications ***/
+/***********************************/
+/*TIA Compliance*/
 /*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
-#view_426 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#view_425 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#view_427 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
-
+#view_1193 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*case details*/
+#view_1194 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*applicant details*/
+#view_1206 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
+#view_1195 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
 /*Max Width of Table*/
-#view_806 { max-width: 60%; }
+#view_1215 { max-width: 60%; } /*submission attachments*/
+#view_1216 { max-width: 60%; } /*review submission attachments*/
+#view_1215 { max-width: 80%; } /*edit attachments*/
 
-/*******************************************************/
-/*** Styles the Edit TIA Application Attachment page ***/
-/*******************************************************/
+/*NTA*/
+/*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
+#view_1278 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*case details*/
+#view_1279 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*applicant details*/
+#view_1291 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
+#view_1280 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
 /*Max Width of Table*/
-#view_808 { max-width: 80%; }
+#view_1294 { max-width: 60%; } /*scope attachments*/
+#view_1290 { max-width: 60%; } /*review scope attachments*/
+#view_1286 { max-width: 80%; } /*edit attachments*/
 
-/**********************************************/
-/*** Styles the TIA Submission Content page ***/
-/**********************************************/
+/*Full TIA*/
+/*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
+#view_1169 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*case details*/
+#view_1170 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*applicant details*/
+#view_1182 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
+#view_1171 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
 /*Max Width of Table*/
-#view_844 { max-width: 75%; }
-
-/****************************************************/
-/*** Styles the TIA Scope Submission Content page ***/
-/****************************************************/
-/*Max Width of Table*/
-#view_842 { max-width: 75%; }
+#view_1185 { max-width: 60%; } /*scope attachments*/
+#view_1181 { max-width: 60%; } /*review scope attachments*/
+#view_1177 { max-width: 80%; } /*edit attachments*/
 
 /*************************************/
 /*** Styles the Reviewer Dashboard ***/
 /*************************************/
-/*Min Width & Transparent for "Hello" Details Label*/
+/*Min Width & Transparent for "Hello/Welcome" Details Label*/
 #kn-scene_249 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_329 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /****************************************/
 /*** Styles the Vision Team Dashboard ***/
 /****************************************/
-/*Min Width & Transparent for "Hello" Details Label*/
+/*Min Width & Transparent for "Hello/Welcome" Details Label*/
 #kn-scene_14 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_347 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
