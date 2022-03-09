@@ -10,31 +10,12 @@
  * @parameter {bool} isDisabled - Is button disabled (defaults to false)
  * @parameter {function} callback - Function that is invoked after appending the button link
  **/
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  isDisabled = false,
-  callback = null
-) {
-  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
-
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
-
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
 }
 	//>>>HOME TAB BUTTONS
@@ -196,26 +177,33 @@ $(document).on('knack-view-render.view_2906', function(event, page) {
     bigButton('ots-work-orders', 'view_2906', "https://atd.knack.com/street-banners#lamppost-schedule/", "flag", "Lamppost | Schedule");
 });
 
-function bigButtonNewTab(div_id, view_id, url, fa_icon, button_label, callback) {
-  // create a large button and link to a new tab
-  
-    $("<div/>", {
-      id: div_id,
-    }).appendTo("#" + view_id);
-    
-  $("#" + div_id).append("<a class='big-button' target='_blank' href='" + url + "'><div class='big-button-container'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></div></a>");
-
-  if(callback) callback();
-}
 	//***MENU - RESOURCES PAGE***
 $(document).on('knack-view-render.view_2713', function(event, page) {
   // create large button on the resources page
-    bigButtonNewTab('street-banners-external-site', 'view_2713', "http://austintexas.gov/page/street-banners", "external-link-square", "Street Banners (External Site)");
+    bigButton('street-banners-external-site', 'view_2713', "http://austintexas.gov/page/street-banners", "external-link-square", "Street Banners (External Site)", true);
 });
 
 $(document).on('knack-view-render.view_2796', function(event, page) {
   // create large button on the resources page
-    bigButtonNewTab('AMANDA-Users-SP', 'view_2796', "https://atd.knack.com/dts#new-service-request/", "database", "AMANDA Support");
+    bigButton('AMANDA-Users-SP', 'view_2796', "https://atd.knack.com/dts#new-service-request/", "database", "AMANDA Support", true);
+});
+
+	//***CUSTOMER PORTAL PAGE***
+$(document).on('knack-view-render.view_3610', function(event, page) {
+  // create large button on the resources page
+    bigButton('get-started', 'view_3610', "https://atd.knack.com/street-banners#get-started/", "list", "Get Started");
+});
+$(document).on('knack-view-render.view_3611', function(event, page) {
+  // create large button on the resources page
+    bigButton("eligibility", "view_3611", "https://atd.knack.com/street-banners#eligibility/", "map-marker", "Eligibility");
+});
+$(document).on('knack-view-render.view_3612', function(event, page) {
+  // create large button on the resources page
+   bigButton("faq", "view_3612", "https://atd.knack.com/street-banners#faq/", "info-circle", "Help");
+});
+$(document).on('knack-view-render.view_3613', function(event, page) {
+  // create large button on the resources page
+    bigButton( "learn-more", "view_3613", "https://www.austintexas.gov/page/street-banners", "book", "About the Program", true);
 });
 
 $(document).on("knack-view-render.any", function (event, page) {
@@ -231,6 +219,7 @@ $(document).on("knack-view-render.any", function (event, page) {
     customizeLoginButton(viewId);
   }
 });
+
 
 /**
  * Enhance SSO button and hide/show default Knack login form with buttons
