@@ -53,21 +53,21 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
-
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
 }
 
 // create large Reviewer Dashboard button on the Home page
-$(document).on("knack-view-render.view_55", function(event, page) {
-  bigButton("reviewer-dashboard", "view_55", "https://atd.knack.com/development-services#rd-assigned-work/", "dashboard", "Reviewer Dashboard");
+$(document).on("knack-view-render.view_1270", function(event, page) {
+  bigButton("reviewer-dashboard", "view_1270", "https://atd.knack.com/development-services#rd-assigned-work/", "dashboard", "Reviewer Dashboard");
 });
 // create large Development Reviews button on the Home page
-$(document).on("knack-view-render.view_15", function(event, page) {
-  bigButton("tdr-reviews", "view_15", "https://atd.knack.com/development-services#home/tdr-reviews/", "list-ul", "TDR Reviews");
+$(document).on("knack-view-render.view_1269", function(event, page) {
+  bigButton("tdr-reviews", "view_1269", "https://atd.knack.com/development-services#home/tdr-reviews/", "list-ul", "TDR Reviews");
 });
 // create large TIA Reviews button on the Home page
 $(document).on("knack-view-render.view_719", function(event, page) {
@@ -77,23 +77,50 @@ $(document).on("knack-view-render.view_719", function(event, page) {
 $(document).on("knack-view-render.view_724", function(event, page) {
   bigButton("tda-reviews", "view_724", "https://atd.knack.com/development-services#tda-reviews/", "list-ul", "TDA Reviews");
 });
-// create large Advanced Search button on the Home page
-$(document).on("knack-view-render.view_56", function(event, page) {
-  bigButton("tia-portal", "view_56", "https://atd.knack.com/development-services#tia-portal/", "car", "TIA Portal");
+// create large TIA Portal button on the Home page
+$(document).on("knack-view-render.view_1271", function(event, page) {
+  bigButton("tia-portal", "view_1271", "https://atd.knack.com/development-services#tia-portal/", "car", "TIA Portal");
 });
 // create large Account Managment button on the Home page
 $(document).on("knack-view-render.view_720", function(event, page) {
-  bigButton("account-management", "view_720", "https://atd.knack.com/development-services#account-management/", "gears", "Account Management");
+  bigButton("account-management", "view_720", "https://atd.knack.com/development-services#account-management/", "users", "Account Management");
 });
-// create large Reviewer Help button on the Home page
-/*$(document).on("knack-view-render.view_721", function(event, page) {
-  bigButton("reviewer-help", "view_721", "https://atd.knack.com/development-services#reviewer-help/", "question", "Reviewer Help");
-});*/
+// create large TIA Determinations button on the Home page
+$(document).on("knack-view-render.view_721", function(event, page) {
+  bigButton("tia-determinations", "view_721", "https://atd.knack.com/development-services#tia-determinations/", "file-text-o", "TIA Determinations");
+});
+// create large Vision Team Dashboard button on the Home page
+$(document).on("knack-view-render.view_1272", function(event, page) {
+  bigButton("vtd-assigned-work", "view_1272", "https://atd.knack.com/development-services#vtd-assigned-work/", "eye", "Vision Team Dashboard");
+});
 
 
-// create large Start TIA Application button on the TIA Portal page
+// create large Determination Service button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1429", function(event, page) {
+  bigButton("determination-service", "view_1429", "https://atd.knack.com/development-services#determination-portal/", "gavel", "Determination");
+});
+// create large TIA Service button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1428", function(event, page) {
+  bigButton("tia-service", "view_1428", "https://atd.knack.com/development-services#tia-portal/", "car", "Traffic Impact Analysis");
+});
+// create large TDS Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1432", function(event, page) {
+  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home", true);
+});
+// create large TIA Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1433", function(event, page) {
+  bigButton("tia-link", "view_1433", "https://www.austintexas.gov/page/check-whether-transportation-impact-analysis-required", "check", "TIA Requirements", true);
+});
+
+
+// create large Start TIA Application button on the TIA Service page
 $(document).on("knack-view-render.view_112", function(event, page) {
-  bigButton("tia-application", "view_112", "https://atd.knack.com/development-services#tia-applicant-information/", "arrow-right", "Start TIA Application");
+  bigButton("tia-application", "view_112", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start TIA Application");
+});
+
+// create large Start TIA Determination button on the Determination Service page
+$(document).on("knack-view-render.view_1426", function(event, page) {
+  bigButton("tia-determination", "view_1426", "https://atd.knack.com/development-services#tia-determination/", "arrow-right", "Start TIA Determination");
 });
 
 /********************************************/
@@ -107,11 +134,11 @@ function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = fals
 
   if (callback) callback();
 }
-
+/*
 // create small Staff Login button on the TIA Portal page
 $(document).on("knack-view-render.view_948", function(event, page) {
   smallButton("tds-staff-login", "view_948", "https://atd.knack.com/development-services#home", "lock", "TDS Staff Login");
-});
+});*/
 
 /**********************************************************/
 /*** Disable Large Trigger buttons from being Clickable ***/
@@ -121,18 +148,25 @@ $(document).on('knack-scene-render.any', function(event, view) {
   $disabledTriggerButton.removeClass("kn-action-link");
 })
 
-/************************************************************/
-/** Convert Case ID field to UPPERCASE for TIA Application **/
-/************************************************************/
+/*************************************************************/
+/** Convert Case ID fields to UPPERCASE for TIA Application **/
+/*************************************************************/
+/*TIA Case ID*/
 $(document).on('knack-page-render.any', function(event, page) {
-  $('input#field_165').keyup(function(){
+  $('input#field_1047').keyup(function(){
+    this.value = this.value.toUpperCase();
+  });
+})
+/*TIA Related Case ID*/
+$(document).on('knack-page-render.any', function(event, page) {
+  $('input#field_1333').keyup(function(){
     this.value = this.value.toUpperCase();
   });
 })
 
-/******************************************************************/
-/** Disable Breadcrumb Navigation Links for TIA Case Status page **/
-/******************************************************************/
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
 function disableBreadCrumbsNonAdmin() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
@@ -140,6 +174,11 @@ function disableBreadCrumbsNonAdmin() {
     });
   }
 }
+
+/******************************************************************/
+/** Disable Breadcrumb Navigation Links for TIA Case Status page **/
+/******************************************************************/
+
 //TIA Case Details page
 $(document).on("knack-scene-render.scene_58", function () {
   disableBreadCrumbsNonAdmin();
@@ -169,36 +208,128 @@ $(document).on("knack-scene-render.scene_231", function () {
   disableBreadCrumbsNonAdmin();
 });
 
-/***************************************************************/
-/*** Disable Breadcrumb Navigation Links for TIA Application ***/
-/***************************************************************/
+/*****************************************************************/
+/*** Disable Breadcrumb Navigation Links for TIA Determination ***/
+/*****************************************************************/
+
+//Determination Information page
+$(document).on("knack-scene-render.scene_412", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Review Determination page
+$(document).on("knack-scene-render.scene_413", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Information page
+$(document).on("knack-scene-render.scene_414", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Determination Confirmation page
+$(document).on("knack-scene-render.scene_417", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/********************************************************************/
+//TIA Application Type page
+$(document).on("knack-scene-render.scene_377", function () {
+  disableBreadCrumbsNonAdmin();
+});
+/********************************************************************/
+/*** Disable Breadcrumb Navigation Links for Full TIA Application ***/
+/********************************************************************/
 
 //TIA Applicant Information page
-$(document).on("knack-scene-render.scene_166", function () {
+$(document).on("knack-scene-render.scene_385", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Project Information page
-$(document).on("knack-scene-render.scene_167", function () {
+$(document).on("knack-scene-render.scene_386", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Required Documents page
-$(document).on("knack-scene-render.scene_176", function () {
+$(document).on("knack-scene-render.scene_388", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Review Application page
-$(document).on("knack-scene-render.scene_177", function () {
+$(document).on("knack-scene-render.scene_389", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Application Confirmation page
-$(document).on("knack-scene-render.scene_178", function () {
+$(document).on("knack-scene-render.scene_392", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Edit Information page
-$(document).on("knack-scene-render.scene_179", function () {
+$(document).on("knack-scene-render.scene_390", function () {
   disableBreadCrumbsNonAdmin();
 });
 //TIA Edit Attachments page
-$(document).on("knack-scene-render.scene_181", function () {
+$(document).on("knack-scene-render.scene_391", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/**************************************************************************/
+/*** Disable Breadcrumb Navigation Links for TIA Compliance Application ***/
+/**************************************************************************/
+
+//TIA Applicant Information page
+$(document).on("knack-scene-render.scene_381", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Project Information page
+$(document).on("knack-scene-render.scene_387", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Required Documents page
+$(document).on("knack-scene-render.scene_393", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Review Application page
+$(document).on("knack-scene-render.scene_394", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Application Confirmation page
+$(document).on("knack-scene-render.scene_397", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Edit Information page
+$(document).on("knack-scene-render.scene_395", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Edit Attachments page
+$(document).on("knack-scene-render.scene_396", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/*******************************************************************/
+/*** Disable Breadcrumb Navigation Links for TIA NTA Application ***/
+/*******************************************************************/
+
+//TIA Applicant Information page
+$(document).on("knack-scene-render.scene_384", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Project Information page
+$(document).on("knack-scene-render.scene_419", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Required Documents page
+$(document).on("knack-scene-render.scene_420", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Review Application page
+$(document).on("knack-scene-render.scene_421", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Application Confirmation page
+$(document).on("knack-scene-render.scene_424", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Edit Information page
+$(document).on("knack-scene-render.scene_422", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TIA Edit Attachments page
+$(document).on("knack-scene-render.scene_423", function () {
   disableBreadCrumbsNonAdmin();
 });
 
