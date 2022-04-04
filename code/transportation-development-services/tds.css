@@ -291,14 +291,14 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_234 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Customer Submission Details Page*/
-#kn-scene_194 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+#kn-scene_484 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_194 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+#kn-scene_484 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Customer Scope Submission Details Page*/
-#kn-scene_214 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+#kn-scene_487 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_214 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+#kn-scene_487 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Memo Details Page*/
 #kn-scene_248 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
@@ -535,26 +535,31 @@ a.ang-link:link {text-decoration: none;}
 /*****************************************************/
 /*** Remove Back Links for specific Customer Pages ***/
 /*****************************************************/
-/*TIA Details page (Prevents access to TIA Case Status page)*/
-#kn-scene_58 .kn-back-link {
+/*Access Code page*/
+#kn-scene_480 .kn-back-link {
+  display: none;
+}
+/*Manage TIA page*/
+#kn-scene_481 .kn-back-link {
   display: none;
 }
 /*Add TIA Scope Submission Attachments page*/
-#kn-scene_213 .kn-back-link {
-  display: none;
-}
-/*Add TIA Submission Attachments page*/
-#kn-scene_228 .kn-back-link {
-  display: none;
-}
-/*Edit TIA Submission Attachments page*/
-#kn-scene_289 .kn-back-link {
+#kn-scene_485 .kn-back-link {
   display: none;
 }
 /*Edit TIA Scope Submission Attachments page*/
-#kn-scene_231 .kn-back-link {
+#kn-scene_486 .kn-back-link {
   display: none;
 }
+/*Add TIA Submission Attachments page*/
+#kn-scene_482 .kn-back-link {
+  display: none;
+}
+/*Edit TIA Submission Attachments page*/
+#kn-scene_483 .kn-back-link {
+  display: none;
+}
+
 
 /***********************************/
 /*** Styles all TIA Applications ***/
