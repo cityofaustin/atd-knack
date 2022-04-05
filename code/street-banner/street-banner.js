@@ -189,21 +189,40 @@ $(document).on('knack-view-render.view_2796', function(event, page) {
 });
 
 	//***CUSTOMER PORTAL PAGE***
+$(document).on('knack-view-render.view_3611', function(event, page) {
+  // create large button on the resources page
+    bigButton("eligibility", "view_3611", "https://atd.knack.com/street-banners#eligibility/", "map-marker", "Eligibility");
+});
 $(document).on('knack-view-render.view_3610', function(event, page) {
   // create large button on the resources page
     bigButton('get-started', 'view_3610', "https://atd.knack.com/street-banners#get-started/", "list", "Get Started");
 });
-$(document).on('knack-view-render.view_3611', function(event, page) {
+$(document).on('knack-view-render.view_3613', function(event, page) {
   // create large button on the resources page
-    bigButton("eligibility", "view_3611", "https://atd.knack.com/street-banners#eligibility/", "map-marker", "Eligibility");
+    bigButton( "learn-more", "view_3613", "https://www.austintexas.gov/page/street-banners", "book", "About the Program", true);
 });
 $(document).on('knack-view-render.view_3612', function(event, page) {
   // create large button on the resources page
    bigButton("faq", "view_3612", "https://atd.knack.com/street-banners#faq/", "info-circle", "Help");
 });
-$(document).on('knack-view-render.view_3613', function(event, page) {
-  // create large button on the resources page
-    bigButton( "learn-more", "view_3613", "https://www.austintexas.gov/page/street-banners", "book", "About the Program", true);
+
+	//***GET STARTED PAGE***
+$(document).on('knack-view-render.view_3614', function(event, page) {
+  // create large button on go back to Portal page
+    bigButton('portal', 'view_3614', "https://atd.knack.com/street-banners#portal", "home", "Home");
+});
+$(document).on('knack-view-render.view_3615', function(event, page) {
+  // create large button on go back to Portal page
+    bigButton('applications', 'view_3615', "https://atd.knack.com/street-banners#applications", "arrow-right", "Start Application");
+});
+	//***APPLICATIONS CHOICE PAGE***
+$(document).on('knack-view-render.view_3153', function(event, page) {
+  // create large button on go back to Portal page
+    bigButton('lpb-application', 'view_3153', "https://atd.knack.com/street-banners#lpb-application/", " ", "Lamppost Banner Application");
+});
+$(document).on('knack-view-render.view_3154', function(event, page) {
+  // create large button on go back to Portal page
+    bigButton('ots-application', 'view_3154', "https://atd.knack.com/street-banners#ots-application"," " , "Over-the-Street Banner Application");
 });
 
 $(document).on("knack-view-render.any", function (event, page) {
@@ -219,8 +238,6 @@ $(document).on("knack-view-render.any", function (event, page) {
     customizeLoginButton(viewId);
   }
 });
-
-
 /**
  * Enhance SSO button and hide/show default Knack login form with buttons
  * @parameter {string} viewId - Knack view id to append button link to
@@ -271,4 +288,54 @@ $(document).on("knack-view-render.any", function (event, page) {
 
     customizeLoginButton(viewId);
   }
+});
+
+/*******************************************/
+/*** Disable Breadcrumb Navigation Links ***/
+/*******************************************/
+function disableBreadCrumbsNonAdmin() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1211", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1212", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1219", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1226", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1233", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1234", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1243", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_1255", function () {
+  disableBreadCrumbsNonAdmin();
 });
