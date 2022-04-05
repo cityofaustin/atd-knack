@@ -339,4 +339,3 @@ $(document).on("knack-scene-render.scene_1243", function () {
 $(document).on("knack-scene-render.scene_1255", function () {
   disableBreadCrumbsNonAdmin();
 });
-

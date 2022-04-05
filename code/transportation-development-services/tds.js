@@ -97,11 +97,11 @@ $(document).on("knack-view-render.view_1272", function(event, page) {
 
 // create large Determination Service button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1429", function(event, page) {
-  bigButton("determination-service", "view_1429", "https://atd.knack.com/development-services#determination-portal/", "gavel", "Determination");
+  bigButton("determination-service", "view_1429", "https://atd.knack.com/development-services#determination-portal/", "gavel", "TIA Determination");
 });
 // create large TIA Service button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1428", function(event, page) {
-  bigButton("tia-service", "view_1428", "https://atd.knack.com/development-services#tia-portal/", "car", "Traffic Impact Analysis");
+  bigButton("tia-service", "view_1428", "https://atd.knack.com/development-services#tia-portal/", "car", "TIA: Traffic Impact Analysis");
 });
 // create large TDS Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1432", function(event, page) {
@@ -174,39 +174,6 @@ function disableBreadCrumbsNonAdmin() {
     });
   }
 }
-
-/******************************************************************/
-/** Disable Breadcrumb Navigation Links for TIA Case Status page **/
-/******************************************************************/
-
-//TIA Case Details page
-$(document).on("knack-scene-render.scene_58", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//View TIA Submission Details page
-$(document).on("knack-scene-render.scene_194", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Add TIA Submission Attachments page
-$(document).on("knack-scene-render.scene_228", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//View TIA Scope Submission Details page
-$(document).on("knack-scene-render.scene_214", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Add TIA Scope Submission Attachments page
-$(document).on("knack-scene-render.scene_213", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Edit TIA Submission Attachment page
-$(document).on("knack-scene-render.scene_230", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Edit TIA Scope Submission Attachment page
-$(document).on("knack-scene-render.scene_231", function () {
-  disableBreadCrumbsNonAdmin();
-});
 
 /*****************************************************************/
 /*** Disable Breadcrumb Navigation Links for TIA Determination ***/
@@ -352,7 +319,7 @@ $(document).on('knack-scene-render.any', function(event, scene) {
 /**************************************************/
 /* Add Previous Window Button to Customer View, Add, & Edit Pages since we disable breadcrumbs */
 $(document).on("knack-view-render.any", function(event, view) {
-var appviews=["view_601","view_602","view_604","view_605","view_612","view_613"];
+var appviews=["view_1552","view_1568","view_1544","view_1560","view_1548","view_1563"];
 var key=(view.key!=undefined)?view.key.toLowerCase().trim():"";
 var l=appviews.length;
 for (var x=0; x<l; x++) {
