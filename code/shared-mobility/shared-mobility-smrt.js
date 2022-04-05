@@ -92,3 +92,21 @@ $(document).on("knack-scene-render.scene_264", function (event, page) {
   $(".view_558").hide();
   $("#csr_view").attr("src", iframe_url);
 });
+
+/*********** Provider SMRT Portal ***********/
+// create large Get Started button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_626", function(event, page) {
+  bigButton( "get-started", "view_626", "https://atd.knack.com/smrt#get-started/", "file-text", "Get Started");
+});
+// create large Am I Eligible button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_627", function(event, page) {
+  bigButton("eligibility", "view_627", "https://atd.knack.com/smrt#eligibility/", "book", "Eligibility");
+});
+// create large Help button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_628", function(event, page) {
+  bigButton("faq", "view_628", "https://atd.knack.com/smrt#faq/", "info-circle", "Help");
+});
+// create large About the Program button on the Customer RPP Portal page
+$(document).on("knack-view-render.view_629", function(event, page) {
+  bigButton("about-the-program", "view_629", "https://www.austintexas.gov/page/shared-mobility-regulations-and-license-application", "book", "About the Program");
+});
