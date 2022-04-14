@@ -60,7 +60,7 @@ $(document).on('knack-view-render.view_2663', function(event, page) {
 	//LAMPPOST TAB BUTTONS
 $(document).on('knack-view-render.view_2814', function(event, page) {
   // create large button on the home page
-    bigButton('lpb-reservations', 'view_2814', "https://atd.knack.com/street-banners#lamppost-banner-reservations/", "pencil-square-o", "Lamppost | Reservations");
+    bigButton('lpb-application-dashboard', 'view_2814', "https://atd.knack.com/street-banners#lpb-application-dashboard/", "pencil-square-o", "Lamppost | Reservations");
 });
 	
 $(document).on('knack-view-render.view_2815', function(event, page) {
@@ -80,7 +80,7 @@ $(document).on('knack-view-render.view_2817', function(event, page) {
 	//>>>OVER-THE-STREET TAB BUTTONS
 $(document).on('knack-view-render.view_2818', function(event, page) {
   // create large button on the home page
-    bigButton('ots-reservations', 'view_2818', "https://atd.knack.com/street-banners#over-the-street-banner-reservations/", "pencil-square-o", "Over-the-Street | Reservations");
+    bigButton('ots-application-dashboard', 'view_2818', "https://atd.knack.com/street-banners#ots-application-dashboard/", "pencil-square-o", "Over-the-Street | Reservations");
 });
 
 $(document).on('knack-view-render.view_2819', function(event, page) {
@@ -154,12 +154,12 @@ $(document).on('knack-view-render.view_2804', function(event, page) {
 	//***MENU - WORK ORDER PAGE***
 $(document).on('knack-view-render.view_2904', function(event, page) {
   // create large button on the home page
-    bigButton('lpb-work-orders', 'view_2904', "https://atd.knack.com/street-banners#lamppost-work-orders/", "flag", "Lamppost | Work Orders");
+    bigButton('work-orders-lpb', 'view_2904', "https://atd.knack.com/street-banners#work-orders-lpb/", "flag", "Lamppost | Work Orders");
 });
 
 $(document).on('knack-view-render.view_2905', function(event, page) {
   // create large button on the home page
-    bigButton('ots-work-orders', 'view_2905', "https://atd.knack.com/street-banners#over-the-street-banner-work-orders/", "flag-checkered", "Over-the-Street | Work Orders");
+    bigButton('work-orders-ots', 'view_2905', "https://atd.knack.com/street-banners#work-orders-ots", "flag-checkered", "Over-the-Street | Work Orders");
 });
 
 $(document).on('knack-view-render.view_2960', function(event, page) {
@@ -339,3 +339,4 @@ $(document).on("knack-scene-render.scene_1243", function () {
 $(document).on("knack-scene-render.scene_1255", function () {
   disableBreadCrumbsNonAdmin();
 });
+
