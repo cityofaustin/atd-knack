@@ -134,12 +134,12 @@ $(document).on('knack-view-render.view_3032', function(event, page) {
 	//***MENU - RESERVATION PAGE***
 $(document).on('knack-view-render.view_2794', function(event, page) {
   // create large button on the home page
-    bigButton('lpb-rsvp', 'view_2794', "https://atd.knack.com/street-banners#lamppost-banner-reservations/", "flag-o", "Lamppost | Reservations");
+    bigButton('lpb-rsvp', 'view_2794', "https://atd.knack.com/street-banners#lpb-application-dashboard/", "flag-o", "Lamppost | Reservations");
 });
 
 $(document).on('knack-view-render.view_2795', function(event, page) {
   // create large button on the home page
-    bigButton('ots-rsvp', 'view_2795', "https://atd.knack.com/street-banners#over-the-street-banner-reservations", "flag-checkered", "Over-the-Street | Reservations");
+    bigButton('ots-rsvp', 'view_2795', "https://atd.knack.com/street-banners#ots-application-dashboard/", "flag-checkered", "Over-the-Street | Reservations");
 });
 	//***MENU - AVAILABILITY PAGE***
 $(document).on('knack-view-render.view_2803', function(event, page) {
