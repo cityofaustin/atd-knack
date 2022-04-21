@@ -70,7 +70,7 @@ $(document).on('knack-view-render.view_2815', function(event, page) {
 
 $(document).on('knack-view-render.view_2816', function(event, page) {
   // create large button on the home page
-    bigButton('lpb-work-orders', 'view_2816', "https://atd.knack.com/street-banners#lamppost-work-orders", "folder-open", "Lamppost | Work Orders");
+    bigButton('work-orders-lpb', 'view_2816', "https://atd.knack.com/street-banners#work-orders-lpb/", "folder-open", "Lamppost | Work Orders");
 });
 
 $(document).on('knack-view-render.view_2817', function(event, page) {
@@ -89,7 +89,7 @@ $(document).on('knack-view-render.view_2819', function(event, page) {
 });
 $(document).on('knack-view-render.view_2820', function(event, page) {
   // create large button on the home page
-    bigButton('ots-work-orders', 'view_2820', "https://atd.knack.com/street-banners#over-the-street-banner-work-orders", "folder-open", "Over-the-Street | Work Orders");
+    bigButton('work-orders-ots', 'view_2820', "https://atd.knack.com/street-banners#work-orders-ots/", "folder-open", "Over-the-Street | Work Orders");
 });
 
 $(document).on('knack-view-render.view_2821', function(event, page) {
