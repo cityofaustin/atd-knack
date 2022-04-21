@@ -1,12 +1,12 @@
 /* Big Buttons */
 .big-button-container {
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
-  padding: 10px;
+  padding: 10px 10px;
   margin: 20px;
-  max-width: 16em;
-  display: block
+  max-width: 18em;
+  display: block;
 }
 
 .big-button-container:hover {
@@ -42,3 +42,22 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
+
+.group-layout-wrapper .view-column {
+  display: block;
+}
+#view_3407 > div > a{
+  background-color: #1A3D6B;
+  color: #ffffff;
+  width: 10%;
+  padding: 14px 28px;
+  font-size: 16px;
+}
+#view_3412 > div > a{
+  background-color: #1A3D6B;
+  color: #ffffff;
+  width: 10%;
+  padding: 14px 28px;
+  font-size: 16px;
+}
+
