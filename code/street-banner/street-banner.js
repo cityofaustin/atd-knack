@@ -350,7 +350,7 @@ $(document).on("knack-scene-render.scene_1212", function () {
 
 // Reload OTS Application when Design Ready "Yes"
 $(document).on("knack-scene-render.scene_1234", function () {
-  $('#view_3392 .kn-link:contains("Yes")').on("click", function(){
+  $('#view_3397 .kn-link:contains("Yes")').on("click", function(){
     location.reload();
   })
 });
