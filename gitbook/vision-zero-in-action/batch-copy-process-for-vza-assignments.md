@@ -44,11 +44,11 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 23
 
 ![](<../../.gitbook/assets/image (189).png>)
 
-8\) Insert another column, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column.
+8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column.
 
 ![](<../.gitbook/assets/image (8).png>)
 
-9\) Insert another column, enter formula: `=RIGHT(E2,14)` this will capture the time. Fill Down the column.
+9\) Insert another column to the left, enter formula: `=RIGHT(E2,14)` this will capture the time. Fill Down the column.
 
 ![](<../../.gitbook/assets/image (187).png>)
 
@@ -109,7 +109,7 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 ## Check - QAQC
 
-These fields need to be populated for the next steps in the process to work. In Knack Builder, check to make sure non of these fields are blank.
+These fields need to be populated for the next steps in the process to work. In Knack Builder, check to make sure none of these fields are blank.
 
 1. Assignment Date and Time
 2. Shift&#x20;
