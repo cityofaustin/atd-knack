@@ -77,3 +77,10 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
+#view_754 > div > a{
+  background-color: #1A3D6B;
+  color: #ffffff;
+  width: 10%;
+  padding: 14px 28px;
+  font-size: 16px;
+}
