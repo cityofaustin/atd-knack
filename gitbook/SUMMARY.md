@@ -148,6 +148,7 @@
 
 * [Application Overview](row-portal/application-overview.md)
 * [TCP | Traffic Control Plans](row-portal/tcp-build.md)
+* [COS JV Update](row-portal/cos-jv-update.md)
 
 ## SMS| Shared Mobility Reporting Tracker <a href="#shared-mobility-reporting-tracker" id="shared-mobility-reporting-tracker"></a>
 

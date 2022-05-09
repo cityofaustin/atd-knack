@@ -30,7 +30,7 @@ Only a VZA Admin / Knack Builder can carry out this process.
 
 Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 23:59 and <mark style="color:blue;">Assignment Date Time</mark> is before 02/28/2022 00:00
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (1).png>)
 
 4\) Export records to CSV
 
@@ -46,7 +46,7 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 23
 
 8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column.
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (1).png>)
 
 9\) Insert another column to the left, enter formula: `=RIGHT(E2,14)` this will capture the time. Fill Down the column.
 
@@ -62,7 +62,7 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 
-![](<../.gitbook/assets/image (7).png>)
+![](<../.gitbook/assets/image (7) (1).png>)
 
 12\) Update and Fill the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark>. <mark style="color:blue;">Created By</mark> should be your email. Delete the <mark style="color:blue;">Modified Date</mark> & <mark style="color:blue;">Modified By</mark> columns.
 
