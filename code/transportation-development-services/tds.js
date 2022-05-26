@@ -461,7 +461,7 @@ $(document).on('knack-view-render.view_887', function(event, view, record) {
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "tia-submissions-reporting", "fa-bar-chart", "Submissions Reporting")}\
-      ${dropdownMenuItem(recordId, "tia-case-status", "fa-child", "Customer's View")}\
+      ${dropdownMenuItem(recordId, "manage-tia", "fa-child", "Customer's View")}\
     </ul>\
   </div>`).appendTo("#view_887")
 
@@ -482,7 +482,7 @@ $(`<div class="mobile-details-dropdown-menu">\
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "tia-submissions-reporting", "fa-bar-chart", "Submissions Reporting", true)}\
-      ${dropdownMenuItem(recordId, "tia-case-status", "fa-child", "Customer's View", true)}\
+      ${dropdownMenuItem(recordId, "manage-tia", "fa-child", "Customer's View", true)}\
     </ul>\
   </div>`).appendTo("#view_887")
 })
@@ -789,6 +789,7 @@ $(document).on('knack-scene-render.scene_290', (event) => {
   // View finishes rendering before table data is loaded
   hideSummaryNameMitigationEditTable("view_854", "Location Total")
   hideSummaryNameMitigationEditTable("view_857", "Location Total")
+  hideSummaryNameMitigationEditTable("view_1595", "Location Total")
 })
 
 /**************************************************************/
