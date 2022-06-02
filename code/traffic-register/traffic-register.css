@@ -1,1 +1,326 @@
-/* Traffic Register CSS */
+/***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+/*Centers icon vertically on a line*/
+.fa { vertical-align: baseline; }
+/*Icon rests at the bottom of a line*/
+.fa-bot { vertical-align: text-bottom; }
+/*Icon touches the top of a line*/
+.fa-top { vertical-align: text-top; }
+
+/****************************************/
+/************ Button Effects ************/
+/****************************************/
+/*Call this class anytime you want to use this cursor*/
+.disabled { cursor: not-allowed; }
+
+/*Call this class anytime you want to center button text*/
+.centered-text { text-align: center; }
+
+/*Close Modal 'X' Button*/
+.delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
+.close-modal {border: #495057 !important; background-color: #495057 !important;}
+.delete:before { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:after { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
+.big-button-container {
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  max-width: 15em;
+  display: block;
+}
+ 
+.big-button-container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.big-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+  pointer-events: none;
+}
+ 
+a.big-button-container { 
+  text-decoration: none;
+}
+
+/***************************************/
+/************ Small Buttons ************/
+/***************************************/
+.small-button-container {
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #babbbc;
+  color: white;
+}
+
+.small-button-container:hover {
+  background-color: #4c4c4c;
+  cursor: pointer;
+}
+
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+}
+
+a.small-button {
+  text-decoration: none;
+}
+
+/****************************************/
+/**** Previous Window / Back Buttons ****/
+/****************************************/
+#previous-window-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+#previous-window-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+.back-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+  display: inline-block;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+a.back-button {text-decoration: none;}
+
+/***************************************/
+/*********** Trigger Buttons ***********/
+/***************************************/
+.trigger-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+/*Large Trigger Buttons*/
+.trigger-button-large {
+  width: 250px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 10px 10px;
+  font-size: 18px;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button-large:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+.trigger-button-large-disabled {
+  width: 250px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: #cbcbcb;
+  color: #777777;
+  padding: 10px 10px;
+  font-size: 18px;
+  text-align: center;
+  opacity: 0.6;
+  display: inline-block;
+  outline-color: transparent;
+}
+
+/***************************************/
+/******** Table Trigger Buttons ********/
+/***************************************/
+.table-trigger-button {
+  padding: 2px 8px;
+  border-width: 1px;
+  border-color: #4CAE49;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: #4CAE49;
+  color: white;
+  text-align: center;
+}
+
+.table-trigger-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+a.table-trigger-button { text-decoration: none; }
+
+/****************************************/
+/****** Table Icon Trigger Buttons ******/
+/****************************************/
+.table-icon-trigger-button {
+  padding: 0px 4px;
+  border-width: 1px;
+  border-color: #367DB7;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: transparent;
+  color: white;
+}
+
+.table-icon-trigger-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/****************************************/
+/******** Table Checkbox Buttons ********/
+/****************************************/
+.table-checkbox-parent {
+  vertical-align: middle !important;
+}
+
+.table-checkbox {
+  transform: scale(2, 2);
+  margin: 20px !important;
+}
+
+/*****************************************/
+/** Style Links with Underline on Hover **/
+/*****************************************/
+/*use <a class="form-link" */
+a.form-link:link {color: #367DB7; text-decoration: none;}
+a.form-link:visited {color: #367DB7; text-decoration: none;}
+a.form-link:hover {text-decoration: underline;}
+
+/********************************************/
+/** Style Links without Underline on Hover **/
+/********************************************/
+a.ang-link:link {text-decoration: none;}
+
+/*****************************************/
+/****** Style Back Links as Buttons ******/
+/*****************************************/
+/*RD Completed Work Page*/
+#kn-scene_41 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_41 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*RD LE Review Page*/
+#kn-scene_42 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_42 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*RD AE Review Page*/
+#kn-scene_43 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_43 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*RD QA Review Page*/
+#kn-scene_255 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_255 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*RD Technician Review Page*/
+#kn-scene_276 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_276 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Regulation Package Details Page*/
+#kn-scene_58 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_58 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Regulation Details Page*/
+#kn-scene_13 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_13 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Historical Entry Page*/
+#kn-scene_392 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_392 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage Reg Types Page*/
+#kn-scene_393 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_393 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage Streets Page*/
+#kn-scene_394 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_394 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*****************************************/
+/** Remove Back Links for Package Draft **/
+/*****************************************/
+/*Draft Package Builder Page 2*/
+#kn-scene_253 .kn-back-link {
+  display: none;
+}
+
+/*Approved Package Builder Page 2*/
+#kn-scene_401 .kn-back-link {
+  display: none;
+}
+
+/*************************************/
+/*** Styles the Reviewer Dashboard ***/
+/*************************************/
+/*Min Width & Transparent for "Hello/Welcome" Details Label*/
+#kn-scene_39 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_41 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Draft Package ID on Package Builder*/
+#kn-scene_253 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_401 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
