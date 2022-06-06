@@ -136,18 +136,3 @@ $(document).on('knack-scene-render.any', function(event, scene) {
   $('.kn-modal-bg').off('click');
 });
 
-/********************************************/
-/************ Connection Picker *************/
-/********************************************/
-function getConnectionFieldValue(fieldKey) {
-    return $($("#connection-picker-chosen-" + "field_52")[0]).find("span")[0]
-      .textContent;
-  }
-
-$(document).on("knack-view-render.view_34", function (event, page) {
-  var fields = {
-    primary_st: "field_52",
-    from_st: "field_53",
-    to_street: "field_54",
-  };
-});
