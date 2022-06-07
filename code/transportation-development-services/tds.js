@@ -835,3 +835,12 @@ $(document).on("knack-scene-render.scene_294", function (event, page) {
   // hide the Mitigation Map URL field & view
   $("#view_967").hide();
 });
+
+/*Mitigation Editor- Edit Location Information Page*/
+$(document).on("knack-scene-render.scene_499", function (event, page) {
+  // update iframe src with Mitigation Map URL in the Detail View
+    var iframe_url = $($("span:contains('apps/webappviewer')")[0]).text()
+  $("#mitigationMapiFrame").attr("src", iframe_url);
+  // hide the Mitigation Map URL field & view
+  $("#view_1605").hide();
+});
