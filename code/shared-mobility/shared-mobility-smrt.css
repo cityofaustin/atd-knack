@@ -77,7 +77,16 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
+/************ Completed Action Button #1 - Phase 1 Review ************/
 #view_754 > div > a{
+  background-color: #1A3D6B;
+  color: #ffffff;
+  width: 10%;
+  padding: 14px 28px;
+  font-size: 16px;
+}
+/************ Completed Action Button #2 - Phase 2 Review: Bond & Insurance ************/
+#view_787 > div > a{
   background-color: #1A3D6B;
   color: #ffffff;
   width: 10%;
