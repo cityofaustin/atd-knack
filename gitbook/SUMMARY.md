@@ -176,6 +176,10 @@
 
 * [Application Overview](human-resources/application-overview.md)
 
+## SMO | Smart Mobility Office <a href="#smart-mobility-office" id="smart-mobility-office"></a>
+
+* [Application Overview](smart-mobility-office/application-overview.md)
+
 ## ATD Forms
 
 * [Application Overview](atd-forms/application-overview.md)
