@@ -16,12 +16,16 @@ Has the ability to send custom emails to applicant for new MetroBike promo code 
 * Program Manager will email spreadsheet to Apps team
 * Download spreadsheet
 * Review spreadsheet, must have: "Promo Code" and "Expiration Date" included
-* Will have to add "Type" field to spreadsheet to indicate if it's an "Austin Energy" or "City of Austin" code
-  * Will know which type based on Promo Code Name
-    * COA\[Code]
-    * AE\[Code]&#x20;
-* Save as .csv for import
+* Will have to add several fields on the spreadsheet:&#x20;
+  * "Type" field to spreadsheet to indicate if it's an "Austin Energy" or "City of Austin" code
+    * Will know which type based on Promo Code Name
+      * COA\[Code]
+      * AE\[Code]&#x20;
+  * Add field `Promo Code Status` - and set all records to "Available"
+  * Added field `Created_Date` - and set to the date of import
+* Create backup copy of `promo_codes_bike_share_benefits` table
+* Field match field headings
 * Import spreadsheet
-* Field match&#x20;
-* Check table on front end
+* Check table records on back end and front end
+* Let Program Manager know that records have been imported
 
