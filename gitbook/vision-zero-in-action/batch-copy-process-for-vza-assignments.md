@@ -62,7 +62,7 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 
-![](<../.gitbook/assets/image (7) (1).png>)
+![](<../.gitbook/assets/image (7) (1) (1).png>)
 
 12\) Update and Fill the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark>. <mark style="color:blue;">Created By</mark> should be your email. Delete the <mark style="color:blue;">Modified Date</mark> & <mark style="color:blue;">Modified By</mark> columns.
 

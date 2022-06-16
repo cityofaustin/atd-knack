@@ -164,11 +164,23 @@ Be sure to Save changes.
 {% endtab %}
 
 {% tab title="🔟" %}
-Lastly, you must enable the SSO on each login page by selecting the checkbox
+You must enable the SSO on each login page by selecting the checkbox
 
 ![](<../../../.gitbook/assets/image (282).png>)
 {% endtab %}
+
+{% tab title="11" %}
+The Final Step is to save the Identity Provider's Certificate (formatted X.509 with headers) in 1Password on the Knack ADFS X.509 IP Certificates document.
+
+![](<../../.gitbook/assets/image (2).png>)
+
+Locate the document in 1Password in the Knack Shared folder. Select Edit and Make a new entry for the new Knack app. Enter the app name, set the field as a password, paste the certificate, and add the IP Cert label. Lastly, Save.
+
+![](<../../.gitbook/assets/image (7).png>)
+{% endtab %}
 {% endtabs %}
+
+
 
 ## Configuring new certificates for all Knack Apps
 

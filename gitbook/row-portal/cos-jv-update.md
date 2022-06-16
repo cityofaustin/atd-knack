@@ -41,7 +41,7 @@ and also select _`Journal Voucher ID`_, then select **Next**\
 Make sure the number of records importing matches your CSV. Select **Add a default**.\
 
 
-![](<../.gitbook/assets/image (7).png>)
+![](<../.gitbook/assets/image (7) (1).png>)
 {% endtab %}
 
 {% tab title="6️⃣" %}

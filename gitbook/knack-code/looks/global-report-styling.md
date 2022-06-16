@@ -4,7 +4,7 @@ description: How to adjust Global HighCharts report styling
 
 # HighCharts Report Styling
 
-Overall, the base report styling in Knack is pretty bland. Knack uses a [HighCharts](https://www.highcharts.com) integration, an interactive JavaScript reporting tool to supply its Report views.
+Overall, the base report styling in Knack is pretty bland. Knack uses a [HighCharts](https://www.highcharts.com/) integration, an interactive JavaScript reporting tool to supply its Report views.
 
 ![A light blue report background and a more defined plot transparency and border](<../../../.gitbook/assets/image (61).png>)
 

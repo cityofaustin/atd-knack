@@ -36,5 +36,5 @@ This is Service Request page for Signs - signs has more pre-filters on their men
 
 **Closed** status
 
-![](<../../.gitbook/assets/image (2).png>)
+![](<../../.gitbook/assets/image (2) (1).png>)
 

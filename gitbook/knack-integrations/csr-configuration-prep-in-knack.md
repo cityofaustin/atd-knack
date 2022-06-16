@@ -23,7 +23,7 @@ When importing from a table the "Map Columns" section auto defaults everything t
 
 ## csr\_flex\_notes
 
-![](<../.gitbook/assets/image (2) (1).png>)
+![](<../.gitbook/assets/image (2) (1) (1).png>)
 
 ### Connections - csr\_flex\_notes
 

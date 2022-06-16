@@ -14,7 +14,7 @@
 
 ![](../../.gitbook/assets/banner\_800x160\_coa\_template.png)
 
-Use [Gimp software ](https://www.gimp.org)to create or update a Knack application banner
+Use [Gimp software ](https://www.gimp.org/)to create or update a Knack application banner
 
 You can find the original banner assets and a template for creating a new application banner in the corresponding G drive folder: G:\ATD\ATD\_GIS\03\_RESOURCES\Seals\_Logos\ATD App Banner Assets
 
