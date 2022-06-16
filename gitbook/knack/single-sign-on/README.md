@@ -156,7 +156,7 @@ In CTM's metadata file, find the Identity Provider certificate in the metadata u
 
 ![](<../../../.gitbook/assets/image (287).png>)
 
-Copy and paste the contents of the `X509Certificate` tag into the [X509 Formatter](https://www.samltool.com/format\_x509cert.php). Click the "Format X.509 Certificate" button, then copy the contents of output box labeled "X.509 cert with header". Paste the formatted certificate into the **Identity Provider's certificate** field in the Knack login config.
+Copy and paste the contents of the `X509Certificate` tag into the [X509 Formatter](https://www.samltool.com/format\_x509cert.php). Click the "Format X.509 Certificate" button, then copy the contents of output box labeled "X.509 cert with header". Paste the formatted certificate into the **Identity Provider's certificate** field in the Knack login config. (removing the asterisks)
 
 ![](<../../../.gitbook/assets/image (301).png>)
 
