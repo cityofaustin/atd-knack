@@ -276,7 +276,7 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_276 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Regulation Package Details Page*/
+/*Regulation Document Details Page*/
 #kn-scene_58 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_58 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
@@ -286,10 +286,10 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_13 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Historical Entry Page*/
-#kn-scene_392 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+/*Manage Regulation Backfill Page*/
+#kn-scene_417 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_392 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+#kn-scene_417 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Manage Reg Types Page*/
 #kn-scene_393 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
@@ -302,14 +302,14 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_394 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*****************************************/
-/** Remove Back Links for Package Draft **/
+/** Remove Back Links for Reg Doc Draft **/
 /*****************************************/
-/*Draft Package Builder Page 2*/
+/*Draft Reg Doc Builder Page 2*/
 #kn-scene_253 .kn-back-link {
   display: none;
 }
 
-/*Approved Package Builder Page 2*/
+/*Approved Reg Doc Builder Page 2*/
 #kn-scene_401 .kn-back-link {
   display: none;
 }
@@ -321,6 +321,6 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_39 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_41 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
-/*Draft Package ID on Package Builder*/
+/*Draft Reg Doc ID on Reg Doc Builder*/
 #kn-scene_253 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_401 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
