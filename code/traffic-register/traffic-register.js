@@ -66,9 +66,9 @@ $(document).on("knack-view-render.view_612", function(event, page) {
   bigButton("reviewer-dashboard", "view_612", "https://atd.knack.com/traffic-register#rd-assigned-work/", "dashboard", "Reviewer Dashboard");
 });
 
-// create large Regulation Packages button on the Home page
+// create large Regulation Documents button on the Home page
 $(document).on("knack-view-render.view_613", function(event, page) {
-  bigButton("regulation-packages", "view_613", "https://atd.knack.com/traffic-register#regulation-packages/", "cubes", "Regulation Packages");
+  bigButton("regulation-documents", "view_613", "https://atd.knack.com/traffic-register#regulation-documents/", "cubes", "Regulation Documents");
 });
 
 // create large Regulations button on the Home page
@@ -81,9 +81,14 @@ $(document).on("knack-view-render.view_615", function(event, page) {
   bigButton("account-management", "view_615", "https://atd.knack.com/traffic-register#account-management/", "users", "Account Management");
 });
 
-/************************************************************/
-/** Convert Sign Type field to UPPERCASE for Draft Package **/
-/************************************************************/
+// create large App Administration button on the Home page
+$(document).on("knack-view-render.view_616", function(event, page) {
+  bigButton("app-administration", "view_616", "https://atd.knack.com/traffic-register#admin/", "gears", "App Administration");
+});
+
+/*********************************************/
+/*** Convert Sign Type field to UPPERCASE  ***/
+/*********************************************/
 /*Canvas Regulation Sign Type*/
 $(document).on('knack-page-render.any', function(event, page) {
   $('input#field_392').keyup(function(){
@@ -94,6 +99,23 @@ $(document).on('knack-page-render.any', function(event, page) {
 /*Approved Regulation Sign Type*/
 $(document).on('knack-page-render.any', function(event, page) {
   $('input#field_100').keyup(function(){
+    this.value = this.value.toUpperCase();
+  });
+})
+
+/*Regulation Backfill Sign Type*/
+$(document).on('knack-page-render.any', function(event, page) {
+  $('input#field_616').keyup(function(){
+    this.value = this.value.toUpperCase();
+  });
+})
+
+/***********************************************/
+/*** Convert Street Name field to UPPERCASE  ***/
+/***********************************************/
+/*Street - Street Name*/
+$(document).on('knack-page-render.any', function(event, page) {
+  $('input#field_14').keyup(function(){
     this.value = this.value.toUpperCase();
   });
 })
@@ -110,14 +132,14 @@ function disableBreadCrumbsNonAdmin() {
 }
 
 /*************************************************************/
-/*** Disable Breadcrumb Navigation Links for Package Draft ***/
+/*** Disable Breadcrumb Navigation Links for Reg Doc Draft ***/
 /*************************************************************/
-/*Draft Package Builder Page 2*/
+/*Draft Reg Doc Builder Page 2*/
 $(document).on("knack-scene-render.scene_253", function () {
   disableBreadCrumbsNonAdmin();
 });
 
-/*Approved Package Builder Page 2*/
+/*Approved Reg Doc Builder Page 2*/
 $(document).on("knack-scene-render.scene_401", function () {
   disableBreadCrumbsNonAdmin();
 });
