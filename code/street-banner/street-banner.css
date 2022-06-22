@@ -38,14 +38,13 @@ a.big-button-container {
   background-color: #4c4c4c;
   cursor: pointer;
 }
-
 a.small-button {
   text-decoration: none;
 }
-
 .group-layout-wrapper .view-column {
   display: block;
 }
+///Buttons - Customer Action Button #1
 #view_3407 > div > a{
   background-color: #1A3D6B;
   color: #ffffff;
@@ -53,6 +52,8 @@ a.small-button {
   padding: 14px 28px;
   font-size: 16px;
 }
+///Buttons - Customer Action Button #2
+
 #view_3412 > div > a{
   background-color: #1A3D6B;
   color: #ffffff;
@@ -60,4 +61,3 @@ a.small-button {
   padding: 14px 28px;
   font-size: 16px;
 }
-
