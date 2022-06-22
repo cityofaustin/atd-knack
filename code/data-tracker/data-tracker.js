@@ -925,3 +925,45 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
     "<span class='icon is-small'><i class='fa fa-list'></i></span><span>Cabinet details</span>"
   );
 });
+
+////////////////////////////////////////////
+////////////// Test 9052 ///////////////////
+////////////////////////////////////////////
+
+// https://atd.knack.com/test--austin-transportation-data-tracker--31-jan-2022#my-work-orders/my-work-order-details2/61f852ef4373c6177acb3dd8/re-assign/61f852ef4373c6177acb3dd8/
+$(document).on("knack-view-render.view_1048", function (event, view, data) {
+  // Find the ID of the technician logged in
+  var userAttributes = Knack.getUserAttributes();
+  var userId = userAttributes.id;
+
+  // Find the ID of the current lead technician (if there is one)
+  var $leadTechnicianSelect = $("select#view_1048-field_1754");
+  var leadTechnicianId = $leadTechnicianSelect.val() || null;
+
+  // See if the logged in technician and lead technician match
+  var isLoggedInUserLeadTechnician = userId === leadTechnicianId;
+
+  // If so, disable the select
+  if (isLoggedInUserLeadTechnician) {
+    console.log(isLoggedInUserLeadTechnician);
+
+    // Try to hook into Chosen API
+    $leadTechnicianSelect.prop("disabled", "disabled");
+    $leadTechnicianSelect.parent().trigger("chosen:updated");
+
+    // If not, get text value of select, save it, create a new chosen, populate value, disable it
+    $leadTechnicianSelect.parent().hide();
+  }
+});
+
+//
+
+$(document).on("knack-view-render.view_3156", function (event, view, data) {
+  // Do something after the records render
+  console.log(data);
+});
+
+$(document).on("knack-view-render.view_1146", function (event, view, data) {
+  // Do something after the records render
+  console.log(data);
+});
