@@ -11,12 +11,18 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login"
+    id: "coacd-button-login",
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+  bigButton(
+    "coacd-big-button",
+    "coacd-button-login",
+    url,
+    "sign-in",
+    "Sign-In"
+  );
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
@@ -53,10 +59,29 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
+      url +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
@@ -65,10 +90,29 @@ function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false,
 /************** Small Buttons ***************/
 /********************************************/
 //Create Small Button nested in a block
-function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function smallButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  $(
+    "<a id='" +
+      id +
+      "' class='back-button" +
+      disabledClass +
+      " href='" +
+      url +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
 
   if (callback) callback();
 }
@@ -568,7 +612,10 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
       $("#" + detailsView)
         .find("div.kn-detail." + fields.quantity.current)
         .find(".kn-detail-body span")[0]
-    ).text().replaceAll(",", "").trim()
+    )
+      .text()
+      .replaceAll(",", "")
+      .trim()
   );
 
   // handle situation where stock levels are negative (this should not but prob will happen)
@@ -746,7 +793,6 @@ $(document).on("knack-scene-render.scene_634", function (event, scene) {
 /// Begin Technician Time Log Validation ///
 ////////////////////////////////////////////
 
-
 function appendErrorMessage(viewKey, formDiv, msg) {
   // remove existing error msg if present
   var errorDiv = $(
@@ -852,19 +898,12 @@ $(document).on("knack-view-render.view_1252", function (event, page) {
         highlightErrorField(`#${viewKey}-${startField.key}`);
         highlightErrorField(`#${viewKey}-${endField.key}`);
 
-        errorMsgs = `${errorMsgs}${formatErrorMessage(
-          startField,
-          endField
-        )}`;
+        errorMsgs = `${errorMsgs}${formatErrorMessage(startField, endField)}`;
       }
     }
     if (!passesValidation) {
-              // show red error banner
-              appendErrorMessage(
-                viewKey,
-                formDiv,
-                errorMsgs
-              );
+      // show red error banner
+      appendErrorMessage(viewKey, formDiv, errorMsgs);
     }
     return passesValidation;
   });
@@ -873,3 +912,16 @@ $(document).on("knack-view-render.view_1252", function (event, page) {
 ////////////////////////////////////////////
 /// End Technician Time Log Validation ///
 ////////////////////////////////////////////
+
+//// Update link text to cabinet details page from signal detals
+$(document).on("knack-view-render.view_1261", function (event, page) {
+  // find cabinet ID field div
+  var el = $(".field_1789");
+  // find child <a>
+  var a = $(el).find("a");
+  // update text
+  $(a).addClass("kn-link kn-link-1 kn-link-page kn-button");
+  $(a).html(
+    "<span class='icon is-small'><i class='fa fa-list'></i></span><span>Cabinet details</span>"
+  );
+});
