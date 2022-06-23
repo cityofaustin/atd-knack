@@ -930,29 +930,59 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
 ////////////// Test 9052 ///////////////////
 ////////////////////////////////////////////
 
+// Test record to see that technicians can add themselves as lead if they are not already assigned as lead
+// https://atd.knack.com/amd#work-orders/work-order-details/62b49fb9ab68ef001f879ba5/assign/62b49fb9ab68ef001f879ba5/
+
+// Test record to see that technicians cannot remove themselves as lead if they are already assigned as lead
 // https://atd.knack.com/test--austin-transportation-data-tracker--31-jan-2022#my-work-orders/my-work-order-details2/61f852ef4373c6177acb3dd8/re-assign/61f852ef4373c6177acb3dd8/
 $(document).on("knack-view-render.view_1048", function (event, view, data) {
   // Find the ID of the technician logged in
+  var technicianField = "field_1754";
   var userAttributes = Knack.getUserAttributes();
   var userId = userAttributes.id;
 
   // Find the ID of the current lead technician (if there is one)
-  var $leadTechnicianSelect = $("select#view_1048-field_1754");
+  var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
+  var $leadTechnicianSelectChosenDiv = $(
+    "div#connection-picker-chosen-" + technicianField
+  );
+  var $leadTechnicianSelectChosenDivClone =
+    $leadTechnicianSelectChosenDiv.clone();
+  var $leadTechnicianParentDiv = $leadTechnicianSelectChosenDiv.parent();
   var leadTechnicianId = $leadTechnicianSelect.val() || null;
 
-  // See if the logged in technician and lead technician match
+  // See if the logged in technician and lead technician ids match
   var isLoggedInUserLeadTechnician = userId === leadTechnicianId;
 
   // If so, disable the select
   if (isLoggedInUserLeadTechnician) {
-    console.log(isLoggedInUserLeadTechnician);
-
     // Try to hook into Chosen API
-    $leadTechnicianSelect.prop("disabled", "disabled");
-    $leadTechnicianSelect.parent().trigger("chosen:updated");
+    // $leadTechnicianSelect.prop('disabled', 'disabled');
+    // Hide the working Chosen select
+    $leadTechnicianSelectChosenDiv.remove();
+    // Append a non-working copy of the Chosen select to the field parent div
+    // Clone/append breaks the context of the Chosen library on the field, hacky but it works
+    $leadTechnicianParentDiv.append($leadTechnicianSelectChosenDivClone);
+
+    // Find the a tag that gives us the hover highlighting and pointer change
+    var $aTag = $leadTechnicianSelectChosenDivClone.find("a.chzn-single");
+    // Remove the class that the hover pseudoclass is defined on
+    $aTag.hover(
+      function () {
+        $(this).css("border-color", "#dbdbdb");
+        $(this).css("cursor", "default");
+      },
+      function () {
+        $(this).css("border-color", "#dbdbdb");
+        $(this).css("cursor", "default");
+      }
+    );
+    // console.log($leadTechnicianSelect.prop("disabled"))
+    // $("div#view_1048_field_1754_chzn").trigger("liszt:updated");
+    // $leadTechnicianSelect.trigger("liszt:updated");
 
     // If not, get text value of select, save it, create a new chosen, populate value, disable it
-    $leadTechnicianSelect.parent().hide();
+    // $leadTechnicianSelect.parent().hide();
   }
 });
 
