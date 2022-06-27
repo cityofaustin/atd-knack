@@ -926,15 +926,11 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
   );
 });
 
-////////////////////////////////////////////
-////////////// Test 9052 ///////////////////
-////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
+///// Prevent user from re-assigning their own assignment /////
+// https://github.com/cityofaustin/atd-data-tech/issues/9053 //
+///////////////////////////////////////////////////////////////
 
-// Test record to see that technicians can add themselves as lead if they are not already assigned as lead
-// https://atd.knack.com/test--austin-transportation-data-tracker--31-jan-2022#work-orders/work-order-details/62b49fb9ab68ef001f879ba5/assign/62b49fb9ab68ef001f879ba5/
-
-// Test record to see that technicians cannot remove themselves as lead if they are already assigned as lead
-// https://atd.knack.com/test--austin-transportation-data-tracker--31-jan-2022#my-work-orders/my-work-order-details2/61f852ef4373c6177acb3dd8/re-assign/61f852ef4373c6177acb3dd8/
 var technicianField = "field_1754";
 var userAttributes = Knack.getUserAttributes();
 var userId = userAttributes.id;
@@ -965,10 +961,10 @@ var disableChosenSelect = function ($workingField, $workingFieldParent) {
   );
 };
 
-$(document).on("knack-view-render.view_1048", function (event, view, data) {
+var disableSelectField = function ($fieldToDisable) {
   // Find the ID of the current lead technician (if there is one)
-  var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
-  var leadTechnicianId = $leadTechnicianSelect.val() || null;
+  console.log("this fired");
+  var leadTechnicianId = $fieldToDisable.val() || null;
 
   // See if the logged in technician and lead technician ids match
   var isLoggedInUserLeadTechnician = userId === leadTechnicianId;
@@ -985,50 +981,22 @@ $(document).on("knack-view-render.view_1048", function (event, view, data) {
       $leadTechnicianParentDiv
     );
   }
+};
+
+$(document).on("knack-view-render.view_1048", function (event, view, data) {
+  var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
+
+  disableSelectField($leadTechnicianSelect);
 });
 
 $(document).on("knack-view-render.view_3156", function (event, view, data) {
-  // Find the ID of the current lead technician (if there is one)
   var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
-  var leadTechnicianId = $leadTechnicianSelect.val() || null;
 
-  // See if the logged in technician and lead technician ids match
-  var isLoggedInUserLeadTechnician = userId === leadTechnicianId;
-
-  // If so, disable the select
-  if (isLoggedInUserLeadTechnician) {
-    var $leadTechnicianSelectChosenDiv = $(
-      "div#connection-picker-chosen-" + technicianField
-    );
-    var $leadTechnicianParentDiv = $leadTechnicianSelectChosenDiv.parent();
-
-    disableChosenSelect(
-      $leadTechnicianSelectChosenDiv,
-      $leadTechnicianParentDiv
-    );
-  }
+  disableSelectField($leadTechnicianSelect);
 });
 
-// Test on
-// https://atd.knack.com/test--austin-transportation-data-tracker--31-jan-2022#work-orders/work-order-details/6227c624c26314001f57d1a1/assign/6227c624c26314001f57d1a1/
 $(document).on("knack-view-render.view_1146", function (event, view, data) {
-  // Find the ID of the current lead technician (if there is one)
   var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
-  var leadTechnicianId = $leadTechnicianSelect.val() || null;
 
-  // See if the logged in technician and lead technician ids match
-  var isLoggedInUserLeadTechnician = userId === leadTechnicianId;
-
-  // If so, disable the select
-  if (isLoggedInUserLeadTechnician) {
-    var $leadTechnicianSelectChosenDiv = $(
-      "div#connection-picker-chosen-" + technicianField
-    );
-    var $leadTechnicianParentDiv = $leadTechnicianSelectChosenDiv.parent();
-
-    disableChosenSelect(
-      $leadTechnicianSelectChosenDiv,
-      $leadTechnicianParentDiv
-    );
-  }
+  disableSelectField($leadTechnicianSelect);
 });
