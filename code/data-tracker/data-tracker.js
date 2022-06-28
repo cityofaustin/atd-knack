@@ -925,3 +925,48 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
     "<span class='icon is-small'><i class='fa fa-list'></i></span><span>Cabinet details</span>"
   );
 });
+
+///////////////////////////////////////////////////////////////
+// https://github.com/cityofaustin/atd-data-tech/issues/9052 //
+///////////////////////////////////////////////////////////////
+
+$(document).on('knack-scene-render.scene_644', function(event, scene) {
+  // This is the record id that needs to be added to the autoselect
+  console.log("record id", scene.scene_id)
+  var originalWorkOrderId = scene.scene_id;
+  console.log(scene.scene_id === "61f853074373c6177acb4549")
+
+  // Get the original work order ID
+  var $originalWorkOrderIdElement = $("div.field_1209 > div.kn-detail-body:last-child")
+  var originalWorkOrderIdText = $originalWorkOrderIdElement.text();
+
+  // Append
+  var selectedOptionElement = '<option value="' + originalWorkOrderId + '" selected>' + originalWorkOrderIdText + '</option>';
+  console.log(selectedOptionElement)
+  $("#view_1718-field_2075").append(selectedOptionElement)
+
+  // Clear results and add the selected value
+  var $resultsUnorderedList = $("ul.chzn-results")
+
+  // console.log($("#view_1718-field_2075").val());
+  // $("#view_1718-field_2075").val(originalWorkOrderId);
+  // $("#view_1718-field_2075").trigger("liszt:updated");
+  // var updatedValue = $("#view_1718-field_2075").val();
+  // console.log(updatedValue)
+
+  // Do something after the scene renders
+  // console.log('listener for scene: ' + scene.key);
+  
+  // <option value="6227c624c26314001f57d1a1" selected>WRK22-138655</option>
+
+  // Update the value of the original work order ID
+  // var $originalWorkOrderIdInput = $("select#view_1718-field_2075");
+  // console.log($originalWorkOrderIdInput);
+  // $originalWorkOrderIdInput.chosen().val(originalWorkOrderId);
+  // $originalWorkOrderIdInput.trigger("chosen:updated");
+});
+
+$(document).on('knack-view-render.view_1718', function(event, view, data) {
+  // Do something after the view renders
+  // console.log(data)
+});
