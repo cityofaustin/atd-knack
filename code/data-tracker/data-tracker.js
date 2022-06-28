@@ -930,23 +930,63 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
 // https://github.com/cityofaustin/atd-data-tech/issues/9052 //
 ///////////////////////////////////////////////////////////////
 
-$(document).on('knack-scene-render.scene_644', function(event, scene) {
-  // This is the record id that needs to be added to the autoselect
-  console.log("record id", scene.scene_id)
-  var originalWorkOrderId = scene.scene_id;
-  console.log(scene.scene_id === "61f853074373c6177acb4549")
+// We need to use a page render so we can take a value from one view
+// and use it to populate another. So, we wait for all views to load
+var waitForEls = function (selectorsArray, callback) {
+  var haveAllElementsLoadedArray = selectorsArray.map(function ($selector) {
+    return $selector.length > 0;
+  });
+  console.log(haveAllElementsLoadedArray);
+  if (!haveAllElementsLoadedArray.includes(false)) {
+    callback();
+  } else {
+    setTimeout(function () {
+      waitForEls(selectorsArray, callback);
+    }, 100);
+  }
+};
 
-  // Get the original work order ID
-  var $originalWorkOrderIdElement = $("div.field_1209 > div.kn-detail-body:last-child")
-  var originalWorkOrderIdText = $originalWorkOrderIdElement.text();
+$(document).on("knack-scene-render.scene_644", function (event, scene) {
+  var $placeholderText = $("div#view_1718_field_2075_chzn > a > span");
+  var $originalWorkOrderIdElement = $(
+    "div.field_1209 > div.kn-detail-body:last-child"
+  );
 
-  // Append
-  var selectedOptionElement = '<option value="' + originalWorkOrderId + '" selected>' + originalWorkOrderIdText + '</option>';
-  console.log(selectedOptionElement)
-  $("#view_1718-field_2075").append(selectedOptionElement)
+  // waitForEls([$placeholderText, $originalWorkOrderIdElement], function(){
+  //   var originalWorkOrderId = scene.scene_id;
+  //   console.log("record id", originalWorkOrderId)
+  //  var $placeholderTextDupe = $("div#view_1718_field_2075_chzn > a > span")
+  // var $originalWorkOrderIdElementDupe = $("div.field_1209 > div.kn-detail-body:last-child")
+  // console.log($placeholderText, $originalWorkOrderIdElement)
+  // // This is the record id that needs to be added to the autoselect
+  // // console.log("record id", scene.scene_id)
 
-  // Clear results and add the selected value
-  var $resultsUnorderedList = $("ul.chzn-results")
+  // // console.log(scene.scene_id === "61f853074373c6177acb4549")
+
+  // // Get the original work order ID
+  // // var $originalWorkOrderIdElement = $("div.field_1209 > div.kn-detail-body:last-child")
+  // var originalWorkOrderIdText = $originalWorkOrderIdElementDupe.text();
+
+  // // Append
+  // var selectedOptionElement = '<option value="' + originalWorkOrderId + '" selected>' + originalWorkOrderIdText + '</option>';
+  // console.log(selectedOptionElement)
+  // $("#view_1718-field_2075").append(selectedOptionElement)
+
+  // // Clear results and add the selected value
+  // var $searchInput = $("div.chzn-search > input")
+  // // Remove the placeholder item
+  // $searchInput.attr("placeholder", originalWorkOrderIdText)
+
+  // // var $placeholderText = $("div#view_1718_field_2075_chzn > a > span")
+  // $placeholderTextDupe.text(originalWorkOrderIdText);
+  // console.log($placeholderText.text());
+
+  // });
+
+  // var $placeholderText = $("div#view_1718_field_2075_chzn > a > span")
+  // $placeholderText.text(originalWorkOrderIdText)
+  // $placeholderText.text(originalWorkOrderIdText);
+  // console.log(originalWorkOrderIdText, $placeholderText);
 
   // console.log($("#view_1718-field_2075").val());
   // $("#view_1718-field_2075").val(originalWorkOrderId);
@@ -956,7 +996,7 @@ $(document).on('knack-scene-render.scene_644', function(event, scene) {
 
   // Do something after the scene renders
   // console.log('listener for scene: ' + scene.key);
-  
+
   // <option value="6227c624c26314001f57d1a1" selected>WRK22-138655</option>
 
   // Update the value of the original work order ID
@@ -966,7 +1006,36 @@ $(document).on('knack-scene-render.scene_644', function(event, scene) {
   // $originalWorkOrderIdInput.trigger("chosen:updated");
 });
 
-$(document).on('knack-view-render.view_1718', function(event, view, data) {
+$(document).on("knack-view-render.view_1718", function (event, view, data) {
   // Do something after the view renders
-  // console.log(data)
+  // console.log(data);
+  var $placeholderText = $("div#view_1718_field_2075_chzn > a > span");
+
+  // The DB id of the work order ID
+  var originalWorkOrderId = data.id;
+  // The human readable value of the work order ID
+  var originalWorkOrderIdText = data.field_1209;
+  console.log(originalWorkOrderId, originalWorkOrderIdText);
+  console.log($placeholderText);
+
+  // Build an option to append
+  var selectedOptionElement =
+    '<option value="' +
+    originalWorkOrderId +
+    '" selected>' +
+    originalWorkOrderIdText +
+    "</option>";
+  $("#view_1718-field_2075").append(selectedOptionElement);
+
+  // Clear results and add the selected value
+  var $searchInput = $("div.chzn-search > input");
+  // Remove the placeholder item
+  $searchInput.attr("placeholder", originalWorkOrderIdText);
+  $placeholderText.parent().change(function () {
+    console.log("changed");
+  });
+  $placeholderText.text(originalWorkOrderIdText);
+
+  $("#view_1718-field_2075").val(originalWorkOrderId);
+  $("#view_1718-field_2075").trigger("liszt:updated");
 });
