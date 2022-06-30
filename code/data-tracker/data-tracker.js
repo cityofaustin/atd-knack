@@ -927,6 +927,7 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
 });
 
 ///////////////////////////////////////////////////////////////
+/// Autopopulate work order ID in the follow-up order form ////
 // https://github.com/cityofaustin/atd-data-tech/issues/9052 //
 ///////////////////////////////////////////////////////////////
 
@@ -938,13 +939,15 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
   var originalWorkOrderIdText = data.field_1209;
   var originalWorkOrderId = data.id;
 
-  $("select#view_1718-field_2075").on("change", function () {
-    var $placeholderOption = $(this).find("option");
-    $placeholderOption.val(originalWorkOrderId);
-    $placeholderOption.text(originalWorkOrderIdText);
+  // Chosen.js updates this select after the view loads so we need to watch for that change
+  // This event blows away any DOM updates made before it
+  $workOrderIdSelect.on("change", function () {
+    // Disable this listener so we don't get an endless loop when we fire off one last change
     $(this).off();
+    // Update this select with the original work order ID as its value
     $(this).val(originalWorkOrderId).change();
 
+    // Update the span that normally prompts the type to search with the human-readable ID
     var $placeholderTextSpan = $("div#view_1718_field_2075_chzn > a > span");
     $placeholderTextSpan.text(originalWorkOrderIdText);
   });
