@@ -952,3 +952,7 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
     $placeholderTextSpan.text(originalWorkOrderIdText);
   });
 });
+
+//////////////////////////////////////////////////////////////////
+/// End Autopopulate work order ID in the follow-up order form ///
+//////////////////////////////////////////////////////////////////
