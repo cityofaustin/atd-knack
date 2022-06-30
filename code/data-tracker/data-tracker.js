@@ -963,7 +963,6 @@ var disableChosenSelect = function ($workingField, $workingFieldParent) {
 
 var disableSelectField = function ($fieldToDisable) {
   // Find the ID of the current lead technician (if there is one)
-  console.log("this fired");
   var leadTechnicianId = $fieldToDisable.val() || null;
 
   // See if the logged in technician and lead technician ids match
@@ -1003,5 +1002,4 @@ $(document).on("knack-view-render.view_1146", function (event, view, data) {
 
 ////////////////////////////////////////////////////////////////
 // End Prevent user from re-assigning their own assignment /////
-////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
