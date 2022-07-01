@@ -942,6 +942,11 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
   // Chosen.js updates this select after the view loads so we need to watch for that change
   // This event blows away any DOM updates made before it
   $workOrderIdSelect.on("change", function () {
+    // Add selected option with value of original work order ID
+    var $placeholderOption = $(this).find("option");
+    $placeholderOption.val(originalWorkOrderId);
+    $placeholderOption.text(originalWorkOrderIdText);
+
     // Disable this listener so we don't get an endless loop when we fire off one last change
     $(this).off();
     // Update this select with the original work order ID as its value
