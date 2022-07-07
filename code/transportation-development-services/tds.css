@@ -365,6 +365,16 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_407 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*TIA Mitigation Case Details Page*/
+#kn-scene_488 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_488 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*TIA Mitigation Segment & Intersections Map Page*/
+#kn-scene_521 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_521 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*TDR */
 /*TDR Vision Team Dashboard Completed Work Page*/
 #kn-scene_347 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
