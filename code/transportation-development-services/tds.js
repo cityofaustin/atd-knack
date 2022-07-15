@@ -65,7 +65,11 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 $(document).on("knack-view-render.view_1270", function(event, page) {
   bigButton("reviewer-dashboard", "view_1270", "https://atd.knack.com/development-services#rd-assigned-work/", "dashboard", "Reviewer Dashboard");
 });
-// create large Development Reviews button on the Home page
+// create large Vision Team Dashboard button on the Home page
+$(document).on("knack-view-render.view_1272", function(event, page) {
+  bigButton("vtd-assigned-work", "view_1272", "https://atd.knack.com/development-services#vtd-assigned-work/", "eye", "Vision Team Dashboard");
+});
+// create large TDR Reviews button on the Home page
 $(document).on("knack-view-render.view_1269", function(event, page) {
   bigButton("tdr-reviews", "view_1269", "https://atd.knack.com/development-services#home/tdr-reviews/", "list-ul", "TDR Reviews");
 });
@@ -77,21 +81,29 @@ $(document).on("knack-view-render.view_719", function(event, page) {
 $(document).on("knack-view-render.view_724", function(event, page) {
   bigButton("tda-reviews", "view_724", "https://atd.knack.com/development-services#tda-reviews/", "list-ul", "TDA Reviews");
 });
-// create large TIA Portal button on the Home page
+// create large Customer Portal button on the Home page
 $(document).on("knack-view-render.view_1271", function(event, page) {
-  bigButton("tia-portal", "view_1271", "https://atd.knack.com/development-services#tia-portal/", "car", "TIA Portal");
+  bigButton("tia-portal", "view_1271", "https://atd.knack.com/development-services#customer-portal/", "home", "Customer Portal");
 });
-// create large Account Managment button on the Home page
-$(document).on("knack-view-render.view_720", function(event, page) {
-  bigButton("account-management", "view_720", "https://atd.knack.com/development-services#account-management/", "users", "Account Management");
+// create large TIA Mitigations button on the Home page
+$(document).on("knack-view-render.view_1662", function(event, page) {
+  bigButton("tia-determinations", "view_1662", "https://atd.knack.com/development-services#tia-mitigations/", "dollar", "TIA Mitigations");
 });
 // create large TIA Determinations button on the Home page
 $(document).on("knack-view-render.view_721", function(event, page) {
   bigButton("tia-determinations", "view_721", "https://atd.knack.com/development-services#tia-determinations/", "file-text-o", "TIA Determinations");
 });
-// create large Vision Team Dashboard button on the Home page
-$(document).on("knack-view-render.view_1272", function(event, page) {
-  bigButton("vtd-assigned-work", "view_1272", "https://atd.knack.com/development-services#vtd-assigned-work/", "eye", "Vision Team Dashboard");
+// create large SIF Worksheets button on the Home page
+$(document).on("knack-view-render.view_1663", function(event, page) {
+  bigButton("tia-determinations", "view_1663", "https://atd.knack.com/development-services#sif-worksheets/", "calculator", "SIF Worksheets");
+});
+// create large Account Managment button on the Home page
+$(document).on("knack-view-render.view_720", function(event, page) {
+  bigButton("account-management", "view_720", "https://atd.knack.com/development-services#account-management/", "users", "Account Management");
+});
+// create large Viewer Managment button on the Home page
+$(document).on("knack-view-render.view_1661", function(event, page) {
+  bigButton("account-management", "view_1661", "https://atd.knack.com/development-services#viewer-management/", "users", "Viewer Management");
 });
 
 
@@ -103,6 +115,10 @@ $(document).on("knack-view-render.view_1429", function(event, page) {
 $(document).on("knack-view-render.view_1428", function(event, page) {
   bigButton("tia-service", "view_1428", "https://atd.knack.com/development-services#tia-portal/", "car", "TIA: Traffic Impact Analysis");
 });
+// create large SIF Worksheet Service button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1643", function(event, page) {
+  bigButton("sif-worksheet-service", "view_1643", "https://atd.knack.com/development-services#sif-worksheet-portal/", "calculator", "SIF Worksheet Submittal");
+});
 // create large TDS Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1432", function(event, page) {
   bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home", true);
@@ -111,16 +127,23 @@ $(document).on("knack-view-render.view_1432", function(event, page) {
 $(document).on("knack-view-render.view_1433", function(event, page) {
   bigButton("tia-link", "view_1433", "https://www.austintexas.gov/page/check-whether-transportation-impact-analysis-required", "check", "TIA Requirements", true);
 });
+// create large SIF Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1648", function(event, page) {
+  bigButton("sif-program-link", "view_1648", "https://www.austintexas.gov/department/street-impact-fee", "road", "SIF Program", true);
+});
 
 
 // create large Start TIA Application button on the TIA Service page
 $(document).on("knack-view-render.view_112", function(event, page) {
   bigButton("tia-application", "view_112", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start TIA Application");
 });
-
 // create large Start TIA Determination button on the Determination Service page
 $(document).on("knack-view-render.view_1426", function(event, page) {
   bigButton("tia-determination", "view_1426", "https://atd.knack.com/development-services#tia-determination/", "arrow-right", "Start TIA Determination");
+});
+// create large Start SIF Worksheet button on the SIF Worksheet page
+$(document).on("knack-view-render.view_1646", function(event, page) {
+  bigButton("sif-worksheet-submittal", "view_1646", "https://atd.knack.com/development-services#sif-worksheet-submittal/", "arrow-right", "Start SIF Worksheet Submittal");
 });
 
 /********************************************/
@@ -174,6 +197,27 @@ function disableBreadCrumbsNonAdmin() {
     });
   }
 }
+
+/***********************************************************************/
+/*** Disable Breadcrumb Navigation Links for SIF Worksheet Submittal ***/
+/***********************************************************************/
+
+//SIF Worksheet Submittal Information page
+$(document).on("knack-scene-render.scene_505", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Review SIF Worksheet Submittal page
+$(document).on("knack-scene-render.scene_506", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Information page
+$(document).on("knack-scene-render.scene_507", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//SIF Worksheet Submittal Confirmation page
+$(document).on("knack-scene-render.scene_512", function () {
+  disableBreadCrumbsNonAdmin();
+});
 
 /*****************************************************************/
 /*** Disable Breadcrumb Navigation Links for TIA Determination ***/
@@ -507,7 +551,7 @@ $(document).on('knack-view-render.view_886', function(event, view, record) {
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "edit-mitigation-fee-status", "fa-dollar", "Mitigation Fees")}\
-      ${dropdownMenuItem(recordId, "feature-map", "fa-road", "Segment & Intersection Map", false, true)}\
+      ${dropdownMenuItem(recordId, "feature-map", "fa-map-marker", "Segment & Intersection Map", false, true)}\
       ${dropdownMenuItem(recordId, "tia-mitigation-reporting", "fa-bar-chart", "Mitigation Reporting")}\
       ${dropdownMenuItem(recordId, "search-tia-mitigations", "fa-search", "Search Mitigations")}\
     </ul>\
@@ -530,7 +574,7 @@ $(`<div class="mobile-details-dropdown-menu">\
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "edit-mitigation-fee-status", "fa-dollar", "Mitigation Fees", true)}\
-      ${dropdownMenuItem(recordId, "feature-map", "fa-road", "Segment & Intersection Map", true, true)}\
+      ${dropdownMenuItem(recordId, "feature-map", "fa-map-marker", "Segment & Intersection Map", true, true)}\
       ${dropdownMenuItem(recordId, "tia-mitigation-reporting", "fa-bar-chart", "Mitigation Reporting", true)}\
       ${dropdownMenuItem(recordId, "search-tia-mitigations", "fa-search", "Search Mitigations", true)}\
     </ul>\
