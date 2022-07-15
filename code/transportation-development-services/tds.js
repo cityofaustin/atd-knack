@@ -117,7 +117,7 @@ $(document).on("knack-view-render.view_1428", function(event, page) {
 });
 // create large SIF Worksheet Service button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1643", function(event, page) {
-  bigButton("tia-service", "view_1643", "https://atd.knack.com/development-services#sif-worksheet-portal/", "calculator", "SIF Worksheet");
+  bigButton("sif-worksheet-service", "view_1643", "https://atd.knack.com/development-services#sif-worksheet-portal/", "calculator", "SIF Worksheet Submittal");
 });
 // create large TDS Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1432", function(event, page) {
@@ -129,7 +129,7 @@ $(document).on("knack-view-render.view_1433", function(event, page) {
 });
 // create large SIF Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1648", function(event, page) {
-  bigButton("tia-link", "view_1648", "https://www.austintexas.gov/department/street-impact-fee", "road", "SIF Program", true);
+  bigButton("sif-program-link", "view_1648", "https://www.austintexas.gov/department/street-impact-fee", "road", "SIF Program", true);
 });
 
 
@@ -143,7 +143,7 @@ $(document).on("knack-view-render.view_1426", function(event, page) {
 });
 // create large Start SIF Worksheet button on the SIF Worksheet page
 $(document).on("knack-view-render.view_1646", function(event, page) {
-  bigButton("tia-determination", "view_1646", "https://atd.knack.com/development-services#sif-worksheet/", "arrow-right", "Start SIF Worksheet");
+  bigButton("sif-worksheet-submittal", "view_1646", "https://atd.knack.com/development-services#sif-worksheet-submittal/", "arrow-right", "Start SIF Worksheet Submittal");
 });
 
 /********************************************/
@@ -197,6 +197,27 @@ function disableBreadCrumbsNonAdmin() {
     });
   }
 }
+
+/***********************************************************************/
+/*** Disable Breadcrumb Navigation Links for SIF Worksheet Submittal ***/
+/***********************************************************************/
+
+//SIF Worksheet Submittal Information page
+$(document).on("knack-scene-render.scene_505", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Review SIF Worksheet Submittal page
+$(document).on("knack-scene-render.scene_506", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Information page
+$(document).on("knack-scene-render.scene_507", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//SIF Worksheet Submittal Confirmation page
+$(document).on("knack-scene-render.scene_512", function () {
+  disableBreadCrumbsNonAdmin();
+});
 
 /*****************************************************************/
 /*** Disable Breadcrumb Navigation Links for TIA Determination ***/
