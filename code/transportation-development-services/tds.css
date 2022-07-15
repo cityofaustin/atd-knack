@@ -422,6 +422,36 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_277 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*SIF Worksheet */
+/*SIF Worksheet Review Details Page*/
+#kn-scene_518 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_518 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*****************************************/
+/** Remove Back Links for SIF Worksheet **/
+/*****************************************/
+/*SIF Worksheet Submittal Page*/
+#kn-scene_500 .kn-back-link {
+  display: none;
+}
+/*SIF Worksheet Submittal Information Page*/
+#kn-scene_505 .kn-back-link {
+  display: none;
+}
+/*Review SIF Worksheet Submittal Page*/
+#kn-scene_506 .kn-back-link {
+  display: none;
+}
+/*Edit SIF Worksheet Submittal Page*/
+#kn-scene_507 .kn-back-link {
+  display: none;
+}
+/*SIF Worksheet Submittal Confirmation Page*/
+#kn-scene_512 .kn-back-link {
+  display: none;
+}
+
 /*********************************************/
 /** Remove Back Links for TIA Determination **/
 /*********************************************/
@@ -620,6 +650,12 @@ a.ang-link:link {text-decoration: none;}
 /*Min Width & Transparent for "Hello/Welcome" Details Label*/
 #kn-scene_14 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_347 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/**********************************/
+/*** Styles the Contact Us Page ***/
+/**********************************/
+/*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
+#view_1667 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /***********************************/
 /*** TIA Menu Buttons Navigation ***/
