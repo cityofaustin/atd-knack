@@ -932,8 +932,6 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
 ///////////////////////////////////////////////////////////////
 
 var technicianField = "field_1754";
-var userAttributes = Knack.getUserAttributes();
-var userId = userAttributes.id;
 
 var disableChosenSelect = function ($workingField, $workingFieldParent) {
   var $workingFieldClone = $workingField.clone();
@@ -961,7 +959,7 @@ var disableChosenSelect = function ($workingField, $workingFieldParent) {
   );
 };
 
-var disableSelectField = function ($fieldToDisable) {
+var disableSelectField = function ($fieldToDisable, userId) {
   // Find the ID of the current lead technician (if there is one)
   var leadTechnicianId = $fieldToDisable.val() || null;
 
@@ -983,21 +981,27 @@ var disableSelectField = function ($fieldToDisable) {
 };
 
 $(document).on("knack-view-render.view_1048", function (event, view, data) {
+  // Getting userId before view load sometimes returns undefined so get it here
+  var userId = Knack.getUserAttributes().id;
   var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
 
-  disableSelectField($leadTechnicianSelect);
+  disableSelectField($leadTechnicianSelect, userId);
 });
 
 $(document).on("knack-view-render.view_3156", function (event, view, data) {
+  // Getting userId before view load sometimes returns undefined so get it here
+  var userId = Knack.getUserAttributes().id;
   var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
 
-  disableSelectField($leadTechnicianSelect);
+  disableSelectField($leadTechnicianSelect, userId);
 });
 
 $(document).on("knack-view-render.view_1146", function (event, view, data) {
+  // Getting userId before view load sometimes returns undefined so get it here
+  var userId = Knack.getUserAttributes().id;
   var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
 
-  disableSelectField($leadTechnicianSelect);
+  disableSelectField($leadTechnicianSelect, userId);
 });
 
 ////////////////////////////////////////////////////////////////
