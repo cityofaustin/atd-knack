@@ -97,6 +97,10 @@ $(document).on("knack-view-render.view_1599", function(event, page) {
 $(document).on("knack-view-render.view_127", function(event, page) {
   bigButton( "apply", "view_127", "https://atd.knack.com/parking#apply-for-permits/", "arrow-right", "Start Application");
 });
+// create large Orange Zone Application button on the Get Started page
+$(document).on("knack-view-render.view_127", function(event, page) {
+  bigButton( "oz-apply", "view_127", "https://parkatx.cmrpay.com/permits", "arrow-right", "Start Orange Zone Application");
+});
 /********** Am I Eligible Page **********/
 // create large Home button on the Am I Eligible page that navigates back to RPP Portal
 $(document).on("knack-view-render.view_226", function(event, page) {
@@ -127,6 +131,18 @@ $(document).on("knack-view-render.view_396", function(event, page) {
 $(document).on('knack-view-render.view_208', function(event, page) {
   bigButton( "reports", "view_208", "https://atd.knack.com/parking#reports", "bar-chart", "Reports");
 });
+
+/********************************************/
+/************** Small Buttons ***************/
+/********************************************/
+//Create Small Button nested in a block
+function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+
+  if (callback) callback();
+}
 
 /*****************************************/
 /*** Convert Field/Inputs to UpperCase ***/
