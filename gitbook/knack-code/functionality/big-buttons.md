@@ -8,59 +8,18 @@ description: How to add big buttons to your application to improve navigation
 
 ### &#x20;The JS
 
-Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/big-button).
+Big Buttons are nested in an `<a>` tag now instead of a `<div>` tag so that the clickable area of buttons does not expand the width of the Knack page and stays within the button area. The variable `newTab` has been added if you would like a big button to open its url in a new tab. To do this you would pass the `true` argument to the individual button. Additionally, the variable `disabledClass` has been added if you would like to set a big button to be disabled. To do this you would pass the `true` argument to the individual button. This code also lives in the [common folder in the atd-knack GitHub repository](https://github.com/cityofaustin/atd-knack/tree/master/code/common/big-button).
 
 ```
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-/**
- * Template and append a button link, disable it optionally, and invoke a callback function argument
- * @parameter {string} id - id attribute of the a tag in the button link
- * @parameter {string} view_id - Knack view id to append button link to
- * @parameter {string} url - Destination to navigate to on click
- * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
- * @parameter {bool} isDisabled - Is button disabled (defaults to false)
- * @parameter {function} callback - Function that is invoked after appending the button link
- **/
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  isDisabled = false,
-  callback = null
-) {
-  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
-
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
-
-  if (callback) callback();
-}
-```
-
-Save Code/Screen space by using this condensed function block instead of above
-
-```
 //Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
-
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
 }
 ```
@@ -68,40 +27,36 @@ function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false,
 A handler for each big button
 
 ```
-// create large Development Reviews button on the Home page
-$(document).on("knack-view-render.view_15", function(event, page) {
-    bigButton(
-    "development-reviews", 
-    "view_15", 
-    "https://atd.knack.com/development-services#home/development-reviews/", 
-    "list-ul", 
-    "Development Reviews"
-    );
+// create large TDS Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1432", function(event, page) {
+  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home");
 });
 ```
 
-To disable a big button pass the `true` argument in the handler like this
+To open a big button in a new tab, pass the `true` argument in the handler like this
 
 ```
-// create a DISABLED Development Reviews button on the Home page
-$(document).on("knack-view-render.view_15", function(event, page) {
-    bigButton(
-    "disabled-development-reviews", 
-    "view_15", 
-    "https://atd.knack.com/development-services#home/development-reviews/", 
-    "list-ul", 
-    "Disabled Development Reviews", 
-    true
-    );
+// create large TDS Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1432", function(event, page) {
+  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home", true);
 });
 ```
 
-Save Code/Screen space by using this condensed handler block instead of above
+To disable a big button, pass the `true` argument in the handler after the `newTab` argument
 
 ```
-// create large Reviewer Dashboard button on the Home page
-$(document).on("knack-view-render.view_55", function(event, page) {
-    bigButton("reviewer-dashboard", "view_55", "https://atd.knack.com/development-services#reviewer-dashboard/", "dashboard", "Reviewer Dashboard");
+// create large TDS Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1432", function(event, page) {
+  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home", false, true);
+});
+```
+
+To do both, open in a new tab and disable the button, pass the `true` argument for both
+
+```
+// create large TDS Link button on the Customer Portal Home page
+$(document).on("knack-view-render.view_1432", function(event, page) {
+  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home", true, true);
 });
 ```
 
@@ -128,9 +83,9 @@ Big Buttons have shadow to show elevation and provide a 3D effect. They are also
 }
 
 .big-button-disabled {
-  pointer-events: none;
   background-color: #f7f7f7;
   opacity: 0.6;
+  pointer-events: none;
 }
 
 a.big-button-container {
@@ -138,7 +93,7 @@ a.big-button-container {
 }
 ```
 
-Add these CSS classes if not already present
+Add these CSS classes if not already present. If we have a disable button it allows us to change the mouse pointer and set the Font Awesome icons throughout the app to the middle of the line vertically.
 
 ```
 /****************************************/
@@ -179,35 +134,36 @@ When placing the JS, the function only needs to be placed once but you will need
 *   Change the Button ID in the first set of parentheses to whatever is appropriate to name your button;&#x20;
 
     ```
-    "development-reviews"
+    "tds-link"
     ```
 *   Change the View ID to match the corresponding Rich Text view where the big button will live;&#x20;
 
     ```
-    "view_15"
+    "view_1432"
     ```
 *   Change the URL to the corresponding page that the button will redirect to;&#x20;
 
     ```
-    "https://atd.knack.com/development-services#home/development-reviews/"
+    "https://www.austintexas.gov/department/transportation-development-services"
     ```
 *   Change the Font Awesome icon to match the theme of the button. Knack currently supports [FA version 4 icons](https://fontawesome.com/v4.7.0/). You can also read more about [FA icons here](../looks/fa-icons.md).
 
     ```
-    "list-ul"
+    "bank"
     ```
 *   Change the Button Label of the button to the text that will be visible;&#x20;
 
     ```
-    "Development Reviews"
+    "TDS Division Home"
     ```
-*   Lastly, only add the `true` argument if you would like the button to be disabled.
+* Add the `true` argument if you would like the button to open in a new tab;
+*   Add the `true` argument after the newTab argument if you would like the button to be disabled&#x20;
 
     ```
     true
     ```
-
-
 {% endtab %}
 {% endtabs %}
+
+
 
