@@ -1,3 +1,167 @@
+/********************************************/
+/******** COACD Single Sign On Login ********/
+/********************************************/
+function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
+
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
+
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login"
+  });
+  $coacdButton.appendTo("#" + viewId);
+
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
+  );
+
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
+}
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
+
+/********************************************/
+/*************** Big Buttons ****************/
+/********************************************/
+//Create Big Button nested in a block
+function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+
+  if (callback) callback();
+}
+
+$(document).on("knack-view-render.view_2621", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "work-orders-markings",
+    "view_2621",
+    "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
+    "road",
+    "Markings | Work Orders",
+  );
+});
+
+$(document).on("knack-view-render.view_3178", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "work-orders-service-requests",
+    "view_3178",
+    "https://atd.knack.com/signs-markings#service-requests-markings/",
+    "comments",
+    "Markings | Service Requests",
+  );
+});
+
+$(document).on("knack-view-render.view_2628", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "work-orders-signs",
+    "view_2628",
+    "https://atd.knack.com/signs-markings#work-order-signs/",
+    "flag",
+    "Signs | Work Orders",
+  );
+});
+
+$(document).on("knack-view-render.view_2629", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "service-requests-signs",
+    "view_2629",
+    "https://atd.knack.com/signs-markings#service-requests-signs/",
+    "comments",
+    "Signs | Service Requests",
+  );
+});
+
+$(document).on("knack-view-render.view_2630", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "street-banners",
+    "view_2630",
+    "https://atd.knack.com/street-banners#home/",
+    "flag-o",
+    "Street Banners | Program",
+  );
+});
+
+$(document).on("knack-view-render.view_2903", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "signs-gis-qa",
+    "view_2903",
+    "https://atd.knack.com/signs-markings#signs-gis-qa/",
+    "flag",
+    "GIS QA | Signs",
+  );
+});
+
+$(document).on("knack-view-render.view_2904", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "markings-gis-qa",
+    "view_2904",
+    "https://atd.knack.com/signs-markings#markings-gis-qa/",
+    "road",
+    "GIS QA | Markings",
+  );
+});
+
+$(document).on("knack-view-render.view_3630", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "sign-fabrication-work-orders",
+    "view_3630",
+    "https://atd.knack.com/signs-markings#work-orders-contractor/contractor-gis-qa/",
+    "wrench",
+    "GIS QA | Contractor",
+  ); 
+})
+// END: Custom Buttons
+
+/********************************************/
+/************** Small Buttons ***************/
+/********************************************/
+//Create Small Button nested in a block
+function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
+    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
+      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+
+  if (callback) callback();
+}
+
 $(document).on("knack-page-render.any", function(event, page) {
   // Hide the entire "Repeat" checkbox and label
   $("label:contains('Repeat')").hide();
@@ -338,95 +502,6 @@ $(document).on("knack-view-render.view_2607", function(event, scene) {
 
 // END: Knack Geo Location Selector Plugin
 
-/**
- * Template and append a button link, disable it optionally, and invoke a callback function argument
- * @parameter {string} id - id attribute of the a tag in the button link
- * @parameter {string} view_id - Knack view id to append button link to
- * @parameter {string} url - Destination to navigate to on click
- * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
- * @parameter {bool} isDisabled - Is button disabled (defaults to false)
- * @parameter {function} callback - Function that is invoked after appending the button link
- */
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  isDisabled = false,
-  callback = null
-) {
-  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
-
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
-
-  if (callback) callback();
-}
-
-/**
- * Enhance SSO button and hide/show default Knack login form with buttons
- * @parameter {string} viewId - Knack view id to append button link to
- */
-function customizeLoginButton(viewId) {
-  // Hide Knack default SSO button, login form, login title, and any other children
-  $("#" + viewId)
-    .children()
-    .hide();
-
-  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
-
-  // Create a div for Login buttons
-  var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
-  });
-  $coacdButton.appendTo("#" + viewId);
-
-  // Append Big SSO Login button and non-SSO Login button
-  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
-
-  $coacdButton.append(
-    "<a class='small-button' href='javascript:void(0)'>" +
-      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
-  );
-
-  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
-  var $nonCoacdButton = $(".small-button");
-  $nonCoacdButton.click(function () {
-    $("#" + viewId)
-      .children()
-      .show();
-    $(".small-button-container,.big-button-container").hide();
-    $(".kn-sso-container").hide();
-  });
-}
-
-// Call customizeLoginButton on any view render to customize any login page that renders in app
-$(document).on("knack-view-render.any", function (event, page) {
-  // Find SSO button and existing custom button
-  var $ssoButton = $(".kn-sso-container");
-  var $coacdLoginDiv = $("#coacd-button-login");
-
-  // If SSO button exists on page and there isn't already a custom button
-  if ($ssoButton.length && !$coacdLoginDiv.length) {
-    var $ssoView = $ssoButton.closest("[id^=view_]");
-    var viewId = $ssoView.get(0).id;
-
-    customizeLoginButton(viewId);
-  }
-});
-
 function setClickEvent(divId, func, param1, param2) {
   // TODO make these args less weird
   $("#" + divId).click(function() {
@@ -438,95 +513,6 @@ function showHideElements(showSelector, hideSelector) {
   $(showSelector).show();
   $(hideSelector).hide();
 }
-
-$(document).on("knack-view-render.view_2621", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "work-orders-markings",
-    "view_2621",
-    "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
-    "road",
-    "Markings | Work Orders",
-  );
-});
-
-$(document).on("knack-view-render.view_3178", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "work-orders-service-requests",
-    "view_3178",
-    "https://atd.knack.com/signs-markings#service-requests-markings/",
-    "comments",
-    "Markings | Service Requests",
-  );
-});
-
-$(document).on("knack-view-render.view_2628", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "work-orders-signs",
-    "view_2628",
-    "https://atd.knack.com/signs-markings#work-order-signs/",
-    "flag",
-    "Signs | Work Orders",
-  );
-});
-
-$(document).on("knack-view-render.view_2629", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "service-requests-signs",
-    "view_2629",
-    "https://atd.knack.com/signs-markings#service-requests-signs/",
-    "comments",
-    "Signs | Service Requests",
-  );
-});
-
-$(document).on("knack-view-render.view_2630", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "street-banners",
-    "view_2630",
-    "https://atd.knack.com/street-banners#home/",
-    "flag-o",
-    "Street Banners | Program",
-  );
-});
-
-$(document).on("knack-view-render.view_2903", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "signs-gis-qa",
-    "view_2903",
-    "https://atd.knack.com/signs-markings#signs-gis-qa/",
-    "flag",
-    "GIS QA | Signs",
-  );
-});
-
-$(document).on("knack-view-render.view_2904", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "markings-gis-qa",
-    "view_2904",
-    "https://atd.knack.com/signs-markings#markings-gis-qa/",
-    "road",
-    "GIS QA | Markings",
-  );
-});
-
-$(document).on("knack-view-render.view_3495", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "sign-fabrication-work-orders",
-    "view_3495",
-    "https://atd.knack.com/signs-markings#work-orders-contractor/",
-    "wrench",
-    "Contractor | Work Orders",
-  ); 
-})
-// END: Custom Buttons
 
 function hideFieldIfRole(selector, roleObjectId) {
   //  function to hide a field based on if the user does not have a given role
@@ -631,3 +617,4 @@ $(document).on('knack-form-submit.view_3158', function(event, view, txn) {
         console.log(response);
     });
 })
+
