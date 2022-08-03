@@ -38,18 +38,7 @@ or we can target a specific field by using the Knack Field ID
 and dont forget to close the function.
 
 ```
-})
-```
-
-Example of full code block
-
-```
-/*TIA Case ID*/
-$(document).on('knack-page-render.any', function(event, page) {
-  $('input#field_1047').keyup(function(){
-    this.value = this.value.toUpperCase();
-  });
-})
+});
 ```
 
 ### The CSS
