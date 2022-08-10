@@ -11,18 +11,12 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
+    id: "coacd-button-login"
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  bigButton(
-    "coacd-big-button",
-    "coacd-button-login",
-    url,
-    "sign-in",
-    "Sign-In"
-  );
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
@@ -59,42 +53,41 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  is_disabled = false,
-  callback = null
-) {
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
-
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
 }
 
-// create large Traffic Control Plans button on the Home page
-$(document).on("knack-view-render.view_31", function (event, page) {
-  bigButton(
-    "traffic-control-plans",
-    "view_31",
-    "https://atd.knack.com/row#tcp-projects/",
-    "crop",
-    "Traffic Control Plans"
-  );
+// create large TCP Projects button on the Home page
+$(document).on("knack-view-render.view_31", function(event, page) {
+  bigButton("tcp-projects", "view_31", "https://atd.knack.com/row#tcp-projects/", "crop", "TCP Projects");
+});
+// create large CCM button on the Home page
+$(document).on("knack-view-render.view_244", function(event, page) {
+  bigButton("ccm", "view_244", "https://atd.knack.com/row#court-case-management/", "briefcase", "Court Case Management");
+});
+
+// create large COS Reporting button on the Home page
+$(document).on("knack-view-render.view_245", function(event, page) {
+  bigButton("cos", "view_245", "https://atd.knack.com/row#cost-of-service-reporting/", "dollar", "COS Reporting");
+});
+
+// create large TCP Service button on the Customer Portal Home page
+$(document).on("knack-view-render.view_234", function(event, page) {
+  bigButton("tcp-service", "view_234", "https://atd.knack.com/row#tcp-portal/", "car", "TCP: Traffic Control Plan");
+});
+// create large ROW Division button on the Customer Portal Home page
+$(document).on("knack-view-render.view_237", function(event, page) {
+  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+});
+
+
+// create large Start TCP Application button on the TCP Portal page
+$(document).on("knack-view-render.view_241", function(event, page) {
+  bigButton("tcp-application", "view_241", "https://atd.knack.com/row#new-tcp-application/", "arrow-right", "Start TCP Application");
 });
 
 /****************************************************/
