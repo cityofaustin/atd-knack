@@ -114,6 +114,18 @@ $(document).on("knack-view-render.view_2630", function(event, page) {
     "flag-o",
     "Street Banners | Program",
   );
+
+});
+
+$(document).on("knack-view-render.view_3495", function(event, page) {
+  // create large button on the home page
+  bigButton(
+    "sign-fabrication-work-orders",
+    "view_3495",
+    "https://atd.knack.com/signs-markings#work-orders-contractor/",
+    "wrench",
+    "Contractor | Work Orders",
+  );
 });
 
 $(document).on("knack-view-render.view_2903", function(event, page) {
