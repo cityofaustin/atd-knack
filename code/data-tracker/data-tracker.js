@@ -961,3 +961,85 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
 //////////////////////////////////////////////////////////////////
 /// End Autopopulate work order ID in the follow-up order form ///
 //////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////
+///// Prevent user from re-assigning their own assignment /////
+// https://github.com/cityofaustin/atd-data-tech/issues/9053 //
+///////////////////////////////////////////////////////////////
+
+var technicianField = "field_1754";
+
+var disableChosenSelect = function ($workingField, $workingFieldParent) {
+  var $workingFieldClone = $workingField.clone();
+
+  // Remove the working Chosen select
+  $workingField.remove();
+  // Append a non-working copy of the Chosen select to the field parent div
+  // Clone/append breaks the context of the Chosen library on the field, hacky but it works
+  $workingFieldParent.append($workingFieldClone);
+
+  // Find the a tag that gives us the hover highlighting and pointer change
+  var $aTag = $workingFieldClone.find("a.chzn-single");
+
+  // Override hover in/out CSS so select doesn't look interactive
+  $aTag.css("background-color", "#e5e5e5");
+  $aTag.hover(
+    function () {
+      $(this).css("border-color", "#dbdbdb");
+      $(this).css("cursor", "default");
+    },
+    function () {
+      $(this).css("border-color", "#dbdbdb");
+      $(this).css("cursor", "default");
+    }
+  );
+};
+
+var disableSelectField = function ($fieldToDisable, userId) {
+  // Find the ID of the current lead technician (if there is one)
+  var leadTechnicianId = $fieldToDisable.val() || null;
+
+  // See if the logged in technician and lead technician ids match
+  var isLoggedInUserLeadTechnician = userId === leadTechnicianId;
+
+  // If so, disable the select
+  if (isLoggedInUserLeadTechnician) {
+    var $leadTechnicianSelectChosenDiv = $(
+      "div#connection-picker-chosen-" + technicianField
+    );
+    var $leadTechnicianParentDiv = $leadTechnicianSelectChosenDiv.parent();
+
+    disableChosenSelect(
+      $leadTechnicianSelectChosenDiv,
+      $leadTechnicianParentDiv
+    );
+  }
+};
+
+$(document).on("knack-view-render.view_1048", function (event, view, data) {
+  // Getting userId before view load sometimes returns undefined so get it here
+  var userId = Knack.getUserAttributes().id;
+  var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
+
+  disableSelectField($leadTechnicianSelect, userId);
+});
+
+$(document).on("knack-view-render.view_3156", function (event, view, data) {
+  // Getting userId before view load sometimes returns undefined so get it here
+  var userId = Knack.getUserAttributes().id;
+  var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
+
+  disableSelectField($leadTechnicianSelect, userId);
+});
+
+$(document).on("knack-view-render.view_1146", function (event, view, data) {
+  // Getting userId before view load sometimes returns undefined so get it here
+  var userId = Knack.getUserAttributes().id;
+  var $leadTechnicianSelect = $("select#" + view.key + "-" + technicianField);
+
+  disableSelectField($leadTechnicianSelect, userId);
+});
+
+////////////////////////////////////////////////////////////////
+// End Prevent user from re-assigning their own assignment /////
+////////////////////////////////////////////////////////////////
