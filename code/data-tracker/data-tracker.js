@@ -1050,7 +1050,7 @@ function customizeLoginButton(viewId) {
   ////////////////////////////////////////////////////////////////////
   
   $(document).on("knack-scene-render.scene_1299", function () {
-      // We have to do this in a scene render — not view — because we need data from a sibling view
+      // We have to do this in a scene render — not view — because we need data from a sibling view
       
       // Select and clone the original work order ID select field
       var $workOrderIdSelect = $("select#view_3207-field_4132");
@@ -1065,6 +1065,8 @@ function customizeLoginButton(viewId) {
       var followUpWorkOrderId = $originalWorkOrderDetails.attr("class");
     
       setInterval(() => {
+        // check if the work order ID needs to be set - this form can be submitted
+        // multiple times and the Chosen input will reset on each form submit
         var currentChosenVal = $workOrderIdSelect.val();
         if (currentChosenVal !== followUpWorkOrderId) {
           $workOrderIdSelect.val(followUpWorkOrderId).change();
