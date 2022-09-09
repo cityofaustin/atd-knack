@@ -92,3 +92,25 @@ $(document).on("knack-view-render.view_32", function(event, page) {
   $('#view_32-field_105').val(attrs.id);
   $('#view_32-field_105').trigger("liszt:updated");
 });
+
+/***************************************************************/
+/*** Disable the ability to Click/Touch outside a Modal Page ***/
+/***************************************************************/
+$(document).on('knack-scene-render.any', function(event, scene) {
+    $('.kn-modal-bg').off('click');
+});
+
+/*** Disable Breadcrumb Navigation Links ***/
+/*******************************************/
+function disableBreadCrumbsNonAdmin() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+//Page to disable crumbtrail
+$(document).on("knack-scene-render.scene_165", function () {
+  disableBreadCrumbsNonAdmin();
+});
