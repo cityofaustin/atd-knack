@@ -630,9 +630,9 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     ).text()
   );
   /*
-      set the value of the preivous unit cost and quanity. these fields are hidden to the 
-      user and we pass these values via submit rule that inserts them into a log record
-    */
+        set the value of the preivous unit cost and quanity. these fields are hidden to the 
+        user and we pass these values via submit rule that inserts them into a log record
+      */
   $("#" + fields.cost.previous)
     .val(state.cost.current)
     .prop("disabled", true);
@@ -685,15 +685,15 @@ $(document).on("knack-view-render.view_2698", function (event, page) {
 //////////////////////////////////////////////////////
 
 /* 
-This logic ensures that a work order's task order cannot be edited if
-any inventory transactions have been financially processed. This is
-dependent on a view being added to the work order edit view which
-displays the `SUM_JV_TRANSACTIONS_COMPLETED` field. This field
-indicates if any financial transactions have been processed.
-
-If financial txns have been processed, then the editable select field
-will be replaced with a static span of text.
-*/
+  This logic ensures that a work order's task order cannot be edited if
+  any inventory transactions have been financially processed. This is
+  dependent on a view being added to the work order edit view which
+  displays the `SUM_JV_TRANSACTIONS_COMPLETED` field. This field
+  indicates if any financial transactions have been processed.
+  
+  If financial txns have been processed, then the editable select field
+  will be replaced with a static span of text.
+  */
 function getDetailsFieldValue(fieldKey) {
   var spans = $("div." + fieldKey).find(".kn-detail-body span");
   if (!spans || spans.length === 0) {
@@ -1044,7 +1044,6 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
 /// End Autopopulate work order ID in the follow-up order form ///
 //////////////////////////////////////////////////////////////////
 
-
 ////////////////////////////////////////////////////////////////////
 /// Autopopulate *scheduled* work order ID in the follow-up form ///
 // https://github.com/cityofaustin/atd-data-tech/issues/9052     ///
@@ -1053,27 +1052,37 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
 $(document).on("knack-scene-render.scene_1299", function () {
   // We have to do this in a scene render — not view — because we need data from a sibling view
 
-  // Select and clone the original work order ID select field
-  var $workOrderIdSelect = $("select#view_3207-field_4132");
+  setInterval(function () {
+    // Select and clone the original work order ID select field
+    var $workOrderIdSelect = $("select#view_3207-field_4132");
 
-  // find follow-up work order from details view
-  var $originalWorkOrderDetails = $("#view_3204")
+    // find follow-up work order from details view
+    var $originalWorkOrderDetails = $("#view_3204")
       .find(".kn-detail.field_1971")
       .find("a")
       .find("span");
 
-  var followUpWorkOrderIdText = $originalWorkOrderDetails.text();
-  var followUpWorkOrderId = $originalWorkOrderDetails.attr("class");
+    var followUpWorkOrderIdText = $originalWorkOrderDetails.text();
+    var followUpWorkOrderId = $originalWorkOrderDetails.attr("class");
+    if ($workOrderIdSelect.val() === followUpWorkOrderId) {
+      //   nothing to do — correct value is set
+      return;
+    }
 
-  setInterval(() => {
-      // check if the work order ID needs to be set - this form can be submitted
-      // multiple times and the Chosen input will reset on each form submit
-      var currentChosenVal = $workOrderIdSelect.val();
-      if (currentChosenVal !== followUpWorkOrderId) {
-      $workOrderIdSelect.val(followUpWorkOrderId).change();
-      var $placeholderTextSpan = $("div#view_3207_field_4132_chzn > a > span");
-      $placeholderTextSpan.text(followUpWorkOrderIdText);
-      }
+    // Update placeholder option with value of original work order ID
+    // The <select> **must** have an option with a value that matches the ID we're targeting
+    var $placeholderOption = $workOrderIdSelect.find("option");
+    $placeholderOption.val(followUpWorkOrderId);
+    $placeholderOption.text(followUpWorkOrderIdText);
+
+    // Disable this listener so we don't get an endless loop when we fire off a change
+    $workOrderIdSelect.off("change");
+    // Update this select with the original work order ID as its value
+    $workOrderIdSelect.val(followUpWorkOrderId).change();
+
+    // Update the span that normally prompts the type to search with the human-readable ID
+    var $placeholderTextSpan = $("div#view_3207_field_4132_chzn > a > span");
+    $placeholderTextSpan.text(followUpWorkOrderIdText);
   }, 500);
 });
 
