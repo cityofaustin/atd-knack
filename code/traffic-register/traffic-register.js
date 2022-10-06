@@ -366,14 +366,15 @@ function populateConnectionFromDetails({
   connFieldId,
   detailsViewId,
   detailsFieldId,
+  modalId,
 }) {
   // Select and clone the original work order ID select field
   var $matchRegSelect = $(`#${formViewId}-${connFieldId}`);
   // Get this form's record ID from the submit button
   var thisRecordId = $(".kn-submit").find("input").val();
 
-  if ($matchRegSelect.val() === thisRecordId) {
-    //   nothing to do — correct value is set
+  if ($(`#${modalId}`).length === 0) {
+    // this modal is not open - stop
     return;
   }
 
@@ -407,6 +408,7 @@ $(document).on("knack-scene-render.scene_449", function () {
       connFieldId: "field_561",
       detailsViewId: "view_891",
       detailsFieldId: "field_950",
+      modalId: "kn-scene_449",
     });
   }, 500);
 });
@@ -419,6 +421,7 @@ $(document).on("knack-scene-render.scene_450", function () {
       connFieldId: "field_561",
       detailsViewId: "view_893",
       detailsFieldId: "field_950",
+      modalId: "kn-scene_450",
     });
   }, 500);
 });
@@ -431,6 +434,7 @@ $(document).on("knack-scene-render.scene_454", function () {
       connFieldId: "field_560",
       detailsViewId: "view_901",
       detailsFieldId: "field_950",
+      modalId: "kn-scene_454",
     });
   }, 500);
 });
