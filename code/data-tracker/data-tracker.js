@@ -1049,21 +1049,27 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
 // https://github.com/cityofaustin/atd-data-tech/issues/9052     ///
 ////////////////////////////////////////////////////////////////////
 
-$(document).on("knack-scene-render.scene_1299", function () {
+$(document).on("knack-scene-render.scene_1468", function () {
   // We have to do this in a scene render — not view — because we need data from a sibling view
 
   setInterval(function () {
     // Select and clone the original work order ID select field
-    var $workOrderIdSelect = $("select#view_3207-field_4132");
+    var $workOrderIdSelect = $("select#view_3653-field_4211");
 
     // find follow-up work order from details view
-    var $originalWorkOrderDetails = $("#view_3204")
+    var $originalWorkOrderDetails = $("#view_3650")
       .find(".kn-detail.field_1971")
-      .find("a")
-      .find("span");
+      .find(".kn-detail-body");
 
+    // find the work order ID text within it
     var followUpWorkOrderIdText = $originalWorkOrderDetails.text();
-    var followUpWorkOrderId = $originalWorkOrderDetails.attr("class");
+    // find the span that text came from (not the most effecient way of doing this...)
+    var workOrderIDSpan = $(
+      `span:contains('${followUpWorkOrderIdText}')`
+    ).last();
+    // extract the Knack record ID from the span's class
+    var followUpWorkOrderId = workOrderIDSpan.attr("class");
+
     if ($workOrderIdSelect.val() === followUpWorkOrderId) {
       //   nothing to do — correct value is set
       return;
@@ -1081,7 +1087,7 @@ $(document).on("knack-scene-render.scene_1299", function () {
     $workOrderIdSelect.val(followUpWorkOrderId).change();
 
     // Update the span that normally prompts the type to search with the human-readable ID
-    var $placeholderTextSpan = $("div#view_3207_field_4132_chzn > a > span");
+    var $placeholderTextSpan = $("div#view_3653_field_4211_chzn > a > span");
     $placeholderTextSpan.text(followUpWorkOrderIdText);
   }, 500);
 });
