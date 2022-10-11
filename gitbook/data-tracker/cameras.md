@@ -39,7 +39,7 @@ For VIP visits, we are asked to disable the CCTV stills feed on specified dates 
 * Go back to the cameras object in Data Tracker. Click on `Import`, `Upload CSV`, select the `CSV`.  For ‘Does the CSV have a row at the top with a name for each column? Let the default be `Yes, the headers are on row 1`
 * For Select a field to match records, select `CAMERA_ID`.  Continue through the process, under Advanced Options, for Field Defaults, select `DISABLE_IMAGE_PUBLISH` and set the default for those records to `Yes`.&#x20;
 * Click on `Submit` Import.&#x20;
-* Check a few of the records from the list to ensure the process has succeeded.
+* You'll need to wait at least **one hour** to verify that the camera images are being uploaded. To verify that the desired cameras have been enabled, you can the follow the URL pattern \`[https://cctv.austinmobility.io/image/\<camera\_id>.jpg](https://cctv.austinmobility.io/image/30.jpg)\`
 
 ### 3. Confirmation
 
