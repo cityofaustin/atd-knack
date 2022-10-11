@@ -1051,41 +1051,35 @@ $(document).on("knack-view-render.view_1718", function (event, view, data) {
 
 $(document).on("knack-scene-render.scene_1468", function () {
   // We have to do this in a scene render — not view — because we need data from a sibling view
-
   setInterval(function () {
     // Select and clone the original work order ID select field
     var $workOrderIdSelect = $("select#view_3653-field_4211");
-
     // find follow-up work order from details view
     var $originalWorkOrderDetails = $("#view_3650")
       .find(".kn-detail.field_1971")
       .find(".kn-detail-body");
-
     // find the work order ID text within it
     var followUpWorkOrderIdText = $originalWorkOrderDetails.text();
-    // find the span that text came from (not the most effecient way of doing this...)
-    var workOrderIDSpan = $(
-      `span:contains('${followUpWorkOrderIdText}')`
-    ).last();
+    // find the span that the text came from (mayb not the most effecient way of doing this...)
+    var workOrderIDSpan = $originalWorkOrderDetails
+      .find(`span:contains('${followUpWorkOrderIdText}')`)
+      .last();
     // extract the Knack record ID from the span's class
     var followUpWorkOrderId = workOrderIDSpan.attr("class");
-
+    // is the correct value already set?
     if ($workOrderIdSelect.val() === followUpWorkOrderId) {
-      //   nothing to do — correct value is set
+      //  nothing to do
       return;
     }
-
     // Update placeholder option with value of original work order ID
     // The <select> **must** have an option with a value that matches the ID we're targeting
     var $placeholderOption = $workOrderIdSelect.find("option");
     $placeholderOption.val(followUpWorkOrderId);
     $placeholderOption.text(followUpWorkOrderIdText);
-
     // Disable this listener so we don't get an endless loop when we fire off a change
     $workOrderIdSelect.off("change");
     // Update this select with the original work order ID as its value
     $workOrderIdSelect.val(followUpWorkOrderId).change();
-
     // Update the span that normally prompts the type to search with the human-readable ID
     var $placeholderTextSpan = $("div#view_3653_field_4211_chzn > a > span");
     $placeholderTextSpan.text(followUpWorkOrderIdText);
