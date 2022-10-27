@@ -275,6 +275,7 @@ $(document).on("knack-scene-render.any", function () {
 /*****************************************************/
 /*** Display Icon function for Field Table Headers ***/
 /*****************************************************/
+/*
 function displayIcon(id, field_id, fa_icon, callback = null) {
   if ($("a#" + id).length === 0) {
     $(
@@ -352,7 +353,7 @@ $(document).on("knack-scene-render.any", function () {
 $(document).on("knack-scene-render.any", function () {
   displayIcon("Modified Timestamp", "field_157", "clock-o");
 });
-
+*/
 /****************************************************/
 /*** Autopopulate Drafted Reg Doc ID for drafting ***/
 /****************************************************/
@@ -366,15 +367,14 @@ function populateConnectionFromDetails({
   connFieldId,
   detailsViewId,
   detailsFieldId,
-  modalId,
 }) {
   // Select and clone the original work order ID select field
   var $matchRegSelect = $(`#${formViewId}-${connFieldId}`);
   // Get this form's record ID from the submit button
   var thisRecordId = $(".kn-submit").find("input").val();
 
-  if ($(`#${modalId}`).length === 0) {
-    // this modal is not open - stop
+  if ($matchRegSelect.val() === thisRecordId) {
+    //   nothing to do — correct value is set
     return;
   }
 
@@ -400,41 +400,50 @@ function populateConnectionFromDetails({
   $placeholderTextSpan.text(thisRecordLabel);
 }
 
+// we need this global var to share interval state across functions
+var prevIntervalId;
+
 /*** Retire modal ***/
 $(document).on("knack-scene-render.scene_449", function () {
-  setInterval(function () {
+  if (prevIntervalId) {
+    clearInterval(prevIntervalId);
+  }
+  prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_890",
       connFieldId: "field_561",
       detailsViewId: "view_891",
       detailsFieldId: "field_950",
-      modalId: "kn-scene_449",
     });
   }, 500);
 });
 
 /*** Retire and replace modal ***/
 $(document).on("knack-scene-render.scene_450", function () {
-  setInterval(function () {
+  if (prevIntervalId) {
+    clearInterval(prevIntervalId);
+  }
+  prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_892",
       connFieldId: "field_561",
       detailsViewId: "view_893",
       detailsFieldId: "field_950",
-      modalId: "kn-scene_450",
     });
   }, 500);
 });
 
 /*** Save draft ***/
 $(document).on("knack-scene-render.scene_454", function () {
-  setInterval(function () {
+  if (prevIntervalId) {
+    clearInterval(prevIntervalId);
+  }
+  prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_902",
       connFieldId: "field_560",
       detailsViewId: "view_901",
       detailsFieldId: "field_950",
-      modalId: "kn-scene_454",
     });
   }, 500);
 });
