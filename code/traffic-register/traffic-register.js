@@ -405,6 +405,12 @@ var prevIntervalId;
 
 /*** Retire modal ***/
 $(document).on("knack-scene-render.scene_449", function () {
+  // clear interval if this modal closes
+  $(".delete.close-modal").on("click", () => {
+    if (prevIntervalId) {
+      clearInterval(prevIntervalId);
+    }
+  });
   if (prevIntervalId) {
     clearInterval(prevIntervalId);
   }
@@ -415,11 +421,18 @@ $(document).on("knack-scene-render.scene_449", function () {
       detailsViewId: "view_891",
       detailsFieldId: "field_950",
     });
-  }, 500);
+  }, 250);
 });
 
 /*** Retire and replace modal ***/
 $(document).on("knack-scene-render.scene_450", function () {
+  // clear interval if this modal closes
+  $(".delete.close-modal").on("click", () => {
+    if (prevIntervalId) {
+      clearInterval(prevIntervalId);
+    }
+  });
+  // clear interval if already running
   if (prevIntervalId) {
     clearInterval(prevIntervalId);
   }
@@ -430,7 +443,7 @@ $(document).on("knack-scene-render.scene_450", function () {
       detailsViewId: "view_893",
       detailsFieldId: "field_950",
     });
-  }, 500);
+  }, 250);
 });
 
 /*** Save draft ***/
@@ -445,7 +458,7 @@ $(document).on("knack-scene-render.scene_454", function () {
       detailsViewId: "view_901",
       detailsFieldId: "field_950",
     });
-  }, 500);
+  }, 250);
 });
 
 /********************************************************/
