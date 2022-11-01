@@ -452,7 +452,8 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
+    //"https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
+    "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
