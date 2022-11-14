@@ -57,21 +57,6 @@ var userId = Knack.getUserAttributes().id;
 
 // Filter for records for assignments time windows
 var filters = {
-  nextFourWeeks: {
-    match: "or",
-    rules: [
-      {
-        field: fields.dateField,
-        operator: "is today",
-      },
-      {
-        field: fields.dateField,
-        operator: "is during the next",
-        range: 28,
-        type: "days",
-      },
-    ],
-  },
   today: [
     {
       field: fields.dateField,
@@ -869,7 +854,8 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      requestRecords(filters.nextFourWeeks, view.key, tableConfig);
+      // Records returned from this API view are filtered by date (assignment occurs today or in the next 28 days)
+      requestRecords([], view.key, tableConfig);
     });
 });
 
