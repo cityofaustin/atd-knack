@@ -854,7 +854,7 @@ $(document).on("knack-view-render.view_466", function (event, view, data) {
   $("#" + appSpecifics.availableAssignmentsView + "> div.view-header")
     .after(recordsTable)
     .ready(function () {
-      // Records returned from this API view are filtered by date (assignment occurs today or in the next 28 days)
+      // The API view filters records by date (assignment occurs today or in the next 28 days) before returning records
       requestRecords([], view.key, tableConfig);
     });
 });
