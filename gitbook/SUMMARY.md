@@ -14,6 +14,7 @@
 * [Rounding Knack Costs Correctly](knack/knack-rounding-costs.md)
 * [URL Parameters to populate a form](knack/url-parameters-to-populate-a-form.md)
 * [Importing Records](knack/importing-records.md)
+* [Copy an Application](knack/copy-an-application.md)
 
 ## Knack Integrations
 
