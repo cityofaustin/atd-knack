@@ -49,6 +49,37 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
+
+function getCitybaseButton(payload, viewId){
+    fetch('https://invoice-service.prod.cityba.se/invoices/austin_tx_transportation/street_banner', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        console.log(response.url)
+        bigButton('citybase-payment-button', viewId, response.url, "arrow-right", "Make Payment");
+      })
+        // return(response.url)})
+        // window.open(response.url, '_blank').focus();
+      .catch((error) => {
+        console.error('Error:', error);
+        // not sure what to do if theres an error getting the citybase payload
+      });
+  }
+
+var knackUserToken = Knack.getUserToken();
+
+var headers = {
+  "X-Knack-Application-Id": "5c4b50a69b19a0085bfd5eec",
+  "X-Knack-REST-API-KEY": "knack",
+  Authorization: knackUserToken,
+  "content-type": "application/json",
+};
+
+
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
@@ -154,10 +185,21 @@ $(document).on('knack-view-render.view_3047', function(event, page) {
     bigButton('schedule', 'view_3047', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
 });
 
+$(document).on('knack-view-render.view_3668', function(event, page) {
+  // create large button on the home page
+    bigButton('signs_markings_tracker', 'view_3668', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
+});
+
 $(document).on('knack-view-render.view_3048', function(event, page) {
   // create large button on the home page
     bigButton('calendar', 'view_3048', "https://atd.knack.com/street-banners#calendar/", "calendar", "Calendar");
 });
+
+$(document).on('knack-view-render.view_3668', function(event, page) {
+  // create large button on the home page
+    bigButton('signs_markings_tracker', 'view_3668', "https://atd.knack.com/signs-markings#home/", "flag", "Signs & Markings Tracker");
+});
+
 	//>>>ADMIN TAB BUTTONS
 $(document).on('knack-view-render.view_3012', function(event, page) {
   // create large button on the home page
@@ -331,3 +373,169 @@ $(document).on("knack-scene-render.scene_1234", function () {
     location.reload();
   })
 });
+
+
+// lamppost application details
+$(document).on('knack-view-render.view_3664', function(event, page) {
+  $('#view_3664').hide()
+  // Set current record ID to fetch invoices from Knack API
+  var hrefArray = window.location.href.split("/");
+  var recordId = hrefArray[hrefArray.length - 2];
+
+  var payload={
+    "allowed_payment_methods": [
+      "CARD",
+      "BANK"
+    ],
+    "cancel_url": {
+      "url": window.location.href,
+      "label": "Cancel"
+    },
+    "return_url": {
+      "url": window.location.href,
+      "label": "Return"
+    }
+  }
+
+  $.ajax({
+      url:
+        "https://api.knack.com/v1/scenes/scene_1219/views/view_3664/records?application-details-lpb_id="
+        +recordId,
+    headers: headers,
+  }).then(function (res) {
+    var records = res.records;
+    if (records.length > 0) {
+      // operating under the expectation that there is only one line item to add
+      payload["line_items"] = [{
+        "description": records[0]["field_3350"],
+        "amount": records[0]["field_3342_raw"]*100,
+        "sub_description": records[0]["field_3351"],
+        "custom_attributes": [
+          {
+            "key":"knack_record_id",
+            "value":records[0]["id"]
+          },
+          {
+            "key": "invoice_number",
+            "value":records[0]["field_3327"]
+          },
+          {
+            "key": "fund",
+            "value":String(records[0]["field_3356"])
+          },
+          {
+            "key": "dept",
+            "value":String(records[0]["field_3357"])
+          },
+                    {
+            "key": "unit",
+            "value":String(records[0]["field_3358"])
+          },
+          {
+            "key": "revenue",
+            "value":String(records[0]["field_3359"])
+          }
+        ],
+      }];
+      payload["custom_attributes"]=[{
+            "key":"knack_record_id",
+            "value":records[0]["id"]
+          },
+          {
+            "key": "invoice_number",
+            "value":records[0]["field_3327"]
+          }
+      ]
+      console.log(JSON.stringify(payload))
+      getCitybaseButton(payload, "view_3667")
+    }
+  })
+})
+
+// over the street
+$(document).on('knack-view-render.view_3665', function(event, page) {
+    $('#view_3665').hide()
+  // Set current record ID to fetch invoices from Knack API
+  var hrefArray = window.location.href.split("/");
+  var recordId = hrefArray[hrefArray.length - 2];
+  // var paymentStatus = ""
+
+  var payload={
+    "allowed_payment_methods": [
+      "CARD",
+      "BANK"
+    ],
+    "cancel_url": {
+      "url": window.location.href,
+      "label": "Cancel"
+    },
+    "return_url": {
+      "url": window.location.href,
+      "label": "Continue"
+    }
+  }
+
+  //  $.ajax({
+  //     url:
+  //       "https://api.knack.com/v1/scenes/scene_1243/views/view_3620/records/"
+  //       +recordId,
+  //     headers: headers
+  //  }).then(res=> (paymentStatus=res["field_2862"]))
+
+  //  console.log(paymentStatus)
+
+  $.ajax({
+      url:
+        "https://api.knack.com/v1/scenes/scene_1243/views/view_3665/records?application-details-ots_id="
+        +recordId,
+    headers: headers,
+  }).then(function (res) {
+    var records = res.records;
+    if (records.length > 0) {
+      console.log(records[0])
+      // operating under the expectation that there is only one line item to add
+      payload["line_items"] = [{
+        "description": records[0]["field_3350"],
+        "amount": records[0]["field_3342_raw"]*100,
+        "sub_description": records[0]["field_3351"],
+        "custom_attributes": [
+          {
+            "key":"knack_record_id",
+            "value":records[0]["id"]
+          },
+          {
+            "key": "invoice_number",
+            "value":records[0]["field_3327"]
+          },
+          {
+            "key": "fund",
+            "value":String(records[0]["field_3356"])
+          },
+          {
+            "key": "dept",
+            "value":String(records[0]["field_3357"])
+          },
+          {
+            "key": "unit",
+            "value":String(records[0]["field_3358"])
+          },
+          {
+            "key": "revenue",
+            "value":String(records[0]["field_3359"])
+          }
+        ],
+      }];
+      payload["custom_attributes"]=[{
+            "key":"knack_record_id",
+            "value":records[0]["id"]
+          },
+          {
+            "key": "invoice_number",
+            "value":records[0]["field_3327"]
+          }
+      ]
+      console.log(JSON.stringify(payload))
+      getCitybaseButton(payload, "view_3666")
+    }
+  })
+})
