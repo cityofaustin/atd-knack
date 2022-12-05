@@ -154,10 +154,21 @@ $(document).on('knack-view-render.view_3047', function(event, page) {
     bigButton('schedule', 'view_3047', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
 });
 
+$(document).on('knack-view-render.view_3668', function(event, page) {
+  // create large button on the home page
+    bigButton('signs_markings_tracker', 'view_3668', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
+});
+
 $(document).on('knack-view-render.view_3048', function(event, page) {
   // create large button on the home page
     bigButton('calendar', 'view_3048', "https://atd.knack.com/street-banners#calendar/", "calendar", "Calendar");
 });
+
+$(document).on('knack-view-render.view_3668', function(event, page) {
+  // create large button on the home page
+    bigButton('signs_markings_tracker', 'view_3668', "https://atd.knack.com/signs-markings#home/", "flag", "Signs & Markings Tracker");
+});
+
 	//>>>ADMIN TAB BUTTONS
 $(document).on('knack-view-render.view_3012', function(event, page) {
   // create large button on the home page
