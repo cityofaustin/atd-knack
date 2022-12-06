@@ -7,6 +7,7 @@
 .fa-bot { vertical-align: text-bottom; }
 /*Icon touches the top of a line*/
 .fa-top { vertical-align: text-top; }
+.fa-gold { color: goldenrod; }
 
 /****************************************/
 /************ Button Effects ************/
@@ -47,6 +48,48 @@
 }
  
 a.big-button-container { 
+  text-decoration: none;
+}
+
+/***************************************/
+/********** Directory Buttons **********/
+/***************************************/
+.directory-button {
+  padding: 60px 60px;
+  margin: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  font-size: 2em;
+  max-width: 18em;
+  min-width: 18em;
+  max-height: 10em;
+  min-height: 10em;
+  text-align: center;
+  display: inline-block;
+}
+ 
+.directory-button:hover {
+  cursor: pointer;
+  background-color: #f7f7f7;
+  opacity: 0.9;
+  border-color: gray;
+  outline-color: transparent;
+}
+
+.directory-button-disabled {
+  pointer-events: none;
+  background-color: #f7f7f7;
+  opacity: 0.6;
+  border-color: transparent;
+  outline-color: transparent;
+}
+ 
+a.directory-button { 
   text-decoration: none;
 }
 
@@ -223,18 +266,6 @@ a.table-trigger-button { text-decoration: none; }
   opacity: 0.8;
 }
 
-/****************************************/
-/******** Table Checkbox Buttons ********/
-/****************************************/
-.table-checkbox-parent {
-  vertical-align: middle !important;
-}
-
-.table-checkbox {
-  transform: scale(2, 2);
-  margin: 20px !important;
-}
-
 /*****************************************/
 /** Style Links with Underline on Hover **/
 /*****************************************/
@@ -304,23 +335,76 @@ a.ang-link:link {text-decoration: none;}
 /*****************************************/
 /** Remove Back Links for Reg Doc Draft **/
 /*****************************************/
-/*Draft Reg Doc Builder Page 2*/
-#kn-scene_253 .kn-back-link {
-  display: none;
-}
+/*Drafting Instructions Page*/
+#kn-scene_446 .kn-back-link { display: none; }
 
-/*Approved Reg Doc Builder Page 2*/
-#kn-scene_401 .kn-back-link {
-  display: none;
-}
+/*Add Regulations Page*/
+#kn-scene_447 .kn-back-link { display: none; }
 
-/*************************************/
-/*** Styles the Reviewer Dashboard ***/
-/*************************************/
-/*Min Width & Transparent for "Hello/Welcome" Details Label*/
-#kn-scene_39 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_41 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+/*Save Draft Page*/
+#kn-scene_454 .kn-back-link { display: none; }
 
-/*Draft Reg Doc ID on Reg Doc Builder*/
-#kn-scene_253 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_401 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+/****************************************/
+/*** Remove Back Links for Task Board ***/
+/****************************************/
+/*My Tasks*/
+#kn-scene_436 .kn-back-link { display: none; }
+
+/*My Tasks - Pending Tasks*/
+#kn-scene_439 .kn-back-link { display: none; }
+
+/*My Tasks - Active Tasks*/
+#kn-scene_440 .kn-back-link { display: none; }
+
+/*My Tasks - Completed Tasks*/
+#kn-scene_441 .kn-back-link { display: none; }
+
+/*My Contributions*/
+#kn-scene_437 .kn-back-link { display: none; }
+
+/*Team Tasks*/
+#kn-scene_438 .kn-back-link { display: none; }
+
+/*Team Tasks - Pending Tasks*/
+#kn-scene_442 .kn-back-link { display: none; }
+
+/*Team Tasks - Active Tasks*/
+#kn-scene_443 .kn-back-link { display: none; }
+
+/*Team Tasks - Completed Tasks*/
+#kn-scene_444 .kn-back-link { display: none; }
+
+/*Review Page*/
+#kn-scene_469 .kn-back-link { display: none; }
+
+/*Draft Editor*/
+#kn-scene_485 .kn-back-link { display: none; }
+
+/*********************************************/
+/*** Min Width & Transparent Detail Labels ***/
+/*********************************************/
+/*Hello/Welcome Details Label on Task Board*/
+#kn-scene_435 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Draft Reg Doc ID on Draft Builder*/
+#kn-scene_447 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_448 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_449 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_450 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_451 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_452 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_454 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Draft Reg Doc ID on Draft Editor*/
+#kn-scene_486 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_487 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_488 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_489 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_490 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_491 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_493 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Reg Doc Print Page*/
+#kn-scene_555 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+
