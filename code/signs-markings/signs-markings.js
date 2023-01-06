@@ -452,7 +452,8 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
+    //"https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
+    "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -610,23 +611,4 @@ $(document).on("knack-view-render.view_2742", function() {
   ).insertBefore("#field_3378_upload");
 });
 // END #233
-
-
-///////////////////////////////////
-//// atd-knack-api integration ////
-///////////////////////////////////
-
-$(document).on('knack-form-submit.view_3158', function(event, view, txn) {
-    // on submission of "assign to" form in markins SR manager
-  	// posts to the work_order_flext_notes endpoint, which fires a script that
-    // attaches flex notes to created work orders
-    var endpoint = "https://knack-api.austinmobility.io/work_order_flex_notes";
-    var src = Knack.application_id; // markings prod
-    var url = endpoint + "?src=" + src;
-
-    // post inventory request
-    $.post(url).done(function (response) {
-        console.log(response);
-    });
-})
 
