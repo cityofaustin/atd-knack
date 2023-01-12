@@ -52,7 +52,6 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
   var newTab = target_blank ? " target='_blank'" : "" ;
@@ -149,7 +148,6 @@ $(document).on("knack-view-render.view_1646", function(event, page) {
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-//Create Small Button nested in a block
 function smallButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " small-button-disabled'" : "'";
   var newTab = target_blank ? " target='_blank'" : "" ;
@@ -712,13 +710,22 @@ function hideSummaryNameMitigationEditTable(view_id, replacementText) {
   })
 }
 
-// Change Summary Name for Edit Mitigation Tables
+// Change Summary Name for Reviewer Mitigation Tables
 $(document).on('knack-scene-render.scene_290', (event) => {
   // Waiting for scene to render instead of view
   // View finishes rendering before table data is loaded
   hideSummaryNameMitigationEditTable("view_854", "Location Total")
   hideSummaryNameMitigationEditTable("view_857", "Location Total")
   hideSummaryNameMitigationEditTable("view_1595", "Location Total")
+})
+
+// Change Summary Name for Mitigation Editor Mitigation Tables
+$(document).on('knack-scene-render.scene_528', (event) => {
+  // Waiting for scene to render instead of view
+  // View finishes rendering before table data is loaded
+  hideSummaryNameMitigationEditTable("view_1693", "Location Total")
+  hideSummaryNameMitigationEditTable("view_1699", "Location Total")
+  hideSummaryNameMitigationEditTable("view_1704", "Location Total")
 })
 
 
@@ -751,4 +758,13 @@ $(document).on("knack-scene-render.scene_499", function (event, page) {
   $("#mitigationMapiFrame").attr("src", iframe_url);
   // hide the Mitigation Map URL field & view
   $("#view_1605").hide();
+});
+
+/*Mitigation Editor- Add Missing Improvements Page*/
+$(document).on("knack-scene-render.scene_528", function (event, page) {
+  // update iframe src with Mitigation Map URL in the Detail View
+    var iframe_url = $($("span:contains('apps/webappviewer')")[0]).text()
+  $("#mitigationMapiFrame").attr("src", iframe_url);
+  // hide the Mitigation Map URL field & view
+  $("#view_1690").hide();
 });
