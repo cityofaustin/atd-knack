@@ -69,7 +69,6 @@ $(document).on("knack-view-render.view_31", function(event, page) {
 $(document).on("knack-view-render.view_244", function(event, page) {
   bigButton("ccm", "view_244", "https://atd.knack.com/row#court-case-management/", "briefcase", "Court Case Management");
 });
-
 // create large COS Reporting button on the Home page
 $(document).on("knack-view-render.view_245", function(event, page) {
   bigButton("cos", "view_245", "https://atd.knack.com/row#cost-of-service-reporting/", "dollar", "COS Reporting");
@@ -127,6 +126,43 @@ $(document).on("knack-scene-render.scene_101", function () {
 });
 //TCP Application Confirmation page
 $(document).on("knack-scene-render.scene_102", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/*******************************************************************/
+/*** Disable Breadcrumb Navigation Links for New TCP Application ***/
+/*******************************************************************/
+
+//New TCP Application page
+$(document).on("knack-scene-render.scene_137", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TCP Project Information page
+$(document).on("knack-scene-render.scene_138", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TCP Fee Information page
+$(document).on("knack-scene-render.scene_148", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TCP Documents page
+$(document).on("knack-scene-render.scene_149", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Finalize TCP Application page
+$(document).on("knack-scene-render.scene_150", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Information page
+$(document).on("knack-scene-render.scene_151", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Attachments page
+$(document).on("knack-scene-render.scene_152", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//TCP Application Confirmation page
+$(document).on("knack-scene-render.scene_153", function () {
   disableBreadCrumbsNonAdmin();
 });
 
