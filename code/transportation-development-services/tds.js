@@ -161,6 +161,53 @@ $(document).on("knack-view-render.view_948", function(event, page) {
   smallButton("tds-staff-login", "view_948", "https://atd.knack.com/development-services#home", "lock", "TDS Staff Login");
 });*/
 
+/********************************************/
+/*********** Large Submit Buttons ***********/
+/********************************************/
+function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " submit-button-large-disabled'" : "'";
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='submit-button-large" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  if (callback) callback();
+}
+
+// create large Start Submittal button on the TDS Customer Portal - Services page for TIA Determinations
+$(document).on("knack-view-render.view_1876", function(event, page) {
+  largeSubmitButton("start-tia-determination-submittal", "view_1876", "https://atd.knack.com/development-services#tia-determination/", "arrow-right", "Start Submittal");
+});
+
+// create large Start Application button on the TDS Customer Portal - Services page for TIA Compliance
+$(document).on("knack-view-render.view_1894", function(event, page) {
+  largeSubmitButton("start-tia-compliance-application", "view_1894", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+});
+
+// create large Start Application button on the TDS Customer Portal - Services page for TIA
+$(document).on("knack-view-render.view_1870", function(event, page) {
+  largeSubmitButton("start-tia-application", "view_1870", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+});
+
+// create large Start Application button on the TDS Customer Portal - Services page for NTA
+$(document).on("knack-view-render.view_1900", function(event, page) {
+  largeSubmitButton("start-nta-application", "view_1900", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+});
+
+// create large Start Application button on the TDS Customer Portal - Services page for TA
+$(document).on("knack-view-render.view_1909", function(event, page) {
+  largeSubmitButton("start-ta-application", "view_1909", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+});
+
+// create large Start Application button on the TDS Customer Portal - Services page for ZTA
+$(document).on("knack-view-render.view_1904", function(event, page) {
+  largeSubmitButton("start-zta-application", "view_1904", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+});
+
+// create large Start Submittal button on the TDS Customer Portal - Services page for SIF Worksheets
+$(document).on("knack-view-render.view_1874", function(event, page) {
+  largeSubmitButton("start-sif-worksheet-submittal", "view_1874", "https://atd.knack.com/development-services#sif-worksheet-submittal/", "arrow-right", "Start Submittal");
+});
+
+
 /**********************************************************/
 /*** Disable Large Trigger buttons from being Clickable ***/
 /**********************************************************/
@@ -767,4 +814,12 @@ $(document).on("knack-scene-render.scene_528", function (event, page) {
   $("#mitigationMapiFrame").attr("src", iframe_url);
   // hide the Mitigation Map URL field & view
   $("#view_1690").hide();
+});
+
+/**************************************/
+/*** Redirect from Blank Nav Pages ***/
+/**************************************/
+//Access Code Page
+$(document).on('knack-scene-render.scene_580', function(event, scene) { 
+window.location.href = "https://atd.knack.com/development-services#customer-portal/access-case/61e9958f57ad0100231d515e/";
 });
