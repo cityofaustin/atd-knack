@@ -10,15 +10,11 @@ description: >-
 Purpose&#x20;
 -------------
 
-To copy a batch of assignments from one month to another. This helps cut down on repetitive form entry and saves time.
-
-## Permission
-
-Only a VZA Admin / Knack Builder can carry out this process.
+To copy a batch of assignments to eliminate form entry.
 
 ## Process
 
-1\) Open the Assignments object in Records View
+1\) Open the **Assignments** object in Records View
 
 ![](<../../.gitbook/assets/image (185).png>)
 
@@ -26,11 +22,11 @@ Only a VZA Admin / Knack Builder can carry out this process.
 
 ![](<../../.gitbook/assets/image (181).png>)
 
-3\) Filter assignments for the previous 8 weeks (Monday to Sunday) using the <mark style="color:blue;">Assignment Date Time</mark> field.
+3\) Filter assignments for the previous 4, 6, or 8 weeks (Monday to Monday) using the <mark style="color:blue;">Assignment Date Time</mark> field.
 
-Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 23:59 and <mark style="color:blue;">Assignment Date Time</mark> is before 02/28/2022 00:00
+Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **04:00** and <mark style="color:blue;">Assignment Date Time</mark> is before 02/28/2022 **04:01** (we do Monday at 4am since there is an overnight shift that often runs until this time)
 
-![](<../.gitbook/assets/image (5) (1).png>)
+<figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 4\) Export records to CSV
 
@@ -44,7 +40,7 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 23
 
 ![](<../../.gitbook/assets/image (189).png>)
 
-8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column.
+8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column. (This would be + 28 for 4 weeks or 42 for 6 weeks.)
 
 ![](<../.gitbook/assets/image (8) (1).png>)
 
@@ -105,17 +101,5 @@ Find all overnight shifts that span two days. Simply copy and paste the <mark st
 
 ![](<../../.gitbook/assets/image (180).png>)
 
-21\) Confirm the records have been imported by checking Assignment IDs and the Calendar.&#x20;
-
-## Check - QAQC
-
-These fields need to be populated for the next steps in the process to work. In Knack Builder, check to make sure none of these fields are blank.
-
-1. Assignment Date and Time
-2. Shift&#x20;
-3. Team Number&#x20;
-4. Location
-5. APD Sector&#x20;
-6. Number of Officers
-7. Assignment Number
+21\) Confirm the records have been imported and data populated by checking Assignment IDs and the Calendar.&#x20;
 
