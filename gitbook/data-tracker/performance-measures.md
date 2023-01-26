@@ -6,7 +6,7 @@ description: How to manage performance measures
 
 [http://transportation.austintexas.io/data-tracker/#home/performance-measures/](http://transportation.austintexas.io/data-tracker/#home/performance-measures/)
 
-### Object Tables defined
+## Object Tables defined
 
 Performance measures are tracked in these objects:
 
@@ -30,7 +30,7 @@ User-submitted entries which provide the actual reported values for each perform
 
 User-submitted entries which provide the actual reported values for each performance measure. Many performance\_measures\_monthly relates to one performance\_measures\_fiscal.
 
-### Annual Updates
+## Annual Updates
 
 The `performance_measures_fiscal` must be created on an annual basis so that end-users can append monthly/quarterly/annual reports to them. This is accomplished via batch import to Knack.
 
@@ -45,7 +45,7 @@ By following these steps you will import the performance measure data to meet th
     `REPORT_STATUS`, `PROPOSED`, and `AMENDED`.
 * Also ask Finance if any new division names need to be added, or if current measures have been moved to different divisions.
 
-
+### Organizing Data
 
 * Filter out the measures that are new and have been added to the current fiscal year.
 * Add the new measures to the `performance_measures` object first.&#x20;
