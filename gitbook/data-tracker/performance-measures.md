@@ -82,9 +82,9 @@ Map Columns:
 ### At the End
 
 * Do some QA/QC to make sure the right number of records got added, that there are no duplicates.
-* Update the view which displays performance measures to the end-user.&#x20;
-  * Currently this is located at [`https://builder.knack.com/atd/amd/pages/scene_565/views/view_1735/table`](https://builder.knack.com/atd/amd/pages/scene\_565/views/view\_1735/table). &#x20;
-* From the builder, navigate to the page views and modify the table filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
+* Update the view "Performance Measures" which displays performance measures to the end-user.&#x20;
+  * Located at [`https://builder.knack.com/atd/amd/pages/scene_565/views/view_1735/table`](https://builder.knack.com/atd/amd/pages/scene\_565/views/view\_1735/table). &#x20;
+* From the builder, navigate to the page views and modify the table **Source** filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
   * Update the Fiscal Year filters for the three eCombs reports.&#x20;
     * Here is the link to the scene - [`https://builder.knack.com/atd/amd/pages/scene_833`](https://builder.knack.com/atd/amd/pages/scene\_833)``
 
