@@ -10,25 +10,9 @@ When we receive a 311 Service Requests record from our CSR integration, we also 
 
 An SR can have as many as seven or eight flex notes, so they start to account for many thousands of records in the Data Tracker.
 
-To save storage space, we have a python script which copies all flex notes to our PostgreSQL/PostgREST database.
+To save storage space we have agreed with business owners that we will **delete** the flex note records from the Data Tracker if the service request is in a **Closed** status.
 
-### Script Location
-
-That script lives here: [https://github.com/cityofaustin/transportation-data-publishing/blob/master/transportation-data-publishing/data\_tracker/knack\_postgrest\_pub.py](https://github.com/cityofaustin/transportation-data-publishing/blob/master/transportation-data-publishing/data\_tracker/knack\_postgrest\_pub.py)
-
-With the flex notes backed up, we have agreed with business owners that we will **delete** the flex note records from the Data Tracker.
-
-Flex notes can be deleted under these conditions:
-
-* The service request is in a **Closed** status
-* The service request is **more than two months old**
-
-### Retrieve Flex Notes
-
-In the event that a user wants to view any flex notes which are no longer in the Data Tracker, we have two options:
-
-* a user can use the 311 CSR system to view the record.
-* a DTS team member can query our database to extract the flex records.
+In the event that a user wants to view any flex notes which are no longer in the Data Tracker a user can use the 311 CSR system to view the record.
 
 ### Delete flex notes from Data Tracker
 
