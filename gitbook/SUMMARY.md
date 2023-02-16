@@ -177,6 +177,11 @@
 ## Traffic Register
 
 * [Application Overview](traffic-register/application-overview.md)
+* [Table of Contents](traffic-register/table-of-contents.md)
+* [Workflow](traffic-register/workflow.md)
+* [Modules](traffic-register/modules.md)
+* [Special Functions/Code](traffic-register/special-functions-code.md)
+* [Permissions](traffic-register/permissions.md)
 
 ## VZA | Vision Zero in Action <a href="#vision-zero-in-action" id="vision-zero-in-action"></a>
 
