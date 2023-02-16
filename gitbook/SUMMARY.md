@@ -89,20 +89,9 @@
 * [Cancel Transactions & Replenishments](cancel-transactions-and-replenishments.md)
 * [Adjustment Transaction, Unit Cost Adjustments & Re-Stock](adjustment-transaction-unit-cost-adjustments-and-re-stock.md)
 
-## Signs & Markings Operations <a href="#signs-and-markings" id="signs-and-markings"></a>
+## ATD Forms
 
-* [Application Overview](signs-and-markings/application-overview.md)
-* [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
-* [Work Order Attachments](signs-and-markings/work-order-attachments.md)
-* [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)
-  * [Process & Functionality](signs-and-markings/contractor-work-order-tracking/contractor-process-and-functionality.md)
-* [Sign Fabrication Work Orders](signs-and-markings/sign-fabrication-work-orders/README.md)
-  * [Process and Functionality](signs-and-markings/sign-fabrication-work-orders/process-and-functionality.md)
-
-## STREET BANNER PROGRAM
-
-* [Application Overview](street-banner-program/application-overview.md)
-* [Street Banner Program](street-banner-program/street-banner-program.md)
+* [Application Overview](atd-forms/application-overview.md)
 
 ## DTS | Data & Technology Services Portal <a href="#dts-portal" id="dts-portal"></a>
 
@@ -120,6 +109,52 @@
   * [Troubleshooting: FAQs](finance-and-purchasing/finance-and-purchasing/troubleshooting-faqs.md)
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
+
+## HR | Human Resources <a href="#human-resources" id="human-resources"></a>
+
+* [Application Overview](human-resources/application-overview.md)
+
+## Parking Enterprise Portal <a href="#parking-enterprise" id="parking-enterprise"></a>
+
+* [Application Overview](parking-enterprise/application-overview.md)
+* [Dispatch Resource Tracking Log Archiving](parking-enterprise/dispatch-resource-tracking-log-archiving.md)
+
+## ROW | Right of Way Portal <a href="#row-portal" id="row-portal"></a>
+
+* [Application Overview](row-portal/application-overview.md)
+* [TCP | Traffic Control Plans](row-portal/tcp-build.md)
+* [COS JV Update](row-portal/cos-jv-update.md)
+
+## RPP | Residential Parking Permit Portal <a href="#rpp-portal" id="rpp-portal"></a>
+
+* [Application Overview](rpp-portal/application-overview.md)
+* [Residential Parking Permits](rpp-portal/rpp-build.md)
+* [RPP Migration](rpp-portal/rpp-migration.md)
+
+## Signs & Markings Operations <a href="#signs-and-markings" id="signs-and-markings"></a>
+
+* [Application Overview](signs-and-markings/application-overview.md)
+* [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
+* [Work Order Attachments](signs-and-markings/work-order-attachments.md)
+* [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)
+  * [Process & Functionality](signs-and-markings/contractor-work-order-tracking/contractor-process-and-functionality.md)
+* [Sign Fabrication Work Orders](signs-and-markings/sign-fabrication-work-orders/README.md)
+  * [Process and Functionality](signs-and-markings/sign-fabrication-work-orders/process-and-functionality.md)
+
+## SMO | Smart Mobility Office <a href="#smart-mobility-office" id="smart-mobility-office"></a>
+
+* [Application Overview](smart-mobility-office/application-overview.md)
+
+## SMS| Shared Mobility Reporting Tracker <a href="#shared-mobility-reporting-tracker" id="shared-mobility-reporting-tracker"></a>
+
+* [Application Overview](shared-mobility-reporting-tracker/application-overview.md)
+* [License & Permit Management](shared-mobility-reporting-tracker/license-and-permit-management.md)
+* [Sources for Monthly Trip Records](shared-mobility-reporting-tracker/sources-monthly-trip-records.md)
+
+## STREET BANNER PROGRAM
+
+* [Application Overview](street-banner-program/application-overview.md)
+* [Street Banner Program](street-banner-program/street-banner-program.md)
 
 ## TDS | Transportation Development Services <a href="#tds-portal" id="tds-portal"></a>
 
@@ -139,23 +174,9 @@
 * [TIA | Traffic Impact Analysis](tds-portal/tia-build.md)
 * [TDA | Transportation Development Assessments](tds-portal/tda-build.md)
 
-## RPP | Residential Parking Permit Portal <a href="#rpp-portal" id="rpp-portal"></a>
+## Traffic Register
 
-* [Application Overview](rpp-portal/application-overview.md)
-* [Residential Parking Permits](rpp-portal/rpp-build.md)
-* [RPP Migration](rpp-portal/rpp-migration.md)
-
-## ROW | Right of Way Portal <a href="#row-portal" id="row-portal"></a>
-
-* [Application Overview](row-portal/application-overview.md)
-* [TCP | Traffic Control Plans](row-portal/tcp-build.md)
-* [COS JV Update](row-portal/cos-jv-update.md)
-
-## SMS| Shared Mobility Reporting Tracker <a href="#shared-mobility-reporting-tracker" id="shared-mobility-reporting-tracker"></a>
-
-* [Application Overview](shared-mobility-reporting-tracker/application-overview.md)
-* [License & Permit Management](shared-mobility-reporting-tracker/license-and-permit-management.md)
-* [Sources for Monthly Trip Records](shared-mobility-reporting-tracker/sources-monthly-trip-records.md)
+* [Page 1](traffic-register/page-1.md)
 
 ## VZA | Vision Zero in Action <a href="#vision-zero-in-action" id="vision-zero-in-action"></a>
 
@@ -167,23 +188,6 @@
 * [Update reports in Power BI](vision-zero-in-action/update-reports-in-power-bi.md)
 * [Use Tasks for Creating Child Records](vision-zero-in-action/use-of-tasks.md)
 * [Use Tasks for Notifications](vision-zero-in-action/use-of-tasks-for-notifications.md)
-
-## Parking Enterprise Portal <a href="#parking-enterprise" id="parking-enterprise"></a>
-
-* [Application Overview](parking-enterprise/application-overview.md)
-* [Dispatch Resource Tracking Log Archiving](parking-enterprise/dispatch-resource-tracking-log-archiving.md)
-
-## HR | Human Resources <a href="#human-resources" id="human-resources"></a>
-
-* [Application Overview](human-resources/application-overview.md)
-
-## SMO | Smart Mobility Office <a href="#smart-mobility-office" id="smart-mobility-office"></a>
-
-* [Application Overview](smart-mobility-office/application-overview.md)
-
-## ATD Forms
-
-* [Application Overview](atd-forms/application-overview.md)
 
 ## O365 Resources
 
