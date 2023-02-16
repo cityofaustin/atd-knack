@@ -176,7 +176,7 @@
 
 ## Traffic Register
 
-* [Page 1](traffic-register/page-1.md)
+* [Application Overview](traffic-register/application-overview.md)
 
 ## VZA | Vision Zero in Action <a href="#vision-zero-in-action" id="vision-zero-in-action"></a>
 

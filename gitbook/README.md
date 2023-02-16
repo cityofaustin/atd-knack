@@ -31,7 +31,7 @@ description: Navigate to the content you need 🛒
 * [SMO | Shared Mobility Operations](https://atd-dts.gitbook.io/atd-knack-operations/shared-mobility-operations/application-overview)
   * [https://app.gitbook.com/@atd-dts/s/atd-knack-operations/shared-mobility-operations/](broken-reference)
 * [SMS | Shared Mobility ](https://atd.knack.com/smrt#home/)
-  * [https://app.gitbook.com/o/-LzDQOVGhTudbKRDGpUA/s/-LzNSSXajDFpzOv2IhIv/\~/changes/655/shared-mobility-reporting-tracker/application-overview](shared-mobility-reporting-tracker/application-overview.md)
+  * [https://atd-dts.gitbook.io/atd-knack-operations/shared-mobility-reporting-tracker/application-overview](https://atd-dts.gitbook.io/atd-knack-operations/shared-mobility-reporting-tracker/application-overview)
 * [TDS | Transportation Development Services](https://atd-dts.gitbook.io/atd-knack-operations/tds-portal/application-overview)
   * [https://app.gitbook.com/@atd-dts/s/atd-knack-operations/tds-portal/](tds-portal/application-overview.md)
 * [Traffic Register](https://atd.knack.com/traffic-register#home/)&#x20;
