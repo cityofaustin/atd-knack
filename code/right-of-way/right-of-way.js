@@ -74,19 +74,33 @@ $(document).on("knack-view-render.view_245", function(event, page) {
   bigButton("cos", "view_245", "https://atd.knack.com/row#cost-of-service-reporting/", "dollar", "COS Reporting");
 });
 
-// create large TCP Service button on the Customer Portal Home page
+// create large Available Services button on the Customer Portal Home page
 $(document).on("knack-view-render.view_234", function(event, page) {
-  bigButton("tcp-service", "view_234", "https://atd.knack.com/row#tcp-portal/", "car", "TCP: Traffic Control Plan");
+  bigButton("services", "view_234", "https://atd.knack.com/row#customer-portal/services", "list-ul", "Available Intake Services");
 });
 // create large ROW Division button on the Customer Portal Home page
 $(document).on("knack-view-render.view_237", function(event, page) {
   bigButton("row-division-link", "view_237", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
 });
 
+/********************************************/
+/*********** Large Submit Buttons ***********/
+/********************************************/
+function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " submit-button-large-disabled'" : "'";
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='submit-button-large" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  if (callback) callback();
+}
 
-// create large Start TCP Application button on the TCP Portal page
-$(document).on("knack-view-render.view_241", function(event, page) {
-  bigButton("tcp-application", "view_241", "https://atd.knack.com/row#new-tcp-application/", "arrow-right", "Start TCP Application");
+// create large Start Application button on the ROW Customer Portal - Services page for TCP
+$(document).on("knack-view-render.view_388", function(event, page) {
+  largeSubmitButton("tcp-application", "view_388", "https://atd.knack.com/row#new-tcp-application/", "arrow-right", "Start Application");
+});
+// create large Start Application button on the ROW Customer Portal - Services page for CSWZ
+$(document).on("knack-view-render.view_444", function(event, page) {
+  largeSubmitButton("cswz-application", "view_444", "https://atd.knack.com/row#new-cswz-application/", "arrow-right", "Start Application");
 });
 
 /****************************************************/
@@ -101,7 +115,7 @@ function disableBreadCrumbsNonAdmin() {
 }
 
 /***************************************************************/
-/*** Disable Breadcrumb Navigation Links for TCP Application ***/
+/*** Disable Breadcrumb Navigation Links for old TCP Application ***/
 /***************************************************************/
 
 //TCP Application Project Information page
@@ -130,7 +144,7 @@ $(document).on("knack-scene-render.scene_102", function () {
 });
 
 /*******************************************************************/
-/*** Disable Breadcrumb Navigation Links for New TCP Application ***/
+/*** Disable Breadcrumb Navigation Links for TCP Application ***/
 /*******************************************************************/
 
 //New TCP Application page
@@ -163,6 +177,39 @@ $(document).on("knack-scene-render.scene_152", function () {
 });
 //TCP Application Confirmation page
 $(document).on("knack-scene-render.scene_153", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/*******************************************************************/
+/*** Disable Breadcrumb Navigation Links for TCP Conflict/Shared TCP Request ***/
+/*******************************************************************/
+
+//Applicant Information page
+$(document).on("knack-scene-render.scene_183", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Conflicting Party page
+$(document).on("knack-scene-render.scene_184", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Attachments page
+$(document).on("knack-scene-render.scene_185", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Review Request page
+$(document).on("knack-scene-render.scene_186", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Submittal Confirmation page
+$(document).on("knack-scene-render.scene_187", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Information page
+$(document).on("knack-scene-render.scene_188", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Attachments page
+$(document).on("knack-scene-render.scene_189", function () {
   disableBreadCrumbsNonAdmin();
 });
 
