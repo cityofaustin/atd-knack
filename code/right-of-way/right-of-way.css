@@ -101,6 +101,50 @@ a.small-button {
   border-color: gray;
 }
 
+/*Large Submit Buttons*/
+.submit-button-large {
+  min-width: 140px;
+  width: 250px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #163f6e;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #163f6e;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  color: #ffffff !important;
+  text-align: center;
+  display: inline-block;
+}
+
+.submit-button-large:hover {
+  cursor: pointer;
+  border-color: gray;
+  background-color: #123258;
+}
+
+.submit-button-large-disabled {
+  min-width: 140px;
+  width: 250px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: #163f6e;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  color: #ffffff !important;
+  text-align: center;
+  opacity: 0.6;
+  display: inline-block;
+  outline-color: transparent;
+}
+
+.submit-button-large-disabled:hover {
+  background-color: #163f6e;
+}
+
+a.submit-button-large {text-decoration: none;}
+
 /*****************************************/
 /** Style Links with Underline on Hover **/
 /*****************************************/
@@ -115,7 +159,23 @@ a.form-link:hover {text-decoration: underline;}
 a.ang-link:link {text-decoration: none;}
 
 /*******************************************/
-/** Remove Back Links for TCP Application **/
+/** Remove Back Links for Customer Portal **/
+/*******************************************/
+/*Available Services Page*/
+#kn-scene_203 .kn-back-link {
+  display: none;
+}
+/*TCP Service Page*/
+#kn-scene_177 .kn-back-link {
+  display: none;
+}
+/*CSWZ Page*/
+#kn-scene_178 .kn-back-link {
+  display: none;
+}
+
+/*******************************************/
+/** Remove Back Links for old TCP Application **/
 /*******************************************/
 /*TCP Begin Application Page*/
 #kn-scene_96 .kn-back-link {
@@ -146,9 +206,9 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
-/***********************************************/
-/** Remove Back Links for New TCP Application **/
-/***********************************************/
+/*******************************************/
+/** Remove Back Links for TCP Application **/
+/*******************************************/
 /*TCP Begin Application Page*/
 #kn-scene_137 .kn-back-link {
   display: none;
@@ -181,6 +241,39 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_153 .kn-back-link {
   display: none;
 }
+
+/*******************************************/
+/** Remove Back Links for TCP Conflict/Shared TCP Request **/
+/*******************************************/
+/*Applicant Information Page*/
+#kn-scene_183 .kn-back-link {
+  display: none;
+}
+/*Conflicting Party Information Page*/
+#kn-scene_184 .kn-back-link {
+  display: none;
+}
+/*Attachments Page*/
+#kn-scene_185 .kn-back-link {
+  display: none;
+}
+/*Review Request Page*/
+#kn-scene_186 .kn-back-link {
+  display: none;
+}
+/*Submittal Information Page*/
+#kn-scene_187 .kn-back-link {
+  display: none;
+}
+/*Edit Information Page*/
+#kn-scene_188 .kn-back-link {
+  display: none;
+}
+/*Edit Attachments Page*/
+#kn-scene_189 .kn-back-link {
+  display: none;
+}
+
 
 /**********************************/
 /********* Report Styling *********/
