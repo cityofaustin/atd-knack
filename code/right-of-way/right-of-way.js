@@ -100,7 +100,7 @@ $(document).on("knack-view-render.view_388", function(event, page) {
 });
 // create large Start Application button on the ROW Customer Portal - Services page for CSWZ
 $(document).on("knack-view-render.view_444", function(event, page) {
-  largeSubmitButton("cswz-application", "view_444", "https://atd.knack.com/row#new-cswz-application/", "arrow-right", "Start Application");
+  largeSubmitButton("cswz-application", "view_444", "https://atd.knack.com/row#new-cswz/", "arrow-right", "Start Request");
 });
 
 /****************************************************/
