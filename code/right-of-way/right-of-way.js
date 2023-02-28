@@ -74,6 +74,11 @@ $(document).on("knack-view-render.view_245", function(event, page) {
   bigButton("cos", "view_245", "https://atd.knack.com/row#cost-of-service-reporting/", "dollar", "COS Reporting");
 });
 
+// create large CSWZ button on the Home page
+$(document).on("knack-view-render.view_450", function(event, page) {
+  bigButton("tcp-cswz", "view_450", "https://atd.knack.com/row#tcp-cswz/", "files-o", "Conflict/Shared Requests");
+});
+
 // create large Available Services button on the Customer Portal Home page
 $(document).on("knack-view-render.view_234", function(event, page) {
   bigButton("services", "view_234", "https://atd.knack.com/row#customer-portal/services", "list-ul", "Available Intake Services");
