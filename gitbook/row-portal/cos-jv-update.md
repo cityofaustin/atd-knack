@@ -22,7 +22,7 @@ CSV includes headers, select **Next**
 {% tab title="3️⃣" %}
 Select **Yes** to update existing records and match _`Fee Number`_ column to the _`Fee Number`_ Knack field and select **Next**
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (2).png>)
 {% endtab %}
 
 {% tab title="4️⃣" %}
@@ -34,7 +34,7 @@ Deselect all Knack fields and check _`Fee Number`_ field\
 and also select _`Journal Voucher ID`_, then select **Next**\
 
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (8).png>)
 {% endtab %}
 
 {% tab title="5️⃣" %}

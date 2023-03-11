@@ -165,6 +165,7 @@
   * [Calculating Date Values for Reporting](tds-portal/app-logic/reporting-dates.md)
   * [Incrementing Review Cycle Automatically](tds-portal/app-logic/review-cycle-automation.md)
   * [Calculating Review Time & On Time Percentage](tds-portal/app-logic/review-time-automation.md)
+  * [Calculating Cycle Completion Percentage](tds-portal/app-logic/calculating-cycle-completion-percentage.md)
   * [Roll up Child Object Conditionals](tds-portal/app-logic/summing-child-booleans.md)
   * [Calculating an Expiration Date](tds-portal/app-logic/expiration-automation.md)
   * [Converting an Entered Percentage to a Percentage Value](tds-portal/app-logic/percentage-conversion.md)
