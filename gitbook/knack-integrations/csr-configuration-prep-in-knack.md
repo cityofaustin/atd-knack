@@ -143,7 +143,7 @@ READY_TO_SEND
 
 ## csr\_issues
 
-![](<../.gitbook/assets/image (1) (1).png>)
+![](<../.gitbook/assets/image (1) (1) (2).png>)
 
 ### Multiple Choice - csr\_issues
 

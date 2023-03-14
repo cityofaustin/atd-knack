@@ -176,7 +176,7 @@ The Final Step is to save the Identity Provider's Certificate (formatted X.509 w
 
 Locate the document in 1Password in the Knack Shared folder. Select Edit and Make a new entry for the new Knack app. Enter the app name, set the field as a password, paste the certificate, and add the IP Cert label. Lastly, Save.
 
-![](<../../.gitbook/assets/image (7).png>)
+![](<../../.gitbook/assets/image (7) (2).png>)
 {% endtab %}
 {% endtabs %}
 

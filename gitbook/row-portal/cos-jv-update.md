@@ -16,7 +16,7 @@ Select **Import** from the _`cost_of_service_fees` object_
 {% tab title="2️⃣" %}
 CSV includes headers, select **Next**
 
-![](<../.gitbook/assets/image (4).png>)
+![](<../.gitbook/assets/image (4) (1).png>)
 {% endtab %}
 
 {% tab title="3️⃣" %}
@@ -34,7 +34,7 @@ Deselect all Knack fields and check _`Fee Number`_ field\
 and also select _`Journal Voucher ID`_, then select **Next**\
 
 
-![](<../.gitbook/assets/image (8).png>)
+![](<../.gitbook/assets/image (8) (3).png>)
 {% endtab %}
 
 {% tab title="5️⃣" %}

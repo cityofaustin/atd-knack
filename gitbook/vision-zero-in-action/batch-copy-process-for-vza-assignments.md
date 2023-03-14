@@ -54,7 +54,7 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 Find all overnight shifts that span two days. Simply copy and paste the <mark style="color:blue;">Assignment Date Time</mark> field into column E and adjust the dates to match the sequencing.
 
-![](<../.gitbook/assets/image (3).png>)
+![](<../.gitbook/assets/image (3) (2).png>)
 
 11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 
