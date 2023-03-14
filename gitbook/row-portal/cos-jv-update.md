@@ -29,7 +29,7 @@ Select **Yes** to update existing records and match _`Fee Number`_ column to the
 Deselect all Knack fields and check _`Fee Number`_ field\
 
 
-![](<../.gitbook/assets/image (5).png>)
+![](<../.gitbook/assets/image (5) (2).png>)
 
 and also select _`Journal Voucher ID`_, then select **Next**\
 

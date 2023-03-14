@@ -21,4 +21,4 @@ We divide the completed child records by the total amount of connected child rec
 <pre><code><strong>{Number of Review Cycle Comments Completed}/{Number of Review Cycle Comments}
 </strong></code></pre>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Completion % as shown for multiple parent records</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>Completion % as shown for multiple parent records</p></figcaption></figure>
