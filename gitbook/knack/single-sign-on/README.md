@@ -103,6 +103,12 @@ Enter COACD as the Provider Name.
 We use custom buttons for our logins but if your app is not, the button and font colors below are the standard colors.
 
 ![](<../../../.gitbook/assets/image (284).png>)
+
+Provider Name: `COACD`
+
+Button Color: `#163f6e`
+
+Button Font Color: `#ffffff`
 {% endtab %}
 
 {% tab title="4️⃣" %}
