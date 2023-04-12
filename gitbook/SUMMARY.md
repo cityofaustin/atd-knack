@@ -134,6 +134,7 @@
 ## Signs & Markings Operations <a href="#signs-and-markings" id="signs-and-markings"></a>
 
 * [Application Overview](signs-and-markings/application-overview.md)
+* [Table of Contents](signs-and-markings/table-of-contents.md)
 * [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
 * [Work Order Attachments](signs-and-markings/work-order-attachments.md)
 * [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)
