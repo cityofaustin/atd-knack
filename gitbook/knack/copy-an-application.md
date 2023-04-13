@@ -20,7 +20,7 @@ description: >-
 <figure><img src="../.gitbook/assets/4_CoptApp.png" alt=""><figcaption></figcaption></figure>
 
 * **Change the new app name and pause tasks (if applicable).**\
-  ****Knack will automatically append Copy to the end of the name. Edit this out and use the format \[APPLICATION NAME] | PRODUCTION or TEST | DD MMM YYYY | \[APPLICATION NAME].
+  Knack will automatically append Copy to the end of the name. Edit this out and use the format \[APPLICATION NAME] | PRODUCTION or TEST | DD MMM YYYY | \[APPLICATION NAME].
 
 <figure><img src="../.gitbook/assets/5_CopyApp.png" alt=""><figcaption></figcaption></figure>
 
@@ -35,12 +35,12 @@ description: >-
 <figure><img src="../.gitbook/assets/7_CopyApp.png" alt=""><figcaption></figcaption></figure>
 
 * **Add the new environment to the** [**DTS Portal listing of applications**](https://atd.knack.com/dts#applications)**.**  \
-  ****Select the PRODUCTION environment you have copied and **Add Environment**. &#x20;
+  Select the PRODUCTION environment you have copied and **Add Environment**. &#x20;
 
 <figure><img src="../.gitbook/assets/8_CopyApp.png" alt=""><figcaption></figcaption></figure>
 
 * **Add the details about the new environment.**\
-  ****To find the Application ID, go to the app > Settings > API and Code.
+  To find the Application ID, go to the app > Settings > API and Code.
 
 <figure><img src="../.gitbook/assets/9_CopyApp.png" alt=""><figcaption></figcaption></figure>
 

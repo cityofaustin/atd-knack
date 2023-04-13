@@ -86,6 +86,6 @@ Map Columns:
   * Located at [`https://builder.knack.com/atd/amd/pages/scene_565/views/view_1735/table`](https://builder.knack.com/atd/amd/pages/scene\_565/views/view\_1735/table). &#x20;
 * From the builder, navigate to the page views and modify the table **Source** filter to the current fiscal year. This ensures that end-users will only see/modify current fiscal year measures.
   * Update the Fiscal Year filters for the three eCombs reports.&#x20;
-    * Here is the link to the scene - [`https://builder.knack.com/atd/amd/pages/scene_833`](https://builder.knack.com/atd/amd/pages/scene\_833)``
+    * Here is the link to the scene - [`https://builder.knack.com/atd/amd/pages/scene_833`](https://builder.knack.com/atd/amd/pages/scene\_833)
 
 You're done!

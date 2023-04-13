@@ -90,7 +90,7 @@ Reference "**Customers\_GREEN\_163.csv**" - as the format of the Knack `Customer
 
 
 {% hint style="info" %}
-ADD THE REST OF THE **** STEPS WHEN CONFIGURING "**PINK**" ZONE
+ADD THE REST OF THE STEPS WHEN CONFIGURING "**PINK**" ZONE
 {% endhint %}
 
 ### Export Zone contacts from "Customer" object table

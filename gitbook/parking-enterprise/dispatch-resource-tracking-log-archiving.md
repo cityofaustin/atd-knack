@@ -36,7 +36,7 @@ Use the `<current month>` to name the issue, for example January 2020 for the No
 
 
 
-****
+
 
 
 

@@ -9,7 +9,7 @@ Finance reviews transactions from Knack and AIMs, she provides a spreadsheet for
 3. Import the CSV file into the `inventory_transactions` object by navigating in Records > Import.&#x20;
    * Does the first row of your data contain column headers? **Yes**
    * Do you want to update existing `inventory_transactions` records with this import? **Yes**
-   * Update records where the following rules match: **`TXN ID` matches `Transaction ID` **&#x20;
+   * Update records where the following rules match: **`TXN ID` matches `Transaction ID`**&#x20;
    * What if no matching record is found to update? **Skip the row and do nothing**
 4. Map columns to Knack fields: Map `TXN ID` to `Transaction ID` , the other columns `Journal Voucher ID` and `Journal Voucher Date`
 

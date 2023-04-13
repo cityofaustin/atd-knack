@@ -75,7 +75,7 @@ We do the same clean up for the Y coordinate into a usable value for the arcgis 
 trim(right({Y Extract},8))
 ```
 
-****
+
 
 </details>
 

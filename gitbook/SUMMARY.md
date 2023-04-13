@@ -135,6 +135,7 @@
 
 * [Application Overview](signs-and-markings/application-overview.md)
 * [Table of Contents](signs-and-markings/table-of-contents.md)
+* [Workflow Process Diagram](signs-and-markings/workflow-process-diagram.md)
 * [Custom Functionality - SMB](signs-and-markings/custom-functionality-smb.md)
 * [Work Order Attachments](signs-and-markings/work-order-attachments.md)
 * [Contractor Work Order Tracking](signs-and-markings/contractor-work-order-tracking/README.md)

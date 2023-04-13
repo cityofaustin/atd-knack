@@ -83,7 +83,7 @@ You can find the original banner assets and a template for creating a new applic
 | [#367DB7](https://www.colorhexa.com/367DB7)  | `#367DB7` | ![](<../../.gitbook/assets/image (95).png>)  | Issued             | `<i class="fa fa-truck"></i>`                | <p></p><p><img src="../../.gitbook/assets/image (105).png" alt=""></p> |
 | [#ADADAD](https://www.colorhexa.com/ADADAD)  | `#ADADAD` | ![](<../../.gitbook/assets/image (92).png>)  | On Hold            | `<i class="fa fa-clock-o"></i>`              | ![](<../../.gitbook/assets/image (113).png>)                           |
 | [#974DA2](https://www.colorhexa.com/974DA2)  | `#974DA2` | ![](<../../.gitbook/assets/image (98).png>)  | Needs GIS          | `<i class="fa fa-map-marker"></i>`           | ![](<../../.gitbook/assets/image (126).png>)                           |
-| [#4CAE4](https://www.colorhexa.com/4CAE49)`` | `4CAE49`  | ![](<../../.gitbook/assets/image (103).png>) | Final Review       | `<i class="fa fa-flag-checkered"></i>`       | ![](<../../.gitbook/assets/image (125).png>)                           |
+| [#4CAE4](https://www.colorhexa.com/4CAE49)   | `4CAE49`  | ![](<../../.gitbook/assets/image (103).png>) | Final Review       | `<i class="fa fa-flag-checkered"></i>`       | ![](<../../.gitbook/assets/image (125).png>)                           |
 | [#777777](https://www.colorhexa.com/777777)  | `#777777` | ![](<../../.gitbook/assets/image (100).png>) | Closed             | `<i class="fa fa-checked-circle"></i>`       | ![](<../../.gitbook/assets/image (109).png>)                           |
 | [#777777](https://www.colorhexa.com/777777)  | `#777777` | ![](<../../.gitbook/assets/image (100).png>) | Cancelled          | `<i class="fa fa-times"></i>`                | ![](<../../.gitbook/assets/image (110).png>)                           |
 
@@ -122,7 +122,7 @@ You can find the original banner assets and a template for creating a new applic
 | [#41ae76](https://www.colorhexa.com/41ae76)   | `#41ae76`    | ![](<../../.gitbook/assets/image (85).png>)  | Processing\| Accounts Payable | `<i class="fa fa-credit-card"></i>` | ![](<../../.gitbook/assets/image (86).png>)                            |
 | [#f5901f](https://www.colorhexa.com/f5901f)   | `#f5901f`    | ![](<../../.gitbook/assets/image (89).png>)  | Pending Invoice               | `<i class="fa fa-clock-o"></i>`     | ![](<../../.gitbook/assets/image (113).png>)                           |
 | [#6a6565](https://www.colorhexa.com/6a6565)   | `#6a6565`    | ![](<../../.gitbook/assets/image (77).png>)  | Cancelled                     | ------------                        | ------------                                                           |
-| ------------                                  | ------------ | ![](<../../.gitbook/assets/image (47).png>)  | Closed                        | ------------                        | `#ADADAD` ![](<../../.gitbook/assets/image (109).png>)``               |
+| ------------                                  | ------------ | ![](<../../.gitbook/assets/image (47).png>)  | Closed                        | ------------                        | `#ADADAD` ![](<../../.gitbook/assets/image (109).png>)                 |
 
 ## Layout
 
