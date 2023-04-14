@@ -6,7 +6,7 @@
 
 ## Build Information:&#x20;
 
-#### New! Object tables created
+#### Object tables created
 
 * `work_orders_sign_fabrication` (just Sign Fabrication Request information)
 
@@ -19,4 +19,4 @@
 
 **Connections**
 
-* **accounts** (audit fields: Created Date/By, Modified Date/By)
+* `accounts` (audit fields: Created Date/By, Modified Date/By)
