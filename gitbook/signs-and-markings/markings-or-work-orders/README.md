@@ -6,7 +6,7 @@
 
 ## Build Information
 
-#### Object tables used
+### Object tables used
 
 * `dosa_tracking` (table that tracks DOSAs)
 * `work_orders_markings` (table of markings work orders)
@@ -17,7 +17,7 @@
 * `work_orders_markings_jobs` (table of jobs used in markings work orders)
 * `work_orders_signs_markings_time_log` (table that tracks time worked)
 
-#### Connections
+### Connections
 
 * `csr_issues` (for work orders markings object - table that tracks issues of CSRs)&#x20;
 * `csr_flex_notes` (for work orders markings object - table of flex notes of CSRs)
