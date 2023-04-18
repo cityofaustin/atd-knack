@@ -4,7 +4,7 @@
 
 **Solution**: Add an area to the Signs and Markings Operations App for Signs Work Orders
 
-## Build Information:&#x20;
+## Build Information&#x20;
 
 ### Object tables used
 
