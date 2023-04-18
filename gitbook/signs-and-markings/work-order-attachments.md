@@ -4,5 +4,3 @@ See [Manage Attachments](https://atd-dts.gitbook.io/signs-and-markings-tracker-h
 
 
 
-
-

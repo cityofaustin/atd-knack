@@ -1,6 +1,6 @@
 # Workflow
 
-## Signs and Markings Operations
+## Signs & Markings Operations
 
 {% embed url="https://miro.com/app/board/uXjVMT6J7Qc=/" %}
 

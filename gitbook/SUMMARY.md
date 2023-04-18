@@ -137,7 +137,7 @@
 * [Table of Contents](signs-and-markings/table-of-contents.md)
 * [Workflow](signs-and-markings/workflow.md)
 * [Markings | Work Orders](signs-and-markings/markings-or-work-orders/README.md)
-  * [Process & Module Functionality](signs-and-markings/markings-or-work-orders/process-and-module-functionality.md)
+  * [Process & Module Functionality](signs-and-markings/markings-or-work-orders/process-and-functionality.md)
 * [Markings | Service Requests](signs-and-markings/markings-or-service-requests/README.md)
   * [Process & Functionality](signs-and-markings/markings-or-service-requests/process-and-functionality.md)
 * [Signs | Work Orders](signs-and-markings/signs-or-work-orders/README.md)
@@ -148,8 +148,8 @@
   * [Process & Module Functionality](signs-and-markings/contractor-work-order-tracking/contractor-process-and-functionality.md)
 * [Sign Fabrication Work Orders](signs-and-markings/sign-fabrication-work-orders/README.md)
   * [Process and Functionality](signs-and-markings/sign-fabrication-work-orders/process-and-functionality.md)
-* [Special Functions/Codes](signs-and-markings/custom-functionality-smb/README.md)
-  * [Work Order Attachments](signs-and-markings/custom-functionality-smb/work-order-attachments.md)
+* [Special Functions/Codes](signs-and-markings/custom-functionality-smb.md)
+  * [Work Order Attachments](signs-and-markings/work-order-attachments.md)
 
 ***
 

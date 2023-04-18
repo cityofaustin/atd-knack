@@ -13,7 +13,7 @@
 
 ex. User account set to "Transportation Engineering" in accounts table - when they create a new work order the Requester field will automatically populate with "Transportation Engineering" based on the logged in user.
 
-![This division is being populated here under the "Requester" field, user doesn't have to populate it ](<../../../.gitbook/assets/image (46).png>)
+![This division is being populated here under the "Requester" field, user doesn't have to populate it ](<../../.gitbook/assets/image (46).png>)
 
 ### **Attachments, showing up as "Plans", "Regulations" instead of the file name**
 
@@ -21,9 +21,9 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * CUSTOMIZATION: File Type is populated and it replaces the File Name to reduce table bloat
 * REASON: File names can be long and take up lots of screen space, to save screen real estate and make table more simplified and readable
 
-![Simple Name for Attachments, using Attachment Type to show on main table](<../../../.gitbook/assets/image (52).png>)
+![Simple Name for Attachments, using Attachment Type to show on main table](<../../.gitbook/assets/image (52).png>)
 
-![Real name of attachments, some a very long and take up too much space](<../../../.gitbook/assets/image (50).png>)
+![Real name of attachments, some a very long and take up too much space](<../../.gitbook/assets/image (50).png>)
 
 ### Work Order Details, Status colors, showing up in the details portion
 
@@ -31,7 +31,7 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * CUSTOMIZATION: Work Order Status has background color that matches the display colors on the Work Order tables
 * REASON: Users associate the work order colors to the work order statuses, easier to know what status a work order is at a glance
 
-![](<../../../.gitbook/assets/image (51).png>)
+![](<../../.gitbook/assets/image (51).png>)
 
 ### Geographic Map/Location Functionality
 
@@ -39,7 +39,7 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * BEHAVIOR: This affects only Signs Work Orders. Location map appears, Add Location fields are (hidden), When `Add location` button is clicked, it passes through the `Longitude`, `Latitude` fields and then creates map markers that links the `Location Details Page` , `Spatial ID`, `Latitude`, `Longitude` on the map instead of just the Locations table
 * REASON: This allows the user to not have to go to the Locations table to figure out which location to choose when added asset information. There are many times where there are more locations on a work order.
 
-![](<../../../.gitbook/assets/image (41).png>)
+![](<../../.gitbook/assets/image (41).png>)
 
 ### "Back to Top" icon/enlarged text&#x20;
 
@@ -47,7 +47,7 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 * CUSTOMIZATION: Custom icon and enlarged text to navigate user back to top of page
 * REASON: to help user not have to scroll all the way up to review information or click submit
 
-![](<../../../.gitbook/assets/image (34).png>)
+![](<../../.gitbook/assets/image (34).png>)
 
 ### "Back to View Work Order Details" icon/enlarged text&#x20;
 
@@ -57,24 +57,24 @@ ex. User account set to "Transportation Engineering" in accounts table - when th
 
 ## Mobile Optimizations
 
-### Code to determine what environment a user was in to recognize when to enable mobile optimizations
+Code to determine what environment a user was in to recognize when to enable mobile optimizations
 
 ### Menu Buttons - Globally Enlarged
 
-![](<../../../.gitbook/assets/image (37).png>)
+![](<../../.gitbook/assets/image (37).png>)
 
 ### Form Field Headings - Globally Enlarged
 
-![](<../../../.gitbook/assets/image (35).png>)
+![](<../../.gitbook/assets/image (35).png>)
 
 ### Form Fields- Globally Enlarged
 
-![](<../../../.gitbook/assets/image (39).png>)
+![](<../../.gitbook/assets/image (39).png>)
 
 ### Form Selections (Drop downs) - Global Enlarged
 
-![](<../../../.gitbook/assets/image (42).png>)
+![](<../../.gitbook/assets/image (42).png>)
 
 ### Submit Button - Globally Enlarged
 
-![](<../../../.gitbook/assets/image (40).png>)
+![](<../../.gitbook/assets/image (40).png>)

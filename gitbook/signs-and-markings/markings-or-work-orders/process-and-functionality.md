@@ -115,5 +115,38 @@ This page has all the jobs information
 This page has reports information for performance measures
 
 * Top level menu (Unstriped streets, Markings Time Labor Vehicle Report, Specifications by Month, Work History, Reimbursements)
-* Bar chart view of&#x20;
+* Bar chart view of task status the last 30 days
+* Search view of specifications
+* Table view of materials
+  * Can filter by item and requester
+* Table view of markings project reimbursements
+  * Modal: Reimbursements received
+
+#### Unstriped Streets Report
+
+* Table view of work orders by SBO/Whereabouts and ATSD
+  * Columns on projected 2 weeks, 30 days, 60 days, and 90 days
+* Table view of commented by wrok group
+
+#### Markings Time Labor Vehicle Report
+
+* Table view of jobs grouped by work order with count of jobs, time logs, vehicles, technicians, and completed date
+* Table view of time logs for signs work orders and time work orders with count of time logs, vehicles, technicians, and total technician hours
+
+#### Specification by Month
+
+* Table view of long line specification by month
+  * Total sum of footage
+* Table view of short line specification by month
+  * Total sum of short line
+* Table view of specialty markings specifications by month
+  * Total sum of specialty markings
+
+#### Work History
+
+* Search view of time logs by keyword search, date worked,  job ID, and contractor work asignment ID
+
+#### Reimbursements
+
+* Table view of reimbursements with columns for invoice, labor, comments, and approval
 
