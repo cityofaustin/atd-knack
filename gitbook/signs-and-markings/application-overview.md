@@ -1,8 +1,8 @@
 # Application Overview
 
-### About the Application
+## About the Application
 
-This application is for creating work orders for the Signs and Markings division
+This application allows SMD staff to manage their work order tracking system&#x20;
 
 ### Key Features / Table of Contents
 
@@ -15,9 +15,10 @@ This application is for creating work orders for the Signs and Markings division
     * Signs&#x20;
     * Markings
 * Technician View
-  * Work Schedule
+  * Jobs details
 * Supervisor View
-  * Issue Work
+  * Issue Jobs
+  * Work Schedule
   * Manage Schedule
 * Markings | Create Job
 * Service Requests
@@ -25,10 +26,9 @@ This application is for creating work orders for the Signs and Markings division
   * Accounts
   * Attachments
   * DOSA
-  * Managing Hardware
+  * Time
   * Materials
   * Specifications
-  * Vehicles
 * Reports
 * GIS QA
 

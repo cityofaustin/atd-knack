@@ -1,4 +1,4 @@
-# Process & Functionality
+# Process & Module Functionality
 
 ## Current Process
 
@@ -97,7 +97,7 @@ SMD staff can change status from "Approved" to "Closed"
 
 Network Location: `G:\ATD\ATD_GIS\02_ENT_APPLICATIONS\app_Signs_and_Markings`
 
-PDF Workflow: **SMB\_Tracker\_contractor\_workflow\_20201113** (Is going to be updated by SMB 5/27/21)
+PDF Workflow: **SMB\_Tracker\_contractor\_workflow\_20201113** (Is going to be updated by SMD 5/27/21)
 
 ## Old Process
 

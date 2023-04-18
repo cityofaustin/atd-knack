@@ -1,4 +1,0 @@
-# Process & Functionality
-
-## Current Process
-
