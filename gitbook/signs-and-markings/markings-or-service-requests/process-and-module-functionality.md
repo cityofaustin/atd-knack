@@ -2,7 +2,7 @@
 
 ## Current Process
 
-* Requester submits CSR using the 3-1-1 app
+* Requester submits CSR using the 311 app
 * Supervisor views flex notes for the CSR
 * Supervisor dispatch technician/crew in the Activity drop down menu
   * Adds Note that they are sending a technician/crew to look at the service request for CSRs
@@ -35,6 +35,6 @@
 
 * Line graph view of total 311 Requests by month
 * Bar graph view of current 311 Request Status
-* Table view of Oct-Nov total CSRs by status and whetner they were closed late or on time or no due date
+* Table view of Oct-Nov total CSRs by status and whether they were closed late or on time or no due date
 * Pie chart view of Percent Closed on Time
-* Table view of Jan-Sept total CSRs by status and whetner they were closed late or on time or no due date
+* Table view of Jan-Sept total CSRs by status and whether they were closed late or on time or no due date

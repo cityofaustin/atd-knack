@@ -13,6 +13,7 @@
 * `work_orders_signs_markings_attachments` (table of plans and/or photos for work order)
 * `work_orders_signs_markings_comments` (table of comments made for work order)
 * `work_orders_markings_specification` (table of marking specifications)
+* `work_orders_signs_markings_specification_actual`  (table of marking specifications to report)
 * `invoice_items` (table that tracks invoice items for markings materials)
 * `work_orders_markings_jobs` (table of jobs used in markings work orders)
 * `work_orders_signs_markings_time_log` (table that tracks time worked)
