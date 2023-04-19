@@ -69,16 +69,18 @@
 * Form view to enter asset information
   * Action - Whether the asset will be install, remove, repair, relocate, tree trim, or inspected
   * Asset Name - the name of the asset where action is occurring
-    * Not filled out if Action is `Inspected`
-    * Not filled out if Action is `Tree Trim`
+    * Not filled out if Action is `Inspected` or `Tree Trim`
   * Asset Condition - condition of the asset
-    * Not filled out if Action is `Install`
-    * Not filled out if Action is `Tree Trim`
+    * Not filled out if Action is `Install` or `Tree Trim`
   * Direction facing - the cardinal direction the asset is facing for the location
-    * Not filled out if Action is `Inspected`
-    * Not filled out if Action is `Tree Trim`
+    * Not filled out if Action is `Inspected` or `Tree Trim`
 
 ### Asset List page
 
 * Table view of assets with MUTCD codes, sub category, asset cost, and photo
+
+### Reports Signs page
+
+* Top level menu (Work History, Reimbursements)
+*
 
