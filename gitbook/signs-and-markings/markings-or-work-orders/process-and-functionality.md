@@ -26,6 +26,7 @@
 ### Markings Work Order page (Main/Parent page)
 
 * Work Order records on table view grouped by requester
+  * Default filter view is work orders in NEED TO BE ISSUED status
 * Ability to click on details page from table view
 
 #### Requester
@@ -108,6 +109,7 @@ This page has all the jobs information
 
 * Top level menu (New Work Order, All Work Orders, Work Schedule)
 * Table view of jobs grouped by work group
+  * Default filter is jobs in the ISSUED status
 * Buttons to filter jobs by work group
 
 ### Reports page
