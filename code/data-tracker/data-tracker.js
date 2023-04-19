@@ -630,9 +630,9 @@ $(document).on("knack-scene-render.scene_1171", function (event, page) {
     ).text()
   );
   /*
-      set the value of the preivous unit cost and quanity. these fields are hidden to the 
-      user and we pass these values via submit rule that inserts them into a log record
-    */
+        set the value of the preivous unit cost and quanity. these fields are hidden to the 
+        user and we pass these values via submit rule that inserts them into a log record
+      */
   $("#" + fields.cost.previous)
     .val(state.cost.current)
     .prop("disabled", true);
@@ -685,15 +685,15 @@ $(document).on("knack-view-render.view_2698", function (event, page) {
 //////////////////////////////////////////////////////
 
 /* 
-This logic ensures that a work order's task order cannot be edited if
-any inventory transactions have been financially processed. This is
-dependent on a view being added to the work order edit view which
-displays the `SUM_JV_TRANSACTIONS_COMPLETED` field. This field
-indicates if any financial transactions have been processed.
-
-If financial txns have been processed, then the editable select field
-will be replaced with a static span of text.
-*/
+  This logic ensures that a work order's task order cannot be edited if
+  any inventory transactions have been financially processed. This is
+  dependent on a view being added to the work order edit view which
+  displays the `SUM_JV_TRANSACTIONS_COMPLETED` field. This field
+  indicates if any financial transactions have been processed.
+  
+  If financial txns have been processed, then the editable select field
+  will be replaced with a static span of text.
+  */
 function getDetailsFieldValue(fieldKey) {
   var spans = $("div." + fieldKey).find(".kn-detail-body span");
   if (!spans || spans.length === 0) {
@@ -927,42 +927,6 @@ $(document).on("knack-view-render.view_1261", function (event, page) {
 });
 
 ///////////////////////////////////////////////////////////////
-/// Autopopulate work order ID in the follow-up order form ////
-// https://github.com/cityofaustin/atd-data-tech/issues/9052 //
-///////////////////////////////////////////////////////////////
-
-$(document).on("knack-view-render.view_1718", function (event, view, data) {
-  // Select and clone the original work order ID select field
-  var $workOrderIdSelect = $("select#view_1718-field_2075");
-
-  // Update the field placeholder text so it looks like the original work order ID is chosen
-  var originalWorkOrderIdText = data.field_1209;
-  var originalWorkOrderId = data.id;
-
-  // Chosen.js updates this select after the view loads so we need to watch for that change
-  // This event blows away any DOM updates made before it
-  $workOrderIdSelect.on("change", function () {
-    // Update placeholder option with value of original work order ID
-    var $placeholderOption = $(this).find("option");
-    $placeholderOption.val(originalWorkOrderId);
-    $placeholderOption.text(originalWorkOrderIdText);
-
-    // Disable this listener so we don't get an endless loop when we fire off one last change
-    $(this).off();
-    // Update this select with the original work order ID as its value
-    $(this).val(originalWorkOrderId).change();
-
-    // Update the span that normally prompts the type to search with the human-readable ID
-    var $placeholderTextSpan = $("div#view_1718_field_2075_chzn > a > span");
-    $placeholderTextSpan.text(originalWorkOrderIdText);
-  });
-});
-
-//////////////////////////////////////////////////////////////////
-/// End Autopopulate work order ID in the follow-up order form ///
-//////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////
 ///// Prevent user from re-assigning their own assignment /////
 // https://github.com/cityofaustin/atd-data-tech/issues/9053 //
 ///////////////////////////////////////////////////////////////
@@ -1043,3 +1007,10 @@ $(document).on("knack-view-render.view_1146", function (event, view, data) {
 ////////////////////////////////////////////////////////////////
 // End Prevent user from re-assigning their own assignment /////
 ////////////////////////////////////////////////////////////////
+
+/***************************************************************/
+/*** Disable the ability to Click/Touch outside a Modal Page ***/
+/***************************************************************/
+$(document).on('knack-scene-render.any', function(event, scene) {
+    $('.kn-modal-bg').off('click');
+});
