@@ -36,11 +36,11 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 6\) Save As Assignments\_Import\_Date
 
-7\) Autofit spreadsheet so you can see all columns. Insert a column left of `Assignment Date Time` column, enter formula: `=left(C2,10)`this will capture the date from the original field. Fill Down the column.&#x20;
+7\) Autofit spreadsheet so you can see all columns. Insert a column left of `Assignment Date Time` column (you will do this for all column inserts), enter formula: `=left(C2,10)`this will capture the date from the original field. Fill Down the column.&#x20;
 
 ![](<../../.gitbook/assets/image (189).png>)
 
-8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later (8 weeks). Format as Short Date. Fill Down the column. (This would be + 28 for 4 weeks or 42 for 6 weeks.)
+8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later for 8 weeks of assignments or `=B2+84` for 12 weeks. Format as Short Date. Fill Down the column.
 
 ![](<../.gitbook/assets/image (8) (1).png>)
 
