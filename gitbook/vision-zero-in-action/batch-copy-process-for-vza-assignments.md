@@ -56,6 +56,12 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 <figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
+10b) To complete the overnight shifts, we will need to update the second date by one day for these records. Copy column F, and Paste as Values. Now we can manually update the end dates for each record.
+
+<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+
+
+
 11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 
 ![](<../.gitbook/assets/image (7) (1) (1).png>)
