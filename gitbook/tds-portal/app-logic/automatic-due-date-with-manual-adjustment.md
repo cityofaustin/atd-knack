@@ -67,7 +67,7 @@ If we use a form submit, we create a menu button for the action:
 
 Which opens up a modal page with a form submit to mark the due date as adjusted with yes and to give the field a date value.
 
-![](<../../.gitbook/assets/image (1).png>)
+![](<../../.gitbook/assets/image (1) (2).png>)
 
 If you want the ability to adjust all due dates for connected child records, record rules must be added accordingly
 

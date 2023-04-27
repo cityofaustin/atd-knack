@@ -21,7 +21,7 @@ description: >-
 * Text Formula - Map URL Generator (the arcgis web map location with specific attributes)
 * Link - Map URL (set to the generated Map URL)
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>An example of the above required fields in the TDS Portal for the TIA Mitigations Map on the TIA Request object</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt=""><figcaption><p>An example of the above required fields in the TDS Portal for the TIA Mitigations Map on the TIA Request object</p></figcaption></figure>
 
 <details>
 

@@ -44,15 +44,17 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 ![](<../.gitbook/assets/image (8) (1).png>)
 
-9a) Insert another column to the left, column D, and enter formula: `=LEFT(RIGHT(E2,14),9)` this will capture the start time. Fill Down the column. For assignments that extend overnight, we will update this formula to `=LEFT(RIGHT(E2,25),9)` for those specific records and manually update the cell reference. Ignore the inconsistent formula error.
+9a) Insert another column to the left, column D, and enter formula: `=LEFT(RIGHT(E2,14),9)` this will capture the start time. Fill Down the column. For assignments that extend overnight, we will update this formula to `=LEFT(RIGHT(E2,25),9)` for those specific records and manually update the cell reference. Ignore the inconsistent formula error. You may copy one entered cell for all the other overnight records.
 
-![](<../../.gitbook/assets/image (187).png>)
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 9b) Insert another column to the left, column E, and enter formula: `=RIGHT(F2,5)` this will capture the end time. Fill Down the column.
 
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
 10\) Insert another column, column F, and enter formula: `=CONCATENATE(TEXT(C2,"mm/dd/yy")&" "&TEXT(D2,"mm:ss")&TEXT(E2,"mm:ss"))`. Fill Down the column. This combines our new date with the start & end times.
 
-![](<../../.gitbook/assets/image (196).png>)
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
 11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 

@@ -48,7 +48,7 @@ Make sure the number of records importing matches your CSV. Select **Add a defau
 Set _`Import Date`_ to today's date and select **Start Import**\
 
 
-![](<../.gitbook/assets/image (6).png>)
+![](<../.gitbook/assets/image (6) (2).png>)
 
 All Done! Complete for each spreadsheet.
 {% endtab %}
