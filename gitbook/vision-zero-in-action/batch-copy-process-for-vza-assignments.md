@@ -40,21 +40,19 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 ![](<../../.gitbook/assets/image (189).png>)
 
-8\) Insert another column to the left, enter formula: `=B2+56` this will create a new date for 56 days later for 8 weeks of assignments or `=B2+84` for 12 weeks. Format as Short Date. Fill Down the column.
+8\) Insert another column to the left, column C, and enter formula: `=B2+56` this will create a new date for 56 days later for 8 weeks of assignments or `=B2+84` for 12 weeks. Format as Short Date. Fill Down the column.
 
 ![](<../.gitbook/assets/image (8) (1).png>)
 
-9\) Insert another column to the left, enter formula: `=RIGHT(E2,14)` this will capture the time. Fill Down the column.
+9a) Insert another column to the left, column D, and enter formula: `=LEFT(RIGHT(E2,14),9)` this will capture the start time. Fill Down the column. For assignments that extend overnight, we will update this formula to `=LEFT(RIGHT(E2,25),9)` for those specific records and manually update the cell reference. Ignore the inconsistent formula error.
 
 ![](<../../.gitbook/assets/image (187).png>)
 
-10\) Insert another column, enter formula: `=concatenate(text(C2,"mm/dd/yyyy")&" "&text(D2,"hh:mm:ss"))`Fill Down the column.
+9b) Insert another column to the left, column E, and enter formula: `=RIGHT(F2,5)` this will capture the end time. Fill Down the column.
+
+10\) Insert another column, column F, and enter formula: `=CONCATENATE(TEXT(C2,"mm/dd/yy")&" "&TEXT(D2,"mm:ss")&TEXT(E2,"mm:ss"))`. Fill Down the column. This combines our new date with the start & end times.
 
 ![](<../../.gitbook/assets/image (196).png>)
-
-Find all overnight shifts that span two days. Simply copy and paste the <mark style="color:blue;">Assignment Date Time</mark> field into column E and adjust the dates to match the sequencing.
-
-![](<../.gitbook/assets/image (3) (2).png>)
 
 11\) Remove the old <mark style="color:blue;">Assignment Date Time</mark> column header and title the new column <mark style="color:blue;">Assignment Date Time</mark>.
 
