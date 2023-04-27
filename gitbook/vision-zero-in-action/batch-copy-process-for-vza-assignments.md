@@ -52,7 +52,7 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
-10\) Insert another column, column F, and enter formula: `=CONCATENATE(TEXT(C2,"mm/dd/yy")&" "&TEXT(D2,"hh:mm")&TEXT(E2,"hh:mm"))`. Fill Down the column. This combines our new date with the start & end times.
+10a) Insert another column, column F, and enter formula: `=CONCATENATE(TEXT(C2,"mm/dd/yy")&" "&TEXT(D2,"hh:mm")&TEXT(E2,"hh:mm"))`. Fill Down the column. This combines our new date with the start & end times. For assignments that extend overnight, we will update this formula to `=CONCATENATE(TEXT(C13,"mm/dd/yy")&" "&TEXT(D13,"hh:mm")&TEXT(C13,"mm/dd/yy")&" "&TEXT(E13,"hh:mm"))` for those specific records and manually update the cell reference. Ignore the inconsistent formula error. You may copy one entered cell for all the other overnight records.
 
 <figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
