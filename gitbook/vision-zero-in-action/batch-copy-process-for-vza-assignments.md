@@ -66,7 +66,7 @@ Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **
 
 ![](<../.gitbook/assets/image (7) (1) (1).png>)
 
-12\) Update and Fill the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark>. <mark style="color:blue;">Created By</mark> should be your email. Delete the <mark style="color:blue;">Modified Date</mark> & <mark style="color:blue;">Modified By</mark> columns.
+12\) Update the <mark style="color:blue;">Created Date</mark> & <mark style="color:blue;">Created By</mark> for the first row. <mark style="color:blue;">Created By</mark> should be your email. Delete the <mark style="color:blue;">Modified Date</mark> & <mark style="color:blue;">Modified By</mark> columns. Fill down both columns.
 
 13\) Save and Import the CSV  into the Assignments object by clicking on Import in the Assignments object Records view.&#x20;
 
