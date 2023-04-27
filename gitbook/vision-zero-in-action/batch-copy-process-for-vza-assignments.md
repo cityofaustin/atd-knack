@@ -22,7 +22,7 @@ To copy a batch of assignments to eliminate form entry.
 
 ![](<../../.gitbook/assets/image (181).png>)
 
-3\) Filter assignments for the previous 4, 6, or 8 weeks (Monday to Monday) using the <mark style="color:blue;">Assignment Date Time</mark> field.
+3\) Filter assignments for the previous 8 or 12 weeks (Monday to Monday) using the <mark style="color:blue;">Assignment Date Time</mark> field.
 
 Ex. <mark style="color:blue;">Assignment Date Time</mark> is after 01/02/2022 **04:00** and <mark style="color:blue;">Assignment Date Time</mark> is before 02/28/2022 **04:01** (we do Monday at 4am since there is an overnight shift that often runs until this time)
 
