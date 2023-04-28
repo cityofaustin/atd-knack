@@ -20,7 +20,7 @@ description: >-
 <figure><img src="../.gitbook/assets/4_CoptApp.png" alt=""><figcaption></figcaption></figure>
 
 * **Change the new app name and pause tasks (if applicable).**\
-  Knack will automatically append Copy to the end of the name. Edit this out and use the format \[APPLICATION NAME] | PRODUCTION or TEST | DD MMM YYYY | \[APPLICATION NAME].
+  Knack will automatically append Copy to the end of the name. Edit this out and use the format  PRODUCTION or TEST | DD MMM YYYY | \[APPLICATION NAME].
 
 <figure><img src="../.gitbook/assets/5_CopyApp.png" alt=""><figcaption></figcaption></figure>
 
