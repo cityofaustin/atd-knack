@@ -44,4 +44,4 @@ description: >-
 
 <figure><img src="../.gitbook/assets/9_CopyApp.png" alt=""><figcaption></figcaption></figure>
 
-* **Delete the old environment from Knack and add Date Deleted to the DTS Portal record if applicable.**
+* **IF APPLICABLE: Delete the old environment from Knack and add Date Deleted to the DTS Portal record.**
