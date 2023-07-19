@@ -17,10 +17,7 @@ Has the ability to send custom emails to applicant for new MetroBike promo code 
 * Download spreadsheet
 * Review spreadsheet, must have: "Promo Code" and "Expiration Date" included
 * Will have to add several fields on the spreadsheet:&#x20;
-  * "Type" field to spreadsheet to indicate if it's an "Austin Energy" or "City of Austin" code
-    * Will know which type based on Promo Code Name
-      * COA\[Code]
-      * AE\[Code]&#x20;
+  * "Type" field to spreadsheet to indicate "ALL" as the universal code that can be assigned to any department and email tenant
   * Add field `Promo Code Status` - and set all records to "Available"
   * Added field `Created_Date` - and set to the date of import
 * Create backup copy of `promo_codes_bike_share_benefits` table
