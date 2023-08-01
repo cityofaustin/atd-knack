@@ -13,20 +13,20 @@ description: >-
 * &#x20;**Log into Knack Builder using the Transportation Data Enterprise account (Knack Builder – Primary Account) using 1Password.**
 * **Search for the application you want to copy.**
 
-<figure><img src="../.gitbook/assets/3_CopyApp.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Snag_19ca275.png" alt=""><figcaption></figcaption></figure>
 
-* **From the gear icon dropdown, select Copy.**
+* **From the ... icon dropdown, select Duplicate App.**
 
-<figure><img src="../.gitbook/assets/4_CoptApp.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Snag_19dd4db.png" alt=""><figcaption></figcaption></figure>
 
 * **Change the new app name and pause tasks (if applicable).**\
   Knack will automatically append Copy to the end of the name. Edit this out and use the format  PRODUCTION or TEST | DD MMM YYYY | \[APPLICATION NAME].
 
-<figure><img src="../.gitbook/assets/5_CopyApp.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Snag_19f5eb7.png" alt=""><figcaption></figcaption></figure>
 
-* **An immediate confirmation will display.**&#x20;
+* **The new duplicate app will show up on the list  with a yellow dot next to the name**
 
-<figure><img src="../.gitbook/assets/6_CopyApp.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/Snag_1a1fd3f.png" alt=""><figcaption></figcaption></figure>
 
 * **Copying the app will take time.** \
   Knack will send an email to the Transportation Data Enterprise account when done.\
