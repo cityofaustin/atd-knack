@@ -106,6 +106,7 @@
   * [Training, Quiz, Account Access Process](finance-and-purchasing/finance-and-purchasing/training-quiz-account-access-process.md)
   * [Statuses](finance-and-purchasing/finance-and-purchasing/finance-and-purchasing-statuses.md)
   * [List of emails generated](finance-and-purchasing/finance-and-purchasing/list-of-emails-generated.md)
+  * [Re/Un-assigning Approver of a PR (Purchase Request)](finance-and-purchasing/finance-and-purchasing/re-un-assigning-approver-of-a-pr-purchase-request.md)
   * [Troubleshooting: FAQs](finance-and-purchasing/finance-and-purchasing/troubleshooting-faqs.md)
 * [Warehouse Inventory](finance-and-purchasing/warehouse-inventory/README.md)
   * [Adding a new inventory item](finance-and-purchasing/warehouse-inventory/adding-a-new-inventory-item.md)
