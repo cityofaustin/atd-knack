@@ -1,3 +1,11 @@
+/*
+KnackInitAsync = function ($, callback) { // Load the Knack Toolkit Library (KTL)
+    (window.LazyLoad = LazyLoad) && LazyLoad.js(['https://ctrnd.com/Lib/KTL/KTL_Start.js'], () => {
+        loadKtl($, callback, (typeof KnackApp === 'function' ? KnackApp : null), '' *//*KTL version, leave blank to get latest*//*, 'min'*//*min or full*//*);
+    })
+};
+*/
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -62,27 +70,17 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 
 // create large Task Board button on the Home page
 $(document).on("knack-view-render.view_612", function(event, page) {
-  bigButton("task-board", "view_612", "https://atd.knack.com/traffic-register#task-board/", "tasks", "Task Board");
+  bigButton("task-board", "view_612", "https://atd.knack.com/traffic-register#task-board/my-tasks/", "tasks", "My Task Board");
 });
 
-// create large Regulation Documents button on the Home page
+// create large Search Approved Regulations button on the Home page
 $(document).on("knack-view-render.view_613", function(event, page) {
-  bigButton("regulation-documents", "view_613", "https://atd.knack.com/traffic-register#regulation-documents/", "files-o", "Regulation Documents");
+  bigButton("search-regulations", "view_613", "https://atd.knack.com/traffic-register#approved-regulations/", "search", "Search for Approved Regulations");
 });
 
-// create large Regulations button on the Home page
+// create large Search Regulation Documents button on the Home page
 $(document).on("knack-view-render.view_614", function(event, page) {
-  bigButton("approved-regulations", "view_614", "https://atd.knack.com/traffic-register#approved-regulations/", "check-square-o", "Approved Regulations");
-});
-
-// create large Account Management button on the Home page
-$(document).on("knack-view-render.view_615", function(event, page) {
-  bigButton("account-management", "view_615", "https://atd.knack.com/traffic-register#account-management/", "users", "Account Management");
-});
-
-// create large App Administration button on the Home page
-$(document).on("knack-view-render.view_616", function(event, page) {
-  bigButton("app-administration", "view_616", "https://atd.knack.com/traffic-register#admin/", "gears", "App Administration");
+  bigButton("search-documents", "view_614", "https://atd.knack.com/traffic-register#regulation-documents/", "search", "Search for Regulation Documents");
 });
 
 // create large Usability Survey button on the Usability Sign Up page
@@ -104,6 +102,7 @@ function smallButton(id, view_id, url, fa_icon, button_label, target_blank = fal
 /********************************************/
 /************ Directory Buttons *************/
 /********************************************/
+/*
 function directoryButton(id, view_id, url, fa_icon, button_label, button_description, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " directory-button-disabled'" : "'";
   var newTab = target_blank ? " target='_blank'" : "" ;
@@ -116,42 +115,23 @@ function directoryButton(id, view_id, url, fa_icon, button_label, button_descrip
 $(document).on("knack-view-render.view_1101", function(event, page) {
   directoryButton("regulation-documents-basic-search", "view_1101", "https://atd.knack.com/traffic-register#doc-basic-search/", "search", "Basic Search:", "Search for Documents with a specific parameter such as Reg Doc ID");
 });
-
-// create Filtered Documents button on the Directory page
-$(document).on("knack-view-render.view_1102", function(event, page) {
-  directoryButton("regulation-documents-filtered-search", "view_1102", "https://atd.knack.com/traffic-register#doc-filtered-search/", "filter", "Filtered Search:", "View pre-filtered Documents by field values such as Area, Status, or State");
+*/
+/********************************************/
+/************* Trigger Buttons **************/
+/********************************************/
+function triggerButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " trigger-button'" : "'";
+  var newTab = target_blank ? " target='_blank'" : "";
+    $( "<a id='" + id + "' class='trigger-button" + disabledClass + " href='" + url + "'" 
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  if (callback) callback();
+}
+/*
+// create a Bookmark button on the Approved Regulation Details page
+$(document).on("knack-view-render.view_838", function (event, page) {
+  triggerButton("bookmark", "view_838", "https://atd.knack.com/traffic-register#filtered-regulations/", "bookmark", "Bookmark");
 });
-
-// create Reg Doc Power Search button on the Directory page
-$(document).on("knack-view-render.view_1104", function(event, page) {
-  directoryButton("regulation-documents-power-search", "view_1104", "https://atd.knack.com/traffic-register#doc-power-search/", "plug", "Power Search:", "Search for Documents that may or may not exist with a range of values");
-});
-
-// create Unassigned Documents button on the Directory page
-$(document).on("knack-view-render.view_1105", function(event, page) {
-  directoryButton("regulation-documents-unconnected-search", "view_1105", "https://atd.knack.com/traffic-register#doc-unassigned-search/", "exclamation-triangle", "Unassigned Search:", "View Document records not assigned to a reviewer");
-});
-
-// create Regulation Basic Search button on the Directory page
-$(document).on("knack-view-render.view_1055", function(event, page) {
-  directoryButton("approved-regulations-basic-search", "view_1055", "https://atd.knack.com/traffic-register#reg-basic-search/", "search", "Basic Search:", "Search for Regulations with a specific parameter such as Regulation ID");
-});
-
-// create Filtered Regulations button on the Directory page
-$(document).on("knack-view-render.view_1056", function(event, page) {
-  directoryButton("approved-regulations-filtered-search", "view_1056", "https://atd.knack.com/traffic-register#reg-filtered-search/", "filter", "Filtered Search:", "View pre-filtered Regulations by field values such as Area, Status, or Action");
-});
-
-// create Regulation Power Search button on the Directory page
-$(document).on("knack-view-render.view_1057", function(event, page) {
-  directoryButton("approved-regulations-power-search", "view_1057", "https://atd.knack.com/traffic-register#reg-power-search/", "plug", "Power Search:", "Search for Regulations that may or may not exist with a range of values");
-});
-
-// create Unconnected Regulations button on the Directory page
-$(document).on("knack-view-render.view_1058", function(event, page) {
-  directoryButton("approved-regulations-unconnected-search", "view_1058", "https://atd.knack.com/traffic-register#reg-unconnected-search/", "unlink", "Unconnected Search:", "View Regulation records not connected to a Regulation Document");
-});
-
+*/
 /******************************************/
 /*** Convert Field Inputs to UPPERCASE  ***/
 /******************************************/
@@ -221,6 +201,11 @@ $(document).on("knack-scene-render.scene_454", function () {
   disableBreadCrumbsNonAdmin();
 });
 
+/*Submit Draft Page*/
+$(document).on("knack-scene-render.scene_657", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
 /********************************************************/
 /** Relabel Attachment Links in Tables to 'Attachment' **/
 /********************************************************/
@@ -279,7 +264,7 @@ function populateConnectionFromDetails({
 // we need this global var to share interval state across functions
 var prevIntervalId;
 
-/*** Retire modal ***/
+/*** Draft Builder Retire modal ***/
 $(document).on("knack-scene-render.scene_449", function () {
   // clear interval if this modal closes
   $(".delete.close-modal").on("click", () => {
@@ -293,14 +278,14 @@ $(document).on("knack-scene-render.scene_449", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_890",
-      connFieldId: "field_561",
+      connFieldId: "field_561", /*Self Connection for Approveds*/
       detailsViewId: "view_891",
-      detailsFieldId: "field_950",
+      detailsFieldId: "field_950", /*Document Display*/
     });
   }, 250);
 });
 
-/*** Retire and Replace modal ***/
+/*** Draft Builder Retire & Replace modal ***/
 $(document).on("knack-scene-render.scene_450", function () {
   // clear interval if this modal closes
   $(".delete.close-modal").on("click", () => {
@@ -315,14 +300,14 @@ $(document).on("knack-scene-render.scene_450", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_892",
-      connFieldId: "field_561",
+      connFieldId: "field_561", /*Self Connection for Approveds*/
       detailsViewId: "view_893",
-      detailsFieldId: "field_950",
+      detailsFieldId: "field_950", /*Document Display*/
     });
   }, 250);
 });
 
-/*** Save Draft page ***/
+/*** Draft Builder Save Draft page ***/
 $(document).on("knack-scene-render.scene_454", function () {
   if (prevIntervalId) {
     clearInterval(prevIntervalId);
@@ -330,9 +315,239 @@ $(document).on("knack-scene-render.scene_454", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_902",
-      connFieldId: "field_560",
+      connFieldId: "field_560", /*Self Connection for Drafts*/
       detailsViewId: "view_901",
-      detailsFieldId: "field_950",
+      detailsFieldId: "field_950", /*Document Display*/
     });
   }, 250);
 });
+
+/*** Draft Builder Submit Draft page ***/
+$(document).on("knack-scene-render.scene_657", function () {
+  if (prevIntervalId) {
+    clearInterval(prevIntervalId);
+  }
+  prevIntervalId = setInterval(function () {
+    populateConnectionFromDetails({
+      formViewId: "view_1334",
+      connFieldId: "field_560", /*Self Connection for Drafts*/
+      detailsViewId: "view_1332",
+      detailsFieldId: "field_950", /*Document Display*/
+    });
+  }, 250);
+});
+
+/*** Draft Editor Retire modal ***/
+$(document).on("knack-scene-render.scene_487", function () {
+  // clear interval if this modal closes
+  $(".delete.close-modal").on("click", () => {
+    if (prevIntervalId) {
+      clearInterval(prevIntervalId);
+    }
+  });
+  if (prevIntervalId) {
+    clearInterval(prevIntervalId);
+  }
+  prevIntervalId = setInterval(function () {
+    populateConnectionFromDetails({
+      formViewId: "view_995",
+      connFieldId: "field_561", /*Self Connection for Approveds*/
+      detailsViewId: "view_996",
+      detailsFieldId: "field_950", /*Document Display*/
+    });
+  }, 250);
+});
+
+/*** Draft Editor Retire & Replace modal ***/
+$(document).on("knack-scene-render.scene_488", function () {
+  // clear interval if this modal closes
+  $(".delete.close-modal").on("click", () => {
+    if (prevIntervalId) {
+      clearInterval(prevIntervalId);
+    }
+  });
+  if (prevIntervalId) {
+    clearInterval(prevIntervalId);
+  }
+  prevIntervalId = setInterval(function () {
+    populateConnectionFromDetails({
+      formViewId: "view_997",
+      connFieldId: "field_561", /*Self Connection for Approveds*/
+      detailsViewId: "view_998",
+      detailsFieldId: "field_950", /*Document Display*/
+    });
+  }, 250);
+});
+
+
+/*************************************************************/
+/*** Render Create Document Button to Send Data to FS Docs ***/
+/*************************************************************/
+/*$(document).on('knack-scene-render.scene_545', function(event, scene) {
+
+  $('#view_1107 .view-header').after('<div style="padding:15px"><a href="#" id="webmerge" class="kn-button">Create Document</a></div>');
+  
+  // link hander: send to FS Docs
+  $('#webmerge').click(function(event) {
+  event.preventDefault();
+
+  // get data
+  var data = Knack.models['view_1107'].toJSON();
+  var record_id = data.id;
+	
+  log('data!');log(data);
+  Knack.showSpinner();
+
+  $.ajax({
+  	url: 'https://www.webmerge.me/merge/983206/rgch6s?test=1',
+	  data: {
+		  //te_email: data.field_1162_raw.email,
+      //cte_email: data.field_1164_raw.email,
+	    regdoc_id: data.field_936_raw,
+      submitted_date: data.field_882_raw,
+      created_date: data.field_71_raw,
+      record_id: data.id,
+      //remarks: data.field_67_raw,
+      //te_approval_date: data.field_888_raw,
+	    //cte_approval_date: data.field_891_raw,
+	    //te_review_completed_by: data.field_301_raw,
+	    //cte_review_completed_by: data.field_303_raw
+	  },
+	  type: 'POST',
+	  success: function() {
+      alert('Document Created!');
+	    Knack.hideSpinner();
+	  },
+      error: function() {
+        alert('There was an error creating the document');
+      }
+    });
+  });
+  
+});*/
+
+/*************************/
+/*** Auto Submit Forms ***/
+/*************************/
+
+/* Auto Submit Page 2 of Draft Builder */
+$(document).on('knack-scene-render.scene_446', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+
+/* Auto Submit TE Approve Modal of Draft Review */
+$(document).on('knack-scene-render.scene_653', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+
+/* Auto Submit CTE Approve Modal of Draft Review */
+$(document).on('knack-scene-render.scene_654', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+
+/*********************************************/
+/*** Hide Top Navigation for Draft Builder ***/
+/*********************************************/
+$(document).on('knack-scene-render.scene_446', function(event, scene) {
+    $('#kn-app-menu').hide()
+});
+$(document).on('knack-scene-render.scene_447', function(event, scene) {
+    $('#kn-app-menu').hide()
+});
+$(document).on('knack-scene-render.scene_454', function(event, scene) {
+    $('#kn-app-menu').hide()
+});
+$(document).on('knack-scene-render.scene_657', function(event, scene) {
+    $('#kn-app-menu').hide()
+});
+
+/********************************/
+/*** Change Browser Tab Names ***/
+/********************************/
+$(document).on('knack-scene-render.scene_310', function(event, scene) {
+  document.title = 'Traffic Register Home';
+});
+$(document).on('knack-scene-render.scene_577', function(event, scene) {
+  document.title = 'Traffic Register Search';
+});
+$(document).on('knack-scene-render.scene_578', function(event, scene) {
+  document.title = 'Traffic Register Search';
+});
+$(document).on('knack-scene-render.scene_518', function(event, scene) {
+  document.title = 'Traffic Register Search';
+});
+$(document).on('knack-scene-render.scene_517', function(event, scene) {
+  document.title = 'Traffic Register Search';
+});
+$(document).on('knack-scene-render.scene_445', function(event, scene) {
+  document.title = 'Traffic Register Draft Builder';
+});
+$(document).on('knack-scene-render.scene_446', function(event, scene) {
+  document.title = 'Traffic Register Draft Builder';
+});
+$(document).on('knack-scene-render.scene_447', function(event, scene) {
+  document.title = 'Traffic Register Draft Builder';
+});
+$(document).on('knack-scene-render.scene_454', function(event, scene) {
+  document.title = 'Traffic Register Draft Builder';
+});
+$(document).on('knack-scene-render.scene_657', function(event, scene) {
+  document.title = 'Traffic Register Draft Builder';
+});
+$(document).on('knack-scene-render.scene_485', function(event, scene) {
+  document.title = 'Traffic Register Draft Editor';
+});
+$(document).on('knack-scene-render.scene_645', function(event, scene) {
+  document.title = 'Traffic Register Draft Review';
+});
+$(document).on('knack-scene-render.scene_588', function(event, scene) {
+  document.title = 'Regulation Document Details';
+});
+$(document).on('knack-scene-render.scene_581', function(event, scene) {
+  document.title = 'Approved Regulation Details';
+});
+$(document).on('knack-scene-render.scene_435', function(event, scene) {
+  document.title = 'My Task Board';
+});
+$(document).on('knack-scene-render.scene_436', function(event, scene) {
+  document.title = 'My Task Board';
+});
+$(document).on('knack-scene-render.scene_439', function(event, scene) {
+  document.title = 'My Task Board';
+});
+$(document).on('knack-scene-render.scene_469', function(event, scene) {
+  document.title = 'Review Page';
+});
+$(document).on('knack-scene-render.scene_469', function(event, scene) {
+  document.title = 'Account Settings';
+});
+$(document).on('knack-scene-render.scene_343', function(event, scene) {
+  document.title = 'App Administration';
+});
+
+/*
+  // Function that adds checkboxes
+var addCheckboxes = function(view) {
+  // Add the checkbox to to the header to select/unselect all
+  $('#' + view.key + '.kn-table thead tr').prepend('<th><input type="checkbox"></th>');
+  $('#' + view.key + '.kn-table thead input').change(function() {
+    $('.' + view.key + '.kn-table tbody tr input').each(function() {
+      $(this).attr('checked', $('#' + view.key + '.kn-table thead input').attr('checked') != undefined);
+    });
+  });
+  // Add a checkbox to each row in the table body
+  $('#' + view.key + '.kn-table tbody tr').each(function() {
+    $(this).prepend('<td><input type="checkbox"></td>');
+  });
+}
+
+// Add checkboxes to a specific table view
+$(document).on('knack-view-render.view_657', function (event, view) {
+  addCheckboxes(view);
+});
+// Cycle through selected checkboxes. Use this in any code that needs to get the checked IDs
+$('#view_657 tbody input[type=checkbox]:checked').each(function() {
+  // add code here to get record id or row value
+  var id = $(this).closest('tr').attr('id'); // record id
+});
+*/

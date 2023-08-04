@@ -344,6 +344,9 @@ a.ang-link:link {text-decoration: none;}
 /*Save Draft Page*/
 #kn-scene_454 .kn-back-link { display: none; }
 
+/*Submit Draft Page*/
+#kn-scene_657 .kn-back-link { display: none; }
+
 /****************************************/
 /*** Remove Back Links for Task Board ***/
 /****************************************/
@@ -394,6 +397,7 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_451 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_452 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_454 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_657 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /*Draft Reg Doc ID on Draft Editor*/
 #kn-scene_486 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
@@ -407,4 +411,24 @@ a.ang-link:link {text-decoration: none;}
 /*Reg Doc Print Page*/
 #kn-scene_555 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
+/*Sticky Headers*/
+thead {
+  position:sticky;
+  top:0px;
+  z-index:7;
+  outline: 1px solid #dddddd;
+}
 
+/*Sticky Header for Filtered Regulations*/
+#view_1063 .kn-table-wrapper {
+  max-height: 800px;
+}
+
+/*Freeze first Column for Filtered Regulations*/
+#view_1063 th:first-child,
+#view_1063 td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 6; /* Increase z-index to be higher priority than the header(lower #) */
+  background-color: #f9f9f9;
+}
