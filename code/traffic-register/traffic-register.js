@@ -655,7 +655,7 @@ $('#view_657 tbody input[type=checkbox]:checked').each(function() {
 var automatedRegulationTextPatternsByType = {
   // This is using the identifier key, should we use id like "61ef7a148e6250071cd47a49"?
   "ANGLEPARK: Angle Parking":
-    "$421 $391 - on -  $394 from $405 $406 of $403 to $408, $399, $414 side(s).",
+    "$421$ $391$ - on -  $394$ from $405$ $406$ of $403$ to $408$, $399$, $414$ side(s).",
 };
 
 /* Some fields return HTML in field_<field #> key, so we need to grab from the raw field
@@ -682,6 +682,19 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
     automatedRegulationTextPatternsByType[regulationTypeRecordIdentifier];
 
   // Gather the fields that need to be replaced with their values
+  // Use match all to get matches and the captured strings too
+  // Ex. [["$391$", "391"], ...]
+  var regex = /\$(.*?)\$/g;
+  var matchesIterable = pattern.matchAll(regex);
+
+  // Collect actual matches, ex. "$391$"
+  var matchValues = [];
+  // Collect field numbers between delimiters, ex. "391"
+  var capturedValues = [];
+  for (var matchArray of matchesIterable) {
+    matchValues.push(matchArray[0]);
+    capturedValues.push(matchArray[1]);
+  }
 
   // Create a map of $<field#>: value from data
 
