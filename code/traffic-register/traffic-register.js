@@ -1,7 +1,7 @@
 /*
 KnackInitAsync = function ($, callback) { // Load the Knack Toolkit Library (KTL)
     (window.LazyLoad = LazyLoad) && LazyLoad.js(['https://ctrnd.com/Lib/KTL/KTL_Start.js'], () => {
-        loadKtl($, callback, (typeof KnackApp === 'function' ? KnackApp : null), '' *//*KTL version, leave blank to get latest*//*, 'min'*//*min or full*//*);
+        loadKtl($, callback, (typeof KnackApp === 'function' ? KnackApp : null), '' */ /*KTL version, leave blank to get latest*/ /*, 'min'*/ /*min or full*/ /*);
     })
 };
 */
@@ -19,12 +19,18 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login"
+    id: "coacd-button-login",
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+  bigButton(
+    "coacd-big-button",
+    "coacd-button-login",
+    url,
+    "sign-in",
+    "Sign-In"
+  );
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
@@ -60,42 +66,111 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  target_blank = false,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  var newTab = target_blank ? " target='_blank'" : "";
+  $(
+    "<a id='" +
+      id +
+      "' class='big-button-container" +
+      disabledClass +
+      " href='" +
+      url +
+      "'" +
+      newTab +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
   if (callback) callback();
 }
 
 // create large Task Board button on the Home page
-$(document).on("knack-view-render.view_612", function(event, page) {
-  bigButton("task-board", "view_612", "https://atd.knack.com/traffic-register#task-board/my-tasks/", "tasks", "My Task Board");
+$(document).on("knack-view-render.view_612", function (event, page) {
+  bigButton(
+    "task-board",
+    "view_612",
+    "https://atd.knack.com/traffic-register#task-board/my-tasks/",
+    "tasks",
+    "My Task Board"
+  );
 });
 
 // create large Search Approved Regulations button on the Home page
-$(document).on("knack-view-render.view_613", function(event, page) {
-  bigButton("search-regulations", "view_613", "https://atd.knack.com/traffic-register#approved-regulations/", "search", "Search for Approved Regulations");
+$(document).on("knack-view-render.view_613", function (event, page) {
+  bigButton(
+    "search-regulations",
+    "view_613",
+    "https://atd.knack.com/traffic-register#approved-regulations/",
+    "search",
+    "Search for Approved Regulations"
+  );
 });
 
 // create large Search Regulation Documents button on the Home page
-$(document).on("knack-view-render.view_614", function(event, page) {
-  bigButton("search-documents", "view_614", "https://atd.knack.com/traffic-register#regulation-documents/", "search", "Search for Regulation Documents");
+$(document).on("knack-view-render.view_614", function (event, page) {
+  bigButton(
+    "search-documents",
+    "view_614",
+    "https://atd.knack.com/traffic-register#regulation-documents/",
+    "search",
+    "Search for Regulation Documents"
+  );
 });
 
 // create large Usability Survey button on the Usability Sign Up page
-$(document).on("knack-view-render.view_1130", function(event, page) {
-  bigButton("usability-survey", "view_1130", "https://forms.office.com/g/C1sagRCRtk", "flask", "Usability Survey", true);
+$(document).on("knack-view-render.view_1130", function (event, page) {
+  bigButton(
+    "usability-survey",
+    "view_1130",
+    "https://forms.office.com/g/C1sagRCRtk",
+    "flask",
+    "Usability Survey",
+    true
+  );
 });
 
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-function smallButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+function smallButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  target_blank = false,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " small-button-disabled'" : "'";
   var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='small-button-container" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  $(
+    "<a id='" +
+      id +
+      "' class='small-button-container" +
+      disabledClass +
+      " href='" +
+      url +
+      "'" +
+      newTab +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
   if (callback) callback();
 }
 
@@ -119,11 +194,33 @@ $(document).on("knack-view-render.view_1101", function(event, page) {
 /********************************************/
 /************* Trigger Buttons **************/
 /********************************************/
-function triggerButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+function triggerButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  target_blank = false,
+  is_disabled = false,
+  callback = null
+) {
   var disabledClass = is_disabled ? " trigger-button'" : "'";
   var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='trigger-button" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  $(
+    "<a id='" +
+      id +
+      "' class='trigger-button" +
+      disabledClass +
+      " href='" +
+      url +
+      "'" +
+      newTab +
+      "'><span><i class='fa fa-" +
+      fa_icon +
+      "'></i></span><span> " +
+      button_label +
+      "</span></a>"
+  ).appendTo("#" + view_id);
   if (callback) callback();
 }
 /*
@@ -278,9 +375,9 @@ $(document).on("knack-scene-render.scene_449", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_890",
-      connFieldId: "field_561", /*Self Connection for Approveds*/
+      connFieldId: "field_561" /*Self Connection for Approveds*/,
       detailsViewId: "view_891",
-      detailsFieldId: "field_950", /*Document Display*/
+      detailsFieldId: "field_950" /*Document Display*/,
     });
   }, 250);
 });
@@ -300,9 +397,9 @@ $(document).on("knack-scene-render.scene_450", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_892",
-      connFieldId: "field_561", /*Self Connection for Approveds*/
+      connFieldId: "field_561" /*Self Connection for Approveds*/,
       detailsViewId: "view_893",
-      detailsFieldId: "field_950", /*Document Display*/
+      detailsFieldId: "field_950" /*Document Display*/,
     });
   }, 250);
 });
@@ -315,9 +412,9 @@ $(document).on("knack-scene-render.scene_454", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_902",
-      connFieldId: "field_560", /*Self Connection for Drafts*/
+      connFieldId: "field_560" /*Self Connection for Drafts*/,
       detailsViewId: "view_901",
-      detailsFieldId: "field_950", /*Document Display*/
+      detailsFieldId: "field_950" /*Document Display*/,
     });
   }, 250);
 });
@@ -330,9 +427,9 @@ $(document).on("knack-scene-render.scene_657", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_1334",
-      connFieldId: "field_560", /*Self Connection for Drafts*/
+      connFieldId: "field_560" /*Self Connection for Drafts*/,
       detailsViewId: "view_1332",
-      detailsFieldId: "field_950", /*Document Display*/
+      detailsFieldId: "field_950" /*Document Display*/,
     });
   }, 250);
 });
@@ -351,9 +448,9 @@ $(document).on("knack-scene-render.scene_487", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_995",
-      connFieldId: "field_561", /*Self Connection for Approveds*/
+      connFieldId: "field_561" /*Self Connection for Approveds*/,
       detailsViewId: "view_996",
-      detailsFieldId: "field_950", /*Document Display*/
+      detailsFieldId: "field_950" /*Document Display*/,
     });
   }, 250);
 });
@@ -372,13 +469,12 @@ $(document).on("knack-scene-render.scene_488", function () {
   prevIntervalId = setInterval(function () {
     populateConnectionFromDetails({
       formViewId: "view_997",
-      connFieldId: "field_561", /*Self Connection for Approveds*/
+      connFieldId: "field_561" /*Self Connection for Approveds*/,
       detailsViewId: "view_998",
-      detailsFieldId: "field_950", /*Document Display*/
+      detailsFieldId: "field_950" /*Document Display*/,
     });
   }, 250);
 });
-
 
 /*************************************************************/
 /*** Render Create Document Button to Send Data to FS Docs ***/
@@ -431,98 +527,98 @@ $(document).on("knack-scene-render.scene_488", function () {
 /*************************/
 
 /* Auto Submit Page 2 of Draft Builder */
-$(document).on('knack-scene-render.scene_446', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_446", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 
 /* Auto Submit TE Approve Modal of Draft Review */
-$(document).on('knack-scene-render.scene_653', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_653", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 
 /* Auto Submit CTE Approve Modal of Draft Review */
-$(document).on('knack-scene-render.scene_654', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_654", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 
 /*********************************************/
 /*** Hide Top Navigation for Draft Builder ***/
 /*********************************************/
-$(document).on('knack-scene-render.scene_446', function(event, scene) {
-    $('#kn-app-menu').hide()
+$(document).on("knack-scene-render.scene_446", function (event, scene) {
+  $("#kn-app-menu").hide();
 });
-$(document).on('knack-scene-render.scene_447', function(event, scene) {
-    $('#kn-app-menu').hide()
+$(document).on("knack-scene-render.scene_447", function (event, scene) {
+  $("#kn-app-menu").hide();
 });
-$(document).on('knack-scene-render.scene_454', function(event, scene) {
-    $('#kn-app-menu').hide()
+$(document).on("knack-scene-render.scene_454", function (event, scene) {
+  $("#kn-app-menu").hide();
 });
-$(document).on('knack-scene-render.scene_657', function(event, scene) {
-    $('#kn-app-menu').hide()
+$(document).on("knack-scene-render.scene_657", function (event, scene) {
+  $("#kn-app-menu").hide();
 });
 
 /********************************/
 /*** Change Browser Tab Names ***/
 /********************************/
-$(document).on('knack-scene-render.scene_310', function(event, scene) {
-  document.title = 'Traffic Register Home';
+$(document).on("knack-scene-render.scene_310", function (event, scene) {
+  document.title = "Traffic Register Home";
 });
-$(document).on('knack-scene-render.scene_577', function(event, scene) {
-  document.title = 'Traffic Register Search';
+$(document).on("knack-scene-render.scene_577", function (event, scene) {
+  document.title = "Traffic Register Search";
 });
-$(document).on('knack-scene-render.scene_578', function(event, scene) {
-  document.title = 'Traffic Register Search';
+$(document).on("knack-scene-render.scene_578", function (event, scene) {
+  document.title = "Traffic Register Search";
 });
-$(document).on('knack-scene-render.scene_518', function(event, scene) {
-  document.title = 'Traffic Register Search';
+$(document).on("knack-scene-render.scene_518", function (event, scene) {
+  document.title = "Traffic Register Search";
 });
-$(document).on('knack-scene-render.scene_517', function(event, scene) {
-  document.title = 'Traffic Register Search';
+$(document).on("knack-scene-render.scene_517", function (event, scene) {
+  document.title = "Traffic Register Search";
 });
-$(document).on('knack-scene-render.scene_445', function(event, scene) {
-  document.title = 'Traffic Register Draft Builder';
+$(document).on("knack-scene-render.scene_445", function (event, scene) {
+  document.title = "Traffic Register Draft Builder";
 });
-$(document).on('knack-scene-render.scene_446', function(event, scene) {
-  document.title = 'Traffic Register Draft Builder';
+$(document).on("knack-scene-render.scene_446", function (event, scene) {
+  document.title = "Traffic Register Draft Builder";
 });
-$(document).on('knack-scene-render.scene_447', function(event, scene) {
-  document.title = 'Traffic Register Draft Builder';
+$(document).on("knack-scene-render.scene_447", function (event, scene) {
+  document.title = "Traffic Register Draft Builder";
 });
-$(document).on('knack-scene-render.scene_454', function(event, scene) {
-  document.title = 'Traffic Register Draft Builder';
+$(document).on("knack-scene-render.scene_454", function (event, scene) {
+  document.title = "Traffic Register Draft Builder";
 });
-$(document).on('knack-scene-render.scene_657', function(event, scene) {
-  document.title = 'Traffic Register Draft Builder';
+$(document).on("knack-scene-render.scene_657", function (event, scene) {
+  document.title = "Traffic Register Draft Builder";
 });
-$(document).on('knack-scene-render.scene_485', function(event, scene) {
-  document.title = 'Traffic Register Draft Editor';
+$(document).on("knack-scene-render.scene_485", function (event, scene) {
+  document.title = "Traffic Register Draft Editor";
 });
-$(document).on('knack-scene-render.scene_645', function(event, scene) {
-  document.title = 'Traffic Register Draft Review';
+$(document).on("knack-scene-render.scene_645", function (event, scene) {
+  document.title = "Traffic Register Draft Review";
 });
-$(document).on('knack-scene-render.scene_588', function(event, scene) {
-  document.title = 'Regulation Document Details';
+$(document).on("knack-scene-render.scene_588", function (event, scene) {
+  document.title = "Regulation Document Details";
 });
-$(document).on('knack-scene-render.scene_581', function(event, scene) {
-  document.title = 'Approved Regulation Details';
+$(document).on("knack-scene-render.scene_581", function (event, scene) {
+  document.title = "Approved Regulation Details";
 });
-$(document).on('knack-scene-render.scene_435', function(event, scene) {
-  document.title = 'My Task Board';
+$(document).on("knack-scene-render.scene_435", function (event, scene) {
+  document.title = "My Task Board";
 });
-$(document).on('knack-scene-render.scene_436', function(event, scene) {
-  document.title = 'My Task Board';
+$(document).on("knack-scene-render.scene_436", function (event, scene) {
+  document.title = "My Task Board";
 });
-$(document).on('knack-scene-render.scene_439', function(event, scene) {
-  document.title = 'My Task Board';
+$(document).on("knack-scene-render.scene_439", function (event, scene) {
+  document.title = "My Task Board";
 });
-$(document).on('knack-scene-render.scene_469', function(event, scene) {
-  document.title = 'Review Page';
+$(document).on("knack-scene-render.scene_469", function (event, scene) {
+  document.title = "Review Page";
 });
-$(document).on('knack-scene-render.scene_469', function(event, scene) {
-  document.title = 'Account Settings';
+$(document).on("knack-scene-render.scene_469", function (event, scene) {
+  document.title = "Account Settings";
 });
-$(document).on('knack-scene-render.scene_343', function(event, scene) {
-  document.title = 'App Administration';
+$(document).on("knack-scene-render.scene_343", function (event, scene) {
+  document.title = "App Administration";
 });
 
 /*
@@ -551,3 +647,24 @@ $('#view_657 tbody input[type=checkbox]:checked').each(function() {
   var id = $(this).closest('tr').attr('id'); // record id
 });
 */
+
+/*************************************************************/
+/*** Automated Regulation Text popluted by regulation type ***/
+/*************************************************************/
+
+var automatedRegulationTextPatternsByType = {
+  // This is using the identifier key, should we use id like "61ef7a148e6250071cd47a49"?
+  "ANGLEPARK: Angle Parking":
+    "$421 $391 - on -  $394 from $405 $406 of $403 to $408, $399, $414 side(s).",
+};
+
+$(document).on("knack-form-submit.view_896", function (event, view, record) {
+  var regulationTypeField = "field_391_raw";
+
+  // Get the pattern from the map
+  var regulationTypeRecordIdentifier =
+    record[regulationTypeField][0].identifier;
+
+  // Replace the pattern with the value by finding $<field #> and replacing with the value
+  // Need to consider that some values come from raw fields (array of objects)
+});
