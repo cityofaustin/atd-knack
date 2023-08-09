@@ -687,16 +687,32 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
   var regex = /\$(.*?)\$/g;
   var matchesIterable = pattern.matchAll(regex);
 
-  // Collect actual matches, ex. "$391$"
-  var matchValues = [];
-  // Collect field numbers between delimiters, ex. "391"
-  var capturedValues = [];
+  // Collect matches and field numbers in an array of objects, ex. [{match: "$391$", fieldNumber: "391"}, ...]
+  var matches = [];
   for (var matchArray of matchesIterable) {
-    matchValues.push(matchArray[0]);
-    capturedValues.push(matchArray[1]);
+    var matchObject = {
+      match: matchArray[0],
+      fieldNumber: matchArray[1],
+    };
+
+    matches.push(matchObject);
   }
 
   // Create a map of $<field#>: value from data
+  var fieldToValueMap = {};
+  matches.forEach(function (matchObject) {
+    var match = matchObject.match;
+    var fieldNumber = matchObject.fieldNumber;
+
+    var fieldKey;
+    if (fieldNumber in fieldsToUseRawData) {
+      fieldKey = "field_" + fieldsToUseRawData[fieldNumber];
+    } else {
+      fieldKey = "field_" + fieldNumber;
+    }
+
+    fieldToValueMap[match] = record[fieldKey];
+  });
 
   // Go through the map and replace the pattern with the value
 
