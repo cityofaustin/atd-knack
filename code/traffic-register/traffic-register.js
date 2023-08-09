@@ -1,3 +1,9 @@
+var appSpecifics = {
+  knackAppId: "64a8051523bfa90026dfd045", // Must update on per app instance basis
+  apiSceneIdForRegulationText: "scene_688", // Automated regulation text edit form API scene id
+  apiViewIdForRegulationText: "view_1393", // Automated regulation text edit form API view id
+};
+
 /*
 KnackInitAsync = function ($, callback) { // Load the Knack Toolkit Library (KTL)
     (window.LazyLoad = LazyLoad) && LazyLoad.js(['https://ctrnd.com/Lib/KTL/KTL_Start.js'], () => {
@@ -675,8 +681,6 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
   var regulationTypeRecordIdentifier =
     record[regulationTypeField][0].identifier;
 
-  // Replace the pattern with the value by finding $<field #> and replacing with the value
-
   // Get the pattern by regulation type
   var pattern =
     automatedRegulationTextPatternsByType[regulationTypeRecordIdentifier];
@@ -687,8 +691,8 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
   var regex = /\$(.*?)\$/g;
   var matchesIterable = pattern.matchAll(regex);
 
-  // Collect matches and field numbers in an array of objects, ex. [{match: "$391$", fieldNumber: "391"}, ...]
-  // and add the value of the field from the record created.
+  // Collect matches and values in an array of objects
+  // For example, [{match: "$391$", value: "value-from-Knack-record"}, ...]
   var matches = [];
   for (var matchArray of matchesIterable) {
     var matchObject = {
@@ -707,53 +711,49 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
     // Add the value to the match object
     if (fieldNumber in fieldsToUseRawData) {
       // Get the value out of the array of objects in raw data
-      var value = fieldsToUseRawData[fieldKey][0].identifier;
+      var value = record[fieldKey][0].identifier;
       matchObject["value"] = value;
     } else {
-      var value = fieldsToUseRawData[fieldKey];
+      var value = record[fieldKey];
       matchObject["value"] = value;
     }
 
     matches.push(matchObject);
   }
 
-  // Create a map of $<field#>: value from data
-  // var fieldToValueMap = {};
-  // matches.forEach(function (matchObject) {
-  //   var match = matchObject.match;
-  //   var fieldNumber = matchObject.fieldNumber;
-
-  //   var fieldKey;
-  //   if (fieldNumber in fieldsToUseRawData) {
-  //     fieldKey = "field_" + fieldsToUseRawData[fieldNumber];
-  //   } else {
-  //     fieldKey = "field_" + fieldNumber;
-  //   }
-
-  //   fieldToValueMap[match] = record[fieldKey];
-  // });
-
+  // Go through the map and replace the pattern with the value
   var automatedRegulationText = pattern;
   matches.forEach(function (matchObject) {
     var match = matchObject.match;
     var value = matchObject.value;
     automatedRegulationText = automatedRegulationText.replace(match, value);
   });
-  // Go through the map and replace the pattern with the value
-  // for (var key in fieldToValueMap) {
-  //   if (fieldNumber in fieldsToUseRawData) {
-  //     // Get the value out of the array of objects in raw data
-  //     var value = fieldsToUseRawData[fieldNumber][0].identifier;
-  //     automatedRegulationText = automatedRegulationText.replace(key, value);
-  //   } else {
-  //     var value = fieldsToUseRawData[fieldNumber];
-  //     automatedRegulationText = automatedRegulationText.replace(key, value);
-  //   }
-  // }
 
-  console.log(fieldToValueMap);
-  console.log(record);
-  console.log(automatedRegulationText);
-  debugger;
   // Async request to populated field_658 with the automated text
+  var headers = {
+    "X-Knack-Application-ID": appSpecifics.knackAppId,
+    Authorization: Knack.getUserToken(),
+    "content-type": "application/json",
+  };
+
+  var putUrl =
+    "https://api.knack.com/v1/pages/" +
+    appSpecifics.apiSceneIdForRegulationText +
+    "/views/" +
+    appSpecifics.apiViewIdForRegulationText +
+    "/records/";
+  var recordId = record.id;
+
+  $.ajax({
+    url: putUrl + recordId,
+    type: "PUT",
+    data: JSON.stringify({ field_658: automatedRegulationText }),
+    headers: headers,
+    success: function (res) {
+      console.log(res);
+    },
+    error: function (error) {
+      console.log(error);
+    },
+  });
 });
