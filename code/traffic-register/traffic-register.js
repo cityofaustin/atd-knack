@@ -658,6 +658,16 @@ var automatedRegulationTextPatternsByType = {
     "$421 $391 - on -  $394 from $405 $406 of $403 to $408, $399, $414 side(s).",
 };
 
+/* Some fields return HTML in field_<field #> key, so we need to grab from the raw field
+which contains an array of objects */
+var fieldsToUseRawData = {
+  391: "391_raw",
+  394: "394_raw",
+  403: "403_raw",
+  408: "408_raw",
+  1313: "1313_raw",
+};
+
 $(document).on("knack-form-submit.view_896", function (event, view, record) {
   var regulationTypeField = "field_391_raw";
 
@@ -666,5 +676,16 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
     record[regulationTypeField][0].identifier;
 
   // Replace the pattern with the value by finding $<field #> and replacing with the value
-  // Need to consider that some values come from raw fields (array of objects)
+
+  // Get the pattern by regulation type
+  var pattern =
+    automatedRegulationTextPatternsByType[regulationTypeRecordIdentifier];
+
+  // Gather the fields that need to be replaced with their values
+
+  // Create a map of $<field#>: value from data
+
+  // Go through the map and replace the pattern with the value
+
+  // Async request to populated field_658 with the automated text
 });
