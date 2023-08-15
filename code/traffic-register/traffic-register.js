@@ -563,13 +563,16 @@ $('#view_657 tbody input[type=checkbox]:checked').each(function() {
 /*************************************************************/
 
 var automatedRegulationTextPatternsByType = {
-  // This is using the identifier key, should we use id like "61ef7a148e6250071cd47a49"?
-  "ANGLEPARK: Angle Parking":
+  /* Object key is value in field_1176 of canvas_regulation table.
+  Value is the pattern to use for the automated regulation text
+  which relies on $<field #>$ to be replaced with the value of
+  a field from a newly-created canvas_regulation record. */
+  "ANGLEPARK":
     "$421$ $391$ - on -  $394$ from $405$ $406$ of $403$ to $408$, $399$, $414$ side(s).",
 };
 
 /* Some fields return HTML in field_<field #> key, so we need to grab from the raw field
-which contains an array of objects */
+which contains an array of objects. */
 var fieldsToUseRawData = {
   391: "391_raw",
   394: "394_raw",
@@ -579,15 +582,12 @@ var fieldsToUseRawData = {
 };
 
 $(document).on("knack-form-submit.view_896", function (event, view, record) {
-  var regulationTypeField = "field_391_raw";
-
-  // Get the pattern from the map
-  var regulationTypeRecordIdentifier =
-    record[regulationTypeField][0].identifier;
+  var regulationTypeField = "field_1176";
 
   // Get the pattern by regulation type
+  var regulationType = record[regulationTypeField];
   var pattern =
-    automatedRegulationTextPatternsByType[regulationTypeRecordIdentifier];
+    automatedRegulationTextPatternsByType[regulationType];
 
   // Gather the fields that need to be replaced with their values
   // Use match all to get matches and the captured strings too
@@ -614,8 +614,8 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
 
     // Add the value to the match object
     if (fieldNumber in fieldsToUseRawData) {
-      // Get the value out of the array of objects in raw data
-      var value = record[fieldKey][0].identifier;
+      // Get the value out of the array of objects in raw data if there is one
+      var value = record[fieldKey][0] ? record[fieldKey][0].identifier : "" ;
       matchObject["value"] = value;
     } else {
       var value = record[fieldKey];
