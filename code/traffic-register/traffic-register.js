@@ -581,7 +581,7 @@ var fieldsToUseRawData = {
   1313: "1313_raw",
 };
 
-$(document).on("knack-form-submit.view_896", function (event, view, record) {
+function makeAutomatedRegulationText(record){
   var regulationTypeField = "field_1176";
 
   // Get the pattern by regulation type
@@ -663,4 +663,8 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
       },
     });
   }
+}
+
+$(document).on("knack-form-submit.view_896", function (event, view, record) {
+  makeAutomatedRegulationText(record)
 });
