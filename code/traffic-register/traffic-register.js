@@ -1,5 +1,5 @@
 var appSpecifics = {
-  knackAppId: "64a8051523bfa90026dfd045", // Must update on per app instance basis
+  knackAppId: "", // Must update on per app instance basis
   apiSceneIdForRegulationText: "scene_688", // Automated regulation text edit form API scene id
   apiViewIdForRegulationText: "view_1393", // Automated regulation text edit form API view id
 };
@@ -589,75 +589,78 @@ $(document).on("knack-form-submit.view_896", function (event, view, record) {
   var pattern =
     automatedRegulationTextPatternsByType[regulationType];
 
-  // Gather the fields that need to be replaced with their values
-  // Use match all to get matches and the captured strings too
-  // Ex. [["$391$", "391"], ...]
-  var regex = /\$(.*?)\$/g;
-  var matchesIterable = pattern.matchAll(regex);
+  // We should only generate the automated regulation text if there is a pattern defined.
+  if(pattern){
+    // Gather the fields that need to be replaced with their values
+    // Use match all to get matches and the captured strings too
+    // Ex. [["$391$", "391"], ...]
+    var regex = /\$(.*?)\$/g;
+    var matchesIterable = pattern.matchAll(regex);
 
-  // Collect matches and values in an array of objects
-  // For example, [{match: "$391$", value: "value-from-Knack-record"}, ...]
-  var matches = [];
-  for (var matchArray of matchesIterable) {
-    var matchObject = {
-      match: matchArray[0],
+    // Collect matches and values in an array of objects
+    // For example, [{match: "$391$", value: "value-from-Knack-record"}, ...]
+    var matches = [];
+    for (var matchArray of matchesIterable) {
+      var matchObject = {
+        match: matchArray[0],
+      };
+
+      var fieldNumber = matchArray[1];
+      // Create the field key to get the value from the record
+      var fieldKey;
+      if (fieldNumber in fieldsToUseRawData) {
+        fieldKey = "field_" + fieldsToUseRawData[fieldNumber];
+      } else {
+        fieldKey = "field_" + fieldNumber;
+      }
+
+      // Add the value to the match object
+      if (fieldNumber in fieldsToUseRawData) {
+        // Get the value out of the array of objects in raw data if there is one
+        var value = record[fieldKey][0] ? record[fieldKey][0].identifier : "" ;
+        matchObject["value"] = value;
+      } else {
+        var value = record[fieldKey];
+        matchObject["value"] = value;
+      }
+
+      matches.push(matchObject);
+    }
+
+    // Go through the map and replace the pattern with the value
+    var automatedRegulationText = pattern;
+    matches.forEach(function (matchObject) {
+      var match = matchObject.match;
+      var value = matchObject.value;
+      automatedRegulationText = automatedRegulationText.replace(match, value);
+    });
+
+    // Async request to populated field_658 with the automated text
+    var headers = {
+      "X-Knack-Application-ID": appSpecifics.knackAppId,
+      Authorization: Knack.getUserToken(),
+      "content-type": "application/json",
     };
 
-    var fieldNumber = matchArray[1];
-    // Create the field key to get the value from the record
-    var fieldKey;
-    if (fieldNumber in fieldsToUseRawData) {
-      fieldKey = "field_" + fieldsToUseRawData[fieldNumber];
-    } else {
-      fieldKey = "field_" + fieldNumber;
-    }
+    var putUrl =
+      "https://api.knack.com/v1/pages/" +
+      appSpecifics.apiSceneIdForRegulationText +
+      "/views/" +
+      appSpecifics.apiViewIdForRegulationText +
+      "/records/";
+    var recordId = record.id;
 
-    // Add the value to the match object
-    if (fieldNumber in fieldsToUseRawData) {
-      // Get the value out of the array of objects in raw data if there is one
-      var value = record[fieldKey][0] ? record[fieldKey][0].identifier : "" ;
-      matchObject["value"] = value;
-    } else {
-      var value = record[fieldKey];
-      matchObject["value"] = value;
-    }
-
-    matches.push(matchObject);
+    $.ajax({
+      url: putUrl + recordId,
+      type: "PUT",
+      data: JSON.stringify({ field_658: automatedRegulationText }),
+      headers: headers,
+      success: function (res) {
+        console.log(res);
+      },
+      error: function (error) {
+        console.log(error);
+      },
+    });
   }
-
-  // Go through the map and replace the pattern with the value
-  var automatedRegulationText = pattern;
-  matches.forEach(function (matchObject) {
-    var match = matchObject.match;
-    var value = matchObject.value;
-    automatedRegulationText = automatedRegulationText.replace(match, value);
-  });
-
-  // Async request to populated field_658 with the automated text
-  var headers = {
-    "X-Knack-Application-ID": appSpecifics.knackAppId,
-    Authorization: Knack.getUserToken(),
-    "content-type": "application/json",
-  };
-
-  var putUrl =
-    "https://api.knack.com/v1/pages/" +
-    appSpecifics.apiSceneIdForRegulationText +
-    "/views/" +
-    appSpecifics.apiViewIdForRegulationText +
-    "/records/";
-  var recordId = record.id;
-
-  $.ajax({
-    url: putUrl + recordId,
-    type: "PUT",
-    data: JSON.stringify({ field_658: automatedRegulationText }),
-    headers: headers,
-    success: function (res) {
-      console.log(res);
-    },
-    error: function (error) {
-      console.log(error);
-    },
-  });
 });
