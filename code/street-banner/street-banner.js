@@ -215,6 +215,13 @@ $(document).on('knack-view-render.view_3032', function(event, page) {
   // create large button on the home page
     bigButton('account-management', 'view_3032', "https://atd.knack.com/street-banners#account-management/", "users", "Account Management");
 });
+
+//SMO App link button for the Admin tab
+$(document).on('knack-view-render.view_3689', function(event, page) {
+  // create large button on the home page
+    bigButton('smart-mobility', 'view_3689', "https://atd.knack.com/smart-mobility#home/", "street-view", "Smart Mobility Office");
+});
+
 	//***MENU - RESERVATION PAGE***
 $(document).on('knack-view-render.view_2794', function(event, page) {
   // create large button on the home page
@@ -260,6 +267,7 @@ $(document).on('knack-view-render.view_2906', function(event, page) {
   // create large button on the home page
     bigButton('ots-work-orders', 'view_2906', "https://atd.knack.com/street-banners#lamppost-schedule/", "flag", "Lamppost | Schedule");
 });
+
 
 	//***MENU - RESOURCES PAGE***
 $(document).on('knack-view-render.view_2713', function(event, page) {
@@ -317,6 +325,10 @@ $(document).on('knack-view-render.view_3673', function(event, page) {
 $(document).on('knack-view-render.view_3675', function(event, page) {
   // create large button on go back to Portal page
     bigButton('manage-wallet', 'view_3675', "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
+});
+$(document).on('knack-view-render.view_3678', function(event, page) {
+  // create large button on go back to Portal page
+    bigButton('manage-wallet', 'view_3678', "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
 });
 
 /*******************************************/
@@ -414,6 +426,7 @@ $(document).on('knack-view-render.view_3664', function(event, page) {
     headers: headers,
   }).then(function (res) {
     var records = res.records;
+    console.log(records)
     if (records.length > 0) {
       // operating under the expectation that there is only one line item to add
       payload["line_items"] = [{
