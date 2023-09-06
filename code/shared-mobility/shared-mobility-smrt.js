@@ -112,15 +112,15 @@ $(document).on("knack-view-render.view_629", function(event, page) {
 });
 
 /*********** Get Started page ***********/
-// create large Home  button on the Customer RPP Portal page
+// create large Home  button on the Customer SMRT Portal page
 $(document).on("knack-view-render.view_875", function(event, page) {
   bigButton( "home", "view_875", "https://atd.knack.com/smrt#portal/", "home", "Home");
 });
-// create large Required Attachments button on the Customer RPP Portal page
+// create large Required Attachments button on the Customer SMRT Portal, Required Documents page
 $(document).on("knack-view-render.view_878", function(event, page) {
   bigButton( "required-documents", "view_878", "https://atd.knack.com/smrt#required-documents/", "files-o", "Required Documents");
 });
-// create large Start Application button on the Customer RPP Portal page
+// create large Start Application button on the Customer SMRT Application page
 $(document).on("knack-view-render.view_631", function(event, page) {
   bigButton( "start-application", "view_631", "https://atd.knack.com/smrt#application/", "arrow-right", "Start Application");
 });
