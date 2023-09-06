@@ -110,7 +110,7 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-//Page to disable crumbtrail
+//Page to disable crumbtrail in SSPR Details
 $(document).on("knack-scene-render.scene_165", function () {
   disableBreadCrumbsNonAdmin();
 });
