@@ -110,3 +110,51 @@ $(document).on("knack-view-render.view_628", function(event, page) {
 $(document).on("knack-view-render.view_629", function(event, page) {
   bigButton("about-the-program", "view_629", "https://www.austintexas.gov/page/shared-mobility-regulations-and-license-application", "book", "About the Program");
 });
+
+/*********** Get Started page ***********/
+// create large Home  button on the Customer SMRT Portal page
+$(document).on("knack-view-render.view_875", function(event, page) {
+  bigButton( "home", "view_875", "https://atd.knack.com/smrt#portal/", "home", "Home");
+});
+// create large Required Attachments button on the Customer SMRT Portal, Required Documents page
+$(document).on("knack-view-render.view_878", function(event, page) {
+  bigButton( "required-documents", "view_878", "https://atd.knack.com/smrt#required-documents/", "files-o", "Required Documents");
+});
+// create large Start Application button on the Customer SMRT Application page
+$(document).on("knack-view-render.view_631", function(event, page) {
+  bigButton( "start-application", "view_631", "https://atd.knack.com/smrt#application/", "arrow-right", "Start Application");
+});
+
+/*** Disable Breadcrumb Navigation Links ***/
+/*******************************************/
+function disableBreadCrumbsNonAdmin() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+//Page to disable crumbtrail App Info page
+$(document).on("knack-scene-render.scene_336", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail Parent Company page
+$(document).on("knack-scene-render.scene_337", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail Business Information page
+$(document).on("knack-scene-render.scene_338", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//Page to disable crumbtrail Past Performance page
+$(document).on("knack-scene-render.scene_339", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Page to disable crumbtrail Fleet Information page
+$(document).on("knack-scene-render.scene_340", function () {
+  disableBreadCrumbsNonAdmin();
+});
