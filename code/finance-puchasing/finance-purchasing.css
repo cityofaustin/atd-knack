@@ -81,6 +81,14 @@ a.small-button {
   background-color: #1a3d6b;
   color: #ffffff;
 }
+#view_1171 > div > a { 
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_1175 > div > a { 
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
 
 /* Purchase Requests | Purchase Request Details | Table Checkboxes */
 .table-checkboxes-parent {
@@ -105,9 +113,9 @@ a.small-button {
   visibility: hidden;
 }
 
-#view_16 tr.kn-table-totals > td:nth-child(13) {
+/* #view_16 tr.kn-table-totals > td:nth-child(13) {
   visibility: hidden;
-}
+} */
 
 /* Purchase Requests | Purchase Request Details | Received Items table spacing */
 #add-to-selected-invoice {
