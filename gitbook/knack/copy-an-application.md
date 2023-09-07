@@ -34,6 +34,11 @@ description: >-
 
 <figure><img src="../.gitbook/assets/7_CopyApp.png" alt=""><figcaption></figcaption></figure>
 
+* **After app has finished copying, add builders to the new duplicate app** \
+  Select Manage Builders and add Apps team for builder access
+
+<figure><img src="../.gitbook/assets/image (15).png" alt="" width="563"><figcaption></figcaption></figure>
+
 * **Add the new environment to the** [**DTS Portal listing of applications**](https://atd.knack.com/dts#applications)**.**  \
   Select the PRODUCTION environment you have copied and **Add Environment**. &#x20;
 
