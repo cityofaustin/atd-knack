@@ -42,3 +42,28 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
+
+/*******************************************/
+/** Remove Back Links for Living Streets EOI Form Pages **/
+/*******************************************/
+/*Living Streets EOI - Timeframe*/
+#kn-scene_188 .kn-back-link {
+  display: none;
+}
+/*Healthy Streets EOI - Finalize and Submit page*/
+#kn-scene_206 .kn-back-link {
+  display: none;
+}
+/*Healthy Streets EOI - Confirmation 9age*/
+#kn-scene_208 .kn-back-link {
+  display: none;
+}
+/*Play Streets EOI - Finalize and Submit page*/
+#kn-scene_209 .kn-back-link {
+  display: none;
+}
+/*Play Streets EOI - Confirmation page*/
+#kn-scene_211 .kn-back-link {
+  display: none;
+}
+
