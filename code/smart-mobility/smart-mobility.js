@@ -93,3 +93,62 @@ $(document).on('knack-view-render.view_16', function(event, page) {
   // create large button on the home page
     bigButton('metrobike-employee-benefit', 'view_16', "https://atd.knack.com/smart-mobility#metrobike-employee-benefit/", "bicycle", "MetroBike Employee Benefit");
 });
+
+
+	//>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
+$(document).on('knack-view-render.view_410', function(event, page) {
+  // create large button on the home page
+    bigButton('living-streets-eoi', 'view_410', "https://atd.knack.com/smart-mobility#living-streets-eoi/", "street-view", "Healthy Streets or Play Streets");
+});
+	//>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
+$(document).on('knack-view-render.view_411', function(event, page) {
+  // create large button on the home page
+    bigButton('living-streets-login', 'view_411', "https://www.austintexas.gov/department/neighborhood-block-parties", "users", "Block Party");
+});
+
+	//>>>LIVING STREETS GETTING STARTED PAGE draft 1
+$(document).on('knack-view-render.view_451', function(event, page) {
+  // create large button on the home page
+    bigButton('living-streets-login', 'view_451', "https://www.austintexas.gov/LivingStreets", "home", "Return to Living Streets Home");
+});
+	//>>>LIVING STREETS GETTING STARTED PAGE draft 2
+$(document).on('knack-view-render.view_450', function(event, page) {
+  // create large button on the home page
+    bigButton('living-streets-getting-started', 'view_450', "https://atd.knack.com/smart-mobility#living-streets-eoi/", "arrow-right", "Start Expression of Interest");
+});
+
+/*******************************************/
+/*** Disable Breadcrumb Navigation Links ***/
+/*******************************************/
+function disableBreadCrumbsNonAdmin() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+//LS Timeframe
+$(document).on("knack-scene-render.scene_188", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//HS EOI Finalize and Submit
+$(document).on("knack-scene-render.scene_206", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//HS EOI Confirmation
+$(document).on("knack-scene-render.scene_208", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//PS EOI Finalize and Submit
+$(document).on("knack-scene-render.scene_209", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//PS EOI Confirmation
+$(document).on("knack-scene-render.scene_211", function () {
+  disableBreadCrumbsNonAdmin();
+});
