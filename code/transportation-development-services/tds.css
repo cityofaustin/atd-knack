@@ -285,21 +285,6 @@ a.ang-link:link {text-decoration: none;}
 /*****************************************/
 /****** Style Back Links as Buttons ******/
 /*****************************************/
-/*RD Completed Work Page*/
-#kn-scene_329 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_329 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*Area Case Load Page*/
-#kn-scene_273 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_273 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*Reviewer Case Load Page*/
-#kn-scene_271 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_271 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
 /*TIA */
 /*TIA Case Details Page*/
 #kn-scene_49 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
@@ -321,35 +306,25 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_186 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Submission Details Page*/
+/*Submission Cycle Details Page*/
 #kn-scene_187 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_187 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Scope Submission Details Page*/
+/*Scope Cycle Details Page*/
 #kn-scene_234 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_234 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Customer Submission Details Page*/
+/*Customer Submission Cycle Details Page*/
 #kn-scene_484 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_484 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Customer Scope Submission Details Page*/
+/*Customer Scope Cycle Details Page*/
 #kn-scene_487 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_487 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*Mitigations Reporting Page*/
-#kn-scene_268 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_268 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*Submissions Reporting Page*/
-#kn-scene_284 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_284 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TIA Cases Search Page*/
 #kn-scene_301 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
@@ -361,12 +336,12 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_302 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*TIA Submissions Search Page*/
+/*TIA Submission Cycle Search Page*/
 #kn-scene_303 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_303 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*TIA Scope Submissions Search Page*/
+/*TIA Scope Cycle Search Page*/
 #kn-scene_304 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_304 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
@@ -407,11 +382,6 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_528 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*TDR */
-/*TDR Vision Team Dashboard Completed Work Page*/
-#kn-scene_347 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_347 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
 /*TDR Case Details Page*/
 #kn-scene_5 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
@@ -453,33 +423,158 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_277 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*TDA Parallel Review Details Page*/
+#kn-scene_622 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_622 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*SIF Worksheet */
 /*SIF Worksheet Review Details Page*/
 #kn-scene_518 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_518 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*****************************************/
-/** Remove Back Links for SIF Worksheet **/
-/*****************************************/
-/*SIF Worksheet Submittal Page*/
-#kn-scene_500 .kn-back-link {
+/**************************************/
+/** Remove Back Links for Task Board **/
+/**************************************/
+/*Task Board Page*/
+#kn-scene_657 .kn-back-link {
   display: none;
 }
-/*SIF Worksheet Submittal Information Page*/
-#kn-scene_505 .kn-back-link {
+
+/*************************************/
+/** Remove Back Links for Reporting **/
+/*************************************/
+/*Reporting Dashboard Page*/
+#kn-scene_676 .kn-back-link {
   display: none;
 }
-/*Review SIF Worksheet Submittal Page*/
-#kn-scene_506 .kn-back-link {
+/*Reporting Dictionary Page*/
+#kn-scene_681 .kn-back-link {
   display: none;
 }
-/*Edit SIF Worksheet Submittal Page*/
-#kn-scene_507 .kn-back-link {
+/*Development Review Reports Page*/
+#kn-scene_677 .kn-back-link {
   display: none;
 }
-/*SIF Worksheet Submittal Confirmation Page*/
-#kn-scene_512 .kn-back-link {
+/*Transportation Study Reports Page*/
+#kn-scene_678 .kn-back-link {
+  display: none;
+}
+/*Development Assessment Reports Page*/
+#kn-scene_679 .kn-back-link {
+  display: none;
+}
+/*Street Impact Fee Reports Page*/
+#kn-scene_680 .kn-back-link {
+  display: none;
+}
+/*All TIA Cases Page*/
+#kn-scene_700 .kn-back-link {
+  display: none;
+}
+/*All TIA Scopes Page*/
+#kn-scene_683 .kn-back-link {
+  display: none;
+}
+/*All TIA Submissions Page*/
+#kn-scene_689 .kn-back-link {
+  display: none;
+}
+/*TIA Mitigations Page*/
+#kn-scene_682 .kn-back-link {
+  display: none;
+}
+/*TIA Determinations Page*/
+#kn-scene_690 .kn-back-link {
+  display: none;
+}
+/*TIA Work Load Page*/
+#kn-scene_684 .kn-back-link {
+  display: none;
+}
+/*Full TIA Cases Page*/
+#kn-scene_701 .kn-back-link {
+  display: none;
+}
+/*Full TIA Scopes Page*/
+#kn-scene_702 .kn-back-link {
+  display: none;
+}
+/*Full TIA Submissions Page*/
+#kn-scene_703 .kn-back-link {
+  display: none;
+}
+/*Compliance Cases Page*/
+#kn-scene_687 .kn-back-link {
+  display: none;
+}
+/*Compliance Cycles Page*/
+#kn-scene_688 .kn-back-link {
+  display: none;
+}
+/*NTA Cases Page*/
+#kn-scene_691 .kn-back-link {
+  display: none;
+}
+/*NTA Cycles Page*/
+#kn-scene_692 .kn-back-link {
+  display: none;
+}
+/*TA Cases Page*/
+#kn-scene_695 .kn-back-link {
+  display: none;
+}
+/*TA Scope Cycles Page*/
+#kn-scene_697 .kn-back-link {
+  display: none;
+}
+/*TA Submission Cycles Page*/
+#kn-scene_696 .kn-back-link {
+  display: none;
+}
+/*ZTA Cases Page*/
+#kn-scene_693 .kn-back-link {
+  display: none;
+}
+/*ZTA Cycles Page*/
+#kn-scene_694 .kn-back-link {
+  display: none;
+}
+
+/*******************************************/
+/** Remove Back Links for Customer Portal **/
+/*******************************************/
+/*Available Services Page*/
+#kn-scene_597 .kn-back-link {
+  display: none;
+}
+/*TIA Determination Service Page*/
+#kn-scene_581 .kn-back-link {
+  display: none;
+}
+/*TIA Compliance Service Page*/
+#kn-scene_582 .kn-back-link {
+  display: none;
+}
+/*TIA Service Page*/
+#kn-scene_583 .kn-back-link {
+  display: none;
+}
+/*NTA Service Page*/
+#kn-scene_584 .kn-back-link {
+  display: none;
+}
+/*TA Service Page*/
+#kn-scene_585 .kn-back-link {
+  display: none;
+}
+/*ZTA Service Page*/
+#kn-scene_586 .kn-back-link {
+  display: none;
+}
+/*SIF Worksheet Service Page*/
+#kn-scene_587 .kn-back-link {
   display: none;
 }
 
@@ -506,36 +601,8 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_417 .kn-back-link {
   display: none;
 }
-
-/************************************************/
-/** Remove Back Links for Full TIA Application **/
-/************************************************/
-/*TIA Applicant Information Page*/
-#kn-scene_385 .kn-back-link {
-  display: none;
-}
-/*TIA Project Information Page*/
-#kn-scene_386 .kn-back-link {
-  display: none;
-}
-/*TIA Required Documents Page*/
-#kn-scene_388 .kn-back-link {
-  display: none;
-}
-/*Review TIA Application Page*/
-#kn-scene_389 .kn-back-link {
-  display: none;
-}
-/*TIA Application Confirmation Page*/
-#kn-scene_392 .kn-back-link {
-  display: none;
-}
-/*TIA Edit Information Page*/
-#kn-scene_390 .kn-back-link {
-  display: none;
-}
-/*TIA Edit Attachments Page*/
-#kn-scene_391 .kn-back-link {
+/*Determination Document Page*/
+#kn-scene_640 .kn-back-link {
   display: none;
 }
 
@@ -571,35 +638,159 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
-/***********************************************/
-/** Remove Back Links for TIA NTA Application **/
-/***********************************************/
+/************************************************/
+/** Remove Back Links for Full TIA Application **/
+/************************************************/
 /*TIA Applicant Information Page*/
-#kn-scene_384 .kn-back-link {
+#kn-scene_385 .kn-back-link {
   display: none;
 }
 /*TIA Project Information Page*/
-#kn-scene_419 .kn-back-link {
+#kn-scene_386 .kn-back-link {
   display: none;
 }
 /*TIA Required Documents Page*/
-#kn-scene_420 .kn-back-link {
+#kn-scene_388 .kn-back-link {
   display: none;
 }
 /*Review TIA Application Page*/
-#kn-scene_421 .kn-back-link {
+#kn-scene_389 .kn-back-link {
   display: none;
 }
 /*TIA Application Confirmation Page*/
-#kn-scene_424 .kn-back-link {
+#kn-scene_392 .kn-back-link {
   display: none;
 }
 /*TIA Edit Information Page*/
-#kn-scene_422 .kn-back-link {
+#kn-scene_390 .kn-back-link {
   display: none;
 }
 /*TIA Edit Attachments Page*/
+#kn-scene_391 .kn-back-link {
+  display: none;
+}
+
+/*******************************************/
+/** Remove Back Links for NTA Application **/
+/*******************************************/
+/*NTA Applicant Information Page*/
+#kn-scene_384 .kn-back-link {
+  display: none;
+}
+/*NTA Project Information Page*/
+#kn-scene_419 .kn-back-link {
+  display: none;
+}
+/*NTA Required Documents Page*/
+#kn-scene_420 .kn-back-link {
+  display: none;
+}
+/*Review NTA Application Page*/
+#kn-scene_421 .kn-back-link {
+  display: none;
+}
+/*NTA Application Confirmation Page*/
+#kn-scene_424 .kn-back-link {
+  display: none;
+}
+/*NTA Edit Information Page*/
+#kn-scene_422 .kn-back-link {
+  display: none;
+}
+/*NTA Edit Attachments Page*/
 #kn-scene_423 .kn-back-link {
+  display: none;
+}
+
+/*******************************************/
+/** Remove Back Links for TA Application **/
+/*******************************************/
+/*TA Applicant Information Page*/
+#kn-scene_598 .kn-back-link {
+  display: none;
+}
+/*TA Project Information Page*/
+#kn-scene_606 .kn-back-link {
+  display: none;
+}
+/*TA Required Documents Page*/
+#kn-scene_607 .kn-back-link {
+  display: none;
+}
+/*Review TA Application Page*/
+#kn-scene_608 .kn-back-link {
+  display: none;
+}
+/*TA Application Confirmation Page*/
+#kn-scene_611 .kn-back-link {
+  display: none;
+}
+/*TA Edit Information Page*/
+#kn-scene_609 .kn-back-link {
+  display: none;
+}
+/*TA Edit Attachments Page*/
+#kn-scene_610 .kn-back-link {
+  display: none;
+}
+
+/*******************************************/
+/** Remove Back Links for ZTA Application **/
+/*******************************************/
+/*ZTA Applicant Information Page*/
+#kn-scene_599 .kn-back-link {
+  display: none;
+}
+/*ZTA Project Information Page*/
+#kn-scene_600 .kn-back-link {
+  display: none;
+}
+/*ZTA Required Documents Page*/
+#kn-scene_601 .kn-back-link {
+  display: none;
+}
+/*Review ZTA Application Page*/
+#kn-scene_602 .kn-back-link {
+  display: none;
+}
+/*ZTA Application Confirmation Page*/
+#kn-scene_605 .kn-back-link {
+  display: none;
+}
+/*ZTA Edit Information Page*/
+#kn-scene_603 .kn-back-link {
+  display: none;
+}
+/*ZTA Edit Attachments Page*/
+#kn-scene_604 .kn-back-link {
+  display: none;
+}
+
+/*****************************************/
+/** Remove Back Links for SIF Worksheet **/
+/*****************************************/
+/*SIF Worksheet Submittal Page*/
+#kn-scene_500 .kn-back-link {
+  display: none;
+}
+/*SIF Worksheet Submittal Information Page*/
+#kn-scene_505 .kn-back-link {
+  display: none;
+}
+/*Review SIF Worksheet Submittal Page*/
+#kn-scene_506 .kn-back-link {
+  display: none;
+}
+/*Edit SIF Worksheet Submittal Page*/
+#kn-scene_507 .kn-back-link {
+  display: none;
+}
+/*SIF Worksheet Submittal Confirmation Page*/
+#kn-scene_512 .kn-back-link {
+  display: none;
+}
+/*SIF Worksheet Submittal Document Page*/
+#kn-scene_647 .kn-back-link {
   display: none;
 }
 
@@ -631,7 +822,6 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
-
 /***********************************/
 /*** Styles all TIA Applications ***/
 /***********************************/
@@ -642,8 +832,8 @@ a.ang-link:link {text-decoration: none;}
 #view_1206 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
 #view_1195 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
 /*Max Width of Table*/
-#view_1215 { max-width: 60%; } /*submission attachments*/
-#view_1216 { max-width: 60%; } /*review submission attachments*/
+#view_1215 { max-width: 80%; } /*submission attachments*/
+#view_1216 { max-width: 80%; } /*review submission attachments*/
 #view_1215 { max-width: 80%; } /*edit attachments*/
 
 /*NTA*/
@@ -653,8 +843,8 @@ a.ang-link:link {text-decoration: none;}
 #view_1291 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
 #view_1280 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
 /*Max Width of Table*/
-#view_1294 { max-width: 60%; } /*scope attachments*/
-#view_1290 { max-width: 60%; } /*review scope attachments*/
+#view_1294 { max-width: 80%; } /*scope attachments*/
+#view_1290 { max-width: 80%; } /*review scope attachments*/
 #view_1286 { max-width: 80%; } /*edit attachments*/
 
 /*Full TIA*/
@@ -664,9 +854,38 @@ a.ang-link:link {text-decoration: none;}
 #view_1182 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
 #view_1171 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
 /*Max Width of Table*/
-#view_1185 { max-width: 60%; } /*scope attachments*/
-#view_1181 { max-width: 60%; } /*review scope attachments*/
+#view_1185 { max-width: 80%; } /*scope attachments*/
+#view_1181 { max-width: 80%; } /*review scope attachments*/
 #view_1177 { max-width: 80%; } /*edit attachments*/
+
+/*TA*/
+/*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
+#view_1963 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*case details*/
+#view_1964 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*applicant details*/
+#view_1976 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
+#view_1965 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
+/*Max Width of Table*/
+#view_1979 { max-width: 80%; } /*scope attachments*/
+#view_1949 { max-width: 80%; } /*review scope attachments*/
+#view_1971 { max-width: 80%; } /*edit attachments*/
+
+/*ZTA*/
+/*div and !important tags allow us to override the min-width of Detail Labels for the Knack Standard Theme*/
+#view_1936 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*case details*/
+#view_1937 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*applicant details*/
+#view_1948 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*sealing engineer details*/
+#view_1938 div.kn-detail-label { background-color: transparent; min-width: 0% !important; } /*project details*/
+/*Max Width of Table*/
+#view_1954 { max-width: 80%; } /*scope attachments*/
+#view_1949 { max-width: 80%; } /*review scope attachments*/
+#view_1945 { max-width: 80%; } /*edit attachments*/
+
+/*****************************/
+/*** Styles the Task Board ***/
+/*****************************/
+/*Min Width & Transparent for "Hello/Welcome" Details Label*/
+#kn-scene_656 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_657 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /*************************************/
 /*** Styles the Reviewer Dashboard ***/
@@ -854,13 +1073,14 @@ a.ang-link:link {text-decoration: none;}
 /*Overrides default Knack blue color with default HighCharts colors for Bar Charts*/
 /*TIA Cases Reporting */
 /*Current Year*/
-/*Total Cases by Type*/
+/*Total Cases by Case Type*/
 #kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
 #kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
 #kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
 #kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
 #kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
 #kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
+#kn-report-view_679-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
 
 /*Total Cases by Status*/
 #kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
@@ -870,11 +1090,13 @@ a.ang-link:link {text-decoration: none;}
 #kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
 #kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(6){fill: #f15c80;}
 #kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(7){fill: #e4d354;}
+#kn-report-view_680-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(8){fill: #2b908f;}
 
 /*Total Cases by Review Area*/
 #kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
 #kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
 #kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_681-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
 
 /*Total Cases by Council District*/
 #kn-report-view_931-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
@@ -888,17 +1110,25 @@ a.ang-link:link {text-decoration: none;}
 #kn-report-view_931-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
 #kn-report-view_931-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
 
-/*Total Cases by TIA Need*/
+/*Total Cases by Request Type*/
 #kn-report-view_932-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
 #kn-report-view_932-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
 #kn-report-view_932-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_932-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_932-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
 
 /*TIA Mitigations Reporting */
 /*Current Year*/
 /*Total Mitigations by Type*/
-#kn-report-view_735-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
-#kn-report-view_735-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_2193-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_2193-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_2193-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_2193-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_2193-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
 
 /*Total Pro Rata $ by Mitigation Type*/
-#kn-report-view_736-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
-#kn-report-view_736-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(1){fill: #7cb5ec;}
+#kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(2){fill: #434348;}
+#kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
+#kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
+#kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
