@@ -491,6 +491,7 @@ $(document).on('click', '.mobile-dropdown-button', function(event) {
 /* Reporting Dashboard Page */
 $(document).on('knack-view-render.view_2433', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  $("#view_2433").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -537,6 +538,7 @@ $(`<div class="mobile-details-dropdown-menu">\
 /* Transportation Study Reports Page */
 $(document).on('knack-view-render.view_2434', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  $("#view_2434").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -713,6 +715,7 @@ function dropdownMenuItem(recordId, route, iconName, linkName, mobile = false, n
 /* Case Details Page */
 $(document).on('knack-view-render.view_744', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  $("#view_744").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -779,6 +782,7 @@ $(`<div class="mobile-details-dropdown-menu">\
 /* Case Management Page */
 $(document).on('knack-view-render.view_887', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  $("#view_887").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -819,6 +823,7 @@ $(`<div class="mobile-details-dropdown-menu">\
 /* Mitigation Page */
 $(document).on('knack-view-render.view_886', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  $("#view_886").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -865,6 +870,7 @@ $(`<div class="mobile-details-dropdown-menu">\
 /* Feature Map Page */
 $(document).on('knack-view-render.view_926', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  $("#view_926").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -905,6 +911,7 @@ $(document).on('knack-view-render.view_901', function(event, view, record) {
    // regex: match the 24 digit record id that comes in hash part of url after "/"
   const parentRecordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0];
   const recordId = view.scene.scene_id;
+  $("#view_901").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -951,6 +958,7 @@ $(document).on('knack-view-render.view_902', function(event, view, record) {
    // regex: match the 24 digit record id that comes in hash part of url after "/"
   const parentRecordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0];
   const recordId = view.scene.scene_id;
+  $("#view_902").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
