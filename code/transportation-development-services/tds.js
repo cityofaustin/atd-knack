@@ -710,14 +710,6 @@ function dropdownMenuItem(recordId, route, iconName, linkName, mobile = false, n
     </li>`)
 }
 
-// Function to toggle "active" class for mobile dropdown menu
-// if class is not "active", list is display: none;
-$(document).on('click', '.mobile-dropdown-button', function(event) {
-  const menuList = $(event.target).siblings()[0]
-  $(menuList).toggleClass("active")
-  $(event.target).toggleClass("show-icon")
-});
-
 /* Case Details Page */
 $(document).on('knack-view-render.view_744', function(event, view, record) {
   var recordId = view.scene.scene_id;
