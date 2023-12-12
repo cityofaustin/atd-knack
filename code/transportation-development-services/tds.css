@@ -1,3 +1,7 @@
+.my-test {
+  color: "#163f6e"
+}
+
 /***************************************/
 /********* FA Icon Positioning *********/
 /***************************************/
@@ -433,6 +437,22 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_518 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_518 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*App Admin */
+/*TDS Contacts Page*/
+#kn-scene_591 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_591 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage Review Areas Page*/
+#kn-scene_638 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_638 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Reporting Targets Page*/
+#kn-scene_710 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_710 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /**************************************/
 /** Remove Back Links for Task Board **/
@@ -910,19 +930,18 @@ a.ang-link:link {text-decoration: none;}
 #view_1912 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #view_1913 div.kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
-/***********************************/
-/*** TIA Menu Buttons Navigation ***/
-/***********************************/
+/***************************************/
+/*** Custom Dropdown Navigation Menu ***/
+/***************************************/
 /* Hide custom Mobile Menu if on desktop */
-
-@media (min-width: 799px) {
+@media (min-width: 767.9px) {
   .mobile-details-dropdown-menu {
     display: none;
   }
 }
 
 /* Hide custom Desktop menu if on mobile */
-@media (max-width: 799px) {
+@media (max-width: 768px) {
   #tia-menu-list {
     display: none;
   }
@@ -943,12 +962,12 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
-/* Hide original Scope Submission Menu */
+/* Hide original Scope Cycle Menu */
 #view_634 {
   display: none;
 }
 
-/* Hide original Submission Menu */
+/* Hide original Submission Cycle Menu */
 #view_450 {
   display: none;
 }
@@ -999,6 +1018,7 @@ a.ang-link:link {text-decoration: none;}
 
 .tia-mobile-dropdown-menu span {
   margin-top: .25em;
+  color: #163f6e;
 }
 
 .mobile-dropdown-button {
@@ -1050,6 +1070,11 @@ a.ang-link:link {text-decoration: none;}
 .tia-button .icon {
   vertical-align: baseline;
 }
+
+.mobile-button {
+  color: #163f6e !important;
+}
+
 
 /**********************************/
 /********* Report Styling *********/
