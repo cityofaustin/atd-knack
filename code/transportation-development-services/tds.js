@@ -704,10 +704,10 @@ function dropdownMenuItem(recordId, route, iconName, linkName, mobile = false, n
   return (
     `<li class="${buttonClass}">\
       <a href="#tia-reviews/tia-case-details/${recordId}/${route}/${recordId}" class="my-test">\
-        <span class="icon is-small"> \
+        <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
-        <span>${linkName}</span>\
+        <span style="color:#163f6e">${linkName}</span>\
       </a>\
     </li>`)
 }
