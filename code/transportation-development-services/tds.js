@@ -451,9 +451,9 @@ if (appviews[x]==key) {
 };	// for
 });
 
-/***********************************/
-/**** Reporting Menu Navigation ****/
-/***********************************/
+/******************************************/
+/**** Reporting Custom Menu Navigation ****/
+/******************************************/
 
 function aDropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
   const buttonClass = mobile ? "tia-button" : "kn-button"
@@ -491,6 +491,7 @@ $(document).on('click', '.mobile-dropdown-button', function(event) {
 /* Reporting Dashboard Page */
 $(document).on('knack-view-render.view_2433', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  //$("#view_2433").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -537,6 +538,7 @@ $(`<div class="mobile-details-dropdown-menu">\
 /* Transportation Study Reports Page */
 $(document).on('knack-view-render.view_2434', function(event, view, record) {
   var recordId = view.scene.scene_id;
+  //$("#view_2434").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -614,7 +616,7 @@ $(`<div class="mobile-details-dropdown-menu">\
       <li class="tia-mobile-dropdown-menu">\
         <span class="tia-button mobile-dropdown-button"> \
           <i class="fa fa-angle-down tia-dropdown" /> \
-          Transportation Study Reports Menu\
+          Transportation Study Reports\
         </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${aDropdownMenuItem(recordId, "ts-cases", "fa-briefcase", "All Cases", true)}\
@@ -624,53 +626,53 @@ $(`<div class="mobile-details-dropdown-menu">\
           ${aDropdownMenuItem(recordId, "tia-work-load-reports", "fa-tasks", "TIA Work Load", true)}\
         </ul>\
       </li>\
-      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#reporting/ts-reports/full-tia-cases/" data-kn-slug="#full-tia-reports-menu">\
-          <span class="nav-dropdown-link">Full TIA Reports</span>\
-          <span class="kn-dropdown-icon fa fa-caret-down" />\
-        </a>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+            Full TIA Reports\
+        </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${aDropdownMenuItem(recordId, "full-tia-cases", "fa-briefcase", "Full TIA Cases", true)}\
           ${aDropdownMenuItem(recordId, "full-tia-scope-cycles", "fa-crosshairs", "Full TIA Scope Cycles", true)}\
           ${aDropdownMenuItem(recordId, "full-tia-submission-cycles", "fa-inbox", "Full TIA Submission Cycles", true)}\
         </ul>\
       </li>\
-      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#reporting/ts-reports/compliance-cases/" data-kn-slug="#compliance-reports-menu">\
-          <span class="nav-dropdown-link">Compliance Reports</span>\
-          <span class="kn-dropdown-icon fa fa-caret-down" />\
-        </a>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+            Compliance Reports\
+        </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${aDropdownMenuItem(recordId, "compliance-cases", "fa-briefcase", "Compliance Cases", true)}\
           ${aDropdownMenuItem(recordId, "compliance-cycles", "fa-inbox", "Compliance Cycles", true)}\
         </ul>\
       </li>\
-      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#reporting/ts-reports/nta-cases/" data-kn-slug="#nta-reports-menu">\
-          <span class="nav-dropdown-link">NTA Reports</span>\
-          <span class="kn-dropdown-icon fa fa-caret-down" />\
-        </a>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+            NTA Reports\
+        </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${aDropdownMenuItem(recordId, "nta-cases", "fa-briefcase", "NTA Cases", true)}\
           ${aDropdownMenuItem(recordId, "nta-cycles", "fa-inbox", "NTA Cycles", true)}\
         </ul>\
       </li>\
-      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#reporting/ts-reports/ta-cases/" data-kn-slug="#ta-reports-menu">\
-          <span class="nav-dropdown-link">TA Reports</span>\
-          <span class="kn-dropdown-icon fa fa-caret-down" />\
-        </a>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+            TA Reports\
+        </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${aDropdownMenuItem(recordId, "ta-cases", "fa-briefcase", "TA Cases", true)}\
           ${aDropdownMenuItem(recordId, "ta-scope-cycles", "fa-crosshairs", "TA Scope Cycles", true)}\
           ${aDropdownMenuItem(recordId, "ta-submission-cycles", "fa-inbox", "TA Submission Cycles", true)}\
         </ul>\
       </li>\
-      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#reporting/ts-reports/zta-cases/" data-kn-slug="#zta-reports-menu">\
-          <span class="nav-dropdown-link">ZTA Reports</span>\
-          <span class="kn-dropdown-icon fa fa-caret-down" />\
-        </a>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+            ZTA Reports\
+        </span>\
         <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${aDropdownMenuItem(recordId, "zta-cases", "fa-briefcase", "ZTA Cases", true)}\
           ${aDropdownMenuItem(recordId, "zta-cycles", "fa-inbox", "ZTA Cycles", true)}\
@@ -681,9 +683,9 @@ $(`<div class="mobile-details-dropdown-menu">\
 })
 
 
-/*****************************/
-/**** TIA Menu Navigation ****/
-/*****************************/
+/********************************************/
+/**** TIA Reviews Custom Menu Navigation ****/
+/********************************************/
 
 function dropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
   const buttonClass = mobile ? "tia-button" : "kn-button"
@@ -701,22 +703,14 @@ function dropdownMenuItem(recordId, route, iconName, linkName, mobile = false, n
 
   return (
     `<li class="${buttonClass}">\
-      <a href="#tia-reviews/tia-case-details/${recordId}/${route}/${recordId}">\
-        <span class="icon is-small"> \
+      <a href="#tia-reviews/tia-case-details/${recordId}/${route}/${recordId}" class="my-test">\
+        <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
-        <span>${linkName}</span>\
+        <span style="color:#163f6e">${linkName}</span>\
       </a>\
     </li>`)
 }
-
-// Function to toggle "active" class for mobile dropdown menu
-// if class is not "active", list is display: none;
-$(document).on('click', '.mobile-dropdown-button', function(event) {
-  const menuList = $(event.target).siblings()[0]
-  $(menuList).toggleClass("active")
-  $(event.target).toggleClass("show-icon")
-});
 
 /* Case Details Page */
 $(document).on('knack-view-render.view_744', function(event, view, record) {
