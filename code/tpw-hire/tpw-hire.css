@@ -1,0 +1,32 @@
+/********************************************/
+/*********** Sticky Table Headers ***********/
+/********************************************/
+thead {
+  position:sticky;
+  top:0px;
+  z-index:7;
+  border-style: solid;
+  border-width: 0px 1px 0px 1px;
+  border-color: #dddddd;
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: #dddddd;
+}
+tr {
+  border: 1px solid #dddddd;
+}
+/*Advanced Search for Filtered Regulations*/
+#view_6 .kn-table-wrapper {
+  max-height: 800px;
+  border: 1px solid #dddddd;
+}
+/********************************************/
+/*********** Sticky Table Columns ***********/
+/********************************************/
+/*Advanced Search for Filtered Regulations*/
+#view_6 th:first-child,
+#view_6 td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 6; /* Increase z-index to be higher priority than the header(lower #) */
+  background-color: #f9f9f9;
