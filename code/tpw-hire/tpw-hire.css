@@ -30,3 +30,4 @@ tr {
   left: 0;
   z-index: 6; /* Increase z-index to be higher priority than the header(lower #) */
   background-color: #f9f9f9;
+}
