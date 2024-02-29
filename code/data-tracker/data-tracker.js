@@ -1095,13 +1095,18 @@ $(document).on("knack-scene-render.scene_1468", function () {
 // https://github.com/cityofaustin/atd-data-tech/issues/15708 //////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-$(document).on("knack-view-render.view_4022", function (event, view, data) {
+$(document).on("knack-scene-render.scene_1607", function (event, scene) {
   // Select and clone the original work order ID select field
   var $workOrderIdSelect = $("select#view_4022-field_2075");
 
-  // Update the field placeholder text so it looks like the original work order ID is chosen
-  var originalWorkOrderIdText = data.field_1209;
-  var originalWorkOrderId = data.id;
+  // Get the original work order id text from the value displayed in view_4021
+  var $originalWorkOrderDetails = $("#view_4021")
+    .find(".kn-detail.field_1209")
+    .find(".kn-detail-body");
+  var originalWorkOrderIdText = $originalWorkOrderDetails.text();
+
+  // Get the Knack id of the original work order from the scene render data
+  var originalWorkOrderId = scene.scene_id;
 
   // Chosen.js updates this select after the view loads so we need to watch for that change
   // This event blows away any DOM updates made before it
@@ -1109,7 +1114,6 @@ $(document).on("knack-view-render.view_4022", function (event, view, data) {
     // Update placeholder option with value of original work order ID
     var $placeholderOption = $(this).find("option");
     $placeholderOption.val(originalWorkOrderId);
-    $placeholderOption.text(originalWorkOrderIdText);
 
     // Disable this listener so we don't get an endless loop when we fire off one last change
     $(this).off();
