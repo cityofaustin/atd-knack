@@ -1008,9 +1008,131 @@ $(document).on("knack-view-render.view_1146", function (event, view, data) {
 // End Prevent user from re-assigning their own assignment /////
 ////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////////////////////////////
+/// Autopopulate work order ID in the follow-up order form ////
+// https://github.com/cityofaustin/atd-data-tech/issues/9052 //
+///////////////////////////////////////////////////////////////
+
+$(document).on("knack-view-render.view_1718", function (event, view, data) {
+  // Select and clone the original work order ID select field
+  var $workOrderIdSelect = $("select#view_1718-field_2075");
+
+  // Update the field placeholder text so it looks like the original work order ID is chosen
+  var originalWorkOrderIdText = data.field_1209;
+  var originalWorkOrderId = data.id;
+
+  // Chosen.js updates this select after the view loads so we need to watch for that change
+  // This event blows away any DOM updates made before it
+  $workOrderIdSelect.on("change", function () {
+    // Update placeholder option with value of original work order ID
+    var $placeholderOption = $(this).find("option");
+    $placeholderOption.val(originalWorkOrderId);
+    $placeholderOption.text(originalWorkOrderIdText);
+
+    // Disable this listener so we don't get an endless loop when we fire off one last change
+    $(this).off();
+    // Update this select with the original work order ID as its value
+    $(this).val(originalWorkOrderId).change();
+
+    // Update the span that normally prompts the type to search with the human-readable ID
+    var $placeholderTextSpan = $("div#view_1718_field_2075_chzn > a > span");
+    $placeholderTextSpan.text(originalWorkOrderIdText);
+  });
+});
+
+//////////////////////////////////////////////////////////////////
+/// End Autopopulate work order ID in the follow-up order form ///
+//////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+/// Autopopulate *scheduled* work order ID in the follow-up form ///
+// https://github.com/cityofaustin/atd-data-tech/issues/9052     ///
+////////////////////////////////////////////////////////////////////
+
+$(document).on("knack-scene-render.scene_1468", function () {
+  // We have to do this in a scene render — not view — because we need data from a sibling view
+  setInterval(function () {
+    // Select and clone the original work order ID select field
+    var $workOrderIdSelect = $("select#view_3653-field_4211");
+    // find follow-up work order from details view
+    var $originalWorkOrderDetails = $("#view_3650")
+      .find(".kn-detail.field_1971")
+      .find(".kn-detail-body");
+    // find the work order ID text within it
+    var followUpWorkOrderIdText = $originalWorkOrderDetails.text();
+    // find the span that the text came from (mayb not the most effecient way of doing this...)
+    var workOrderIDSpan = $originalWorkOrderDetails
+      .find(`span:contains('${followUpWorkOrderIdText}')`)
+      .last();
+    // extract the Knack record ID from the span's class
+    var followUpWorkOrderId = workOrderIDSpan.attr("class");
+    // is the correct value already set?
+    if ($workOrderIdSelect.val() === followUpWorkOrderId) {
+      //  nothing to do
+      return;
+    }
+    // Update placeholder option with value of original work order ID
+    // The <select> **must** have an option with a value that matches the ID we're targeting
+    var $placeholderOption = $workOrderIdSelect.find("option");
+    $placeholderOption.val(followUpWorkOrderId);
+    $placeholderOption.text(followUpWorkOrderIdText);
+    // Disable this listener so we don't get an endless loop when we fire off a change
+    $workOrderIdSelect.off("change");
+    // Update this select with the original work order ID as its value
+    $workOrderIdSelect.val(followUpWorkOrderId).change();
+    // Update the span that normally prompts the type to search with the human-readable ID
+    var $placeholderTextSpan = $("div#view_3653_field_4211_chzn > a > span");
+    $placeholderTextSpan.text(followUpWorkOrderIdText);
+  }, 500);
+});
+
+//////////////////////////////////////////////////////////////////
+/// End Autopopulate *scheduled* work order ID in the follow-up order form ///
+//////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+/// Autopopulate *communications* work order ID in the follow-up order form ////
+// https://github.com/cityofaustin/atd-data-tech/issues/15708 //////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+$(document).on("knack-scene-render.scene_1607", function (event, scene) {
+  // Select and clone the original work order ID select field
+  var $workOrderIdSelect = $("select#view_4022-field_2075");
+
+  // Get the original work order id text from the value displayed in view_4021
+  var $originalWorkOrderDetails = $("#view_4021")
+    .find(".kn-detail.field_1209")
+    .find(".kn-detail-body");
+  var originalWorkOrderIdText = $originalWorkOrderDetails.text();
+
+  // Get the Knack id of the original work order from the scene render data
+  var originalWorkOrderId = scene.scene_id;
+
+  // Chosen.js updates this select after the view loads so we need to watch for that change
+  // This event blows away any DOM updates made before it
+  $workOrderIdSelect.on("change", function () {
+    // Update placeholder option with value of original work order ID
+    var $placeholderOption = $(this).find("option");
+    $placeholderOption.val(originalWorkOrderId);
+
+    // Disable this listener so we don't get an endless loop when we fire off one last change
+    $(this).off();
+    // Update this select with the original work order ID as its value
+    $(this).val(originalWorkOrderId).change();
+
+    // Update the span that normally prompts the type to search with the human-readable ID
+    var $placeholderTextSpan = $("div#view_4022_field_2075_chzn > a > span");
+    $placeholderTextSpan.text(originalWorkOrderIdText);
+  });
+});
+
+///////////////////////////////////////////////////////////////////////////////////
+/// End Autopopulate *communications* work order ID in the follow-up order form ///
+///////////////////////////////////////////////////////////////////////////////////
+
 /***************************************************************/
 /*** Disable the ability to Click/Touch outside a Modal Page ***/
 /***************************************************************/
-$(document).on('knack-scene-render.any', function(event, scene) {
-    $('.kn-modal-bg').off('click');
+$(document).on("knack-scene-render.any", function (event, scene) {
+  $(".kn-modal-bg").off("click");
 });
