@@ -152,3 +152,28 @@ $(document).on("knack-scene-render.scene_209", function () {
 $(document).on("knack-scene-render.scene_211", function () {
   disableBreadCrumbsNonAdmin();
 });
+
+//LS Timeframe NEW
+$(document).on("knack-scene-render.scene_276", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//HS EOI Finalize and Submit NEW
+$(document).on("knack-scene-render.scene_277", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//HS EOI Confirmation NEW
+$(document).on("knack-scene-render.scene_280", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//PS EOI Finalize and Submit NEW
+$(document).on("knack-scene-render.scene_281", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+//PS EOI Confirmation NEW
+$(document).on("knack-scene-render.scene_284", function () {
+  disableBreadCrumbsNonAdmin();
+});
