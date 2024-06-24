@@ -1,3 +1,168 @@
+/***************************/
+/**** Step Indicator *******/
+/***************************/
+.stepindicator{
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  position:static;
+}
+.label-stepindicator{
+  display:inline-block;
+  width: 1.5em;
+  height:1.5em;
+  background: #005EA2;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  line-height: 1.5em;
+  font-size:1.5em;
+}
+
+.active-label-stepindicator{
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:20px;
+}
+.progressbar{
+  counter-reset: step;
+}
+
+/* This is for the Circle number */
+.progressbar li:before{
+  content:counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #bebebe;
+  display:block;
+  border-radius: 50%;
+  line-height: 26px;
+  background: white;
+  color: #bebebe;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* This is for the bars */
+.progressbar li{
+  list-style-type: none;
+  float: left;
+  width: 25%;
+  position: relative;
+  text-align: left;
+  margin-left: -5px;
+}
+.progressbar li + li {
+  margin-top: unset;
+}
+
+.progressbar li:after{
+  content: '';
+  position: absolute;
+  width:100%;
+  height: 8px;
+  background: #979797;
+  top: 10px;
+  left: -90%;
+  z-index: -1;
+}
+
+/* Hides the first child bar */
+.progressbar li:first-child:after{
+  content: none;
+}
+
+.progressbar li.active + li:after{
+  background: #005EA2;
+}
+
+.progressbar li.active::before{
+  border: 2px solid white;
+  background: #005EA2;
+  color: white;
+}
+.progressbar li.active{
+  font-weight: bold;
+  color: #005EA2;
+}
+.progressbar li.inactive{
+  font-weight: bold;
+  color: #163f6e;
+}
+.progressbar li.inactive + li:after{
+  background: #163f6e;
+}
+
+.progressbar li.inactive::before{
+  border-color: white;
+  background: #163f6e;
+  color: white;
+}
+
+
+/***************************************/
+/*********** Trigger Buttons ***********/
+/***************************************/
+.trigger-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+/*Large Trigger Buttons*/
+.trigger-button-large {
+  width: 250px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button-large:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+.trigger-button-large-disabled {
+  width: 250px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: #cbcbcb;
+  color: #777777;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  text-align: center;
+  opacity: 0.6;
+  display: inline-block;
+  outline-color: transparent;
+}
+
+a.trigger-button-large {text-decoration: none;}
+
 /***************************************/
 /***************************************/
 /************* Big Buttons *************/
@@ -36,6 +201,7 @@ a.big-button-container {
 /***************************************/
 .fa { vertical-align: baseline; }
 
+/***************************************/
 /************ Small Buttons ************/
 /***************************************/
 .small-button-container {
@@ -61,4 +227,124 @@ a.big-button-container {
 
 a.small-button {
   text-decoration: none;
+}
+
+/******************************************************/
+/********* Style Horizontal radio buttons ************/
+/*****************************************************/
+ #kn-input-field_46 
+  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+  .control { margin-right: .5em;}
+
+ #kn-input-field_47
+  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+  .control { margin-right: .5em;}
+
+ #kn-input-field_50
+  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+  .control { margin-right: .5em;}
+
+ #kn-input-field_51
+  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+  .control { margin-right: .5em;}
+
+ #kn-input-field_54
+  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+  .control { margin-right: .5em;}
+
+#kn-input-field_75
+  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+  .control { margin-right: .5em;}
+
+/*Mobile Detail labels for printing*/
+
+/* Prints 3 pages */
+#view_212 .kn-detail-label { background-color: transparent; min-width: 60% !important;}
+#view_236 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+#view_214 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+
+/* Prints 4 pages */
+#view_105 .kn-detail-label { background-color: transparent; min-width: 60% !important;}
+#view_237 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+#view_184 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+#view_195 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+
+/********************************************/
+/****** Print Application Header ************/
+/********************************************/
+#kn-scene_65, #kn-scene_83 {
+  counter-reset: page;
+}
+#kn-scene_65 .view-group, #kn-scene_83 .view-group {
+  display: block; /* avoids text overlapping */
+}
+
+.image-header-container {
+  display: block;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  break-before:page;
+}
+
+.image-seal {
+  content:url("https://www.austintexas.gov/sites/default/files/images/Transportation/Home_Page_Gallery/2023%20Austin%20Transportation%20Public%20Works%20Branding%20Guide%2004.28.23_Color%20stack.png");
+  width: 152px; 
+  height: 113.324px;
+  display: inline-block; 
+  vertical-align: top;
+  border-right: 3px solid #2B5EA0;
+}
+
+.text-header {
+  justify-content: center;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  display: inline-block; 
+  vertical-align: top; 
+  margin-left: 10px;
+}
+
+.header-title {
+  color: #2B5EA0;
+  font-weight:lighter;
+  font-size:1.5em;
+}
+
+/* Page Number Counter setup */
+.page-counter {
+  display:block;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.page-counter .page-number::before {
+  counter-increment: page;
+  content: counter(page);
+}
+
+/* For mobile screens step indicator */ 
+@media only screen and (max-width: 600px) {
+  .progressbar li:before{
+    margin-top: -33px;
+    line-height: 18px;
+    width:20px;
+    height:20px;
+    border-width: 1px;
+  }
+  .progressbar li.active::before{
+    border-width: 1px;
+  }
+  
+  .progressbar li, .progressbar li.active, .progressbar li.inactive {
+    font-size: 11px;
+    padding-top: 15px;
+  }
+  
+  .progressbar li:after{
+    border-left: 1px solid white;
+    height: 10px;
+    margin-top: -2em;
+  }
+
 }
