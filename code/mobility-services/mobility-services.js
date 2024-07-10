@@ -1,11 +1,25 @@
 /***************************************/
+/***** Print Menu Button ************/
+/***************************************/
+function printMenuButton(view_id) {
+  $(document).on('knack-view-render.' + view_id, function(event, view, data) {
+      $('#' + view_id + ' .knMenuLink').click(function(e) {
+        window.print();
+      });
+  });
+}
+
+printMenuButton('view_227'); // Print 3 pages
+printMenuButton('view_228'); // Print 4 pages
+
+/***************************************/
 /**** Input Mask number for SSN ********/
 /***************************************/
 
 $(document).on('knack-view-render.any', function (event, view, data) {
   $('input#field_33').keyup(function(event) { // validates typing
     this.value = this.value.replace(/[-]/g, ''); // replace hyphens with nothing
-    console.log(event)
+
     if (event.key === 'Backspace') { // ignore if backspace
       return;
     } else if (event.key === ' ') { // reject " "
@@ -14,9 +28,9 @@ $(document).on('knack-view-render.any', function (event, view, data) {
       this.value = this.value.replace(/[^0-9\s-]+/g, '');
     }
     if (this.value.charAt(3) != " "){
-      this.value = this.value.replace(/^(.{3})(.*)$/, "$1 $2"); // replace if no space at 4th
+      this.value = this.value.replace(/^(.{3})(.*)$/, "$1 $2"); // replace if no space at 4th position
     }
-    if (this.value.charAt(6) != " "){ // replace if no spaces at 7th
+    if (this.value.charAt(6) != " "){ // replace if no spaces at 7th position
       this.value = this.value.replace(/^(.{6})(.*)$/, "$1 $2");
     }
 
@@ -24,53 +38,52 @@ $(document).on('knack-view-render.any', function (event, view, data) {
   // Validation
   $("input#field_33").attr('maxlength', 11);
   $("input#field_33").attr('placeholder',"___ __ ____");
+
 });
 
 /********************************************************/
-/***** Show character limit on paragraph text type ******/
+/********** Show character limit on text type ***********/
 /********************************************************/
 function showCharacterLimit(view_id, field_id, charLimit) {
-  $( document ).ready(function() {
-    const charLeftText = "<p class='typed-chars'>" + charLimit +  " characters allowed</p>";
-    $(".kn-form.kn-view." + view_id + " form #" + field_id).after(charLeftText);
-    $(".kn-form.kn-view."+ view_id + " form #" + field_id).on('input',function(e){
-      const $input = $(this);
-      const charCount = $input.val().length;
-      const totalChar = charLimit - charCount;
-      if (charCount > charLimit) {
-        $input.siblings('.typed-chars').css({"color": "#ff0000", "font-weight": "bold"});
-        $input.siblings('.typed-chars').text(Math.abs(totalChar) + " characters over limit");
-      } else {
-        $input.siblings('.typed-chars').css({"color": "#4a4a4a", "font-weight": "normal"});
-        if (charCount == 0) {
-          $input.siblings('.typed-chars').text(totalChar + " characters allowed");
-        } else {
-          $input.siblings('.typed-chars').text(totalChar + " characters left");
-        }
-      }
+  // Function returns list as message string and css dictionary based on the input length and character limit
+  function showMessage(inputField) {
+    const fieldLength = inputField.val().length;
+    var inputLength = Math.abs(charLimit - fieldLength); // No negative numbers 
+    var fieldText = fieldLength == 0 ? "allowed" : "left";
+    var cssField = {"color": "#4a4a4a", "font-weight": "normal"};
+    if (fieldLength > charLimit) { // if the length is over the character limit change the CSS and text
+      cssField = {"color": "#ff0000", "font-weight": "bold"}; // make text red and bold instead
+      fieldText = "over limit"; // Will say "XXX characters over limit" instead
+    }
+    return [inputLength + " characters " + fieldText,cssField]; // returns list as [str message, dict css]
+  }
+
+  // Shows the message after field input based on character limit and length
+  $(document).on("knack-view-render." + view_id, function(event, view, data) {
+    // When first viewing the field input
+    const formViewFieldID = ".kn-form.kn-view."+ view_id + " form #" + field_id;
+    const fieldMessage = showMessage($(formViewFieldID))[0]; 
+    $(formViewFieldID).after(`<p class='typed-chars'>${fieldMessage}</p>`);
+    
+    // When user is typing in the input field change the text and CSS
+    $(document).ready(function() { 
+      $(formViewFieldID).on('input',function(e){
+        const $input = $(this);
+        const inputMessage = showMessage($input)[0];
+        const cssField = showMessage($input)[1];
+        $input.siblings('.typed-chars').text(inputMessage); // Set text message of field
+        $input.siblings('.typed-chars').css(cssField); // Set CSS of typed-chars class
+      });
     });
   });
-}
+};
 
-const editViewID = 'view_100'; // edit application page view
-const bgInfoViewID = 'view_83'; // background info page view
 const textBoxFieldIDs = [48, 49, 52, 53, 76, 86, 56]; // lists paragraph fields
-
-// Character limit on Background Information page
-// This is when applicant first fills out application
-$(document).on("knack-view-render."+ bgInfoViewID, function(event, view, data) {
-  for (let i = 0; i < textBoxFieldIDs.length; i++) {
-    showCharacterLimit(editViewID,'field_'+ textBoxFieldIDs[i],500);
-  }
-});
-
-// Character Limit on Edit Application page
-// BUG - Doesn't read current input charCount after submission
-$(document).on("knack-view-render." + editViewID, function(event, view, data) {
-  for (let i = 0; i < textBoxFieldIDs.length; i++) {
-    showCharacterLimit(editViewID,'field_'+ textBoxFieldIDs[i],500);
-  }
-});
+// Character limit 
+for (let i = 0; i < textBoxFieldIDs.length; i++) {
+  showCharacterLimit('view_83','field_'+ textBoxFieldIDs[i],500); // background info page view
+  showCharacterLimit('view_155','field_'+ textBoxFieldIDs[i],500); // edit application page view
+}
 
 /********************************************************/
 /** Relabel Attachment Links in Tables to 'Attachment' **/
@@ -85,7 +98,7 @@ $(document).on('knack-view-render.any', function(event, view, data) {
 $(document).on('knack-scene-render.any', function(event, view) {
   var $disabledTriggerButton = $(".trigger-button-large-disabled").parent();
   $disabledTriggerButton.removeClass("kn-action-link");
-})
+});
 
 /********************************************/
 /*************** Big Buttons ****************/
