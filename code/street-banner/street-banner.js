@@ -331,6 +331,17 @@ $(document).on('knack-view-render.view_3678', function(event, page) {
     bigButton('manage-wallet', 'view_3678', "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
 });
 
+  //***RESERVATION CALENDAR BUTTONS***
+$(document).on('knack-view-render.view_3728', function(event, page) {
+  // create large button on the home page
+    bigButton('lpb-rsvp', 'view_3728', "https://atd.knack.com/street-banners#lpb-reservation-calendar", "flag-o", "Lamppost | RSVP Calendar");
+});
+
+$(document).on('knack-view-render.view_3729', function(event, page) {
+  // create large button on the home page
+    bigButton('ots-rsvp', 'view_3729', "https://atd.knack.com/street-banners#ots-reservation-calendar", "flag-checkered", "Over-the-Street | RSVP Calendar");
+});
+
 /*******************************************/
 /*** Disable Breadcrumb Navigation Links ***/
 /*******************************************/
@@ -562,5 +573,3 @@ $(document).on('knack-view-render.view_3665', function(event, page) {
     }
   })
 })
-
-
