@@ -919,3 +919,21 @@ $(document).on("knack-view-render.view_794", function (event, page) {
 $(document).on("knack-scene-render.scene_340", function () {
   changeFieldColor(".field_930", colorMapOne);
 });
+
+var viewsToFetch = ["view_1161", "view_1162", "view_1163", "view_1165", "view_1166", "view_1167"]
+// When the form in view 1020 has been submitted, refetch the views - New SR - (Add Job)
+$(document).on("knack-form-submit.view_1020", function (event, view, data) {
+    viewsToFetch.forEach(view => Knack.views[view].model.fetch())
+});
+
+var viewsToFetchUserAdds = ["view_867", "view_865", "view_870", "view_1062", "view_1061", "view_1068"]
+//When the form in view 1181 has been submitted, refetch the views - Requester SR Details SR - (Add Job)
+$(document).on("knack-form-submit.view_1181", function (event, view, data) {
+    viewsToFetchUserAdds.forEach(view => Knack.views[view].model.fetch())
+});
+
+var viewsToFetchAdmin = ["view_1183", "view_1191", "view_1185", "view_1186", "view_1187", "view_1188"]
+ //When the form in view 1182 has been submitted, refetch the views - Manage SR - Admin (Add Job)
+$(document).on("knack-form-submit.view_1182", function (event, view, data) {
+    viewsToFetchAdmin.forEach(view => Knack.views[view].model.fetch())
+});
