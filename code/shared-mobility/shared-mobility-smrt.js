@@ -160,7 +160,7 @@ $(document).on("knack-scene-render.scene_340", function () {
 });
 
 
-/******* Add invoice to multiple impoundments *******/
+/******* Associate impoundments with invoice *******/
 
 function getTodaysDate() {
   var today = new Date()
@@ -218,6 +218,8 @@ function handleAddImpoundmentsClick(id, viewKey) {
                   "id": Knack.user.id,
                   "identifier": Knack.user.attributes.values.name.full
                 }],
+              "field_405": [{id:id}], // impoundment id
+              "field_411": "UNPAID", // transaction status
               "crumbtrail": {"invoice-details_id": invoiceId}
             }
             return(newInvoiceItem)
@@ -237,7 +239,6 @@ function handleAddImpoundmentsClick(id, viewKey) {
               console.error("Failed to add invoice to impoundments")
             });
           })
-
 
     selectedImpoundments.push({
       id: id,
@@ -333,7 +334,6 @@ function addCheckboxes(view) {
     var $checkbox = $(this);
     toggleCheckbox($checkbox);
   });
-
 
 }
 
