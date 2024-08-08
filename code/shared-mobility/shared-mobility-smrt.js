@@ -225,6 +225,7 @@ function handleAddImpoundmentsClick(id, viewKey) {
             return(newInvoiceItem)
           })
           .then(function(newInvoiceItem) {
+            console.log("Creating invoice item:", newInvoiceItem)
             $.ajax({
               type: "POST",
               url: "https://api.knack.com/v1/pages/scene_231/views/view_459/records",
@@ -235,8 +236,12 @@ function handleAddImpoundmentsClick(id, viewKey) {
             .then(function (res) {
               Knack.views["view_459"].model.fetch();
             })
-            .fail(function () {
-              console.error("Failed to add invoice to impoundments")
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("Failed to create new invoice item")
+                console.error("Status:", textStatus);
+                console.error("Error:", errorThrown);
+                console.error("Response Text:", jqXHR.responseText);
+                console.error("Status Code:", jqXHR.status);
             });
           })
 
@@ -274,9 +279,14 @@ function handleAddImpoundmentsClick(id, viewKey) {
           // refetch view
           Knack.views[viewKey].model.fetch();
         })
-        .fail(function () {
+        .fail(function (jqXHR, textStatus, errorThrown) {
           $("#" + id + "-spinner").remove();
-          console.error("Failed to add invoice to impoundments")
+          console.error("Failed to set impoundment invoice ID")
+          console.error("Failed to create new invoice item")
+          console.error("Status:", textStatus);
+          console.error("Error:", errorThrown);
+          console.error("Response Text:", jqXHR.responseText);
+          console.error("Status Code:", jqXHR.status);
         });
     });
 }
