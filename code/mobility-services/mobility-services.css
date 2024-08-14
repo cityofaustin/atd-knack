@@ -272,10 +272,10 @@ a.small-button {
 /********************************************/
 /****** Print Application Header ************/
 /********************************************/
-#kn-scene_65, #kn-scene_83 {
+#kn-scene_65, #kn-scene_83, #kn-scene_100, #kn-scene_101 {
   counter-reset: page;
 }
-#kn-scene_65 .view-group, #kn-scene_83 .view-group {
+#kn-scene_65 .view-group, #kn-scene_83 .view-group, #kn-scene_100 .view-group, #kn-scene_101 .view-group  {
   display: block; /* avoids text overlapping */
 }
 
