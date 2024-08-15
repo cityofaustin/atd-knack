@@ -132,13 +132,21 @@ function printMenuButton(view_id) {
 }
 
 /* Print 3 pages menu view button */
-$(document).on('knack-view-render.view_227', function(event, view, data) {
+$(document).on('knack-view-render.view_227', function(event, view, data) { // Customer Print
   printMenuButton('view_227');
 });
 
+$(document).on('knack-view-render.view_315', function(event, view, data) { // Reviewer Print
+  printMenuButton('view_315');
+});
+
 /* Print 4 pages menu view button */
-$(document).on('knack-view-render.view_228', function(event, view, data) {
+$(document).on('knack-view-render.view_228', function(event, view, data) { // Customer Print
   printMenuButton('view_228');
+});
+
+$(document).on('knack-view-render.view_304', function(event, view, data) { // Reviewer Print
+  printMenuButton('view_304'); 
 });
 
 /***************************************
