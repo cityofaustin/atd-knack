@@ -93,3 +93,169 @@ a.small-button {
   padding: 14px 28px;
   font-size: 16px;
 }
+
+/***************************************/
+/*********** Trigger Buttons ***********/
+/***************************************/
+.trigger-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+/***************************************/
+/*********** Trigger Buttons ***********/
+/***************************************/
+.trigger-button-large {
+  width: 250px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button-large:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+.trigger-button-large-disabled {
+  width: 250px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: #cbcbcb;
+  color: #777777;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  text-align: center;
+  opacity: 0.6;
+  display: inline-block;
+  outline-color: transparent;
+}
+
+a.trigger-button-large {text-decoration: none;}
+
+#kn-scene_444 .kn-back-link {
+  display: none;
+}
+#kn-scene_455 .kn-back-link {
+  display: none;
+}
+/*********************************/
+/********* Mobile Styling ********/
+/*********************************/
+@media (max-width: 800px) {
+
+/* Form Views */
+  /* Increase size of buttons with type="submit" */
+  button[type="submit"] {
+    height: 64px !important;
+    font-size: 32px !important;
+    min-width: fit-content;
+    width: 100%;
+  }
+  /* Increase font size of form field labels */
+  .kn-label {
+    font-size: 22px;
+  }
+  .kn-detail-body {
+    font-size: 22px;
+  }
+  .kn-read-only {
+    font-size: 22px;
+  }
+  /* Increase height of text fields */
+  input[type="text"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* Increase height of email fields */
+  input[type="email"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+   /* Increase font size of checkbox options */
+  .option.checkbox {
+    font-size: 22px;
+  }
+ /* Increase font size of Choose File button */
+  input[type="file"] {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  .custom-file-upload {
+    border: 3px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+
+/* Screen Selection */
+  /* Increase size of back links at bottom of pages */
+  a.ang-link {
+      font-size: 22px !important;
+  }
+  /* Increase height of selected field */
+  .chzn-single {
+    height: 48px !important;
+  }
+  .kn-select {
+    height: 48px !important;
+  }
+  select {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+  /* Increase height of container surrounding selected field */
+  .chzn-container {
+    height: 48px;
+    font-size: 22px !important;
+  }
+  .chzn-container > a > span {
+    font-size: 22px !important;
+  }
+  /* Increase font size of dropdown text in selected field */
+  .chzn-drop {
+    font-size: 22px !important;
+  }
+
+/* FA Icons */
+  /* Increase size of Font Awesome icons */
+  .icon .fa {
+      font-size: 22px !important;
+  }
+
+/* Buttons */
+  /* Increase size of search button */
+  .kn-button.search {
+    height: 48px;
+  }
+   /* Increase default menu button size */
+  .kn-button
+  {
+    height: 48px !important;
+    font-size: 22px !important;
+  }
+
+}/* End Mobile Styling */
