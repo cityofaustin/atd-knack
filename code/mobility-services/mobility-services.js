@@ -35,7 +35,7 @@ $(document).on('knack-view-render.view_57', function(event, page) {
 });
 
 /***************************************/
-/**** Input Mask number for SSN ********/
+/**** Input validation for SSN ********/
 /***************************************/
 $(document).on('knack-view-render.any', function (event, view, data) {
   $('input#field_33').keyup(function(event) { // validates typing
@@ -48,18 +48,8 @@ $(document).on('knack-view-render.any', function (event, view, data) {
     } else if (isNaN(Number(event.key))) { // if not number
       this.value = this.value.replace(/[^0-9\s-]+/g, '');
     }
-    if (this.value.charAt(3) != " "){
-      this.value = this.value.replace(/^(.{3})(.*)$/, "$1 $2"); // replace if no space at 4th position
-    }
-    if (this.value.charAt(6) != " "){ // replace if no spaces at 7th position
-      this.value = this.value.replace(/^(.{6})(.*)$/, "$1 $2");
-    }
-
   });
-  /* Validation */
-  $("input#field_33").attr('maxlength', 11);
-  $("input#field_33").attr('placeholder',"___ __ ____");
-
+  $("input#field_33").attr('maxlength', 4); // only max is 4 length
 });
 
 /********************************************************/
