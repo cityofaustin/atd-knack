@@ -257,6 +257,11 @@ function handleAddImpoundmentsClick(id, viewKey) {
 
   });
 
+  // if no impoundments have been selected, remove the spinner
+  if (selectedImpoundments.length < 1) {
+      $("#" + id + "-spinner").remove();
+  }
+
 
   // For each selected impoundment, make call to set invoice
   selectedImpoundments.forEach(function (item) {
