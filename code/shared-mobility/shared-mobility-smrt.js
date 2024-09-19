@@ -158,3 +158,225 @@ $(document).on("knack-scene-render.scene_339", function () {
 $(document).on("knack-scene-render.scene_340", function () {
   disableBreadCrumbsNonAdmin();
 });
+
+
+/******* Associate impoundments with invoice *******/
+
+function getTodaysDate() {
+  var today = new Date()
+  return((today.getMonth() + 1) + "/" + today.getDate() + "/"+ today.getFullYear())
+}
+
+var headers = {
+  "X-Knack-Application-ID": "6669fb3cd43ca60027942eef",
+  Authorization: Knack.getUserToken(),
+  "content-type": "application/json",
+};
+
+
+// Create invoice items from items after selection and submission
+function handleAddImpoundmentsClick(id, viewKey) {
+
+  var impoundmentDetailsView = "view_392";
+  var impoundmentDetailsScene = "scene_210";
+
+  // Get current invoice knack ID
+  var hrefArray = window.location.href.split("/");
+  var invoiceId = hrefArray[hrefArray.length - 2];
+
+  // Show spinner
+  $("#" + id).append(
+    '<span id="' +
+      id +
+      '-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
+  );
+
+  // Cycle through selected checkboxes, get their id and create payload
+
+  var selectedImpoundments = [];
+
+  $("#" + viewKey + " tbody input[type=checkbox]:checked").each(function () {
+    // Get id of row
+    var id = $(this).closest("tr").attr("id");
+
+     $.ajax({
+      type: "GET",
+      url:
+        "https://api.knack.com/v1/scenes/" + impoundmentDetailsScene + "/views/" +
+        impoundmentDetailsView + "/records/" + id,
+      headers: headers,
+      contentType: "application/json",
+      })
+        .then(function (res) {
+          newInvoiceItem = {
+              "field_404": res["field_121_raw"], // provider
+              "field_407": res["field_128_raw"], // impound fee: transaction amount
+              "field_454": res["field_115"], // description: date of impound
+              "field_403": getTodaysDate(), // Created Date
+              "field_401": "Impoundment Fee",
+              "field_408": [{ // Created By
+                  "id": Knack.user.id,
+                  "identifier": Knack.user.attributes.values.name.full
+                }],
+              "field_405": [{id:id}], // impoundment id
+              "field_411": "UNPAID", // transaction status
+              "crumbtrail": {"invoice-details_id": invoiceId}
+            }
+            return(newInvoiceItem)
+          })
+          .then(function(newInvoiceItem) {
+            console.log("Creating invoice item:", newInvoiceItem)
+            $.ajax({
+              type: "POST",
+              url: "https://api.knack.com/v1/pages/scene_231/views/view_459/records",
+              headers: headers,
+              data: JSON.stringify(newInvoiceItem),
+              contentType: "application/json",
+            })
+            .then(function (res) {
+              Knack.views["view_459"].model.fetch();
+            })
+            .fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("Failed to create new invoice item")
+                console.error("Status:", textStatus);
+                console.error("Error:", errorThrown);
+                console.error("Response Text:", jqXHR.responseText);
+                console.error("Status Code:", jqXHR.status);
+            });
+          })
+
+    selectedImpoundments.push({
+      id: id,
+      payload: {
+        "field_467": [{
+          "id": invoiceId,
+        }]
+      }
+    });
+
+
+  });
+
+  // if no impoundments have been selected, remove the spinner
+  if (selectedImpoundments.length < 1) {
+      $("#" + id + "-spinner").remove();
+  }
+
+
+  // For each selected impoundment, make call to set invoice
+  selectedImpoundments.forEach(function (item) {
+    $.ajax({
+      type: "PUT",
+      url:
+        "https://api.knack.com/v1/scenes/scene_231/views/" +
+        viewKey + "/records/" + item.id,
+      headers: headers,
+      data: JSON.stringify(item.payload),
+      contentType: "application/json",
+      })
+        .then(function (res) {
+          // Remove spinner after invoice item record is created
+          $("#" + id + "-spinner").remove();
+          // Clear all checkboxes
+          $(".table-checkboxes").each(function (event) {
+            $(this).prop("checked", false);
+          });
+          // refetch view
+          Knack.views[viewKey].model.fetch();
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          $("#" + id + "-spinner").remove();
+          console.error("Failed to set impoundment invoice ID")
+          console.error("Failed to create new invoice item")
+          console.error("Status:", textStatus);
+          console.error("Error:", errorThrown);
+          console.error("Response Text:", jqXHR.responseText);
+          console.error("Status Code:", jqXHR.status);
+        });
+    });
+}
+
+function addCheckboxes(view) {
+  // Add the checkbox to to the header to select/unselect all
+  $("#" + view.key + ".kn-table thead tr").prepend(
+    '<th class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></th>'
+  );
+
+  $("#" + view.key + ".kn-table thead input").change(function () {
+    $("." + view.key + ".kn-table tbody tr input").each(function () {
+      $(this).attr(
+        "checked",
+        $("#" + view.key + ".kn-table thead input").attr("checked") !==
+          undefined
+      );
+    });
+  });
+
+  // Add a checkbox to each row in the table body
+  $("#" + view.key + ".kn-table tbody tr").each(function () {
+    $(this).prepend(
+      '<td class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></td>'
+    );
+  });
+
+  function toggleCheckbox($checkbox) {
+    $checkbox.is(":checked")
+      ? $checkbox.prop("checked", false)
+      : $checkbox.prop("checked", true);
+  }
+
+  // Add click event handler to checkbox parent to check/uncheck child box
+  $("#" + view.key + " .table-checkboxes-parent").click(function (event) {
+    // If table header, check/uncheck all checkboxes
+    if ($(this).is("th")) {
+      var $headerCheckbox = $($(this).children()[0]);
+      toggleCheckbox($headerCheckbox);
+      $(
+        "#" + view.key + " td.table-checkboxes-parent input.table-checkboxes"
+      ).each(function () {
+        $headerCheckbox.is(":checked")
+          ? $(this).prop("checked", true)
+          : $(this).prop("checked", false);
+      });
+    } else {
+      var $checkbox = $($(this).children()[0]);
+      toggleCheckbox($checkbox);
+    }
+  });
+
+  // Restore default checkbox toggle
+  $("#" + view.key + " .table-checkboxes").click(function (event) {
+    var $checkbox = $(this);
+    toggleCheckbox($checkbox);
+  });
+
+}
+
+function appendSubmitButton(buttonString, selector, handler, viewKey) {
+  var id = buttonString.toLowerCase().split(" ").join("-");
+  $(selector).append(
+    '<a id="' +
+      id +
+      '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
+      buttonString +
+      "</span></a>"
+  );
+
+  $("#" + id).click(function () {
+    handler(id, viewKey);
+  });
+}
+
+
+// the view with the Provider Impoundments table
+$(document).on("knack-view-render.view_1044", function(event, view, data) {
+  addCheckboxes(view);
+
+  appendSubmitButton(
+    "Add to invoice items",
+    "#" + view.key + " > .kn-table-wrapper",
+    handleAddImpoundmentsClick,
+    view.key,
+  );
+});
+
