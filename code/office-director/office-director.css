@@ -1,0 +1,97 @@
+/***************************************/
+/******* Form Validation Styling *******/
+/***************************************/
+.kn-notification { background-color: #2acee3 !important; font-size: 1.25em; color: black;}
+.is-confirmation { background-color: #caf4bc !important; font-size: 1.25em; color: black;}
+.is-warning {  background-color: #ffe09a !important; font-size: 1.25em; color: black;}
+.is-alert { background-color: #ff9b9c !important; font-size: 1.25em; color: black;}
+
+/***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+/*Centers icon vertically on a line*/
+.fa { vertical-align: baseline; }
+/*Icon rests at the bottom of a line*/
+.fa-bot { vertical-align: text-bottom; }
+/*Icon touches the top of a line*/
+.fa-top { vertical-align: text-top; }
+/*Icon colors*/
+.fa-gold { color: goldenrod; }
+.fa-red { color: red; }
+.fa-green { color: green; }
+.fa-yellow { color: yellow; }
+.fa-orange { color: orange; }
+.fa-blue { color: blue; }
+.fa-purple { color: purple; }
+
+/****************************************/
+/********** Custom CSS Classes **********/
+/****************************************/
+/*Call this class anytime you want to use this cursor*/
+.disabled { cursor: not-allowed; }
+/*Call this class anytime you want to center button text*/
+.centered-text { text-align: center; }
+
+/****************************************/
+/************* Modal Styling ************/
+/****************************************/
+/*Close Modal 'X' Button*/
+.delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
+.close-modal {border: #495057 !important; background-color: #495057 !important;}
+.delete:before { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
+
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
+.big-button-container {
+  padding: 20px 20px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 2.5em;
+  max-width: 15em;
+  display: block;
+}
+ 
+.big-button-container:hover {
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+.big-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+  pointer-events: none;
+}
+ 
+a.big-button-container { 
+  text-decoration: none;
+}
+
+/***************************************/
+/************ Small Buttons ************/
+/***************************************/
+.small-button-container {
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #babbbc;
+  color: white;
+}
+
+.small-button-container:hover {
+  background-color: #4c4c4c;
+  cursor: pointer;
+}
+
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+}
+
+a.small-button {
+  text-decoration: none;
+}
