@@ -33,6 +33,10 @@ $(document).on('knack-view-render.view_57', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
     bigButton('available-services', 'view_57', "https://atd.knack.com/mobility-services#portal/", "arrow-right", "Mobility Services Portal");
 });
+$(document).on('knack-view-render.view_383', function(event, page) {
+  // create large START APPLICATION button on the Operating Authority page
+    bigButton('start-application', 'view_383', "https://atd.knack.com/mobility-services#application-operating-authority", "arrow-right", "Start Operating Authority Application");
+});
 
 /***************************************/
 /**** Input validation for SSN ********/
@@ -121,7 +125,7 @@ function printMenuButton(view_id) {
   });
 }
 
-/* Print 3 pages menu view button */
+/* Print 3 pages menu view button - Chauffeur Permit*/
 $(document).on('knack-view-render.view_227', function(event, view, data) { // Customer Print
   printMenuButton('view_227');
 });
@@ -130,13 +134,18 @@ $(document).on('knack-view-render.view_315', function(event, view, data) { // Re
   printMenuButton('view_315');
 });
 
-/* Print 4 pages menu view button */
+/* Print 4 pages menu view button - Chauffeur Permit*/
 $(document).on('knack-view-render.view_228', function(event, view, data) { // Customer Print
   printMenuButton('view_228');
 });
 
 $(document).on('knack-view-render.view_304', function(event, view, data) { // Reviewer Print
   printMenuButton('view_304'); 
+});
+
+/* Print Operating Authority Notary Page */
+$(document).on('knack-view-render.view_480', function(event, view, data) { // Company Print
+  printMenuButton('view_480'); 
 });
 
 /***************************************
@@ -190,3 +199,43 @@ $(document).on("knack-view-render.any", function (event, page) {
     customizeLoginButton(viewId);
   }
 });
+
+/****************************************/
+/*** Dropdown Menu Buttons Navigation ***/
+/****************************************/
+function dropdownMenuItem(recordId, route, linkName) {
+  return (
+    `<li class="kn-button">\
+      <a href="#application-operating-authority/business-information/${recordId}/${route}/${recordId}">\
+        <span>${linkName}</span>\
+      </a>\
+    </li>`)
+}
+
+// Dictonary of views needing dropdown menu in editable Operating Authority (OA) pages
+var viewNameOA = {687:"1 - Service Type",676:"2 - Business Information",689:"3 - Insurance", 
+691:"4 - Authorized Person", 693:"5 - Vehicle Information", 695:"6 - Review and Submit"};
+
+for (let key in viewNameOA) {
+  $(document).on('knack-view-render.view_' + key, function(event, view, record) {
+    var recordId = view.scene.scene_id;
+    var currentMenu = viewNameOA[key];
+
+    $(`<div class="details-dropdown-menu tabs">\
+      <ul id="oa-menu-list">\
+        <li class="oa-dropdown-menu kn-dropdown-menu kn-button">\
+          <a href="#application-operating-authority/business-information/${recordId}/business-information/${recordId}" data-kn-slug="#application-operating-authority">\
+            <span class="nav-dropdown-link">${currentMenu}</span>\
+            <span class="kn-dropdown-icon fa fa-caret-down" />\
+          </a>\
+          <ul class="kn-dropdown-menu-list oa-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+            ${dropdownMenuItem(recordId, "application-operating-authority-service-type", "1 - Service Type")}\
+            ${dropdownMenuItem(recordId, "business-information", "2 - Business Information")}\
+            ${dropdownMenuItem(recordId, "insurance", "3 - Insurance")}\
+            ${dropdownMenuItem(recordId, "authorized-person", "4 - Authorized Person")}\
+            ${dropdownMenuItem(recordId, "application-operating-authority-vehicles", "5 - Vehicle Information")}\
+            ${dropdownMenuItem(recordId, "application-operating-authority-details", "6 - Review and Submit")}\
+          </ul>\
+    </div><br>`).appendTo("#view_" + key)
+  });
+}

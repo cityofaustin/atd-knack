@@ -46,13 +46,22 @@
 }
 
 /* This is for the bars */
-.progressbar li{
+.progressbar li{ /* Chauffeur Permit Form */
   list-style-type: none;
   float: left;
   width: 25%;
   position: relative;
   text-align: left;
   margin-left: -5px;
+}
+
+.progressbar #oa { /* Operating Authority Form */
+  list-style-type: none;
+  float: left;
+  width: 15%;
+  position: relative;
+  text-align: left;
+  margin-left: -1px;
 }
 .progressbar li + li {
   margin-top: unset;
@@ -194,7 +203,7 @@ a.big-button-container {
 /****************************************/
 /************ Button Effects ************/
 /****************************************/
-.disabled { cursor: not-allowed; }
+//.disabled { cursor: not-allowed; }
 
 /***************************************/
 /********* FA Icon Positioning *********/
@@ -227,6 +236,53 @@ a.big-button-container {
 
 a.small-button {
   text-decoration: none;
+}
+/****************************************/
+/*** Dropdown Menu Buttons Navigation ***/
+/****************************************/
+
+/* hide custom menu if on mobile */
+@media (max-width: 799px) {
+  #tia-menu-list {
+    display: none;
+  }
+}
+
+/* hide knack menu buttons if on desktop */
+@media (min-width: 799px) {
+  #view_163 {
+    display: none;
+  }
+}
+
+/*list, list item, and button stylings*/
+#oa-menu-list {
+  border-bottom: 0 !important
+}
+
+#oa-menu-list li {
+  margin-right: .5em;
+  box-shadow: 0px 2px 4px 0px gray;
+}
+
+#oa-menu-list .kn-button a {
+  color: #163f6e;
+  font-size: 1.1em;
+  border-bottom: 0;
+  padding-top:3px;
+}
+
+.oa-dropdown-menu-list .kn-button {
+  border-radius: 0;
+}
+
+.oa-dropdown-menu-list li {
+  border: 0;
+  margin-right: 0 !important;
+} 
+
+.oa-dropdown-menu-list li:hover {
+  background-color: rgb(235,235,235);
 }
 
 /******************************************************/
@@ -275,7 +331,7 @@ a.small-button {
 #kn-scene_65, #kn-scene_83, #kn-scene_100, #kn-scene_101 {
   counter-reset: page;
 }
-#kn-scene_65 .view-group, #kn-scene_83 .view-group, #kn-scene_100 .view-group, #kn-scene_101 .view-group  {
+#kn-scene_65 .view-group, #kn-scene_83 .view-group, #kn-scene_100 .view-group, #kn-scene_101 .view-group {
   display: block; /* avoids text overlapping */
 }
 
@@ -347,4 +403,18 @@ a.small-button {
     margin-top: -2em;
   }
 
+}
+
+/* Print Operating Authoriy Notary */
+/*640 and 639 is text content for notary. 614 is form*/
+#view_640, #view_639 { 
+    display:none;
+}
+@media print {
+  #view_614 {
+    display:none;
+  }
+  #view_640, #view_639 {
+    display:contents;
+  }
 }
