@@ -198,10 +198,10 @@ $(document).on("knack-view-render.any", function (event, page) {
  $(document).on('knack-view-render.view_584', function(event, view, data) {
   console.log("Quiz manager script is running!");
 
-  // API credentials for Knack
-  const API_CREDENTIALS = {
-    appId: '674f773be31ff5028042cd64',
-    apiKey: '7dc6d273-87d9-4fae-a1ad-1ca5837707c2'
+  const headers = {
+    'X-Knack-Application-Id': Knack.application_id,
+    'Authorization': Knack.getUserToken(),
+    'Content-Type': 'application/json'
   };
 
   // Global state variables
@@ -276,10 +276,7 @@ $(document).on("knack-view-render.any", function (event, page) {
       $.ajax({
         url: 'https://api.knack.com/v1/objects/object_19/records',
         type: 'GET',
-        headers: {
-          'X-Knack-Application-Id': API_CREDENTIALS.appId,
-          'X-Knack-REST-API-KEY': API_CREDENTIALS.apiKey
-        },
+        headers: headers,
         success: function(response) {
           console.log('Available quizzes:', response);
           resolve(response.records);
@@ -298,10 +295,7 @@ $(document).on("knack-view-render.any", function (event, page) {
         $.ajax({
           url: `https://api.knack.com/v1/objects/object_21/records?filters=[{"field":"field_331","operator":"is","value":"${quizId}"}]&page=${page}&rows_per_page=1000`,
           type: 'GET',
-          headers: {
-            'X-Knack-Application-Id': API_CREDENTIALS.appId,
-            'X-Knack-REST-API-KEY': API_CREDENTIALS.apiKey
-          },
+          headers: headers,
           success: function(response) {
             if (response && response.records) {
               const newAccumulator = accumulator.concat(response.records);
@@ -384,11 +378,7 @@ $(document).on("knack-view-render.any", function (event, page) {
     $.ajax({
       url: 'https://api.knack.com/v1/objects/object_22/records',
       type: 'POST',
-      headers: {
-        'X-Knack-Application-Id': API_CREDENTIALS.appId,
-        'X-Knack-REST-API-KEY': API_CREDENTIALS.apiKey,
-        'Content-Type': 'application/json'
-      },
+      headers: headers,
       data: JSON.stringify(data),
       success: function(response) {
         console.log('Quiz results saved successfully:', response);
@@ -475,13 +465,11 @@ $(document).on("knack-view-render.any", function (event, page) {
     const userId = Knack.getUserAttributes().id;
     
     // Get current attempts
-    const attemptsResponse = await $.ajax({
+    const attemptsResponse = await 
+    $.ajax({
       url: `https://api.knack.com/v1/objects/object_22/records?filters=[{"field":"field_332","operator":"is","value":"${userId}"}]`,
       type: 'GET',
-      headers: {
-        'X-Knack-Application-Id': API_CREDENTIALS.appId,
-        'X-Knack-REST-API-KEY': API_CREDENTIALS.apiKey
-      }
+      headers: headers
     });
 
     const attempts = attemptsResponse.records.filter(record => 
@@ -537,10 +525,7 @@ $(document).on("knack-view-render.any", function (event, page) {
         $.ajax({
           url: `https://api.knack.com/v1/objects/object_22/records?filters=[{"field":"field_332","operator":"is","value":"${userId}"}]`,
           type: 'GET',
-          headers: {
-            'X-Knack-Application-Id': API_CREDENTIALS.appId,
-            'X-Knack-REST-API-KEY': API_CREDENTIALS.apiKey
-          }
+          headers: headers
         }),
         fetchQuizzes()
       ]);
