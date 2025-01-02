@@ -273,18 +273,12 @@ $(document).on("knack-view-render.any", function (event, page) {
    ***************************************************************************/
   function fetchQuizzes() {
     return new Promise((resolve, reject) => {
-      $.ajax({
-        url: 'https://api.knack.com/v1/objects/object_19/records',
-        type: 'GET',
-        headers: headers,
-        success: function(response) {
-          console.log('Available quizzes:', response);
-          resolve(response.records);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.error('Failed to fetch quizzes:', { status: jqXHR.status, textStatus, errorThrown });
-          reject(new Error(`Failed to fetch quizzes: ${textStatus}`));
-        }
+      Knack.api.get('objects/object_19/records', {}, function(response) {
+        console.log('Available quizzes:', response);
+        resolve(response.records);
+      }, function(error) {
+        console.error('Failed to fetch quizzes:', error);
+        reject(new Error(`Failed to fetch quizzes: ${error}`));
       });
     });
   }
@@ -292,26 +286,30 @@ $(document).on("knack-view-render.any", function (event, page) {
   function fetchQuestions(quizId) {
     return new Promise((resolve, reject) => {
       function fetchPage(page = 1, accumulator = []) {
-        $.ajax({
-          url: `https://api.knack.com/v1/objects/object_21/records?filters=[{"field":"field_331","operator":"is","value":"${quizId}"}]&page=${page}&rows_per_page=1000`,
-          type: 'GET',
-          headers: headers,
-          success: function(response) {
-            if (response && response.records) {
-              const newAccumulator = accumulator.concat(response.records);
-              if (response.current_page < response.total_pages) {
-                fetchPage(page + 1, newAccumulator);
-              } else {
-                processQuestions(newAccumulator);
-              }
+        const filters = [{
+          field: 'field_331',
+          operator: 'is',
+          value: quizId
+        }];
+        
+        Knack.api.get('objects/object_21/records', {
+          page: page,
+          rows_per_page: 1000,
+          filters: filters
+        }, function(response) {
+          if (response && response.records) {
+            const newAccumulator = accumulator.concat(response.records);
+            if (response.current_page < response.total_pages) {
+              fetchPage(page + 1, newAccumulator);
             } else {
-              reject(new Error('Invalid response format'));
+              processQuestions(newAccumulator);
             }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            console.error('API Error:', { status: jqXHR.status, textStatus, errorThrown });
-            reject(new Error(`Failed to fetch questions: ${textStatus}`));
+          } else {
+            reject(new Error('Invalid response format'));
           }
+        }, function(error) {
+          console.error('API Error:', error);
+          reject(new Error(`Failed to fetch questions: ${error}`));
         });
       }
 
@@ -361,38 +359,24 @@ $(document).on("knack-view-render.any", function (event, page) {
     const userId = Knack.getUserAttributes().id;
     const percentage = (correctAnswers / totalQuestions) * 100;
     
-    // Subtract 6 hours from the current time
     const now = new Date();
     const sixHoursInMs = 6 * 60 * 60 * 1000;
     const adjustedTime = new Date(now.getTime() - sixHoursInMs);
     
     const data = {
-      field_332: [userId],                    // Quiz Taker connection
-      field_333: adjustedTime.toISOString(),  // Date/Time minus 6 hours
-      field_334: percentage,                  // Score percentage
-      field_335: correctAnswers.toString(),   // Correct Answers
-      field_336: totalQuestions.toString(),   // Total Questions
-      field_337: [currentQuiz.id]            // Quiz-Parent connection
+      field_332: [userId],
+      field_333: adjustedTime.toISOString(),
+      field_334: percentage,
+      field_335: correctAnswers.toString(),
+      field_336: totalQuestions.toString(),
+      field_337: [currentQuiz.id]
     };
 
-    $.ajax({
-      url: 'https://api.knack.com/v1/objects/object_22/records',
-      type: 'POST',
-      headers: headers,
-      data: JSON.stringify(data),
-      success: function(response) {
-        console.log('Quiz results saved successfully:', response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.error('Failed to save quiz results:', {
-          status: jqXHR.status,
-          textStatus: textStatus,
-          error: errorThrown,
-          responseText: jqXHR.responseText,
-          sentData: data
-        });
-        alert('Failed to save quiz results. Check browser console for details.');
-      }
+    Knack.api.post('objects/object_22/records', data, function(response) {
+      console.log('Quiz results saved successfully:', response);
+    }, function(error) {
+      console.error('Failed to save quiz results:', error);
+      alert('Failed to save quiz results. Check browser console for details.');
     });
   }
 
@@ -522,10 +506,20 @@ $(document).on("knack-view-render.any", function (event, page) {
       
       // Run API calls in parallel
       const [attemptsResponse, quizzes] = await Promise.all([
-        $.ajax({
-          url: `https://api.knack.com/v1/objects/object_22/records?filters=[{"field":"field_332","operator":"is","value":"${userId}"}]`,
-          type: 'GET',
-          headers: headers
+        new Promise((resolve, reject) => {
+          const filters = [{
+            field: 'field_332',
+            operator: 'is',
+            value: userId
+          }];
+          
+          Knack.api.get('objects/object_22/records', {
+            filters: filters
+          }, function(response) {
+            resolve(response);
+          }, function(error) {
+            reject(error);
+          });
         }),
         fetchQuizzes()
       ]);
