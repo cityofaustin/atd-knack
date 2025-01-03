@@ -70,6 +70,23 @@ $(document).on("knack-view-render.view_97", function(event, page) {
     bigButton("add-time", "view_97", "https://atd.knack.com/hr#add-time/", "plus-circle", "Add Coded Time");
 });
 
+// create large Employee Logs | District Maintenance button on the home page
+$(document).on("knack-view-render.view_760", function(event, page) {
+    bigButton("employee-logs-district-maintenance", "view_760", "https://atd.knack.com/hr#manage-employee-logs/manage-dm-logs/?view_774_filters=%5B%5D", "cubes", "District Maintenance");
+});
+// create large Employee Logs | Pavement Operations button on the home page
+$(document).on("knack-view-render.view_761", function(event, page) {
+    bigButton("employee-logs-pavement-operations", "view_761", "https://atd.knack.com/hr#manage-employee-logs/manage-pvm-logs/?view_777_filters=%5B%5D", "road", "Pavement Operations");
+});
+// create large Employee Logs | District Maintenance button on the home page
+$(document).on("knack-view-render.view_762", function(event, page) {
+    bigButton("employee-logs-utilities-and-structures", "view_762", "https://atd.knack.com/hr#manage-employee-logs/manage-usd-logs/?view_780_filters=%5B%5D", "wrench", "Utilities and Structures");
+});
+// create large Employee Logs | Logistics button on the home page
+$(document).on("knack-view-render.view_827", function(event, page) {
+    bigButton("manage-logistic-logs", "view_827", "https://atd.knack.com/hr#manage-employee-logs/manage-logistic-logs/?view_822_filters=%5B%5D", "truck", "Logistics");
+});
+
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
