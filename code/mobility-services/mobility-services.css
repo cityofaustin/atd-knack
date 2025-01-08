@@ -1,42 +1,44 @@
 /***************************/
 /**** Step Indicator *******/
 /***************************/
-.stepindicator{
-  width: 100%;
+/* General Step Indicator */
+/* Chauffeur Permit Form  */
+.stepindicator {
+  width: 120%;
   z-index: 1;
-  display: flex;
-  position:static;
+  display: inline-flex;
+  position: static;
 }
-.label-stepindicator{
-  display:inline-block;
+.label-stepindicator {
+  display: inline-block;
   width: 1.5em;
-  height:1.5em;
-  background: #005EA2;
+  height: 1.5em;
+  background: #005ea2;
   border-radius: 50%;
   text-align: center;
   font-weight: bold;
   color: white;
   line-height: 1.5em;
-  font-size:1.5em;
+  font-size: 1.5em;
 }
 
-.active-label-stepindicator{
+.active-label-stepindicator {
   font-weight: bold;
-  font-size:1.5em;
-  margin-left:20px;
+  font-size: 1.5em;
+  margin-left: 20px;
 }
-.progressbar{
+.progressbar {
   counter-reset: step;
 }
 
 /* This is for the Circle number */
-.progressbar li:before{
-  content:counter(step);
+.progressbar li:before {
+  content: counter(step);
   counter-increment: step;
   width: 30px;
   height: 30px;
   border: 2px solid #bebebe;
-  display:block;
+  display: block;
   border-radius: 50%;
   line-height: 26px;
   background: white;
@@ -46,7 +48,7 @@
 }
 
 /* This is for the bars */
-.progressbar li{
+.progressbar li {
   list-style-type: none;
   float: left;
   width: 25%;
@@ -54,14 +56,15 @@
   text-align: left;
   margin-left: -5px;
 }
+
 .progressbar li + li {
   margin-top: unset;
 }
 
-.progressbar li:after{
-  content: '';
+.progressbar li:after {
+  content: "";
   position: absolute;
-  width:100%;
+  width: 100%;
   height: 8px;
   background: #979797;
   top: 10px;
@@ -70,38 +73,86 @@
 }
 
 /* Hides the first child bar */
-.progressbar li:first-child:after{
+.progressbar li:first-child:after {
   content: none;
 }
 
-.progressbar li.active + li:after{
-  background: #005EA2;
+.progressbar li.active + li:after {
+  background: #005ea2;
 }
 
-.progressbar li.active::before{
+.progressbar li.active::before {
   border: 2px solid white;
-  background: #005EA2;
+  background: #005ea2;
   color: white;
 }
-.progressbar li.active{
+.progressbar li.active {
   font-weight: bold;
-  color: #005EA2;
+  color: #005ea2;
 }
-.progressbar li.inactive{
+.progressbar li.inactive {
   font-weight: bold;
   color: #163f6e;
 }
-.progressbar li.inactive + li:after{
+.progressbar li.inactive + li:after {
   background: #163f6e;
 }
 
-.progressbar li.inactive::before{
+.progressbar li.inactive::before {
   border-color: white;
   background: #163f6e;
   color: white;
 }
 
+/***************************/
+/**** Step Indicator *******/
+/***************************/
+/* Operating Authority Form Only */
+.progressbar #oa {
+  list-style-type: none;
+  float: left;
+  width: 15%;
+  position: relative;
+  text-align: left;
+  margin-left: -1px;
+}
 
+/***************************/
+/**** Step Indicator *******/
+/***************************/
+/* For mobile screens step indicator */
+@media only screen and (max-width: 600px) {
+  .progressbar li:before {
+    margin-top: -33px;
+    line-height: 18px;
+    width: 20px;
+    height: 20px;
+    border-width: 1px;
+  }
+
+  .progressbar li#oa,
+  .progressbar li#oa.active,
+  .progressbar li#oa.inactive {
+    font-size: 9.5px;
+  }
+
+  .progressbar li.active::before {
+    border-width: 1px;
+  }
+
+  .progressbar li,
+  .progressbar li.active,
+  .progressbar li.inactive {
+    font-size: 11px;
+    padding-top: 15px;
+  }
+
+  .progressbar li:after {
+    border-left: 1px solid white;
+    height: 10px;
+    margin-top: -2em;
+  }
+}
 /***************************************/
 /*********** Trigger Buttons ***********/
 /***************************************/
@@ -161,7 +212,9 @@
   outline-color: transparent;
 }
 
-a.trigger-button-large {text-decoration: none;}
+a.trigger-button-large {
+  text-decoration: none;
+}
 
 /***************************************/
 /***************************************/
@@ -194,12 +247,14 @@ a.big-button-container {
 /****************************************/
 /************ Button Effects ************/
 /****************************************/
-.disabled { cursor: not-allowed; }
+/* .disabled { cursor: not-allowed; } // disabled for visual bug in big trigger button */
 
 /***************************************/
 /********* FA Icon Positioning *********/
 /***************************************/
-.fa { vertical-align: baseline; }
+.fa {
+  vertical-align: baseline;
+}
 
 /***************************************/
 /************ Small Buttons ************/
@@ -229,53 +284,145 @@ a.small-button {
   text-decoration: none;
 }
 
+/****************************************/
+/*** Dropdown Menu Buttons Navigation ***/
+/****************************************/
+
+/* hide custom menu if on mobile */
+@media (max-width: 770px) {
+  #desktop-menu-list {
+    display: none;
+  }
+}
+
+/* hide knack menu buttons if on desktop */
+@media (min-width: 770px) {
+  #mobile-menu-list {
+    display: none;
+  }
+}
+
+/*list, list item, and button stylings*/
+#desktop-menu-list {
+  border-bottom: 0 !important;
+}
+
+#desktop-menu-list li {
+  margin-right: 0.5em;
+  box-shadow: 0px 2px 4px 0px gray;
+}
+
+#desktop-menu-list .kn-button a {
+  color: #163f6e;
+  font-size: 1.1em;
+  border-bottom: 0;
+  padding-top: 3px;
+}
+
+.desktop-dropdown-menu-list .kn-button {
+  border-radius: 1px;
+}
+
+.desktop-dropdown-menu-list li {
+  border: 0;
+  margin-right: 0 !important;
+}
+
+.desktop-dropdown-menu-list li:hover {
+  background-color: #ebebeb;
+}
+
+/*Mobile list, list item, and button stylings*/
+.mobile-details-dropdown-menu ul {
+  margin-left: 0.25em;
+}
+
+#mobile-menu-list {
+  list-style-type: none;
+  margin: 0;
+}
+
+#mobile-menu-list li {
+  margin-top: 5px;
+}
+
+#mobile-menu-list ul {
+  list-style-type: none;
+}
+
+#mobile-menu-list .kn-button a {
+  padding: 5px;
+  text-decoration: none;
+}
+
+.mobile-dropdown-menu span {
+  margin-top: 0.25em;
+  color: #163f6e;
+}
+
+.mobile-dropdown-menu-list {
+  margin-top: 1em;
+}
+
+.mobile-dropdown-menu-list.active {
+  display: inherit;
+}
+
 /******************************************************/
 /********* Style Horizontal radio buttons ************/
 /*****************************************************/
- #kn-input-field_46 
-  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
-  .control { margin-right: .5em;}
-
- #kn-input-field_47
-  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
-  .control { margin-right: .5em;}
-
- #kn-input-field_50
-  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
-  .control { margin-right: .5em;}
-
- #kn-input-field_51
-  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
-  .control { margin-right: .5em;}
-
- #kn-input-field_54
-  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
-  .control { margin-right: .5em;}
-
-#kn-input-field_75
-  .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
-  .control { margin-right: .5em;}
+#kn-input-field_46 .kn-radio,
+#kn-input-field_47 .kn-radio,
+#kn-input-field_50 .kn-radio,
+#kn-input-field_51 .kn-radio,
+#kn-input-field_54 .kn-radio,
+#kn-input-field_75 .kn-radio {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.control {
+  margin-right: 0.5em;
+}
 
 /*Mobile Detail labels for printing*/
 
 /* Prints 3 pages */
-#view_212 .kn-detail-label { background-color: transparent; min-width: 60% !important;}
-#view_236 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
-#view_214 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+#view_212 .kn-detail-label {
+  background-color: transparent;
+  min-width: 60% !important;
+}
+#view_236 .kn-detail-label,
+#view_214 .kn-detail-label {
+  background-color: transparent;
+  min-width: 80% !important;
+}
 
 /* Prints 4 pages */
-#view_105 .kn-detail-label { background-color: transparent; min-width: 60% !important;}
-#view_237 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
-#view_184 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
-#view_195 .kn-detail-label { background-color: transparent; min-width: 80% !important;}
+#view_105 .kn-detail-label {
+  background-color: transparent;
+  min-width: 60% !important;
+}
+#view_237 .kn-detail-label,
+#view_184 .kn-detail-label,
+#view_195 .kn-detail-label {
+  background-color: transparent;
+  min-width: 80% !important;
+}
 
 /********************************************/
 /****** Print Application Header ************/
 /********************************************/
-#kn-scene_65, #kn-scene_83, #kn-scene_100, #kn-scene_101 {
+#kn-scene_65,
+#kn-scene_83,
+#kn-scene_100,
+#kn-scene_101 {
   counter-reset: page;
 }
-#kn-scene_65 .view-group, #kn-scene_83 .view-group, #kn-scene_100 .view-group, #kn-scene_101 .view-group  {
+#kn-scene_65 .view-group,
+#kn-scene_83 .view-group,
+#kn-scene_100 .view-group,
+#kn-scene_101 .view-group {
   display: block; /* avoids text overlapping */
 }
 
@@ -284,36 +431,38 @@ a.small-button {
   align-items: flex-start;
   flex-direction: row;
   justify-content: center;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  break-before:page;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  break-before: page;
 }
 
 .image-seal {
-  content:url("https://www.austintexas.gov/sites/default/files/images/Transportation/Home_Page_Gallery/2023%20Austin%20Transportation%20Public%20Works%20Branding%20Guide%2004.28.23_Color%20stack.png");
-  width: 152px; 
+  content: url("https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FCqNGfEc0WO4ar1y6yBB3%2Fuploads%2FdxBFascjuN72Cl1NwFMQ%2Fimage.png?alt=media&token=caaa96e0-8684-4747-b936-f5501a1259f6");
+  width: 152px;
   height: 113.324px;
-  display: inline-block; 
+  display: inline-block;
   vertical-align: top;
-  border-right: 3px solid #2B5EA0;
+  border-right: 3px solid #2b5ea0;
 }
 
 .text-header {
   justify-content: center;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  display: inline-block; 
-  vertical-align: top; 
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: inline-block;
+  vertical-align: top;
   margin-left: 10px;
 }
 
 .header-title {
-  color: #2B5EA0;
-  font-weight:lighter;
-  font-size:1.5em;
+  color: #2b5ea0;
+  font-weight: lighter;
+  font-size: 1.5em;
 }
 
 /* Page Number Counter setup */
 .page-counter {
-  display:block;
+  display: block;
   text-align: right;
   margin-top: 10px;
 }
@@ -323,28 +472,18 @@ a.small-button {
   content: counter(page);
 }
 
-/* For mobile screens step indicator */ 
-@media only screen and (max-width: 600px) {
-  .progressbar li:before{
-    margin-top: -33px;
-    line-height: 18px;
-    width:20px;
-    height:20px;
-    border-width: 1px;
+/* Print Operating Authoriy Notary */
+/*640 and 639 is text content for notary. 614 is form*/
+#view_640,
+#view_639 {
+  display: none;
+}
+@media print {
+  #view_614 {
+    display: none;
   }
-  .progressbar li.active::before{
-    border-width: 1px;
+  #view_640,
+  #view_639 {
+    display: contents;
   }
-  
-  .progressbar li, .progressbar li.active, .progressbar li.inactive {
-    font-size: 11px;
-    padding-top: 15px;
-  }
-  
-  .progressbar li:after{
-    border-left: 1px solid white;
-    height: 10px;
-    margin-top: -2em;
-  }
-
 }
