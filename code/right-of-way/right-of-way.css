@@ -1,4 +1,12 @@
 /***************************************/
+/******* Form Validation Styling *******/
+/***************************************/
+.kn-notification { background-color: #2acee3 !important; font-size: 1.25em; color: black;}
+.is-confirmation { background-color: #caf4bc !important; font-size: 1.25em; color: black;}
+.is-warning {  background-color: #ffe09a !important; font-size: 1.25em; color: black;}
+.is-alert { background-color: #ff9b9c !important; font-size: 1.25em; color: black;}
+
+/***************************************/
 /********* FA Icon Positioning *********/
 /***************************************/
 /*Centers icon vertically on a line*/
@@ -7,21 +15,31 @@
 .fa-bot { vertical-align: text-bottom; }
 /*Icon touches the top of a line*/
 .fa-top { vertical-align: text-top; }
+/*Icon colors*/
+.fa-gold { color: goldenrod; }
+.fa-red { color: red; }
+.fa-green { color: green; }
+.fa-yellow { color: yellow; }
+.fa-orange { color: orange; }
+.fa-blue { color: blue; }
+.fa-purple { color: purple; }
 
 /****************************************/
-/************ Button Effects ************/
+/********** Custom CSS Classes **********/
 /****************************************/
 /*Call this class anytime you want to use this cursor*/
 .disabled { cursor: not-allowed; }
-
 /*Call this class anytime you want to center button text*/
 .centered-text { text-align: center; }
 
+/****************************************/
+/************* Modal Styling ************/
+/****************************************/
 /*Close Modal 'X' Button*/
 .delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
 .close-modal {border: #495057 !important; background-color: #495057 !important;}
-.delete:before { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
-.delete:after { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:before { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
 
 /***************************************/
 /************* Big Buttons *************/
@@ -78,6 +96,50 @@ a.small-button {
   text-decoration: none;
 }
 
+/****************************************/
+/**** Previous Window / Back Buttons ****/
+/****************************************/
+#previous-window-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+}
+
+#previous-window-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+.back-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+  display: inline-block;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+a.back-button {text-decoration: none;}
+
 /***************************************/
 /*********** Trigger Buttons ***********/
 /***************************************/
@@ -99,6 +161,58 @@ a.small-button {
   cursor: pointer;
   opacity: 0.9;
   border-color: gray;
+}
+
+.trigger-button-disabled {
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #cbcbcb;
+  color: #777777;
+  padding: 5px 10px;
+  font-size: 1.1em;
+  text-align: center;
+  display: inline-block;
+  opacity: 0.6;
+  outline-color: transparent;
+}
+
+/*Large Trigger Buttons*/
+.trigger-button-large {
+  width: 250px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #dddddd;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #ebebeb;
+  color: #163f6e;
+  padding: 10px 10px;
+  font-size: 18px;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button-large:hover {
+  cursor: pointer;
+  opacity: 0.9;
+  border-color: gray;
+}
+
+.trigger-button-large-disabled {
+  width: 250px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: #cbcbcb;
+  color: #777777;
+  padding: 10px 10px;
+  font-size: 18px;
+  text-align: center;
+  opacity: 0.6;
+  display: inline-block;
+  outline-color: transparent;
 }
 
 /*Large Submit Buttons*/
@@ -145,6 +259,90 @@ a.small-button {
 
 a.submit-button-large {text-decoration: none;}
 
+/***************************************/
+/******** Table Confirm Buttons ********/
+/***************************************/
+.table-trigger-button {
+  padding: 2px 8px;
+  border-width: 1px;
+  border-color: #4CAE49;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: #4CAE49;
+  color: white;
+  text-align: center;
+}
+
+.table-trigger-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+a.table-trigger-button { text-decoration: none; }
+
+/***********************************/
+/****** Table Archive Buttons ******/
+/***********************************/
+
+.table-archive-button {
+  padding: 2px 8px 4px 8px;
+  border-width: 1px;
+  border-color: #367DB7;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: #dddddd;
+  color: black;
+}
+
+.table-archive-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/**************************************/
+/****** Table Icon Modal Buttons ******/
+/**************************************/
+
+.table-icon-modal-button {
+  padding: 2px 8px;
+  border-width: 1px;
+  border-radius: 4px;
+  border-color: #015499;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: transparent;
+}
+
+.table-icon-modal-button:hover {
+  cursor: pointer;
+  opacity: 0.85;
+  border-style: solid;
+  border-width: 1px;
+  border-color: gray;
+}
+
+a.table-icon-modal-button { text-decoration: none; }
+
+/***************************************/
+/***** Table Icon Checkbox Buttons *****/
+/***************************************/
+.table-icon-checkbox-button {
+  padding: 0px 4px;
+  border-width: 1px;
+  border-color: #367DB7;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: transparent;
+  color: white;
+}
+
+.table-icon-checkbox-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 /*****************************************/
 /** Style Links with Underline on Hover **/
 /*****************************************/
@@ -157,128 +355,181 @@ a.form-link:hover {text-decoration: underline;}
 /** Style Links without Underline on Hover **/
 /********************************************/
 a.ang-link:link {text-decoration: none;}
+a.ang-link:hover {color: #367DB7;}
+
+/***********************************/
+/*** Style Back Links as Buttons ***/
+/***********************************/
+/*STAFF SIDE*/
+/*TCP Case Details Page*/
+#kn-scene_3 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_3 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+/*TCP Cycle Details Page*/
+#kn-scene_26 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_26 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+/*CSWZ Case Details Page*/
+#kn-scene_194 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_194 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+/*CSWZ Cycle Details Page*/
+#kn-scene_251 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_251 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+/*Organization Details Page*/
+#kn-scene_456 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_456 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*CUSTOMER SIDE*/
+/*Manage Contacts Page*/
+#kn-scene_432 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_432 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*TCP Case Details Page*/
+#kn-scene_410 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_410 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+/*TCP Cycle Details Page*/
+#kn-scene_412 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_412 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*CSWZ Case Details Page*/
+#kn-scene_416 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_416 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+/*CSWZ Cycle Details Page*/
+#kn-scene_418 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_418 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+
+/**************************************/
+/** Remove Back Links for Task Board **/
+/**************************************/
+/*Available Services Page*/
+#kn-scene_269 .kn-back-link { display: none; }
+
+/*************************************/
+/** Remove Back Links for App Admin **/
+/*************************************/
+/*Manage Customers Page*/
+#kn-scene_448 .kn-back-link { display: none; }
+/*Manage Organizations Page*/
+#kn-scene_483 .kn-back-link { display: none; }
+/*Organization Details Page*/
+#kn-scene_484 .kn-back-link { display: none; }
+/*Manage Deficiencies Page*/
+#kn-scene_445 .kn-back-link { display: none; }
 
 /*******************************************/
 /** Remove Back Links for Customer Portal **/
 /*******************************************/
 /*Available Services Page*/
-#kn-scene_203 .kn-back-link {
-  display: none;
-}
+#kn-scene_203 .kn-back-link { display: none; }
 /*TCP Service Page*/
-#kn-scene_177 .kn-back-link {
-  display: none;
-}
+#kn-scene_177 .kn-back-link { display: none; }
 /*CSWZ Page*/
-#kn-scene_178 .kn-back-link {
-  display: none;
-}
+#kn-scene_178 .kn-back-link { display: none; }
 
-/*******************************************/
+/**********************************************/
+/** Remove Back Links for Customer Dashboard **/
+/**********************************************/
+/*Customer Signup Step 3*/
+#kn-scene_476 .kn-back-link { display: none; }
+/*Customer Home Page*/
+#kn-scene_307 .kn-back-link { display: none; }
+/*My Projects Page*/
+#kn-scene_320 .kn-back-link { display: none; }
+/*Account Signin / Signup Page*/
+#kn-scene_308 .kn-back-link { display: none; }
+/*Organization Details Page*/
+#kn-scene_422 .kn-back-link { display: none; }
+/*TCP Edit Cycle Page*/
+#kn-scene_413 .kn-back-link { display: none; }
+/*CSWZ Edit Cycle Page*/
+#kn-scene_419 .kn-back-link { display: none; }
+/*TCP Create Project Step 1 Page*/
+#kn-scene_463 .kn-back-link { display: none; }
+/*TCP Create Project Step 2 Page*/
+#kn-scene_464 .kn-back-link { display: none; }
+/*CSWZ Create Request Step 1 Page*/
+#kn-scene_465 .kn-back-link { display: none; }
+/*CSWZ Create Request Step 2 Page*/
+#kn-scene_467 .kn-back-link { display: none; }
+
+/***********************************************/
 /** Remove Back Links for old TCP Application **/
-/*******************************************/
+/***********************************************/
 /*TCP Begin Application Page*/
-#kn-scene_96 .kn-back-link {
-  display: none;
-}
+#kn-scene_96 .kn-back-link { display: none; }
 /*TCP Project Information Page*/
-#kn-scene_97 .kn-back-link {
-  display: none;
-}
+#kn-scene_97 .kn-back-link { display: none; }
 /*TCP Attachments Page*/
-#kn-scene_98 .kn-back-link {
-  display: none;
-}
+#kn-scene_98 .kn-back-link { display: none; }
 /*Review TCP Application Page*/
-#kn-scene_99 .kn-back-link {
-  display: none;
-}
+#kn-scene_99 .kn-back-link { display: none; }
 /*Edit Information Page*/
-#kn-scene_100 .kn-back-link {
-  display: none;
-}
+#kn-scene_100 .kn-back-link { display: none; }
 /*Edit Attachments Page*/
-#kn-scene_101 .kn-back-link {
-  display: none;
-}
+#kn-scene_101 .kn-back-link { display: none; }
 /*TCP Application Confirmation Page*/
-#kn-scene_102 .kn-back-link {
-  display: none;
-}
+#kn-scene_102 .kn-back-link { display: none; }
 
 /*******************************************/
 /** Remove Back Links for TCP Application **/
 /*******************************************/
 /*TCP Begin Application Page*/
-#kn-scene_137 .kn-back-link {
-  display: none;
-}
+#kn-scene_137 .kn-back-link { display: none; }
 /*TCP Project Information Page*/
-#kn-scene_138 .kn-back-link {
-  display: none;
-}
+#kn-scene_138 .kn-back-link { display: none; }
 /*TCP Fee Information Page*/
-#kn-scene_148 .kn-back-link {
-  display: none;
-}
+#kn-scene_148 .kn-back-link { display: none; }
 /*TCP Documents Page*/
-#kn-scene_149 .kn-back-link {
-  display: none;
-}
+#kn-scene_149 .kn-back-link { display: none; }
 /*Finalize TCP Application Page*/
-#kn-scene_150 .kn-back-link {
-  display: none;
-}
+#kn-scene_150 .kn-back-link { display: none; }
 /*Edit Information Page*/
-#kn-scene_151 .kn-back-link {
-  display: none;
-}
+#kn-scene_151 .kn-back-link { display: none; }
 /*Edit Attachments Page*/
-#kn-scene_152 .kn-back-link {
-  display: none;
-}
+#kn-scene_152 .kn-back-link { display: none; }
 /*TCP Application Confirmation Page*/
-#kn-scene_153 .kn-back-link {
-  display: none;
-}
+#kn-scene_153 .kn-back-link { display: none; }
 
-/*******************************************/
+/***********************************************************/
 /** Remove Back Links for TCP Conflict/Shared TCP Request **/
-/*******************************************/
+/***********************************************************/
 /*Applicant Information Page*/
-#kn-scene_183 .kn-back-link {
-  display: none;
-}
+#kn-scene_183 .kn-back-link { display: none; }
 /*Conflicting Party Information Page*/
-#kn-scene_184 .kn-back-link {
-  display: none;
-}
+#kn-scene_184 .kn-back-link { display: none; }
 /*Attachments Page*/
-#kn-scene_185 .kn-back-link {
-  display: none;
-}
+#kn-scene_185 .kn-back-link { display: none; }
 /*Review Request Page*/
-#kn-scene_186 .kn-back-link {
-  display: none;
-}
+#kn-scene_186 .kn-back-link { display: none; }
 /*Submittal Information Page*/
-#kn-scene_187 .kn-back-link {
-  display: none;
-}
+#kn-scene_187 .kn-back-link { display: none; }
 /*Edit Information Page*/
-#kn-scene_188 .kn-back-link {
-  display: none;
-}
+#kn-scene_188 .kn-back-link { display: none; }
 /*Edit Attachments Page*/
-#kn-scene_189 .kn-back-link {
-  display: none;
-}
+#kn-scene_189 .kn-back-link { display: none; }
 
+/*****************************/
+/*** Styles the Task Board ***/
+/*****************************/
+/*Min Width & Transparent for "Hello/Welcome" Details Label*/
+#kn-scene_166 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_269 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+/*Customer Overview Page*/
+#kn-scene_307 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /**********************************/
 /********* Report Styling *********/
 /**********************************/
-/*Total Reviews In Progress by Reviewer*/
+/*TCP Projects by Reviewer w Custom Filters*/
 #kn-report-view_30-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
 #kn-report-view_30-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
 #kn-report-view_30-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
@@ -289,3 +540,240 @@ a.ang-link:link {text-decoration: none;}
 #kn-report-view_30-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
 #kn-report-view_30-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
 #kn-report-view_30-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*TCP Projects by Reviewer w Date Filters*/
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_544-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*TCP Submissions by Reviewer w Date Filters*/
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_545-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*TCP Submissions by Reviewer w Custom Filters*/
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_546-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*ROW Requirement Deficiencies*/
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_85-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*Bike & Pedestrian Deficiencies*/
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_87-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*TTC Component Deficiencies*/
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n){fill: #91e8e1;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+1){fill: #7cb5ec;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+2){fill: #434348;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+3){fill: #90ed7d;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+4){fill: #f7a35c;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+5){fill: #8085e9;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+6){fill: #f15c80;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+7){fill: #e4d354;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+8){fill: #2b908f;}
+#kn-report-view_86-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(10n+9){fill: #f45b5b;}
+
+/*********************************/
+/**** Horizontal Radio Button ****/
+/*********************************/
+/*TCP - Layout Option*/
+#kn-input-field_1200 .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+#kn-input-field_1200 .control { margin-right: .5em;}
+/*TCP - Partner City Department*/
+#kn-input-field_656 .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+#kn-input-field_656 .control { margin-right: .5em;}
+/*CSWZ - Layout Option*/
+#kn-input-field_1202 .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+#kn-input-field_1202 .control { margin-right: .5em;}
+/*CSWZ - Partner City Department*/
+#kn-input-field_1203 .kn-radio { display: flex; flex-direction: row; flex-wrap: nowrap; }
+#kn-input-field_1203 .control { margin-right: .5em;}
+
+/***************************************/
+/** Hide Placeholder Text & Input Box **/
+/***************************************/
+/*Username field - Customer Signup Form, Add/Edit Account, & Profile*/
+#kn-input-field_1 input::placeholder { color: transparent; background-color: transparent; }
+#kn-input-field_1 input#last.input:placeholder-shown { display: none;}
+
+/**************************************/
+/**** Customer Signup Progress Bar ****/
+/**************************************/
+progress { width: 200px; height: 30px; }
+
+.colored-progress { accent-color: green; }
+
+/***************************************/
+/*** Custom Dropdown Navigation Menu ***/
+/***************************************/
+/* Hide custom Mobile Menu if on desktop */
+@media (min-width: 767.9px) {
+  .mobile-details-dropdown-menu {
+    display: none;
+  }
+}
+
+/* Hide custom Desktop menu if on mobile */
+@media (max-width: 768px) {
+  #desktop-menu-list {
+    display: none;
+  }
+}
+
+/* Hide original TCP Case Details Menu */
+#view_844 {
+  display: none;
+}
+
+/* Hide original TCP Intake Menu */
+#view_1166 {
+  display: none;
+}
+
+/* Hide original CSWZ Case Details Menu */
+#view_653 {
+  display: none;
+}
+
+/*list, list item, and button stylings*/
+#desktop-menu-list {
+  border-bottom: 0 !important
+}
+
+#desktop-menu-list li {
+  margin-right: .5em;
+  box-shadow: 0px 0px 0px 0px gray;
+}
+
+#desktop-menu-list .kn-button a {
+  color: #163f6e;
+  font-size: 1.1em;
+  border-bottom: 0;
+  padding-top:3px;
+}
+
+.desktop-dropdown-menu-list .kn-button {
+  border-radius: 0;
+}
+
+.desktop-dropdown-menu-list li {
+  border: 0;
+  margin-right: 0 !important;
+} 
+
+.desktop-dropdown-menu-list li:hover {
+  background-color: #ebebeb;
+}
+
+/*Mobile list, list item, and button stylings*/
+.mobile-details-dropdown-menu ul {
+  margin-left: .25em;
+}
+
+#mobile-menu-list {
+  list-style-type: none;
+  margin: 0;
+} 
+
+#mobile-menu-list ul {
+  list-style-type: none;
+}
+
+.mobile-dropdown-menu span {
+  margin-top: .25em;
+  color: #163f6e;
+}
+
+.mobile-dropdown-button {
+  display: flex;
+}
+
+.mobile-dropdown-button i {
+  display: none;
+}
+
+.mobile-dropdown-button.show-icon i {
+  display: inherit;
+  width: 16px;
+}
+
+.mobile-dropdown-button:not(.show-icon)::before {
+  content: "\203A";
+  font-size: 18px;
+  font-weight: 800;
+  width: 16px;
+  line-height: 16px;
+}
+
+.mobile-dropdown-menu-list {
+  margin-top: 1em;
+  display: none;
+}
+
+.mobile-dropdown-menu-list.active {
+  display: inherit;
+}
+
+.desktop-button {
+  background-color: rgba(0,0,0,.08);
+  color: #163f6e;
+  font-size: 1.1em;
+  padding: .4em .8em;
+  height: 32px;
+  border-radius: .35em
+}
+
+.desktop-button a {
+  padding: 0.5em;
+  color: #163f6e;
+  text-decoration: none;
+  display: block;
+}
+
+.desktop-button .icon {
+  vertical-align: baseline;
+}
+
+.mobile-button {
+  color: #163f6e !important;
+}
