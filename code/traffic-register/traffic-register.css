@@ -1,5 +1,20 @@
+/**************************************/
+/***** Validation Message Styling *****/
+/**************************************/
+.kn-notification, .is-confirmation, .is-warning, .is-alert { font-size: 1.25em !important; color: black !important;}
+.kn-notification { background-color: #2acee3 !important;}
+.is-confirmation { background-color: #caf4bc !important;}
+.is-warning { background-color: #ffe09a !important;}
+.is-alert { background-color: #ff9b9c !important;}
+
 /***************************************/
-/********* FA Icon Positioning *********/
+/*** Dropdown Menu Selection Styling ***/
+/***************************************/
+/*Modern Menus*/
+.menu-links select { padding: 10px; border-radius: 4px; }
+
+/***************************************/
+/*********** FA Icon Styling ***********/
 /***************************************/
 /*Centers icon vertically on a line*/
 .fa { vertical-align: baseline; }
@@ -7,22 +22,30 @@
 .fa-bot { vertical-align: text-bottom; }
 /*Icon touches the top of a line*/
 .fa-top { vertical-align: text-top; }
+/*Icon colors*/
 .fa-gold { color: goldenrod; }
+.fa-red { color: red; }
+.fa-green { color: green; }
+.fa-yellow { color: yellow; }
+.fa-orange { color: orange; }
+.fa-blue { color: blue; }
+.fa-purple { color: purple; }
 
 /****************************************/
-/************ Button Effects ************/
+/********** Custom CSS Classes **********/
 /****************************************/
 /*Call this class anytime you want to use this cursor*/
 .disabled { cursor: not-allowed; }
-
 /*Call this class anytime you want to center button text*/
 .centered-text { text-align: center; }
 
+/****************************************/
+/************* Modal Styling ************/
+/****************************************/
 /*Close Modal 'X' Button*/
 .delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
 .close-modal {border: #495057 !important; background-color: #495057 !important;}
-.delete:before { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
-.delete:after { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:before, .delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
 
 /***************************************/
 /************* Big Buttons *************/
@@ -224,6 +247,50 @@ a.back-button {text-decoration: none;}
   outline-color: transparent;
 }
 
+/*Large Submit Buttons*/
+.submit-button-large {
+  min-width: 140px;
+  width: 250px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #163f6e;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #163f6e;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  color: #ffffff !important;
+  text-align: center;
+  display: inline-block;
+}
+
+.submit-button-large:hover {
+  cursor: pointer;
+  border-color: gray;
+  background-color: #123258;
+}
+
+.submit-button-large-disabled {
+  min-width: 140px;
+  width: 250px;
+  border-color: transparent;
+  border-radius: 4px;
+  background-color: #163f6e;
+  padding: 10px 10px;
+  font-size: 1.5em;
+  color: #ffffff !important;
+  text-align: center;
+  opacity: 0.6;
+  display: inline-block;
+  outline-color: transparent;
+}
+
+.submit-button-large-disabled:hover {
+  background-color: #163f6e;
+}
+
+a.submit-button-large {text-decoration: none;}
+
 /***************************************/
 /******** Table Trigger Buttons ********/
 /***************************************/
@@ -248,9 +315,24 @@ a.back-button {text-decoration: none;}
 
 a.table-trigger-button { text-decoration: none; }
 
-/****************************************/
-/****** Table Icon Trigger Buttons ******/
-/****************************************/
+/**************************************/
+/***** Table Icon Trigger Buttons *****/
+/**************************************/
+.table-archive-button {
+  padding: 2px 8px 4px 8px;
+  border-width: 1px;
+  border-color: #367DB7;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px gray;
+  background-color: #dddddd;
+  color: black;
+}
+
+.table-archive-button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
 .table-icon-trigger-button {
   padding: 0px 4px;
   border-width: 1px;
@@ -266,6 +348,8 @@ a.table-trigger-button { text-decoration: none; }
   opacity: 0.8;
 }
 
+a.table-icon-trigger-button { text-decoration: none; }
+
 /*****************************************/
 /** Style Links with Underline on Hover **/
 /*****************************************/
@@ -279,34 +363,9 @@ a.form-link:hover {text-decoration: underline;}
 /********************************************/
 a.ang-link:link {text-decoration: none;}
 
-/*****************************************/
-/****** Style Back Links as Buttons ******/
-/*****************************************/
-/*RD Completed Work Page*/
-#kn-scene_41 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_41 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*RD LE Review Page*/
-#kn-scene_42 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_42 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*RD AE Review Page*/
-#kn-scene_43 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_43 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*RD QA Review Page*/
-#kn-scene_255 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_255 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
-/*RD Technician Review Page*/
-#kn-scene_276 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
-  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_276 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
-
+/***********************************/
+/*** Style Back Links as Buttons ***/
+/***********************************/
 /*Regulation Document Details Page*/
 #kn-scene_58 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
@@ -322,6 +381,11 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_417 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*Fix Reg Errors*/
+#kn-scene_751 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_751 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*Manage Reg Types Page*/
 #kn-scene_393 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
@@ -332,103 +396,332 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_394 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*Manage Review Areas*/
+#kn-scene_655 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_655 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage Archived Documents*/
+#kn-scene_746 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_746 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage City Managers*/
+#kn-scene_748 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_748 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Checked Out Documents*/
+#kn-scene_762 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_762 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Unassigned Documents*/
+#kn-scene_579 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_579 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Unconnected Regulations*/
+#kn-scene_580 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_580 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Task Board - Draft Editor*/
+#kn-scene_658 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_658 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Task Board - Draft Review*/
+#kn-scene_673 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_673 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Reg Doc Details - Search*/
+#kn-scene_588 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_588 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Reg Item Details - Search*/
+#kn-scene_581 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_581 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/**************************************/
+/*** Style Details Links as Buttons ***/
+/**************************************/
+/*These are for View PDF Buttons*/
+/*Reg Doc Details Header*/
+#kn-scene_588 #view_1476 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_588 #view_1476 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_588 #view_1476 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Draft Review Details Header*/
+#kn-scene_673 #view_1478 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_673 #view_1478 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_673 #view_1478 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
 /*****************************************/
-/** Remove Back Links for Reg Doc Draft **/
+/** Remove Back Links for Draft Builder **/
 /*****************************************/
 /*Drafting Instructions Page*/
-#kn-scene_446 .kn-back-link { display: none; }
-
+#kn-scene_698 .kn-back-link { display: none; }
 /*Add Regulations Page*/
-#kn-scene_447 .kn-back-link { display: none; }
-
+#kn-scene_699 .kn-back-link { display: none; }
 /*Save Draft Page*/
-#kn-scene_454 .kn-back-link { display: none; }
-
+#kn-scene_707 .kn-back-link { display: none; }
 /*Submit Draft Page*/
-#kn-scene_657 .kn-back-link { display: none; }
+#kn-scene_708 .kn-back-link { display: none; }
 
 /****************************************/
 /*** Remove Back Links for Task Board ***/
 /****************************************/
 /*My Tasks*/
 #kn-scene_436 .kn-back-link { display: none; }
-
 /*My Tasks - Pending Tasks*/
 #kn-scene_439 .kn-back-link { display: none; }
-
 /*My Tasks - Active Tasks*/
 #kn-scene_440 .kn-back-link { display: none; }
-
 /*My Tasks - Completed Tasks*/
 #kn-scene_441 .kn-back-link { display: none; }
-
 /*My Contributions*/
 #kn-scene_437 .kn-back-link { display: none; }
-
 /*Team Tasks*/
 #kn-scene_438 .kn-back-link { display: none; }
-
 /*Team Tasks - Pending Tasks*/
 #kn-scene_442 .kn-back-link { display: none; }
-
 /*Team Tasks - Active Tasks*/
 #kn-scene_443 .kn-back-link { display: none; }
-
 /*Team Tasks - Completed Tasks*/
 #kn-scene_444 .kn-back-link { display: none; }
-
 /*Review Page*/
 #kn-scene_469 .kn-back-link { display: none; }
-
 /*Draft Editor*/
 #kn-scene_485 .kn-back-link { display: none; }
+
+/*******************************************/
+/** Remove Back Links for Document Search **/
+/*******************************************/
+/*Filtered Search Page*/
+#kn-scene_577 .kn-back-link { display: none; }
+/*Advanced Search Page*/
+#kn-scene_578 .kn-back-link { display: none; }
+
+/*********************************************/
+/** Remove Back Links for Regulation Search **/
+/*********************************************/
+/*Filtered Search Page*/
+#kn-scene_518 .kn-back-link { display: none; }
+/*Advanced Search Page*/
+#kn-scene_517 .kn-back-link { display: none; }
+
 
 /*********************************************/
 /*** Min Width & Transparent Detail Labels ***/
 /*********************************************/
 /*Hello/Welcome Details Label on Task Board*/
 #kn-scene_435 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_436 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /*Draft Reg Doc ID on Draft Builder*/
-#kn-scene_447 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_448 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_449 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_450 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_451 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_452 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_454 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_657 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_699 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Add Regulations*/
+#kn-scene_756 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Retire*/
+#kn-scene_757 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Install*/
+#kn-scene_758 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Blank Install*/
+#kn-scene_741 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Create Reg Item*/
+#kn-scene_743 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Edit Reg Item*/
+#kn-scene_707 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Submit Draft for Review*/
+#kn-scene_708 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Save Draft*/
 
 /*Draft Reg Doc ID on Draft Editor*/
-#kn-scene_486 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_487 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_488 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_489 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_490 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_491 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_493 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_769 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Edit Area & Remarks*/
+#kn-scene_763 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Retire*/
+#kn-scene_765 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Install*/
+#kn-scene_767 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Blank Install*/
+#kn-scene_771 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Submit for Review*/
 
-/*Reg Doc Print Page*/
-#kn-scene_555 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+/*Draft Reg Doc ID on Draft Review*/
+#kn-scene_685 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Edit Area & Remarks*/
 
-/*Sticky Headers*/
+/***************************************/
+/*********** Color Variables ***********/
+/***************************************/
+:root{
+  --tableFirstHeadBackgroundColor: #f0f2f4;
+  --tableSecondHeadBackgroundColor: #f0f1f3;
+  --tableColumnBackgroundColor: #f9f9f9;
+  --tableBorderColor: #dddddd;
+}
+
+
+/*************************************/
+/*********** Table Styling ***********/
+/*************************************/
 thead {
   position:sticky;
-  top:0px;
+  top:1px;
   z-index:7;
-  outline: 1px solid #dddddd;
+  border-style: solid;
+  border-width: 1px 1px 0px 1px;
+  border-color: var(--tableBorderColor);
+  outline-style: solid;
+  outline-width: 2px;
+  outline-color: var(--tableBorderColor);
 }
 
-/*Sticky Header for Filtered Regulations*/
+tr {
+  border: 1px solid var(--tableBorderColor);
+}
+
+/*Filtered Search for Approved Regulations*/
 #view_1063 .kn-table-wrapper {
   max-height: 800px;
+  border: 1px solid var(--tableBorderColor);
+}
+/*Advanced Search for Approved Regulations*/
+#view_1059 .kn-table-wrapper {
+  max-height: 800px;
+  border: 1px solid var(--tableBorderColor);
 }
 
-/*Freeze first Column for Filtered Regulations*/
+/*Filtered Search for Approved Documents*/
+#view_657 .kn-table-wrapper {
+  max-height: 800px;
+  border: 1px solid var(--tableBorderColor);
+}
+/*Advanced Search for Approved Documents*/
+#view_1085 .kn-table-wrapper {
+  max-height: 800px;
+  border: 1px solid var(--tableBorderColor);
+}
+
+/********************************************/
+/*********** Sticky Table Styling ***********/
+/********************************************/
+
+/*Advanced Search for Filtered Regulations*/ 
 #view_1063 th:first-child,
 #view_1063 td:first-child {
+  left: 0;
+  position: sticky;
+  z-index: 4; /* Lower # = Higher Priority */
+  background-color: var(--tableFirstHeadBackgroundColor);
+  border-right: 1px solid var(--tableBorderColor);
+}
+
+#view_1063 th:nth-child(2),
+#view_1063 th:nth-child(3),
+#view_1063 th:nth-child(4),
+#view_1063 th:nth-child(5) {
+  position: sticky;
+  z-index: 5; /* Lower # = Higher Priority */
+  background-color: var(--tableSecondHeadBackgroundColor);
+  border-right: 1px solid var(--tableBorderColor);
+}
+
+#view_1063 td:nth-child(2),
+#view_1063 td:nth-child(3),
+#view_1063 td:nth-child(4),
+#view_1063 td:nth-child(5) {
+  position: sticky;
+  z-index: 6; /* Lower # = Higher Priority */
+  background-color: var(--tableColumnBackgroundColor);
+  border-right: 1px solid var(--tableBorderColor);
+}
+
+#view_1063 th:nth-child(2),
+#view_1063 td:nth-child(2) {
+  left: calc(100px);
+}
+
+#view_1063 th:nth-child(3),
+#view_1063 td:nth-child(3) {
+  left: calc(220px - 1px); /* +120 column width minus total border pixels */
+}
+
+#view_1063 th:nth-child(4),
+#view_1063 td:nth-child(4) {
+  left: calc(380px - 2px); /* +160 column width minus total border pixels */
+}
+
+#view_1063 th:nth-child(5),
+#view_1063 td:nth-child(5) {
+  left: calc(500px - 3px); /* +120 column width minus total border pixels */
+}
+
+
+/*Advanced Search for Approved Regulations*/
+#view_1059 th:first-child,
+#view_1059 td:first-child {
+  left: 0;
+  position: sticky;
+  z-index: 4; /* Lower # = Higher Priority */
+  background-color: var(--tableFirstHeadBackgroundColor);
+  border-right: 1px solid var(--tableBorderColor);
+}
+
+#view_1059 th:nth-child(2),
+#view_1059 th:nth-child(3),
+#view_1059 th:nth-child(4),
+#view_1059 th:nth-child(5) {
+  position: sticky;
+  z-index: 5; /* Lower # = Higher Priority */
+  background-color: var(--tableSecondHeadBackgroundColor);
+  border-right: 1px solid var(--tableBorderColor);
+}
+
+#view_1059 td:nth-child(2),
+#view_1059 td:nth-child(3),
+#view_1059 td:nth-child(4),
+#view_1059 td:nth-child(5) {
+  position: sticky;
+  z-index: 6; /* Lower # = Higher Priority */
+  background-color: var(--tableColumnBackgroundColor);
+  border-right: 1px solid var(--tableBorderColor);
+}
+
+#view_1059 th:nth-child(2),
+#view_1059 td:nth-child(2) {
+  left: calc(100px);
+}
+
+#view_1059 th:nth-child(3),
+#view_1059 td:nth-child(3) {
+  left: calc(220px - 1px); /* +120 column width minus total border pixels */
+}
+
+#view_1059 th:nth-child(4),
+#view_1059 td:nth-child(4) {
+  left: calc(380px - 2px); /* +160 column width minus total border pixels */
+}
+
+#view_1059 th:nth-child(5),
+#view_1059 td:nth-child(5) {
+  left: calc(500px - 3px); /* +120 column width minus total border pixels */
+}
+
+/*Filtered Search for Approved Documents*/
+#view_657 th:first-child,
+#view_657 td:first-child {
   position: sticky;
   left: 0;
-  z-index: 6; /* Increase z-index to be higher priority than the header(lower #) */
-  background-color: #f9f9f9;
+  z-index: 4; /* Lower # = Higher Priority */
+  background-color: var(--tableFirstHeadBackgroundColor);
 }
+/*Advanced Search for Approved Documents*/
+#view_1085 th:first-child,
+#view_1085 td:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 4; /* Lower # = Higher Priority */
+  background-color: var(--tableFirstHeadBackgroundColor);
+}
+
+/***************************************/
+/** Hide Placeholder Text & Input Box **/
+/***************************************/
+/*Username Field - Add/Edit Account & Profile*/
+#kn-input-field_39 input::placeholder { color: transparent; background-color: transparent; }
+#kn-input-field_39 input#last.input:placeholder-shown { display: none;}
+
