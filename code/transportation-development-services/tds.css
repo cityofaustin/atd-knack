@@ -1,10 +1,11 @@
-/***************************************/
-/******* Form Validation Styling *******/
-/***************************************/
-.kn-notification { background-color: #2acee3 !important; font-size: 1.25em; color: black;}
-.is-confirmation { background-color: #caf4bc !important; font-size: 1.25em; color: black;}
-.is-warning {  background-color: #ffe09a !important; font-size: 1.25em; color: black;}
-.is-alert { background-color: #ff9b9c !important; font-size: 1.25em; color: black;}
+/**************************************/
+/***** Validation Message Styling *****/
+/**************************************/
+.kn-notification, .is-confirmation, .is-warning, .is-alert { font-size: 1.25em !important; color: black !important;}
+.kn-notification { background-color: #2acee3 !important;}
+.is-confirmation { background-color: #caf4bc !important;}
+.is-warning { background-color: #ffe09a !important;}
+.is-alert { background-color: #ff9b9c !important;}
 
 /***************************************/
 /********* FA Icon Positioning *********/
@@ -28,8 +29,7 @@
 /*Close Modal 'X' Button*/
 .delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
 .close-modal {border: #495057 !important; background-color: #495057 !important;}
-.delete:before { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
-.delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:before, .delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
 
 /***************************************/
 /************* Big Buttons *************/
