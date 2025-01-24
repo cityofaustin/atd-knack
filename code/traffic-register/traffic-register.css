@@ -490,26 +490,6 @@ a.ang-link:link {text-decoration: none;}
 /****************************************/
 /*My Tasks*/
 #kn-scene_436 .kn-back-link { display: none; }
-/*My Tasks - Pending Tasks*/
-#kn-scene_439 .kn-back-link { display: none; }
-/*My Tasks - Active Tasks*/
-#kn-scene_440 .kn-back-link { display: none; }
-/*My Tasks - Completed Tasks*/
-#kn-scene_441 .kn-back-link { display: none; }
-/*My Contributions*/
-#kn-scene_437 .kn-back-link { display: none; }
-/*Team Tasks*/
-#kn-scene_438 .kn-back-link { display: none; }
-/*Team Tasks - Pending Tasks*/
-#kn-scene_442 .kn-back-link { display: none; }
-/*Team Tasks - Active Tasks*/
-#kn-scene_443 .kn-back-link { display: none; }
-/*Team Tasks - Completed Tasks*/
-#kn-scene_444 .kn-back-link { display: none; }
-/*Review Page*/
-#kn-scene_469 .kn-back-link { display: none; }
-/*Draft Editor*/
-#kn-scene_485 .kn-back-link { display: none; }
 
 /*******************************************/
 /** Remove Back Links for Document Search **/
