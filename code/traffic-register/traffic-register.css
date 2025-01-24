@@ -436,12 +436,17 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_673 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Reg Doc Details - Search*/
+/*Regulation Document Details - navigating from Document Search*/
 #kn-scene_588 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_588 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
-/*Reg Item Details - Search*/
+/*Document Details - navigating from Regulation Search*/
+#kn-scene_773 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_773 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Regulation Details - navigating from Regulation Search*/
 #kn-scene_581 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_581 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
@@ -450,11 +455,17 @@ a.ang-link:link {text-decoration: none;}
 /*** Style Details Links as Buttons ***/
 /**************************************/
 /*These are for View PDF Buttons*/
-/*Reg Doc Details Header*/
+/*Reg Doc Details Header navigating from Document Search*/
 #kn-scene_588 #view_1476 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
 #kn-scene_588 #view_1476 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
 #kn-scene_588 #view_1476 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Reg Doc Details Header navigating from Regulations Search*/
+#kn-scene_773 #view_1592 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_773 #view_1592 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_773 #view_1592 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /*Draft Review Details Header*/
 #kn-scene_673 #view_1478 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
@@ -632,22 +643,22 @@ tr {
 
 #view_1063 th:nth-child(2),
 #view_1063 td:nth-child(2) {
-  left: calc(100px);
+  left: calc(140px);
 }
 
 #view_1063 th:nth-child(3),
 #view_1063 td:nth-child(3) {
-  left: calc(220px - 1px); /* +120 column width minus total border pixels */
+  left: calc(280px - 1px); /* +140 column width minus total border pixels */
 }
 
 #view_1063 th:nth-child(4),
 #view_1063 td:nth-child(4) {
-  left: calc(380px - 2px); /* +160 column width minus total border pixels */
+  left: calc(440px - 2px); /* +160 column width minus total border pixels */
 }
 
 #view_1063 th:nth-child(5),
 #view_1063 td:nth-child(5) {
-  left: calc(500px - 3px); /* +120 column width minus total border pixels */
+  left: calc(560px - 3px); /* +120 column width minus total border pixels */
 }
 
 
@@ -683,22 +694,22 @@ tr {
 
 #view_1059 th:nth-child(2),
 #view_1059 td:nth-child(2) {
-  left: calc(100px);
+  left: calc(140px);
 }
 
 #view_1059 th:nth-child(3),
 #view_1059 td:nth-child(3) {
-  left: calc(220px - 1px); /* +120 column width minus total border pixels */
+  left: calc(280px - 1px); /* +140 column width minus total border pixels */
 }
 
 #view_1059 th:nth-child(4),
 #view_1059 td:nth-child(4) {
-  left: calc(380px - 2px); /* +160 column width minus total border pixels */
+  left: calc(440px - 2px); /* +160 column width minus total border pixels */
 }
 
 #view_1059 th:nth-child(5),
 #view_1059 td:nth-child(5) {
-  left: calc(500px - 3px); /* +120 column width minus total border pixels */
+  left: calc(560px - 3px); /* +120 column width minus total border pixels */
 }
 
 /*Filtered Search for Approved Documents*/
@@ -724,4 +735,5 @@ tr {
 /*Username Field - Add/Edit Account & Profile*/
 #kn-input-field_39 input::placeholder { color: transparent; background-color: transparent; }
 #kn-input-field_39 input#last.input:placeholder-shown { display: none;}
+
 
