@@ -309,7 +309,7 @@ window.location.href = "https://atd.knack.com/row#task-board/my-tasks/";
 });
 
 /****************************/
-/*** Autosubit Form Pages ***/
+/*** Autosubmit Form Pages ***/
 /****************************/
 
 /* Auto Submit New TCP Submission Cycle */
