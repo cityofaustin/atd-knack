@@ -392,28 +392,41 @@ $(document).on("knack-scene-render.scene_604", function () {
   disableBreadCrumbsNonAdmin();
 });
 
-/***********************************************************************/
-/*** Disable Breadcrumb Navigation Links for SIF Worksheet Submittal ***/
-/***********************************************************************/
+/**************************************************************/
+/*** Disable Breadcrumb Navigation Links for SWF Assessment ***/
+/**************************************************************/
 
-//SIF Worksheet Submittal Information page
-$(document).on("knack-scene-render.scene_505", function () {
+//SWF Assessment Documents page
+$(document).on("knack-scene-render.scene_817", function () {
   disableBreadCrumbsNonAdmin();
 });
-//Review SIF Worksheet Submittal page
-$(document).on("knack-scene-render.scene_506", function () {
+
+/**************************************************************/
+/*** Disable Breadcrumb Navigation Links for SIF Assessment ***/
+/**************************************************************/
+
+//SIF Worksheet Documents page
+$(document).on("knack-scene-render.scene_819", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Submit SIF Worksheet Submittal page
+$(document).on("knack-scene-render.scene_820", function () {
   disableBreadCrumbsNonAdmin();
 });
 //Edit Information page
-$(document).on("knack-scene-render.scene_507", function () {
+$(document).on("knack-scene-render.scene_823", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Edit Attachments page
+$(document).on("knack-scene-render.scene_824", function () {
   disableBreadCrumbsNonAdmin();
 });
 //SIF Worksheet Submittal Confirmation page
-$(document).on("knack-scene-render.scene_512", function () {
+$(document).on("knack-scene-render.scene_821", function () {
   disableBreadCrumbsNonAdmin();
 });
-//SIF Worksheet Submittal Document page
-$(document).on("knack-scene-render.scene_647", function () {
+//SIF Worksheet Submittal Completed Documents page
+$(document).on("knack-scene-render.scene_822", function () {
   disableBreadCrumbsNonAdmin();
 });
 
@@ -742,7 +755,6 @@ $(document).on('knack-view-render.view_744', function(event, view, record) {
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "edit-tia-fee-status", "fa-dollar", "Fees")}\
-      ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication")}\
     </ul>\
   </div>`).appendTo("#view_744")
 
@@ -773,7 +785,6 @@ $(`<div class="mobile-details-dropdown-menu">\
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "edit-tia-fee-status", "fa-dollar", "Fees", true)}\
-      ${dropdownMenuItem(recordId, "add-tia-communication", "fa-plus-circle", "Communication", true)}\
     </ul>\
   </div>`).appendTo("#view_744")
 })
@@ -1097,5 +1108,17 @@ $(document).on('knack-scene-render.scene_633', function(event, scene) {
 });
 /* Complete TDA Parallel Review Modal */
 $(document).on('knack-scene-render.scene_625', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Begin SWS Review Modal */
+$(document).on('knack-scene-render.scene_761', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Complete SWS Review Modal */
+$(document).on('knack-scene-render.scene_760', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Approve SWS Case Modal */
+$(document).on('knack-scene-render.scene_810', function(event, scene) {
     $('button[type=submit]').submit();
 });
