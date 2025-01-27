@@ -1,6 +1,11 @@
-.my-test {
-  color: "#163f6e"
-}
+/**************************************/
+/***** Validation Message Styling *****/
+/**************************************/
+.kn-notification, .is-confirmation, .is-warning, .is-alert { font-size: 1.25em !important; color: black !important;}
+.kn-notification { background-color: #2acee3 !important;}
+.is-confirmation { background-color: #caf4bc !important;}
+.is-warning { background-color: #ffe09a !important;}
+.is-alert { background-color: #ff9b9c !important;}
 
 /***************************************/
 /********* FA Icon Positioning *********/
@@ -24,8 +29,7 @@
 /*Close Modal 'X' Button*/
 .delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
 .close-modal {border: #495057 !important; background-color: #495057 !important;}
-.delete:before { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
-.delete:after { background-color: white !important; width: 66% !important; left: 44% !important; height: 3px !important; border-radius: 2px !important;}
+.delete:before, .delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
 
 /***************************************/
 /************* Big Buttons *************/
@@ -340,6 +344,11 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_302 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*Memo Attachments Search Page*/
+#kn-scene_729 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_729 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*TIA Submission Cycle Search Page*/
 #kn-scene_303 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
@@ -433,10 +442,15 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_622 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*SIF Worksheet */
-/*SIF Worksheet Review Details Page*/
-#kn-scene_518 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+/*SIF Worksheet Assessment Details Page*/
+#kn-scene_747 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
-#kn-scene_518 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+#kn-scene_747 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*SIF Worksheet Review Details Page*/
+#kn-scene_757 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_757 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*App Admin */
 /*TDS Contacts Page*/
@@ -595,6 +609,10 @@ a.ang-link:link {text-decoration: none;}
 }
 /*SIF Worksheet Service Page*/
 #kn-scene_587 .kn-back-link {
+  display: none;
+}
+/*TPW Waiver Service Page*/
+#kn-scene_831 .kn-back-link {
   display: none;
 }
 
@@ -786,31 +804,43 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
-/*****************************************/
-/** Remove Back Links for SIF Worksheet **/
-/*****************************************/
+/******************************************/
+/** Remove Back Links for SIF Assessment **/
+/******************************************/
 /*SIF Worksheet Submittal Page*/
-#kn-scene_500 .kn-back-link {
+#kn-scene_818 .kn-back-link {
   display: none;
 }
-/*SIF Worksheet Submittal Information Page*/
-#kn-scene_505 .kn-back-link {
+/*SIF Worksheet Submittal Documents Page*/
+#kn-scene_819 .kn-back-link {
   display: none;
 }
 /*Review SIF Worksheet Submittal Page*/
-#kn-scene_506 .kn-back-link {
+#kn-scene_820 .kn-back-link {
   display: none;
 }
-/*Edit SIF Worksheet Submittal Page*/
-#kn-scene_507 .kn-back-link {
+/*Edit Information Page*/
+#kn-scene_823 .kn-back-link {
+  display: none;
+}
+/*Edit Attachments Page*/
+#kn-scene_824 .kn-back-link {
   display: none;
 }
 /*SIF Worksheet Submittal Confirmation Page*/
-#kn-scene_512 .kn-back-link {
+#kn-scene_821 .kn-back-link {
   display: none;
 }
-/*SIF Worksheet Submittal Document Page*/
-#kn-scene_647 .kn-back-link {
+/*SIF Worksheet Submittal Completed Documents Page*/
+#kn-scene_822 .kn-back-link {
+  display: none;
+}
+
+/******************************************/
+/** Remove Back Links for SWF Assessment **/
+/******************************************/
+/*SWF Assessment Documents Page*/
+#kn-scene_788 .kn-back-link {
   display: none;
 }
 
@@ -906,20 +936,6 @@ a.ang-link:link {text-decoration: none;}
 /*Min Width & Transparent for "Hello/Welcome" Details Label*/
 #kn-scene_656 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 #kn-scene_657 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-
-/*************************************/
-/*** Styles the Reviewer Dashboard ***/
-/*************************************/
-/*Min Width & Transparent for "Hello/Welcome" Details Label*/
-#kn-scene_249 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_329 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-
-/****************************************/
-/*** Styles the Vision Team Dashboard ***/
-/****************************************/
-/*Min Width & Transparent for "Hello/Welcome" Details Label*/
-#kn-scene_14 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
-#kn-scene_347 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
 
 /**********************************/
 /*** Styles the Contact Us Page ***/
@@ -1157,3 +1173,17 @@ a.ang-link:link {text-decoration: none;}
 #kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(3){fill: #90ed7d;}
 #kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(4){fill: #f7a35c;}
 #kn-report-view_2194-1 div.highcharts-container svg g.highcharts-series-group g.highcharts-series rect:nth-child(5){fill: #8085e9;}
+
+/***************************************/
+/** Hide Placeholder Text & Input Box **/
+/***************************************/
+/*Username field - Add/Edit Account & Profile*/
+#kn-input-field_6 input::placeholder { color: transparent; background-color: transparent; }
+#kn-input-field_6 input#last.input:placeholder-shown { display: none;}
+
+/**********************************/
+/**** Application Progress Bar ****/
+/**********************************/
+progress { width: 200px; height: 30px; }
+
+.colored-progress { accent-color: green; }
