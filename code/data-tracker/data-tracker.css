@@ -1,79 +1,79 @@
 /* Mobile Styles */
 @media (max-width: 800px) {
-  /* Make buttons with type="submit" bigger */
-  button[type="submit"] {
-    height: 64px !important;
-    font-size: 32px !important;
-    min-width: fit-content;
-    width: 100%;
-  }
-
-  /* Override width set for submit buttons to prevent overlaying map controls */
-  #lat-lon-form > form > div > button {
-    width: 50%;
-  }
-
-  /* Increase font size of form field labels */
-  .kn-label {
-    font-size: 22px;
-  }
-
-  /* Increase height of text fields */
-  input[type="text"] {
-    height: 48px !important;
-    font-size: 22px !important;
-  }
-
-  /* Increase height of select fields */
-  .chzn-single {
-    height: 48px !important;
-  }
-
-  .kn-select {
-    height: 48px !important;
-  }
-
-  select {
-    height: 48px !important;
-    font-size: 22px !important;
-  }
-
-  /* Increase height of container surrounding select fields */
-  .chzn-container {
-    height: 48px;
-    font-size: 22px !important;
-  }
-
-  .chzn-container > a > span {
-    font-size: 22px !important;
-  }
-
-  /* Increase font size of dropdown text in select fields */
-  .chzn-drop {
-    font-size: 22px !important;
-  }
-
-  /* Increase size of search button */
-  .kn-button.search {
-    height: 48px;
-  }
-
-  /* Increase font size of checkbox options */
-  .option.checkbox {
-    font-size: 22px;
-  }
+    /* Make buttons with type="submit" bigger */
+    button[type="submit"] {
+      height: 64px !important;
+      font-size: 32px !important;
+      min-width: fit-content;
+      width: 100%;
+    }
+  
+    /* Override width set for submit buttons to prevent overlaying map controls */
+    #lat-lon-form > form > div > button {
+      width: 50%;
+    }
+  
+    /* Increase font size of form field labels */
+    .kn-label {
+      font-size: 22px;
+    }
+  
+    /* Increase height of text fields */
+    input[type="text"] {
+      height: 48px !important;
+      font-size: 22px !important;
+    }
+  
+    /* Increase height of select fields */
+    .chzn-single {
+      height: 48px !important;
+    }
+  
+    .kn-select {
+      height: 48px !important;
+    }
+  
+    select {
+      height: 48px !important;
+      font-size: 22px !important;
+    }
+  
+    /* Increase height of container surrounding select fields */
+    .chzn-container {
+      height: 48px;
+      font-size: 22px !important;
+    }
+  
+    .chzn-container > a > span {
+      font-size: 22px !important;
+    }
+  
+    /* Increase font size of dropdown text in select fields */
+    .chzn-drop {
+      font-size: 22px !important;
+    }
+  
+    /* Increase size of search button */
+    .kn-button.search {
+      height: 48px;
+    }
+  
+    /* Increase font size of checkbox options */
+    .option.checkbox {
+      font-size: 22px;
+    }
 }
-      
+        
 .kn-link-disabled span {
-color: #bdbebf !important;
+  color: #bdbebf !important;
 }
-      
+        
 .hidden {
-display: none;
+  display: none;
 }
 
 .button-padding{
-padding-left: 20%
+  padding-left: 20%
 }
 
 /* hide attachment type column (field contents are extracted via JS */
@@ -98,38 +98,38 @@ div.view_2465 .field_3174 { display: none; }
   margin: 20px;
   max-width: 15em;
 }
-
+ 
 .big-button-container:hover {
   background-color: #f7f7f7;
   cursor: pointer;
 }
-
+ 
 .small-button-container {
-padding: 5px;
-margin: 20px;
-border-radius: 2px;
-box-shadow: 0px 1px 2px 0px gray;
-font-size: 1em;
-max-width: 15em;
-background-color: #babbbc;
-color: white;
+  padding: 5px;
+  margin: 20px;
+  border-radius: 2px;
+  box-shadow: 0px 1px 2px 0px gray;
+  font-size: 1em;
+  max-width: 15em;
+  background-color: #babbbc;
+  color: white;
 }
 
 .small-button-container:hover {
   background-color: #4c4c4c;
   cursor: pointer;
 }
-
+ 
 .fa {
-vertical-align: middle;
+  vertical-align: middle;
 }
-
+ 
 a.big-button {
-text-decoration: none;
+  text-decoration: none;
 }
 
-a.small-button {
-text-decoration: none;
+ a.small-button {
+  text-decoration: none;
 }
 
 
@@ -143,137 +143,137 @@ text-decoration: none;
 /**** Step Indicator *******/
 /***************************/
 .stepindicator{
-width: 100%;
-z-index: 1;
-display: flex;
-position:static;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  position:static;
 }
 .label-stepindicator{
-display:inline-block;
-width: 1.5em;
-height:1.5em;
-background: #005EA2;
-border-radius: 50%;
-text-align: center;
-font-weight: bold;
-color: white;
-line-height: 1.5em;
-font-size:1.5em;
+  display:inline-block;
+  width: 1.5em;
+  height:1.5em;
+  background: #005EA2;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  line-height: 1.5em;
+  font-size:1.5em;
 }
 
 .active-label-stepindicator{
-font-weight: bold;
-font-size:1.5em;
-margin-left:20px;
+  font-weight: bold;
+  font-size:1.5em;
+  margin-left:20px;
 }
 .progressbar{
-counter-reset: step;
+  counter-reset: step;
 }
 
 /* This is for the Circle number */
 .progressbar li:before{
-content:counter(step);
-counter-increment: step;
-width: 30px;
-height: 30px;
-border: 2px solid #bebebe;
-display:block;
-border-radius: 50%;
-line-height: 26px;
-background: white;
-color: #bebebe;
-text-align: center;
-font-weight: bold;
+  content:counter(step);
+  counter-increment: step;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #bebebe;
+  display:block;
+  border-radius: 50%;
+  line-height: 26px;
+  background: white;
+  color: #bebebe;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* This is for the bars */
 .progressbar li{
-list-style-type: none;
-float: left;
-width: 32%;
-position: relative;
-text-align: left;
-margin-left: -5px;
+  list-style-type: none;
+  float: left;
+  width: 32%;
+  position: relative;
+  text-align: left;
+  margin-left: -5px;
 }
 .progressbar li + li {
-margin-top: unset;
+  margin-top: unset;
 }
 
 .progressbar li:after{
-content: '';
-position: absolute;
-width:100%;
-height: 8px;
-background: #979797;
-top: 10px;
-left: -90%;
-z-index: -1;
+  content: '';
+  position: absolute;
+  width:100%;
+  height: 8px;
+  background: #979797;
+  top: 10px;
+  left: -90%;
+  z-index: -1;
 }
 
 /* Hides the first child bar */
 .progressbar li:first-child:after{
-content: none;
+  content: none;
 }
 
 .progressbar li.active + li:after{
-background: #005EA2;
+  background: #005EA2;
 }
 
 .progressbar li.active::before{
-border: 2px solid white;
-background: #005EA2;
-color: white;
+  border: 2px solid white;
+  background: #005EA2;
+  color: white;
 }
 .progressbar li.active{
-font-weight: bold;
-color: #005EA2;
+  font-weight: bold;
+  color: #005EA2;
 }
 .progressbar li.inactive{
-font-weight: bold;
-color: #163f6e;
+  font-weight: bold;
+  color: #163f6e;
 }
 .progressbar li.inactive + li:after{
-background: #163f6e;
+  background: #163f6e;
 }
 
 .progressbar li.inactive::before{
-border-color: white;
-background: #163f6e;
-color: white;
+  border-color: white;
+  background: #163f6e;
+  color: white;
 }
 
 /* For mobile screens step indicator */ 
 @media only screen and (max-width: 600px) {
-.progressbar li:before{
-  margin-top: -33px;
-  line-height: 18px;
-  width:20px;
-  height:20px;
-  border-width: 1px;
-}
-.progressbar li.active::before{
-  border-width: 1px;
+  .progressbar li:before{
+    margin-top: -33px;
+    line-height: 18px;
+    width:20px;
+    height:20px;
+    border-width: 1px;
+  }
+  .progressbar li.active::before{
+    border-width: 1px;
+  }
+  
+  .progressbar li, .progressbar li.active, .progressbar li.inactive {
+    font-size: 11px;
+    padding-top: 15px;
+  }
+  
+  .progressbar li:after{
+    border-left: 1px solid white;
+    height: 10px;
+    margin-top: -2em;
+  }
+
 }
 
-.progressbar li, .progressbar li.active, .progressbar li.inactive {
-  font-size: 11px;
-  padding-top: 15px;
-}
-
-.progressbar li:after{
-  border-left: 1px solid white;
-  height: 10px;
-  margin-top: -2em;
-}
-
-}
-/*wraps text in Signals Details>Service Requests - Details field*/
+/* Wraps text in Signals Details>Service Requests - Details field */
 view_1704 td.field_1446 > * {
-overflow: auto;
-overflow-wrap:
-break-word;
-width: 60px;
-max-height: 100px;
+  overflow: auto;
+  overflow-wrap: break-word;
+  width: 60px;
+  max-height: 100px;
 }
 
 /*********************************************/
@@ -282,56 +282,56 @@ max-height: 100px;
 
 /* Base styles for the image */
 img.knHeader__logo-image {
-width: 100% !important;
-height: auto !important;
-max-width: 100% !important;
-object-fit: contain !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
 }
 
 /* Base styles for the parent container */
 .knHeader__logo.knHeader__logo--custom {
-height: auto !important;
-max-width: 1000px !important;
-margin: 0 0 0 0 !important; /* Left-justified */
+  height: auto !important;
+  max-width: 1000px !important;
+  margin: 0 0 0 0 !important; /* Left-justified */
 }
 
 /* Overrides for conflicting styles */
 .knHeader .knHeader__logo--custom {
-width: 100% !important;
-max-width: 1000px !important;
-margin: 0 0 0 0 !important; /* Left-justified */
+  width: 100% !important;
+  max-width: 1000px !important;
+  margin: 0 0 0 0 !important; /* Left-justified */
 }
 
 .knHeader .knHeader__logo .knHeader__logo-image {
-width: 100% !important;
-object-fit: contain !important;
+  width: 100% !important;
+  object-fit: contain !important;
 }
 
 /* Media queries for larger screens */
 @media (min-width: 768px) {
-.knHeader__logo.knHeader__logo--custom {
-  width: 80% !important;
-}
+  .knHeader__logo.knHeader__logo--custom {
+    width: 80% !important;
+  }
 }
 
 @media (min-width: 1024px) {
-.knHeader__logo.knHeader__logo--custom {
-  width: 80% !important; /* Medium width on large screens */
-  max-width: 1000px !important;
-}
+  .knHeader__logo.knHeader__logo--custom {
+    width: 80% !important; /* Medium width on large screens */
+    max-width: 1000px !important;
+  }
 }
 
 /* Media queries for image resizing */
 @media (max-width: 767px) {
-.knHeader__logo.knHeader__logo--custom {
-  width: 100% !important; /* Full width on small screens */
-  max-width: 600px !important;
-}
+  .knHeader__logo.knHeader__logo--custom {
+    width: 100% !important; /* Full width on small screens */
+    max-width: 600px !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
-.knHeader__logo.knHeader__logo--custom {
-  width: 80% !important; /* Medium width on medium screens */
-  max-width: 800px !important;
-}
+  .knHeader__logo.knHeader__logo--custom {
+    width: 80% !important; /* Medium width on medium screens */
+    max-width: 800px !important;
+  }
 }
