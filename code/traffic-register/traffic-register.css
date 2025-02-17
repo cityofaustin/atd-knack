@@ -539,6 +539,17 @@ a.ang-link:link {text-decoration: none;}
 /*Draft Reg Doc ID on Draft Review*/
 #kn-scene_685 .kn-detail-label { background-color: transparent; min-width: 0% !important; } /*Edit Area & Remarks*/
 
+/**********************************/
+/*** Keep Knack Nav Menu on Top ***/
+/**********************************/
+.knHeader__menu.knHeader__menu--tabs {
+  position: relative;
+}
+
+nav.knHeader__menu-nav {
+  z-index: 10;
+}
+
 /***************************************/
 /*********** Color Variables ***********/
 /***************************************/
@@ -779,8 +790,5 @@ img.knHeader__logo-image {
     width: 80% !important; /* Medium width on medium screens */
     max-width: 800px !important;
   }
-}
-
-  z-index: 10;
 }
 
