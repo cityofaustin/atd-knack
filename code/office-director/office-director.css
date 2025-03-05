@@ -95,3 +95,85 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
+
+/***************************************/
+/******* Specific View Styling *********/
+/* These styles target specific views (#38, #54, #56) */
+/* in the Office Director interface, giving them a    */
+/* consistent dark blue background and white text.    */
+/* This is commonly used for navigation elements or   */
+/* important action buttons that need to stand out.   */
+/***************************************/
+
+#view_38 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_54 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+#view_56 > div > a {
+  background-color: #1a3d6b;
+  color: #ffffff;
+}
+
+/*********************************************/
+/******** Header Banner Image Styling ********/
+/*********************************************/
+
+/* Base styles for the image */
+img.knHeader__logo-image {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Base styles for the parent container */
+.knHeader__logo.knHeader__logo--custom {
+  height: auto !important;
+  max-width: 1000px !important;
+  margin: 0 0 0 0 !important; /* Left-justified */
+}
+
+/* Overrides for conflicting styles */
+.knHeader .knHeader__logo--custom {
+  width: 100% !important;
+  max-width: 1000px !important;
+  margin: 0 0 0 0 !important; /* Left-justified */
+}
+
+.knHeader .knHeader__logo .knHeader__logo-image {
+  width: 100% !important;
+  object-fit: contain !important;
+}
+
+/* Media queries for larger screens */
+@media (min-width: 768px) {
+  .knHeader__logo.knHeader__logo--custom {
+    width: 80% !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .knHeader__logo.knHeader__logo--custom {
+    width: 80% !important; /* Medium width on large screens */
+    max-width: 1000px !important;
+  }
+}
+
+/* Media queries for image resizing */
+@media (max-width: 767px) {
+  .knHeader__logo.knHeader__logo--custom {
+    width: 100% !important; /* Full width on small screens */
+    max-width: 600px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .knHeader__logo.knHeader__logo--custom {
+    width: 80% !important; /* Medium width on medium screens */
+    max-width: 800px !important;
+  }
+}
