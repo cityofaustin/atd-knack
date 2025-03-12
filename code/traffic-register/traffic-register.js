@@ -236,3 +236,24 @@ $(document).on('knack-scene-render.scene_707', function(event, scene) {
 $(document).on('knack-scene-render.scene_708', function(event, scene) {
     $('#kn-app-menu').hide()
 });
+
+/*********************************************/
+/************** PDF Button link **************/
+/*********************************************/
+$(document).on('knack-scene-render.any', function(event, scene) {
+  $(".kn-detail.field_1729 a").addClass("pbi-link");                      /*Add CSS Class pbi-link to child anchor*/
+  $(".kn-detail.field_1729").wrap("<div class='pbi-link-button'></div>"); /*Wrap the div with div class pbi-link-button*/
+  $(".pbi-link-button").click(function(){                                 /*Add click event to the new div*/
+	  window.open($(this).find("a").attr("href"), '_blank');                /*Click event uses link from child anchor & opens in new tab*/
+		return false;
+	});
+});
+
+$(document).on('knack-scene-render.any', function(event, scene) {
+  $(".kn-detail.field_1778 a").addClass("sp-link");                      /*Add CSS Class sp-link to child anchor*/
+  $(".kn-detail.field_1778").wrap("<div class='sp-link-button'></div>"); /*Wrap the div with div class sp-link-button*/
+  $(".sp-link-button").click(function(){                                 /*Add click event to the new div*/
+	  window.open($(this).find("a").attr("href"), '_blank');               /*Click event uses link from child anchor & opens in new tab*/
+		return false;
+	});
+});

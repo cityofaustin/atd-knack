@@ -454,24 +454,51 @@ a.ang-link:link {text-decoration: none;}
 /**************************************/
 /*** Style Details Links as Buttons ***/
 /**************************************/
-/*These are for View PDF Buttons*/
-/*Reg Doc Details Header navigating from Document Search*/
-#kn-scene_588 #view_1476 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+/* These are for View PDF Buttons */
+/*Reg Doc Details Header navigating from Document Search - Generated Power BI PDF*/
+/* #kn-scene_588 #view_1476 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
-#kn-scene_588 #view_1476 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
-#kn-scene_588 #view_1476 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_588 #view_1476 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; }
+#kn-scene_588 #view_1476 .kn-detail-label { background-color: transparent; min-width: 0% !important; } */
 
-/*Reg Doc Details Header navigating from Regulations Search*/
-#kn-scene_773 #view_1592 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+/*Reg Doc Details Header navigating from Document Search - Historical SharePoint PDF*/
+/* #kn-scene_588 #view_1706 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #163f6e; border-radius: 8px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
-#kn-scene_773 #view_1592 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
-#kn-scene_773 #view_1592 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+#kn-scene_588 #view_1706 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #163f6e; border-width: 2px; }
+#kn-scene_588 #view_1706 .kn-detail-label { background-color: transparent; min-width: 0% !important; } */
+
+/*Reg Doc Details Header navigating from Regulations Search - Generated Power BI PDF*/
+/* #kn-scene_773 #view_1592 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_773 #view_1592 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; }
+#kn-scene_773 #view_1592 .kn-detail-label { background-color: transparent; min-width: 0% !important; } */
+
+/*Reg Doc Details Header navigating from Regulations Search - Historical SharePoint PDF*/
+/* #kn-scene_773 #view_1705 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #163f6e; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_773 #view_1705 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #163f6e; border-width: 2px; }
+#kn-scene_773 #view_1705 .kn-detail-label { background-color: transparent; min-width: 0% !important; } */
 
 /*Draft Review Details Header*/
 #kn-scene_673 #view_1478 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
-#kn-scene_673 #view_1478 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_673 #view_1478 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; }
 #kn-scene_673 #view_1478 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/****************************************/
+/*** Style PDF Link Fields as Buttons ***/
+/****************************************/
+div.kn-detail.field_1729 { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+div.kn-detail:hover.field_1729 { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; }
+div.kn-detail.field_1729 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+.pbi-link {text-decoration: none !important;} /*the CSS Class we apply to the anchor with JQuery. Overrides default .kn-content a*/
+
+div.kn-detail.field_1778 { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #163f6e; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+div.kn-detail:hover.field_1778 { opacity: 0.9; cursor: pointer; border-color: #163f6e; border-width: 2px; }
+div.kn-detail.field_1778 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+.sp-link {text-decoration: none !important;} /*the CSS Class we apply to the anchor with JQuery. Overrides default .kn-content a*/
 
 /*****************************************/
 /** Remove Back Links for Draft Builder **/
