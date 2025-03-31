@@ -67,9 +67,8 @@
   /***************************************/
   /* Delete Button styling */
   .trigger-button-delete {
-    border-style: solid;
     border-width: 1px;
-    border-color: #EB4133;
+    border-color: transparent;
     border-radius: 4px;
     box-shadow: 0px 0px 0px 0px gray;
     background-color: #EB4133;
@@ -82,7 +81,6 @@
   .trigger-button-delete:hover {
     cursor: pointer;
     opacity: 0.9;
-    filter: brightness(95%);
   }
   
   /*********************************************/
