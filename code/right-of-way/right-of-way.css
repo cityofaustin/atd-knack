@@ -499,6 +499,12 @@ a.ang-link:hover {color: #367DB7;}
 /*TCP Application Confirmation Page*/
 #kn-scene_153 .kn-back-link { display: none; }
 
+/****************************************************/
+/** Remove Back Links for Reviewer TCP Application **/
+/****************************************************/
+/*TCP Begin Application Page*/
+#kn-scene_583 .kn-back-link { display: none; }
+
 /***********************************************************/
 /** Remove Back Links for TCP Conflict/Shared TCP Request **/
 /***********************************************************/
