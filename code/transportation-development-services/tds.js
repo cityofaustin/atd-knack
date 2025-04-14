@@ -63,7 +63,7 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 
 // create large Task Board button on the Home page
 $(document).on("knack-view-render.view_1664", function(event, page) {
-  bigButton("task-board", "view_1664", "https://atd.knack.com/development-services#task-board/", "tasks", "Task Board");
+  bigButton("task-board", "view_1664", "https://atd.knack.com/development-services#task-board/my-tasks", "tasks", "Task Board");
 });
 // create large TDR Reviews button on the Home page
 $(document).on("knack-view-render.view_1269", function(event, page) {
@@ -119,6 +119,11 @@ $(document).on("knack-view-render.view_1432", function(event, page) {
 // create large SIF Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1433", function(event, page) {
   bigButton("sif-program-link", "view_1433", "https://www.austintexas.gov/department/street-impact-fee", "road", "SIF Program", true);
+});
+
+// create large Task Board button on the Task Board Login page
+$(document).on("knack-view-render.view_3019", function(event, page) {
+  bigButton("task-board", "view_3019", "https://atd.knack.com/development-services#task-board/my-tasks", "tasks", "Go to My Tasks");
 });
 
 /********************************************/
@@ -1089,12 +1094,17 @@ $(document).on("knack-scene-render.scene_616", function (event, page) {
 /*************************************/
 /*** Redirect from Blank Nav Pages ***/
 /*************************************/
-//Access Code Page
+/*Customer Home Page "https://atd.knack.com/development-services#customer/" */
+$(document).on('knack-scene-render.scene_870', function(event, scene) { 
+window.location.href = "https://atd.knack.com/development-services#customer-portal/";
+});
+
+/*Access Case Page "https://atd.knack.com/development-services#access-case-redirect/" */
 $(document).on('knack-scene-render.scene_580', function(event, scene) { 
 window.location.href = "https://atd.knack.com/development-services#customer-portal/access-case/61e9958f57ad0100231d515e/";
 });
 
-//Task Board Page
+/*Task Board Page "https://atd.knack.com/development-services#task-board" */
 $(document).on('knack-scene-render.scene_656', function(event, scene) { 
 window.location.href = "https://atd.knack.com/development-services#task-board/my-tasks/";
 });
@@ -1122,3 +1132,5 @@ $(document).on('knack-scene-render.scene_760', function(event, scene) {
 $(document).on('knack-scene-render.scene_810', function(event, scene) {
     $('button[type=submit]').submit();
 });
+
+
