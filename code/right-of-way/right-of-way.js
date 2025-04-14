@@ -67,7 +67,7 @@ $(document).on("knack-view-render.view_644", function(event, page) {
 });
 // create large Customer Portal button on the Home page
 $(document).on("knack-view-render.view_645", function(event, page) {
-  bigButton("customer-portal", "view_645", "https://atd.knack.com/row#customer-portal/", "child", "Customer Portal");
+  bigButton("row-portal", "view_645", "https://atd.knack.com/row#portal-home/", "child", "Customer Portal");
 });
 // create large Customer Home button on the Home page
 $(document).on("knack-view-render.view_1087", function(event, page) {
@@ -123,6 +123,10 @@ $(document).on("knack-view-render.view_1120", function(event, page) {
   bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
 });
 
+// create large Task Board button on the Task Board Login page
+$(document).on("knack-view-render.view_1385", function(event, page) {
+  bigButton("task-board", "view_1385", "https://atd.knack.com/row#task-board/my-tasks", "tasks", "Go to My Tasks");
+});
 
 /********************************************/
 /*********** Large Submit Buttons ***********/
@@ -135,6 +139,7 @@ function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank
   if (callback) callback();
 }
 
+/*
 // create large Start Application button on the ROW Customer Portal - Services page for TCP
 $(document).on("knack-view-render.view_388", function(event, page) {
   largeSubmitButton("tcp-application", "view_388", "https://atd.knack.com/row#new-tcp-application/", "arrow-right", "Start Application");
@@ -143,6 +148,8 @@ $(document).on("knack-view-render.view_388", function(event, page) {
 $(document).on("knack-view-render.view_444", function(event, page) {
   largeSubmitButton("cswz-application", "view_444", "https://atd.knack.com/row#new-cswz/", "arrow-right", "Start Request");
 }); 
+*/
+
 // create large My Projects button on the Customer Dashboard - Customer Services page
 $(document).on("knack-view-render.view_1089", function(event, page) {
   largeSubmitButton("my-projects", "view_1089", "https://atd.knack.com/row#customer/my-projects", "arrow-right", "My Projects");
@@ -225,6 +232,15 @@ $(document).on("knack-scene-render.scene_153", function () {
   disableBreadCrumbsNonAdmin();
 });
 
+/************************************************************************/
+/*** Disable Breadcrumb Navigation Links for Reviewer TCP Application ***/
+/************************************************************************/
+
+//New TCP Application page
+$(document).on("knack-scene-render.scene_583", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
 /*******************************************************************************/
 /*** Disable Breadcrumb Navigation Links for TCP Conflict/Shared TCP Request ***/
 /*******************************************************************************/
@@ -303,14 +319,19 @@ $(document).on("knack-scene-render.any", function (event, scene) {
 /*************************************/
 /*** Redirect from Blank Nav Pages ***/
 /*************************************/
-//Task Board Page
+/*Customer Home Page "https://atd.knack.com/row#customer-portal-home/" */
+$(document).on('knack-scene-render.scene_586', function(event, scene) { 
+window.location.href = "https://atd.knack.com/row#portal-home/";
+});
+
+/*Task Board Page "https://atd.knack.com/row#task-board/" */
 $(document).on('knack-scene-render.scene_166', function(event, scene) { 
 window.location.href = "https://atd.knack.com/row#task-board/my-tasks/";
 });
 
-/****************************/
+/*****************************/
 /*** Autosubmit Form Pages ***/
-/****************************/
+/*****************************/
 
 /* Auto Submit New TCP Submission Cycle */
 $(document).on('knack-scene-render.scene_411', function(event, scene) {
@@ -393,7 +414,8 @@ $(document).on('knack-view-render.view_1175', function(event, view, record) {
         </ul>\
       </li>\
       ${tcpDropdownMenuItem(recordId, "intake-decision", "fa-inbox", "Intake Decision")}\
-      ${tcpDropdownMenuItem(recordId, "create-tcp-submission-cycle-staff", "fa-plus-square", "Create a Submission Cycle")}\
+      ${tcpDropdownMenuItem(recordId, "create-tcp-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle")}\
+      ${tcpDropdownMenuItem(recordId, "tcp-submission-override", "fa-share-square", "Create Submission Cycle Override")}\
     </ul>\
   </div>`).appendTo("#view_1175")
 
@@ -423,7 +445,8 @@ $(`<div class="mobile-details-dropdown-menu">\
         </ul>\
       </li>\
       ${tcpDropdownMenuItem(recordId, "intake-decision", "fa-inbox", "Intake Decision", true)}\
-      ${tcpDropdownMenuItem(recordId, "create-tcp-submission-cycle-staff", "fa-plus-square", "Create a Submission Cycle", true)}\
+      ${tcpDropdownMenuItem(recordId, "create-tcp-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle", true)}\
+      ${tcpDropdownMenuItem(recordId, "tcp-submission-override", "fa-share-square", "Create Submission Cycle Override", true)}\
     </ul>\
   </div>`).appendTo("#view_1175")
 })
@@ -484,7 +507,8 @@ $(document).on('knack-view-render.view_1176', function(event, view, record) {
           ${cswzDropdownMenuItem(recordId, "change-cswz-contact-person", "fa-refresh", "Change Contact")}\
         </ul>\
       </li>\
-      ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create a Submission Cycle")}\
+      ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle")}\
+      ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override")}\
     </ul>\
   </div>`).appendTo("#view_1176")
 
@@ -512,7 +536,8 @@ $(`<div class="mobile-details-dropdown-menu">\
           ${cswzDropdownMenuItem(recordId, "change-cswz-contact-person", "fa-refresh", "Change Contact", true)}\
         </ul>\
       </li>\
-      ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create a Submission Cycle", true)}\
+      ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle", true)}\
+      ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override", true)}\
     </ul>\
   </div>`).appendTo("#view_1176")
 })
