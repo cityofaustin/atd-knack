@@ -249,9 +249,9 @@ for (let key in viewNameOA) {
       $(`<div class="details-dropdown-menu tabs">\
       <ul id="desktop-menu-list">\
         <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
+        <a><span class="nav-dropdown-link">${currentMenu}</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /></a>\
           <a href="#application-operating-authority/business-information/${recordId}/business-information/${recordId}" data-kn-slug="#application-operating-authority">\
-            <span class="nav-dropdown-link">${currentMenu}</span>\
-            <span class="kn-dropdown-icon fa fa-caret-down" />\
           </a>\
           <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
             ${dropdownMenuItem(
