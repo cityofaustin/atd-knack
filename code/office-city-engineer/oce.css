@@ -62,6 +62,27 @@ a.small-button {
 /***************************************/
 .fa { vertical-align: baseline; }
 
+/***************************************/
+/*********** Trigger Buttons ***********/
+/***************************************/
+/* Delete Trigger Button styling */
+.trigger-button-delete {
+  border-width: 1px;
+  border-color: transparent;
+  border-radius: 4px;
+  box-shadow: 0px 0px 0px 0px gray;
+  background-color: #E41A1C;
+  color: #FFFFFF;
+  padding: 1px 10px;
+  text-align: center;
+  display: inline-block;
+}
+
+.trigger-button-delete:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
 /*********************************************/
 /******** Header Banner Image Styling ********/
 /*********************************************/
