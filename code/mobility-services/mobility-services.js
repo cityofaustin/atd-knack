@@ -277,7 +277,7 @@ for (let key in viewNameOA) {
             )}\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-details",
+              "review-and-submit",
               "6 - Review and Submit"
             )}\
           </ul>\
@@ -311,7 +311,7 @@ for (let key in viewNameOA) {
             )}\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-details",
+              "review-and-submit",
               "6 - Review and Submit"
             )}\
       </li>\
