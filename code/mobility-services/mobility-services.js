@@ -231,7 +231,7 @@ function dropdownMenuItem(recordId, route, linkName) {
 // Dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
 var viewNameOA = {
   687: "1 - Service Type",
-  676: "2 - Business Information",
+  750: "2 - Business Information",
   689: "3 - Insurance",
   691: "4 - Authorized Person",
   693: "5 - Vehicle Information",
@@ -249,14 +249,14 @@ for (let key in viewNameOA) {
       $(`<div class="details-dropdown-menu tabs">\
       <ul id="desktop-menu-list">\
         <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-          <a href="#application-operating-authority/business-information/${recordId}/business-information/${recordId}" data-kn-slug="#application-operating-authority">\
-            <span class="nav-dropdown-link">${currentMenu}</span>\
-            <span class="kn-dropdown-icon fa fa-caret-down" />\
+        <a><span class="nav-dropdown-link">${currentMenu}</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /></a>\
+          <a href="#application-operating-authority/service-type/${recordId}/service-type/${recordId}" data-kn-slug="#application-operating-authority">\
           </a>\
           <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-service-type",
+              "service-type",
               "1 - Service Type"
             )}\
             ${dropdownMenuItem(
@@ -272,12 +272,12 @@ for (let key in viewNameOA) {
             )}\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-vehicles",
+              "vehicle-information",
               "5 - Vehicle Information"
             )}\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-details",
+              "review-and-submit",
               "6 - Review and Submit"
             )}\
           </ul>\
@@ -290,7 +290,7 @@ for (let key in viewNameOA) {
         <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
           ${dropdownMenuItem(
             recordId,
-            "application-operating-authority-service-type",
+            "service-type",
             "1 - Service Type"
           )}\
             ${dropdownMenuItem(
@@ -306,12 +306,12 @@ for (let key in viewNameOA) {
             )}\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-vehicles",
+              "vehicle-information",
               "5 - Vehicle Information"
             )}\
             ${dropdownMenuItem(
               recordId,
-              "application-operating-authority-details",
+              "review-and-submit",
               "6 - Review and Submit"
             )}\
       </li>\
