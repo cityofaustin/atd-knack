@@ -233,7 +233,7 @@ $(document).on("knack-scene-render.scene_112", function () {
         var payload = {
           // Connection fields - using IDs for relationships
           // field_87: interviewManagement[0].id, // interview_management connection
-          field_87: "67b8b06980a23602bb02eb32",
+          field_87: Knack.views["view_253"].model.id,
           field_88: candidate.get("id") || candidate.id, // interview_candidate
           field_89: question.get("id") || question.id, // interview_question
           field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
