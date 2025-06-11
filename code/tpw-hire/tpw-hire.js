@@ -113,68 +113,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   //   // Test 1: Try different view IDs that might exist on this scene
   var testViews = ["view_263", "view_264", "view_269"]; // Test the views you mentioned
 
-  //   console.log("=== Testing Multiple Views ===");
-  //   testViews.forEach(function (viewId) {
-  //     console.log("Testing view:", viewId);
-  //     $.ajax({
-  //       url:
-  //         "https://api.knack.com/v1/scenes/scene_112/views/" +
-  //         viewId +
-  //         "/records",
-  //       headers: headers,
-  //     })
-  //       .then(function (res) {
-  //         console.log("✅ " + viewId + " Success:", {
-  //           view: viewId,
-  //           recordCount: res.records ? res.records.length : 0,
-  //           totalRecords: res.total_records,
-  //           currentPage: res.current_page,
-  //           totalPages: res.total_pages,
-  //           data: res,
-  //         });
-
-  //         if (res.records && res.records.length > 0) {
-  //           console.log("Sample record from " + viewId + ":", res.records[0]);
-  //         }
-  //       })
-  //       .fail(function (jqXHR, textStatus, errorThrown) {
-  //         console.error("❌ " + viewId + " Failed:");
-  //         logAPIError(jqXHR, textStatus, errorThrown);
-  //       });
-  //   });
-
-  // Test 2: Try fetching with filters that might be required
-  //   console.log("=== Testing with URL Context Filters ===");
-  //   if (recordId && recordId !== "scene_112") {
-  //     // Try different filter approaches that might be needed
-  //     var filterTests = [
-  //       "?filters=%5B%5D", // Empty filters
-  //       "?parent_id=" + recordId,
-  //       "?" + recordId.split("-").pop() + "_id=" + recordId, // Common pattern
-  //       "?record_id=" + recordId,
-  //     ];
-
-  //     filterTests.forEach(function (filter, index) {
-  //       console.log("Testing filter " + (index + 1) + ":", filter);
-  //       $.ajax({
-  //         url:
-  //           "https://api.knack.com/v1/scenes/scene_112/views/view_263/records" +
-  //           filter,
-  //         headers: headers,
-  //       })
-  //         .then(function (res) {
-  //           console.log("✅ Filter " + (index + 1) + " Success:", {
-  //             filter: filter,
-  //             recordCount: res.records ? res.records.length : 0,
-  //             data: res,
-  //           });
-  //         })
-  //         .fail(function (jqXHR, textStatus, errorThrown) {
-  //           console.error("❌ Filter " + (index + 1) + " Failed:", filter);
-  //         });
-  //     });
-  //   }
-
   // Test 3: Check what views are actually available on this page
   console.log("=== Available Knack Views on Page ===");
   if (typeof Knack !== "undefined" && Knack.views) {
@@ -182,6 +120,7 @@ $(document).on("knack-scene-render.scene_112", function () {
 
     // Try to get data from views that are actually loaded on the page
     Object.keys(Knack.views).forEach(function (viewKey) {
+      console.log("viewKey", viewKey);
       if (Knack.views[viewKey].model && Knack.views[viewKey].model.data) {
         console.log("✅ " + viewKey + " has data:", {
           view: viewKey,
@@ -193,42 +132,6 @@ $(document).on("knack-scene-render.scene_112", function () {
       }
     });
   }
-
-  // Test 4: Try the alternative API pattern for all test views
-  //   console.log("=== Testing Alternative API Pattern ===");
-  //   testViews.forEach(function (viewId) {
-  //     $.ajax({
-  //       url:
-  //         "https://api.knack.com/v1/pages/scene_112/views/" + viewId + "/records",
-  //       headers: headers,
-  //     })
-  //       .then(function (res) {
-  //         console.log("✅ Alternative " + viewId + " worked:", {
-  //           view: viewId,
-  //           recordCount: res.records ? res.records.length : 0,
-  //           data: res,
-  //         });
-  //       })
-  //       .fail(function (jqXHR, textStatus, errorThrown) {
-  //         console.error("❌ Alternative " + viewId + " failed");
-  //       });
-  //   });
-
-  //   // Helper function to log detailed error information
-  //   function logAPIError(jqXHR, textStatus, errorThrown) {
-  //     console.error("=== Detailed Error Information ===");
-  //     console.error("Status Code:", jqXHR.status);
-  //     console.error("Status Text:", textStatus);
-  //     console.error("Error Thrown:", errorThrown);
-  //     console.error("Response Text:", jqXHR.responseText);
-
-  //     try {
-  //       var errorResponse = JSON.parse(jqXHR.responseText);
-  //       console.error("Parsed Error Response:", errorResponse);
-  //     } catch (e) {
-  //       console.error("Could not parse error response as JSON");
-  //     }
-  //   }
 
   //   Everything above is for debugging.
   // Here we focus on the actual functionality.
@@ -305,10 +208,95 @@ $(document).on("knack-scene-render.scene_112", function () {
     interviewQuestions.map(function (question) {
       return {
         id: question.get("id") || question.id,
-        question: question.get("field_189"),
+        question: question.get("field_26"),
       };
     })
   );
+
+  console.log("view_253", Knack.views["view_253"]);
+
+  var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
+  console.log("Interview management:", interviewManagement);
+  console.log("Interview management ID:", interviewManagement[0].id);
+  console.log("Interview management Name:", interviewManagement[0].identifier);
+
+  // Test creating new INTERVIEW RESPONSE records
+  console.log("=== Testing POST request to create Interview Response ===");
+
+  //   Fields needed:
+  //   interview_candidate	object_10	field_88	outbound	one	one
+  //   interview_panel_member	object_9	field_183	outbound	one	many
+  //   interview_question	object_4	field_89	outbound	one	many
+
+  //   field_88: interview_candidate
+  //   field_87: interview_management
+  //   field_183: interview_panel_member
+  //   field_89: interview_question
+
+  // Create a test Interview Response record following proper patterns
+  var newRecordData = {
+    field_87: "67b8b06980a23602bb02eb32",
+    field_88: selectedToInterviewCandidates[0].get("id"),
+    field_89: interviewQuestions[0].get("id"),
+    field_183: panelMembers[0].get("id"),
+  };
+
+  console.log("Test data to be sent:", newRecordData);
+
+  var addResponseScene = "scene_124";
+
+  $.ajax({
+    type: "POST",
+    url:
+      "https://api.knack.com/v1/scenes/" +
+      addResponseScene +
+      "/views/view_268/records", // Try scenes pattern first
+    headers: headers,
+    data: JSON.stringify(newRecordData), // ✅ Must stringify the data
+    contentType: "application/json", // ✅ Required for JSON requests
+  })
+    .then(function (res) {
+      console.log("✅ POST Success:", res);
+      console.log("res", res);
+      console.log("Created record ID:", res.id);
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      console.error("❌ POST Failed:");
+      logAPIError(jqXHR, textStatus, errorThrown);
+
+      // Try alternative API pattern if first fails
+      console.log("Trying alternative /pages/ pattern...");
+      $.ajax({
+        type: "POST",
+        url: "https://api.knack.com/v1/pages/scene_112/views/view_268/records", // Alternative pattern
+        headers: headers,
+        data: JSON.stringify(newRecordData),
+        contentType: "application/json",
+      })
+        .then(function (res) {
+          console.log("✅ Alternative POST Success:", res);
+        })
+        .fail(function (jqXHR2, textStatus2, errorThrown2) {
+          console.error("❌ Alternative POST also failed:");
+          logAPIError(jqXHR2, textStatus2, errorThrown2);
+        });
+    });
+
+  // Helper function to log detailed error information
+  function logAPIError(jqXHR, textStatus, errorThrown) {
+    console.error("=== Detailed Error Information ===");
+    console.error("Status Code:", jqXHR.status);
+    console.error("Status Text:", textStatus);
+    console.error("Error Thrown:", errorThrown);
+    console.error("Response Text:", jqXHR.responseText);
+
+    try {
+      var errorResponse = JSON.parse(jqXHR.responseText);
+      console.error("Parsed Error Response:", errorResponse);
+    } catch (e) {
+      console.error("Could not parse error response as JSON");
+    }
+  }
 
   // For each Candidate, create a new Interview Response related to each panel member and interview question.
 });
