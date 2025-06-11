@@ -85,6 +85,9 @@ function bigButton(
   if (callback) callback();
 }
 
+/********************************************/
+/*************** TPW Hire ****************/
+/********************************************/
 // TPW Hire Generate Responses Page
 $(document).on("knack-scene-render.scene_112", function () {
   // Create "Execute Script" button
@@ -121,25 +124,6 @@ $(document).on("knack-scene-render.scene_112", function () {
     Authorization: knackUserToken,
     "content-type": "application/json",
   };
-
-  //   console.log("=== Available Knack Views on Page ===");
-  //   if (typeof Knack !== "undefined" && Knack.views) {
-  //     console.log("Available Knack views:", Object.keys(Knack.views));
-
-  //     // Try to get data from views that are actually loaded on the page
-  //     Object.keys(Knack.views).forEach(function (viewKey) {
-  //       console.log("viewKey", viewKey);
-  //       if (Knack.views[viewKey].model && Knack.views[viewKey].model.data) {
-  //         console.log("✅ " + viewKey + " has data:", {
-  //           view: viewKey,
-  //           modelData: Knack.views[viewKey].model.data,
-  //           recordCount: Knack.views[viewKey].model.data.models
-  //             ? Knack.views[viewKey].model.data.models.length
-  //             : "N/A",
-  //         });
-  //       }
-  //     });
-  //   }
 
   // Get all the Candidates with Status = "Selected to interview"
   // Name: interview_candidates, Key: view_263
@@ -268,6 +252,88 @@ $(document).on("knack-scene-render.scene_112", function () {
   console.log(interviewResponsePayloads);
 
   // =================================================================
+  // BUTTON STATE MANAGEMENT
+  // =================================================================
+
+  // Function to check if Execute Script button should be disabled
+  function checkButtonState() {
+    var currentInterviewResponses =
+      Knack.views["view_268"].model.data.total_records;
+
+    console.log("Current interview responses:", currentInterviewResponses);
+
+    // Use view data for count
+    updateButtonWithCount(currentInterviewResponses);
+  }
+
+  // Helper function to update button with count
+  function updateButtonWithCount(currentInterviewResponses) {
+    var expectedRecords = interviewResponsePayloads.length;
+    var shouldDisable = currentInterviewResponses >= expectedRecords;
+
+    console.log("=== Button State Check ===");
+    console.log("Current interview responses:", currentInterviewResponses);
+    console.log("Expected records to create:", expectedRecords);
+    console.log("Should disable button:", shouldDisable);
+
+    var $executeButton = $("#execute-script-button");
+
+    if (shouldDisable) {
+      // Disable button and add visual indication
+      $executeButton.prop("disabled", true).addClass("is-disabled").css({
+        opacity: "0.5",
+        cursor: "not-allowed",
+        "pointer-events": "none",
+      });
+
+      // Update button text to show reason
+      $executeButton
+        .find("span:last")
+        .text(
+          "All Records Exist (" +
+            currentInterviewResponses +
+            "/" +
+            expectedRecords +
+            ")"
+        );
+
+      // Add informational message after button
+      if ($("#records-exist-message").length === 0) {
+        var messageHtml =
+          '<div id="records-exist-message" style="margin: 10px 0; padding: 10px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; color: #155724; font-size: 14px;">' +
+          '<i class="fa fa-check-circle"></i> <strong>All interview response records already exist.</strong><br>' +
+          "Current: " +
+          currentInterviewResponses +
+          " records | Expected: " +
+          expectedRecords +
+          " records<br>" +
+          "The Execute Script button is disabled because all required records are already present." +
+          "</div>";
+        $executeButton.after(messageHtml);
+      }
+    } else {
+      // Enable button and remove any restrictions
+      $executeButton.prop("disabled", false).removeClass("is-disabled").css({
+        opacity: "1",
+        cursor: "pointer",
+        "pointer-events": "auto",
+      });
+
+      // Reset button text
+      $executeButton.find("span:last").text("Execute Script");
+
+      // Remove informational message
+      $("#records-exist-message").remove();
+    }
+
+    return {
+      currentCount: currentInterviewResponses,
+      expectedCount: expectedRecords,
+      shouldDisable: shouldDisable,
+    };
+  }
+
+  // =================================================================
   // VIEW REFRESH FUNCTIONS
   // =================================================================
 
@@ -291,6 +357,11 @@ $(document).on("knack-scene-render.scene_112", function () {
     });
 
     console.log("✅ All views refreshed");
+
+    // Check button state after refresh (with small delay to ensure data is loaded)
+    setTimeout(function () {
+      checkButtonState();
+    }, 500);
   }
 
   // Function to create and manage progress bar
@@ -567,10 +638,22 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Add the Execute Script button and click handler
   addExecuteScriptButton();
 
+  // Check initial button state
+  checkButtonState();
+
   // Add click handler for the Execute Script button
   $(document).on("click", "#execute-script-button", function (e) {
     e.preventDefault();
     console.log("🚀 Execute Script button clicked!");
+
+    // Check if button should be disabled before proceeding
+    var buttonState = checkButtonState();
+    if (buttonState.shouldDisable) {
+      console.log(
+        "❌ Execute Script button is disabled - all records already exist"
+      );
+      return false;
+    }
 
     var confirmationText =
       "This will create " +
