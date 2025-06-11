@@ -91,22 +91,22 @@ function bigButton(
 // TPW Hire Generate Responses Page
 $(document).on("knack-scene-render.scene_112", function () {
   // Create "Execute Script" button
-  function addExecuteScriptButton() {
+  function addGenerateResponsesButton() {
     // Check if button already exists to avoid duplicates
-    if ($("#execute-script-button").length === 0) {
+    if ($("#generate-responses-button").length === 0) {
       // Create the button with same styling as "Generate Responses" button
-      var executeButtonHtml = $(
-        '<a id="execute-script-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
+      var generateResponsesButtonHtml = $(
+        '<a id="generate-responses-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
           '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
-          "<span>Execute Script</span>" +
+          "<span>Generate Responses</span>" +
           "</a>"
       );
 
-      // Find existing "Generate Responses" button and add our button next to it
-      var generateResponsesButton = $('a[href*="generate-responses"]');
-      if (generateResponsesButton.length > 0) {
-        executeButtonHtml.insertAfter(generateResponsesButton);
-        executeButtonHtml.css("margin-left", "10px"); // Add some spacing
+      // Find existing "Add Manual Reponses" button and add our button next to it
+      var addManualResponsesButton = $('a[href*="add-reponses"]');
+      if (addManualResponsesButton.length > 0) {
+        generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
+        generateResponsesButtonHtml.css("margin-left", "10px"); // Add some spacing
       }
     }
   }
@@ -244,10 +244,6 @@ $(document).on("knack-scene-render.scene_112", function () {
     interviewResponsePayloads.length,
     "interview response payloads"
   );
-  console.log(
-    "Sample payloads (first 3):",
-    interviewResponsePayloads.slice(0, 3)
-  );
 
   console.log(interviewResponsePayloads);
 
@@ -276,18 +272,21 @@ $(document).on("knack-scene-render.scene_112", function () {
     console.log("Expected records to create:", expectedRecords);
     console.log("Should disable button:", shouldDisable);
 
-    var $executeButton = $("#execute-script-button");
+    var $generateResponsesButton = $("#generate-responses-button");
 
     if (shouldDisable) {
       // Disable button and add visual indication
-      $executeButton.prop("disabled", true).addClass("is-disabled").css({
-        opacity: "0.5",
-        cursor: "not-allowed",
-        "pointer-events": "none",
-      });
+      $generateResponsesButton
+        .prop("disabled", true)
+        .addClass("is-disabled")
+        .css({
+          opacity: "0.5",
+          cursor: "not-allowed",
+          "pointer-events": "none",
+        });
 
       // Update button text to show reason
-      $executeButton
+      $generateResponsesButton
         .find("span:last")
         .text(
           "All Records Exist (" +
@@ -307,20 +306,23 @@ $(document).on("knack-scene-render.scene_112", function () {
           " records | Expected: " +
           expectedRecords +
           " records<br>" +
-          "The Execute Script button is disabled because all required records are already present." +
+          "The Generate Responses button is disabled because all required records are already present." +
           "</div>";
-        $executeButton.after(messageHtml);
+        $generateResponsesButton.after(messageHtml);
       }
     } else {
       // Enable button and remove any restrictions
-      $executeButton.prop("disabled", false).removeClass("is-disabled").css({
-        opacity: "1",
-        cursor: "pointer",
-        "pointer-events": "auto",
-      });
+      $generateResponsesButton
+        .prop("disabled", false)
+        .removeClass("is-disabled")
+        .css({
+          opacity: "1",
+          cursor: "pointer",
+          "pointer-events": "auto",
+        });
 
       // Reset button text
-      $executeButton.find("span:last").text("Execute Script");
+      $generateResponsesButton.find("span:last").text("Generate Responses");
 
       // Remove informational message
       $("#records-exist-message").remove();
@@ -390,7 +392,7 @@ $(document).on("knack-scene-render.scene_112", function () {
       "</div>";
 
     // Insert progress bar after execute button
-    $("#execute-script-button").after(progressBarHtml);
+    $("#generate-responses-button").after(progressBarHtml);
   }
 
   // Function to update progress bar
@@ -636,13 +638,13 @@ $(document).on("knack-scene-render.scene_112", function () {
   console.log("Test payload:", testPayload);
 
   // Add the Execute Script button and click handler
-  addExecuteScriptButton();
+  addGenerateResponsesButton();
 
   // Check initial button state
   checkButtonState();
 
   // Add click handler for the Execute Script button
-  $(document).on("click", "#execute-script-button", function (e) {
+  $(document).on("click", "#generate-responses-button", function (e) {
     e.preventDefault();
     console.log("🚀 Execute Script button clicked!");
 
@@ -677,18 +679,17 @@ $(document).on("knack-scene-render.scene_112", function () {
     if (confirmation) {
       console.log("✅ User confirmed - Starting bulk record creation...");
       // Disable button during execution
-      $("#execute-script-button").addClass("is-loading").prop("disabled", true);
+      $("#generate-responses-button")
+        .addClass("is-loading")
+        .prop("disabled", true);
 
-      // Test single record creation (commented out for safety)
-      //   createInterviewResponse(testPayload, 0, 1);
-
-      //   ⚠️ Execute the bulk creation
+      //   ⚠️ Generate the responses
       //   Uncomment this line below to execute the bulk creation
       createAllInterviewResponses(interviewResponsePayloads);
 
       // Re-enable button after 5 seconds (or you could do this in the completion callback)
       setTimeout(function () {
-        $("#execute-script-button")
+        $("#generate-responses-button")
           .removeClass("is-loading")
           .prop("disabled", false);
       }, 5000);
