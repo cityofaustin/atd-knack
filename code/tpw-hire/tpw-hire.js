@@ -293,6 +293,74 @@ $(document).on("knack-scene-render.scene_112", function () {
     console.log("✅ All views refreshed");
   }
 
+  // Function to create and manage progress bar
+  function createProgressBar(total) {
+    // Remove existing progress bar if it exists
+    $("#interview-progress-container").remove();
+
+    var progressBarHtml =
+      '<div id="interview-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
+      '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Creating Interview Response Records</div>' +
+      '<div id="progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to create ' +
+      total +
+      " records...</div>" +
+      '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
+      '<div id="progress-bar-fill" style="background: linear-gradient(90deg, #28a745, #20c997); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
+      '<div id="progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
+      "</div>" +
+      "</div>" +
+      '<div id="progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
+      '<span>✅ Success: <span id="success-count">0</span></span>' +
+      '<span>❌ Failed: <span id="failed-count">0</span></span>' +
+      '<span>⏳ Remaining: <span id="remaining-count">' +
+      total +
+      "</span></span>" +
+      "</div>" +
+      "</div>";
+
+    // Insert progress bar after execute button
+    $("#execute-script-button").after(progressBarHtml);
+  }
+
+  // Function to update progress bar
+  function updateProgress(completed, total, failed, currentAction) {
+    var percentage = Math.round((completed / total) * 100);
+    var remaining = total - completed;
+
+    $("#progress-bar-fill").css("width", percentage + "%");
+    $("#progress-percentage").text(percentage + "%");
+    $("#progress-text").text(
+      currentAction || "Processing record " + completed + " of " + total
+    );
+    $("#success-count").text(completed - failed);
+    $("#failed-count").text(failed);
+    $("#remaining-count").text(remaining);
+  }
+
+  // Function to complete progress bar
+  function completeProgress(total, failed) {
+    $("#progress-bar-fill").css(
+      "background",
+      failed > 0
+        ? "linear-gradient(90deg, #ffc107, #fd7e14)"
+        : "linear-gradient(90deg, #28a745, #20c997)"
+    );
+    $("#progress-text").text(
+      "✅ Process complete! Created " +
+        (total - failed) +
+        " of " +
+        total +
+        " records."
+    );
+
+    // Remove progress bar after 5 seconds
+    setTimeout(function () {
+      $("#interview-progress-container").fadeOut(500, function () {
+        $(this).remove();
+      });
+    }, 5000);
+  }
+
   // =================================================================
   // BULK RECORD CREATION FUNCTIONS
   // =================================================================
@@ -352,11 +420,6 @@ $(document).on("knack-scene-render.scene_112", function () {
             res.id
           );
 
-          // Refresh views to show new records (if it's the last record in batch)
-          if (index === total - 1) {
-            refreshInterviewViews();
-          }
-
           resolve(res);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -388,6 +451,9 @@ $(document).on("knack-scene-render.scene_112", function () {
     console.log("Total records to create:", payloads.length);
     console.log("Batch size:", batchSize);
 
+    // Initialize progress bar
+    createProgressBar(payloads.length);
+
     var createdRecords = [];
     var failedRecords = [];
     var currentBatch = 0;
@@ -410,6 +476,14 @@ $(document).on("knack-scene-render.scene_112", function () {
           ")"
       );
 
+      // Update progress bar for batch start
+      updateProgress(
+        createdRecords.length + failedRecords.length,
+        payloads.length,
+        failedRecords.length,
+        "Processing batch " + currentBatch + "/" + totalBatches + "..."
+      );
+
       // Create promises for this batch
       var batchPromises = batchPayloads.map(function (payload, index) {
         return createInterviewResponse(
@@ -428,6 +502,14 @@ $(document).on("knack-scene-render.scene_112", function () {
             failedRecords.push(result.reason);
           }
         });
+
+        // Update progress bar after batch completion
+        updateProgress(
+          createdRecords.length + failedRecords.length,
+          payloads.length,
+          failedRecords.length,
+          "Batch " + currentBatch + "/" + totalBatches + " complete"
+        );
 
         console.log(
           "Batch " +
@@ -458,8 +540,13 @@ $(document).on("knack-scene-render.scene_112", function () {
             console.log("Failed records:", failedRecords);
           }
 
+          // Complete progress bar
+          completeProgress(payloads.length, failedRecords.length);
+
           // Refresh all views to show new records
-          refreshInterviewViews();
+          setTimeout(function () {
+            refreshInterviewViews();
+          }, 1000);
         }
       });
     }
