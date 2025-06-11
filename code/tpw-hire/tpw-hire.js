@@ -85,9 +85,39 @@ function bigButton(
   if (callback) callback();
 }
 
+// Create a small that says "Execute Script" next to "Generate Responses"
+
 // TPW Hire Generate Responses Page
 $(document).on("knack-scene-render.scene_112", function () {
   console.log("=== TPW Hire Generate Responses Debug ===");
+
+  // Create "Execute Script" button that matches existing button styling
+  function addExecuteScriptButton() {
+    // Check if button already exists to avoid duplicates
+    if ($("#execute-script-button").length === 0) {
+      // Create the button with same styling as "Generate Responses" button
+      var executeButton = $(
+        '<a id="execute-script-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
+          '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
+          "<span>Execute Script</span>" +
+          "</a>"
+      );
+
+      // Find existing "Generate Responses" button and add our button next to it
+      var generateResponsesButton = $('a[href*="generate-responses"]');
+      if (generateResponsesButton.length > 0) {
+        executeButton.insertAfter(generateResponsesButton);
+        executeButton.css("margin-left", "10px"); // Add some spacing
+      } else {
+        // If "Generate Responses" button not found, add to page header
+        $(".kn-page-header, .kn-content-header, .view-header")
+          .first()
+          .append(executeButton);
+      }
+
+      console.log("✅ Execute Script button added to page");
+    }
+  }
 
   // Get current record ID from URL
   var hrefArray = window.location.href.split("/");
@@ -220,67 +250,279 @@ $(document).on("knack-scene-render.scene_112", function () {
   console.log("Interview management ID:", interviewManagement[0].id);
   console.log("Interview management Name:", interviewManagement[0].identifier);
 
-  // Test creating new INTERVIEW RESPONSE records
-  console.log("=== Testing POST request to create Interview Response ===");
+  // =================================================================
+  // 🐛 KNOWN BUG - TODO: Fix connection field persistence
+  // =================================================================
+  // Issue: When creating interview response records via POST request,
+  // the field_87 (interview_management connection) doesn't persist
+  // from payload to response. Record creates but isn't associated
+  // to the correct interview_management object.
+  //
+  // Possible causes to investigate:
+  // - Wrong field format (should it be field_87 vs field_87_raw?)
+  // - Missing crumbtrail parameter for parent context
+  // - Connection field permissions/validation rules
+  // - API endpoint should be under interview_management context
+  // =================================================================
 
-  //   Fields needed:
+  console.log("=== Generating All Interview Response Payloads ===");
+
+  //   Fields needed for Interview Response records:
   //   interview_candidate	object_10	field_88	outbound	one	one
   //   interview_panel_member	object_9	field_183	outbound	one	many
   //   interview_question	object_4	field_89	outbound	one	many
+  //   interview_management object_11 field_87   outbound   one   many
 
-  //   field_88: interview_candidate
-  //   field_87: interview_management
-  //   field_183: interview_panel_member
-  //   field_89: interview_question
+  // Generate all combinations of candidates × panel members × questions
+  var interviewResponsePayloads = [];
 
-  // Create a test Interview Response record following proper patterns
-  var newRecordData = {
-    field_87: "67b8b06980a23602bb02eb32",
-    field_88: selectedToInterviewCandidates[0].get("id"),
-    field_89: interviewQuestions[0].get("id"),
-    field_183: panelMembers[0].get("id"),
-  };
+  console.log("Generating payloads for:");
+  console.log("- Candidates:", selectedToInterviewCandidates.length);
+  console.log("- Panel Members:", panelMembers.length);
+  console.log("- Interview Questions:", interviewQuestions.length);
+  console.log(
+    "- Expected total records:",
+    selectedToInterviewCandidates.length *
+      panelMembers.length *
+      interviewQuestions.length
+  );
 
-  console.log("Test data to be sent:", newRecordData);
+  // Triple nested loop to create all combinations
+  selectedToInterviewCandidates.forEach(function (candidate, candidateIndex) {
+    panelMembers.forEach(function (panelMember, panelIndex) {
+      interviewQuestions.forEach(function (question, questionIndex) {
+        var payload = {
+          // Connection fields - using IDs for relationships
+          field_87: interviewManagement[0].id, // interview_management connection
+          field_88: candidate.get("id") || candidate.id, // interview_candidate
+          field_89: question.get("id") || question.id, // interview_question
+          field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
 
-  var addResponseScene = "scene_124";
+          // Metadata for tracking
+          _meta: {
+            candidateIndex: candidateIndex,
+            candidateName: candidate.get("field_90"),
+            panelIndex: panelIndex,
+            panelMemberName: panelMember.get("field_189"),
+            questionIndex: questionIndex,
+            questionText: question.get("field_26"),
+            recordNumber: interviewResponsePayloads.length + 1,
+          },
+        };
 
-  $.ajax({
-    type: "POST",
-    url:
-      "https://api.knack.com/v1/scenes/" +
-      addResponseScene +
-      "/views/view_268/records", // Try scenes pattern first
-    headers: headers,
-    data: JSON.stringify(newRecordData), // ✅ Must stringify the data
-    contentType: "application/json", // ✅ Required for JSON requests
-  })
-    .then(function (res) {
-      console.log("✅ POST Success:", res);
-      console.log("res", res);
-      console.log("Created record ID:", res.id);
-    })
-    .fail(function (jqXHR, textStatus, errorThrown) {
-      console.error("❌ POST Failed:");
-      logAPIError(jqXHR, textStatus, errorThrown);
+        interviewResponsePayloads.push(payload);
+      });
+    });
+  });
 
-      // Try alternative API pattern if first fails
-      console.log("Trying alternative /pages/ pattern...");
+  console.log(
+    "Generated",
+    interviewResponsePayloads.length,
+    "interview response payloads"
+  );
+  console.log(
+    "Sample payloads (first 3):",
+    interviewResponsePayloads.slice(0, 3)
+  );
+
+  console.log(interviewResponsePayloads);
+
+  // =================================================================
+  // BULK RECORD CREATION FUNCTIONS
+  // =================================================================
+
+  // Function to create a single interview response record
+  function createInterviewResponse(payload, index, total) {
+    return new Promise(function (resolve, reject) {
+      // Remove metadata before sending to API
+      var apiPayload = Object.assign({}, payload);
+      delete apiPayload._meta;
+
+      console.log(
+        "Creating record " + (index + 1) + "/" + total + ":",
+        payload._meta.candidateName +
+          " → " +
+          payload._meta.panelMemberName +
+          " → " +
+          payload._meta.questionText.substring(0, 50) +
+          "..."
+      );
+
       $.ajax({
         type: "POST",
-        url: "https://api.knack.com/v1/pages/scene_112/views/view_268/records", // Alternative pattern
+        url: "https://api.knack.com/v1/scenes/scene_112/views/view_268/records",
         headers: headers,
-        data: JSON.stringify(newRecordData),
+        data: JSON.stringify(apiPayload),
         contentType: "application/json",
       })
         .then(function (res) {
-          console.log("✅ Alternative POST Success:", res);
+          console.log(
+            "✅ Created record " + (index + 1) + "/" + total + " - ID:",
+            res.id
+          );
+          resolve(res);
         })
-        .fail(function (jqXHR2, textStatus2, errorThrown2) {
-          console.error("❌ Alternative POST also failed:");
-          logAPIError(jqXHR2, textStatus2, errorThrown2);
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error(
+            "❌ Failed to create record " + (index + 1) + "/" + total + ":"
+          );
+          logAPIError(jqXHR, textStatus, errorThrown);
+          reject({ payload: payload, error: jqXHR });
         });
     });
+    //   //   This is the data that we need to send to the API.
+    //   var newRecordData = {
+    //     field_87_raw: [
+    //       {
+    //         id: "67b8b06980a23602bb02eb32",
+    //         identifier: "999999 | <p>DTS TEST RECORD</p>-INT36",
+    //       },
+    //     ],
+    //     field_88: selectedToInterviewCandidates[0].get("id"),
+    //     field_89: interviewQuestions[0].get("id"),
+    //     field_183: panelMembers[0].get("id"),
+    //   };
+  }
+
+  // Function to create all interview response records in batches
+  function createAllInterviewResponses(payloads, batchSize = 5) {
+    console.log("=== Starting Bulk Interview Response Creation ===");
+    console.log("Total records to create:", payloads.length);
+    console.log("Batch size:", batchSize);
+
+    var createdRecords = [];
+    var failedRecords = [];
+    var currentBatch = 0;
+    var totalBatches = Math.ceil(payloads.length / batchSize);
+
+    function processBatch(startIndex) {
+      currentBatch++;
+      var endIndex = Math.min(startIndex + batchSize, payloads.length);
+      var batchPayloads = payloads.slice(startIndex, endIndex);
+
+      console.log(
+        "Processing batch " +
+          currentBatch +
+          "/" +
+          totalBatches +
+          " (records " +
+          (startIndex + 1) +
+          "-" +
+          endIndex +
+          ")"
+      );
+
+      // Create promises for this batch
+      var batchPromises = batchPayloads.map(function (payload, index) {
+        return createInterviewResponse(
+          payload,
+          startIndex + index,
+          payloads.length
+        );
+      });
+
+      // Wait for all records in this batch to complete
+      Promise.allSettled(batchPromises).then(function (results) {
+        results.forEach(function (result, index) {
+          if (result.status === "fulfilled") {
+            createdRecords.push(result.value);
+          } else {
+            failedRecords.push(result.reason);
+          }
+        });
+
+        console.log(
+          "Batch " +
+            currentBatch +
+            " complete. Success: " +
+            results.filter((r) => r.status === "fulfilled").length +
+            ", Failed: " +
+            results.filter((r) => r.status === "rejected").length
+        );
+
+        // Process next batch or finish
+        if (endIndex < payloads.length) {
+          // Add delay between batches to avoid rate limiting
+          setTimeout(function () {
+            processBatch(endIndex);
+          }, 1000); // 1 second delay between batches
+        } else {
+          // All batches complete
+          console.log("=== Bulk Creation Complete ===");
+          console.log("Total created:", createdRecords.length);
+          console.log("Total failed:", failedRecords.length);
+          console.log(
+            "Success rate:",
+            Math.round((createdRecords.length / payloads.length) * 100) + "%"
+          );
+
+          if (failedRecords.length > 0) {
+            console.log("Failed records:", failedRecords);
+          }
+        }
+      });
+    }
+
+    // Start processing from first batch
+    processBatch(0);
+  }
+
+  // =================================================================
+  // TESTING SECTION
+  // =================================================================
+
+  // Test with a single record first
+  console.log("=== Testing Single Record Creation ===");
+  var testPayload = interviewResponsePayloads[0];
+  console.log("Test payload:", testPayload);
+
+  // Add the Execute Script button and click handler
+  addExecuteScriptButton();
+
+  // Add click handler for the Execute Script button
+  $(document).on("click", "#execute-script-button", function (e) {
+    e.preventDefault();
+    console.log("🚀 Execute Script button clicked!");
+
+    // Show confirmation dialog for safety
+    var confirmation = confirm(
+      "This will create " +
+        interviewResponsePayloads.length +
+        " interview response records.\n\n" +
+        "Breakdown:\n" +
+        "- Candidates: " +
+        selectedToInterviewCandidates.length +
+        "\n" +
+        "- Panel Members: " +
+        panelMembers.length +
+        "\n" +
+        "- Questions: " +
+        interviewQuestions.length +
+        "\n\n" +
+        "Are you sure you want to proceed?"
+    );
+
+    if (confirmation) {
+      console.log("✅ User confirmed - Starting bulk record creation...");
+      // Disable button during execution
+      $("#execute-script-button").addClass("is-loading").prop("disabled", true);
+
+      // Test single record creation (commented out for safety)
+      createInterviewResponse(testPayload, 0, 1);
+
+      //   // Execute the bulk creation
+      //   createAllInterviewResponses(interviewResponsePayloads);
+
+      // Re-enable button after 5 seconds (or you could do this in the completion callback)
+      setTimeout(function () {
+        $("#execute-script-button")
+          .removeClass("is-loading")
+          .prop("disabled", false);
+      }, 5000);
+    } else {
+      console.log("❌ User cancelled bulk record creation");
+    }
+  });
 
   // Helper function to log detailed error information
   function logAPIError(jqXHR, textStatus, errorThrown) {
