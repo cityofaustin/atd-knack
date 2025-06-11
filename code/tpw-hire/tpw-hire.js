@@ -510,11 +510,11 @@ $(document).on("knack-scene-render.scene_112", function () {
       $("#execute-script-button").addClass("is-loading").prop("disabled", true);
 
       // Test single record creation (commented out for safety)
-      createInterviewResponse(testPayload, 0, 1);
+      //   createInterviewResponse(testPayload, 0, 1);
 
       //   ⚠️ Execute the bulk creation
       //   Uncomment this line below to execute the bulk creation
-      //   createAllInterviewResponses(interviewResponsePayloads);
+      createAllInterviewResponses(interviewResponsePayloads);
 
       // Re-enable button after 5 seconds (or you could do this in the completion callback)
       setTimeout(function () {
