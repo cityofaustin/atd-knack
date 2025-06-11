@@ -85,18 +85,14 @@ function bigButton(
   if (callback) callback();
 }
 
-// Create a small that says "Execute Script" next to "Generate Responses"
-
 // TPW Hire Generate Responses Page
 $(document).on("knack-scene-render.scene_112", function () {
-  console.log("=== TPW Hire Generate Responses Debug ===");
-
-  // Create "Execute Script" button that matches existing button styling
+  // Create "Execute Script" button
   function addExecuteScriptButton() {
     // Check if button already exists to avoid duplicates
     if ($("#execute-script-button").length === 0) {
       // Create the button with same styling as "Generate Responses" button
-      var executeButton = $(
+      var executeButtonHtml = $(
         '<a id="execute-script-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
           '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
           "<span>Execute Script</span>" +
@@ -106,16 +102,9 @@ $(document).on("knack-scene-render.scene_112", function () {
       // Find existing "Generate Responses" button and add our button next to it
       var generateResponsesButton = $('a[href*="generate-responses"]');
       if (generateResponsesButton.length > 0) {
-        executeButton.insertAfter(generateResponsesButton);
-        executeButton.css("margin-left", "10px"); // Add some spacing
-      } else {
-        // If "Generate Responses" button not found, add to page header
-        $(".kn-page-header, .kn-content-header, .view-header")
-          .first()
-          .append(executeButton);
+        executeButtonHtml.insertAfter(generateResponsesButton);
+        executeButtonHtml.css("margin-left", "10px"); // Add some spacing
       }
-
-      console.log("✅ Execute Script button added to page");
     }
   }
 
@@ -133,60 +122,38 @@ $(document).on("knack-scene-render.scene_112", function () {
     "content-type": "application/json",
   };
 
-  // Debug current page and URL structure
-  console.log("=== Page Context Debug ===");
-  console.log("Current URL:", window.location.href);
-  console.log("URL parts:", hrefArray);
-  console.log("Extracted record ID:", recordId);
-  console.log("Current scene:", window.location.hash);
+  //   console.log("=== Available Knack Views on Page ===");
+  //   if (typeof Knack !== "undefined" && Knack.views) {
+  //     console.log("Available Knack views:", Object.keys(Knack.views));
 
-  //   // Test 1: Try different view IDs that might exist on this scene
-  var testViews = ["view_263", "view_264", "view_269"]; // Test the views you mentioned
-
-  // Test 3: Check what views are actually available on this page
-  console.log("=== Available Knack Views on Page ===");
-  if (typeof Knack !== "undefined" && Knack.views) {
-    console.log("Available Knack views:", Object.keys(Knack.views));
-
-    // Try to get data from views that are actually loaded on the page
-    Object.keys(Knack.views).forEach(function (viewKey) {
-      console.log("viewKey", viewKey);
-      if (Knack.views[viewKey].model && Knack.views[viewKey].model.data) {
-        console.log("✅ " + viewKey + " has data:", {
-          view: viewKey,
-          modelData: Knack.views[viewKey].model.data,
-          recordCount: Knack.views[viewKey].model.data.models
-            ? Knack.views[viewKey].model.data.models.length
-            : "N/A",
-        });
-      }
-    });
-  }
-
-  //   Everything above is for debugging.
-  // Here we focus on the actual functionality.
+  //     // Try to get data from views that are actually loaded on the page
+  //     Object.keys(Knack.views).forEach(function (viewKey) {
+  //       console.log("viewKey", viewKey);
+  //       if (Knack.views[viewKey].model && Knack.views[viewKey].model.data) {
+  //         console.log("✅ " + viewKey + " has data:", {
+  //           view: viewKey,
+  //           modelData: Knack.views[viewKey].model.data,
+  //           recordCount: Knack.views[viewKey].model.data.models
+  //             ? Knack.views[viewKey].model.data.models.length
+  //             : "N/A",
+  //         });
+  //       }
+  //     });
+  //   }
 
   // Get all the Candidates with Status = "Selected to interview"
   // Name: interview_candidates, Key: view_263
   // Filter: field_36 = "Selected to interview"
 
-  // Try to get data from views that are actually loaded on the page
-  //   Object.keys(Knack.views).forEach(function (viewKey) {
-
-  var viewKey = "view_263";
+  var viewKey = "view_263"; // interview_candidates
   var candidates = Knack.views[viewKey].model.data.models;
   console.log("Candidates raw models:", candidates);
 
   var isSelectedToInterview = function (candidate) {
     // Access Backbone model attributes properly
     var status = candidate.get("field_71"); // Use .get() method for Backbone models
-    var name = candidate.get("field_90");
-    var id = candidate.get("id") || candidate.id;
-
-    console.log("Candidate ID:", id);
-    console.log("Candidate name:", name);
-    console.log("Candidate status:", status);
-    console.log("Is selected:", status === "Selected to interview");
+    // var name = candidate.get("field_90");
+    // var id = candidate.get("id") || candidate.id;
 
     return status === "Selected to interview";
   };
@@ -194,10 +161,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Filter candidates by status = "Selected to interview"
   var selectedToInterviewCandidates = candidates.filter(isSelectedToInterview);
 
-  console.log(
-    "Filtered candidates (selected to interview):",
-    selectedToInterviewCandidates.length
-  );
   console.log(
     "Selected candidates details:",
     selectedToInterviewCandidates.map(function (candidate) {
@@ -212,7 +175,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Get all the Panel Members
   // Name: interview_panel_members, Key: view_264
   var panelMembers = Knack.views["view_264"].model.data.models;
-  console.log("Panel members:", panelMembers);
 
   console.log(
     "Panel member details:",
@@ -225,13 +187,9 @@ $(document).on("knack-scene-render.scene_112", function () {
     })
   );
 
-  // Do we need to filter panel members Type?
-  //   For now, no. Ask Team.
-
   // Get all the Interview Questions
   // Name: interview_questions, Key: view_269
   var interviewQuestions = Knack.views["view_269"].model.data.models;
-  console.log("Interview questions:", interviewQuestions);
 
   console.log(
     "Interview question details:",
@@ -243,31 +201,12 @@ $(document).on("knack-scene-render.scene_112", function () {
     })
   );
 
-  console.log("view_253", Knack.views["view_253"]);
-
   var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
   console.log("Interview management:", interviewManagement);
-  console.log("Interview management ID:", interviewManagement[0].id);
-  console.log("Interview management Name:", interviewManagement[0].identifier);
-
-  // =================================================================
-  // 🐛 KNOWN BUG - TODO: Fix connection field persistence
-  // =================================================================
-  // Issue: When creating interview response records via POST request,
-  // the field_87 (interview_management connection) doesn't persist
-  // from payload to response. Record creates but isn't associated
-  // to the correct interview_management object.
-  //
-  // Possible causes to investigate:
-  // - Wrong field format (should it be field_87 vs field_87_raw?)
-  // - Missing crumbtrail parameter for parent context
-  // - Connection field permissions/validation rules
-  // - API endpoint should be under interview_management context
-  // =================================================================
 
   console.log("=== Generating All Interview Response Payloads ===");
 
-  //   Fields needed for Interview Response records:
+  //   Fields needed for Interview Response records (right?):
   //   interview_candidate	object_10	field_88	outbound	one	one
   //   interview_panel_member	object_9	field_183	outbound	one	many
   //   interview_question	object_4	field_89	outbound	one	many
@@ -293,7 +232,8 @@ $(document).on("knack-scene-render.scene_112", function () {
       interviewQuestions.forEach(function (question, questionIndex) {
         var payload = {
           // Connection fields - using IDs for relationships
-          field_87: interviewManagement[0].id, // interview_management connection
+          // field_87: interviewManagement[0].id, // interview_management connection
+          field_87: "67b8b06980a23602bb02eb32",
           field_88: candidate.get("id") || candidate.id, // interview_candidate
           field_89: question.get("id") || question.id, // interview_question
           field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
@@ -348,14 +288,39 @@ $(document).on("knack-scene-render.scene_112", function () {
           "..."
       );
 
+      // =================================================================
+      // 🐛 KNOWN BUG - TODO: Fix connection field persistence
+      // =================================================================
+      // Issue: When creating interview response records via POST request,
+      // the field_87 (interview_management connection) doesn't persist
+      // from payload to response. Record creates but isn't associated
+      // to the correct interview_management object.
+      //
+      // Possible causes to investigate:
+      // - Wrong field format (should it be field_87 vs field_87_raw?)
+      // - Missing crumbtrail parameter for parent context
+      // - Connection field permissions/validation rules
+      // - API endpoint should be under interview_management context
+      // =================================================================
+
+      var scene = "scene_124";
+      var view = "view_286";
+      var url =
+        "https://api.knack.com/v1/scenes/" +
+        scene +
+        "/views/" +
+        view +
+        "/records";
+
       $.ajax({
         type: "POST",
-        url: "https://api.knack.com/v1/scenes/scene_112/views/view_268/records",
+        url: url,
         headers: headers,
         data: JSON.stringify(apiPayload),
         contentType: "application/json",
       })
         .then(function (res) {
+          console.log("res", res);
           console.log(
             "✅ Created record " + (index + 1) + "/" + total + " - ID:",
             res.id
@@ -378,6 +343,7 @@ $(document).on("knack-scene-render.scene_112", function () {
     //         identifier: "999999 | <p>DTS TEST RECORD</p>-INT36",
     //       },
     //     ],
+    //     field_87: interviewManagement[0].id, // interview_management connection
     //     field_88: selectedToInterviewCandidates[0].get("id"),
     //     field_89: interviewQuestions[0].get("id"),
     //     field_183: panelMembers[0].get("id"),
@@ -484,23 +450,24 @@ $(document).on("knack-scene-render.scene_112", function () {
     e.preventDefault();
     console.log("🚀 Execute Script button clicked!");
 
-    // Show confirmation dialog for safety
-    var confirmation = confirm(
+    var confirmationText =
       "This will create " +
-        interviewResponsePayloads.length +
-        " interview response records.\n\n" +
-        "Breakdown:\n" +
-        "- Candidates: " +
-        selectedToInterviewCandidates.length +
-        "\n" +
-        "- Panel Members: " +
-        panelMembers.length +
-        "\n" +
-        "- Questions: " +
-        interviewQuestions.length +
-        "\n\n" +
-        "Are you sure you want to proceed?"
-    );
+      interviewResponsePayloads.length +
+      " interview response records.\n\n" +
+      "Breakdown:\n" +
+      "- Candidates: " +
+      selectedToInterviewCandidates.length +
+      "\n" +
+      "- Panel Members: " +
+      panelMembers.length +
+      "\n" +
+      "- Questions: " +
+      interviewQuestions.length +
+      "\n\n" +
+      "Are you sure you want to proceed?";
+
+    // Show confirmation dialog for safety
+    var confirmation = confirm(confirmationText);
 
     if (confirmation) {
       console.log("✅ User confirmed - Starting bulk record creation...");
@@ -510,7 +477,8 @@ $(document).on("knack-scene-render.scene_112", function () {
       // Test single record creation (commented out for safety)
       createInterviewResponse(testPayload, 0, 1);
 
-      //   // Execute the bulk creation
+      //   ⚠️ Execute the bulk creation
+      //   Uncomment this line below to execute the bulk creation
       //   createAllInterviewResponses(interviewResponsePayloads);
 
       // Re-enable button after 5 seconds (or you could do this in the completion callback)
@@ -539,6 +507,4 @@ $(document).on("knack-scene-render.scene_112", function () {
       console.error("Could not parse error response as JSON");
     }
   }
-
-  // For each Candidate, create a new Interview Response related to each panel member and interview question.
 });
