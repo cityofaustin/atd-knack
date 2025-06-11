@@ -268,6 +268,32 @@ $(document).on("knack-scene-render.scene_112", function () {
   console.log(interviewResponsePayloads);
 
   // =================================================================
+  // VIEW REFRESH FUNCTIONS
+  // =================================================================
+
+  // Function to refresh all interview-related views
+  function refreshInterviewViews() {
+    console.log("🔄 Refreshing interview views...");
+
+    var viewsToRefresh = [
+      "view_263", // interview_candidates
+      "view_264", // interview_panel_members
+      "view_269", // interview_questions
+      "view_268", // interview_responses (where new records are created)
+      "view_253", // interview_management details
+    ];
+
+    viewsToRefresh.forEach(function (viewKey) {
+      if (Knack.views[viewKey] && Knack.views[viewKey].model) {
+        console.log("Refreshing view:", viewKey);
+        Knack.views[viewKey].model.fetch();
+      }
+    });
+
+    console.log("✅ All views refreshed");
+  }
+
+  // =================================================================
   // BULK RECORD CREATION FUNCTIONS
   // =================================================================
 
@@ -325,6 +351,12 @@ $(document).on("knack-scene-render.scene_112", function () {
             "✅ Created record " + (index + 1) + "/" + total + " - ID:",
             res.id
           );
+
+          // Refresh views to show new records (if it's the last record in batch)
+          if (index === total - 1) {
+            refreshInterviewViews();
+          }
+
           resolve(res);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -425,6 +457,9 @@ $(document).on("knack-scene-render.scene_112", function () {
           if (failedRecords.length > 0) {
             console.log("Failed records:", failedRecords);
           }
+
+          // Refresh all views to show new records
+          refreshInterviewViews();
         }
       });
     }
