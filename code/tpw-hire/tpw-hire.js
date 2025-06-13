@@ -1,6 +1,7 @@
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
+
 function customizeLoginButton(viewId) {
   // Hide Knack default SSO button, login form, login title, and any other children
   $("#" + viewId)
@@ -245,11 +246,44 @@ function logAPIError(jqXHR, textStatus, errorThrown) {
 /*************** TPW Hire ****************/
 /********************************************/
 
+// Configuration object for view IDs and other constants
+const CONFIG = {
+  views: {
+    candidates: "view_263", // interview_candidates
+    panelMembers: "view_264", // interview_panel_members
+    questions: "view_269", // interview_questions
+    responses: "view_268", // interview_responses
+    management: "view_253", // interview_management details
+  },
+  api: {
+    baseUrl: "https://api.knack.com/v1",
+    scenes: {
+      main: "scene_112",
+      create: "scene_124",
+    },
+    views: {
+      create: "view_286",
+      list: "view_268",
+    },
+  },
+  fields: {
+    candidateStatus: "field_71", // Status field for candidates (e.g. "Selected to interview")
+  },
+  batchSize: 5,
+  batchDelay: 1000,
+};
+
 // Main scene render handler for interview management
 $(document).on("knack-scene-render.scene_112", function () {
   /********************************************/
   /*********** INITIALIZATION & SETUP *********/
   /********************************************/
+
+  // Helper function to filter candidates by interview status
+  function isSelectedToInterview(candidate) {
+    var status = candidate.get(CONFIG.fields.candidateStatus);
+    return status === "Selected to interview";
+  }
 
   // Add the Generate Responses button to the page
   function addGenerateResponsesButton() {
@@ -279,20 +313,24 @@ $(document).on("knack-scene-render.scene_112", function () {
     // Get the total records count
     try {
       if (
-        Knack.views["view_268"] &&
-        Knack.views["view_268"].model &&
-        Knack.views["view_268"].model.data &&
-        Knack.views["view_268"].model.data.total_records !== undefined
+        Knack.views[CONFIG.views.responses] &&
+        Knack.views[CONFIG.views.responses].model &&
+        Knack.views[CONFIG.views.responses].model.data &&
+        Knack.views[CONFIG.views.responses].model.data.total_records !==
+          undefined
       ) {
         currentInterviewResponses =
-          Knack.views["view_268"].model.data.total_records;
+          Knack.views[CONFIG.views.responses].model.data.total_records;
         console.log(
-          "✅ Successfully got total_records:",
-          currentInterviewResponses
+          "✅ Successfully got " +
+            currentInterviewResponses +
+            " existing interview response records"
         );
       } else {
         console.warn(
-          "Could not access total_records from view_268, defaulting to 0"
+          "Could not access total_records from " +
+            CONFIG.views.responses +
+            ", defaulting to 0"
         );
       }
     } catch (error) {
@@ -306,16 +344,11 @@ $(document).on("knack-scene-render.scene_112", function () {
 
   // Helper function to calculate expected record count
   function calculateExpectedRecordCount() {
-    var viewKey = "view_263"; // interview_candidates
+    var viewKey = CONFIG.views.candidates;
     var candidates = Knack.views[viewKey].model.data.models;
-    var panelMembers = Knack.views["view_264"].model.data.models;
-    var interviewQuestions = Knack.views["view_269"].model.data.models;
-
-    // Filter candidates by status
-    var isSelectedToInterview = function (candidate) {
-      var status = candidate.get("field_71");
-      return status === "Selected to interview";
-    };
+    var panelMembers = Knack.views[CONFIG.views.panelMembers].model.data.models;
+    var interviewQuestions =
+      Knack.views[CONFIG.views.questions].model.data.models;
 
     var selectedToInterviewCandidates = candidates.filter(
       isSelectedToInterview
@@ -400,7 +433,7 @@ $(document).on("knack-scene-render.scene_112", function () {
 
   // Refresh all interview-related views
   function refreshInterviewViews() {
-    var viewsToRefresh = ["view_268"];
+    var viewsToRefresh = [CONFIG.views.responses];
 
     viewsToRefresh.forEach(function (viewKey) {
       if (Knack.views[viewKey] && Knack.views[viewKey].model) {
@@ -427,7 +460,12 @@ $(document).on("knack-scene-render.scene_112", function () {
 
       // Get all existing records via API
       var apiUrl =
-        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records";
+        CONFIG.api.baseUrl +
+        "/scenes/" +
+        CONFIG.api.scenes.main +
+        "/views/" +
+        CONFIG.api.views.list +
+        "/records";
 
       $.ajax({
         type: "GET",
@@ -436,7 +474,8 @@ $(document).on("knack-scene-render.scene_112", function () {
         data: {
           page: 1,
           rows_per_page: 1000, // Get all records (assuming less than 1000)
-          "view-interview-details-admin_id": Knack.views["view_253"].model.id,
+          "view-interview-details-admin_id":
+            Knack.views[CONFIG.views.management].model.id,
         },
       })
         .then(function (response) {
@@ -478,7 +517,12 @@ $(document).on("knack-scene-render.scene_112", function () {
             });
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-          console.error("❌ Failed to fetch records from scene_124/view_286");
+          console.error(
+            "❌ Failed to fetch records from " +
+              CONFIG.api.scenes.main +
+              "/" +
+              CONFIG.api.views.list
+          );
           logAPIError(jqXHR, textStatus, errorThrown);
         });
     });
@@ -550,7 +594,12 @@ $(document).on("knack-scene-render.scene_112", function () {
   function deleteInterviewResponse(recordId) {
     return new Promise(function (resolve, reject) {
       var deleteUrl =
-        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
+        CONFIG.api.baseUrl +
+        "/scenes/" +
+        CONFIG.api.scenes.main +
+        "/views/" +
+        CONFIG.api.views.list +
+        "/records/" +
         recordId;
 
       $.ajax({
@@ -577,13 +626,12 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Create a single interview response record
   function createInterviewResponse(payload, index, total) {
     return new Promise(function (resolve, reject) {
-      var scene = "scene_124";
-      var view = "view_286";
       var url =
-        "https://api.knack.com/v1/scenes/" +
-        scene +
+        CONFIG.api.baseUrl +
+        "/scenes/" +
+        CONFIG.api.scenes.create +
         "/views/" +
-        view +
+        CONFIG.api.views.create +
         "/records";
 
       $.ajax({
@@ -595,7 +643,6 @@ $(document).on("knack-scene-render.scene_112", function () {
       })
         .then(function (res) {
           console.log("✅ Created record " + (index + 1) + "/" + total);
-
           resolve(res);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
@@ -732,17 +779,11 @@ $(document).on("knack-scene-render.scene_112", function () {
     console.log("=== Generating Interview Response Payloads ===");
 
     // Get all required data from Knack views
-    var viewKey = "view_263"; // interview_candidates
+    var viewKey = CONFIG.views.candidates;
     var candidates = Knack.views[viewKey].model.data.models;
-    var panelMembers = Knack.views["view_264"].model.data.models;
-    var interviewQuestions = Knack.views["view_269"].model.data.models;
-    var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
-
-    // Filter candidates by status
-    var isSelectedToInterview = function (candidate) {
-      var status = candidate.get("field_71");
-      return status === "Selected to interview";
-    };
+    var panelMembers = Knack.views[CONFIG.views.panelMembers].model.data.models;
+    var interviewQuestions =
+      Knack.views[CONFIG.views.questions].model.data.models;
 
     var selectedToInterviewCandidates = candidates.filter(
       isSelectedToInterview
@@ -768,7 +809,7 @@ $(document).on("knack-scene-render.scene_112", function () {
         interviewQuestions.forEach(function (question) {
           var payload = {
             // Connection fields - using IDs for relationships
-            field_87: Knack.views["view_253"].model.id,
+            field_87: Knack.views[CONFIG.views.management].model.id,
             field_88: candidate.get("id") || candidate.id, // interview_candidate
             field_89: question.get("id") || question.id, // interview_question
             field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
