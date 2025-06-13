@@ -425,9 +425,9 @@ $(document).on("knack-scene-render.scene_112", function () {
       "</div>" +
       "</div>" +
       '<div id="progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
-      '<span>✅ Success: <span id="success-count">0</span></span>' +
-      '<span>❌ Failed: <span id="failed-count">0</span></span>' +
-      '<span>⏳ Remaining: <span id="remaining-count">' +
+      '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Success: <span id="success-count">0</span></span>' +
+      '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="failed-count">0</span></span>' +
+      '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="remaining-count">' +
       total +
       "</span></span>" +
       "</div>" +
