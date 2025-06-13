@@ -714,21 +714,6 @@ $(document).on("knack-scene-render.scene_112", function () {
           "..."
       );
 
-      // =================================================================
-      // 🐛 KNOWN BUG - TODO: Fix connection field persistence
-      // =================================================================
-      // Issue: When creating interview response records via POST request,
-      // the field_87 (interview_management connection) doesn't persist
-      // from payload to response. Record creates but isn't associated
-      // to the correct interview_management object.
-      //
-      // Possible causes to investigate:
-      // - Wrong field format (should it be field_87 vs field_87_raw?)
-      // - Missing crumbtrail parameter for parent context
-      // - Connection field permissions/validation rules
-      // - API endpoint should be under interview_management context
-      // =================================================================
-
       var scene = "scene_124";
       var view = "view_286";
       var url =
@@ -1109,13 +1094,4 @@ $(document).on("knack-scene-render.scene_112", function () {
       console.log("❌ User cancelled operation");
     }
   });
-
-  /********************************************/
-  /************* TESTING SECTION **************/
-  /********************************************/
-
-  // Test with a single record first
-  console.log("=== Testing Single Record Creation ===");
-  var testPayload = interviewResponsePayloads[0];
-  console.log("Test payload:", testPayload);
 });
