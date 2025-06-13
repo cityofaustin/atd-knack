@@ -101,11 +101,13 @@ function addGenerateResponsesButton() {
         "</a>"
     );
 
-    // Find existing "Add Manual Responses" button and add our button next to it
-    var addManualResponsesButton = $('a[href*="add-reponses"]');
+    // Find the "Add Manual Responses" button using the view ID from config
+    var addManualResponsesButton = $(
+      "#" + CONFIG.views.manualResponses + " .kn-button"
+    );
     if (addManualResponsesButton.length > 0) {
       generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
-      generateResponsesButtonHtml.css("margin-left", "10px"); // Add some spacing
+      generateResponsesButtonHtml.css("margin-left", "8px"); // Add some spacing
     }
   }
 }
@@ -443,6 +445,7 @@ const CONFIG = {
     questions: "view_269", // interview_questions
     responses: "view_268", // interview_responses
     management: "view_253", // interview_management details
+    manualResponses: "view_285", // "Add Manual Responses" button
   },
   api: {
     baseUrl: "https://api.knack.com/v1",
