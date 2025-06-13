@@ -255,7 +255,7 @@ $(document).on("knack-scene-render.scene_112", function () {
   function addGenerateResponsesButton() {
     // Check if button already exists to avoid duplicates
     if ($("#generate-responses-button").length === 0) {
-      // Create the button with same styling as "Generate Responses" button
+      // Create the styled button with icon and text
       var generateResponsesButtonHtml = $(
         '<a id="generate-responses-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
           '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
@@ -263,7 +263,7 @@ $(document).on("knack-scene-render.scene_112", function () {
           "</a>"
       );
 
-      // Find existing "Add Manual Reponses" button and add our button next to it
+      // Find existing "Add Manual Responses" button and add our button next to it
       var addManualResponsesButton = $('a[href*="add-reponses"]');
       if (addManualResponsesButton.length > 0) {
         generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
@@ -294,44 +294,44 @@ $(document).on("knack-scene-render.scene_112", function () {
         console.warn(
           "Could not access total_records from view_268, defaulting to 0"
         );
-        console.log("Debug info:", {
-          hasView: !!Knack.views["view_268"],
-          hasModel: !!(
-            Knack.views["view_268"] && Knack.views["view_268"].model
-          ),
-          hasData: !!(
-            Knack.views["view_268"] &&
-            Knack.views["view_268"].model &&
-            Knack.views["view_268"].model.data
-          ),
-          totalRecords:
-            Knack.views["view_268"] &&
-            Knack.views["view_268"].model &&
-            Knack.views["view_268"].model.data
-              ? Knack.views["view_268"].model.data.total_records
-              : "N/A",
-        });
       }
     } catch (error) {
       console.error("Error accessing view data:", error);
       currentInterviewResponses = 0;
     }
 
-    console.log("Current interview responses:", currentInterviewResponses);
-
     // Use view data for count and return the result
     return updateButtonWithCount(currentInterviewResponses);
   }
 
+  // Helper function to calculate expected record count
+  function calculateExpectedRecordCount() {
+    var viewKey = "view_263"; // interview_candidates
+    var candidates = Knack.views[viewKey].model.data.models;
+    var panelMembers = Knack.views["view_264"].model.data.models;
+    var interviewQuestions = Knack.views["view_269"].model.data.models;
+
+    // Filter candidates by status
+    var isSelectedToInterview = function (candidate) {
+      var status = candidate.get("field_71");
+      return status === "Selected to interview";
+    };
+
+    var selectedToInterviewCandidates = candidates.filter(
+      isSelectedToInterview
+    );
+
+    return (
+      selectedToInterviewCandidates.length *
+      panelMembers.length *
+      interviewQuestions.length
+    );
+  }
+
   // Helper function to update button with count
   function updateButtonWithCount(currentInterviewResponses) {
-    var expectedRecords = interviewResponsePayloads.length;
+    var expectedRecords = calculateExpectedRecordCount();
     var hasExistingRecords = currentInterviewResponses > 0;
-
-    console.log("=== Button State Check ===");
-    console.log("Current interview responses:", currentInterviewResponses);
-    console.log("Expected records to create:", expectedRecords);
-    console.log("Has existing records:", hasExistingRecords);
 
     var $generateResponsesButton = $("#generate-responses-button");
 
@@ -400,24 +400,13 @@ $(document).on("knack-scene-render.scene_112", function () {
 
   // Refresh all interview-related views
   function refreshInterviewViews() {
-    console.log("🔄 Refreshing interview views...");
-
-    var viewsToRefresh = [
-      "view_263", // interview_candidates
-      "view_264", // interview_panel_members
-      "view_269", // interview_questions
-      "view_268", // interview_responses (where new records are created)
-      "view_253", // interview_management details
-    ];
+    var viewsToRefresh = ["view_268"];
 
     viewsToRefresh.forEach(function (viewKey) {
       if (Knack.views[viewKey] && Knack.views[viewKey].model) {
-        console.log("Refreshing view:", viewKey);
         Knack.views[viewKey].model.fetch();
       }
     });
-
-    console.log("✅ All views refreshed");
 
     // Check button state after refresh (with small delay to ensure data is loaded)
     setTimeout(function () {
@@ -440,9 +429,6 @@ $(document).on("knack-scene-render.scene_112", function () {
       var apiUrl =
         "https://api.knack.com/v1/scenes/scene_112/views/view_268/records";
 
-      console.log("🔍 Fetching records from:", apiUrl);
-      console.log("🔍 Using headers:", headers);
-
       $.ajax({
         type: "GET",
         url: apiUrl,
@@ -454,43 +440,12 @@ $(document).on("knack-scene-render.scene_112", function () {
         },
       })
         .then(function (response) {
-          console.log("📋 Full API response:", response);
-
           var recordsToDelete = response.records || [];
           console.log("Found " + recordsToDelete.length + " records to delete");
 
           // Initialize deletion progress bar if we have records to delete
           if (recordsToDelete.length > 0) {
             createDeletionProgressBar(recordsToDelete.length);
-          }
-
-          // Log sample records if any exist
-          if (recordsToDelete.length > 0) {
-            console.log("Sample record structure:", recordsToDelete[0]);
-          } else {
-            console.log("⚠️ No records found in response");
-            console.log("Response keys:", Object.keys(response));
-
-            // Check if records might be in a different property
-            if (response.data && Array.isArray(response.data)) {
-              recordsToDelete = response.data;
-              console.log(
-                "✅ Found records in response.data:",
-                recordsToDelete.length
-              );
-              if (recordsToDelete.length > 0) {
-                createDeletionProgressBar(recordsToDelete.length);
-              }
-            } else if (response.models && Array.isArray(response.models)) {
-              recordsToDelete = response.models;
-              console.log(
-                "✅ Found records in response.models:",
-                recordsToDelete.length
-              );
-              if (recordsToDelete.length > 0) {
-                createDeletionProgressBar(recordsToDelete.length);
-              }
-            }
           }
 
           if (recordsToDelete.length === 0) {
@@ -605,18 +560,6 @@ $(document).on("knack-scene-render.scene_112", function () {
         return;
       }
 
-      console.log(
-        "Deleting batch " +
-          Math.ceil(startIndex / batchSize + 1) +
-          " (" +
-          (startIndex + 1) +
-          "-" +
-          endIndex +
-          " of " +
-          records.length +
-          ")"
-      );
-
       // Update progress bar for batch start
       updateDeletionProgress(
         startIndex,
@@ -674,8 +617,6 @@ $(document).on("knack-scene-render.scene_112", function () {
         "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
         recordId;
 
-      console.log("🗑️ Deleting record:", recordId, "from:", deleteUrl);
-
       $.ajax({
         type: "DELETE",
         url: deleteUrl,
@@ -700,20 +641,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Create a single interview response record
   function createInterviewResponse(payload, index, total) {
     return new Promise(function (resolve, reject) {
-      // Remove metadata before sending to API
-      var apiPayload = Object.assign({}, payload);
-      delete apiPayload._meta;
-
-      console.log(
-        "Creating record " + (index + 1) + "/" + total + ":",
-        payload._meta.candidateName +
-          " → " +
-          payload._meta.panelMemberName +
-          " → " +
-          payload._meta.questionText.substring(0, 50) +
-          "..."
-      );
-
       var scene = "scene_124";
       var view = "view_286";
       var url =
@@ -727,46 +654,28 @@ $(document).on("knack-scene-render.scene_112", function () {
         type: "POST",
         url: url,
         headers: headers,
-        data: JSON.stringify(apiPayload),
+        data: JSON.stringify(payload),
         contentType: "application/json",
       })
         .then(function (res) {
-          console.log("res", res);
-          console.log(
-            "✅ Created record " + (index + 1) + "/" + total + " - ID:",
-            res.id
-          );
+          console.log("✅ Created record " + (index + 1) + "/" + total);
 
           resolve(res);
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
           console.error(
-            "❌ Failed to create record " + (index + 1) + "/" + total + ":"
+            "❌ Failed to create record " + (index + 1) + "/" + total
           );
           logAPIError(jqXHR, textStatus, errorThrown);
           reject({ payload: payload, error: jqXHR });
         });
     });
-    //   //   This is the data that we need to send to the API.
-    //   var newRecordData = {
-    //     field_87_raw: [
-    //       {
-    //         id: "67b8b06980a23602bb02eb32",
-    //         identifier: "999999 | <p>DTS TEST RECORD</p>-INT36",
-    //       },
-    //     ],
-    //     field_87: interviewManagement[0].id, // interview_management connection
-    //     field_88: selectedToInterviewCandidates[0].get("id"),
-    //     field_89: interviewQuestions[0].get("id"),
-    //     field_183: panelMembers[0].get("id"),
-    //   };
   }
 
   // Create all interview response records in batches
   function createAllInterviewResponses(payloads, batchSize = 5) {
-    console.log("=== Starting Bulk Interview Response Creation ===");
+    console.log("🔄 Starting creation of new records...");
     console.log("Total records to create:", payloads.length);
-    console.log("Batch size:", batchSize);
 
     // Initialize progress bar
     createProgressBar(payloads.length);
@@ -780,18 +689,6 @@ $(document).on("knack-scene-render.scene_112", function () {
       currentBatch++;
       var endIndex = Math.min(startIndex + batchSize, payloads.length);
       var batchPayloads = payloads.slice(startIndex, endIndex);
-
-      console.log(
-        "Processing batch " +
-          currentBatch +
-          "/" +
-          totalBatches +
-          " (records " +
-          (startIndex + 1) +
-          "-" +
-          endIndex +
-          ")"
-      );
 
       // Update progress bar for batch start
       updateProgress(
@@ -884,7 +781,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Get current record ID from URL
   var hrefArray = window.location.href.split("/");
   var recordId = hrefArray[hrefArray.length - 2];
-  console.log("Current page record ID:", recordId);
 
   // Set auth and headers for API calls
   var knackUserToken = Knack.getUserToken();
@@ -895,75 +791,61 @@ $(document).on("knack-scene-render.scene_112", function () {
     "content-type": "application/json",
   };
 
-  // Get all required data from Knack views
-  var viewKey = "view_263"; // interview_candidates
-  var candidates = Knack.views[viewKey].model.data.models;
-  var panelMembers = Knack.views["view_264"].model.data.models;
-  var interviewQuestions = Knack.views["view_269"].model.data.models;
-  var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
+  // Function to generate interview response payloads
+  function generateInterviewResponsePayloads() {
+    console.log("=== Generating Interview Response Payloads ===");
 
-  // Filter candidates by status
-  var isSelectedToInterview = function (candidate) {
-    // Access Backbone model attributes properly
-    var status = candidate.get("field_71"); // Use .get() method for Backbone models
-    // var name = candidate.get("field_90");
-    // var id = candidate.get("id") || candidate.id;
+    // Get all required data from Knack views
+    var viewKey = "view_263"; // interview_candidates
+    var candidates = Knack.views[viewKey].model.data.models;
+    var panelMembers = Knack.views["view_264"].model.data.models;
+    var interviewQuestions = Knack.views["view_269"].model.data.models;
+    var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
 
-    return status === "Selected to interview";
-  };
+    // Filter candidates by status
+    var isSelectedToInterview = function (candidate) {
+      var status = candidate.get("field_71");
+      return status === "Selected to interview";
+    };
 
-  var selectedToInterviewCandidates = candidates.filter(isSelectedToInterview);
+    var selectedToInterviewCandidates = candidates.filter(
+      isSelectedToInterview
+    );
 
-  // Generate all combinations of candidates × panel members × questions
-  var interviewResponsePayloads = [];
+    console.log("Generating payloads for:");
+    console.log("- Candidates:", selectedToInterviewCandidates.length);
+    console.log("- Panel Members:", panelMembers.length);
+    console.log("- Interview Questions:", interviewQuestions.length);
+    console.log(
+      "- Expected total records:",
+      selectedToInterviewCandidates.length *
+        panelMembers.length *
+        interviewQuestions.length
+    );
 
-  console.log("Generating payloads for:");
-  console.log("- Candidates:", selectedToInterviewCandidates.length);
-  console.log("- Panel Members:", panelMembers.length);
-  console.log("- Interview Questions:", interviewQuestions.length);
-  console.log(
-    "- Expected total records:",
-    selectedToInterviewCandidates.length *
-      panelMembers.length *
-      interviewQuestions.length
-  );
+    // Generate all combinations of candidates × panel members × questions
+    var payloads = [];
 
-  // Triple nested loop to create all combinations
-  selectedToInterviewCandidates.forEach(function (candidate, candidateIndex) {
-    panelMembers.forEach(function (panelMember, panelIndex) {
-      interviewQuestions.forEach(function (question, questionIndex) {
-        var payload = {
-          // Connection fields - using IDs for relationships
-          // field_87: interviewManagement[0].id, // interview_management connection
-          field_87: Knack.views["view_253"].model.id,
-          field_88: candidate.get("id") || candidate.id, // interview_candidate
-          field_89: question.get("id") || question.id, // interview_question
-          field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
+    // Triple nested loop to create all combinations
+    selectedToInterviewCandidates.forEach(function (candidate) {
+      panelMembers.forEach(function (panelMember) {
+        interviewQuestions.forEach(function (question) {
+          var payload = {
+            // Connection fields - using IDs for relationships
+            field_87: Knack.views["view_253"].model.id,
+            field_88: candidate.get("id") || candidate.id, // interview_candidate
+            field_89: question.get("id") || question.id, // interview_question
+            field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
+          };
 
-          // Metadata for tracking
-          _meta: {
-            candidateIndex: candidateIndex,
-            candidateName: candidate.get("field_90"),
-            panelIndex: panelIndex,
-            panelMemberName: panelMember.get("field_189"),
-            questionIndex: questionIndex,
-            questionText: question.get("field_26"),
-            recordNumber: interviewResponsePayloads.length + 1,
-          },
-        };
-
-        interviewResponsePayloads.push(payload);
+          payloads.push(payload);
+        });
       });
     });
-  });
 
-  console.log(
-    "Generated",
-    interviewResponsePayloads.length,
-    "interview response payloads"
-  );
-
-  console.log(interviewResponsePayloads);
+    console.log("Generated", payloads.length, "interview response payloads");
+    return payloads;
+  }
 
   /********************************************/
   /************* EVENT HANDLERS ***************/
@@ -1004,36 +886,12 @@ $(document).on("knack-scene-render.scene_112", function () {
         "1. DELETE all " +
         currentCount +
         " existing interview response records\n" +
-        "2. CREATE " +
-        interviewResponsePayloads.length +
-        " new interview response records\n\n" +
-        "New records breakdown:\n" +
-        "- Candidates: " +
-        selectedToInterviewCandidates.length +
-        "\n" +
-        "- Panel Members: " +
-        panelMembers.length +
-        "\n" +
-        "- Questions: " +
-        interviewQuestions.length +
-        "\n\n" +
+        "2. CREATE new interview response records\n\n" +
         "⚠️  This action cannot be undone! ⚠️\n\n" +
         "Are you sure you want to proceed?";
     } else {
       confirmationText =
-        "This will create " +
-        interviewResponsePayloads.length +
-        " interview response records.\n\n" +
-        "Breakdown:\n" +
-        "- Candidates: " +
-        selectedToInterviewCandidates.length +
-        "\n" +
-        "- Panel Members: " +
-        panelMembers.length +
-        "\n" +
-        "- Questions: " +
-        interviewQuestions.length +
-        "\n\n" +
+        "This will create new interview response records.\n\n" +
         "Are you sure you want to proceed?";
     }
 
@@ -1048,17 +906,15 @@ $(document).on("knack-scene-render.scene_112", function () {
         .addClass("is-loading")
         .prop("disabled", true);
 
+      // Generate payloads
+      var interviewResponsePayloads = generateInterviewResponsePayloads();
+
       if (hasExistingRecords) {
         // Regenerate mode: delete first, then create
         console.log("🔄 Starting regeneration process...");
 
         deleteAllInterviewResponses()
           .then(function (deletedCount) {
-            console.log(
-              "✅ Deletion complete. Deleted " + deletedCount + " records."
-            );
-            console.log("🔄 Starting creation of new records...");
-
             // Refresh views to reflect deletions
             refreshInterviewViews();
 
