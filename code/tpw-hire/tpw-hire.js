@@ -54,10 +54,12 @@ $(document).on("knack-view-render.any", function (event, page) {
     customizeLoginButton(viewId);
   }
 });
+
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
+
+// Creates a big button with icon and label
 function bigButton(
   id,
   view_id,
@@ -85,12 +87,171 @@ function bigButton(
   if (callback) callback();
 }
 
+/*********** Progress Bar Components ********/
+// Creates and manages progress bar for record creation
+function createProgressBar(total) {
+  // Remove existing progress bar if it exists
+  $("#interview-progress-container").remove();
+
+  var progressBarHtml =
+    '<div id="interview-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
+    '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Creating Interview Response Records</div>' +
+    '<div id="progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to create ' +
+    total +
+    " records...</div>" +
+    '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
+    '<div id="progress-bar-fill" style="background: linear-gradient(90deg, #28a745, #20c997); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
+    '<div id="progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
+    "</div>" +
+    "</div>" +
+    '<div id="progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
+    '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Success: <span id="success-count">0</span></span>' +
+    '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="failed-count">0</span></span>' +
+    '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="remaining-count">' +
+    total +
+    "</span></span>" +
+    "</div>" +
+    "</div>";
+
+  // Insert progress bar after execute button
+  $("#generate-responses-button").after(progressBarHtml);
+}
+
+// Updates progress bar during record creation
+function updateProgress(completed, total, failed, currentAction) {
+  var percentage = Math.round((completed / total) * 100);
+  var remaining = total - completed;
+
+  $("#progress-bar-fill").css("width", percentage + "%");
+  $("#progress-percentage").text(percentage + "%");
+  $("#progress-text").text(
+    currentAction || "Processing record " + completed + " of " + total
+  );
+  $("#success-count").text(completed - failed);
+  $("#failed-count").text(failed);
+  $("#remaining-count").text(remaining);
+}
+
+// Completes progress bar after record creation
+function completeProgress(total, failed) {
+  $("#progress-bar-fill").css(
+    "background",
+    failed > 0
+      ? "linear-gradient(90deg, #ffc107, #fd7e14)"
+      : "linear-gradient(90deg, #28a745, #20c997)"
+  );
+  $("#progress-text").text(
+    "✅ Process complete! Created " +
+      (total - failed) +
+      " of " +
+      total +
+      " records."
+  );
+
+  // Remove progress bar after 5 seconds
+  setTimeout(function () {
+    $("#interview-progress-container").fadeOut(500, function () {
+      $(this).remove();
+    });
+  }, 5000);
+}
+
+// Creates and manages progress bar for record deletion
+function createDeletionProgressBar(total) {
+  // Remove existing deletion progress bar if it exists
+  $("#deletion-progress-container").remove();
+
+  var progressBarHtml =
+    '<div id="deletion-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
+    '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Deleting Existing Interview Response Records</div>' +
+    '<div id="deletion-progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to delete ' +
+    total +
+    " records...</div>" +
+    '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
+    '<div id="deletion-progress-bar-fill" style="background: linear-gradient(90deg, #dc3545, #fd7e14); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
+    '<div id="deletion-progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
+    "</div>" +
+    "</div>" +
+    '<div id="deletion-progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
+    '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Deleted: <span id="deletion-success-count">0</span></span>' +
+    '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="deletion-failed-count">0</span></span>' +
+    '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="deletion-remaining-count">' +
+    total +
+    "</span></span>" +
+    "</div>" +
+    "</div>";
+
+  // Insert progress bar after execute button
+  $("#generate-responses-button").after(progressBarHtml);
+}
+
+// Updates progress bar during record deletion
+function updateDeletionProgress(completed, total, failed, currentAction) {
+  var percentage = Math.round((completed / total) * 100);
+  var remaining = total - completed;
+
+  $("#deletion-progress-bar-fill").css("width", percentage + "%");
+  $("#deletion-progress-percentage").text(percentage + "%");
+  $("#deletion-progress-text").text(
+    currentAction || "Deleting record " + completed + " of " + total
+  );
+  $("#deletion-success-count").text(completed - failed);
+  $("#deletion-failed-count").text(failed);
+  $("#deletion-remaining-count").text(remaining);
+}
+
+// Completes progress bar after record deletion
+function completeDeletionProgress(total, failed) {
+  $("#deletion-progress-bar-fill").css(
+    "background",
+    failed > 0
+      ? "linear-gradient(90deg, #ffc107, #fd7e14)"
+      : "linear-gradient(90deg, #dc3545, #fd7e14)"
+  );
+  $("#deletion-progress-text").text(
+    "✅ Deletion complete! Deleted " +
+      (total - failed) +
+      " of " +
+      total +
+      " records."
+  );
+
+  // Remove progress bar after 3 seconds
+  setTimeout(function () {
+    $("#deletion-progress-container").fadeOut(500, function () {
+      $(this).remove();
+    });
+  }, 3000);
+}
+
+/*********** Utility Functions **************/
+// Helper function to log detailed API errors
+function logAPIError(jqXHR, textStatus, errorThrown) {
+  console.error("=== Detailed Error Information ===");
+  console.error("Status Code:", jqXHR.status);
+  console.error("Status Text:", textStatus);
+  console.error("Error Thrown:", errorThrown);
+  console.error("Response Text:", jqXHR.responseText);
+
+  try {
+    var errorResponse = JSON.parse(jqXHR.responseText);
+    console.error("Parsed Error Response:", errorResponse);
+  } catch (e) {
+    console.error("Could not parse error response as JSON");
+  }
+}
+
 /********************************************/
 /*************** TPW Hire ****************/
 /********************************************/
-// TPW Hire Generate Responses Page
+
+// Main scene render handler for interview management
 $(document).on("knack-scene-render.scene_112", function () {
-  // Create "Execute Script" button
+  /********************************************/
+  /*********** INITIALIZATION & SETUP *********/
+  /********************************************/
+
+  // Add the Generate Responses button to the page
   function addGenerateResponsesButton() {
     // Check if button already exists to avoid duplicates
     if ($("#generate-responses-button").length === 0) {
@@ -111,147 +272,7 @@ $(document).on("knack-scene-render.scene_112", function () {
     }
   }
 
-  // Get current record ID from URL
-  var hrefArray = window.location.href.split("/");
-  var recordId = hrefArray[hrefArray.length - 2];
-  console.log("Current page record ID:", recordId);
-
-  // Set auth and headers for API calls
-  var knackUserToken = Knack.getUserToken();
-  var headers = {
-    "X-Knack-Application-Id": Knack.application_id,
-    "X-Knack-REST-API-KEY": "knack",
-    Authorization: knackUserToken,
-    "content-type": "application/json",
-  };
-
-  // Get all the Candidates with Status = "Selected to interview"
-  // Name: interview_candidates, Key: view_263
-  // Filter: field_36 = "Selected to interview"
-
-  var viewKey = "view_263"; // interview_candidates
-  var candidates = Knack.views[viewKey].model.data.models;
-  console.log("Candidates raw models:", candidates);
-
-  var isSelectedToInterview = function (candidate) {
-    // Access Backbone model attributes properly
-    var status = candidate.get("field_71"); // Use .get() method for Backbone models
-    // var name = candidate.get("field_90");
-    // var id = candidate.get("id") || candidate.id;
-
-    return status === "Selected to interview";
-  };
-
-  // Filter candidates by status = "Selected to interview"
-  var selectedToInterviewCandidates = candidates.filter(isSelectedToInterview);
-
-  console.log(
-    "Selected candidates details:",
-    selectedToInterviewCandidates.map(function (candidate) {
-      return {
-        id: candidate.get("id") || candidate.id,
-        name: candidate.get("field_90"),
-        status: candidate.get("field_71"),
-      };
-    })
-  );
-
-  // Get all the Panel Members
-  // Name: interview_panel_members, Key: view_264
-  var panelMembers = Knack.views["view_264"].model.data.models;
-
-  console.log(
-    "Panel member details:",
-    panelMembers.map(function (panelMember) {
-      return {
-        id: panelMember.get("id") || panelMember.id,
-        name: panelMember.get("field_189"),
-        type: panelMember.get("field_213"),
-      };
-    })
-  );
-
-  // Get all the Interview Questions
-  // Name: interview_questions, Key: view_269
-  var interviewQuestions = Knack.views["view_269"].model.data.models;
-
-  console.log(
-    "Interview question details:",
-    interviewQuestions.map(function (question) {
-      return {
-        id: question.get("id") || question.id,
-        question: question.get("field_26"),
-      };
-    })
-  );
-
-  var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
-  console.log("Interview management:", interviewManagement);
-
-  console.log("=== Generating All Interview Response Payloads ===");
-
-  //   Fields needed for Interview Response records (right?):
-  //   interview_candidate	object_10	field_88	outbound	one	one
-  //   interview_panel_member	object_9	field_183	outbound	one	many
-  //   interview_question	object_4	field_89	outbound	one	many
-  //   interview_management object_11 field_87   outbound   one   many
-
-  // Generate all combinations of candidates × panel members × questions
-  var interviewResponsePayloads = [];
-
-  console.log("Generating payloads for:");
-  console.log("- Candidates:", selectedToInterviewCandidates.length);
-  console.log("- Panel Members:", panelMembers.length);
-  console.log("- Interview Questions:", interviewQuestions.length);
-  console.log(
-    "- Expected total records:",
-    selectedToInterviewCandidates.length *
-      panelMembers.length *
-      interviewQuestions.length
-  );
-
-  // Triple nested loop to create all combinations
-  selectedToInterviewCandidates.forEach(function (candidate, candidateIndex) {
-    panelMembers.forEach(function (panelMember, panelIndex) {
-      interviewQuestions.forEach(function (question, questionIndex) {
-        var payload = {
-          // Connection fields - using IDs for relationships
-          // field_87: interviewManagement[0].id, // interview_management connection
-          field_87: Knack.views["view_253"].model.id,
-          field_88: candidate.get("id") || candidate.id, // interview_candidate
-          field_89: question.get("id") || question.id, // interview_question
-          field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
-
-          // Metadata for tracking
-          _meta: {
-            candidateIndex: candidateIndex,
-            candidateName: candidate.get("field_90"),
-            panelIndex: panelIndex,
-            panelMemberName: panelMember.get("field_189"),
-            questionIndex: questionIndex,
-            questionText: question.get("field_26"),
-            recordNumber: interviewResponsePayloads.length + 1,
-          },
-        };
-
-        interviewResponsePayloads.push(payload);
-      });
-    });
-  });
-
-  console.log(
-    "Generated",
-    interviewResponsePayloads.length,
-    "interview response payloads"
-  );
-
-  console.log(interviewResponsePayloads);
-
-  // =================================================================
-  // BUTTON STATE MANAGEMENT
-  // =================================================================
-
-  // Function to check if Execute Script button should be disabled
+  // Check and update button state based on existing records
   function checkButtonState() {
     var currentInterviewResponses = 0;
 
@@ -377,11 +398,7 @@ $(document).on("knack-scene-render.scene_112", function () {
     };
   }
 
-  // =================================================================
-  // VIEW REFRESH FUNCTIONS
-  // =================================================================
-
-  // Function to refresh all interview-related views
+  // Refresh all interview-related views
   function refreshInterviewViews() {
     console.log("🔄 Refreshing interview views...");
 
@@ -408,221 +425,11 @@ $(document).on("knack-scene-render.scene_112", function () {
     }, 500);
   }
 
-  // Function to create and manage progress bar
-  function createProgressBar(total) {
-    // Remove existing progress bar if it exists
-    $("#interview-progress-container").remove();
+  /********************************************/
+  /*********** RECORD DELETION FUNCTIONS ******/
+  /********************************************/
 
-    var progressBarHtml =
-      '<div id="interview-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
-      '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Creating Interview Response Records</div>' +
-      '<div id="progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to create ' +
-      total +
-      " records...</div>" +
-      '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
-      '<div id="progress-bar-fill" style="background: linear-gradient(90deg, #28a745, #20c997); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
-      '<div id="progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
-      "</div>" +
-      "</div>" +
-      '<div id="progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
-      '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Success: <span id="success-count">0</span></span>' +
-      '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="failed-count">0</span></span>' +
-      '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="remaining-count">' +
-      total +
-      "</span></span>" +
-      "</div>" +
-      "</div>";
-
-    // Insert progress bar after execute button
-    $("#generate-responses-button").after(progressBarHtml);
-  }
-
-  // Function to update progress bar
-  function updateProgress(completed, total, failed, currentAction) {
-    var percentage = Math.round((completed / total) * 100);
-    var remaining = total - completed;
-
-    $("#progress-bar-fill").css("width", percentage + "%");
-    $("#progress-percentage").text(percentage + "%");
-    $("#progress-text").text(
-      currentAction || "Processing record " + completed + " of " + total
-    );
-    $("#success-count").text(completed - failed);
-    $("#failed-count").text(failed);
-    $("#remaining-count").text(remaining);
-  }
-
-  // Function to complete progress bar
-  function completeProgress(total, failed) {
-    $("#progress-bar-fill").css(
-      "background",
-      failed > 0
-        ? "linear-gradient(90deg, #ffc107, #fd7e14)"
-        : "linear-gradient(90deg, #28a745, #20c997)"
-    );
-    $("#progress-text").text(
-      "✅ Process complete! Created " +
-        (total - failed) +
-        " of " +
-        total +
-        " records."
-    );
-
-    // Remove progress bar after 5 seconds
-    setTimeout(function () {
-      $("#interview-progress-container").fadeOut(500, function () {
-        $(this).remove();
-      });
-    }, 5000);
-  }
-
-  // =================================================================
-  // BULK RECORD DELETION FUNCTIONS
-  // =================================================================
-
-  // Function to create and manage deletion progress bar
-  function createDeletionProgressBar(total) {
-    // Remove existing deletion progress bar if it exists
-    $("#deletion-progress-container").remove();
-
-    var progressBarHtml =
-      '<div id="deletion-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
-      '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Deleting Existing Interview Response Records</div>' +
-      '<div id="deletion-progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to delete ' +
-      total +
-      " records...</div>" +
-      '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
-      '<div id="deletion-progress-bar-fill" style="background: linear-gradient(90deg, #dc3545, #fd7e14); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
-      '<div id="deletion-progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
-      "</div>" +
-      "</div>" +
-      '<div id="deletion-progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
-      '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Deleted: <span id="deletion-success-count">0</span></span>' +
-      '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="deletion-failed-count">0</span></span>' +
-      '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="deletion-remaining-count">' +
-      total +
-      "</span></span>" +
-      "</div>" +
-      "</div>";
-
-    // Insert progress bar after execute button
-    $("#generate-responses-button").after(progressBarHtml);
-  }
-
-  // Function to update deletion progress bar
-  function updateDeletionProgress(completed, total, failed, currentAction) {
-    var percentage = Math.round((completed / total) * 100);
-    var remaining = total - completed;
-
-    $("#deletion-progress-bar-fill").css("width", percentage + "%");
-    $("#deletion-progress-percentage").text(percentage + "%");
-    $("#deletion-progress-text").text(
-      currentAction || "Deleting record " + completed + " of " + total
-    );
-    $("#deletion-success-count").text(completed - failed);
-    $("#deletion-failed-count").text(failed);
-    $("#deletion-remaining-count").text(remaining);
-  }
-
-  // Function to complete deletion progress bar
-  function completeDeletionProgress(total, failed) {
-    $("#deletion-progress-bar-fill").css(
-      "background",
-      failed > 0
-        ? "linear-gradient(90deg, #ffc107, #fd7e14)"
-        : "linear-gradient(90deg, #dc3545, #fd7e14)"
-    );
-    $("#deletion-progress-text").text(
-      "✅ Deletion complete! Deleted " +
-        (total - failed) +
-        " of " +
-        total +
-        " records."
-    );
-
-    // Remove progress bar after 3 seconds
-    setTimeout(function () {
-      $("#deletion-progress-container").fadeOut(500, function () {
-        $(this).remove();
-      });
-    }, 3000);
-  }
-
-  // Helper function to delete records in batches
-  function deleteRecordsBatch(records, startIndex, results) {
-    return new Promise(function (resolve, reject) {
-      var batchSize = 5;
-      var endIndex = Math.min(startIndex + batchSize, records.length);
-      var batchRecords = records.slice(startIndex, endIndex);
-
-      if (batchRecords.length === 0) {
-        resolve(results);
-        return;
-      }
-
-      console.log(
-        "Deleting batch " +
-          Math.ceil(startIndex / batchSize + 1) +
-          " (" +
-          (startIndex + 1) +
-          "-" +
-          endIndex +
-          " of " +
-          records.length +
-          ")"
-      );
-
-      // Update progress bar for batch start
-      updateDeletionProgress(
-        startIndex,
-        records.length,
-        results.filter((r) => !r.success).length,
-        "Processing batch " +
-          Math.ceil(startIndex / batchSize + 1) +
-          "/" +
-          Math.ceil(records.length / batchSize) +
-          "..."
-      );
-
-      // Create deletion promises for this batch
-      var deletePromises = batchRecords.map(function (record) {
-        return deleteInterviewResponse(record.id);
-      });
-
-      Promise.allSettled(deletePromises).then(function (batchResults) {
-        var batchResultsFormatted = batchResults.map(function (result, index) {
-          return {
-            recordId: batchRecords[index].id,
-            success: result.status === "fulfilled",
-            error: result.status === "rejected" ? result.reason : null,
-          };
-        });
-
-        results = results.concat(batchResultsFormatted);
-
-        // Update progress after batch completion
-        updateDeletionProgress(
-          endIndex,
-          records.length,
-          results.filter((r) => !r.success).length,
-          "Batch " +
-            Math.ceil(startIndex / batchSize + 1) +
-            "/" +
-            Math.ceil(records.length / batchSize) +
-            " complete"
-        );
-
-        // Continue with next batch after delay
-        setTimeout(function () {
-          deleteRecordsBatch(records, endIndex, results)
-            .then(resolve)
-            .catch(reject);
-        }, 1000);
-      });
-    });
-  }
-
-  // Function to delete all existing interview response records
+  // Delete all existing interview response records
   function deleteAllInterviewResponses() {
     return new Promise(function (resolve, reject) {
       console.log(
@@ -786,11 +593,111 @@ $(document).on("knack-scene-render.scene_112", function () {
     });
   }
 
-  // =================================================================
-  // BULK RECORD CREATION FUNCTIONS
-  // =================================================================
+  // Delete records in batches
+  function deleteRecordsBatch(records, startIndex, results) {
+    return new Promise(function (resolve, reject) {
+      var batchSize = 5;
+      var endIndex = Math.min(startIndex + batchSize, records.length);
+      var batchRecords = records.slice(startIndex, endIndex);
 
-  // Function to create a single interview response record
+      if (batchRecords.length === 0) {
+        resolve(results);
+        return;
+      }
+
+      console.log(
+        "Deleting batch " +
+          Math.ceil(startIndex / batchSize + 1) +
+          " (" +
+          (startIndex + 1) +
+          "-" +
+          endIndex +
+          " of " +
+          records.length +
+          ")"
+      );
+
+      // Update progress bar for batch start
+      updateDeletionProgress(
+        startIndex,
+        records.length,
+        results.filter((r) => !r.success).length,
+        "Processing batch " +
+          Math.ceil(startIndex / batchSize + 1) +
+          "/" +
+          Math.ceil(records.length / batchSize) +
+          "..."
+      );
+
+      // Create deletion promises for this batch
+      var deletePromises = batchRecords.map(function (record) {
+        return deleteInterviewResponse(record.id);
+      });
+
+      Promise.allSettled(deletePromises).then(function (batchResults) {
+        var batchResultsFormatted = batchResults.map(function (result, index) {
+          return {
+            recordId: batchRecords[index].id,
+            success: result.status === "fulfilled",
+            error: result.status === "rejected" ? result.reason : null,
+          };
+        });
+
+        results = results.concat(batchResultsFormatted);
+
+        // Update progress after batch completion
+        updateDeletionProgress(
+          endIndex,
+          records.length,
+          results.filter((r) => !r.success).length,
+          "Batch " +
+            Math.ceil(startIndex / batchSize + 1) +
+            "/" +
+            Math.ceil(records.length / batchSize) +
+            " complete"
+        );
+
+        // Continue with next batch after delay
+        setTimeout(function () {
+          deleteRecordsBatch(records, endIndex, results)
+            .then(resolve)
+            .catch(reject);
+        }, 1000);
+      });
+    });
+  }
+
+  // Delete a single interview response record
+  function deleteInterviewResponse(recordId) {
+    return new Promise(function (resolve, reject) {
+      var deleteUrl =
+        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
+        recordId;
+
+      console.log("🗑️ Deleting record:", recordId, "from:", deleteUrl);
+
+      $.ajax({
+        type: "DELETE",
+        url: deleteUrl,
+        headers: headers,
+      })
+        .then(function (response) {
+          console.log("✅ Deleted record " + recordId);
+          resolve(response);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error("❌ Failed to delete record " + recordId);
+          logAPIError(jqXHR, textStatus, errorThrown);
+          reject(new Error("Failed to delete record " + recordId));
+        });
+    });
+  }
+
+  /********************************************/
+  /*********** RECORD CREATION FUNCTIONS ******/
+  /********************************************/
+
+  // Create a single interview response record
   function createInterviewResponse(payload, index, total) {
     return new Promise(function (resolve, reject) {
       // Remove metadata before sending to API
@@ -870,7 +777,7 @@ $(document).on("knack-scene-render.scene_112", function () {
     //   };
   }
 
-  // Function to create all interview response records in batches
+  // Create all interview response records in batches
   function createAllInterviewResponses(payloads, batchSize = 5) {
     console.log("=== Starting Bulk Interview Response Creation ===");
     console.log("Total records to create:", payloads.length);
@@ -985,14 +892,97 @@ $(document).on("knack-scene-render.scene_112", function () {
     processBatch(0);
   }
 
-  // =================================================================
-  // TESTING SECTION
-  // =================================================================
+  /********************************************/
+  /******* DATA COLLECTION & PAYLOAD GEN ******/
+  /********************************************/
 
-  // Test with a single record first
-  console.log("=== Testing Single Record Creation ===");
-  var testPayload = interviewResponsePayloads[0];
-  console.log("Test payload:", testPayload);
+  // Get current record ID from URL
+  var hrefArray = window.location.href.split("/");
+  var recordId = hrefArray[hrefArray.length - 2];
+  console.log("Current page record ID:", recordId);
+
+  // Set auth and headers for API calls
+  var knackUserToken = Knack.getUserToken();
+  var headers = {
+    "X-Knack-Application-Id": Knack.application_id,
+    "X-Knack-REST-API-KEY": "knack",
+    Authorization: knackUserToken,
+    "content-type": "application/json",
+  };
+
+  // Get all required data from Knack views
+  var viewKey = "view_263"; // interview_candidates
+  var candidates = Knack.views[viewKey].model.data.models;
+  var panelMembers = Knack.views["view_264"].model.data.models;
+  var interviewQuestions = Knack.views["view_269"].model.data.models;
+  var interviewManagement = Knack.views["view_253"].record["field_17_raw"];
+
+  // Filter candidates by status
+  var isSelectedToInterview = function (candidate) {
+    // Access Backbone model attributes properly
+    var status = candidate.get("field_71"); // Use .get() method for Backbone models
+    // var name = candidate.get("field_90");
+    // var id = candidate.get("id") || candidate.id;
+
+    return status === "Selected to interview";
+  };
+
+  var selectedToInterviewCandidates = candidates.filter(isSelectedToInterview);
+
+  // Generate all combinations of candidates × panel members × questions
+  var interviewResponsePayloads = [];
+
+  console.log("Generating payloads for:");
+  console.log("- Candidates:", selectedToInterviewCandidates.length);
+  console.log("- Panel Members:", panelMembers.length);
+  console.log("- Interview Questions:", interviewQuestions.length);
+  console.log(
+    "- Expected total records:",
+    selectedToInterviewCandidates.length *
+      panelMembers.length *
+      interviewQuestions.length
+  );
+
+  // Triple nested loop to create all combinations
+  selectedToInterviewCandidates.forEach(function (candidate, candidateIndex) {
+    panelMembers.forEach(function (panelMember, panelIndex) {
+      interviewQuestions.forEach(function (question, questionIndex) {
+        var payload = {
+          // Connection fields - using IDs for relationships
+          // field_87: interviewManagement[0].id, // interview_management connection
+          field_87: Knack.views["view_253"].model.id,
+          field_88: candidate.get("id") || candidate.id, // interview_candidate
+          field_89: question.get("id") || question.id, // interview_question
+          field_183: panelMember.get("id") || panelMember.id, // interview_panel_member
+
+          // Metadata for tracking
+          _meta: {
+            candidateIndex: candidateIndex,
+            candidateName: candidate.get("field_90"),
+            panelIndex: panelIndex,
+            panelMemberName: panelMember.get("field_189"),
+            questionIndex: questionIndex,
+            questionText: question.get("field_26"),
+            recordNumber: interviewResponsePayloads.length + 1,
+          },
+        };
+
+        interviewResponsePayloads.push(payload);
+      });
+    });
+  });
+
+  console.log(
+    "Generated",
+    interviewResponsePayloads.length,
+    "interview response payloads"
+  );
+
+  console.log(interviewResponsePayloads);
+
+  /********************************************/
+  /************* EVENT HANDLERS ***************/
+  /********************************************/
 
   // Add the Execute Script button and click handler
   addGenerateResponsesButton();
@@ -1120,45 +1110,12 @@ $(document).on("knack-scene-render.scene_112", function () {
     }
   });
 
-  // Helper function to log detailed error information
-  function logAPIError(jqXHR, textStatus, errorThrown) {
-    console.error("=== Detailed Error Information ===");
-    console.error("Status Code:", jqXHR.status);
-    console.error("Status Text:", textStatus);
-    console.error("Error Thrown:", errorThrown);
-    console.error("Response Text:", jqXHR.responseText);
+  /********************************************/
+  /************* TESTING SECTION **************/
+  /********************************************/
 
-    try {
-      var errorResponse = JSON.parse(jqXHR.responseText);
-      console.error("Parsed Error Response:", errorResponse);
-    } catch (e) {
-      console.error("Could not parse error response as JSON");
-    }
-  }
-
-  // Function to delete a single interview response record
-  function deleteInterviewResponse(recordId) {
-    return new Promise(function (resolve, reject) {
-      var deleteUrl =
-        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
-        recordId;
-
-      console.log("🗑️ Deleting record:", recordId, "from:", deleteUrl);
-
-      $.ajax({
-        type: "DELETE",
-        url: deleteUrl,
-        headers: headers,
-      })
-        .then(function (response) {
-          console.log("✅ Deleted record " + recordId);
-          resolve(response);
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          console.error("❌ Failed to delete record " + recordId);
-          logAPIError(jqXHR, textStatus, errorThrown);
-          reject(new Error("Failed to delete record " + recordId));
-        });
-    });
-  }
+  // Test with a single record first
+  console.log("=== Testing Single Record Creation ===");
+  var testPayload = interviewResponsePayloads[0];
+  console.log("Test payload:", testPayload);
 });
