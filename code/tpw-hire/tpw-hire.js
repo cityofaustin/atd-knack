@@ -431,20 +431,35 @@ $(document).on("knack-scene-render.scene_112", function () {
     };
   }
 
-  // Refresh all interview-related views
+  // Refresh all interview-related views and update button state
   function refreshInterviewViews() {
-    var viewsToRefresh = [CONFIG.views.responses];
+    return new Promise(function (resolve) {
+      var viewsToRefresh = [CONFIG.views.responses];
+      var refreshPromises = [];
 
-    viewsToRefresh.forEach(function (viewKey) {
-      if (Knack.views[viewKey] && Knack.views[viewKey].model) {
-        Knack.views[viewKey].model.fetch();
-      }
+      viewsToRefresh.forEach(function (viewKey) {
+        if (Knack.views[viewKey] && Knack.views[viewKey].model) {
+          // Create a promise for each view refresh
+          var refreshPromise = new Promise(function (viewResolve) {
+            // Listen for the view's render event
+            $(document).one("knack-view-render." + viewKey, function () {
+              viewResolve();
+            });
+            // Trigger the refresh
+            Knack.views[viewKey].model.fetch();
+          });
+          refreshPromises.push(refreshPromise);
+        }
+      });
+
+      // Wait for all views to refresh
+      Promise.all(refreshPromises).then(function () {
+        // Add a small delay to ensure data is processed
+        setTimeout(function () {
+          resolve();
+        }, 500);
+      });
     });
-
-    // Check button state after refresh (with small delay to ensure data is loaded)
-    setTimeout(function () {
-      checkButtonState();
-    }, 500);
   }
 
   /********************************************/
@@ -722,7 +737,7 @@ $(document).on("knack-scene-render.scene_112", function () {
           // Add delay between batches to avoid rate limiting
           setTimeout(function () {
             processBatch(endIndex);
-          }, 1000); // 1 second delay between batches
+          }, 1000);
         } else {
           // All batches complete
           console.log("=== Bulk Creation Complete ===");
@@ -741,20 +756,36 @@ $(document).on("knack-scene-render.scene_112", function () {
           completeProgress(payloads.length, failedRecords.length);
 
           // Re-enable button
-          $("#generate-responses-button")
-            .removeClass("is-loading")
-            .prop("disabled", false);
+          enableGenerateButton();
 
-          // Refresh all views to show new records
-          setTimeout(function () {
-            refreshInterviewViews();
-          }, 1000);
+          // Refresh views and update button state
+          refreshInterviewViews()
+            .then(function () {
+              var buttonState = checkButtonState();
+              console.log("Button state updated:", buttonState);
+            })
+            .catch(function (error) {
+              console.error("Error refreshing views:", error);
+            });
         }
       });
     }
 
     // Start processing from first batch
     processBatch(0);
+  }
+
+  // Helper function to manage button state
+  function enableGenerateButton() {
+    $("#generate-responses-button")
+      .removeClass("is-loading")
+      .prop("disabled", false);
+  }
+
+  function disableGenerateButton() {
+    $("#generate-responses-button")
+      .addClass("is-loading")
+      .prop("disabled", true);
   }
 
   /********************************************/
@@ -879,9 +910,7 @@ $(document).on("knack-scene-render.scene_112", function () {
       console.log("✅ User confirmed - Starting process...");
 
       // Disable button during execution
-      $("#generate-responses-button")
-        .addClass("is-loading")
-        .prop("disabled", true);
+      disableGenerateButton();
 
       // Generate payloads
       var interviewResponsePayloads = generateInterviewResponsePayloads();
@@ -906,23 +935,14 @@ $(document).on("knack-scene-render.scene_112", function () {
               "Failed to delete existing records. Please try again or contact support."
             );
 
-            // Re-enable button
-            $("#generate-responses-button")
-              .removeClass("is-loading")
-              .prop("disabled", false);
+            // Re-enable button on error
+            enableGenerateButton();
           });
       } else {
         // Normal generation mode: just create
         console.log("🔄 Starting record creation...");
         createAllInterviewResponses(interviewResponsePayloads);
       }
-
-      // Re-enable button after timeout (backup in case something goes wrong)
-      setTimeout(function () {
-        $("#generate-responses-button")
-          .removeClass("is-loading")
-          .prop("disabled", false);
-      }, 60000); // 1 minute timeout
     } else {
       console.log("❌ User cancelled operation");
     }
