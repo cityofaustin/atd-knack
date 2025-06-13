@@ -276,18 +276,18 @@ const CONFIG = {
   batchDelay: 1000,
 };
 
+// Add operation state tracking at the top level
+var operationState = {
+  isProcessing: false,
+  lastOperationTime: 0,
+  operationTimeout: 5000, // 5 second cooldown between operations
+};
+
 // Main scene render handler for interview management
 $(document).on("knack-scene-render.scene_112", function () {
   /********************************************/
   /*********** INITIALIZATION & SETUP *********/
   /********************************************/
-
-  // Add operation state tracking
-  var operationState = {
-    isProcessing: false,
-    lastOperationTime: 0,
-    operationTimeout: 5000, // 5 second cooldown between operations
-  };
 
   // Helper function to filter candidates by interview status
   function isSelectedToInterview(candidate) {
@@ -901,123 +901,125 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Check initial button state
   checkButtonState();
 
-  // Add click handler for the Generate Responses button
-  $(document).on("click", "#generate-responses-button", function (e) {
-    e.preventDefault();
-    e.stopPropagation(); // Prevent event bubbling
+  // Move click handler outside scene render
+  $(document)
+    .off("click", "#generate-responses-button")
+    .on("click", "#generate-responses-button", function (e) {
+      e.preventDefault();
+      e.stopPropagation(); // Prevent event bubbling
 
-    // Check if we're already processing or in cooldown
-    var now = Date.now();
-    if (operationState.isProcessing) {
-      console.log("⚠️ Operation already in progress, ignoring click");
-      return false;
-    }
-
-    if (
-      now - operationState.lastOperationTime <
-      operationState.operationTimeout
-    ) {
-      console.log("⚠️ Operation cooldown in effect, ignoring click");
-      return false;
-    }
-
-    console.log("🚀 Generate Responses button clicked!");
-
-    // Get current button state
-    var buttonState = checkButtonState();
-
-    // Safety check in case buttonState is undefined
-    if (!buttonState) {
-      console.error("Button state is undefined, aborting operation");
-      alert(
-        "Error: Could not determine current state. Please refresh the page and try again."
-      );
-      return false;
-    }
-
-    var currentCount = buttonState.currentCount || 0;
-    var expectedCount = buttonState.expectedCount || 0;
-    var hasExistingRecords = buttonState.hasExistingRecords || false;
-
-    // Build confirmation message based on whether we have existing records
-    var confirmationText;
-    if (hasExistingRecords) {
-      confirmationText =
-        "⚠️  REGENERATE MODE ⚠️\n\n" +
-        "This will:\n" +
-        "1. DELETE all " +
-        currentCount +
-        " existing interview response records\n" +
-        "2. CREATE " +
-        expectedCount +
-        " new interview response records\n\n" +
-        "⚠️  This action cannot be undone! ⚠️\n\n" +
-        "Are you sure you want to proceed?";
-    } else {
-      confirmationText =
-        "This will create " +
-        expectedCount +
-        " new interview response records.\n\n" +
-        "Are you sure you want to proceed?";
-    }
-
-    // Show confirmation dialog for safety
-    var confirmation = confirm(confirmationText);
-
-    if (confirmation) {
-      // Set processing state
-      operationState.isProcessing = true;
-      operationState.lastOperationTime = now;
-
-      console.log("✅ User confirmed - Starting process...");
-
-      // Disable button during execution
-      disableGenerateButton();
-
-      // Generate payloads
-      var interviewResponsePayloads = generateInterviewResponsePayloads();
-
-      if (hasExistingRecords) {
-        // Regenerate mode: delete first, then create
-        console.log("🔄 Starting regeneration process...");
-
-        deleteAllInterviewResponses()
-          .then(function (deletedCount) {
-            // Refresh views to reflect deletions
-            refreshInterviewViews();
-
-            // Start creation after small delay
-            setTimeout(function () {
-              createAllInterviewResponses(interviewResponsePayloads).finally(
-                function () {
-                  // Reset processing state when complete
-                  operationState.isProcessing = false;
-                }
-              );
-            }, 1000);
-          })
-          .catch(function (error) {
-            console.error("❌ Deletion failed:", error);
-            alert(
-              "Failed to delete existing records. Please try again or contact support."
-            );
-
-            // Re-enable button and reset state on error
-            enableGenerateButton();
-            operationState.isProcessing = false;
-          });
-      } else {
-        // Normal generation mode: just create
-        console.log("🔄 Starting record creation...");
-        createAllInterviewResponses(interviewResponsePayloads).finally(
-          function () {
-            // Reset processing state when complete
-            operationState.isProcessing = false;
-          }
-        );
+      // Check if we're already processing or in cooldown
+      var now = Date.now();
+      if (operationState.isProcessing) {
+        console.log("⚠️ Operation already in progress, ignoring click");
+        return false;
       }
-    } else {
-      console.log("❌ User cancelled operation");
-    }
-  });
+
+      if (
+        now - operationState.lastOperationTime <
+        operationState.operationTimeout
+      ) {
+        console.log("⚠️ Operation cooldown in effect, ignoring click");
+        return false;
+      }
+
+      console.log("🚀 Generate Responses button clicked!");
+
+      // Get current button state
+      var buttonState = checkButtonState();
+
+      // Safety check in case buttonState is undefined
+      if (!buttonState) {
+        console.error("Button state is undefined, aborting operation");
+        alert(
+          "Error: Could not determine current state. Please refresh the page and try again."
+        );
+        return false;
+      }
+
+      var currentCount = buttonState.currentCount || 0;
+      var expectedCount = buttonState.expectedCount || 0;
+      var hasExistingRecords = buttonState.hasExistingRecords || false;
+
+      // Build confirmation message based on whether we have existing records
+      var confirmationText;
+      if (hasExistingRecords) {
+        confirmationText =
+          "⚠️  REGENERATE MODE ⚠️\n\n" +
+          "This will:\n" +
+          "1. DELETE all " +
+          currentCount +
+          " existing interview response records\n" +
+          "2. CREATE " +
+          expectedCount +
+          " new interview response records\n\n" +
+          "⚠️  This action cannot be undone! ⚠️\n\n" +
+          "Are you sure you want to proceed?";
+      } else {
+        confirmationText =
+          "This will create " +
+          expectedCount +
+          " new interview response records.\n\n" +
+          "Are you sure you want to proceed?";
+      }
+
+      // Show confirmation dialog for safety
+      var confirmation = confirm(confirmationText);
+
+      if (confirmation) {
+        // Set processing state
+        operationState.isProcessing = true;
+        operationState.lastOperationTime = now;
+
+        console.log("✅ User confirmed - Starting process...");
+
+        // Disable button during execution
+        disableGenerateButton();
+
+        // Generate payloads
+        var interviewResponsePayloads = generateInterviewResponsePayloads();
+
+        if (hasExistingRecords) {
+          // Regenerate mode: delete first, then create
+          console.log("🔄 Starting regeneration process...");
+
+          deleteAllInterviewResponses()
+            .then(function (deletedCount) {
+              // Refresh views to reflect deletions
+              refreshInterviewViews();
+
+              // Start creation after small delay
+              setTimeout(function () {
+                createAllInterviewResponses(interviewResponsePayloads).finally(
+                  function () {
+                    // Reset processing state when complete
+                    operationState.isProcessing = false;
+                  }
+                );
+              }, 1000);
+            })
+            .catch(function (error) {
+              console.error("❌ Deletion failed:", error);
+              alert(
+                "Failed to delete existing records. Please try again or contact support."
+              );
+
+              // Re-enable button and reset state on error
+              enableGenerateButton();
+              operationState.isProcessing = false;
+            });
+        } else {
+          // Normal generation mode: just create
+          console.log("🔄 Starting record creation...");
+          createAllInterviewResponses(interviewResponsePayloads).finally(
+            function () {
+              // Reset processing state when complete
+              operationState.isProcessing = false;
+            }
+          );
+        }
+      } else {
+        console.log("❌ User cancelled operation");
+      }
+    });
 });
