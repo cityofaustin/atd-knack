@@ -57,9 +57,10 @@ $(document).on("knack-view-render.any", function (event, page) {
 });
 
 /********************************************/
-/*************** Big Buttons ****************/
+/*************** UI Components ***************/
 /********************************************/
 
+/*********** Button Components ********/
 // Creates a big button with icon and label
 function bigButton(
   id,
@@ -86,6 +87,168 @@ function bigButton(
   ).appendTo("#" + view_id);
 
   if (callback) callback();
+}
+
+// Add the Generate Responses button to the page
+function addGenerateResponsesButton() {
+  // Check if button already exists to avoid duplicates
+  if ($("#generate-responses-button").length === 0) {
+    // Create the styled button with icon and text
+    var generateResponsesButtonHtml = $(
+      '<a id="generate-responses-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
+        '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
+        "<span>Generate Responses</span>" +
+        "</a>"
+    );
+
+    // Find existing "Add Manual Responses" button and add our button next to it
+    var addManualResponsesButton = $('a[href*="add-reponses"]');
+    if (addManualResponsesButton.length > 0) {
+      generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
+      generateResponsesButtonHtml.css("margin-left", "10px"); // Add some spacing
+    }
+  }
+}
+
+// Helper function to manage button state
+function enableGenerateButton() {
+  $("#generate-responses-button")
+    .removeClass("is-loading")
+    .prop("disabled", false)
+    .find("i")
+    .removeClass("fa-spinner fa-spin")
+    .addClass("fa-cogs");
+}
+
+function disableGenerateButton() {
+  $("#generate-responses-button")
+    .addClass("is-loading")
+    .prop("disabled", true)
+    .find("i")
+    .removeClass("fa-cogs")
+    .addClass("fa-spinner fa-spin");
+
+  // Hide the warning message during processing
+  $("#regenerate-warning-message").hide();
+}
+
+// Helper function to update button with count
+function updateButtonWithCount(currentInterviewResponses) {
+  var expectedRecords = calculateExpectedRecordCount();
+  var hasExistingRecords = currentInterviewResponses > 0;
+
+  var $generateResponsesButton = $("#generate-responses-button");
+
+  // Always enable the button
+  $generateResponsesButton
+    .prop("disabled", false)
+    .removeClass("is-disabled")
+    .css({
+      opacity: "1",
+      cursor: "pointer",
+      "pointer-events": "auto",
+    });
+
+  // Update button text and icon based on existing records
+  if (hasExistingRecords) {
+    // Change to "Regenerate" if records exist
+    $generateResponsesButton
+      .find("span:last")
+      .text(
+        "Regenerate Responses (" + currentInterviewResponses + " existing)"
+      );
+
+    // Change icon to refresh icon
+    $generateResponsesButton
+      .find("i")
+      .removeClass("fa-cogs")
+      .addClass("fa-refresh");
+
+    // Show warning message about deletion if it exists, or create it if it doesn't
+    var $warningMessage = $("#regenerate-warning-message");
+    if ($warningMessage.length === 0) {
+      var warningHtml =
+        '<div id="regenerate-warning-message" style="margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404; font-size: 14px;">' +
+        '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
+        "This will first delete all " +
+        currentInterviewResponses +
+        " existing interview response records, " +
+        "then create " +
+        expectedRecords +
+        " new records." +
+        "</div>";
+      // Insert warning message after the button
+      $generateResponsesButton.after(warningHtml);
+    } else {
+      // Update existing warning message with current counts
+      $warningMessage.html(
+        '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
+          "This will first delete all " +
+          currentInterviewResponses +
+          " existing interview response records, " +
+          "then create " +
+          expectedRecords +
+          " new records."
+      );
+      $warningMessage.show();
+    }
+  } else {
+    // Normal "Generate" mode
+    $generateResponsesButton.find("span:last").text("Generate Responses");
+
+    // Use normal cogs icon
+    $generateResponsesButton
+      .find("i")
+      .removeClass("fa-refresh")
+      .addClass("fa-cogs");
+
+    // Remove warning message
+    $("#regenerate-warning-message").remove();
+  }
+
+  // Remove old records exist message if it exists
+  $("#records-exist-message").remove();
+
+  return {
+    currentCount: currentInterviewResponses,
+    expectedCount: expectedRecords,
+    hasExistingRecords: hasExistingRecords,
+  };
+}
+
+// Check and update button state based on existing records
+function checkButtonState() {
+  var currentInterviewResponses = 0;
+
+  // Get the total records count
+  try {
+    if (
+      Knack.views[CONFIG.views.responses] &&
+      Knack.views[CONFIG.views.responses].model &&
+      Knack.views[CONFIG.views.responses].model.data &&
+      Knack.views[CONFIG.views.responses].model.data.total_records !== undefined
+    ) {
+      currentInterviewResponses =
+        Knack.views[CONFIG.views.responses].model.data.total_records;
+      console.log(
+        "✅ Successfully got " +
+          currentInterviewResponses +
+          " existing interview response records"
+      );
+    } else {
+      console.warn(
+        "Could not access total_records from " +
+          CONFIG.views.responses +
+          ", defaulting to 0"
+      );
+    }
+  } catch (error) {
+    console.error("Error accessing view data:", error);
+    currentInterviewResponses = 0;
+  }
+
+  // Use view data for count and return the result
+  return updateButtonWithCount(currentInterviewResponses);
 }
 
 /*********** Progress Bar Components ********/
@@ -245,6 +408,29 @@ function logAPIError(jqXHR, textStatus, errorThrown) {
   }
 }
 
+// Helper function to filter candidates by interview status
+function isSelectedToInterview(candidate) {
+  var status = candidate.get(CONFIG.fields.candidateStatus);
+  return status === "Selected to interview";
+}
+
+// Helper function to calculate expected record count
+function calculateExpectedRecordCount() {
+  var viewKey = CONFIG.views.candidates;
+  var candidates = Knack.views[viewKey].model.data.models;
+  var panelMembers = Knack.views[CONFIG.views.panelMembers].model.data.models;
+  var interviewQuestions =
+    Knack.views[CONFIG.views.questions].model.data.models;
+
+  var selectedToInterviewCandidates = candidates.filter(isSelectedToInterview);
+
+  return (
+    selectedToInterviewCandidates.length *
+    panelMembers.length *
+    interviewQuestions.length
+  );
+}
+
 /********************************************/
 /*************** TPW Hire ****************/
 /********************************************/
@@ -288,172 +474,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   /********************************************/
   /*********** INITIALIZATION & SETUP *********/
   /********************************************/
-
-  // Helper function to filter candidates by interview status
-  function isSelectedToInterview(candidate) {
-    var status = candidate.get(CONFIG.fields.candidateStatus);
-    return status === "Selected to interview";
-  }
-
-  // Add the Generate Responses button to the page
-  function addGenerateResponsesButton() {
-    // Check if button already exists to avoid duplicates
-    if ($("#generate-responses-button").length === 0) {
-      // Create the styled button with icon and text
-      var generateResponsesButtonHtml = $(
-        '<a id="generate-responses-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
-          '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
-          "<span>Generate Responses</span>" +
-          "</a>"
-      );
-
-      // Find existing "Add Manual Responses" button and add our button next to it
-      var addManualResponsesButton = $('a[href*="add-reponses"]');
-      if (addManualResponsesButton.length > 0) {
-        generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
-        generateResponsesButtonHtml.css("margin-left", "10px"); // Add some spacing
-      }
-    }
-  }
-
-  // Check and update button state based on existing records
-  function checkButtonState() {
-    var currentInterviewResponses = 0;
-
-    // Get the total records count
-    try {
-      if (
-        Knack.views[CONFIG.views.responses] &&
-        Knack.views[CONFIG.views.responses].model &&
-        Knack.views[CONFIG.views.responses].model.data &&
-        Knack.views[CONFIG.views.responses].model.data.total_records !==
-          undefined
-      ) {
-        currentInterviewResponses =
-          Knack.views[CONFIG.views.responses].model.data.total_records;
-        console.log(
-          "✅ Successfully got " +
-            currentInterviewResponses +
-            " existing interview response records"
-        );
-      } else {
-        console.warn(
-          "Could not access total_records from " +
-            CONFIG.views.responses +
-            ", defaulting to 0"
-        );
-      }
-    } catch (error) {
-      console.error("Error accessing view data:", error);
-      currentInterviewResponses = 0;
-    }
-
-    // Use view data for count and return the result
-    return updateButtonWithCount(currentInterviewResponses);
-  }
-
-  // Helper function to calculate expected record count
-  function calculateExpectedRecordCount() {
-    var viewKey = CONFIG.views.candidates;
-    var candidates = Knack.views[viewKey].model.data.models;
-    var panelMembers = Knack.views[CONFIG.views.panelMembers].model.data.models;
-    var interviewQuestions =
-      Knack.views[CONFIG.views.questions].model.data.models;
-
-    var selectedToInterviewCandidates = candidates.filter(
-      isSelectedToInterview
-    );
-
-    return (
-      selectedToInterviewCandidates.length *
-      panelMembers.length *
-      interviewQuestions.length
-    );
-  }
-
-  // Helper function to update button with count
-  function updateButtonWithCount(currentInterviewResponses) {
-    var expectedRecords = calculateExpectedRecordCount();
-    var hasExistingRecords = currentInterviewResponses > 0;
-
-    var $generateResponsesButton = $("#generate-responses-button");
-
-    // Always enable the button
-    $generateResponsesButton
-      .prop("disabled", false)
-      .removeClass("is-disabled")
-      .css({
-        opacity: "1",
-        cursor: "pointer",
-        "pointer-events": "auto",
-      });
-
-    // Update button text and icon based on existing records
-    if (hasExistingRecords) {
-      // Change to "Regenerate" if records exist
-      $generateResponsesButton
-        .find("span:last")
-        .text(
-          "Regenerate Responses (" + currentInterviewResponses + " existing)"
-        );
-
-      // Change icon to refresh icon
-      $generateResponsesButton
-        .find("i")
-        .removeClass("fa-cogs")
-        .addClass("fa-refresh");
-
-      // Show warning message about deletion if it exists, or create it if it doesn't
-      var $warningMessage = $("#regenerate-warning-message");
-      if ($warningMessage.length === 0) {
-        var warningHtml =
-          '<div id="regenerate-warning-message" style="margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404; font-size: 14px;">' +
-          '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
-          "This will first delete all " +
-          currentInterviewResponses +
-          " existing interview response records, " +
-          "then create " +
-          expectedRecords +
-          " new records." +
-          "</div>";
-        // Insert warning message after the button
-        $generateResponsesButton.after(warningHtml);
-      } else {
-        // Update existing warning message with current counts
-        $warningMessage.html(
-          '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
-            "This will first delete all " +
-            currentInterviewResponses +
-            " existing interview response records, " +
-            "then create " +
-            expectedRecords +
-            " new records."
-        );
-        $warningMessage.show();
-      }
-    } else {
-      // Normal "Generate" mode
-      $generateResponsesButton.find("span:last").text("Generate Responses");
-
-      // Use normal cogs icon
-      $generateResponsesButton
-        .find("i")
-        .removeClass("fa-refresh")
-        .addClass("fa-cogs");
-
-      // Remove warning message
-      $("#regenerate-warning-message").remove();
-    }
-
-    // Remove old records exist message if it exists
-    $("#records-exist-message").remove();
-
-    return {
-      currentCount: currentInterviewResponses,
-      expectedCount: expectedRecords,
-      hasExistingRecords: hasExistingRecords,
-    };
-  }
 
   // Refresh the interview responses view and update button state
   function refreshInterviewViews() {
@@ -787,28 +807,6 @@ $(document).on("knack-scene-render.scene_112", function () {
     });
   }
 
-  // Helper function to manage button state
-  function enableGenerateButton() {
-    $("#generate-responses-button")
-      .removeClass("is-loading")
-      .prop("disabled", false)
-      .find("i")
-      .removeClass("fa-spinner fa-spin")
-      .addClass("fa-cogs");
-  }
-
-  function disableGenerateButton() {
-    $("#generate-responses-button")
-      .addClass("is-loading")
-      .prop("disabled", true)
-      .find("i")
-      .removeClass("fa-cogs")
-      .addClass("fa-spinner fa-spin");
-
-    // Hide the warning message during processing
-    $("#regenerate-warning-message").hide();
-  }
-
   /********************************************/
   /******* DATA COLLECTION & PAYLOAD GEN ******/
   /********************************************/
@@ -880,10 +878,8 @@ $(document).on("knack-scene-render.scene_112", function () {
   /************* EVENT HANDLERS ***************/
   /********************************************/
 
-  // Add the Execute Script button and click handler
+  // Initialize UI components
   addGenerateResponsesButton();
-
-  // Check initial button state
   checkButtonState();
 
   // Move click handler outside scene render
