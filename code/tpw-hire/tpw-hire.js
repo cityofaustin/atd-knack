@@ -455,34 +455,19 @@ $(document).on("knack-scene-render.scene_112", function () {
     };
   }
 
-  // Refresh all interview-related views and update button state
+  // Refresh the interview responses view and update button state
   function refreshInterviewViews() {
     return new Promise(function (resolve) {
-      var viewsToRefresh = [CONFIG.views.responses];
-      var refreshPromises = [];
-
-      viewsToRefresh.forEach(function (viewKey) {
-        if (Knack.views[viewKey] && Knack.views[viewKey].model) {
-          // Create a promise for each view refresh
-          var refreshPromise = new Promise(function (viewResolve) {
-            // Listen for the view's render event
-            $(document).one("knack-view-render." + viewKey, function () {
-              viewResolve();
-            });
-            // Trigger the refresh
-            Knack.views[viewKey].model.fetch();
-          });
-          refreshPromises.push(refreshPromise);
+      // Listen for the view's render event
+      $(document).one(
+        "knack-view-render." + CONFIG.views.responses,
+        function () {
+          // Add a small delay to ensure data is processed
+          setTimeout(resolve, 500);
         }
-      });
-
-      // Wait for all views to refresh
-      Promise.all(refreshPromises).then(function () {
-        // Add a small delay to ensure data is processed
-        setTimeout(function () {
-          resolve();
-        }, 500);
-      });
+      );
+      // Trigger the refresh
+      Knack.views[CONFIG.views.responses].model.fetch();
     });
   }
 
@@ -906,7 +891,7 @@ $(document).on("knack-scene-render.scene_112", function () {
     .off("click", "#generate-responses-button")
     .on("click", "#generate-responses-button", function (e) {
       e.preventDefault();
-      e.stopPropagation(); // Prevent event bubbling
+      e.stopPropagation();
 
       // Check if we're already processing or in cooldown
       var now = Date.now();
@@ -941,27 +926,52 @@ $(document).on("knack-scene-render.scene_112", function () {
       var expectedCount = buttonState.expectedCount || 0;
       var hasExistingRecords = buttonState.hasExistingRecords || false;
 
-      // Build confirmation message based on whether we have existing records
-      var confirmationText;
+      // Get detailed counts for the breakdown
+      var viewKey = CONFIG.views.candidates;
+      var candidates = Knack.views[viewKey].model.data.models;
+      var panelMembers =
+        Knack.views[CONFIG.views.panelMembers].model.data.models;
+      var interviewQuestions =
+        Knack.views[CONFIG.views.questions].model.data.models;
+      var selectedToInterviewCandidates = candidates.filter(
+        isSelectedToInterview
+      );
+
+      // Build detailed confirmation message
+      var confirmationText = "=== Record Creation Summary ===\n\n";
+
       if (hasExistingRecords) {
-        confirmationText =
-          "⚠️  REGENERATE MODE ⚠️\n\n" +
-          "This will:\n" +
+        confirmationText += "⚠️  REGENERATE MODE ⚠️\n\n";
+        confirmationText += "This will:\n";
+        confirmationText +=
           "1. DELETE all " +
           currentCount +
-          " existing interview response records\n" +
-          "2. CREATE " +
-          expectedCount +
-          " new interview response records\n\n" +
-          "⚠️  This action cannot be undone! ⚠️\n\n" +
-          "Are you sure you want to proceed?";
+          " existing interview response records\n";
+        confirmationText += "2. CREATE new records as follows:\n\n";
       } else {
-        confirmationText =
-          "This will create " +
-          expectedCount +
-          " new interview response records.\n\n" +
-          "Are you sure you want to proceed?";
+        confirmationText += "This will create new records as follows:\n\n";
       }
+
+      // Add detailed breakdown
+      confirmationText +=
+        "Selected Candidates: " + selectedToInterviewCandidates.length + "\n";
+      confirmationText += "Panel Members: " + panelMembers.length + "\n";
+      confirmationText +=
+        "Interview Questions: " + interviewQuestions.length + "\n\n";
+
+      // Show the calculation
+      confirmationText += "Calculation:\n";
+      confirmationText +=
+        selectedToInterviewCandidates.length + " candidates × ";
+      confirmationText += panelMembers.length + " panel members × ";
+      confirmationText += interviewQuestions.length + " questions = ";
+      confirmationText += expectedCount + " total records\n\n";
+
+      if (hasExistingRecords) {
+        confirmationText += "⚠️  This action cannot be undone! ⚠️\n\n";
+      }
+
+      confirmationText += "Are you sure you want to proceed?";
 
       // Show confirmation dialog for safety
       var confirmation = confirm(confirmationText);
