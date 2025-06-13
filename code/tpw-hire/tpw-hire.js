@@ -811,10 +811,6 @@ $(document).on("knack-scene-render.scene_112", function () {
   /******* DATA COLLECTION & PAYLOAD GEN ******/
   /********************************************/
 
-  // Get current record ID from URL
-  var hrefArray = window.location.href.split("/");
-  var recordId = hrefArray[hrefArray.length - 2];
-
   // Set auth and headers for API calls
   var knackUserToken = Knack.getUserToken();
   var headers = {
