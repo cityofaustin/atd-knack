@@ -253,85 +253,127 @@ $(document).on("knack-scene-render.scene_112", function () {
 
   // Function to check if Execute Script button should be disabled
   function checkButtonState() {
-    var currentInterviewResponses =
-      Knack.views["view_268"].model.data.total_records;
+    var currentInterviewResponses = 0;
+
+    // Safely get the total records count
+    try {
+      if (
+        Knack.views["view_268"] &&
+        Knack.views["view_268"].model &&
+        Knack.views["view_268"].model.data &&
+        Knack.views["view_268"].model.data.total_records !== undefined
+      ) {
+        currentInterviewResponses =
+          Knack.views["view_268"].model.data.total_records;
+        console.log(
+          "✅ Successfully got total_records:",
+          currentInterviewResponses
+        );
+      } else {
+        console.warn(
+          "Could not access total_records from view_268, defaulting to 0"
+        );
+        console.log("Debug info:", {
+          hasView: !!Knack.views["view_268"],
+          hasModel: !!(
+            Knack.views["view_268"] && Knack.views["view_268"].model
+          ),
+          hasData: !!(
+            Knack.views["view_268"] &&
+            Knack.views["view_268"].model &&
+            Knack.views["view_268"].model.data
+          ),
+          totalRecords:
+            Knack.views["view_268"] &&
+            Knack.views["view_268"].model &&
+            Knack.views["view_268"].model.data
+              ? Knack.views["view_268"].model.data.total_records
+              : "N/A",
+        });
+      }
+    } catch (error) {
+      console.error("Error accessing view data:", error);
+      currentInterviewResponses = 0;
+    }
 
     console.log("Current interview responses:", currentInterviewResponses);
 
-    // Use view data for count
-    updateButtonWithCount(currentInterviewResponses);
+    // Use view data for count and return the result
+    return updateButtonWithCount(currentInterviewResponses);
   }
 
   // Helper function to update button with count
   function updateButtonWithCount(currentInterviewResponses) {
     var expectedRecords = interviewResponsePayloads.length;
-    var shouldDisable = currentInterviewResponses >= expectedRecords;
+    var hasExistingRecords = currentInterviewResponses > 0;
 
     console.log("=== Button State Check ===");
     console.log("Current interview responses:", currentInterviewResponses);
     console.log("Expected records to create:", expectedRecords);
-    console.log("Should disable button:", shouldDisable);
+    console.log("Has existing records:", hasExistingRecords);
 
     var $generateResponsesButton = $("#generate-responses-button");
 
-    if (shouldDisable) {
-      // Disable button and add visual indication
-      $generateResponsesButton
-        .prop("disabled", true)
-        .addClass("is-disabled")
-        .css({
-          opacity: "0.5",
-          cursor: "not-allowed",
-          "pointer-events": "none",
-        });
+    // Always enable the button
+    $generateResponsesButton
+      .prop("disabled", false)
+      .removeClass("is-disabled")
+      .css({
+        opacity: "1",
+        cursor: "pointer",
+        "pointer-events": "auto",
+      });
 
-      // Update button text to show reason
+    // Update button text and icon based on existing records
+    if (hasExistingRecords) {
+      // Change to "Regenerate" if records exist
       $generateResponsesButton
         .find("span:last")
         .text(
-          "All Records Exist (" +
-            currentInterviewResponses +
-            "/" +
-            expectedRecords +
-            ")"
+          "Regenerate Responses (" + currentInterviewResponses + " existing)"
         );
 
-      // Add informational message after button
-      if ($("#records-exist-message").length === 0) {
-        var messageHtml =
-          '<div id="records-exist-message" style="margin: 10px 0; padding: 10px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 5px; color: #155724; font-size: 14px;">' +
-          '<i class="fa fa-check-circle"></i> <strong>All interview response records already exist.</strong><br>' +
-          "Current: " +
+      // Change icon to refresh icon
+      $generateResponsesButton
+        .find("i")
+        .removeClass("fa-cogs")
+        .addClass("fa-refresh");
+
+      // Add warning message about deletion
+      if ($("#regenerate-warning-message").length === 0) {
+        var warningHtml =
+          '<div id="regenerate-warning-message" style="margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404; font-size: 14px;">' +
+          '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
+          "This will first delete all " +
           currentInterviewResponses +
-          " records | Expected: " +
+          " existing interview response records, " +
+          "then create " +
           expectedRecords +
-          " records<br>" +
-          "The Generate Responses button is disabled because all required records are already present." +
+          " new records." +
           "</div>";
-        $generateResponsesButton.after(messageHtml);
+        $generateResponsesButton.after(warningHtml);
       }
     } else {
-      // Enable button and remove any restrictions
-      $generateResponsesButton
-        .prop("disabled", false)
-        .removeClass("is-disabled")
-        .css({
-          opacity: "1",
-          cursor: "pointer",
-          "pointer-events": "auto",
-        });
-
-      // Reset button text
+      // Normal "Generate" mode
       $generateResponsesButton.find("span:last").text("Generate Responses");
 
-      // Remove informational message
-      $("#records-exist-message").remove();
+      // Use normal cogs icon
+      $generateResponsesButton
+        .find("i")
+        .removeClass("fa-refresh")
+        .addClass("fa-cogs");
+
+      // Remove warning message
+      $("#regenerate-warning-message").remove();
     }
+
+    // Remove old records exist message if it exists
+    $("#records-exist-message").remove();
 
     return {
       currentCount: currentInterviewResponses,
       expectedCount: expectedRecords,
-      shouldDisable: shouldDisable,
+      hasExistingRecords: hasExistingRecords,
     };
   }
 
@@ -432,6 +474,235 @@ $(document).on("knack-scene-render.scene_112", function () {
         $(this).remove();
       });
     }, 5000);
+  }
+
+  // =================================================================
+  // BULK RECORD DELETION FUNCTIONS
+  // =================================================================
+
+  // Function to delete all existing interview response records
+  function deleteAllInterviewResponses() {
+    return new Promise(function (resolve, reject) {
+      console.log(
+        "🗑️ Starting deletion of existing interview response records..."
+      );
+
+      // Get all existing records via API
+      var apiUrl =
+        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records";
+
+      console.log("🔍 Fetching records from:", apiUrl);
+      console.log(
+        "🔍 Note: Using creation scene/view (scene_124/view_286) for consistency"
+      );
+      console.log("🔍 Using headers:", headers);
+
+      $.ajax({
+        type: "GET",
+        url: apiUrl,
+        headers: headers,
+        data: {
+          page: 1,
+          rows_per_page: 1000, // Get all records (assuming less than 1000)
+          "view-interview-details-admin_id": Knack.views["view_253"].model.id,
+        },
+      })
+        .then(function (response) {
+          console.log("📋 Full API response:", response);
+
+          var recordsToDelete = response.records || [];
+          console.log("Found " + recordsToDelete.length + " records to delete");
+
+          // Log sample records if any exist
+          if (recordsToDelete.length > 0) {
+            console.log("Sample record structure:", recordsToDelete[0]);
+          } else {
+            console.log("⚠️ No records found in response");
+            console.log("Response keys:", Object.keys(response));
+
+            // Check if records might be in a different property
+            if (response.data && Array.isArray(response.data)) {
+              recordsToDelete = response.data;
+              console.log(
+                "✅ Found records in response.data:",
+                recordsToDelete.length
+              );
+            } else if (response.models && Array.isArray(response.models)) {
+              recordsToDelete = response.models;
+              console.log(
+                "✅ Found records in response.models:",
+                recordsToDelete.length
+              );
+            }
+          }
+
+          if (recordsToDelete.length === 0) {
+            console.log("No records to delete");
+            resolve(0);
+            return;
+          }
+
+          // Delete records in batches
+          deleteRecordsBatch(recordsToDelete, 0, [])
+            .then(function (results) {
+              var deletedCount = results.filter((r) => r.success).length;
+              var failedCount = results.filter((r) => !r.success).length;
+
+              console.log(
+                "Deletion complete. Deleted: " +
+                  deletedCount +
+                  ", Failed: " +
+                  failedCount
+              );
+              resolve(deletedCount);
+            })
+            .catch(function (error) {
+              console.error("Deletion failed:", error);
+              reject(error);
+            });
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error("❌ Failed to fetch records from scene_124/view_286");
+          logAPIError(jqXHR, textStatus, errorThrown);
+
+          // Fallback: try the original view (scene_112/view_268)
+          console.log("🔄 Trying fallback: scene_112/view_268");
+          var fallbackUrl =
+            "https://api.knack.com/v1/scenes/scene_112/views/view_268/records";
+
+          $.ajax({
+            type: "GET",
+            url: fallbackUrl,
+            headers: headers,
+            data: {
+              page: 1,
+              rows_per_page: 1000,
+            },
+          })
+            .then(function (response) {
+              console.log("📋 Fallback API response:", response);
+
+              var recordsToDelete =
+                response.records || response.data || response.models || [];
+              console.log(
+                "Found " +
+                  recordsToDelete.length +
+                  " records to delete (fallback)"
+              );
+
+              if (recordsToDelete.length === 0) {
+                console.log("No records to delete (fallback)");
+                resolve(0);
+                return;
+              }
+
+              // Delete records in batches
+              deleteRecordsBatch(recordsToDelete, 0, [])
+                .then(function (results) {
+                  var deletedCount = results.filter((r) => r.success).length;
+                  var failedCount = results.filter((r) => !r.success).length;
+
+                  console.log(
+                    "Deletion complete (fallback). Deleted: " +
+                      deletedCount +
+                      ", Failed: " +
+                      failedCount
+                  );
+                  resolve(deletedCount);
+                })
+                .catch(function (error) {
+                  console.error("Deletion failed (fallback):", error);
+                  reject(error);
+                });
+            })
+            .fail(function (jqXHR2, textStatus2, errorThrown2) {
+              console.error("❌ Fallback also failed:");
+              logAPIError(jqXHR2, textStatus2, errorThrown2);
+              reject(
+                new Error(
+                  "Failed to fetch records for deletion (both endpoints failed)"
+                )
+              );
+            });
+        });
+    });
+  }
+
+  // Helper function to delete records in batches
+  function deleteRecordsBatch(records, startIndex, results) {
+    return new Promise(function (resolve, reject) {
+      var batchSize = 5;
+      var endIndex = Math.min(startIndex + batchSize, records.length);
+      var batchRecords = records.slice(startIndex, endIndex);
+
+      if (batchRecords.length === 0) {
+        resolve(results);
+        return;
+      }
+
+      console.log(
+        "Deleting batch " +
+          Math.ceil(startIndex / batchSize + 1) +
+          " (" +
+          (startIndex + 1) +
+          "-" +
+          endIndex +
+          " of " +
+          records.length +
+          ")"
+      );
+
+      // Create deletion promises for this batch
+      var deletePromises = batchRecords.map(function (record) {
+        return deleteInterviewResponse(record.id);
+      });
+
+      Promise.allSettled(deletePromises).then(function (batchResults) {
+        var batchResultsFormatted = batchResults.map(function (result, index) {
+          return {
+            recordId: batchRecords[index].id,
+            success: result.status === "fulfilled",
+            error: result.status === "rejected" ? result.reason : null,
+          };
+        });
+
+        results = results.concat(batchResultsFormatted);
+
+        // Continue with next batch after delay
+        setTimeout(function () {
+          deleteRecordsBatch(records, endIndex, results)
+            .then(resolve)
+            .catch(reject);
+        }, 1000);
+      });
+    });
+  }
+
+  // Function to delete a single interview response record
+  function deleteInterviewResponse(recordId) {
+    return new Promise(function (resolve, reject) {
+      // Try the same scene/view as we use for creation (scene_124/view_286)
+      var deleteUrl =
+        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
+        recordId;
+
+      console.log("🗑️ Deleting record:", recordId, "from:", deleteUrl);
+
+      $.ajax({
+        type: "DELETE",
+        url: deleteUrl,
+        headers: headers,
+      })
+        .then(function (response) {
+          console.log("✅ Deleted record " + recordId);
+          resolve(response);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error("❌ Failed to delete record " + recordId);
+          logAPIError(jqXHR, textStatus, errorThrown);
+          reject(new Error("Failed to delete record " + recordId));
+        });
+    });
   }
 
   // =================================================================
@@ -616,6 +887,11 @@ $(document).on("knack-scene-render.scene_112", function () {
           // Complete progress bar
           completeProgress(payloads.length, failedRecords.length);
 
+          // Re-enable button
+          $("#generate-responses-button")
+            .removeClass("is-loading")
+            .prop("disabled", false);
+
           // Refresh all views to show new records
           setTimeout(function () {
             refreshInterviewViews();
@@ -643,58 +919,123 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Check initial button state
   checkButtonState();
 
-  // Add click handler for the Execute Script button
+  // Add click handler for the Generate Responses button
   $(document).on("click", "#generate-responses-button", function (e) {
     e.preventDefault();
-    console.log("🚀 Execute Script button clicked!");
+    console.log("🚀 Generate Responses button clicked!");
 
-    // Check if button should be disabled before proceeding
+    // Get current button state
     var buttonState = checkButtonState();
-    if (buttonState.shouldDisable) {
-      console.log(
-        "❌ Execute Script button is disabled - all records already exist"
+
+    // Safety check in case buttonState is undefined
+    if (!buttonState) {
+      console.error("Button state is undefined, aborting operation");
+      alert(
+        "Error: Could not determine current state. Please refresh the page and try again."
       );
       return false;
     }
 
-    var confirmationText =
-      "This will create " +
-      interviewResponsePayloads.length +
-      " interview response records.\n\n" +
-      "Breakdown:\n" +
-      "- Candidates: " +
-      selectedToInterviewCandidates.length +
-      "\n" +
-      "- Panel Members: " +
-      panelMembers.length +
-      "\n" +
-      "- Questions: " +
-      interviewQuestions.length +
-      "\n\n" +
-      "Are you sure you want to proceed?";
+    var currentCount = buttonState.currentCount || 0;
+    var hasExistingRecords = buttonState.hasExistingRecords || false;
+
+    // Build confirmation message based on whether we have existing records
+    var confirmationText;
+    if (hasExistingRecords) {
+      confirmationText =
+        "⚠️  REGENERATE MODE ⚠️\n\n" +
+        "This will:\n" +
+        "1. DELETE all " +
+        currentCount +
+        " existing interview response records\n" +
+        "2. CREATE " +
+        interviewResponsePayloads.length +
+        " new interview response records\n\n" +
+        "New records breakdown:\n" +
+        "- Candidates: " +
+        selectedToInterviewCandidates.length +
+        "\n" +
+        "- Panel Members: " +
+        panelMembers.length +
+        "\n" +
+        "- Questions: " +
+        interviewQuestions.length +
+        "\n\n" +
+        "⚠️  This action cannot be undone! ⚠️\n\n" +
+        "Are you sure you want to proceed?";
+    } else {
+      confirmationText =
+        "This will create " +
+        interviewResponsePayloads.length +
+        " interview response records.\n\n" +
+        "Breakdown:\n" +
+        "- Candidates: " +
+        selectedToInterviewCandidates.length +
+        "\n" +
+        "- Panel Members: " +
+        panelMembers.length +
+        "\n" +
+        "- Questions: " +
+        interviewQuestions.length +
+        "\n\n" +
+        "Are you sure you want to proceed?";
+    }
 
     // Show confirmation dialog for safety
     var confirmation = confirm(confirmationText);
 
     if (confirmation) {
-      console.log("✅ User confirmed - Starting bulk record creation...");
+      console.log("✅ User confirmed - Starting process...");
+
       // Disable button during execution
       $("#generate-responses-button")
         .addClass("is-loading")
         .prop("disabled", true);
 
-      //   ⚠️ Generate the responses
-      //   Uncomment this line below to execute the bulk creation
-      createAllInterviewResponses(interviewResponsePayloads);
+      if (hasExistingRecords) {
+        // Regenerate mode: delete first, then create
+        console.log("🔄 Starting regeneration process...");
 
-      // Re-enable button after 5 seconds (or you could do this in the completion callback)
+        deleteAllInterviewResponses()
+          .then(function (deletedCount) {
+            console.log(
+              "✅ Deletion complete. Deleted " + deletedCount + " records."
+            );
+            console.log("🔄 Starting creation of new records...");
+
+            // Refresh views to reflect deletions
+            refreshInterviewViews();
+
+            // Start creation after small delay
+            setTimeout(function () {
+              createAllInterviewResponses(interviewResponsePayloads);
+            }, 1000);
+          })
+          .catch(function (error) {
+            console.error("❌ Deletion failed:", error);
+            alert(
+              "Failed to delete existing records. Please try again or contact support."
+            );
+
+            // Re-enable button
+            $("#generate-responses-button")
+              .removeClass("is-loading")
+              .prop("disabled", false);
+          });
+      } else {
+        // Normal generation mode: just create
+        console.log("🔄 Starting record creation...");
+        createAllInterviewResponses(interviewResponsePayloads);
+      }
+
+      // Re-enable button after timeout (backup in case something goes wrong)
       setTimeout(function () {
         $("#generate-responses-button")
           .removeClass("is-loading")
           .prop("disabled", false);
-      }, 5000);
+      }, 60000); // 1 minute timeout
     } else {
-      console.log("❌ User cancelled bulk record creation");
+      console.log("❌ User cancelled operation");
     }
   });
 
