@@ -282,6 +282,13 @@ $(document).on("knack-scene-render.scene_112", function () {
   /*********** INITIALIZATION & SETUP *********/
   /********************************************/
 
+  // Add operation state tracking
+  var operationState = {
+    isProcessing: false,
+    lastOperationTime: 0,
+    operationTimeout: 5000, // 5 second cooldown between operations
+  };
+
   // Helper function to filter candidates by interview status
   function isSelectedToInterview(candidate) {
     var status = candidate.get(CONFIG.fields.candidateStatus);
@@ -689,107 +696,110 @@ $(document).on("knack-scene-render.scene_112", function () {
 
   // Create all interview response records in batches
   function createAllInterviewResponses(payloads, batchSize = 5) {
-    console.log("🔄 Starting creation of new records...");
-    console.log("Total records to create:", payloads.length);
+    return new Promise(function (resolve, reject) {
+      console.log("🔄 Starting creation of new records...");
+      console.log("Total records to create:", payloads.length);
 
-    // Initialize progress bar
-    createProgressBar(payloads.length);
+      // Initialize progress bar
+      createProgressBar(payloads.length);
 
-    var createdRecords = [];
-    var failedRecords = [];
-    var currentBatch = 0;
-    var totalBatches = Math.ceil(payloads.length / batchSize);
+      var createdRecords = [];
+      var failedRecords = [];
+      var currentBatch = 0;
+      var totalBatches = Math.ceil(payloads.length / batchSize);
 
-    function processBatch(startIndex) {
-      currentBatch++;
-      var endIndex = Math.min(startIndex + batchSize, payloads.length);
-      var batchPayloads = payloads.slice(startIndex, endIndex);
+      function processBatch(startIndex) {
+        currentBatch++;
+        var endIndex = Math.min(startIndex + batchSize, payloads.length);
+        var batchPayloads = payloads.slice(startIndex, endIndex);
 
-      // Update progress bar for batch start
-      updateProgress(
-        createdRecords.length + failedRecords.length,
-        payloads.length,
-        failedRecords.length,
-        "Processing batch " + currentBatch + "/" + totalBatches + "..."
-      );
-
-      // Create promises for this batch
-      var batchPromises = batchPayloads.map(function (payload, index) {
-        return createInterviewResponse(
-          payload,
-          startIndex + index,
-          payloads.length
-        );
-      });
-
-      // Wait for all records in this batch to complete
-      Promise.allSettled(batchPromises).then(function (results) {
-        results.forEach(function (result, index) {
-          if (result.status === "fulfilled") {
-            createdRecords.push(result.value);
-          } else {
-            failedRecords.push(result.reason);
-          }
-        });
-
-        // Update progress bar after batch completion
+        // Update progress bar for batch start
         updateProgress(
           createdRecords.length + failedRecords.length,
           payloads.length,
           failedRecords.length,
-          "Batch " + currentBatch + "/" + totalBatches + " complete"
+          "Processing batch " + currentBatch + "/" + totalBatches + "..."
         );
 
-        console.log(
-          "Batch " +
-            currentBatch +
-            " complete. Success: " +
-            results.filter((r) => r.status === "fulfilled").length +
-            ", Failed: " +
-            results.filter((r) => r.status === "rejected").length
-        );
+        // Create promises for this batch
+        var batchPromises = batchPayloads.map(function (payload, index) {
+          return createInterviewResponse(
+            payload,
+            startIndex + index,
+            payloads.length
+          );
+        });
 
-        // Process next batch or finish
-        if (endIndex < payloads.length) {
-          // Add delay between batches to avoid rate limiting
-          setTimeout(function () {
-            processBatch(endIndex);
-          }, 1000);
-        } else {
-          // All batches complete
-          console.log("=== Bulk Creation Complete ===");
-          console.log("Total created:", createdRecords.length);
-          console.log("Total failed:", failedRecords.length);
-          console.log(
-            "Success rate:",
-            Math.round((createdRecords.length / payloads.length) * 100) + "%"
+        // Wait for all records in this batch to complete
+        Promise.allSettled(batchPromises).then(function (results) {
+          results.forEach(function (result, index) {
+            if (result.status === "fulfilled") {
+              createdRecords.push(result.value);
+            } else {
+              failedRecords.push(result.reason);
+            }
+          });
+
+          // Update progress bar after batch completion
+          updateProgress(
+            createdRecords.length + failedRecords.length,
+            payloads.length,
+            failedRecords.length,
+            "Batch " + currentBatch + "/" + totalBatches + " complete"
           );
 
-          if (failedRecords.length > 0) {
-            console.log("Failed records:", failedRecords);
+          console.log(
+            "Batch " +
+              currentBatch +
+              " complete. Success: " +
+              results.filter((r) => r.status === "fulfilled").length +
+              ", Failed: " +
+              results.filter((r) => r.status === "rejected").length
+          );
+
+          // Process next batch or finish
+          if (endIndex < payloads.length) {
+            setTimeout(function () {
+              processBatch(endIndex);
+            }, 1000);
+          } else {
+            // All batches complete
+            console.log("=== Bulk Creation Complete ===");
+            console.log("Total created:", createdRecords.length);
+            console.log("Total failed:", failedRecords.length);
+            console.log(
+              "Success rate:",
+              Math.round((createdRecords.length / payloads.length) * 100) + "%"
+            );
+
+            if (failedRecords.length > 0) {
+              console.log("Failed records:", failedRecords);
+              reject(new Error("Some records failed to create"));
+            } else {
+              resolve(createdRecords);
+            }
+
+            // Complete progress bar
+            completeProgress(payloads.length, failedRecords.length);
+
+            // Re-enable button
+            enableGenerateButton();
+
+            // Refresh views and update button state
+            refreshInterviewViews()
+              .then(function () {
+                var buttonState = checkButtonState();
+              })
+              .catch(function (error) {
+                console.error("Error refreshing views:", error);
+              });
           }
+        });
+      }
 
-          // Complete progress bar
-          completeProgress(payloads.length, failedRecords.length);
-
-          // Re-enable button
-          enableGenerateButton();
-
-          // Refresh views and update button state
-          refreshInterviewViews()
-            .then(function () {
-              var buttonState = checkButtonState();
-              console.log("Button state updated:", buttonState);
-            })
-            .catch(function (error) {
-              console.error("Error refreshing views:", error);
-            });
-        }
-      });
-    }
-
-    // Start processing from first batch
-    processBatch(0);
+      // Start processing from first batch
+      processBatch(0);
+    });
   }
 
   // Helper function to manage button state
@@ -894,6 +904,23 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Add click handler for the Generate Responses button
   $(document).on("click", "#generate-responses-button", function (e) {
     e.preventDefault();
+    e.stopPropagation(); // Prevent event bubbling
+
+    // Check if we're already processing or in cooldown
+    var now = Date.now();
+    if (operationState.isProcessing) {
+      console.log("⚠️ Operation already in progress, ignoring click");
+      return false;
+    }
+
+    if (
+      now - operationState.lastOperationTime <
+      operationState.operationTimeout
+    ) {
+      console.log("⚠️ Operation cooldown in effect, ignoring click");
+      return false;
+    }
+
     console.log("🚀 Generate Responses button clicked!");
 
     // Get current button state
@@ -938,6 +965,10 @@ $(document).on("knack-scene-render.scene_112", function () {
     var confirmation = confirm(confirmationText);
 
     if (confirmation) {
+      // Set processing state
+      operationState.isProcessing = true;
+      operationState.lastOperationTime = now;
+
       console.log("✅ User confirmed - Starting process...");
 
       // Disable button during execution
@@ -957,7 +988,12 @@ $(document).on("knack-scene-render.scene_112", function () {
 
             // Start creation after small delay
             setTimeout(function () {
-              createAllInterviewResponses(interviewResponsePayloads);
+              createAllInterviewResponses(interviewResponsePayloads).finally(
+                function () {
+                  // Reset processing state when complete
+                  operationState.isProcessing = false;
+                }
+              );
             }, 1000);
           })
           .catch(function (error) {
@@ -966,13 +1002,19 @@ $(document).on("knack-scene-render.scene_112", function () {
               "Failed to delete existing records. Please try again or contact support."
             );
 
-            // Re-enable button on error
+            // Re-enable button and reset state on error
             enableGenerateButton();
+            operationState.isProcessing = false;
           });
       } else {
         // Normal generation mode: just create
         console.log("🔄 Starting record creation...");
-        createAllInterviewResponses(interviewResponsePayloads);
+        createAllInterviewResponses(interviewResponsePayloads).finally(
+          function () {
+            // Reset processing state when complete
+            operationState.isProcessing = false;
+          }
+        );
       }
     } else {
       console.log("❌ User cancelled operation");
