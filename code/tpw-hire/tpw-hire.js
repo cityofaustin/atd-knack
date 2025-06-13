@@ -276,7 +276,7 @@ $(document).on("knack-scene-render.scene_112", function () {
   function checkButtonState() {
     var currentInterviewResponses = 0;
 
-    // Safely get the total records count
+    // Get the total records count
     try {
       if (
         Knack.views["view_268"] &&
@@ -480,70 +480,6 @@ $(document).on("knack-scene-render.scene_112", function () {
         .fail(function (jqXHR, textStatus, errorThrown) {
           console.error("❌ Failed to fetch records from scene_124/view_286");
           logAPIError(jqXHR, textStatus, errorThrown);
-
-          // Fallback: try the original view (scene_112/view_268)
-          console.log("🔄 Trying fallback: scene_112/view_268");
-          var fallbackUrl =
-            "https://api.knack.com/v1/scenes/scene_112/views/view_268/records";
-
-          $.ajax({
-            type: "GET",
-            url: fallbackUrl,
-            headers: headers,
-            data: {
-              page: 1,
-              rows_per_page: 1000,
-            },
-          })
-            .then(function (response) {
-              console.log("📋 Fallback API response:", response);
-
-              var recordsToDelete =
-                response.records || response.data || response.models || [];
-              console.log(
-                "Found " +
-                  recordsToDelete.length +
-                  " records to delete (fallback)"
-              );
-
-              if (recordsToDelete.length === 0) {
-                console.log("No records to delete (fallback)");
-                resolve(0);
-                return;
-              }
-
-              // Delete records in batches
-              deleteRecordsBatch(recordsToDelete, 0, [])
-                .then(function (results) {
-                  var deletedCount = results.filter((r) => r.success).length;
-                  var failedCount = results.filter((r) => !r.success).length;
-
-                  console.log(
-                    "Deletion complete (fallback). Deleted: " +
-                      deletedCount +
-                      ", Failed: " +
-                      failedCount
-                  );
-                  resolve(deletedCount);
-                })
-                .catch(function (error) {
-                  console.error("Deletion failed (fallback):", error);
-                  reject(
-                    new Error(
-                      "Failed to fetch records for deletion (both endpoints failed)"
-                    )
-                  );
-                });
-            })
-            .fail(function (jqXHR2, textStatus2, errorThrown2) {
-              console.error("❌ Fallback also failed:");
-              logAPIError(jqXHR2, textStatus2, errorThrown2);
-              reject(
-                new Error(
-                  "Failed to fetch records for deletion (both endpoints failed)"
-                )
-              );
-            });
         });
     });
   }
