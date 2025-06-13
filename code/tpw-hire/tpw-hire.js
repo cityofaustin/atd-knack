@@ -480,6 +480,148 @@ $(document).on("knack-scene-render.scene_112", function () {
   // BULK RECORD DELETION FUNCTIONS
   // =================================================================
 
+  // Function to create and manage deletion progress bar
+  function createDeletionProgressBar(total) {
+    // Remove existing deletion progress bar if it exists
+    $("#deletion-progress-container").remove();
+
+    var progressBarHtml =
+      '<div id="deletion-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
+      '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Deleting Existing Interview Response Records</div>' +
+      '<div id="deletion-progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to delete ' +
+      total +
+      " records...</div>" +
+      '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
+      '<div id="deletion-progress-bar-fill" style="background: linear-gradient(90deg, #dc3545, #fd7e14); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
+      '<div id="deletion-progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
+      "</div>" +
+      "</div>" +
+      '<div id="deletion-progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
+      '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Deleted: <span id="deletion-success-count">0</span></span>' +
+      '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="deletion-failed-count">0</span></span>' +
+      '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="deletion-remaining-count">' +
+      total +
+      "</span></span>" +
+      "</div>" +
+      "</div>";
+
+    // Insert progress bar after execute button
+    $("#generate-responses-button").after(progressBarHtml);
+  }
+
+  // Function to update deletion progress bar
+  function updateDeletionProgress(completed, total, failed, currentAction) {
+    var percentage = Math.round((completed / total) * 100);
+    var remaining = total - completed;
+
+    $("#deletion-progress-bar-fill").css("width", percentage + "%");
+    $("#deletion-progress-percentage").text(percentage + "%");
+    $("#deletion-progress-text").text(
+      currentAction || "Deleting record " + completed + " of " + total
+    );
+    $("#deletion-success-count").text(completed - failed);
+    $("#deletion-failed-count").text(failed);
+    $("#deletion-remaining-count").text(remaining);
+  }
+
+  // Function to complete deletion progress bar
+  function completeDeletionProgress(total, failed) {
+    $("#deletion-progress-bar-fill").css(
+      "background",
+      failed > 0
+        ? "linear-gradient(90deg, #ffc107, #fd7e14)"
+        : "linear-gradient(90deg, #dc3545, #fd7e14)"
+    );
+    $("#deletion-progress-text").text(
+      "✅ Deletion complete! Deleted " +
+        (total - failed) +
+        " of " +
+        total +
+        " records."
+    );
+
+    // Remove progress bar after 3 seconds
+    setTimeout(function () {
+      $("#deletion-progress-container").fadeOut(500, function () {
+        $(this).remove();
+      });
+    }, 3000);
+  }
+
+  // Helper function to delete records in batches
+  function deleteRecordsBatch(records, startIndex, results) {
+    return new Promise(function (resolve, reject) {
+      var batchSize = 5;
+      var endIndex = Math.min(startIndex + batchSize, records.length);
+      var batchRecords = records.slice(startIndex, endIndex);
+
+      if (batchRecords.length === 0) {
+        resolve(results);
+        return;
+      }
+
+      console.log(
+        "Deleting batch " +
+          Math.ceil(startIndex / batchSize + 1) +
+          " (" +
+          (startIndex + 1) +
+          "-" +
+          endIndex +
+          " of " +
+          records.length +
+          ")"
+      );
+
+      // Update progress bar for batch start
+      updateDeletionProgress(
+        startIndex,
+        records.length,
+        results.filter((r) => !r.success).length,
+        "Processing batch " +
+          Math.ceil(startIndex / batchSize + 1) +
+          "/" +
+          Math.ceil(records.length / batchSize) +
+          "..."
+      );
+
+      // Create deletion promises for this batch
+      var deletePromises = batchRecords.map(function (record) {
+        return deleteInterviewResponse(record.id);
+      });
+
+      Promise.allSettled(deletePromises).then(function (batchResults) {
+        var batchResultsFormatted = batchResults.map(function (result, index) {
+          return {
+            recordId: batchRecords[index].id,
+            success: result.status === "fulfilled",
+            error: result.status === "rejected" ? result.reason : null,
+          };
+        });
+
+        results = results.concat(batchResultsFormatted);
+
+        // Update progress after batch completion
+        updateDeletionProgress(
+          endIndex,
+          records.length,
+          results.filter((r) => !r.success).length,
+          "Batch " +
+            Math.ceil(startIndex / batchSize + 1) +
+            "/" +
+            Math.ceil(records.length / batchSize) +
+            " complete"
+        );
+
+        // Continue with next batch after delay
+        setTimeout(function () {
+          deleteRecordsBatch(records, endIndex, results)
+            .then(resolve)
+            .catch(reject);
+        }, 1000);
+      });
+    });
+  }
+
   // Function to delete all existing interview response records
   function deleteAllInterviewResponses() {
     return new Promise(function (resolve, reject) {
@@ -492,9 +634,6 @@ $(document).on("knack-scene-render.scene_112", function () {
         "https://api.knack.com/v1/scenes/scene_112/views/view_268/records";
 
       console.log("🔍 Fetching records from:", apiUrl);
-      console.log(
-        "🔍 Note: Using creation scene/view (scene_124/view_286) for consistency"
-      );
       console.log("🔍 Using headers:", headers);
 
       $.ajax({
@@ -513,6 +652,11 @@ $(document).on("knack-scene-render.scene_112", function () {
           var recordsToDelete = response.records || [];
           console.log("Found " + recordsToDelete.length + " records to delete");
 
+          // Initialize deletion progress bar if we have records to delete
+          if (recordsToDelete.length > 0) {
+            createDeletionProgressBar(recordsToDelete.length);
+          }
+
           // Log sample records if any exist
           if (recordsToDelete.length > 0) {
             console.log("Sample record structure:", recordsToDelete[0]);
@@ -527,12 +671,18 @@ $(document).on("knack-scene-render.scene_112", function () {
                 "✅ Found records in response.data:",
                 recordsToDelete.length
               );
+              if (recordsToDelete.length > 0) {
+                createDeletionProgressBar(recordsToDelete.length);
+              }
             } else if (response.models && Array.isArray(response.models)) {
               recordsToDelete = response.models;
               console.log(
                 "✅ Found records in response.models:",
                 recordsToDelete.length
               );
+              if (recordsToDelete.length > 0) {
+                createDeletionProgressBar(recordsToDelete.length);
+              }
             }
           }
 
@@ -554,6 +704,10 @@ $(document).on("knack-scene-render.scene_112", function () {
                   ", Failed: " +
                   failedCount
               );
+
+              // Complete the deletion progress bar
+              completeDeletionProgress(recordsToDelete.length, failedCount);
+
               resolve(deletedCount);
             })
             .catch(function (error) {
@@ -612,7 +766,11 @@ $(document).on("knack-scene-render.scene_112", function () {
                 })
                 .catch(function (error) {
                   console.error("Deletion failed (fallback):", error);
-                  reject(error);
+                  reject(
+                    new Error(
+                      "Failed to fetch records for deletion (both endpoints failed)"
+                    )
+                  );
                 });
             })
             .fail(function (jqXHR2, textStatus2, errorThrown2) {
@@ -624,83 +782,6 @@ $(document).on("knack-scene-render.scene_112", function () {
                 )
               );
             });
-        });
-    });
-  }
-
-  // Helper function to delete records in batches
-  function deleteRecordsBatch(records, startIndex, results) {
-    return new Promise(function (resolve, reject) {
-      var batchSize = 5;
-      var endIndex = Math.min(startIndex + batchSize, records.length);
-      var batchRecords = records.slice(startIndex, endIndex);
-
-      if (batchRecords.length === 0) {
-        resolve(results);
-        return;
-      }
-
-      console.log(
-        "Deleting batch " +
-          Math.ceil(startIndex / batchSize + 1) +
-          " (" +
-          (startIndex + 1) +
-          "-" +
-          endIndex +
-          " of " +
-          records.length +
-          ")"
-      );
-
-      // Create deletion promises for this batch
-      var deletePromises = batchRecords.map(function (record) {
-        return deleteInterviewResponse(record.id);
-      });
-
-      Promise.allSettled(deletePromises).then(function (batchResults) {
-        var batchResultsFormatted = batchResults.map(function (result, index) {
-          return {
-            recordId: batchRecords[index].id,
-            success: result.status === "fulfilled",
-            error: result.status === "rejected" ? result.reason : null,
-          };
-        });
-
-        results = results.concat(batchResultsFormatted);
-
-        // Continue with next batch after delay
-        setTimeout(function () {
-          deleteRecordsBatch(records, endIndex, results)
-            .then(resolve)
-            .catch(reject);
-        }, 1000);
-      });
-    });
-  }
-
-  // Function to delete a single interview response record
-  function deleteInterviewResponse(recordId) {
-    return new Promise(function (resolve, reject) {
-      // Try the same scene/view as we use for creation (scene_124/view_286)
-      var deleteUrl =
-        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
-        recordId;
-
-      console.log("🗑️ Deleting record:", recordId, "from:", deleteUrl);
-
-      $.ajax({
-        type: "DELETE",
-        url: deleteUrl,
-        headers: headers,
-      })
-        .then(function (response) {
-          console.log("✅ Deleted record " + recordId);
-          resolve(response);
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          console.error("❌ Failed to delete record " + recordId);
-          logAPIError(jqXHR, textStatus, errorThrown);
-          reject(new Error("Failed to delete record " + recordId));
         });
     });
   }
@@ -1053,5 +1134,31 @@ $(document).on("knack-scene-render.scene_112", function () {
     } catch (e) {
       console.error("Could not parse error response as JSON");
     }
+  }
+
+  // Function to delete a single interview response record
+  function deleteInterviewResponse(recordId) {
+    return new Promise(function (resolve, reject) {
+      var deleteUrl =
+        "https://api.knack.com/v1/scenes/scene_112/views/view_268/records/" +
+        recordId;
+
+      console.log("🗑️ Deleting record:", recordId, "from:", deleteUrl);
+
+      $.ajax({
+        type: "DELETE",
+        url: deleteUrl,
+        headers: headers,
+      })
+        .then(function (response) {
+          console.log("✅ Deleted record " + recordId);
+          resolve(response);
+        })
+        .fail(function (jqXHR, textStatus, errorThrown) {
+          console.error("❌ Failed to delete record " + recordId);
+          logAPIError(jqXHR, textStatus, errorThrown);
+          reject(new Error("Failed to delete record " + recordId));
+        });
+    });
   }
 });
