@@ -575,7 +575,7 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Delete records in batches
   function deleteRecordsBatch(records, startIndex, results) {
     return new Promise(function (resolve, reject) {
-      var batchSize = 5;
+      var batchSize = CONFIG.batchSize;
       var endIndex = Math.min(startIndex + batchSize, records.length);
       var batchRecords = records.slice(startIndex, endIndex);
 
@@ -629,7 +629,7 @@ $(document).on("knack-scene-render.scene_112", function () {
           deleteRecordsBatch(records, endIndex, results)
             .then(resolve)
             .catch(reject);
-        }, 1000);
+        }, CONFIG.batchDelay);
       });
     });
   }
@@ -700,7 +700,7 @@ $(document).on("knack-scene-render.scene_112", function () {
   }
 
   // Create all interview response records in batches
-  function createAllInterviewResponses(payloads, batchSize = 5) {
+  function createAllInterviewResponses(payloads, batchSize = CONFIG.batchSize) {
     return new Promise(function (resolve, reject) {
       console.log("🔄 Starting creation of new records...");
       console.log("Total records to create:", payloads.length);
@@ -766,7 +766,7 @@ $(document).on("knack-scene-render.scene_112", function () {
           if (endIndex < payloads.length) {
             setTimeout(function () {
               processBatch(endIndex);
-            }, 1000);
+            }, CONFIG.batchDelay);
           } else {
             // All batches complete
             console.log("=== Bulk Creation Complete ===");
