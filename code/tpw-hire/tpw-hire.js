@@ -114,8 +114,11 @@ function createProgressBar(total) {
     "</div>" +
     "</div>";
 
-  // Insert progress bar after execute button
-  $("#generate-responses-button").after(progressBarHtml);
+  // Insert progress bar after the warning message if it exists, otherwise after the button
+  var $insertAfter = $("#regenerate-warning-message").length
+    ? $("#regenerate-warning-message")
+    : $("#generate-responses-button");
+  $insertAfter.after(progressBarHtml);
 }
 
 // Updates progress bar during record creation
@@ -393,8 +396,9 @@ $(document).on("knack-scene-render.scene_112", function () {
         .removeClass("fa-cogs")
         .addClass("fa-refresh");
 
-      // Add warning message about deletion
-      if ($("#regenerate-warning-message").length === 0) {
+      // Show warning message about deletion if it exists, or create it if it doesn't
+      var $warningMessage = $("#regenerate-warning-message");
+      if ($warningMessage.length === 0) {
         var warningHtml =
           '<div id="regenerate-warning-message" style="margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404; font-size: 14px;">' +
           '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
@@ -405,7 +409,20 @@ $(document).on("knack-scene-render.scene_112", function () {
           expectedRecords +
           " new records." +
           "</div>";
+        // Insert warning message after the button
         $generateResponsesButton.after(warningHtml);
+      } else {
+        // Update existing warning message with current counts
+        $warningMessage.html(
+          '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
+            "This will first delete all " +
+            currentInterviewResponses +
+            " existing interview response records, " +
+            "then create " +
+            expectedRecords +
+            " new records."
+        );
+        $warningMessage.show();
       }
     } else {
       // Normal "Generate" mode
@@ -779,13 +796,22 @@ $(document).on("knack-scene-render.scene_112", function () {
   function enableGenerateButton() {
     $("#generate-responses-button")
       .removeClass("is-loading")
-      .prop("disabled", false);
+      .prop("disabled", false)
+      .find("i")
+      .removeClass("fa-spinner fa-spin")
+      .addClass("fa-cogs");
   }
 
   function disableGenerateButton() {
     $("#generate-responses-button")
       .addClass("is-loading")
-      .prop("disabled", true);
+      .prop("disabled", true)
+      .find("i")
+      .removeClass("fa-cogs")
+      .addClass("fa-spinner fa-spin");
+
+    // Hide the warning message during processing
+    $("#regenerate-warning-message").hide();
   }
 
   /********************************************/
@@ -883,6 +909,7 @@ $(document).on("knack-scene-render.scene_112", function () {
     }
 
     var currentCount = buttonState.currentCount || 0;
+    var expectedCount = buttonState.expectedCount || 0;
     var hasExistingRecords = buttonState.hasExistingRecords || false;
 
     // Build confirmation message based on whether we have existing records
@@ -894,12 +921,16 @@ $(document).on("knack-scene-render.scene_112", function () {
         "1. DELETE all " +
         currentCount +
         " existing interview response records\n" +
-        "2. CREATE new interview response records\n\n" +
+        "2. CREATE " +
+        expectedCount +
+        " new interview response records\n\n" +
         "⚠️  This action cannot be undone! ⚠️\n\n" +
         "Are you sure you want to proceed?";
     } else {
       confirmationText =
-        "This will create new interview response records.\n\n" +
+        "This will create " +
+        expectedCount +
+        " new interview response records.\n\n" +
         "Are you sure you want to proceed?";
     }
 
