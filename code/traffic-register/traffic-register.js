@@ -194,9 +194,19 @@ $(document).on("knack-scene-render.any", function () {
 /*************************************/
 /*** Redirect from Blank Nav Pages ***/
 /*************************************/
-//Task Board Page
+/*Task Board Page*/
 $(document).on('knack-scene-render.scene_435', function(event, scene) { 
 window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tasks/";
+});
+
+/****************************/
+/*** Auto Refresh Browser ***/
+/****************************/
+/*1st Page of Draft Builder*/
+$(document).on("knack-scene-render.scene_697", function () {
+  setInterval(function() {
+    location.reload();
+  }, 20000); // Refreshes every 20 seconds (20000 milliseconds)
 });
 
 /*************************/
@@ -257,3 +267,6 @@ $(document).on('knack-scene-render.any', function(event, scene) {
 		return false;
 	});
 });
+
+
+
