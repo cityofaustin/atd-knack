@@ -452,8 +452,7 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
 
 function loadIframeMapMessenger(viewId) {
   var url =
-    //"https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
-    "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessengerDev.js";
+    "https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -467,7 +466,6 @@ window.viewIdsArray = [];
 // Work Orders Details Page - Viewer
 $(document).on("knack-view-render.view_2619", function(event, scene, data) {
   window.viewIdsArray.push("#view_2619");
-  console.log(data)
   loadIframeMapMessenger("view_2619");
 });
 
@@ -612,3 +610,4 @@ $(document).on("knack-view-render.view_2742", function() {
   ).insertBefore("#field_3378_upload");
 });
 // END #233
+
