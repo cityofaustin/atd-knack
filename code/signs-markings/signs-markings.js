@@ -187,20 +187,20 @@ $(document).on("knack-page-render.any", function(event, page) {
   }
 });
 
-$(document).on("knack-scene-render.scene_1014", function(event, page) {
+$(document).on("knack-scene-render.scene_1014", function() {
   // CSR issue - markings details
   // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
+  var iframe_url = $('.kn-detail.field_3095 a').attr('href');
   $("#csr_view").attr("src", iframe_url);
 
   // hide the url vield, we don't need it after extracting the value
   $("#view_2528").hide();
 });
 
-$(document).on("knack-scene-render.scene_1264", function(event, page) {
+$(document).on("knack-scene-render.scene_1264", function() {
   // CSR issue - signs details
   // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
+  var iframe_url = $('.kn-detail.field_3095 a').attr('href');
   $("#csr_view").attr("src", iframe_url);
 
   // hide the url vield, we don't need it after extracting the value
@@ -453,7 +453,7 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
 function loadIframeMapMessenger(viewId) {
   var url =
     //"https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
-    "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessenger.js";
+    "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessengerDev.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
@@ -465,8 +465,9 @@ function loadIframeMapMessenger(viewId) {
 window.viewIdsArray = [];
 
 // Work Orders Details Page - Viewer
-$(document).on("knack-view-render.view_2619", function(event, scene) {
+$(document).on("knack-view-render.view_2619", function(event, scene, data) {
   window.viewIdsArray.push("#view_2619");
+  console.log(data)
   loadIframeMapMessenger("view_2619");
 });
 
@@ -611,4 +612,3 @@ $(document).on("knack-view-render.view_2742", function() {
   ).insertBefore("#field_3378_upload");
 });
 // END #233
-
