@@ -187,20 +187,20 @@ $(document).on("knack-page-render.any", function(event, page) {
   }
 });
 
-$(document).on("knack-scene-render.scene_1014", function(event, page) {
+$(document).on("knack-scene-render.scene_1014", function() {
   // CSR issue - markings details
   // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
+  var iframe_url = $('.kn-detail.field_3095 a').attr('href');
   $("#csr_view").attr("src", iframe_url);
 
   // hide the url vield, we don't need it after extracting the value
   $("#view_2528").hide();
 });
 
-$(document).on("knack-scene-render.scene_1264", function(event, page) {
+$(document).on("knack-scene-render.scene_1264", function() {
   // CSR issue - signs details
   // update iframe src from detail field
-  var iframe_url = $("span:contains('apps/webappviewer')").text();
+  var iframe_url = $('.kn-detail.field_3095 a').attr('href');
   $("#csr_view").attr("src", iframe_url);
 
   // hide the url vield, we don't need it after extracting the value
@@ -451,9 +451,7 @@ $(document).on("knack-scene-render.scene_713", function(event, page) {
 // can we remove them on the Knack side instead?
 
 function loadIframeMapMessenger(viewId) {
-  var url =
-    //"https://dnb4pix4gcpf6.cloudfront.net/atd-knack-signs-markings/production/iframeMapMessenger.js";
-    "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessenger.js";
+  var url = "https://atd-knack-signs-markings.s3.amazonaws.com/staging/iframeMapMessenger.js";
   $.getScript(url, function(data, textStatus, jqxhr) {
     console.log(data); // Data returned
     console.log(textStatus); // Success
