@@ -138,8 +138,8 @@ $(document).on("knack-view-render.view_958", function (event, page) {
  */
 $(document).on("knack-scene-render.scene_428", function () {
   // update iframe src from detail field
-//   var iframe_url = $('a[href*="webappviewer"]').attr("href");
-  var iframe_url = $('.kn-detail.field_1403 a').attr('href');
+  //   var iframe_url = $('a[href*="webappviewer"]').attr("href");
+  var iframe_url = $(".kn-detail.field_1403 a").attr("href");
   $(".view_1852").hide();
   $("#csr_view").attr("src", iframe_url);
 });
@@ -1137,6 +1137,6 @@ $(document).on("knack-scene-render.scene_1607", function (event, scene) {
 /***************************************************************/
 /*** Disable the ability to Click/Touch outside a Modal Page ***/
 /***************************************************************/
-$(document).on('knack-scene-render.any', function(event, scene) {
-    $('.kn-modal-bg').off('click');
+$(document).on("knack-scene-render.any", function (event, scene) {
+  $(".kn-modal-bg").off("click");
 });
