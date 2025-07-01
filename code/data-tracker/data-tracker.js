@@ -133,9 +133,11 @@ $(document).on("knack-view-render.view_958", function (event, page) {
   }, 1000);
 });
 
-$(document).on("knack-scene-render.scene_428", function (event, page) {
-  // update iframe src from detail field
-  var iframe_url = $('a[href*="webappviewer"]').attr("href");
+/**
+ * Set the URL of the embedded AGOL map on the MMC issue/service request details page
+ */
+$(document).on("knack-scene-render.scene_428", function () {
+  var iframe_url = $(".kn-detail.field_1403 a").attr("href");
   $(".view_1852").hide();
   $("#csr_view").attr("src", iframe_url);
 });
