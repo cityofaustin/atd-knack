@@ -599,12 +599,7 @@ $(document).on("knack-scene-render.scene_112", function () {
       updateDeletionProgress(
         startIndex,
         records.length,
-        results.filter((r) => !r.success).length,
-        "Processing batch " +
-          Math.ceil(startIndex / batchSize + 1) +
-          "/" +
-          Math.ceil(records.length / batchSize) +
-          "..."
+        results.filter((r) => !r.success).length
       );
 
       // Create deletion promises for this batch
@@ -627,12 +622,7 @@ $(document).on("knack-scene-render.scene_112", function () {
         updateDeletionProgress(
           endIndex,
           records.length,
-          results.filter((r) => !r.success).length,
-          "Batch " +
-            Math.ceil(startIndex / batchSize + 1) +
-            "/" +
-            Math.ceil(records.length / batchSize) +
-            " complete"
+          results.filter((r) => !r.success).length
         );
 
         // Continue with next batch after delay
@@ -733,8 +723,7 @@ $(document).on("knack-scene-render.scene_112", function () {
         updateProgress(
           createdRecords.length + failedRecords.length,
           payloads.length,
-          failedRecords.length,
-          "Processing batch " + currentBatch + "/" + totalBatches + "..."
+          failedRecords.length
         );
 
         // Create promises for this batch
@@ -760,8 +749,7 @@ $(document).on("knack-scene-render.scene_112", function () {
           updateProgress(
             createdRecords.length + failedRecords.length,
             payloads.length,
-            failedRecords.length,
-            "Batch " + currentBatch + "/" + totalBatches + " complete"
+            failedRecords.length
           );
 
           console.log(
