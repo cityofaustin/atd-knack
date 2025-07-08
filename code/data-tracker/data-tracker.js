@@ -251,62 +251,60 @@ $(document).on("knack-scene-render.scene_716", function (event, page) {
 //////////////////////////////////////////////////
 // Remove non-digits from street segment inputs///
 //////////////////////////////////////////////////
+
+/**
+ * Restricts an input field to digits by removing all non-digit characters.
+ * This function is designed to be used as a jQuery event handler.
+ *
+ * @function restrictToDigits
+ * @this {jQuery} The jQuery object representing the input element
+ * @returns {void}
+ *
+ * @example
+ * // Attach to a specific input field
+ * $("#phone-number").keyup(restrictToDigits);
+ *
+ * @example
+ * // Use with event delegation
+ * $(document).on("keyup", ".digits-only", restrictToDigits);
+ *
+ * @example
+ * // Attach to multiple events
+ * $("#zip-code").on("keyup input paste", restrictToDigits);
+ */
+function restrictToDigits() {
+  var currentValue = $(this).val();
+  // Remove all non-digit characters
+  var digitsOnly = currentValue.replace(/\D/g, "");
+  // Only update if the value changed to avoid cursor jumping
+  if (currentValue !== digitsOnly) {
+    $(this).val(digitsOnly);
+  }
+}
+
 $(document).on("knack-view-render.view_1199", function () {
   // New location form - add primary street segment
-  $("#field_119").keyup(function () {
-    var currentValue = $(this).val();
-    // Remove all non-digit characters
-    var digitsOnly = currentValue.replace(/\D/g, "");
-    // Only update if the value changed to avoid cursor jumping
-    if (currentValue !== digitsOnly) {
-      $(this).val(digitsOnly);
-    }
-  });
+  $("#field_119").keyup(restrictToDigits);
 });
 
 $(document).on("knack-view-render.view_1200", function () {
   // New location form - cross street segment
-  $("#field_119").keyup(function () {
-    var currentValue = $(this).val();
-    // Remove all non-digit characters
-    var digitsOnly = currentValue.replace(/\D/g, "");
-    // Only update if the value changed to avoid cursor jumping
-    if (currentValue !== digitsOnly) {
-      $(this).val(digitsOnly);
-    }
-  });
+  $("#field_119").keyup(restrictToDigits);
 });
 
 $(document).on("knack-view-render.view_1207", function () {
   // Edit location form - primary street segment
-  $("#field_119").keyup(function () {
-    var currentValue = $(this).val();
-    // Remove all non-digit characters
-    var digitsOnly = currentValue.replace(/\D/g, "");
-    // Only update if the value changed to avoid cursor jumping
-    if (currentValue !== digitsOnly) {
-      $(this).val(digitsOnly);
-    }
-  });
+  $("#field_119").keyup(restrictToDigits);
 });
 
 $(document).on("knack-view-render.view_1206", function () {
   // Edit location form - cross street segment
-  $("#field_119").keyup(function () {
-    var currentValue = $(this).val();
-    // Remove all non-digit characters
-    var digitsOnly = currentValue.replace(/\D/g, "");
-    // Only update if the value changed to avoid cursor jumping
-    if (currentValue !== digitsOnly) {
-      $(this).val(digitsOnly);
-    }
-  });
+  $("#field_119").keyup(restrictToDigits);
 });
 
 ////////////////////////////////////////
 // End non-digit character removal /////
 ////////////////////////////////////////
-
 
 $(document).on("knack-view-render.view_2357", function (event, page) {
   //  now with minor changes, used for traffic count attachments field
