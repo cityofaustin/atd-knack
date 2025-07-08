@@ -836,7 +836,7 @@ $(document).on("knack-scene-render.scene_112", function () {
             // Refresh views and update button state
             refreshInterviewViews()
               .then(function () {
-                var buttonState = checkButtonState();
+                checkButtonState();
               })
               .catch(function (error) {
                 console.error("Error refreshing views:", error);
