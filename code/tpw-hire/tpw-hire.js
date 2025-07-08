@@ -280,51 +280,46 @@ function createProgressBar(total, operationType = "create") {
     ? "deletion-remaining-count"
     : "remaining-count";
 
-  // Default colors based on operation type
-  var defaultGradient = isDelete
-    ? "linear-gradient(90deg, #dc3545, #fd7e14)"
-    : "linear-gradient(90deg, #28a745, #20c997)";
-
   // Remove existing progress bar if it exists
   $("#" + containerId).remove();
 
   var progressBarHtml =
     '<div id="' +
     containerId +
-    '" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
-    '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">' +
+    '" class="progress-container">' +
+    '<div class="progress-title">' +
     title +
     "</div>" +
     '<div id="' +
     progressTextId +
-    '" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">' +
+    '" class="progress-text">' +
     preparingText +
     " " +
     total +
     " records...</div>" +
-    '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
+    '<div class="progress-track">' +
     '<div id="' +
     progressBarId +
-    '" style="background: ' +
-    defaultGradient +
-    '; height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
+    '" class="progress-fill progress-fill-' +
+    (isDelete ? "delete" : "create") +
+    '">' +
     '<div id="' +
     progressPercentageId +
-    '" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
+    '" class="progress-percentage">0%</div>' +
     "</div>" +
     "</div>" +
     '<div id="' +
     progressStatsId +
-    '" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
-    '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> ' +
+    '" class="progress-stats">' +
+    '<span class="progress-stat-item"><i class="fa fa-check-circle progress-stat-success"></i> ' +
     successLabel +
     ': <span id="' +
     successCountId +
     '">0</span></span>' +
-    '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="' +
+    '<span class="progress-stat-item"><i class="fa fa-times-circle progress-stat-failed"></i> Failed: <span id="' +
     failedCountId +
     '">0</span></span>' +
-    '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="' +
+    '<span class="progress-stat-item"><i class="fa fa-gears progress-stat-remaining"></i> Remaining: <span id="' +
     remainingCountId +
     '">' +
     total +
@@ -386,18 +381,21 @@ function completeProgress(total, failed, operationType = "create") {
     : "progress-bar-fill";
   var progressTextId = isDelete ? "deletion-progress-text" : "progress-text";
 
-  var successGradient = isDelete
-    ? "linear-gradient(90deg, #dc3545, #fd7e14)"
-    : "linear-gradient(90deg, #28a745, #20c997)";
-  var warningGradient = "linear-gradient(90deg, #ffc107, #fd7e14)";
-
   var actionText = isDelete ? "Deleted" : "Created";
   var completionText = isDelete ? "Deletion complete!" : "Process complete!";
 
-  $("#" + progressBarId).css(
-    "background",
-    failed > 0 ? warningGradient : successGradient
-  );
+  // Update progress bar appearance based on success/failure
+  var $progressBar = $("#" + progressBarId);
+  $progressBar.removeClass("progress-fill-create progress-fill-delete");
+
+  if (failed > 0) {
+    $progressBar.addClass("progress-fill-warning");
+  } else {
+    $progressBar.addClass(
+      isDelete ? "progress-fill-delete" : "progress-fill-create"
+    );
+  }
+
   $("#" + progressTextId).text(
     "✅ " +
       completionText +
