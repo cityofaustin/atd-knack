@@ -240,3 +240,18 @@ img.knHeader__logo-image {
     max-width: 800px !important;
   }
 }
+
+/********************************************/
+/*********** Custom Message Styles **********/
+/********************************************/
+
+/* Warning message for regenerate mode */
+.regenerate-warning-message {
+  margin: 10px 0;
+  padding: 10px;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 5px;
+  color: #856404;
+  font-size: 14px;
+}

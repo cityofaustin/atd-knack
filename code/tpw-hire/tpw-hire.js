@@ -25,10 +25,14 @@ function customizeLoginButton(viewId) {
     "Sign-In"
   );
 
-  $coacdButton.append(
-    "<a class='small-button' href='javascript:void(0)'>" +
-      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
-  );
+  $coacdButton.append(`
+    <a class="small-button" href="javascript:void(0)">
+      <div class="small-button-container">
+        <span><i class="fa fa-lock"></i></span>
+        <span> Non-COA Sign-In</span>
+      </div>
+    </a>
+  `);
 
   // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
   var $nonCoacdButton = $(".small-button");
@@ -71,19 +75,13 @@ function bigButton(
   is_disabled = false,
   callback = null
 ) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
   $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
+    `<a id="${id}" class="big-button-container${
+      is_disabled ? " big-button-disabled" : ""
+    }" href="${url}">
+      <span><i class="fa fa-${fa_icon}"></i></span>
+      <span> ${button_label}</span>
+    </a>`
   ).appendTo("#" + view_id);
 
   if (callback) callback();
@@ -94,11 +92,13 @@ function addGenerateResponsesButton() {
   // Check if button already exists to avoid duplicates
   if ($("#generate-responses-button").length === 0) {
     // Create the styled button with icon and text
-    var generateResponsesButtonHtml = $(
-      '<a id="generate-responses-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">' +
-        '<span class="icon is-small"><i class="fa fa-cogs"></i></span>' +
-        "<span>Generate Responses</span>" +
-        "</a>"
+    const generateResponsesButtonHtml = $(
+      `
+      <a id="generate-responses-button" class="kn-link kn-link-2 kn-link-page kn-button" href="javascript:void(0)">
+        <span class="icon is-small"><i class="fa fa-cogs"></i></span>
+        <span>Generate Responses</span>
+      </a>
+      `
     );
 
     // Find the "Add Manual Responses" button using the view ID from config
@@ -156,9 +156,7 @@ function updateButtonWithCount(currentInterviewResponses) {
     // Change to "Regenerate" if records exist
     $generateResponsesButton
       .find("span:last")
-      .text(
-        "Regenerate Responses (" + currentInterviewResponses + " existing)"
-      );
+      .text(`Regenerate Responses (${currentInterviewResponses} existing)`);
 
     // Change icon to refresh icon
     $generateResponsesButton
@@ -169,29 +167,20 @@ function updateButtonWithCount(currentInterviewResponses) {
     // Show warning message about deletion if it exists, or create it if it doesn't
     var $warningMessage = $("#regenerate-warning-message");
     if ($warningMessage.length === 0) {
-      var warningHtml =
-        '<div id="regenerate-warning-message" style="margin: 10px 0; padding: 10px; background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 5px; color: #856404; font-size: 14px;">' +
-        '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
-        "This will first delete all " +
-        currentInterviewResponses +
-        " existing interview response records, " +
-        "then create " +
-        expectedRecords +
-        " new records." +
-        "</div>";
+      const warningHtml = `
+        <div id="regenerate-warning-message" class="regenerate-warning-message">
+          <i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong>
+          This will first delete all ${currentInterviewResponses} existing interview response records, then create ${expectedRecords} new records.
+        </div>
+      `;
       // Insert warning message after the button
       $generateResponsesButton.after(warningHtml);
     } else {
       // Update existing warning message with current counts
-      $warningMessage.html(
-        '<i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong> ' +
-          "This will first delete all " +
-          currentInterviewResponses +
-          " existing interview response records, " +
-          "then create " +
-          expectedRecords +
-          " new records."
-      );
+      $warningMessage.html(`
+        <i class="fa fa-exclamation-triangle"></i> <strong>Regenerate Mode:</strong>
+        This will first delete all ${currentInterviewResponses} existing interview response records, then create ${expectedRecords} new records.
+      `);
       $warningMessage.show();
     }
   } else {
@@ -283,49 +272,30 @@ function createProgressBar(total, operationType = "create") {
   // Remove existing progress bar if it exists
   $("#" + containerId).remove();
 
-  var progressBarHtml =
-    '<div id="' +
-    containerId +
-    '" class="progress-container">' +
-    '<div class="progress-title">' +
-    title +
-    "</div>" +
-    '<div id="' +
-    progressTextId +
-    '" class="progress-text">' +
-    preparingText +
-    " " +
-    total +
-    " records...</div>" +
-    '<div class="progress-track">' +
-    '<div id="' +
-    progressBarId +
-    '" class="progress-fill progress-fill-' +
-    (isDelete ? "delete" : "create") +
-    '">' +
-    '<div id="' +
-    progressPercentageId +
-    '" class="progress-percentage">0%</div>' +
-    "</div>" +
-    "</div>" +
-    '<div id="' +
-    progressStatsId +
-    '" class="progress-stats">' +
-    '<span class="progress-stat-item"><i class="fa fa-check-circle progress-stat-success"></i> ' +
-    successLabel +
-    ': <span id="' +
-    successCountId +
-    '">0</span></span>' +
-    '<span class="progress-stat-item"><i class="fa fa-times-circle progress-stat-failed"></i> Failed: <span id="' +
-    failedCountId +
-    '">0</span></span>' +
-    '<span class="progress-stat-item"><i class="fa fa-gears progress-stat-remaining"></i> Remaining: <span id="' +
-    remainingCountId +
-    '">' +
-    total +
-    "</span></span>" +
-    "</div>" +
-    "</div>";
+  const progressBarHtml = `
+  <div id="${containerId}" class="progress-container">
+    <div class="progress-title">${title}</div>
+    <div id="${progressTextId}" class="progress-text">${preparingText} ${total} records...</div>
+    <div class="progress-track">
+      <div id="${progressBarId}" class="progress-fill progress-fill-${
+    isDelete ? "delete" : "create"
+  }">
+        <div id="${progressPercentageId}" class="progress-percentage">0%</div>
+      </div>
+    </div>
+    <div id="${progressStatsId}" class="progress-stats">
+      <span class="progress-stat-item">
+        <i class="fa fa-check-circle progress-stat-success"></i> ${successLabel}: <span id="${successCountId}">0</span>
+      </span>
+      <span class="progress-stat-item">
+        <i class="fa fa-times-circle progress-stat-failed"></i> Failed: <span id="${failedCountId}">0</span>
+      </span>
+      <span class="progress-stat-item">
+        <i class="fa fa-gears progress-stat-remaining"></i> Remaining: <span id="${remainingCountId}">${total}</span>
+      </span>
+    </div>
+  </div>
+`;
 
   // Insert progress bar after the warning message if it exists, otherwise after the button
   var $insertAfter = $("#regenerate-warning-message").length
