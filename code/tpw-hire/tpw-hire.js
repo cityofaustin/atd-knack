@@ -254,26 +254,79 @@ function checkButtonState() {
 }
 
 /*********** Progress Bar Components ********/
-// Creates and manages progress bar for record creation
-function createProgressBar(total) {
+// Unified progress bar function for both create and delete operations
+function createProgressBar(total, operationType = "create") {
+  var isDelete = operationType === "delete";
+  var containerId = isDelete
+    ? "deletion-progress-container"
+    : "interview-progress-container";
+  var title = isDelete
+    ? "Deleting Existing Interview Response Records"
+    : "Creating Interview Response Records";
+  var actionText = isDelete ? "delete" : "create";
+  var preparingText = isDelete ? "Preparing to delete" : "Preparing to create";
+  var successLabel = isDelete ? "Deleted" : "Success";
+  var progressBarId = isDelete
+    ? "deletion-progress-bar-fill"
+    : "progress-bar-fill";
+  var progressTextId = isDelete ? "deletion-progress-text" : "progress-text";
+  var progressPercentageId = isDelete
+    ? "deletion-progress-percentage"
+    : "progress-percentage";
+  var progressStatsId = isDelete ? "deletion-progress-stats" : "progress-stats";
+  var successCountId = isDelete ? "deletion-success-count" : "success-count";
+  var failedCountId = isDelete ? "deletion-failed-count" : "failed-count";
+  var remainingCountId = isDelete
+    ? "deletion-remaining-count"
+    : "remaining-count";
+
+  // Default colors based on operation type
+  var defaultGradient = isDelete
+    ? "linear-gradient(90deg, #dc3545, #fd7e14)"
+    : "linear-gradient(90deg, #28a745, #20c997)";
+
   // Remove existing progress bar if it exists
-  $("#interview-progress-container").remove();
+  $("#" + containerId).remove();
 
   var progressBarHtml =
-    '<div id="interview-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
-    '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Creating Interview Response Records</div>' +
-    '<div id="progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to create ' +
+    '<div id="' +
+    containerId +
+    '" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
+    '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">' +
+    title +
+    "</div>" +
+    '<div id="' +
+    progressTextId +
+    '" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">' +
+    preparingText +
+    " " +
     total +
     " records...</div>" +
     '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
-    '<div id="progress-bar-fill" style="background: linear-gradient(90deg, #28a745, #20c997); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
-    '<div id="progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
+    '<div id="' +
+    progressBarId +
+    '" style="background: ' +
+    defaultGradient +
+    '; height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
+    '<div id="' +
+    progressPercentageId +
+    '" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
     "</div>" +
     "</div>" +
-    '<div id="progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
-    '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Success: <span id="success-count">0</span></span>' +
-    '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="failed-count">0</span></span>' +
-    '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="remaining-count">' +
+    '<div id="' +
+    progressStatsId +
+    '" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
+    '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> ' +
+    successLabel +
+    ': <span id="' +
+    successCountId +
+    '">0</span></span>' +
+    '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="' +
+    failedCountId +
+    '">0</span></span>' +
+    '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="' +
+    remainingCountId +
+    '">' +
     total +
     "</span></span>" +
     "</div>" +
@@ -286,31 +339,71 @@ function createProgressBar(total) {
   $insertAfter.after(progressBarHtml);
 }
 
-// Updates progress bar during record creation
-function updateProgress(completed, total, failed, currentAction) {
+// Unified progress update function for both create and delete operations
+function updateProgress(
+  completed,
+  total,
+  failed,
+  currentAction,
+  operationType = "create"
+) {
+  var isDelete = operationType === "delete";
+  var progressBarId = isDelete
+    ? "deletion-progress-bar-fill"
+    : "progress-bar-fill";
+  var progressTextId = isDelete ? "deletion-progress-text" : "progress-text";
+  var progressPercentageId = isDelete
+    ? "deletion-progress-percentage"
+    : "progress-percentage";
+  var successCountId = isDelete ? "deletion-success-count" : "success-count";
+  var failedCountId = isDelete ? "deletion-failed-count" : "failed-count";
+  var remainingCountId = isDelete
+    ? "deletion-remaining-count"
+    : "remaining-count";
+
   var percentage = Math.round((completed / total) * 100);
   var remaining = total - completed;
+  var defaultAction = isDelete ? "Deleting record" : "Processing record";
 
-  $("#progress-bar-fill").css("width", percentage + "%");
-  $("#progress-percentage").text(percentage + "%");
-  $("#progress-text").text(
-    currentAction || "Processing record " + completed + " of " + total
+  $("#" + progressBarId).css("width", percentage + "%");
+  $("#" + progressPercentageId).text(percentage + "%");
+  $("#" + progressTextId).text(
+    currentAction || defaultAction + " " + completed + " of " + total
   );
-  $("#success-count").text(completed - failed);
-  $("#failed-count").text(failed);
-  $("#remaining-count").text(remaining);
+  $("#" + successCountId).text(completed - failed);
+  $("#" + failedCountId).text(failed);
+  $("#" + remainingCountId).text(remaining);
 }
 
-// Completes progress bar after record creation
-function completeProgress(total, failed) {
-  $("#progress-bar-fill").css(
+// Unified progress completion function for both create and delete operations
+function completeProgress(total, failed, operationType = "create") {
+  var isDelete = operationType === "delete";
+  var containerId = isDelete
+    ? "deletion-progress-container"
+    : "interview-progress-container";
+  var progressBarId = isDelete
+    ? "deletion-progress-bar-fill"
+    : "progress-bar-fill";
+  var progressTextId = isDelete ? "deletion-progress-text" : "progress-text";
+
+  var successGradient = isDelete
+    ? "linear-gradient(90deg, #dc3545, #fd7e14)"
+    : "linear-gradient(90deg, #28a745, #20c997)";
+  var warningGradient = "linear-gradient(90deg, #ffc107, #fd7e14)";
+
+  var actionText = isDelete ? "Deleted" : "Created";
+  var completionText = isDelete ? "Deletion complete!" : "Process complete!";
+
+  $("#" + progressBarId).css(
     "background",
-    failed > 0
-      ? "linear-gradient(90deg, #ffc107, #fd7e14)"
-      : "linear-gradient(90deg, #28a745, #20c997)"
+    failed > 0 ? warningGradient : successGradient
   );
-  $("#progress-text").text(
-    "✅ Process complete! Created " +
+  $("#" + progressTextId).text(
+    "✅ " +
+      completionText +
+      " " +
+      actionText +
+      " " +
       (total - failed) +
       " of " +
       total +
@@ -319,78 +412,25 @@ function completeProgress(total, failed) {
 
   // Remove progress bar after 5 seconds
   setTimeout(function () {
-    $("#interview-progress-container").fadeOut(500, function () {
+    $("#" + containerId).fadeOut(500, function () {
       $(this).remove();
     });
   }, 5000);
 }
 
-// Creates and manages progress bar for record deletion
+// Legacy function aliases for backward compatibility
 function createDeletionProgressBar(total) {
-  // Remove existing deletion progress bar if it exists
-  $("#deletion-progress-container").remove();
-
-  var progressBarHtml =
-    '<div id="deletion-progress-container" style="margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">' +
-    '<div style="margin-bottom: 10px; font-weight: bold; color: #495057;">Deleting Existing Interview Response Records</div>' +
-    '<div id="deletion-progress-text" style="margin-bottom: 8px; font-size: 14px; color: #6c757d;">Preparing to delete ' +
-    total +
-    " records...</div>" +
-    '<div style="background: #e9ecef; border-radius: 10px; height: 20px; overflow: hidden;">' +
-    '<div id="deletion-progress-bar-fill" style="background: linear-gradient(90deg, #dc3545, #fd7e14); height: 100%; width: 0%; transition: width 0.3s ease; border-radius: 10px; position: relative;">' +
-    '<div id="deletion-progress-percentage" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: white; font-size: 12px; font-weight: bold;">0%</div>' +
-    "</div>" +
-    "</div>" +
-    '<div id="deletion-progress-stats" style="margin-top: 8px; font-size: 12px; color: #6c757d; display: flex; justify-content: space-between;">' +
-    '<span><i class="fa fa-check-circle" style="color: #28a745;"></i> Deleted: <span id="deletion-success-count">0</span></span>' +
-    '<span><i class="fa fa-times-circle" style="color: #dc3545;"></i> Failed: <span id="deletion-failed-count">0</span></span>' +
-    '<span><i class="fa fa-gears" style="color: #6c757d;"></i> Remaining: <span id="deletion-remaining-count">' +
-    total +
-    "</span></span>" +
-    "</div>" +
-    "</div>";
-
-  // Insert progress bar after execute button
-  $("#generate-responses-button").after(progressBarHtml);
+  return createProgressBar(total, "delete");
 }
 
 // Updates progress bar during record deletion
 function updateDeletionProgress(completed, total, failed, currentAction) {
-  var percentage = Math.round((completed / total) * 100);
-  var remaining = total - completed;
-
-  $("#deletion-progress-bar-fill").css("width", percentage + "%");
-  $("#deletion-progress-percentage").text(percentage + "%");
-  $("#deletion-progress-text").text(
-    currentAction || "Deleting record " + completed + " of " + total
-  );
-  $("#deletion-success-count").text(completed - failed);
-  $("#deletion-failed-count").text(failed);
-  $("#deletion-remaining-count").text(remaining);
+  return updateProgress(completed, total, failed, currentAction, "delete");
 }
 
 // Completes progress bar after record deletion
 function completeDeletionProgress(total, failed) {
-  $("#deletion-progress-bar-fill").css(
-    "background",
-    failed > 0
-      ? "linear-gradient(90deg, #ffc107, #fd7e14)"
-      : "linear-gradient(90deg, #dc3545, #fd7e14)"
-  );
-  $("#deletion-progress-text").text(
-    "✅ Deletion complete! Deleted " +
-      (total - failed) +
-      " of " +
-      total +
-      " records."
-  );
-
-  // Remove progress bar after 3 seconds
-  setTimeout(function () {
-    $("#deletion-progress-container").fadeOut(500, function () {
-      $(this).remove();
-    });
-  }, 3000);
+  return completeProgress(total, failed, "delete");
 }
 
 /*********** Utility Functions **************/
