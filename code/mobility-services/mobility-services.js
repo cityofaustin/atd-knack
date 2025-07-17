@@ -155,7 +155,7 @@ $(document).on("knack-view-render.view_304", function (event, view, data) {
 
 /* Print Operating Authority Notary Page */
 $(document).on("knack-view-render.view_480", function (event, view, data) {
-  // Company Print
+  // Primary Holder Print
   printMenuButton("view_480");
 });
 
@@ -218,105 +218,82 @@ $(document).on("knack-view-render.any", function (event, page) {
 });
 
 /****************************************/
-/*** Dropdown Menu Buttons Navigation ***/
+/**** In-Form Dropdown Menu Buttons  ****/
 /****************************************/
-function dropdownMenuItem(recordId, route, linkName) {
-  return `<li class="kn-button">\
-      <a href="#application-operating-authority/business-information/${recordId}/${route}/${recordId}">\
-        <span>${linkName}</span>\
-      </a>\
-    </li>`;
-}
-
-// Dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
-var viewNameOA = {
-  687: "1 - Service Type",
-  750: "2 - Business Information",
-  689: "3 - Insurance",
-  691: "4 - Authorized Person",
-  693: "5 - Vehicle Information",
-  695: "6 - Review and Submit",
+// Define dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
+// Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...}
+var dropdown = {
+  "view_687": ["1 - Service Type", "service-type"],
+  "view_750": ["2 - Business Information", "business-information"],
+  "view_689": ["3 - Insurance", "insurance"],
+  "view_691": ["4 - Additional People", "additional-people"],
+  "view_693": ["5 - Vehicle Information", "vehicle-information"],
+  "view_695": ["6 - Review and Submit", "review-and-submit"]
 };
 
-for (let key in viewNameOA) {
-  $(document).on(
-    "knack-view-render.view_" + key,
-    function (event, view, record) {
-      var recordId = view.scene.scene_id;
-      var currentMenu = viewNameOA[key];
+var knSlug = "#application-operating-authority";
 
-      /* Desktop Operating Authority Page */
-      $(`<div class="details-dropdown-menu tabs">\
-      <ul id="desktop-menu-list">\
-        <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-        <a><span class="nav-dropdown-link">${currentMenu}</span>\
-          <span class="kn-dropdown-icon fa fa-caret-down" /></a>\
-          <a href="#application-operating-authority/service-type/${recordId}/service-type/${recordId}" data-kn-slug="#application-operating-authority">\
-          </a>\
-          <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-            ${dropdownMenuItem(
-              recordId,
-              "service-type",
-              "1 - Service Type"
-            )}\
-            ${dropdownMenuItem(
-              recordId,
-              "business-information",
-              "2 - Business Information"
-            )}\
-            ${dropdownMenuItem(recordId, "insurance", "3 - Insurance")}\
-            ${dropdownMenuItem(
-              recordId,
-              "authorized-person",
-              "4 - Authorized Person"
-            )}\
-            ${dropdownMenuItem(
-              recordId,
-              "vehicle-information",
-              "5 - Vehicle Information"
-            )}\
-            ${dropdownMenuItem(
-              recordId,
-              "review-and-submit",
-              "6 - Review and Submit"
-            )}\
-          </ul>\
-    </div><br>`).appendTo("#view_" + key);
-
-      /* Mobile Operating Authority Page */
-      $(`<div class="mobile-details-dropdown-menu">\
-    <ul id="mobile-menu-list">\
-      <li class="mobile-dropdown-menu">\
-        <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
-          ${dropdownMenuItem(
-            recordId,
-            "service-type",
-            "1 - Service Type"
-          )}\
-            ${dropdownMenuItem(
-              recordId,
-              "business-information",
-              "2 - Business Information"
-            )}\
-            ${dropdownMenuItem(recordId, "insurance", "3 - Insurance")}\
-            ${dropdownMenuItem(
-              recordId,
-              "authorized-person",
-              "4 - Authorized Person"
-            )}\
-            ${dropdownMenuItem(
-              recordId,
-              "vehicle-information",
-              "5 - Vehicle Information"
-            )}\
-            ${dropdownMenuItem(
-              recordId,
-              "review-and-submit",
-              "6 - Review and Submit"
-            )}\
-      </li>\
-    </ul>\
-  </div><br>`).appendTo("#view_" + key);
-    }
-  );
+// Function that returns the dropdown menu item
+function dropdownMenuItem(slug, recordId, route, linkName) {
+  var buttonItem = `<li class="kn-button">\
+      <a href="${slug}/${route}/${recordId}/">\
+        <span>${linkName}</span>\
+      </a></li>`;
+  return buttonItem;
 }
+
+for (let v in dropdown) {
+  $(document).on(`knack-view-render.${v}`, function (event, view, record) {         
+    var recordId = view.scene.scene_id; 
+    var currentMenu = dropdown[v][0];   // "Dropdown Menu Label"
+    var currentSlug = dropdown[v][1];   // "page-slug"
+
+    // Desktop dropdown menu code
+    var desktopDropdownMenu = `<div class="details-dropdown-menu tabs">\
+      <ul id="desktop-menu-list"><li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
+      <a><span class="nav-dropdown-link">${currentMenu}</span><span class="kn-dropdown-icon fa fa-caret-down" /></a>\
+      <a href="${knSlug}/${currentSlug}/${recordId}" data-kn-slug="${knSlug}"></a>\
+      <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">`;
+
+    // Mobile dropdown menu code
+    var mobileDropdownMenu = `<div class="mobile-details-dropdown-menu">\
+    <ul id="mobile-menu-list"><li class="mobile-dropdown-menu">\
+    <ul class="kn-dropdown-menu-list mobile-dropdown-menu-list" style="min-width: 152px; margin: 0;">`;
+
+    // Adds dropdown menuu item to desktop and mobile
+    for (let label in dropdown) {
+      desktopDropdownMenu += `${dropdownMenuItem(knSlug,recordId,dropdown[label][1],dropdown[label][0])}`;
+      mobileDropdownMenu += `${dropdownMenuItem(knSlug,recordId,dropdown[label][1],dropdown[label][0])}`;
+    }
+    desktopDropdownMenu += `</ul></div><br>`;
+    mobileDropdownMenu += `</ul></li></ul></div><br>`;
+
+    $(desktopDropdownMenu).appendTo(`#${v}`);
+    $(mobileDropdownMenu).appendTo(`#${v}`);
+  });
+}
+
+/****************************************/
+/******* Refresh View on Delete  ********/
+/****************************************/
+// A function to refresh a specified view
+function refreshView(viewKey) {
+  Knack.views[viewKey].model.fetch();
+  setTimeout(() => {
+    Knack.views[viewKey].render();
+    Knack.views[viewKey].postRender();
+  }, 2000);
+}
+
+// 2 - Background Information Page
+// If holder is deleted through table, refreshes connected attachment table
+$(document).on('knack-record-delete.view_870', function (event, view, data) {
+  refreshView('view_872');
+});
+
+// 6 - Review and Submit Page
+// If non-primary holder is deleted through table, refreshes connected attachment table and additional people table
+$(document).on('knack-record-delete.view_874', function (event, view, data) {
+  refreshView('view_876'); // Other Affidavit table
+  refreshView('view_464'); // Additional People table in case holder is also a driver
+});
