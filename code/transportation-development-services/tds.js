@@ -1333,7 +1333,7 @@ $(document).on('knack-scene-render.any', function(event, scene) {
 
 
 /*****************************************************/
-/*** Viewport buttons for Task Board ***/
+/********** Viewport buttons for Task Board **********/
 /*****************************************************/
 $(document).on('knack-scene-render.scene_657', function(event, scene) {
   // Remove previous button container if it exists (useful if navigating back and forth)
