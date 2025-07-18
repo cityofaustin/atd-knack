@@ -103,7 +103,11 @@ $(document).on("knack-view-render.view_1661", function(event, page) {
 });
 // create large Reporting button on the Home page
 $(document).on("knack-view-render.view_1270", function(event, page) {
-  bigButton("viewer-management", "view_1270", "https://atd.knack.com/development-services#reporting/", "pie-chart", "Reporting");
+  bigButton("reporting", "view_1270", "https://atd.knack.com/development-services#reporting/", "pie-chart", "Reporting");
+});
+// create large Reporting button on the Home page
+$(document).on("knack-view-render.view_1272", function(event, page) {
+  bigButton("sep", "view_1272", "https://atd.knack.com/development-services#sif-encumbrance-projects/", "certificate", "SIF Encumbrance Projects");
 });
 
 
@@ -164,6 +168,14 @@ $(document).on("knack-view-render.view_1904", function(event, page) {
 // create large Start Submittal button on the TDS Customer Portal - Services page for SIF Worksheets
 $(document).on("knack-view-render.view_1874", function(event, page) {
   largeSubmitButton("start-sif-worksheet-submittal", "view_1874", "https://atd.knack.com/development-services#sif-worksheet-submittal/", "arrow-right", "Start Submittal");
+});
+// create large Start Request button on the WVR Start page for TPW Waiver Requests
+$(document).on("knack-view-render.view_3254", function(event, page) {
+  largeSubmitButton("start-wvr", "view_3254", "https://atd.knack.com/development-services#create-wvr/", "arrow-right", "Start Request");
+});
+// create large Start Request button on the TDS Customer Portal - Services page for TPW Waiver Requests
+$(document).on("knack-view-render.view_2918", function(event, page) {
+  largeSubmitButton("start-wvr", "view_2918", "https://atd.knack.com/development-services#wvr-start/", "arrow-right", "Start Request");
 });
 
 /**********************************************************/
@@ -397,6 +409,64 @@ $(document).on("knack-scene-render.scene_604", function () {
   disableBreadCrumbsNonAdmin();
 });
 
+/*******************************************************************/
+/*** Disable Breadcrumb Navigation Links for Non-TIA Application ***/
+/*******************************************************************/
+
+//Non-TIA Customer Information page
+$(document).on("knack-scene-render.scene_1019", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Non-TIA Project Information page
+$(document).on("knack-scene-render.scene_1020", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Non-TIA Add Documentation page
+$(document).on("knack-scene-render.scene_1021", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Non-TIA Submit page
+$(document).on("knack-scene-render.scene_1022", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Non-TIA Edit Information page
+$(document).on("knack-scene-render.scene_1023", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//Non-TIA Edit Attachments page
+$(document).on("knack-scene-render.scene_1024", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/******************************************************************/
+/*** Disable Breadcrumb Navigation Links for TPW Waiver Request ***/
+/******************************************************************/
+
+//WVR Customer Information page
+$(document).on("knack-scene-render.scene_1025", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//WVR Project Information page
+$(document).on("knack-scene-render.scene_1026", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//WVR Add Documentation page
+$(document).on("knack-scene-render.scene_1027", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//WVR Submit page
+$(document).on("knack-scene-render.scene_1028", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//WVR Edit Information page
+$(document).on("knack-scene-render.scene_1029", function () {
+  disableBreadCrumbsNonAdmin();
+});
+//WVR Edit Attachments page
+$(document).on("knack-scene-render.scene_1030", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
 /**************************************************************/
 /*** Disable Breadcrumb Navigation Links for SWF Assessment ***/
 /**************************************************************/
@@ -454,7 +524,7 @@ $(document).on('knack-scene-render.any', function(event, scene) {
 /**************************************************/
 /* Add Previous Window Button to Customer View, Add, & Edit Pages since we disable breadcrumbs */
 $(document).on("knack-view-render.any", function(event, view) {
-var appviews=["view_1552","view_1568","view_1544","view_1560","view_1548","view_1563"];
+var appviews=["view_1552","view_1568","view_1544","view_1560"];
 var key=(view.key!=undefined)?view.key.toLowerCase().trim():"";
 var l=appviews.length;
 for (var x=0; x<l; x++) {
@@ -792,6 +862,66 @@ $(`<div class="mobile-details-dropdown-menu">\
       ${dropdownMenuItem(recordId, "edit-tia-fee-status", "fa-dollar", "Fees", true)}\
     </ul>\
   </div>`).appendTo("#view_744")
+})
+
+/* Case Details Page for Non-TIA */
+$(document).on('knack-view-render.view_3346', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-reviews/tia-case-details/${recordId}/" data-kn-slug="#mitigation-details">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations")}\
+        </ul>\
+      </li>\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-reviews/tia-case-details/${recordId}/edit-tia-case-details/${recordId}" data-kn-slug="#update-case-details">\
+          <span class="nav-dropdown-link">Update Case Details</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes")}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
+          ${dropdownMenuItem(recordId, "edit-tia-case-status", "fa-retweet", "Edit Case Status")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "edit-tia-fee-status", "fa-dollar", "Fees")}\
+    </ul>\
+  </div>`).appendTo("#view_3346")
+
+/* Mobile Case Details Page for Non-TIA */
+$(`<div class="mobile-details-dropdown-menu">\
+    <ul id="tia-mobile-menu-list">\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button"> \
+          <i class="fa fa-angle-down tia-dropdown" /> \
+          Case Management Menu\
+        </span>\
+        <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(recordId, "tia-mitigation-details", "fa-file-text-o", "Mitigations", true)}\
+        </ul>\
+      </li>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+          Update Case Details Menu\
+        </span>\
+        <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes", true)}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers", true)}\
+          ${dropdownMenuItem(recordId, "edit-tia-case-status", "fa-retweet", "Edit Case Status", true)}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "edit-tia-fee-status", "fa-dollar", "Fees", true)}\
+    </ul>\
+  </div>`).appendTo("#view_3346")
 })
 
 /* Case Management Page */
@@ -1132,5 +1262,152 @@ $(document).on('knack-scene-render.scene_760', function(event, scene) {
 $(document).on('knack-scene-render.scene_810', function(event, scene) {
     $('button[type=submit]').submit();
 });
+/* Begin TPW Waiver Lead Cycle Review Modal */
+$(document).on('knack-scene-render.scene_978', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Begin TPW Waiver PM Cycle Review Modal */
+$(document).on('knack-scene-render.scene_985', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Begin TPW Waiver Companion Review Modal */
+$(document).on('knack-scene-render.scene_967', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Approve TPW Waiver Case Modal */
+$(document).on('knack-scene-render.scene_915', function(event, scene) {
+    $('button[type=submit]').submit();
+});
 
+
+/*****************************************************/
+/*** "Go to Top" and "Go to Bottom" Scroll buttons ***/
+/*****************************************************/
+$(document).on('knack-scene-render.any', function(event, scene) {  
+  const excludedScenes = ['scene_1', 'scene_2'] // Add scenes where you don't want the buttons to appear
+  if (excludedScenes.includes(scene.key)) return
+  const isModal = Knack.modals.length != 0
+  const markup = 
+  `
+    <div id="scroll-buttons">
+      <button id="go-to-top" class="kn-button">
+        <i class="fa fa-arrow-up"></i>
+      </button>
+      <button id="go-to-bottom" class="kn-button">
+        <i class="fa fa-arrow-down"></i>
+      </button>
+    </div>
+  `
+  const target = isModal ? '.kn-modal-bg' : `#kn-${Knack.router.current_scene_key}`
+  const buttons = isModal ? '.kn-modal-bg #scroll-buttons' : `#kn-${Knack.router.current_scene_key} #scroll-buttons`
+  const topButton = isModal ? '.kn-modal-bg #go-to-top' : `#kn-${Knack.router.current_scene_key} #go-to-top`
+  const bottomButton = isModal ? '.kn-modal-bg #go-to-bottom' : `#kn-${Knack.router.current_scene_key} #go-to-bottom`
+  const hasButtons = $(buttons).length
+
+  if (hasButtons) return
+  
+  $(target).append(markup)
+  const topElement = isModal ? '.kn-modal-bg' : 'html, body'
+  
+  $(topButton).on('click', function(e) {
+    $(topElement).animate({ scrollTop: 0 }, "fast")
+  })
+
+  $(bottomButton).on('click', function(e) {
+    $(topElement).animate({ scrollTop: $(document).height() }, "fast")
+  })
+
+  $(buttons).css('visibility', 'visible')
+  const scrollableElement = isModal ? '.kn-modal-bg' : window
+  
+  $(scrollableElement).on('scroll',function() {
+    const scroll = $(scrollableElement).scrollTop()
+
+    if (scroll >= 50) {
+      $(buttons).css('visibility', 'visible')
+    } else {
+      $(buttons).css('visibility', 'hidden')
+    }
+  })
+})
+
+
+/*****************************************************/
+/********** Viewport buttons for Task Board **********/
+/*****************************************************/
+$(document).on('knack-scene-render.scene_657', function(event, scene) {
+  // Remove previous button container if it exists (useful if navigating back and forth)
+  $('#viewport-button-container').remove();
+
+  // Find the target scene element
+  const $sceneElement = $('#kn-scene_657');
+
+  if ($sceneElement.length) {
+    // Find all kn-table.kn-view elements within the scene, excluding view_2679
+    const $tableViews = $sceneElement.find('.kn-table.kn-view').not('#view_2679');
+
+    // Create a new container for the buttons
+    const $buttonContainer = $('<div>').attr('id', 'viewport-button-container');
+
+    // Style the button container
+    $buttonContainer.css({
+      position: 'fixed',
+      bottom: '0',
+      left: '0',
+      width: '90%', // Limit width to 80%
+      display: 'flex',
+      justifyContent: 'flex-start', // Start the buttons in the bottom left
+      padding: '10px',
+      boxSizing: 'border-box',
+      zIndex: '1000', // Ensure the buttons are on top
+      backgroundColor: 'rgba(255, 255, 255, 0.8)', // Add a background for better visibility
+      overflowX: 'auto', // Add horizontal scrolling if too many buttons
+      whiteSpace: 'nowrap' // Prevent wrapping
+    });
+
+    // Create buttons for each table view
+    $tableViews.each(function(index) {
+      const $tableView = $(this);
+      const button = document.createElement('button'); // Using plain JS for element creation is fine here
+
+      // Find the h2.kn-title element within the table view
+      const $knTitle = $tableView.find('.view-header h2.kn-title');
+      const buttonText = $knTitle.length ? $knTitle.text().trim() : $tableView.attr('id') || 'Table View'; // Use kn-title text or ID
+
+      button.textContent = buttonText;
+
+      // Style the button
+      $(button).css({
+        backgroundColor: '#163f6e',
+        color: 'white',
+        border: 'none',
+        padding: '8px 12px',
+        cursor: 'pointer',
+        borderRadius: '4px',
+        marginRight: index < $tableViews.length - 1 ? '5px' : '0' // Add 5px margin to all but the last button
+      });
+
+      // Add scroll functionality
+      $(button).on('click', function() {
+        $('html, body').animate({
+          scrollTop: $tableView.offset().top
+        }, 500); // Smooth scroll duration in milliseconds
+      });
+
+      $buttonContainer.append(button);
+    });
+
+    // Append the container to the body
+    $('body').append($buttonContainer);
+  } else {
+    console.log('Scene #kn-scene_657 not found during render event.');
+  }
+});
+
+/* Hide Viewport Container when switching scene from Task Board */
+$(document).on('knack-scene-render.any', function(event, scene) {
+  if (scene.key !== 'scene_657') {
+    $('#viewport-button-container').remove();
+  }
+});
 
