@@ -199,15 +199,103 @@ $(document).on('knack-scene-render.scene_435', function(event, scene) {
 window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tasks/";
 });
 
-/****************************/
-/*** Auto Refresh Browser ***/
-/****************************/
-/*1st Page of Draft Builder*/
-$(document).on("knack-scene-render.scene_697", function () {
-  setInterval(function() {
-    location.reload();
-  }, 20000); // Refreshes every 20 seconds (20000 milliseconds)
-});
+/******************************/
+/**** Auto Refresh Browser ****/
+/******************************/
+/* 1st Page of Draft Builder */
+(function() { // Wrap interval management in a block to avoid global scope pollution
+    // Store interval IDs for cleanup
+    let pageReloadInterval;
+    let countdownInterval;
+
+    $(document).on("knack-scene-render.scene_697", function () {
+        // Clear any existing intervals to prevent multiples
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+        }
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        // Set up the page reload timer
+        pageReloadInterval = setInterval(function() {
+            location.reload();
+        }, 20000); // Refreshes every 20 seconds
+    });
+
+    $(document).on("knack-scene-render.scene_697", function () {
+        // Clear existing countdown interval if it exists
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+        
+        let timeLeft = 20;
+        const timeDisplay = document.getElementById("displayTime");
+        
+        if (timeDisplay) {
+            timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
+            
+            countdownInterval = setInterval(function() {
+                timeLeft--;
+                timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
+                
+                if (timeLeft === 0) {
+                    timeLeft = 20;
+                    location.reload();
+                }
+            }, 1000); // Updates every 1 second
+        }
+    });
+
+    // Clean up intervals when scene is destroyed or navigated away from
+    $(document).on("knack-scene-destroy.scene_697", function () {
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+            pageReloadInterval = null;
+        }
+        
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+    });
+
+    // Clear intervals BEFORE any navigation occurs
+    $(document).on("knack-route-change", function() {
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+            pageReloadInterval = null;
+        }
+        
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+    });
+
+    // Also listen for any link clicks or navigation attempts
+    $(document).on("click", "a[href], .kn-link", function() {
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+            pageReloadInterval = null;
+        }
+        
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+    });
+
+    // Additional cleanup for page unload (extra safety measure)
+    $(window).on('beforeunload', function() {
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+        }
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+        }
+    });
+})();
 
 /*************************/
 /*** Auto Submit Forms ***/
