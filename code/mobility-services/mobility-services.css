@@ -329,22 +329,23 @@ a.small-button {
 }
 
 .desktop-dropdown-menu-list li:hover {
-  background-color: #ebebeb;
+  background-color:#ebebeb;
 }
 
 /*Mobile list, list item, and button stylings*/
 .mobile-details-dropdown-menu ul {
-  margin-left: 0.25em;
+  margin-left: .25em;
 }
 
 #mobile-menu-list {
   list-style-type: none;
   margin: 0;
-}
+} 
 
 #mobile-menu-list li {
-  margin-top: 5px;
-}
+  margin-top:5px;
+  margin-left:5px;
+} 
 
 #mobile-menu-list ul {
   list-style-type: none;
@@ -356,7 +357,7 @@ a.small-button {
 }
 
 .mobile-dropdown-menu span {
-  margin-top: 0.25em;
+  margin-top: .25em;
   color: #163f6e;
 }
 
