@@ -88,33 +88,33 @@ function bigButton(
 
   if (callback) callback();
 }
-	//>>>HOME TAB BUTTONS
+  //>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large button on the home page
-    bigButton('metrobike-employee-benefit', 'view_16', "https://atd.knack.com/smart-mobility#metrobike-employee-benefit/", "bicycle", "MetroBike Employee Benefit");
+    bigButton('metrobike-employee-benefit', 'view_16', "https://atd.knack.com/bike-benefit-program#metrobike-employee-benefit/", "bicycle", "MetroBike Employee Benefit");
 });
 
 
-	//>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
+  //>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
 $(document).on('knack-view-render.view_410', function(event, page) {
   // create large button on the home page
     bigButton('living-streets-eoi', 'view_410', "https://atd.knack.com/smart-mobility#living-streets-eoi/", "street-view", "Healthy Streets or Play Streets");
 });
-	//>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
+  //>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
 $(document).on('knack-view-render.view_411', function(event, page) {
   // create large button on the home page
     bigButton('living-streets-login', 'view_411', "https://www.austintexas.gov/department/neighborhood-block-parties", "users", "Block Party");
 });
 
-	//>>>LIVING STREETS GETTING STARTED PAGE draft 1
+  //>>>LIVING STREETS GETTING STARTED PAGE draft 1
 $(document).on('knack-view-render.view_451', function(event, page) {
   // create large button on the home page
     bigButton('living-streets-login', 'view_451', "https://www.austintexas.gov/LivingStreets", "home", "Return to Living Streets Home");
 });
-	//>>>LIVING STREETS GETTING STARTED PAGE draft 2
+  //>>>LIVING STREETS GETTING STARTED PAGE draft 2
 $(document).on('knack-view-render.view_450', function(event, page) {
   // create large button on the home page
-    bigButton('living-streets-getting-started', 'view_450', "https://atd.knack.com/smart-mobility#living-streets-eoi/", "arrow-right", "Start Expression of Interest");
+    bigButton('living-streets-getting-started', 'view_450', "https://atd.knack.com/smart-mobility#living-streets-eoi-new/", "arrow-right", "Start Expression of Interest");
 });
 
 /*******************************************/
@@ -176,4 +176,125 @@ $(document).on("knack-scene-render.scene_281", function () {
 //PS EOI Confirmation NEW
 $(document).on("knack-scene-render.scene_284", function () {
   disableBreadCrumbsNonAdmin();
+});
+
+  //***MANAGE WALLET AND MAKE PAYMENT BUTTONS***
+$(document).on('knack-view-render.view_804', function(event, page) {
+  // create large button on go back to Portal page
+  bigButton('manage-wallet', 'view_804', "https://austin-tx-austin-tx.uat.cityba.se/welcome", "credit-card", "Manage Wallet");
+  // bigButton('manage-wallet', 'view_804', "https://atd.knack.com/smart-mobility#living-streets-applicant-portal/", "credit-card", "Manage Wallet");
+});
+$(document).on('knack-view-render.view_806', function(event, page) {
+  // create large button on go back to Portal page
+  // *** see the getCitybaseButton function for the invocation of the make payment bigButton function
+  //   bigButton('make-payment', 'view_806', "https://atd.knack.com/smart-mobility#living-streets-applicant-portal/", "arrow-right", "Make Payment");
+});
+
+/** 
+ * Citybase Integration
+ */
+
+function getCitybaseButton(payload, viewId) {
+  fetch(
+    "https://invoice-service-austin-tx.uat.cityba.se/invoices/austin_tx_transportation/street_banner",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    },
+  )
+    .then((response) => {
+      console.log(response.url);
+      bigButton(
+        "make-payment",
+        viewId,
+        response.url,
+        "arrow-right",
+        "Make Payment",
+      );
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+var knackUserToken = Knack.getUserToken();
+
+var headers = {
+  "X-Knack-Application-Id": "618ad3322d11b4002169a6f9",
+  "X-Knack-REST-API-KEY": "knack",
+  Authorization: knackUserToken,
+  "content-type": "application/json",
+};
+
+// After the transactions table loads
+$(document).on("knack-view-render.view_817", function (event, page, view) {
+  var transactionRecord = view[0];
+
+  var payload = {
+    allowed_payment_methods: ["CARD", "BANK"],
+    cancel_url: {
+      url: window.location.href,
+      label: "Cancel",
+    },
+    return_url: {
+      url: window.location.href,
+      label: "Continue",
+    },
+  };
+
+  // make sure record exists
+  if (transactionRecord) {
+    payload["line_items"] = [
+      {
+        description: transactionRecord["field_819"],
+        amount: transactionRecord["field_833_raw"] * 100,
+        sub_description: transactionRecord["field_819"], // does not exist on NBP, is it needed?
+        custom_attributes: [
+          {
+            key: "knack_record_id",
+            value: transactionRecord["id"],
+          },
+          {
+            key: "invoice_number",
+            value: transactionRecord["field_814"],
+          },
+          {
+            key: "fund",
+            value: String(transactionRecord["field_829"]),
+          },
+          {
+            key: "dept",
+            value: String(transactionRecord["field_830"]),
+          },
+          {
+            key: "unit",
+            value: String(transactionRecord["field_831"]),
+          },
+          {
+            key: "revenue",
+            value: String(transactionRecord["field_832"]),
+          },
+        ],
+      },
+    ];
+    payload["custom_attributes"] = [
+      {
+        key: "knack_record_id",
+        value: transactionRecord["id"],
+      },
+      {
+        key: "invoice_number",
+        value: transactionRecord["field_814"],
+      },
+      {
+        key: "knack_app",
+        value: "SMART_MOBILITY",
+      },
+    ];
+    console.log(JSON.stringify(payload));
+    getCitybaseButton(payload, "view_806");
+  }
 });
