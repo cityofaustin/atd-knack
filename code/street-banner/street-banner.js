@@ -484,89 +484,78 @@ $(document).on("knack-view-render.view_3664", function (event, page, view) {
 });
 
 // over the street
-$(document).on('knack-view-render.view_3665', function(event, page) {
-    $('#view_3665').hide()
-  // Set current record ID to fetch invoices from Knack API
-  var hrefArray = window.location.href.split("/");
-  var recordId = hrefArray[hrefArray.length - 2];
-  // var paymentStatus = ""
+$(document).on("knack-view-render.view_3665", function (event, page, view) {
+  $("#view_3665").hide();
+  // operating under the expectation that there is only one line item to add
+  var transactionRecord = view[0];
 
-  var payload={
-    "allowed_payment_methods": [
-      "CARD",
-      "BANK"
-    ],
-    "cancel_url": {
-      "url": window.location.href,
-      "label": "Cancel"
+  var payload = {
+    allowed_payment_methods: ["CARD", "BANK"],
+    cancel_url: {
+      url: window.location.href,
+      label: "Cancel",
     },
-    "return_url": {
-      "url": window.location.href,
-      "label": "Continue"
-    }
-  }
+    return_url: {
+      url: window.location.href,
+      label: "Continue",
+    },
+  };
 
-  //  $.ajax({
-  //     url:
-  //       "https://api.knack.com/v1/scenes/scene_1243/views/view_3620/records/"
-  //       +recordId,
-  //     headers: headers
-  //  }).then(res=> (paymentStatus=res["field_2862"]))
-
-  //  console.log(paymentStatus)
-
-  $.ajax({
-      url:
-        "https://api.knack.com/v1/scenes/scene_1243/views/view_3665/records?application-details-ots_id="
-        +recordId,
-    headers: headers,
-  }).then(function (res) {
-    var records = res.records;
-    if (records.length > 0) {
-      console.log(records[0])
-      // operating under the expectation that there is only one line item to add
-      payload["line_items"] = [{
-        "description": records[0]["field_3350"],
-        "amount": records[0]["field_3342_raw"]*100,
-        "sub_description": records[0]["field_3351"],
-        "custom_attributes": [
+  var records = res.records;
+  if (transactionRecord) {
+    // operating under the expectation that there is only one line item to add
+    payload["line_items"] = [
+      {
+        description: transactionRecord["field_3350"],
+        amount: transactionRecord["field_3342_raw"] * 100,
+        sub_description: transactionRecord["field_3351"],
+        custom_attributes: [
           {
-            "key":"knack_record_id",
-            "value":records[0]["id"]
+            key: "knack_record_id",
+            value: transactionRecord["id"],
           },
           {
-            "key": "invoice_number",
-            "value":records[0]["field_3327"]
+            key: "invoice_number",
+            value: transactionRecord["field_3327"],
           },
           {
-            "key": "fund",
-            "value":String(records[0]["field_3356"])
+            key: "fund",
+            value: String(transactionRecord["field_3356"]),
           },
           {
-            "key": "dept",
-            "value":String(records[0]["field_3357"])
+            key: "dept",
+            value: String(transactionRecord["field_3357"]),
           },
           {
-            "key": "unit",
-            "value":String(records[0]["field_3358"])
+            key: "unit",
+            value: String(transactionRecord["field_3358"]),
           },
           {
-            "key": "revenue",
-            "value":String(records[0]["field_3359"])
-          }
+            key: "revenue",
+            value: String(transactionRecord["field_3359"]),
+          },
         ],
-      }];
-      payload["custom_attributes"]=[{
-            "key":"knack_record_id",
-            "value":records[0]["id"]
-          },
-          {
-            "key": "invoice_number",
-            "value":records[0]["field_3327"]
-          }
-      ]
-      console.log(JSON.stringify(payload))
-      getCitybaseButton(payload, "view_3666")
-    }
-  })
-})
+      },
+    ];
+    payload["custom_attributes"] = [
+      {
+        key: "knack_record_id",
+        value: transactionRecord["id"],
+      },
+      {
+        key: "invoice_number",
+        value: transactionRecord["field_3327"],
+      },
+      {
+        key: "banner_reservations_ots",
+        value: String(transactionRecord["field_3329_raw"][0]["identifier"]),
+      },
+      {
+        key: "knack_app",
+        value: "STREET_BANNER",
+      },
+    ];
+    console.log(JSON.stringify(payload));
+    getCitybaseButton(payload, "view_3666");
+  }
+});
