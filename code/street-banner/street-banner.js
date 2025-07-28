@@ -406,8 +406,6 @@ $(document).on("knack-scene-render.scene_1234", function () {
     location.reload();
   })
 });
-
-
 // lamppost application details
 $(document).on("knack-view-render.view_3664", function (event, page, view) {
   $("#view_3664").hide();
@@ -470,7 +468,11 @@ $(document).on("knack-view-render.view_3664", function (event, page, view) {
         value: transactionRecord["field_3327"],
       },
       {
-        key: "banner_reservations_lpb",
+        key: "banner_type",
+        value: "LAMPPOST",
+      },
+      {
+        key: "parent_record_id",
         value: String(transactionRecord["field_3326_raw"][0]["identifier"]),
       },
       {
@@ -547,8 +549,12 @@ $(document).on("knack-view-render.view_3665", function (event, page, view) {
         value: transactionRecord["field_3327"],
       },
       {
-        key: "banner_reservations_ots",
-        value: String(transactionRecord["field_3329_raw"][0]["identifier"]),
+        key: "banner_type",
+        value: "OVER_THE_STREET",
+      },
+      {
+        key: "parent_record_id",
+        value: String(transactionRecord["field_3329_raw"][0]["id"]),
       },
       {
         key: "knack_app",
