@@ -1,3 +1,4 @@
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
@@ -11,31 +12,31 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_11', function(event, page) {
   // create large AVAILABLE SERVICES button on the PORTAL page
-    bigButton('available-services', 'view_11', "https://atd.knack.com/mobility-services#available-services/", "list-ul", "Available Services");
+  bigButton('available-services', 'view_11', `${APP_URL}#available-services/`, "list-ul", "Available Services");
 });
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-    bigButton('available-services', 'view_16', "https://atd.knack.com/mobility-services#portal/", "child", "Customer Portal");
+  bigButton('available-services', 'view_16', `${APP_URL}#portal/`, "child", "Customer Portal");
 });
 $(document).on('knack-view-render.view_34', function(event, page) {
   // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
-    bigButton('required-documents-chauffeur', 'view_34', "https://atd.knack.com/mobility-services#chauffeur-permit/required-documents-chauffeur/", "files-o", "Required Documents");
+  bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, "files-o", "Required Documents");
 });
 $(document).on('knack-view-render.view_36', function(event, page) {
   // create large START APPLICATION button on the CHAUFFEUR page
-    bigButton('start-application', 'view_36', "https://atd.knack.com/mobility-services#application-chauffeur/", "arrow-right", "Start Chauffeur Application");
+  bigButton('start-application', 'view_36', `${APP_URL}#application-chauffeur/`, "arrow-right", "Start Chauffeur Application");
 });
 $(document).on('knack-view-render.view_41', function(event, page) {
   // create large SIGN UP or Log-In button on the PORTAL page
-    bigButton('sign-up', 'view_41', "https://atd.knack.com/mobility-services#sign-up", "sign-in", "Sign up or Log In ");
+  bigButton('sign-up', 'view_41', `${APP_URL}#sign-up`, "sign-in", "Sign up or Log In ");
 });
 $(document).on('knack-view-render.view_57', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-    bigButton('available-services', 'view_57', "https://atd.knack.com/mobility-services#portal/", "arrow-right", "Mobility Services Portal");
+  bigButton('available-services', 'view_57', `${APP_URL}#portal/`, "arrow-right", "Mobility Services Portal");
 });
 $(document).on('knack-view-render.view_383', function(event, page) {
   // create large START APPLICATION button on the Operating Authority page
-    bigButton('start-application', 'view_383', "https://atd.knack.com/mobility-services#application-operating-authority", "arrow-right", "Start Operating Authority Application");
+  bigButton('start-application', 'view_383', `${APP_URL}#application-operating-authority`, "arrow-right", "Start Operating Authority Application");
 });
 
 /***************************************/
@@ -108,10 +109,50 @@ for (let i = 0; i < textBoxFieldIDs.length; i++) {
 }
 
 /********************************************************/
-/** Relabel Attachment Links in Tables to 'Attachment' **/
+/** Relabel Attachment Links in Tables to Name Field **/
 /********************************************************/
+//  replace attachment file name with name field. hide_name to hide nameField from tabl
+function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_name = true) {
+  //  find each attachment cell
+  $("td." + fileFieldId).each(function() {
+    //  find each attachment link within the cell
+    $(this).find("span").children("span").each(function() {
+      var attachmentType = "View";
+      var fileRecordId = $(this).context.id;
+
+      //  if neighboring field exists on same table, retrieve the corresponding type
+      $(this).closest("tr").children("td." + nameFieldId)
+        .find("span")
+        .children("span")
+        .each(function() {
+          var nameRecordId = $(this).context.id;
+          if (fileRecordId == nameRecordId) {
+            attachmentType = $(this).text();
+          }
+        });
+      //  update link contents
+      $(this).find("a").html(attachmentType);
+    });
+
+    // Remove duplicate break lines
+    $('br').each(function () {
+      if ($(this).next().is('br')) {
+        $(this).next().remove();
+      }
+    });
+
+  });
+
+  // hides the name field ID based on third parameter. Default true.
+  if (hide_name){
+    $("td." + nameFieldId).hide();
+    $("th." + nameFieldId).hide();
+  }
+}
+
 $(document).on("knack-view-render.any", function (event, view, data) {
   $("a.kn-view-asset").html("View");
+  replaceAttachmentFilenameWithNameField("field_285", "field_458");
 });
 
 /****************************************************/
