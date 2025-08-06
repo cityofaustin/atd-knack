@@ -1,6 +1,6 @@
-/*****************/
-/* Big Buttons */
-/*****************/
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
 .big-button-container {
   border-radius: 2px;
   box-shadow: 0px 1px 2px 0px gray;
@@ -24,9 +24,9 @@ a.big-button-container {
   text-decoration: none;
 }
 
-/*****************/
-/* Small Buttons */
-/*****************/
+/***************************************/
+/************ Small Buttons ************/
+/***************************************/
 .small-button-container {
   padding: 5px;
   margin: 20px;
@@ -47,13 +47,23 @@ a.small-button {
   text-decoration: none;
 }
 
-/*////////////////////////////*/
-/* Mobile Optimization Styles */
-/*////////////////////////////*/
+/*************************************************/
+/** Remove Back Links for Event Support Request **/
+/*************************************************/
+/*Multi Day Request Page*/
+#kn-scene_298 .kn-back-link { display: none; }
+/*Daily Details Page*/
+#kn-scene_299 .kn-back-link { display: none; }
+/*Confirmation Page*/
+#kn-scene_300 .kn-back-link { display: none; }
+
+/*************************************************/
+/*********** Mobile Optimization Styles **********/
+/*************************************************/
 @media (max-width: 800px) {
 
 
-/* FORMS */
+  /* FORMS */
 
   /* Increase size of buttons with type="submit" */
   button[type="submit"] {
@@ -83,9 +93,9 @@ a.small-button {
     font-size: 22px;
   }
 
-/* END FORMS */
+  /* END FORMS */
 
-/* NAVIGATION */
+  /* NAVIGATION */
 
   /* Increase size of "back" links at bottom of pages */
   a.ang-link {
@@ -121,18 +131,18 @@ a.small-button {
     font-size: 22px !important;
   }
 
-/* END NAVIGATION */
+  /* END NAVIGATION */
 
-/* ICONS */
+  /* ICONS */
 
   /* Increase size of Font Awesome icons */
   .icon .fa {
       font-size: 22px !important;
   }
 
-/* END ICONS */
+  /* END ICONS */
 
-/* BUTTONS */
+  /* BUTTONS */
 
   /* Increase size of search button */
   .kn-button.search {
@@ -151,20 +161,20 @@ a.small-button {
   input[type="file"] {
     height: 48px !important;
     font-size: 22px !important;
-}
-.custom-file-upload {
+  }
+  .custom-file-upload {
     border: 3px solid #ccc;
     display: inline-block;
     padding: 6px 12px;
     cursor: pointer;
-}
+  }
 
   /* Increase size of Font Awesome icons */
   .icon .fa {
       font-size: 24px !important;
   }
   
-/* END BUTTONS */
+  /* END BUTTONS */
 
 }
 
