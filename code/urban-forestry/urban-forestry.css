@@ -86,13 +86,6 @@ a.small-button {
   text-decoration: none;
 }
 
-/*******************************************/
-/************ Wrap Table Headers ***********/
-/*******************************************/
-#view_133 th, #view_147 th {
-  white-space:normal;
-}
-
 /*********************************************/
 /******** Header Banner Image Styling ********/
 /*********************************************/
@@ -151,4 +144,11 @@ img.knHeader__logo-image {
     width: 80% !important; /* Medium width on medium screens */
     max-width: 800px !important;
   }
+}
+
+/*******************************************/
+/************ Wrap Table Headers ***********/
+/*******************************************/
+#view_133 th, #view_147 th {
+  white-space:normal;
 }
