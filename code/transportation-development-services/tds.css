@@ -452,8 +452,29 @@ a.ang-link:link {text-decoration: none;}
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_757 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
+/*SIF Encumbrance Details Page*/
+#kn-scene_941 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_941 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*TPW Waiver */
+/*TPW Waiver Case Details Page*/
+#kn-scene_876 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_876 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*TPW Waiver Cycle Details Page*/
+#kn-scene_916 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_916 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*TPW Waiver Companion Review Details Page*/
+#kn-scene_966 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_966 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
 /*App Admin */
-/*TDS Contacts Page*/
+/*Manage TDS Contacts Page*/
 #kn-scene_591 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_591 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
@@ -462,6 +483,16 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_638 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
 #kn-scene_638 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage Attachment Types Page*/
+#kn-scene_873 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_873 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
+
+/*Manage Workgroups Page*/
+#kn-scene_943 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.1em; background-color: #ebebeb; color: #163f6e; text-align: center; }
+#kn-scene_943 .kn-back-link:hover { opacity: 0.9; cursor: pointer; border-color: gray; }
 
 /*Reporting Targets Page*/
 #kn-scene_710 .kn-back-link { padding: 5px 10px; border-style: solid; border-width: 1px; border-color: #dddddd; border-radius: 4px; 
@@ -804,6 +835,62 @@ a.ang-link:link {text-decoration: none;}
   display: none;
 }
 
+/***********************************************/
+/** Remove Back Links for Non-TIA Application **/
+/***********************************************/
+/*Non-TIA Customer Information Page*/
+#kn-scene_1019 .kn-back-link {
+  display: none;
+}
+/*Non-TIA Project Information Page*/
+#kn-scene_1020 .kn-back-link {
+  display: none;
+}
+/*Non-TIA Add Documentation Page*/
+#kn-scene_1021 .kn-back-link {
+  display: none;
+}
+/*Non-TIA Submit Page*/
+#kn-scene_1022 .kn-back-link {
+  display: none;
+}
+/*Non-TIA Edit Information Page*/
+#kn-scene_1023 .kn-back-link {
+  display: none;
+}
+/*Non-TIA Edit Attachments Page*/
+#kn-scene_1024 .kn-back-link {
+  display: none;
+}
+
+/**********************************************/
+/** Remove Back Links for TPW Waiver Request **/
+/**********************************************/
+/*WVR Customer Information Page*/
+#kn-scene_1025 .kn-back-link {
+  display: none;
+}
+/*WVR Project Information Page*/
+#kn-scene_1026 .kn-back-link {
+  display: none;
+}
+/*WVR Add Documentation Page*/
+#kn-scene_1027 .kn-back-link {
+  display: none;
+}
+/*WVR Submit Page*/
+#kn-scene_1028 .kn-back-link {
+  display: none;
+}
+/*WVR Edit Information Page*/
+#kn-scene_1029 .kn-back-link {
+  display: none;
+}
+/*WVR Edit Attachments Page*/
+#kn-scene_1030 .kn-back-link {
+  display: none;
+}
+
 /******************************************/
 /** Remove Back Links for SIF Assessment **/
 /******************************************/
@@ -962,6 +1049,7 @@ a.ang-link:link {text-decoration: none;}
     display: none;
   }
 }
+
 
 /* Hide original Case Details Menu */
 #view_163 {
@@ -1247,3 +1335,23 @@ img.knHeader__logo-image {
     max-width: 800px !important;
   }
 }
+
+/*****************************************************/
+/*** "Go to Top" and "Go to Bottom" Scroll buttons ***/
+/*****************************************************/
+#scroll-buttons {
+  position: fixed;
+  bottom: 0;
+  right: 10px;
+  margin-bottom: 15px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+}
+
+#go-to-top, #go-to-bottom {
+  background: #02539b;
+  color: white;
+  margin-left: 10px;
+}
+
