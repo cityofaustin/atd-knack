@@ -505,7 +505,6 @@ $(document).on("knack-view-render.view_3665", function (event, page, view) {
 
   var records = res.records;
   if (transactionRecord) {
-    // operating under the expectation that there is only one line item to add
     payload["line_items"] = [
       {
         description: transactionRecord["field_3350"],
