@@ -1,7 +1,6 @@
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-const appURL = "test-91724-msp-mobility-services";
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
   var newTab = target_blank ? " target='_blank'" : "" ;
@@ -12,27 +11,31 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_11', function(event, page) {
   // create large AVAILABLE SERVICES button on the PORTAL page
-    bigButton('available-services', 'view_11', `https://atd.knack.com/${appURL}#available-services/`, "list-ul", "Available Services");
+    bigButton('available-services', 'view_11', "https://atd.knack.com/mobility-services#available-services/", "list-ul", "Available Services");
 });
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-    bigButton('available-services', 'view_16', `https://atd.knack.com/${appURL}#portal/`, "child", "Customer Portal");
+    bigButton('available-services', 'view_16', "https://atd.knack.com/mobility-services#portal/", "child", "Customer Portal");
 });
 $(document).on('knack-view-render.view_34', function(event, page) {
   // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
-    bigButton('required-documents-chauffeur', 'view_34', `https://atd.knack.com/${appURL}#chauffeur-permit/required-documents-chauffeur/`, "files-o", "Required Documents");
+    bigButton('required-documents-chauffeur', 'view_34', "https://atd.knack.com/mobility-services#chauffeur-permit/required-documents-chauffeur/", "files-o", "Required Documents");
 });
 $(document).on('knack-view-render.view_36', function(event, page) {
   // create large START APPLICATION button on the CHAUFFEUR page
-    bigButton('start-application', 'view_36', `https://atd.knack.com/${appURL}#application-chauffeur/`, "arrow-right", "Start Chauffeur Application");
+    bigButton('start-application', 'view_36', "https://atd.knack.com/mobility-services#application-chauffeur/", "arrow-right", "Start Chauffeur Application");
 });
 $(document).on('knack-view-render.view_41', function(event, page) {
   // create large SIGN UP or Log-In button on the PORTAL page
-    bigButton('sign-up', 'view_41', `https://atd.knack.com/${appURL}#sign-up`, "sign-in", "Sign up or Log In ");
+    bigButton('sign-up', 'view_41', "https://atd.knack.com/mobility-services#sign-up", "sign-in", "Sign up or Log In ");
 });
 $(document).on('knack-view-render.view_57', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-    bigButton('available-services', 'view_57', `https://atd.knack.com/${appURL}#portal/`, "arrow-right", "Mobility Services Portal");
+    bigButton('available-services', 'view_57', "https://atd.knack.com/mobility-services#portal/", "arrow-right", "Mobility Services Portal");
+});
+$(document).on('knack-view-render.view_383', function(event, page) {
+  // create large START APPLICATION button on the Operating Authority page
+    bigButton('start-application', 'view_383', "https://atd.knack.com/mobility-services#application-operating-authority", "arrow-right", "Start Operating Authority Application");
 });
 
 /***************************************/
@@ -140,6 +143,16 @@ $(document).on('knack-view-render.view_304', function(event, view, data) { // Re
   printMenuButton('view_304'); 
 });
 
+/* Print Operating Authority page Review */
+$(document).on('knack-view-render.view_496', function(event, view, data) { // Company Print
+  printMenuButton('view_496'); 
+});
+
+$(document).on('knack-view-render.view_511', function(event, view, data) { // Company Print
+  printMenuButton('view_511'); 
+});
+
+
 /***************************************
  * Enhance SSO button and hide/show default Knack login form with buttons
  * @parameter {string} viewId - Knack view id to append button link to
@@ -192,27 +205,53 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
-/********************************************/
-/**************** Quiz App ******************/
-/********************************************/
+/***************************************************************************
+ ********************************* QUIZ ************************************
+ ***************************************************************************/
 
-$(document).on('knack-view-render.view_363', function(event, view, data) {
+ $(document).on('knack-view-render.view_584', function(event, view, data) {
+  console.log("Quiz manager script is running!");
+
+  const headers = {
+    'X-Knack-Application-Id': Knack.application_id,
+    'Authorization': Knack.getUserToken(),
+    'Content-Type': 'application/json'
+  };
+
+  // Global state variables
+  let currentQuiz = null;
   let questions = [];
   let currentQuestionIndex = 0;
   let score = 0;
+  let totalQuestions = 0;
 
-  // Add CSS styles
+  /***************************************************************************
+   * CSS STYLES
+   * Defines all styling for quiz components including:
+   * - Container layout
+   * - Quiz selector styling
+   * - Answer button appearance
+   * - Progress bar
+   * - Score display
+   ***************************************************************************/
   $('<style>')
     .prop('type', 'text/css')
     .html(`
       #quiz-container { max-width: 600px; margin: 0 auto; font-family: Arial, sans-serif; }
       #quiz-container h2 { color: #333; }
       #quiz-container h3 { color: #2c3e50; margin-bottom: 20px; }
+      #quiz-selector { margin-bottom: 20px; }
+      #quiz-selector select { 
+        width: 100%; 
+        padding: 10px; 
+        margin-bottom: 10px;
+        border-radius: 5px;
+      }
       #answers button { 
         display: block; width: 100%; padding: 10px; margin-bottom: 10px; 
         background-color: #3498db; color: white; border: none; 
         border-radius: 5px; cursor: pointer; transition: background-color 0.3s;
-        text-align: left; /* Left-justify text */
+        text-align: left;
       }
       #answers button:hover { background-color: #2980b9; }
       #answers button:disabled { background-color: #bdc3c7; cursor: not-allowed; }
@@ -226,76 +265,98 @@ $(document).on('knack-view-render.view_363', function(event, view, data) {
         height: 20px; background-color: #4CAF50; 
         border-radius: 10px; transition: width 0.5s;
       }
+      .score-details {
+        margin-top: 15px;
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .score-details p {
+        margin: 5px 0;
+      }
     `)
     .appendTo('head');
 
-  function log(message, data) {
-    console.log(message, JSON.stringify(data, null, 2));
+  /***************************************************************************
+   * QUIZ DATA FETCHING
+   * Functions to retrieve quiz data from Knack API:
+   * - fetchQuizzes: Gets list of available quizzes
+   * - fetchQuestions: Gets questions for selected quiz
+   * - Includes pagination handling for large question sets
+   ***************************************************************************/
+  function fetchQuizzes() {
+
+    return new Promise((resolve, reject) => {
+      Knack.api.get('objects/object_19/records', {}, function(response) {
+        console.log('Available quizzes:', response);
+        resolve(response.records);
+      }, function(error) {
+        console.error('Failed to fetch quizzes:', error);
+        reject(new Error(`Failed to fetch quizzes: ${error}`));
+      });
+    });
   }
 
-  // This code does not work currently due to headers 
-  function fetchQuestions() {
+  function fetchQuestions(quizId) {
     return new Promise((resolve, reject) => {
       function fetchPage(page = 1, accumulator = []) {
-        $.ajax({
-          url: `https://api.knack.com/v1/objects/object_14/records?page=${page}&rows_per_page=1000`,
-          type: 'GET',
-          headers: {
-            'X-Knack-Application-Id': 'XXXXXXXXXXXXXXXXXXXXX', 
-            'X-Knack-REST-API-KEY': 'XXXXXXXXXXXXXXXXXXXXXXX' 
-          },
-          success: function(response) {
-            log(`API Response (Page ${page}):`, response);
-            if (response && response.records) {
-              const newAccumulator = accumulator.concat(response.records);
-              if (response.current_page < response.total_pages) {
-                fetchPage(page + 1, newAccumulator);
-              } else {
-                processQuestions(newAccumulator);
-              }
+        const filters = [{
+          field: 'field_331',
+          operator: 'is',
+          value: quizId
+        }];
+        
+        Knack.api.get('objects/object_21/records', {
+          page: page,
+          rows_per_page: 1000,
+          filters: filters
+        }, function(response) {
+          if (response && response.records) {
+            const newAccumulator = accumulator.concat(response.records);
+            if (response.current_page < response.total_pages) {
+              fetchPage(page + 1, newAccumulator);
             } else {
-              reject(new Error('Invalid response format'));
+              processQuestions(newAccumulator);
             }
-          },
-          error: function(jqXHR, textStatus, errorThrown) {
-            log('API Error:', { status: jqXHR.status, textStatus, errorThrown });
-            reject(new Error(`Failed to fetch questions: ${textStatus}`));
+          } else {
+            reject(new Error('Invalid response format'));
           }
+        }, function(error) {
+          console.error('API Error:', error);
+          reject(new Error(`Failed to fetch questions: ${error}`));
         });
       }
 
       function processQuestions(records) {
         const mappedQuestions = records.map(record => {
-          log('Processing record:', record);
           const answers = [
-            record.field_196, // A
-            record.field_197, // B
-            record.field_198, // C
-            record.field_199, // D
-            record.field_200, // E
-            record.field_201, // F
-            record.field_202  // G
-          ].filter(answer => answer); // Remove empty answers
+            record.field_323, // A
+            record.field_324, // B
+            record.field_325, // C
+            record.field_326, // D
+            record.field_327, // E
+            record.field_328, // F
+            record.field_329  // G
+          ].filter(answer => answer);
 
-          const correctAnswer = record.field_203;
+          const correctAnswer = record.field_330;
           if (!['A', 'B', 'C', 'D', 'E', 'F', 'G'].includes(correctAnswer)) {
-            log('Warning: Invalid correct answer', correctAnswer);
-            return null; // Skip this question
+            console.warn('Warning: Invalid correct answer', correctAnswer);
+            return null;
           }
 
           return {
-            question: record.field_195,
+            id: record.id,
+            questionNumber: record.field_321,
+            question: record.field_322,
             answers: answers,
-            correctAnswer: correctAnswer
+            correctAnswer: correctAnswer,
+            quizId: record.field_331
           };
-        }).filter(q => q !== null); // Remove any skipped questions
+        }).filter(q => q !== null);
 
-        log('Total mapped questions:', mappedQuestions.length);
-        log('Mapped questions:', mappedQuestions);
-        
-        if (mappedQuestions.length !== 25) {
-          log('Warning: Expected 25 questions, but got', mappedQuestions.length);
-        }
+        console.log('Mapped questions for quiz:', mappedQuestions);
         resolve(mappedQuestions);
       }
 
@@ -303,98 +364,274 @@ $(document).on('knack-view-render.view_363', function(event, view, data) {
     });
   }
 
+  /***************************************************************************
+   * QUIZ RESULTS HANDLING
+   * Manages saving quiz results to Knack:
+   * - Saves score, timestamp (UTC-6), and attempt information
+   * - Handles API response and error states
+   ***************************************************************************/
+  function saveQuizResults(correctAnswers, totalQuestions) {
+    const userId = Knack.getUserAttributes().id;
+    const percentage = (correctAnswers / totalQuestions) * 100;
+    
+    const now = new Date();
+    const sixHoursInMs = 6 * 60 * 60 * 1000;
+    const adjustedTime = new Date(now.getTime() - sixHoursInMs);
+    
+    const data = {
+      field_332: [userId],
+      field_333: adjustedTime.toISOString(),
+      field_334: percentage,
+      field_335: correctAnswers.toString(),
+      field_336: totalQuestions.toString(),
+      field_337: [currentQuiz.id]
+    };
+
+    Knack.api.post('objects/object_22/records', data, function(response) {
+      console.log('Quiz results saved successfully:', response);
+    }, function(error) {
+      console.error('Failed to save quiz results:', error);
+      alert('Failed to save quiz results. Check browser console for details.');
+    });
+  }
+
+  /***************************************************************************
+   * QUIZ DISPLAY AND INTERACTION
+   * Core quiz functionality including:
+   * - Question display and randomization
+   * - Answer handling
+   * - Progress tracking
+   * - Score calculation
+   ***************************************************************************/
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
+    return array;
   }
 
   function displayQuestion() {
-    if (currentQuestionIndex < questions.length) {
-      const question = questions[currentQuestionIndex];
-      log('Displaying question:', question);
-      const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-      $('#quiz-container').html(`
-        <div id="progress">
-          Question ${currentQuestionIndex + 1} of ${questions.length}
-          <div id="progress-bar">
-            <div id="progress-bar-inner" style="width: ${progress}%;"></div>
-          </div>
-        </div>
-        <h3>${question.question}</h3>
-        <div id="answers"></div>
-        <div id="result"></div>
+    const question = questions[currentQuestionIndex];
+    const progressPercent = (currentQuestionIndex / questions.length) * 100;
+    
+    $('#quiz-container').html(`
+      <div id="progress">Question ${currentQuestionIndex + 1} of ${questions.length}</div>
+      <div id="progress-bar">
+        <div id="progress-bar-inner" style="width: ${progressPercent}%"></div>
+      </div>
+      <h3>${question.question}</h3>
+      <div id="answers"></div>
+    `);
+
+    const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+    question.answers.forEach((answer, index) => {
+      $('#answers').append(`
+        <button data-answer="${letters[index]}">${letters[index]}. ${answer}</button>
       `);
-      const $answersContainer = $('#answers');
-      question.answers.forEach((answer, index) => {
-        $('<button>')
-          .text(answer)
-          .on('click', () => checkAnswer(index))
-          .appendTo($answersContainer);
-      });
+    });
+
+    $('#answers button').click(function() {
+      const selectedAnswer = $(this).data('answer');
+      checkAnswer(selectedAnswer);
+    });
+  }
+
+  function checkAnswer(selectedAnswer) {
+    const question = questions[currentQuestionIndex];
+    if (selectedAnswer === question.correctAnswer) {
+      score++;
+    }
+
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+      displayQuestion();
     } else {
       endQuiz();
     }
   }
 
-  function checkAnswer(selectedIndex) {
-    const question = questions[currentQuestionIndex];
-    log('Checking answer:', { question, selectedIndex });
-    const correctAnswerIndex = ['A', 'B', 'C', 'D', 'E', 'F', 'G'].indexOf(question.correctAnswer);
-    log('Correct answer index:', correctAnswerIndex);
-    
-    if (correctAnswerIndex === -1) {
-      log('Error: Invalid correct answer', question.correctAnswer);
-      $('#result').html('<p style="color: red;">Error: Unable to determine correct answer</p>');
-    } else if (selectedIndex === correctAnswerIndex) {
-      score++;
-      $('#result').html('<p style="color: green;">Correct!</p>');
-    } else {
-      $('#result').html(`
-        <p style="color: red;">Incorrect</p>
-        <p>The correct answer is: ${question.answers[correctAnswerIndex]}</p>
-      `);
-    }
-    $('#answers button').prop('disabled', true);
-    setTimeout(() => {
-      currentQuestionIndex++;
-      displayQuestion();
-    }, 1000); // 1 seconds delay
-  }
-
-  function endQuiz() {
+  /***************************************************************************
+   * QUIZ COMPLETION AND RESULTS
+   * Handles end-of-quiz operations:
+   * - Final score calculation
+   * - Results display
+   * - Attempt tracking
+   * - Return to quiz selection
+   ***************************************************************************/
+  async function endQuiz() {
     const percentage = (score / questions.length) * 100;
+    const userId = Knack.getUserAttributes().id;
+    
+    // Get current attempts
+    const attemptsResponse = await 
+    $.ajax({
+      url: `https://api.knack.com/v1/objects/object_22/records?filters=[{"field":"field_332","operator":"is","value":"${userId}"}]`,
+      type: 'GET',
+      headers: headers
+    });
+
+    const attempts = attemptsResponse.records.filter(record => 
+      record.field_337_raw && record.field_337_raw.length && 
+      record.field_337_raw[0].id === currentQuiz.id
+    );
+
+    const remainingAttempts = 3 - attempts.length;
+    const attemptsMessage = percentage < 72 ? 
+      `<p class="attempts-remaining">You have ${remainingAttempts - 1} attempts remaining for this quiz.</p>` : '';
+
     $('#quiz-container').html(`
       <h2>Quiz Complete!</h2>
-      <p>You scored ${score} out of ${questions.length} (${percentage.toFixed(2)}%)</p>
-      <button id="restart-quiz">Restart Quiz</button>
+      <div class="score-details">
+        <p>Quiz: ${currentQuiz.field_319}</p>
+        <p>Correct Answers: ${score} out of ${questions.length}</p>
+        <p>Score: ${percentage.toFixed(1)}%</p>
+        ${attemptsMessage}
+      </div>
+      <button id="return-button" style="margin-top: 20px;">Back to Quiz Home</button>
     `);
-    $('#restart-quiz').on('click', initializeQuiz);
+
+    saveQuizResults(score, questions.length);
+
+    $('#return-button').click(function() {
+      initializeQuiz();
+    });
   }
 
-  function initializeQuiz() {
-    currentQuestionIndex = 0;
-    score = 0;
-    $('#quiz-container').html('<p>Loading quiz...</p>');
-    fetchQuestions()
-      .then(function(fetchedQuestions) {
-        questions = fetchedQuestions;
-        log('Fetched questions:', questions);
-        if (questions.length === 0) {
-          throw new Error('No questions fetched');
+  /***************************************************************************
+   * QUIZ INITIALIZATION AND STATE MANAGEMENT
+   * Main control flow for quiz system:
+   * - Initial setup and quiz selection
+   * - Attempt validation
+   * - 24-hour waiting period enforcement
+   * - Maximum attempts (3) enforcement
+   * - Error handling
+   ***************************************************************************/
+  async function initializeQuiz() {
+    try {
+      // Show loading state immediately
+      $('#quiz-container').html(`
+        <div style="text-align: center; padding: 20px;">
+          <h2>Loading quizzes...</h2>
+        </div>
+      `);
+
+      const userId = Knack.getUserAttributes().id;
+      const selectedQuiz = new URLSearchParams(window.location.search).get('quiz');
+      
+      // Run API calls in parallel
+      const [attemptsResponse, quizzes] = await Promise.all([
+        new Promise((resolve, reject) => {
+          const filters = [{
+            field: 'field_332',
+            operator: 'is',
+            value: userId
+          }];
+          
+          Knack.api.get('objects/object_22/records', {
+            filters: filters
+          }, function(response) {
+            resolve(response);
+          }, function(error) {
+            reject(error);
+          });
+        }),
+        fetchQuizzes()
+      ]);
+      
+      // Render quiz selector
+      $('#quiz-container').html(`
+        <div id="quiz-selector">
+          <h2>Select a Quiz</h2>
+          <select id="quiz-select">
+            <option value="">Choose a quiz...</option>
+            ${quizzes.map(quiz => `
+              <option value="${quiz.id}" ${selectedQuiz === quiz.id ? 'selected' : ''}>${quiz.field_319}</option>
+            `).join('')}
+          </select>
+        </div>
+      `);
+
+      $('#quiz-select').change(async function() {
+        const selectedQuizId = $(this).val();
+        if (selectedQuizId) {
+          // Check attempts for selected quiz
+          const attempts = attemptsResponse.records.filter(record => 
+            record.field_337_raw && record.field_337_raw.length && 
+            record.field_337_raw[0].id === selectedQuizId
+          );
+
+          // Get most recent attempt with UTC-6 time comparison
+          const sortedAttempts = attempts.sort((a, b) => 
+            new Date(b.field_333) - new Date(a.field_333)
+          );
+
+          if (sortedAttempts.length > 0) {
+            const lastAttemptTime = new Date(sortedAttempts[0].field_333).getTime();
+            const currentTime = new Date().getTime();
+            const hoursSinceLastAttempt = (currentTime - lastAttemptTime) / (1000 * 60 * 60);
+
+            console.log('Last attempt:', new Date(lastAttemptTime).toLocaleString());
+            console.log('Current time:', new Date(currentTime).toLocaleString());
+            console.log('Hours since last attempt:', hoursSinceLastAttempt);
+
+            if (hoursSinceLastAttempt < 24) {
+              const hoursRemaining = Math.ceil(24 - hoursSinceLastAttempt);
+              const attemptsRemaining = 3 - attempts.length;
+              $('#quiz-container').html(`
+                <div class="error">
+                  <h2>Waiting Period Required</h2>
+                  <p>Please wait ${hoursRemaining} more hours before attempting this quiz again.</p>
+                  <p>You have ${attemptsRemaining} attempt${attemptsRemaining !== 1 ? 's' : ''} remaining for this quiz.</p>
+                  <button id="return-button" style="margin-top: 20px;">Back to Quiz Home</button>
+                </div>
+              `);
+              $('#return-button').click(function() {
+                initializeQuiz();
+              });
+              return;
+            }
+          }
+
+          if (attempts.length >= 3) {
+            $('#quiz-container').html(`
+              <div class="error">
+                <h2>Maximum Attempts Reached</h2>
+                <p>You have already attempted this quiz 3 times.</p>
+                <p>Please contact staff for instructions on retesting at a later date.</p>
+                <button id="return-button" style="margin-top: 20px;">Back to Quiz Home</button>
+              </div>
+            `);
+            $('#return-button').click(function() {
+              initializeQuiz();
+            });
+            return;
+          }
+          
+          currentQuiz = quizzes.find(q => q.id === selectedQuizId);
+          questions = await fetchQuestions(selectedQuizId);
+          questions = shuffleArray(questions);
+          currentQuestionIndex = 0;
+          score = 0;
+          displayQuestion();
         }
-        if (questions.length !== 25) {
-          log('Warning: Expected 25 questions, but got ' + questions.length);
-        }
-        shuffleArray(questions);
-        displayQuestion();
-      })
-      .catch(function(error) {
-        console.error('Error initializing quiz:', error);
-        $('#quiz-container').html(`<p>Error loading quiz: ${error.message}. Please try again later.</p>`);
       });
+
+      // Auto-select quiz if passed in URL
+      if (selectedQuiz) {
+        $('#quiz-select').val(selectedQuiz).trigger('change');
+      }
+
+    } catch (error) {
+      console.error('Failed to initialize quiz:', error);
+      $('#quiz-container').html(`
+        <div class="error">
+          Failed to load quiz. Please try again later.
+        </div>
+      `);
+    }
   }
 
+  // Initialize the quiz when the view loads
   initializeQuiz();
 });

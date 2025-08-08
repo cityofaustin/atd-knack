@@ -89,10 +89,36 @@ $(document).on("knack-view-render.view_127", function(event, page) {
     "https://atd.knack.com/parking-enterprise#home/officer-citation-tracking/", 
     "exclamation-circle", 
     "Officer Citation Tracking"
-   );
-  
+    );
 });
 
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadCrumbsNonAdmin() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+/*Multi Day Request Page*/
+$(document).on("knack-scene-render.scene_298", function () {
+  disableBreadCrumbsNonAdmin();
+});
+/*Daily Details Page*/
+$(document).on("knack-scene-render.scene_299", function () {
+  disableBreadCrumbsNonAdmin();
+});
+/*Confirmation Page*/
+$(document).on("knack-scene-render.scene_300", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
+/********************************************/
+/***************** Iframes ******************/
+/********************************************/
 $(document).on("knack-scene-render.scene_113", function (event, page) {
   // CSR issue - signs details
   // update iframe src from detail field
@@ -111,6 +137,9 @@ $(document).on("knack-scene-render.scene_185", function (event, page) {
   $("#view_354").hide();
 });
 
+/********************************************/
+/*************** Color Mapping **************/
+/********************************************/
 function changeFieldColor(field, color_map) {
   var child_field = $(field).find(".kn-detail-body");
   var value = child_field.text();
@@ -149,5 +178,5 @@ var colorMapServiceRequestsStatus = {
 $(document).on("knack-scene-render.any", function() {
   //  My Assignments | My Status
   changeFieldColor(".field_236", colorMapOne);
-
 });
+
