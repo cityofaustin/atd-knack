@@ -104,14 +104,14 @@ function showCharacterLimit(view_id, field_id, charLimit) {
 const textBoxFieldIDs = [48, 49, 52, 53, 76, 86, 56]; // lists paragraph fields
 /* Character limit */
 for (let i = 0; i < textBoxFieldIDs.length; i++) {
-  showCharacterLimit("view_83", "field_" + textBoxFieldIDs[i], 500); // background info page view
-  showCharacterLimit("view_155", "field_" + textBoxFieldIDs[i], 500); // edit application page view
+  showCharacterLimit("view_83", "field_" + textBoxFieldIDs[i], 500);  // Background Info page view
+  showCharacterLimit("view_155", "field_" + textBoxFieldIDs[i], 500); // Edit Application page view
 }
 
 /********************************************************/
 /** Relabel Attachment Links in Tables to Name Field **/
 /********************************************************/
-//  replace attachment file name with name field. hide_name to hide nameField from tabl
+//  replace attachment file name with name field. hide_name to hide nameField from table
 function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_name = true) {
   //  find each attachment cell
   $("td." + fileFieldId).each(function() {
