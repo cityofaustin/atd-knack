@@ -149,6 +149,8 @@ img.knHeader__logo-image {
 /*******************************************/
 /************ Wrap Table Headers ***********/
 /*******************************************/
-#view_133 th, #view_147 th {
+#view_133 th,   /* Search My Herbicide Report           */
+#view_147 th    /* Search Contractor | Herbicide Report */
+{
   white-space:normal;
 }
