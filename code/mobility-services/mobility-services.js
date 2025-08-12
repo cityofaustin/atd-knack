@@ -117,15 +117,15 @@ function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_n
   $("td." + fileFieldId).each(function() {
     //  find each attachment link within the cell
     $(this).find("span").children("span").each(function() {
-      var attachmentType = "View";
-      var fileRecordId = $(this).context.id;
+      let attachmentType = "View";
+      let fileRecordId = $(this).context.id;
 
       //  if neighboring field exists on same table, retrieve the corresponding type
       $(this).closest("tr").children("td." + nameFieldId)
         .find("span")
         .children("span")
         .each(function() {
-          var nameRecordId = $(this).context.id;
+          let nameRecordId = $(this).context.id;
           if (fileRecordId == nameRecordId) {
             attachmentType = $(this).text();
           }
