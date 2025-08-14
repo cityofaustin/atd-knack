@@ -12,15 +12,15 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_11', function(event, page) {
   // create large AVAILABLE SERVICES button on the PORTAL page
-  bigButton('available-services', 'view_11', `${APP_URL}#available-services/`, "list-ul", "Available Services");
+  bigButton('available-services', 'view_11', `${APP_URL}#available-services/`, 'list-ul', 'Available Services');
 });
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-  bigButton('available-services', 'view_16', `${APP_URL}#portal/`, "child", "Customer Portal");
+  bigButton('available-services', 'view_16', `${APP_URL}#portal/`, 'child', 'Customer Portal');
 });
 $(document).on('knack-view-render.view_34', function(event, page) {
   // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
-  bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, "files-o", "Required Documents");
+  bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, 'files-o', 'Required Documents');
 });
 $(document).on('knack-view-render.view_36', function(event, page) {
   // create large START APPLICATION button on the CHAUFFEUR page
@@ -28,15 +28,15 @@ $(document).on('knack-view-render.view_36', function(event, page) {
 });
 $(document).on('knack-view-render.view_41', function(event, page) {
   // create large SIGN UP or Log-In button on the PORTAL page
-  bigButton('sign-up', 'view_41', `${APP_URL}#sign-up`, "sign-in", "Sign up or Log In ");
+  bigButton('sign-up', 'view_41', `${APP_URL}#sign-up`, 'sign-in', 'Sign up or Log In');
 });
 $(document).on('knack-view-render.view_57', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-  bigButton('available-services', 'view_57', `${APP_URL}#portal/`, "arrow-right", "Mobility Services Portal");
+  bigButton('available-services', 'view_57', `${APP_URL}#portal/`, 'arrow-right', 'Mobility Services Portal');
 });
 $(document).on('knack-view-render.view_383', function(event, page) {
   // create large START APPLICATION button on the Operating Authority page
-  bigButton('start-application', 'view_383', `${APP_URL}#application-operating-authority`, "arrow-right", "Start Operating Authority Application");
+  bigButton('start-application', 'view_383', `${APP_URL}#application-operating-authority`, 'arrow-right', 'Start Operating Authority Application');
 });
 
 /***************************************/
