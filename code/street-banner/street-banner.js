@@ -473,7 +473,7 @@ $(document).on("knack-view-render.view_3664", function (event, page, view) {
       },
       {
         key: "parent_record_id",
-        value: String(transactionRecord["field_3326_raw"][0]["identifier"]),
+        value: String(transactionRecord["field_3326_raw"][0]["id"]),
       },
       {
         key: "knack_app",
