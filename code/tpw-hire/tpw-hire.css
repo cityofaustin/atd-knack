@@ -2,9 +2,9 @@
 /*********** Sticky Table Headers ***********/
 /********************************************/
 thead {
-  position:sticky;
-  top:0px;
-  z-index:7;
+  position: sticky;
+  top: 0px;
+  z-index: 7;
   border-style: solid;
   border-width: 0px 1px 0px 1px;
   border-color: #dddddd;
@@ -30,8 +30,8 @@ tr {
   left: 0;
   z-index: 6; /* Increase z-index to be higher priority than the header(lower #) */
   background-color: #f9f9f9;
-  }
-  /*****************/
+}
+/*****************/
 /* Big Buttons */
 /*****************/
 .big-button-container {
@@ -78,6 +78,107 @@ a.big-button-container {
 
 a.small-button {
   text-decoration: none;
+}
+
+/********************************************/
+/*********** Progress Bar Styles ***********/
+/********************************************/
+
+/* Main progress bar container */
+.progress-container {
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+/* Progress bar title */
+.progress-title {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #495057;
+}
+
+/* Progress text */
+.progress-text {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #6c757d;
+}
+
+/* Progress bar background track */
+.progress-track {
+  background: #e9ecef;
+  border-radius: 10px;
+  height: 20px;
+  overflow: hidden;
+}
+
+/* Progress bar fill */
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 10px;
+  position: relative;
+}
+
+/* Progress bar fill - Create operation (green) */
+.progress-fill-create {
+  background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+/* Progress bar fill - Delete operation (red) */
+.progress-fill-delete {
+  background: linear-gradient(90deg, #dc3545, #fd7e14);
+}
+
+/* Progress bar fill - Warning state (orange) */
+.progress-fill-warning {
+  background: linear-gradient(90deg, #ffc107, #fd7e14);
+}
+
+/* Progress percentage text */
+.progress-percentage {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* Progress statistics container */
+.progress-stats {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #6c757d;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Progress stat items */
+.progress-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Success icon color */
+.progress-stat-success {
+  color: #28a745;
+}
+
+/* Failed icon color */
+.progress-stat-failed {
+  color: #dc3545;
+}
+
+/* Remaining icon color */
+.progress-stat-remaining {
+  color: #6c757d;
 }
 
 /*********************************************/
@@ -138,4 +239,19 @@ img.knHeader__logo-image {
     width: 80% !important; /* Medium width on medium screens */
     max-width: 800px !important;
   }
+}
+
+/********************************************/
+/*********** Custom Message Styles **********/
+/********************************************/
+
+/* Warning message for regenerate mode */
+.regenerate-warning-message {
+  margin: 10px 0;
+  padding: 10px;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 5px;
+  color: #856404;
+  font-size: 14px;
 }
