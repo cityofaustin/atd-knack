@@ -338,3 +338,32 @@ $(document).on('knack-record-delete.view_874', function (event, view, data) {
   refreshView('view_876'); // Other Affidavit table
   refreshView('view_464'); // Additional People table in case holder is also a driver
 });
+
+/*******************************************/
+/*** Disable Breadcrumb Navigation Links ***/
+/*******************************************/
+function disableBreadCrumbsNonAdmin() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+let sceneIdDisable = [
+  198,  // Submitted Operating Authority
+  209,  // 1 - Service Type
+  235,  // 2 - Business Information
+  239,  // 3 - Insurance
+  241,  // 4 - Addtional People
+  245,  // 5 - Vehicle Information
+  250,  // 6 - Review and Submit
+  288   // 7 - Add Notary
+];
+
+// Pages to disable crumbtrail
+for (let s in sceneIdDisable) {
+  $(document).on('knack-scene-render.scene_' + sceneIdDisable[s], function () {
+    disableBreadCrumbsNonAdmin();
+  });
+};

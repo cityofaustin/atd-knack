@@ -217,7 +217,6 @@ a.trigger-button-large {
 }
 
 /***************************************/
-/***************************************/
 /************* Big Buttons *************/
 /***************************************/
 .big-button-container {
@@ -244,10 +243,32 @@ a.big-button-container {
   text-decoration: none;
 }
 
-/****************************************/
-/************ Button Effects ************/
-/****************************************/
-/* .disabled { cursor: not-allowed; } // disabled for visual bug in big trigger button */
+/**************************************/
+/***** Validation Message Styling *****/
+/**************************************/
+.kn-notification, .is-confirmation, .is-warning, .is-alert { 
+  color: black !important;
+}
+
+.kn-notification  { background-color: #c0f1f7 !important; }
+.is-confirmation  { background-color: #caf4bc !important; }
+.is-warning       { background-color: #ffe09a !important; }
+.is-alert         { background-color: #ff9b9c !important; }
+
+/**************************************/
+/***** Remove Back Links on Scene *****/
+/**************************************/
+#kn-scene_198 .kn-back-link,    /* Submitted OA            */
+#kn-scene_209 .kn-back-link,    /* 1 - Service Type        */
+#kn-scene_235 .kn-back-link,    /* 2 - Business Info       */
+#kn-scene_239 .kn-back-link,    /* 3 - Insurance           */
+#kn-scene_241 .kn-back-link,    /* 4 - Additional People   */
+#kn-scene_245 .kn-back-link,    /* 5 - Vehicle Information */
+#kn-scene_250 .kn-back-link,    /* 6 - Review and Submit   */
+#kn-scene_288 .kn-back-link     /* 7 - Add Notary          */
+{
+  display: none;
+}
 
 /***************************************/
 /********* FA Icon Positioning *********/
@@ -294,6 +315,7 @@ a.small-button {
     display: none;
   }
 }
+
 
 /* hide knack menu buttons if on desktop */
 @media (min-width: 770px) {
@@ -480,7 +502,8 @@ a.small-button {
   display: none;
 }
 @media print {
-  #view_614 {
+  #view_846,
+  #view_920 {
     display: none;
   }
   #view_640,
