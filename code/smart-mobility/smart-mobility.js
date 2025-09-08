@@ -251,7 +251,7 @@ $(document).on("knack-view-render.view_817", function (event, page, view) {
       {
         description: transactionRecord["field_819"],
         amount: transactionRecord["field_833_raw"] * 100,
-        sub_description: transactionRecord["field_819"], // does not exist on NBP, is it needed?
+        sub_description: transactionRecord["field_849"],
         custom_attributes: [
           {
             key: "knack_record_id",
