@@ -128,6 +128,66 @@ $(document).on("knack-view-render.view_1385", function(event, page) {
   bigButton("task-board", "view_1385", "https://atd.knack.com/row#task-board/my-tasks", "tasks", "Go to My Tasks");
 });
 
+// create large DAPCZ Meeting button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1526", function(event, page) {
+  bigButton("manage-dapcz-meetings", "view_1526", "https://atd.knack.com/row#manage-dapcz-meetings/", "microphone", "DAPCZ Meeting");
+});
+
+// create large DAPCZ Project button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1527", function(event, page) {
+  bigButton("manage-dapcz-project", "view_1527", "https://atd.knack.com/row#manage-dapcz-project/", "cubes", "DAPCZ Projects");
+});
+
+// create large DAPCZ Contacts button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1528", function(event, page) {
+  bigButton("manage-dapcz-contacts", "view_1528", "https://atd.knack.com/row#manage-dapcz-contacts/", "users", "DAPCZ Contacts");
+});
+
+// create large DAPCZ Resources button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1529", function(event, page) {
+  bigButton("manage-dapcz-resources", "view_1529", "https://atd.knack.com/row#manage-dapcz-resources/", "book", "DAPCZ Resources");
+});
+
+// create large DAPCZ Public Portal button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1593", function(event, page) {
+  bigButton("dapcz-meeting", "view_1593", "https://atd.knack.com/row#dapcz-meeting/", "slideshare", "DAPCZ Public Portal");
+});
+
+// create large Manage DAPCZ Links button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1594", function(event, page) {
+  bigButton("manage-links", "view_1594", "https://atd.knack.com/row#manage-links/", "link", "Manage Links");
+});
+
+// create large Manage DAPCZ Meeting Schedule button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1595", function(event, page) {
+  bigButton("manage-schedule", "view_1595", "https://atd.knack.com/row#manage-schedule", "calendar", "Manage Schedule");
+});
+
+// create large DAPCZ Public Portal button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1597", function(event, page) {
+  bigButton("dapcz-meeting", "view_1597", "https://atd.knack.com/row#dapcz-meeting/", "slideshare", "DAPCZ Public Portal");
+});
+
+// create large DAPCZ Agenda button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1505", function(event, page) {
+  bigButton("dapcz-agenda", "view_1505", "https://atd.knack.com/row#dapcz-meeting/dapcz-agenda/", "file-o", "DAPCZ Agenda");
+});
+
+// create large DAPCZ Project List button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1506", function(event, page) {
+  bigButton("dapcz-project-list", "view_1506", "https://atd.knack.com/row#dapcz-meeting/dapcz-project-list/", "list-ul", "DAPCZ Project List");
+});
+
+// create large DAPCZ Links button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1507", function(event, page) {
+  bigButton("dapcz-links", "view_1507", "https://atd.knack.com/row#dapcz-meeting/dapcz-links/", "link", "DAPCZ Links & Resources");
+});
+
+// create large DAPCZ Meeting Schedule button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1508", function(event, page) {
+  bigButton("dapcz-meeting-schedule", "view_1508", "https://atd.knack.com/row#dapcz-meeting/dapcz-meeting-schedule", "calendar", "DAPCZ Meeting Schedule");
+});
+
 /********************************************/
 /*********** Large Submit Buttons ***********/
 /********************************************/
@@ -241,6 +301,11 @@ $(document).on("knack-scene-render.scene_583", function () {
   disableBreadCrumbsNonAdmin();
 });
 
+//Cycle Builder Add Documentation page
+$(document).on("knack-scene-render.scene_601", function () {
+  disableBreadCrumbsNonAdmin();
+});
+
 /*******************************************************************************/
 /*** Disable Breadcrumb Navigation Links for TCP Conflict/Shared TCP Request ***/
 /*******************************************************************************/
@@ -333,7 +398,11 @@ window.location.href = "https://atd.knack.com/row#task-board/my-tasks/";
 /*** Autosubmit Form Pages ***/
 /*****************************/
 
-/* Auto Submit New TCP Submission Cycle */
+/* Auto Submit New TCP Intake Submission Cycle */
+$(document).on('knack-scene-render.scene_589', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Auto Submit New TCP Review Submission Cycle */
 $(document).on('knack-scene-render.scene_411', function(event, scene) {
     $('button[type=submit]').submit();
 });
@@ -342,7 +411,11 @@ $(document).on('knack-scene-render.scene_417', function(event, scene) {
     $('button[type=submit]').submit();
 });
 
-/* Auto Submit Begin Review for TCP Submissions */
+/* Auto Submit Begin Review for TCP Intake Submission Cycle */
+$(document).on('knack-scene-render.scene_593', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+/* Auto Submit Begin Review for TCP Review Submission Cycle */
 $(document).on('knack-scene-render.scene_378', function(event, scene) {
     $('button[type=submit]').submit();
 });
@@ -541,3 +614,77 @@ $(`<div class="mobile-details-dropdown-menu">\
     </ul>\
   </div>`).appendTo("#view_1176")
 })
+
+// /***************************************************************/
+// /*** Autopopulate Submitting Organization for Creating Cases ***/
+// /***************************************************************/
+// function populateConnectionFromDetails({
+//   detailsViewId,
+//   detailsFieldId,
+//   formViewId,
+//   connFieldId,
+// }) {
+//   // Select and clone the original ID
+//   var $matchRegSelect = $(`#${formViewId}-${connFieldId}`);
+//   // Get this form's record ID from the submit button
+//   var thisRecordId = $(".kn-submit").find("input").val();
+
+//   if ($matchRegSelect.val() === thisRecordId) {
+//     // nothing to do — correct value is set
+//     return;
+//   }
+
+//   var thisRecordLabel = $(`#${detailsViewId}`)
+//     .find(`.kn-detail.${detailsFieldId}`)
+//     .find(".kn-detail-body")
+//     .text();
+
+//   // Update placeholder option with value of original ID
+//   var $placeholderOption = $matchRegSelect.find("option");
+//   $placeholderOption.val(thisRecordId);
+//   $placeholderOption.text(thisRecordLabel);
+
+//   // Disable this listener so we don't get an endless loop when we fire off one last change
+//   $matchRegSelect.off("change");
+//   // Update this select with the original ID as its value
+//   $matchRegSelect.val(thisRecordId).change();
+
+//   // Update the span that normally prompts the type to search with the readable ID
+//   var $placeholderTextSpan = $(
+//     `div#${formViewId}_${connFieldId}_chzn > a > span`
+//   );
+//   $placeholderTextSpan.text(thisRecordLabel);
+// }
+
+// // we need this global var to share interval state across functions
+// var prevIntervalId;
+
+// /*** Create TCP Project Page ***/
+// $(document).on("knack-scene-render.scene_463", function () {
+//   if (prevIntervalId) {
+//     clearInterval(prevIntervalId);
+//   }
+//   prevIntervalId = setInterval(function () {
+//     populateConnectionFromDetails({
+//       detailsViewId: "view_1139",
+//       detailsFieldId: "field_998", /*Connected Organization - Account object*/
+//       formViewId: "view_1073",
+//       connFieldId: "field_1096", /*Submitting Organization*/
+//     });
+//   }, 250);
+// });
+
+// /*** Create CSWZ Request Page ***/
+// $(document).on("knack-scene-render.scene_465", function () {
+//   if (prevIntervalId) {
+//     clearInterval(prevIntervalId);
+//   }
+//   prevIntervalId = setInterval(function () {
+//     populateConnectionFromDetails({
+//       detailsViewId: "view_1140",
+//       detailsFieldId: "field_998", /*Connected Organization - Account object*/
+//       formViewId: "view_1077",
+//       connFieldId: "field_1142", /*Submitting Organization*/
+//     });
+//   }, 250);
+// });
