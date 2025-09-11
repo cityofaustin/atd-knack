@@ -479,7 +479,13 @@ a.ang-link:link {text-decoration: none;}
 #kn-scene_773 #view_1705 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #163f6e; border-width: 2px; }
 #kn-scene_773 #view_1705 .kn-detail-label { background-color: transparent; min-width: 0% !important; } */
 
-/*Draft Review Details Header*/
+/*Draft Editor Details Header - Draft PDF Button Link*/
+#kn-scene_658 #view_1767 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
+  box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
+#kn-scene_658 #view_1767 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; }
+#kn-scene_658 #view_1767 .kn-detail-label { background-color: transparent; min-width: 0% !important; }
+
+/*Draft Review Details Header - Draft PDF Button Link*/
 #kn-scene_673 #view_1478 div.kn-detail { padding: 1px 2px; border-style: solid; border-width: 1px; border-color: #dd4d4d; border-radius: 8px; 
   box-shadow: 0px 0px 0px 0px gray; font-size: 1.25em; background-color: #ebebeb; color: #163f6e; text-align: left; min-width: 190px !important; max-width: 27% !important; }
 #kn-scene_673 #view_1478 div.kn-detail:hover { opacity: 0.9; cursor: pointer; border-color: #dd4d4d; border-width: 2px; }
