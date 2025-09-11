@@ -301,11 +301,6 @@ $(document).on("knack-scene-render.scene_583", function () {
   disableBreadCrumbsNonAdmin();
 });
 
-//Cycle Builder Add Documentation page
-$(document).on("knack-scene-render.scene_601", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
 /*******************************************************************************/
 /*** Disable Breadcrumb Navigation Links for TCP Conflict/Shared TCP Request ***/
 /*******************************************************************************/
@@ -398,10 +393,6 @@ window.location.href = "https://atd.knack.com/row#task-board/my-tasks/";
 /*** Autosubmit Form Pages ***/
 /*****************************/
 
-/* Auto Submit New TCP Intake Submission Cycle */
-$(document).on('knack-scene-render.scene_589', function(event, scene) {
-    $('button[type=submit]').submit();
-});
 /* Auto Submit New TCP Review Submission Cycle */
 $(document).on('knack-scene-render.scene_411', function(event, scene) {
     $('button[type=submit]').submit();
@@ -411,10 +402,6 @@ $(document).on('knack-scene-render.scene_417', function(event, scene) {
     $('button[type=submit]').submit();
 });
 
-/* Auto Submit Begin Review for TCP Intake Submission Cycle */
-$(document).on('knack-scene-render.scene_593', function(event, scene) {
-    $('button[type=submit]').submit();
-});
 /* Auto Submit Begin Review for TCP Review Submission Cycle */
 $(document).on('knack-scene-render.scene_378', function(event, scene) {
     $('button[type=submit]').submit();
@@ -614,77 +601,3 @@ $(`<div class="mobile-details-dropdown-menu">\
     </ul>\
   </div>`).appendTo("#view_1176")
 })
-
-// /***************************************************************/
-// /*** Autopopulate Submitting Organization for Creating Cases ***/
-// /***************************************************************/
-// function populateConnectionFromDetails({
-//   detailsViewId,
-//   detailsFieldId,
-//   formViewId,
-//   connFieldId,
-// }) {
-//   // Select and clone the original ID
-//   var $matchRegSelect = $(`#${formViewId}-${connFieldId}`);
-//   // Get this form's record ID from the submit button
-//   var thisRecordId = $(".kn-submit").find("input").val();
-
-//   if ($matchRegSelect.val() === thisRecordId) {
-//     // nothing to do — correct value is set
-//     return;
-//   }
-
-//   var thisRecordLabel = $(`#${detailsViewId}`)
-//     .find(`.kn-detail.${detailsFieldId}`)
-//     .find(".kn-detail-body")
-//     .text();
-
-//   // Update placeholder option with value of original ID
-//   var $placeholderOption = $matchRegSelect.find("option");
-//   $placeholderOption.val(thisRecordId);
-//   $placeholderOption.text(thisRecordLabel);
-
-//   // Disable this listener so we don't get an endless loop when we fire off one last change
-//   $matchRegSelect.off("change");
-//   // Update this select with the original ID as its value
-//   $matchRegSelect.val(thisRecordId).change();
-
-//   // Update the span that normally prompts the type to search with the readable ID
-//   var $placeholderTextSpan = $(
-//     `div#${formViewId}_${connFieldId}_chzn > a > span`
-//   );
-//   $placeholderTextSpan.text(thisRecordLabel);
-// }
-
-// // we need this global var to share interval state across functions
-// var prevIntervalId;
-
-// /*** Create TCP Project Page ***/
-// $(document).on("knack-scene-render.scene_463", function () {
-//   if (prevIntervalId) {
-//     clearInterval(prevIntervalId);
-//   }
-//   prevIntervalId = setInterval(function () {
-//     populateConnectionFromDetails({
-//       detailsViewId: "view_1139",
-//       detailsFieldId: "field_998", /*Connected Organization - Account object*/
-//       formViewId: "view_1073",
-//       connFieldId: "field_1096", /*Submitting Organization*/
-//     });
-//   }, 250);
-// });
-
-// /*** Create CSWZ Request Page ***/
-// $(document).on("knack-scene-render.scene_465", function () {
-//   if (prevIntervalId) {
-//     clearInterval(prevIntervalId);
-//   }
-//   prevIntervalId = setInterval(function () {
-//     populateConnectionFromDetails({
-//       detailsViewId: "view_1140",
-//       detailsFieldId: "field_998", /*Connected Organization - Account object*/
-//       formViewId: "view_1077",
-//       connFieldId: "field_1142", /*Submitting Organization*/
-//     });
-//   }, 250);
-// });
