@@ -231,6 +231,7 @@ var headers = {
 
 // After the transactions table loads
 $(document).on("knack-view-render.view_817", function (event, page, view) {
+  $('#view_817').hide()
   var transactionRecord = view[0];
 
   var payload = {
