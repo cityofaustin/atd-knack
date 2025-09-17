@@ -1,3 +1,5 @@
+const APPLICATION_ID = "5c4b50a69b19a0085bfd5eec";
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -59,21 +61,18 @@ function getCitybaseButton(payload, viewId){
       body: JSON.stringify(payload),
     })
       .then((response) => {
-        console.log(response.url)
+        console.log("Citybase make payment URL:", response.url)
         bigButton('citybase-payment-button', viewId, response.url, "arrow-right", "Make Payment");
       })
-        // return(response.url)})
-        // window.open(response.url, '_blank').focus();
       .catch((error) => {
         console.error('Error:', error);
-        // not sure what to do if theres an error getting the citybase payload
       });
   }
 
 var knackUserToken = Knack.getUserToken();
 
 var headers = {
-  "X-Knack-Application-Id": "5c4b50a69b19a0085bfd5eec",
+  "X-Knack-Application-Id": APPLICATION_ID,
   "X-Knack-REST-API-KEY": "knack",
   Authorization: knackUserToken,
   "content-type": "application/json",
@@ -428,7 +427,7 @@ $(document).on("knack-view-render.view_3664", function (event, page, view) {
     payload["line_items"] = [
       {
         description: transactionRecord["field_3350"],
-        amount: transactionRecord["field_3342_raw"] * 100,
+        amount: parseInt(transactionRecord["field_3342_raw"] * 100),
         sub_description: transactionRecord["field_3351"],
         custom_attributes: [
           {
@@ -480,7 +479,8 @@ $(document).on("knack-view-render.view_3664", function (event, page, view) {
         value: "STREET_BANNER",
       },
     ];
-    console.log(JSON.stringify(payload));
+    // uncomment line below for debugging
+    // console.log(JSON.stringify(payload));
     getCitybaseButton(payload, "view_3667");
   }
 });
@@ -503,12 +503,11 @@ $(document).on("knack-view-render.view_3665", function (event, page, view) {
     },
   };
 
-  var records = res.records;
   if (transactionRecord) {
     payload["line_items"] = [
       {
         description: transactionRecord["field_3350"],
-        amount: transactionRecord["field_3342_raw"] * 100,
+        amount: parseInt(transactionRecord["field_3342_raw"] * 100),
         sub_description: transactionRecord["field_3351"],
         custom_attributes: [
           {
@@ -560,7 +559,8 @@ $(document).on("knack-view-render.view_3665", function (event, page, view) {
         value: "STREET_BANNER",
       },
     ];
-    console.log(JSON.stringify(payload));
+    // uncomment line below for debugging
+    // console.log(JSON.stringify(payload));
     getCitybaseButton(payload, "view_3666");
   }
 });
