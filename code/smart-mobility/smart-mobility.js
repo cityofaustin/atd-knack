@@ -1,3 +1,5 @@
+const APPLICATION_ID = "618ad3322d11b4002169a6f9";
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -220,7 +222,7 @@ function getCitybaseButton(payload, viewId) {
 var knackUserToken = Knack.getUserToken();
 
 var headers = {
-  "X-Knack-Application-Id": "618ad3322d11b4002169a6f9",
+  "X-Knack-Application-Id": APPLICATION_ID,
   "X-Knack-REST-API-KEY": "knack",
   Authorization: knackUserToken,
   "content-type": "application/json",
