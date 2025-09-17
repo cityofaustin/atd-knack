@@ -203,7 +203,7 @@ function getCitybaseButton(payload, viewId) {
     },
   )
     .then((response) => {
-      console.log(response.url);
+      console.log("Citybase make payment URL:", response.url)
       bigButton(
         "make-payment",
         viewId,
