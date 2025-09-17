@@ -178,16 +178,13 @@ $(document).on("knack-scene-render.scene_284", function () {
   disableBreadCrumbsNonAdmin();
 });
 
-  //***MANAGE WALLET AND MAKE PAYMENT BUTTONS***
+  //*** MANAGE WALLET AND MAKE PAYMENT BUTTONS ***
 $(document).on('knack-view-render.view_804', function(event, page) {
   // create large button on go back to Portal page
   bigButton('manage-wallet', 'view_804', "https://austin-tx-austin-tx.uat.cityba.se/welcome", "credit-card", "Manage Wallet");
-  // bigButton('manage-wallet', 'view_804', "https://atd.knack.com/smart-mobility#living-streets-applicant-portal/", "credit-card", "Manage Wallet");
 });
 $(document).on('knack-view-render.view_806', function(event, page) {
-  // create large button on go back to Portal page
   // *** see the getCitybaseButton function for the invocation of the make payment bigButton function
-  //   bigButton('make-payment', 'view_806', "https://atd.knack.com/smart-mobility#living-streets-applicant-portal/", "arrow-right", "Make Payment");
 });
 
 /** 
