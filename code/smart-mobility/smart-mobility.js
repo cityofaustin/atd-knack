@@ -248,7 +248,7 @@ $(document).on("knack-view-render.view_817", function (event, page, view) {
     payload["line_items"] = [
       {
         description: transactionRecord["field_819"],
-        amount: transactionRecord["field_833_raw"] * 100,
+        amount: parseInt(transactionRecord["field_833_raw"] * 100),
         sub_description: transactionRecord["field_849"],
         custom_attributes: [
           {
@@ -296,7 +296,8 @@ $(document).on("knack-view-render.view_817", function (event, page, view) {
         value: "SMART_MOBILITY",
       },
     ];
-    console.log(JSON.stringify(payload));
+    // uncomment line below for debugging
+    // console.log(JSON.stringify(payload));
     getCitybaseButton(payload, "view_806");
   }
 });
