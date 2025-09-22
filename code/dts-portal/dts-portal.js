@@ -53,11 +53,11 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
-
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
 }
 
@@ -71,20 +71,26 @@ $(document).on("knack-view-render.view_128", function(event, page) {
     bigButton("datasets", "view_128", "https://atd.knack.com/dts#datasets/", "database", "Datasets");
 });
 
-// create large My Equipment button on the home page
-$(document).on("knack-view-render.view_146", function(event, page) {
-    bigButton("equipment", "view_146", "https://atd.knack.com/dts#my-equipment/", "desktop", "My Equipment");
-});
-
 // create large Applications button on the home page
 $(document).on("knack-view-render.view_312", function(event, page) {
     bigButton("applications", "view_312", "https://atd.knack.com/dts#applications/", "laptop", "Applications");
 });
 
-// create large Technician Equipment Tracker button on the home page
-$(document).on("knack-view-render.view_176", function(event, page) {
-    bigButton("all", "view_176", "https://atd.knack.com/dts#technician-equipment-tracker/", "wrench", "Technician Equipment Tracker");
+// create large Knack Directory button on the home page
+$(document).on("knack-view-render.view_374", function(event, page) {
+    bigButton("knack-directory", "view_374", "https://atd.knack.com/dts#knack-directory/", "asterisk", "Knack Directory");
 });
+
+/********************************************/
+/************** Small Buttons ***************/
+/********************************************/
+function smallButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
+  var newTab = target_blank ? " target='_blank'" : "";
+    $( "<a id='" + id + "' class='small-button-container" + disabledClass + " href='" + url + "'" 
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  if (callback) callback();
+}
 
 /********************************************/
 /********* Click Event / Selector ***********/
@@ -100,3 +106,80 @@ function showHideElements(showSelector, hideSelector) {
   $(showSelector).show();
   $(hideSelector).hide();
 }
+
+/*************************************/
+/*** Redirect from Blank Nav Pages ***/
+/*************************************/
+//Knack Directory Pages
+//AMD Data Tracker
+$(document).on('knack-scene-render.scene_200', function(event, scene) { 
+window.location.replace("https://atd.knack.com/amd");
+});
+//Bike Benefit Program
+$(document).on('knack-scene-render.scene_213', function(event, scene) { 
+window.location.replace("https://atd.knack.com/bike-benefit-program");
+});
+//Finance & Purchasing
+$(document).on('knack-scene-render.scene_204', function(event, scene) { 
+window.location.replace("https://atd.knack.com/finance-purchasing");
+});
+//Hiring Resource
+$(document).on('knack-scene-render.scene_208', function(event, scene) { 
+window.location.replace("https://atd.knack.com/tpw-hire");
+});
+//Human Resources
+$(document).on('knack-scene-render.scene_203', function(event, scene) { 
+window.location.replace("https://atd.knack.com/hr");
+});
+//Office of City Engineer
+$(document).on('knack-scene-render.scene_215', function(event, scene) { 
+window.location.replace("https://atd.knack.com/oce");
+});
+//Office of the Director
+$(document).on('knack-scene-render.scene_319', function(event, scene) { 
+window.location.replace("https://atd.knack.com/ood");
+});
+//Parking Enterprise
+$(document).on('knack-scene-render.scene_212', function(event, scene) { 
+window.location.replace("https://atd.knack.com/parking-enterprise");
+});
+//Right of Way
+$(document).on('knack-scene-render.scene_205', function(event, scene) { 
+window.location.replace("https://atd.knack.com/row");
+});
+//Shared Mobility
+$(document).on('knack-scene-render.scene_209', function(event, scene) { 
+window.location.replace("https://atd.knack.com/smrt");
+});
+//Signs & Markings
+$(document).on('knack-scene-render.scene_202', function(event, scene) { 
+window.location.replace("https://atd.knack.com/signs-markings");
+});
+//Smart Mobility
+$(document).on('knack-scene-render.scene_210', function(event, scene) { 
+window.location.replace("https://atd.knack.com/smart-mobility");
+});
+//Street Banners
+$(document).on('knack-scene-render.scene_211', function(event, scene) { 
+window.location.replace("https://atd.knack.com/street-banners");
+});
+//Street and Bridge
+$(document).on('knack-scene-render.scene_216', function(event, scene) { 
+window.location.replace("https://atd.knack.com/sbo");
+});
+//TPW Forms
+$(document).on('knack-scene-render.scene_218', function(event, scene) { 
+window.location.replace("https://atd.knack.com/atd-forms");
+});
+//Traffic Register
+$(document).on('knack-scene-render.scene_207', function(event, scene) { 
+window.location.replace("https://atd.knack.com/traffic-register");
+});
+//Transportation Development Services
+$(document).on('knack-scene-render.scene_206', function(event, scene) { 
+window.location.replace("https://atd.knack.com/development-services");
+});
+//Urban Forestry
+$(document).on('knack-scene-render.scene_214', function(event, scene) { 
+window.location.replace("https://atd.knack.com/urban-forestry");
+});
