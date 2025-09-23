@@ -255,3 +255,10 @@ img.knHeader__logo-image {
   color: #856404;
   font-size: 14px;
 }
+
+/********************************************/
+/*********** Progress Bar Styles ***********/
+/********************************************/
+.tpw-generate-responses-container {
+  margin: 0.5em 0;
+}
