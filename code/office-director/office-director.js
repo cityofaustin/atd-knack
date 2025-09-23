@@ -62,12 +62,10 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 }	
 //>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_50', function(event, page) {
-  // create large button on the home page
     bigButton('manage-accounts', 'view_50', "https://atd.knack.com/ood#manage-accounts/", "users", "Account Administration");
 });
 
 $(document).on('knack-view-render.view_84', function(event, page) {
-  // create large button on the home page
     bigButton('deadlines', 'view_84', "https://atd.knack.com/ood#deadlines/", "calendar", "Deadlines");
 });
 
