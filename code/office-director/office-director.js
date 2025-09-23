@@ -59,7 +59,15 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
     $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
       + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
-}
+}	
+//>>>HOME TAB BUTTONS
+$(document).on('knack-view-render.view_50', function(event, page) {
+    bigButton('manage-accounts', 'view_50', "https://atd.knack.com/ood#manage-accounts/", "users", "Account Administration");
+});
+
+$(document).on('knack-view-render.view_84', function(event, page) {
+    bigButton('deadlines', 'view_84', "https://atd.knack.com/ood#deadlines/", "calendar", "Deadlines");
+});
 
 /********************************************************/
 /** Relabel Attachment Links in Tables to 'Attachment' **/
@@ -69,3 +77,26 @@ $(document).on('knack-view-render.any', function(event, view, data) {
  $("a.kn-view-asset").html("Attachment"); 
  
 });
+// set random password when adding an account.        //
+// the user will not use this pw. they login with ADFS    //
+//////////////////////////////////////////////////////////////
+
+function generatePassword() {
+  var length = 20,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal + "!"; // add  a special character, per app requirements
+}
+
+$(document).on("knack-view-render.view_49", function (event, scene) {
+  // set a random password when creating a new account. the user will not
+  // use this pw. they login with ADFS
+  var pw = generatePassword();
+  $('input[name$="password"]').val(pw);
+  $('input[name$="password_confirmation"]').val(pw);
+});
+
+///// end set password //////
