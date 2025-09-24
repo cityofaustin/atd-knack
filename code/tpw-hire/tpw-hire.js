@@ -101,14 +101,14 @@ function addGenerateResponsesButton() {
       `
     );
 
-    // Find the "Add Manual Responses" button using the view ID from config
-    var addManualResponsesButton = $(
-      "#" + CONFIG.views.manualResponses + " .kn-button"
+    // Insert button just below the Interview Questions title
+    var $responsesTitle = $(
+      "#" + CONFIG.views.responses + " .view-header .kn-title"
     );
-    if (addManualResponsesButton.length > 0) {
-      generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
-      generateResponsesButtonHtml.css("margin-left", "8px"); // Add some spacing
-    }
+    // Create a lightweight container so spacing matches other controls
+    var $container = $('<div class="tpw-generate-responses-container"></div>');
+    $container.insertAfter($responsesTitle);
+    $container.append(generateResponsesButtonHtml);
   }
 }
 
