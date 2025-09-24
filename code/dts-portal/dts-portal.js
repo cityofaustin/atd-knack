@@ -92,21 +92,6 @@ function smallButton(id, view_id, url, fa_icon, button_label, target_blank = fal
   if (callback) callback();
 }
 
-/********************************************/
-/********* Click Event / Selector ***********/
-/********************************************/
-function setClickEvent(divId, func, param1, param2) {
-  // TODO make these args less weird
-  $("#" + divId).click(function(){
-    func(param1, param2);
-  })
-}
-
-function showHideElements(showSelector, hideSelector) {
-  $(showSelector).show();
-  $(hideSelector).hide();
-}
-
 /*************************************/
 /*** Redirect from Blank Nav Pages ***/
 /*************************************/
