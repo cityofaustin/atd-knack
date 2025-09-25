@@ -192,3 +192,234 @@ img.knHeader__logo-image {
     max-width: 800px !important;
   }
 }
+
+/*************************************/
+/****** Knack Directory Buttons ******/
+/*************************************/
+
+/* Container for the 3-column layout */
+.kn-list-content {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 16px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Style the list item containers for 3-column layout */
+.kn-list-item-container.directory-item {
+  flex: 0 0 calc(33.333% - 11px) !important; /* 3 columns with gap */
+  margin-bottom: 16px !important;
+  background: none !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  box-sizing: border-box !important;
+}
+
+/* Style the directory buttons */
+.kn-list-item-container .directory-button {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e0e6ed !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+  color: #333333 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  min-height: 80px !important;
+}
+
+.kn-list-item-container .directory-button:hover,
+.kn-list-item-container .directory-button-hover {
+  background-color: #f8f9fa !important;
+  border-color: #2c5aa0 !important;
+  box-shadow: 0 4px 8px rgba(44, 90, 160, 0.15) !important;
+  transform: translateY(-1px) !important;
+  text-decoration: none !important;
+}
+
+.directory-button .button-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 16px 20px !important;
+  min-height: 80px !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.directory-button .button-text {
+  font-size: 1.1em !important;
+  font-weight: 500 !important;
+  color: #2c5aa0 !important;
+  line-height: 1.4 !important;
+  flex: 1 !important;
+  text-align: left !important;
+  padding-right: 15px !important;
+}
+
+.directory-button .button-arrow {
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease !important;
+}
+
+.directory-button:hover .button-arrow,
+.directory-button-hover .button-arrow {
+  transform: translateX(3px) !important;
+}
+
+.directory-button .button-arrow svg {
+  width: 32px !important;
+  height: 32px !important;
+  display: block !important;
+}
+
+/* Override any Knack column classes that might interfere */
+.kn-list-item-container.column.is-one-third,
+.columns .column.is-one-third.directory-item,
+.columns.is-multiline .column.is-one-third.directory-item {
+  flex: 0 0 calc(33.333% - 11px) !important;
+  width: calc(33.333% - 11px) !important;
+  max-width: calc(33.333% - 11px) !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+}
+
+/* Remove default Knack list styling from transformed items */
+.kn-list-item-container.directory-item {
+  list-style: none !important;
+  border-bottom: none !important;
+  background: none !important;
+}
+
+/* Override any Knack link styling */
+.kn-list-item-container .directory-button:visited,
+.kn-list-item-container .directory-button:active,
+.kn-list-item-container .directory-button:focus {
+  color: #333333 !important;
+  text-decoration: none !important;
+}
+
+.kn-list-item-container .directory-button .button-text:visited,
+.kn-list-item-container .directory-button .button-text:active,
+.kn-list-item-container .directory-button .button-text:focus {
+  color: #2c5aa0 !important;
+}
+
+/* Optional: Add subtle gradient overlay on hover */
+.directory-button::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: -100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(90deg, transparent, rgba(44, 90, 160, 0.05), transparent) !important;
+  transition: left 0.5s ease !important;
+}
+
+.directory-button:hover::before,
+.directory-button-hover::before {
+  left: 100% !important;
+}
+
+/* Ensure proper spacing and alignment */
+.kn-list-content.columns {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+/* Ensure buttons work well with focus states for accessibility */
+.kn-list-item-container .directory-button:focus {
+  outline: 2px solid #2c5aa0 !important;
+  outline-offset: 2px !important;
+}
+
+/* Additional overrides for common Knack styling conflicts */
+.kn-list-item-container.directory-item * {
+  box-sizing: border-box !important;
+}
+
+.kn-list-item-container .directory-button,
+.kn-list-item-container .directory-button:hover {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+/* RESPONSIVE ADJUSTMENTS - STRENGTHENED SELECTORS */
+/* Tablet Layout - 2 columns */
+@media screen and (max-width: 1023px) and (min-width: 540px) {
+  .kn-list-item-container.directory-item,
+  .kn-list-item-container.column.is-one-third,
+  .columns .column.is-one-third.directory-item,
+  .columns.is-multiline .column.is-one-third.directory-item,
+  .kn-list-content .kn-list-item-container.directory-item {
+    flex: 0 0 calc(50% - 8px) !important;
+    width: calc(50% - 8px) !important;
+    max-width: calc(50% - 8px) !important;
+    min-width: calc(50% - 8px) !important;
+  }
+  
+  .kn-list-content {
+    gap: 16px !important;
+  }
+}
+
+/* Mobile Layout - 1 column */
+@media screen and (max-width: 539px) {
+  .kn-list-content {
+    gap: 12px !important;
+  }
+  
+  .kn-list-item-container.directory-item,
+  .kn-list-item-container.column.is-one-third,
+  .columns .column.is-one-third.directory-item,
+  .columns.is-multiline .column.is-one-third.directory-item,
+  .kn-list-content .kn-list-item-container.directory-item {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .directory-button .button-content {
+    padding: 14px 16px !important;
+    min-height: 70px !important;
+  }
+  
+  .directory-button .button-text {
+    font-size: 1em !important;
+  }
+  
+  .directory-button .button-arrow svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* Force override any Bulma framework responsive classes */
+@media screen and (max-width: 1024px) and (min-width: 540px) {
+  .column.is-one-third-desktop.directory-item,
+  .column.is-one-third-tablet.directory-item {
+    flex: 0 0 calc(50% - 8px) !important;
+    width: calc(50% - 8px) !important;
+    max-width: calc(50% - 8px) !important;
+  }
+}
+
+@media screen and (max-width: 539px) {
+  .column.is-one-third-desktop.directory-item,
+  .column.is-one-third-tablet.directory-item,
+  .column.is-one-third-mobile.directory-item {
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
