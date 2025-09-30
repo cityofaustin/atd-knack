@@ -453,16 +453,16 @@ const CONFIG = {
     questions: "view_269", // interview_questions
     responses: "view_268", // interview_responses
     management: "view_253", // interview_management details
-    manualResponses: "view_285", // "Add Manual Responses" button
+    manualResponses: "view_573", // "Add Manual Responses" button
   },
   api: {
     baseUrl: "https://api.knack.com/v1",
     scenes: {
       main: "scene_112",
-      create: "scene_124",
+      create: "scene_216",
     },
     views: {
-      create: "view_286",
+      create: "view_576",
       list: "view_268",
     },
   },
