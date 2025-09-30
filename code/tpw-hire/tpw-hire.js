@@ -300,7 +300,7 @@ function createProgressBar(total, operationType = "create") {
   // Insert progress bar after the warning message if it exists, otherwise after the button
   var $insertAfter = $("#regenerate-warning-message").length
     ? $("#regenerate-warning-message")
-    : $("#generate-responses-button");
+    : $("#" + CONFIG.views.responses + " .view-header .kn-title");
   $insertAfter.after(progressBarHtml);
 }
 
