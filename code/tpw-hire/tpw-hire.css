@@ -262,3 +262,14 @@ img.knHeader__logo-image {
 .tpw-generate-responses-container {
   margin: 0.5em 0;
 }
+
+/* Disabled button styles */
+#generate-responses-button.is-disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+#generate-responses-button.is-disabled:hover {
+  background-color: inherit !important;
+}
