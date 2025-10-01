@@ -529,7 +529,7 @@ $(document).on("knack-scene-render.scene_112", function () {
   /********************************************/
 
   // Hide the "Add Manual Responses" button
-  $("#view_573").hide();
+  $(`#${CONFIG.views.manualResponses}`).hide();
 
   // Refresh the interview responses view and update button state
   function refreshInterviewViews() {
@@ -924,17 +924,11 @@ $(document).on("knack-scene-render.scene_112", function () {
 
   // Add listener to recreate button after view re-renders
   $(document).on("knack-view-render." + CONFIG.views.responses, function () {
-    console.log(
-      "🔄 View re-rendered, checking if button needs to be recreated"
-    );
-
     // Check if button still exists
     if ($("#generate-responses-button").length === 0) {
-      console.log("⚠️ Button missing after view re-render, recreating...");
       addGenerateResponsesButton();
       checkButtonState();
     } else {
-      console.log("✅ Button still exists after view re-render");
       // Still update button state in case record count changed
       checkButtonState();
     }
