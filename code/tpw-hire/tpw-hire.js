@@ -322,7 +322,7 @@ function createProgressBar(total, operationType = "create") {
   </div>
 `;
 
-  // Insert progress bar after the warning message if it exists, otherwise after the button
+  // Insert progress bar after the warning message if it exists, otherwise after the title
   var $insertAfter = $("#regenerate-warning-message").length
     ? $("#regenerate-warning-message")
     : $("#" + CONFIG.views.responses + " .view-header .kn-title");
