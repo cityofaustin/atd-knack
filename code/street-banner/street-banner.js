@@ -59,7 +59,7 @@ function getCitybaseButton(payload, viewId){
       body: JSON.stringify(payload),
     })
       .then((response) => {
-        console.log(response.url)
+        console.log("Citybase make payment URL:", response.url);
         bigButton('citybase-payment-button', viewId, response.url, "arrow-right", "Make Payment");
       })
       .catch((error) => {
@@ -403,7 +403,6 @@ $(document).on("knack-scene-render.scene_1234", function () {
     location.reload();
   })
 });
-
 
 // lamppost application details
 $(document).on("knack-view-render.view_3664", function (event, page, view) {
