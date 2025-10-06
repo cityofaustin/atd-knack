@@ -168,3 +168,163 @@ window.location.replace("https://atd.knack.com/development-services");
 $(document).on('knack-scene-render.scene_214', function(event, scene) { 
 window.location.replace("https://atd.knack.com/urban-forestry");
 });
+
+// /*************************************/
+// /****** Knack Directory Buttons ******/
+// /*************************************/
+
+// Transform kn-list-item-container items into directory-style buttons
+// Only targets scene 201, view 377
+$(document).ready(function() {
+  
+  // Function to check if we're on the target scene and view
+  function isTargetSceneView() {
+    // Scene 201 detection - check for #kn-scene_201 element
+    const hasScene201 = $('#kn-scene_201').length > 0;
+    const hasView377 = $('#view_377').length > 0;
+    
+    return hasScene201 && hasView377;
+  }
+  
+  // Function to transform list item containers into directory buttons
+  function transformListItemContainers() {
+    // Only proceed if we're on the target scene/view
+    if (!isTargetSceneView()) {
+      return;
+    }
+    
+    // Target the kn-list-item-container elements within view 377 specifically
+    let $listContainers = $('#view_377 .kn-list-item-container');
+    
+    if ($listContainers.length === 0) {
+      // Try alternative selectors within view 377 only
+      const alternatives = [
+        '#view_377 .kn-list-item',
+        '#view_377 .kn-list-content .kn-list-item-container',
+        '#view_377 [class*="kn-list-item"]',
+        '#view_377 .kn-list [class*="container"]'
+      ];
+      
+      for (let selector of alternatives) {
+        const $alt = $(selector);
+        if ($alt.length > 0) {
+          $alt.each(function() {
+            transformListItem($(this));
+          });
+          return;
+        }
+      }
+      return;
+    }
+    
+    $listContainers.each(function() {
+      transformListItem($(this));
+    });
+  }
+  
+  function transformListItem($container) {
+    // Skip if already transformed
+    if ($container.hasClass('directory-button-transformed')) {
+      return;
+    }
+    
+    // Look for a link within this container
+    const $link = $container.find('a[href]').first();
+    
+    if ($link.length === 0) {
+      return; // No link found, skip this container
+    }
+    
+    // Get text - try different elements that might contain the title
+    let buttonText = '';
+    
+    // Try to find text in common Knack elements
+    const $titleElements = $container.find('h1, h2, h3, h4, h5, h6, .kn-title, .kn-link-title, .field-title');
+    if ($titleElements.length > 0) {
+      buttonText = $titleElements.first().text().trim();
+    } else {
+      // Fallback to link text or container text
+      buttonText = $link.text().trim() || $container.text().trim();
+    }
+    
+    const buttonHref = $link.attr('href');
+    
+    if (!buttonText || !buttonHref) {
+      return;
+    }
+    
+    // Create the directory-style button
+    const $buttonLink = $('<a>')
+      .attr('href', buttonHref)
+      .attr('target', $link.attr('target') || '_self') // Preserve original target
+      .addClass('directory-button directory-button-transformed')
+      .html(`
+        <div class="button-content">
+          <span class="button-text">${buttonText}</span>
+          <div class="button-arrow">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="12" fill="#163f6e"/>
+              <path d="M10 8L14 12L10 16" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      `);
+    
+    // Replace the container content with our button
+    $container.addClass('directory-item directory-button-transformed').empty().append($buttonLink);
+  }
+  
+  // Run transformation after DOM is ready
+  setTimeout(transformListItemContainers, 1000);
+  
+  // Also run when Knack renders content, specifically for scene 201
+  $(document).on('knack-scene-render.kn-scene_201', function() {
+    setTimeout(transformListItemContainers, 500);
+  });
+  
+  // Also listen for view 377 renders specifically
+  $(document).on('knack-view-render.view_377', function() {
+    setTimeout(transformListItemContainers, 500);
+  });
+  
+  // Run on hash change (when navigating in Knack)
+  $(window).on('hashchange', function() {
+    setTimeout(transformListItemContainers, 500);
+  });
+  
+  // Add hover effects
+  $(document).on('mouseenter', '.directory-button', function() {
+    $(this).addClass('directory-button-hover');
+  });
+  $(document).on('mouseleave', '.directory-button', function() {
+    $(this).removeClass('directory-button-hover');
+  });
+  
+  // Add responsive CSS for large screens only
+  if (!$('#directory-button-responsive-styles').length) {
+    const responsiveStyles = `
+      <style id="directory-button-responsive-styles">
+        /* Medium-large screens (1650px to 2079px) - H3 size text */
+        @media screen and (min-width: 1650px) and (max-width: 2079px) {
+          .directory-button .button-text {
+            font-size: 1.5em !important;
+          }
+        }
+        
+        /* Large screens (2080px+) - H2 size text */
+        @media screen and (min-width: 2080px) {
+          .directory-button .button-text {
+            font-size: 2em !important;
+          }
+        }
+      </style>
+    `;
+    $('head').append(responsiveStyles);
+    
+    // Debug: Check if styles were added and screen size
+    console.log('Directory button responsive styles added');
+    console.log('Current screen width:', window.innerWidth);
+    console.log('Media query should apply:', window.innerWidth >= 1920);
+  }
+  
+});
