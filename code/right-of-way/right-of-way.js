@@ -199,6 +199,66 @@ $(document).on("knack-view-render.view_1508", function(event, page) {
   bigButton("dapcz-meeting-schedule", "view_1508", `${APP_URL}#dapcz-meeting/dapcz-meeting-schedule`, "calendar", "DAPCZ Meeting Schedule");
 });
 
+// create large DAPCZ Meeting button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1526", function(event, page) {
+  bigButton("manage-dapcz-meetings", "view_1526", "https://atd.knack.com/row#manage-dapcz-meetings/", "microphone", "DAPCZ Meeting");
+});
+
+// create large DAPCZ Project button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1527", function(event, page) {
+  bigButton("manage-dapcz-project", "view_1527", "https://atd.knack.com/row#manage-dapcz-project/", "cubes", "DAPCZ Projects");
+});
+
+// create large DAPCZ Contacts button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1528", function(event, page) {
+  bigButton("manage-dapcz-contacts", "view_1528", "https://atd.knack.com/row#manage-dapcz-contacts/", "users", "DAPCZ Contacts");
+});
+
+// create large DAPCZ Resources button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1529", function(event, page) {
+  bigButton("manage-dapcz-resources", "view_1529", "https://atd.knack.com/row#manage-dapcz-resources/", "book", "DAPCZ Resources");
+});
+
+// create large DAPCZ Public Portal button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1593", function(event, page) {
+  bigButton("dapcz-meeting", "view_1593", "https://atd.knack.com/row#dapcz-meeting/", "slideshare", "DAPCZ Public Portal");
+});
+
+// create large Manage DAPCZ Links button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1594", function(event, page) {
+  bigButton("manage-links", "view_1594", "https://atd.knack.com/row#manage-links/", "link", "Manage Links");
+});
+
+// create large Manage DAPCZ Meeting Schedule button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1595", function(event, page) {
+  bigButton("manage-schedule", "view_1595", "https://atd.knack.com/row#manage-schedule", "calendar", "Manage Schedule");
+});
+
+// create large DAPCZ Public Portal button on the Manage DAPCZ page
+$(document).on("knack-view-render.view_1597", function(event, page) {
+  bigButton("dapcz-meeting", "view_1597", "https://atd.knack.com/row#dapcz-meeting/", "slideshare", "DAPCZ Public Portal");
+});
+
+// create large DAPCZ Agenda button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1505", function(event, page) {
+  bigButton("dapcz-agenda", "view_1505", "https://atd.knack.com/row#dapcz-meeting/dapcz-agenda/", "file-o", "DAPCZ Agenda");
+});
+
+// create large DAPCZ Project List button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1506", function(event, page) {
+  bigButton("dapcz-project-list", "view_1506", "https://atd.knack.com/row#dapcz-meeting/dapcz-project-list/", "list-ul", "DAPCZ Project List");
+});
+
+// create large DAPCZ Links button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1507", function(event, page) {
+  bigButton("dapcz-links", "view_1507", "https://atd.knack.com/row#dapcz-meeting/dapcz-links/", "link", "DAPCZ Links & Resources");
+});
+
+// create large DAPCZ Meeting Schedule button on the DAPCZ Public Portal page
+$(document).on("knack-view-render.view_1508", function(event, page) {
+  bigButton("dapcz-meeting-schedule", "view_1508", "https://atd.knack.com/row#dapcz-meeting/dapcz-meeting-schedule", "calendar", "DAPCZ Meeting Schedule");
+});
+
 /********************************************/
 /*********** Large Submit Buttons ***********/
 /********************************************/

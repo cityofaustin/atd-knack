@@ -1,5 +1,3 @@
-const APPLICATION_ID = "5c4b50a69b19a0085bfd5eec";
-
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -61,7 +59,7 @@ function getCitybaseButton(payload, viewId){
       body: JSON.stringify(payload),
     })
       .then((response) => {
-        console.log("Citybase make payment URL:", response.url)
+        console.log("Citybase make payment URL:", response.url);
         bigButton('citybase-payment-button', viewId, response.url, "arrow-right", "Make Payment");
       })
       .catch((error) => {
@@ -72,7 +70,7 @@ function getCitybaseButton(payload, viewId){
 var knackUserToken = Knack.getUserToken();
 
 var headers = {
-  "X-Knack-Application-Id": APPLICATION_ID,
+  "X-Knack-Application-Id": Knack.application_id
   "X-Knack-REST-API-KEY": "knack",
   Authorization: knackUserToken,
   "content-type": "application/json",
@@ -215,10 +213,10 @@ $(document).on('knack-view-render.view_3032', function(event, page) {
     bigButton('account-management', 'view_3032', "https://atd.knack.com/street-banners#account-management/", "users", "Account Management");
 });
 
-//SMO App link button for the Admin tab
+//Help link button for the Admin tab
 $(document).on('knack-view-render.view_3689', function(event, page) {
   // create large button on the home page
-    bigButton('smart-mobility', 'view_3689', "https://atd.knack.com/smart-mobility#home/", "street-view", "Smart Mobility Office");
+    bigButton('help', 'view_3689', "https://atd.knack.com/street-banners#help/", "info-circle", "Admin Help Guide");
 });
 
 	//***MENU - RESERVATION PAGE***
@@ -405,6 +403,7 @@ $(document).on("knack-scene-render.scene_1234", function () {
     location.reload();
   })
 });
+
 // lamppost application details
 $(document).on("knack-view-render.view_3664", function (event, page, view) {
   $("#view_3664").hide();
@@ -472,7 +471,7 @@ $(document).on("knack-view-render.view_3664", function (event, page, view) {
       },
       {
         key: "parent_record_id",
-        value: String(transactionRecord["field_3326_raw"][0]["id"]),
+        value: String(transactionRecord["field_3328_raw"][0]["id"]),
       },
       {
         key: "knack_app",

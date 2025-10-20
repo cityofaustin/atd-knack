@@ -59,66 +59,127 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 //Create Big Button nested in a block
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  is_disabled = false,
-  callback = null
-) {
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
-
+  var newTab = target_blank ? " target='_blank'" : "" ;
+    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
+      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
   if (callback) callback();
 }
 
-$(document).on("knack-view-render.view_167", function (event, page) {
-  // create large button on the home page
-  bigButton(
-    "all",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#purchase-requests/",
-    "archive",
-    "All Purchase Requests"
-  );
+// create large button on the SERVICES page - Service Request
+$(document).on("knack-view-render.view_1426", function(event, page) {
+  bigButton("quiz", "view_1426",  "https://atd.knack.com/finance-purchasing#quiz/", "list-ol", "Purchase Request Quiz");
+});
 
-  bigButton(
-    "create",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#new-purchase-requests/",
-    "plus-circle",
-    "New Purchase Request"
-  );
+// create large button on the SERVICES page - Purchase Requests Home
+$(document).on("knack-view-render.view_167", function(event, page) {
+  bigButton("purchase-requests-home", "view_167", "https://atd.knack.com/finance-purchasing#purchase-requests-home/ ", "money", "Purchase Requests");
+});
 
-  bigButton(
-    "review",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#reviews/",
-    "check-square-o",
-    "Review Purchase Requests"
-  );
+// create large button on the SERVICES page - Service Request
+$(document).on("knack-view-render.view_164", function(event, page) {
+  bigButton("card-services", "view_164",  "https://atd.knack.com/finance-purchasing#service-requests-home/", "paper-plane", "Service Requests");
+});
 
-  bigButton(
-    "my",
-    "view_167",
-    "https://atd.knack.com/finance-purchasing#my-purchase-requests/",
-    "male",
-    "My Purchase Requests"
-  );
+// create large button on the SERVICES page - Card Services Request
+$(document).on("knack-view-render.view_165", function(event, page) {
+  bigButton("card-services-home", "view_165",  "https://atd.knack.com/finance-purchasing#card-services-home/", "credit-card", "Card Service Requests");
+});
+
+// create large button on the SERVICES page - Inventory HOME
+$(document).on("knack-view-render.view_166", function(event, page) {
+  bigButton("inventory-home", "view_166",  "https://atd.knack.com/finance-purchasing#inventory-home/", "truck", "Inventory");
+});
+
+// create large button on the CARD SERVICES page - Getting Started | ProCard
+$(document).on("knack-view-render.view_1290", function(event, page) {
+  bigButton("getting-started-procard", "view_1290",  "https://atd.knack.com/finance-purchasing#get-started-procard/", "credit-card", "Get Started | ProCard");
+});
+
+// create large button on the CARD SERVICES page - Getting Started | ProCard
+$(document).on("knack-view-render.view_1381", function(event, page) {
+  bigButton("getting-started-procard", "view_1381",  "https://atd.knack.com/finance-purchasing#how-to-apply/", "question-circle", "How to Apply");
+});
+
+// create large button on the CARD SERVICES page - New Service Request
+$(document).on("knack-view-render.view_1291", function(event, page) {
+  bigButton("card-service-request", "view_1291",  "https://atd.knack.com/finance-purchasing#card-service-request/", "plus-circle", "Card Services | New Request");
+});
+
+// create large button on the CARD SERVICES page - My Card Service Requests
+$(document).on("knack-view-render.view_1349", function(event, page) {
+  bigButton("my-card-service-request", "view_1349",  "https://atd.knack.com/finance-purchasing#my-card-service-requests/", "user", "My Card Services Requests");
+});
+
+// create large button on the CARD SERVICES page - Manage Card Service Requests
+$(document).on("knack-view-render.view_1292", function(event, page) {
+  bigButton("manage-card-service-requests", "view_1292",  "https://atd.knack.com/finance-purchasing#manage-card-service-requests", " ", "Manage Card Service Requests");
+});
+
+// create large button on the GET STARTED | PROCARD page - New ProCard Service Request
+$(document).on("knack-view-render.view_1296", function(event, page) {
+  bigButton("card-service-request", "view_1296",  "https://atd.knack.com/finance-purchasing#procard-service-request/?view_1295_vars=%7B%22field_1175%22%3A%5B%22Request%20ProCard%22%5D%7D", "plus-circle", "ProCard | New Request");
+});
+
+// create large button on the SERVICES page - Purchase Requests Home
+$(document).on("knack-view-render.view_1313", function(event, page) {
+  bigButton("purchase-requests-home", "view_1313",  "https://atd.knack.com/finance-purchasing#purchase-requests-home/ ", "money", "Purchase Requests");
+});
+
+// create large button on the SERVICES page - Service Request
+$(document).on("knack-view-render.view_1314", function(event, page) {
+  bigButton("card-services", "view_1314",  "https://atd.knack.com/finance-purchasing#service-requests-home/", "paper-plane", "Service Requests");
+});
+
+// create large button on the SERVICES page - Card Services Request
+$(document).on("knack-view-render.view_1315", function(event, page) {
+  bigButton("card-services-home", "view_1315",  "https://atd.knack.com/finance-purchasing#card-services-home/", "credit-card", "Card Service Requests");
+});
+
+// create large button on the SERVICES page - Inventory HOME
+$(document).on("knack-view-render.view_1365", function(event, page) {
+  bigButton("inventory-home", "view_1365",  "https://atd.knack.com/finance-purchasing#services/inventory-home/", "truck", "Inventory");
+});
+
+// create large button on the INVENTORY HOME page - Inventory
+$(document).on("knack-view-render.view_1364", function(event, page) {
+  bigButton("inventory", "view_1364",  "https://atd.knack.com/finance-purchasing#inventory/?view_790_filters=%5B%7B%22field%22%3A%22field_370%22%2C%22value%22%3A%22ACTIVE%22%2C%22operator%22%3A%22is%22%7D%5D/", "dropbox", "Inventory");
+});
+
+// create large button on the SERVICE REQUESTS HOME page - All
+$(document).on("knack-view-render.view_1325", function(event, page) {
+  bigButton("service-requests", "view_1325", "https://atd.knack.com/finance-purchasing#service-requests/", "comments", "All Service Requests");
+});
+
+// create large button on the SERVICE REQUESTS HOME page - New Service Request
+$(document).on("knack-view-render.view_1326", function(event, page) {
+  bigButton("new-service-request", "view_1326",  "https://atd.knack.com/finance-purchasing#new-service-request/", "plus-circle", "New Service Request");
+});
+
+// create large button on the SERVICE REQUESTS HOME page - My Service Requests
+$(document).on("knack-view-render.view_1327", function(event, page) {
+  bigButton("my-service-requests", "view_1327",  "https://atd.knack.com/finance-purchasing#my-service-requests/", "male", "My Service Requests");
+});
+
+// create large button on the PURCHASE REQUESTS HOME page - All
+$(document).on("knack-view-render.view_1319", function(event, page) {
+  bigButton("all", "view_1319", "https://atd.knack.com/finance-purchasing#purchase-requests/", "archive", "All Purchase Requests");
+});
+
+// create large button on the PURCHASE REQUESTS HOME page - New Purchase Request
+$(document).on("knack-view-render.view_1320", function(event, page) {
+  bigButton("create", "view_1320",  "https://atd.knack.com/finance-purchasing#new-purchase-requests/", "plus-circle", "New Purchase Request");
+});
+
+// create large button on the PURCHASE REQUESTS HOME page - Review Purchase Requests
+$(document).on("knack-view-render.view_1321", function(event, page) {
+  bigButton("review", "view_1321",  "https://atd.knack.com/finance-purchasing#reviews/", "check-square-o", "Review Purchase Requests");
+});
+
+// create large button on the PURCHASE REQUESTS HOME page - My Purchase Requests
+$(document).on("knack-view-render.view_1322", function(event, page) {
+  bigButton("my", "view_1322",  "https://atd.knack.com/finance-purchasing#my-purchase-requests/", "male", "My Purchase Requests");
 });
 
 /********************************************/
@@ -936,4 +997,53 @@ var viewsToFetchAdmin = ["view_1183", "view_1191", "view_1185", "view_1186", "vi
  //When the form in view 1182 has been submitted, refetch the views - Manage SR - Admin (Add Job)
 $(document).on("knack-form-submit.view_1182", function (event, view, data) {
     viewsToFetchAdmin.forEach(view => Knack.views[view].model.fetch())
+});
+/*******************************/
+/* Generates a Random Password */
+/*******************************/
+function generatePassword() {
+  const PASSWORD_LENGTH = 20;
+  const LOWER = "abcdefghijklmnopqrstuvwxyz";
+  const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const NUMBERS = "0123456789";
+  const SPECIAL = "!@#$%&*^"; //  `(` and `)` are not special chars according to Knack
+  const ALL_CHARS = LOWER + UPPER + NUMBERS + SPECIAL;
+  /*
+   * Generates a cryptographically secure random integer between 0 and max (inclusive) using rejection sampling to avoid modulo bias.
+   * Must be between 0 and 255 since this uses Uint8Array with 255 as the max value and excludes integers greater than max
+   */
+  function getRandomInt(max) {
+    let int = null;
+    do {
+      const randomIntArray = new Uint8Array(1);
+      crypto.getRandomValues(randomIntArray);
+      int = randomIntArray[0];
+    } while (int !== null && int > max);
+    return int;
+  }
+  // Make sure password contains all required character types
+  function hasAllCharacterTypes(password) {
+    const pwArray = password.split("");
+    const hasLower = pwArray.some((char) => LOWER.includes(char));
+    const hasUpper = pwArray.some((char) => UPPER.includes(char));
+    const hasNumber = pwArray.some((char) => NUMBERS.includes(char));
+    const hasSpecial = pwArray.some((char) => SPECIAL.includes(char));
+    return hasLower && hasUpper && hasNumber && hasSpecial;
+  }
+  // Loop until a valid password is generated
+  let password = "";
+  do {
+    password = "";
+    for (let i = 0; i < PASSWORD_LENGTH; i++) {
+      password += ALL_CHARS[getRandomInt(ALL_CHARS.length - 1)];
+    }
+  } while (!hasAllCharacterTypes(password));
+  return password;
+}
+
+// Handler to target a specific login view to load generated password into the password input box
+$(document).on("knack-view-render.view_1266", function (event, scene) {
+  var pw = generatePassword();
+  $('input[name$="password"]').val(pw);
+  $('input[name$="password_confirmation"]').val(pw);
 });
