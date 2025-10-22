@@ -1176,3 +1176,8 @@ $(document).on("knack-view-render.view_1294", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+/***************************************************************/
+/*** Disable the ability to Click/Touch outside a Modal Page ***/
+/***************************************************************/
+$(document).on("knack-scene-render.any", function (event, scene) {
+  $(".kn-modal-bg").off("click");
