@@ -1181,3 +1181,4 @@ $(document).on("knack-view-render.view_1294", function (event, scene) {
 /***************************************************************/
 $(document).on("knack-scene-render.any", function (event, scene) {
   $(".kn-modal-bg").off("click");
+});
