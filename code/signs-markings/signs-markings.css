@@ -1,3 +1,9 @@
+/* Hides Password field when creating account */
+/* Keeps the JS to allow populating password  */
+#view_1294 #kn-input-field_169 {
+  content-visibility: hidden;
+}
+
 /* hide attachment type column (field contents are extracted via JS */
 div.view_2107 .field_2403 {
   display: none;
@@ -36,7 +42,7 @@ div.view_2565 .field_2403 {
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
   padding: 10px;
-  //margin: 20px;
+  /*margin: 20px; /* Commented out due to visual line break offset in homepage*/
   max-width: 15em;
   display: block;
 }
