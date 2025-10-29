@@ -101,21 +101,21 @@ function addGenerateResponsesButton() {
       `
     );
 
-    // Find the "Add Manual Responses" button using the view ID from config
-    var addManualResponsesButton = $(
-      "#" + CONFIG.views.manualResponses + " .kn-button"
+    // Insert button just below the Interview Questions title
+    var $responsesTitle = $(
+      "#" + CONFIG.views.responses + " .view-header .kn-title"
     );
-    if (addManualResponsesButton.length > 0) {
-      generateResponsesButtonHtml.insertAfter(addManualResponsesButton);
-      generateResponsesButtonHtml.css("margin-left", "8px"); // Add some spacing
-    }
+    // Create a lightweight container so spacing matches other controls
+    var $container = $('<div class="tpw-generate-responses-container"></div>');
+    $container.insertAfter($responsesTitle);
+    $container.append(generateResponsesButtonHtml);
   }
 }
 
 // Helper function to manage button state
 function enableGenerateButton() {
   $("#generate-responses-button")
-    .removeClass("is-loading")
+    .removeClass("is-loading is-disabled")
     .prop("disabled", false)
     .find("i")
     .removeClass("fa-spinner fa-spin")
@@ -141,15 +141,32 @@ function updateButtonWithCount(currentInterviewResponses) {
 
   var $generateResponsesButton = $("#generate-responses-button");
 
-  // Always enable the button
-  $generateResponsesButton
-    .prop("disabled", false)
-    .removeClass("is-disabled")
-    .css({
-      opacity: "1",
-      cursor: "pointer",
-      "pointer-events": "auto",
-    });
+  // Only enable the button if no progress bar is visible
+  var progressBarVisible = $(".progress-container").length > 0;
+
+  if (!progressBarVisible) {
+    $generateResponsesButton
+      .prop("disabled", false)
+      .removeClass("is-disabled")
+      .css({
+        opacity: "1",
+        cursor: "pointer",
+        "pointer-events": "auto",
+      });
+  } else {
+    // Keep button disabled if progress bar is visible and show spinner
+    $generateResponsesButton
+      .prop("disabled", true)
+      .addClass("is-disabled")
+      .css({
+        opacity: "0.6",
+        cursor: "not-allowed",
+        "pointer-events": "none",
+      })
+      .find("i")
+      .removeClass("fa-cogs fa-refresh")
+      .addClass("fa-spinner fa-spin");
+  }
 
   // Update button text and icon based on existing records
   if (hasExistingRecords) {
@@ -272,6 +289,14 @@ function createProgressBar(total, operationType = "create") {
   // Remove existing progress bar if it exists
   $("#" + containerId).remove();
 
+  // Disable button while progress bar is visible and show spinner
+  $("#generate-responses-button")
+    .prop("disabled", true)
+    .addClass("is-disabled")
+    .find("i")
+    .removeClass("fa-cogs fa-refresh")
+    .addClass("fa-spinner fa-spin");
+
   const progressBarHtml = `
   <div id="${containerId}" class="progress-container">
     <div class="progress-title">${title}</div>
@@ -297,10 +322,10 @@ function createProgressBar(total, operationType = "create") {
   </div>
 `;
 
-  // Insert progress bar after the warning message if it exists, otherwise after the button
+  // Insert progress bar after the warning message if it exists, otherwise after the title
   var $insertAfter = $("#regenerate-warning-message").length
     ? $("#regenerate-warning-message")
-    : $("#generate-responses-button");
+    : $("#" + CONFIG.views.responses + " .view-header .kn-title");
   $insertAfter.after(progressBarHtml);
 }
 
@@ -382,6 +407,23 @@ function completeProgress(total, failed, operationType = "create") {
   setTimeout(function () {
     $("#" + containerId).fadeOut(500, function () {
       $(this).remove();
+      // Re-enable button after progress bar is removed and restore appropriate icon
+      var $button = $("#generate-responses-button");
+      $button.prop("disabled", false).removeClass("is-disabled");
+
+      // Restore appropriate icon based on current state
+      var hasExistingRecords = $button
+        .find("span:last")
+        .text()
+        .includes("Regenerate");
+      if (hasExistingRecords) {
+        $button
+          .find("i")
+          .removeClass("fa-spinner fa-spin")
+          .addClass("fa-refresh");
+      } else {
+        $button.find("i").removeClass("fa-spinner fa-spin").addClass("fa-cogs");
+      }
     });
   }, 5000);
 }
@@ -453,16 +495,16 @@ const CONFIG = {
     questions: "view_269", // interview_questions
     responses: "view_268", // interview_responses
     management: "view_253", // interview_management details
-    manualResponses: "view_285", // "Add Manual Responses" button
+    manualResponses: "view_573", // "Add Manual Responses" button
   },
   api: {
     baseUrl: "https://api.knack.com/v1",
     scenes: {
       main: "scene_112",
-      create: "scene_124",
+      create: "scene_216",
     },
     views: {
-      create: "view_286",
+      create: "view_576",
       list: "view_268",
     },
   },
@@ -485,6 +527,9 @@ $(document).on("knack-scene-render.scene_112", function () {
   /********************************************/
   /*********** INITIALIZATION & SETUP *********/
   /********************************************/
+
+  // Hide the "Add Manual Responses" button
+  $(`#${CONFIG.views.manualResponses}`).hide();
 
   // Refresh the interview responses view and update button state
   function refreshInterviewViews() {
@@ -876,6 +921,18 @@ $(document).on("knack-scene-render.scene_112", function () {
   // Initialize UI components
   addGenerateResponsesButton();
   checkButtonState();
+
+  // Add listener to recreate button after view re-renders
+  $(document).on("knack-view-render." + CONFIG.views.responses, function () {
+    // Check if button still exists
+    if ($("#generate-responses-button").length === 0) {
+      addGenerateResponsesButton();
+      checkButtonState();
+    } else {
+      // Still update button state in case record count changed
+      checkButtonState();
+    }
+  });
 
   // Move click handler outside scene render
   $(document)
