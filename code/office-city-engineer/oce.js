@@ -167,7 +167,15 @@ function generatePassword() {
 }
 
 // Handler to target a specific login view to load generated password into the password input box
+// When an account admin creates a COA user account
 $(document).on("knack-view-render.view_75", function (event, scene) {
+  var pw = generatePassword();
+  $('input[name$="password"]').val(pw);
+  $('input[name$="password_confirmation"]').val(pw);
+});
+
+// When a COA user creates an account
+$(document).on("knack-view-render.view_87", function (event, scene) {
   var pw = generatePassword();
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
