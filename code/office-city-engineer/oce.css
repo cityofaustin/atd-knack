@@ -24,6 +24,7 @@
 a.big-button-container {
   text-decoration: none;
 }
+
 /***************************************/
 /************ Small Buttons ************/
 /***************************************/
@@ -81,6 +82,14 @@ a.small-button {
 .trigger-button-delete:hover {
   cursor: pointer;
   opacity: 0.9;
+}
+
+/*************************************************/
+/* Hide Password field when creating SSO account */
+/*************************************************/
+#view_75 #kn-input-field_21,
+#view_87 #kn-input-field_21 {
+  content-visibility: hidden;
 }
 
 /*********************************************/
