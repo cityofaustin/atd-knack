@@ -451,88 +451,12 @@ a.small-button {
 /********************************************/
 /****** Print Application Header ************/
 /********************************************/
-/*
 .image-header-container {
   display: block;
   align-items: flex-start;
   flex-direction: row;
   justify-content: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", "Arial", "sans-serif";
-  break-before: page;
-  width: 200%;
-  height: 100%;
-}
-
-.image-seal {
-  content: url("https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FCqNGfEc0WO4ar1y6yBB3%2Fuploads%2FdxBFascjuN72Cl1NwFMQ%2Fimage.png?alt=media&token=caaa96e0-8684-4747-b936-f5501a1259f6");
-  width: 10%;
-  height: 10%;
-  max-width: 152px;
-  max-height: 113px;
-  min-width: 120px;
-  min-height: 90px;
-  display: inline-block;
-  padding-right: 0.5em;
-  vertical-align: top;
-  border-right: 3px solid #2b5ea0;
-}
-
-.text-header {
-  justify-content: center;
-  display: inline-block;
-  vertical-align: top;
-  margin-left: 10px;
-  font-size: 0.9em;
-  height:100%;
-}
-
-.header-title {
-  color: #2b5ea0;
-  font-weight: lighter;
-  font-size: 1.5em;
-} 
-
-/*
-.image-header-container {
-  display: block;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande","Lucida Sans", "Arial", "sans-serif";
-  break-before: page;
-}
-
-.image-seal {
-  content: url("https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FCqNGfEc0WO4ar1y6yBB3%2Fuploads%2FdxBFascjuN72Cl1NwFMQ%2Fimage.png?alt=media&token=caaa96e0-8684-4747-b936-f5501a1259f6");
-  width: 152px;
-  height: 113px;
-  display: inline-block;
-  vertical-align: top;
-  padding-right: 10px;
-  border-right: 3px solid #2b5ea0;
-}
-
-.text-header {
-  justify-content: center;
-  display: inline-block;
-  vertical-align: top;
-  margin-left: 10px;
-}
-
-.header-title {
-  color: #2b5ea0;
-  font-weight: lighter;
-  font-size: 1.5em;
-}
-*/
-
-.image-header-container {
-  display: block;
-  align-items: flex-start;
-  flex-direction: row;
-  justify-content: center;
-  font-family: "Arial", "sans-serif";
+  font-family: "Helvetica","Arial", "sans-serif";
   break-before: page;
 }
 
@@ -553,6 +477,7 @@ a.small-button {
   margin-left: 10px;
   color: #44499C;
   font-size: 14px;
+  line-height: normal;
 }
 
 .text-header > .header-title {
@@ -592,9 +517,8 @@ a.small-button {
     width: 100%;
   }
   .image-seal {
-    width: 149px;
-    height: 113px;
-  }
+    width: 100px;
+  } 
   #view_846,
   #view_920 {
     display: none;
