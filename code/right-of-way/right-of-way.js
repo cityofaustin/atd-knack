@@ -199,66 +199,6 @@ $(document).on("knack-view-render.view_1508", function(event, page) {
   bigButton("dapcz-meeting-schedule", "view_1508", `${APP_URL}#dapcz-meeting/dapcz-meeting-schedule`, "calendar", "DAPCZ Meeting Schedule");
 });
 
-// create large DAPCZ Meeting button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1526", function(event, page) {
-  bigButton("manage-dapcz-meetings", "view_1526", "https://atd.knack.com/row#manage-dapcz-meetings/", "microphone", "DAPCZ Meeting");
-});
-
-// create large DAPCZ Project button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1527", function(event, page) {
-  bigButton("manage-dapcz-project", "view_1527", "https://atd.knack.com/row#manage-dapcz-project/", "cubes", "DAPCZ Projects");
-});
-
-// create large DAPCZ Contacts button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1528", function(event, page) {
-  bigButton("manage-dapcz-contacts", "view_1528", "https://atd.knack.com/row#manage-dapcz-contacts/", "users", "DAPCZ Contacts");
-});
-
-// create large DAPCZ Resources button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1529", function(event, page) {
-  bigButton("manage-dapcz-resources", "view_1529", "https://atd.knack.com/row#manage-dapcz-resources/", "book", "DAPCZ Resources");
-});
-
-// create large DAPCZ Public Portal button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1593", function(event, page) {
-  bigButton("dapcz-meeting", "view_1593", "https://atd.knack.com/row#dapcz-meeting/", "slideshare", "DAPCZ Public Portal");
-});
-
-// create large Manage DAPCZ Links button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1594", function(event, page) {
-  bigButton("manage-links", "view_1594", "https://atd.knack.com/row#manage-links/", "link", "Manage Links");
-});
-
-// create large Manage DAPCZ Meeting Schedule button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1595", function(event, page) {
-  bigButton("manage-schedule", "view_1595", "https://atd.knack.com/row#manage-schedule", "calendar", "Manage Schedule");
-});
-
-// create large DAPCZ Public Portal button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1597", function(event, page) {
-  bigButton("dapcz-meeting", "view_1597", "https://atd.knack.com/row#dapcz-meeting/", "slideshare", "DAPCZ Public Portal");
-});
-
-// create large DAPCZ Agenda button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1505", function(event, page) {
-  bigButton("dapcz-agenda", "view_1505", "https://atd.knack.com/row#dapcz-meeting/dapcz-agenda/", "file-o", "DAPCZ Agenda");
-});
-
-// create large DAPCZ Project List button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1506", function(event, page) {
-  bigButton("dapcz-project-list", "view_1506", "https://atd.knack.com/row#dapcz-meeting/dapcz-project-list/", "list-ul", "DAPCZ Project List");
-});
-
-// create large DAPCZ Links button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1507", function(event, page) {
-  bigButton("dapcz-links", "view_1507", "https://atd.knack.com/row#dapcz-meeting/dapcz-links/", "link", "DAPCZ Links & Resources");
-});
-
-// create large DAPCZ Meeting Schedule button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1508", function(event, page) {
-  bigButton("dapcz-meeting-schedule", "view_1508", "https://atd.knack.com/row#dapcz-meeting/dapcz-meeting-schedule", "calendar", "DAPCZ Meeting Schedule");
-});
-
 /********************************************/
 /*********** Large Submit Buttons ***********/
 /********************************************/
@@ -563,3 +503,53 @@ $(`<div class="mobile-details-dropdown-menu">\
     </ul>\
   </div>`).appendTo("#view_1176")
 })
+
+/********************************************************************/
+/* Generates a Strong Random Password for Internal Account Creation */
+/********************************************************************/
+function generatePassword() {
+  const PASSWORD_LENGTH = 20;
+  const LOWER = "abcdefghijklmnopqrstuvwxyz";
+  const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const NUMBERS = "0123456789";
+  const SPECIAL = "!@#$%&*^"; //  `(` and `)` are not special chars according to Knack
+  const ALL_CHARS = LOWER + UPPER + NUMBERS + SPECIAL;
+  /*
+   * Generates a cryptographically secure random integer between 0 and max (inclusive) using rejection sampling to avoid modulo bias.
+   * Must be between 0 and 255 since this uses Uint8Array with 255 as the max value and excludes integers greater than max
+   */
+  function getRandomInt(max) {
+    let int = null;
+    do {
+      const randomIntArray = new Uint8Array(1);
+      crypto.getRandomValues(randomIntArray);
+      int = randomIntArray[0];
+    } while (int !== null && int > max);
+    return int;
+  }
+  // Make sure password contains all required character types
+  function hasAllCharacterTypes(password) {
+    const pwArray = password.split("");
+    const hasLower = pwArray.some((char) => LOWER.includes(char));
+    const hasUpper = pwArray.some((char) => UPPER.includes(char));
+    const hasNumber = pwArray.some((char) => NUMBERS.includes(char));
+    const hasSpecial = pwArray.some((char) => SPECIAL.includes(char));
+    return hasLower && hasUpper && hasNumber && hasSpecial;
+  }
+  // Loop until a valid password is generated
+  let password = "";
+  do {
+    password = "";
+    for (let i = 0; i < PASSWORD_LENGTH; i++) {
+      password += ALL_CHARS[getRandomInt(ALL_CHARS.length - 1)];
+    }
+  } while (!hasAllCharacterTypes(password));
+  return password;
+}
+
+// Load Password for Internal Account Creation form
+$(document).on("knack-view-render.view_29", function (event, scene) {
+  var pw = generatePassword();
+  $('input[name$="password"]').val(pw);
+  $('input[name$="password_confirmation"]').val(pw);
+});
