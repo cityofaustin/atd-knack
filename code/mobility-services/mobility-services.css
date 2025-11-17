@@ -463,12 +463,12 @@ a.small-button {
 .image-seal {
   content: url("https://github.com/cityofaustin/atd-knack/blob/master/media/COA-Icon-Official-Knockout-RGB.png?raw=true");
   display: inline-block;
-  text-align:center;
+  text-align: center;
   vertical-align: top;
   padding-right: 10px;
-  object-fit:contain;
+  object-fit: contain;
   width: 100px;
-  height:auto;
+  height: auto;
 }
 
 .text-header {
