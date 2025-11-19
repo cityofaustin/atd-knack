@@ -448,39 +448,50 @@ a.small-button {
 #kn-scene_101 .view-group {
   display: block; /* avoids text overlapping */
 }
-
+/********************************************/
+/****** Print Application Header ************/
+/********************************************/
 .image-header-container {
   display: block;
   align-items: flex-start;
   flex-direction: row;
   justify-content: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: "Helvetica","Arial", "sans-serif";
   break-before: page;
 }
 
 .image-seal {
-  content: url("https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FCqNGfEc0WO4ar1y6yBB3%2Fuploads%2FdxBFascjuN72Cl1NwFMQ%2Fimage.png?alt=media&token=caaa96e0-8684-4747-b936-f5501a1259f6");
-  width: 152px;
-  height: 113.324px;
+  content: url("https://github.com/cityofaustin/atd-knack/blob/master/media/COA-Icon-Official-Knockout-RGB.png?raw=true");
   display: inline-block;
+  text-align: center;
   vertical-align: top;
-  border-right: 3px solid #2b5ea0;
+  padding-right: 10px;
+  object-fit: contain;
+  width: 100px;
+  height: auto;
 }
 
 .text-header {
   justify-content: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
   display: inline-block;
-  vertical-align: top;
   margin-left: 10px;
+  color: #44499C;
+  font-size: 14px;
+  line-height: normal;
 }
 
-.header-title {
-  color: #2b5ea0;
-  font-weight: lighter;
-  font-size: 1.5em;
+.text-header > .header-title {
+  font-size: 1.05em;
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 760px) {
+  .image-seal {
+    width: 70px;
+  }
+  .text-header {
+    font-size: 11px;
+  }
 }
 
 /* Page Number Counter setup */
@@ -502,6 +513,12 @@ a.small-button {
   display: none;
 }
 @media print {
+  .image-header-container {
+    width: 100%;
+  }
+  .image-seal {
+    width: 100px;
+  } 
   #view_846,
   #view_920 {
     display: none;
