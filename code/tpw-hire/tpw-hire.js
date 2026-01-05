@@ -1081,3 +1081,124 @@ $(document).on("knack-scene-render.scene_112", function () {
       }
     });
 });
+
+/***********************************/
+/*** Custom Hire Navigation Menu  ***/
+/***********************************/
+function hireDropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
+  const buttonClass = mobile ? "desktop-button" : "kn-button"
+  if (newTab) {
+    return (
+      `<li class="${buttonClass}">\
+        <a href="#hiring-management/view-hiring-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
+          <span class="icon is-small"> \
+            <i class="fa ${iconName}" /> \
+          </span>\
+          <span>${linkName}</span>\
+        </a>\
+      </li>`)
+  }
+
+  return (
+    `<li class="${buttonClass}">\
+      <a href="#hiring-management/view-hiring-details/${recordId}/${route}/${recordId}" class="hire-nav-menu">\
+        <span class="icon is-small" style="color:#163f6e"> \
+          <i class="fa ${iconName}" /> \
+        </span>\
+        <span style="color:#163f6e">${linkName}</span>\
+      </a>\
+    </li>`)
+}
+
+/* Hire Details Page */
+$(document).on('knack-view-render.view_570', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+   $(`<div class="details-dropdown-menu tabs">\
+    <ul id="desktop-menu-list">\
+      <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#hiring-management/" data-kn-slug="#case-management">\
+          <span class="kn-dropdown-icon fa fa-reply" />\
+          <span class="nav-dropdown-link">&nbsp;Back to List</span>\
+        </a>\
+        <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+        </ul>\
+      </li>\
+      <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#hiring-management/view-hiring-details/${recordId}/edit-hiring-info/${recordId}" data-kn-slug="#manage-hiring">\
+          <span class="kn-dropdown-icon fa fa-edit" /> \
+          <span class="nav-dropdown-link">&nbsp;Manage Hiring</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${hireDropdownMenuItem(recordId, "edit-hiring-info", "fa-edit", "Hiring Details")}\
+          ${hireDropdownMenuItem(recordId, "posting-management", "fa-user", "Hiring Manager | View ")}\
+        </ul>\
+      </li>\
+      <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
+       <a href="#hiring-management/view-hiring-details/${recordId}/applicants/${recordId}" data-kn-slug="#pre-interview">\
+          <span class="kn-dropdown-icon fa fa-edit" /> \
+          <span class="nav-dropdown-link">&nbsp;Pre-Interview</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${hireDropdownMenuItem(recordId, "applicants", "fa-edit", "Applicants")}\
+          ${hireDropdownMenuItem(recordId, "connect-interview", "fa-link", "Connect Interview & Applicants")}\
+        </ul>\
+      </li>\
+      <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
+       <a href="#hiring-management/view-hiring-details/${recordId}/edit-zone-offer/${recordId}" data-kn-slug="#post-interview">\
+          <span class="kn-dropdown-icon fa fa-edit" /> \
+          <span class="nav-dropdown-link">&nbsp;Post-Interview</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${hireDropdownMenuItem(recordId, "edit-zone-offer", "fa-edit", "Zone & Offer Details")}\
+          ${hireDropdownMenuItem(recordId, "edit-zoning-form", "fa-edit", "Edit Zoning Information")}\
+        </ul>\
+      </li>\
+      ${hireDropdownMenuItem(recordId, "change-status", "fa-exchange", "Status")}\
+    </ul>\
+  </div>`).appendTo("#view_570")
+
+/* Mobile Hire Details Page */
+$(`<div class="mobile-details-dropdown-menu">\
+    <ul id="mobile-menu-list">\
+      <li class="mobile-dropdown-menu">\
+        <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+        </ul>\
+      </li>\
+      <li class="mobile-dropdown-menu">\
+        <span class="desktop-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down desktop-dropdown" /> \
+          Hiring Management Menu\
+        </span>\
+        <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${hireDropdownMenuItem(recordId, "edit-hiring-info", "fa-edit", "Hiring Details", true)}\
+          ${hireDropdownMenuItem(recordId, "posting-management", "fa-user", "Hiring Manager | View ", true)}\
+        </ul>\
+      </li>\
+      <li class="mobile-dropdown-menu">\
+        <span class="desktop-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down desktop-dropdown" /> \
+          Pre Interview Menu\
+        </span>\
+        <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${hireDropdownMenuItem(recordId, "applicants", "fa-edit", "Applicants", true)}\
+          ${hireDropdownMenuItem(recordId, "connect-interview", "fa-link", "Connect Interview & Applicants", true)}\
+        </ul>\
+      </li>\
+      <li class="mobile-dropdown-menu">\
+        <span class="desktop-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down desktop-dropdown" /> \
+          Post Interview Menu\
+        </span>\
+        <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${hireDropdownMenuItem(recordId, "edit-zone-offer", "fa-edit", "Zone & Offer Details", true)}\
+          ${hireDropdownMenuItem(recordId, "edit-zoning-form", "fa-edit", "Edit Zoning Information", true)}\
+        </ul>\
+      </li>\
+      ${hireDropdownMenuItem(recordId, "change-status", "fa-exchange", "Status", true)}\
+    </ul>\
+  </div>`).appendTo("#view_570")
+})
