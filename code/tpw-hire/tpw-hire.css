@@ -273,3 +273,125 @@ img.knHeader__logo-image {
 #generate-responses-button.is-disabled:hover {
   background-color: inherit !important;
 }
+/****************************************/
+/*** Dropdown Menu Buttons Navigation ***/
+/****************************************/
+/* Hide original TCP Case Details Menu */
+ #view_300 {
+  display: none;
+}
+/* Hide custom Mobile Menu if on desktop */
+@media (min-width: 767.9px) {
+  .mobile-details-dropdown-menu {
+    display: none;
+  }
+}
+/* Hide custom Desktop menu if on mobile */
+@media (max-width: 768px) {
+  #desktop-menu-list {
+    display: none;
+  }
+}
+
+/*list, list item, and button stylings*/
+#desktop-menu-list {
+  border-bottom: 0 !important
+}
+
+#desktop-menu-list li {
+  margin-right: .5em;
+  }
+
+#desktop-menu-list .kn-button a {
+  color: #163f6e;
+  font-size: 1.1em;
+  border-bottom: 0;
+  padding-top:3px;
+}
+
+.desktop-dropdown-menu-list .kn-button {
+  border-radius: 0;
+}
+
+.desktop-dropdown-menu-list li {
+  border: 0;
+  margin-right: 0 !important;
+} 
+
+.desktop-dropdown-menu-list li:hover {
+  background-color: #ebebeb;
+}
+
+/*Mobile list, list item, and button stylings*/
+.mobile-details-dropdown-menu ul {
+  margin-left: .25em;
+}
+
+#mobile-menu-list {
+  list-style-type: none;
+  margin: 0;
+} 
+
+#mobile-menu-list ul {
+  list-style-type: none;
+}
+
+.mobile-dropdown-menu span {
+  margin-top: .25em;
+  color: #163f6e;
+}
+
+.mobile-dropdown-button {
+  display: flex;
+}
+
+.mobile-dropdown-button i {
+  display: none;
+}
+
+.mobile-dropdown-button.show-icon i {
+  display: inherit;
+  width: 16px;
+}
+
+.mobile-dropdown-button:not(.show-icon)::before {
+  content: "\203A";
+  font-size: 18px;
+  font-weight: 800;
+  width: 16px;
+  line-height: 16px;
+}
+
+.mobile-dropdown-menu-list {
+  margin-top: 1em;
+  display: none;
+}
+
+.mobile-dropdown-menu-list.active {
+  display: inherit;
+}
+
+.desktop-button {
+  background-color: rgba(0,0,0,.08);
+  color: #163f6e;
+  font-size: 1.1em;
+  padding: .4em .8em;
+  height: 32px;
+  border-radius: .35em
+}
+
+.desktop-button a {
+  padding: 0.5em;
+  color: #163f6e;
+  text-decoration: none;
+  display: block;
+}
+
+.desktop-button .icon {
+  vertical-align: baseline;
+}
+
+.mobile-button {
+  color: #163f6e !important;
+}
+
