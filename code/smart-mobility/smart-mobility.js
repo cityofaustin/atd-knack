@@ -1,4 +1,5 @@
-const APPLICATION_ID = "618ad3322d11b4002169a6f9";
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
 
 /********************************************/
 /******** COACD Single Sign On Login ********/
@@ -54,99 +55,70 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-/**
- * Template and append a button link, disable it optionally, and invoke a callback function argument
- * @parameter {string} id - id attribute of the a tag in the button link
- * @parameter {string} view_id - Knack view id to append button link to
- * @parameter {string} url - Destination to navigate to on click
- * @parameter {string} fa_icon - Icon string (https://support.knack.com/hc/en-us/articles/226165208-Working-with-Icons#2-complete-list-of-icons)
- * @parameter {bool} isDisabled - Is button disabled (defaults to false)
- * @parameter {function} callback - Function that is invoked after appending the button link
- **/
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  isDisabled = false,
-  callback = null
-) {
-  var disabledClass = isDisabled ? " big-button-disabled'" : "'";
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
-  $(
-    "<a id='" +
-      id +
-      "' class='big-button-container" +
-      disabledClass +
-      " href='" +
-      url +
-      "'><span><i class='fa fa-" +
-      fa_icon +
-      "'></i></span><span> " +
-      button_label +
-      "</span></a>"
-  ).appendTo("#" + view_id);
-
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
-	//>>>HOME TAB BUTTONS
+
+//HOME TAB BUTTONS
 $(document).on('knack-view-render.view_16', function(event, page) {
-  // create large button on the home page
     bigButton('metrobike-employee-benefit', 'view_16', "https://atd.knack.com/bike-benefit-program#metrobike-employee-benefit/", "bicycle", "MetroBike Employee Benefit");
 });
 
-
-	//>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
+//LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
 $(document).on('knack-view-render.view_410', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-eoi', 'view_410', "https://atd.knack.com/smart-mobility#living-streets-eoi/", "street-view", "Healthy Streets or Play Streets");
+    bigButton('living-streets-eoi', 'view_410', `${APP_URL}#living-streets-eoi/`, "street-view", "Healthy Streets or Play Streets");
 });
-	//>>>LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
+//LIVING STREETS PROGRAM SELECTIONS BUTTONS draft
 $(document).on('knack-view-render.view_411', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-login', 'view_411', "https://www.austintexas.gov/department/neighborhood-block-parties", "users", "Block Party");
+    bigButton('living-streets-login', 'view_411', "https://www.austintexas.gov/department/neighborhood-block-parties", "users", "Block Party", true);
 });
 
-	//>>>LIVING STREETS GETTING STARTED PAGE draft 1
+//LIVING STREETS GETTING STARTED PAGE draft 1
 $(document).on('knack-view-render.view_451', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-login', 'view_451', "https://www.austintexas.gov/LivingStreets", "home", "Return to Living Streets Home");
+    bigButton('living-streets-login', 'view_451', "https://www.austintexas.gov/LivingStreets", "home", "Return to Living Streets Home", true);
 });
-	//>>>LIVING STREETS GETTING STARTED PAGE draft 2
+//LIVING STREETS GETTING STARTED PAGE draft 2
 $(document).on('knack-view-render.view_450', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-getting-started', 'view_450', "https://atd.knack.com/smart-mobility#living-streets-eoi-new/", "arrow-right", "Start Expression of Interest");
+    bigButton('living-streets-getting-started', 'view_450', `${APP_URL}#living-streets-eoi-new/`, "arrow-right", "Start Expression of Interest");
 });
 
-	//>>>LS SPLASH PAGE - Healthy Streets
+//LS SPLASH PAGE - Healthy Streets
 $(document).on('knack-view-render.view_832', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-getting-started', 'view_832', "https://atd.knack.com/smart-mobility#living-streets-getting-started/", "arrow-right", "Healthy Streets");
+    bigButton('living-streets-getting-started', 'view_832', `${APP_URL}#living-streets-getting-started/`, "arrow-right", "Healthy Streets");
 });
 
-	//>>>LS SPLASH PAGE - Play Streets
+//LS SPLASH PAGE - Play Streets
 $(document).on('knack-view-render.view_833', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-getting-started', 'view_833', "https://atd.knack.com/smart-mobility#living-streets-getting-started//", "arrow-right", "Play Streets");
+    bigButton('living-streets-getting-started', 'view_833', `${APP_URL}#living-streets-getting-started/`, "arrow-right", "Play Streets");
 });
 
-	//>>>LS SPLASH PAGE - Neighborhood Block Party
+//LS SPLASH PAGE - Neighborhood Block Party
 $(document).on('knack-view-render.view_834', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-getting-started', 'view_834', "https://atd.knack.com/smart-mobility#block-party-getting-started/", "arrow-right", "Neighborhood Block Party");
+    bigButton('living-streets-getting-started', 'view_834', `${APP_URL}#block-party-getting-started/`, "arrow-right", "Neighborhood Block Party");
 });
 
-	//>>>LS NBP Gettign Started PAGE
+//LS NBP Gettign Started PAGE
 $(document).on('knack-view-render.view_836', function(event, page) {
-  // create large button on the home page
-    bigButton('living-streets-getting-started', 'view_836', "https://atd.knack.com/smart-mobility#nbp-login/", "arrow-right", "Start Block Party Application");
+    bigButton('living-streets-getting-started', 'view_836', `${APP_URL}#nbp-login/`, "arrow-right", "Start Block Party Application");
 });
 
-/*******************************************/
-/*** Disable Breadcrumb Navigation Links ***/
-/*******************************************/
-function disableBreadCrumbsNonAdmin() {
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -154,65 +126,33 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-//LS Timeframe
-$(document).on("knack-scene-render.scene_188", function () {
-  disableBreadCrumbsNonAdmin();
+const BREADCRUMB_SCENES = [
+  // Old TCP Application
+  'scene_188', //LS Timeframe
+  'scene_206', //HS EOI Finalize and Submit
+  'scene_208', //HS EOI Confirmation
+  'scene_209', //PS EOI Finalize and Submit
+  'scene_211', //PS EOI Confirmation
+  'scene_276', //LS Timeframe NEW
+  'scene_277', //HS EOI Finalize and Submit NEW
+  'scene_280', //HS EOI Confirmation NEW
+  'scene_281', //PS EOI Finalize and Submit NEW
+  'scene_284', //PS EOI Confirmation NEW
+];
+
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
-//HS EOI Finalize and Submit
-$(document).on("knack-scene-render.scene_206", function () {
-  disableBreadCrumbsNonAdmin();
-});
+/****************************/
+/*** Citybase Integration ***/
+/****************************/
 
-//HS EOI Confirmation
-$(document).on("knack-scene-render.scene_208", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//PS EOI Finalize and Submit
-$(document).on("knack-scene-render.scene_209", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//PS EOI Confirmation
-$(document).on("knack-scene-render.scene_211", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//LS Timeframe NEW
-$(document).on("knack-scene-render.scene_276", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//HS EOI Finalize and Submit NEW
-$(document).on("knack-scene-render.scene_277", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//HS EOI Confirmation NEW
-$(document).on("knack-scene-render.scene_280", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//PS EOI Finalize and Submit NEW
-$(document).on("knack-scene-render.scene_281", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//PS EOI Confirmation NEW
-$(document).on("knack-scene-render.scene_284", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-  //***MANAGE MAKE PAYMENT BUTTON***
+//MANAGE MAKE PAYMENT BUTTON
 $(document).on('knack-view-render.view_806', function(event, page) {
   // create large button on go back to Portal page
-  // *** see the getCitybaseButton function for the invocation of the make payment bigButton function
+  // see the getCitybaseButton function for the invocation of the make payment bigButton function
 });
-
-/** 
- * Citybase Integration
- */
 
 
 function getCitybaseButton(payload, viewId){
@@ -316,6 +256,7 @@ $(document).on('knack-view-render.view_817', function(event, page, view) {
       getCitybaseButton(payload, "view_806")
     }
 })
+
 /*******************************/
 /* Generates a Random Password */
 /*******************************/
