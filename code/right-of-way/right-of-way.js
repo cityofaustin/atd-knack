@@ -164,21 +164,6 @@ $(document).on("knack-view-render.view_1593", function(event, page) {
   bigButton("dapcz-meeting", "view_1593", `${APP_URL}#dapcz-meeting/`, "slideshare", "DAPCZ Public Portal");
 });
 
-// create large Manage DAPCZ Links button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1594", function(event, page) {
-  bigButton("manage-links", "view_1594", `${APP_URL}#manage-links/`, "link", "Manage Links");
-});
-
-// create large Manage DAPCZ Meeting Schedule button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1595", function(event, page) {
-  bigButton("manage-schedule", "view_1595", `${APP_URL}#manage-schedule`, "calendar", "Manage Schedule");
-});
-
-// create large DAPCZ Public Portal button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1597", function(event, page) {
-  bigButton("dapcz-meeting", "view_1597", `${APP_URL}#dapcz-meeting/`, "slideshare", "DAPCZ Public Portal");
-});
-
 // create large DAPCZ Agenda button on the DAPCZ Public Portal page
 $(document).on("knack-view-render.view_1505", function(event, page) {
   bigButton("dapcz-agenda", "view_1505", `${APP_URL}#dapcz-meeting/dapcz-agenda/`, "file-o", "DAPCZ Agenda");
