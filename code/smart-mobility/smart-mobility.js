@@ -149,7 +149,7 @@ BREADCRUMB_SCENES.forEach(scene => {
 /****************************/
 
 //MANAGE MAKE PAYMENT BUTTON
-$(document).on('knack-view-render.view_806', function(event, page) {
+$(document).on('knack-view-render.view_997', function(event, page) {
   // create large button on go back to Portal page
   // see the getCitybaseButton function for the invocation of the make payment bigButton function
 });
@@ -182,8 +182,8 @@ var headers = {
 };
 
 // After the transactions table loads
-$(document).on('knack-view-render.view_817', function(event, page, view) {
-  $('#view_817').hide()
+$(document).on('knack-view-render.view_1002', function(event, page, view) {
+  $('#view_1002').hide()
   var transactionRecord = view[0]
 
   var payload = {
@@ -253,7 +253,7 @@ $(document).on('knack-view-render.view_817', function(event, page, view) {
       ]
       // uncomment line below for debugging / triaging
       // console.log(JSON.stringify(payload));
-      getCitybaseButton(payload, "view_806")
+      getCitybaseButton(payload, "view_997")
     }
 })
 
