@@ -782,133 +782,267 @@ $(document).on("knack-scene-render.scene_634", function (event, scene) {
   conditionallyDisableTaskOrderEditing();
 });
 
-////////////////////////////////////////////
-////// End Disable Task Order Editing //////
-////////////////////////////////////////////
+/**************************************/
+/*** Technician Time Log Validation ***/
+/**************************************/
 
-////////////////////////////////////////////
-/// Begin Technician Time Log Validation ///
-////////////////////////////////////////////
-
-function appendErrorMessage(viewKey, formDiv, msg) {
-  // remove existing error msg if present
-  var errorDiv = $(
-    '<div id="' +
-      viewKey +
-      '-fail" class="kn-message is-error"><span class="kn-message-body"><p><strong>' +
-      msg +
-      "</strong></p></span></div>"
-  );
-  errorDiv.insertBefore(formDiv);
-  setTimeout(function () {
-    $("#" + viewKey + "-fail").remove();
-  }, 6000);
-}
-
-function highlightErrorField(inputId) {
-  $(inputId).addClass("input-error");
-  $(inputId + "-time").addClass("input-error");
-
-  setTimeout(function () {
-    $(inputId).removeClass("input-error");
-    $(inputId + "-time").removeClass("input-error");
-  }, 6000);
-}
-
-function getDatetime(inputId) {
-  // Date-time field has two inputs, one for date, and one for time
-  var dt = $("#" + inputId).val();
-
-  if (!dt) return undefined;
-
-  var [hoursStr, minutesStr] = $("#" + inputId + "-time")
-    .val()
-    .split(":");
-
-  if (!(hoursStr && minutesStr)) {
-    // we'll do like knack does and handle an absent or un-parseable time as 0:00
-    hoursStr = "0";
-    minutesStr = "0";
-  }
-
-  var hours = parseInt(hoursStr);
-  var amPm = minutesStr.slice(-2).toLowerCase();
-
-  // extract 'am' or 'pm' if present
-  if (amPm !== "am" && amPm !== "pm") {
-    amPm = null;
-  } else {
-    // remove am/pm string from string so that we can parse it as an int
-    minutesStr = minutesStr.replace(amPm, "");
-  }
-
-  minutes = parseInt(minutesStr) || 0;
-
-  if (isNaN(hours) || isNaN(minutes)) {
-    return undefined;
-  }
-
-  // adjust hours for am/pm
-  if (amPm == "pm" && hours < 12) {
-    hours = hours + 12;
-  } else if (amPm == "am" && hours == 12) {
-    hours = 0;
-  }
-  return new Date(dt + " " + hours + ":" + minutes);
-}
-
-function formatErrorMessage(startField, endField) {
-  return `<u>${startField.name}</u> must be earlier than <u>${endField.name}</u><br/>`;
-}
-
-$(document).on("knack-view-render.view_1252", function (event, page) {
-  var viewKey = page.key;
-
-  // each date field must be ordred chronologically, earliest to latest
-  var dateFields = [
-    { key: "field_2020", name: "Issue Recevied" }, // issue received
-    { key: "field_1437", name: "Arrive at Worksite" }, // arrive on-site
-    { key: "field_1438", name: "Leave Work Site" }, // leave site
-    { key: "field_1425", name: "Return to Shop" }, // return to shop
+(function() {
+  'use strict';
+  
+  // Date fields configuration
+  const DATE_FIELDS = [
+    { key: "field_2020", name: "Issue Received" },
+    { key: "field_1437", name: "Arrive at Worksite" },
+    { key: "field_1438", name: "Leave Work Site" },
+    { key: "field_1425", name: "Return to Shop" },
   ];
+  
+  // Inject custom CSS for error message styling
+  const injectCustomStyles = () => {
+    const styleId = 'time-log-validation-styles';
+    
+    // Check if styles already exist
+    if ($(`#${styleId}`).length) return;
+    
+    const customStyles = `
+      <style id="${styleId}">
+        /* Error message font size for Desktop */
+        .kn-message.is-error .kn-message-body p {
+          font-size: 14px !important;
+          line-height: 1.4 !important;
+        }
+        
+        /* Larger Error message font for Tablet */
+        @media (max-width: 800px) {
+          .kn-message.is-error .kn-message-body p {
+            font-size: 18px !important;
+            line-height: 1.3 !important;
+          }
+        }
+        
+        /* Error message font size for Mobile */
+        @media (max-width: 635px) {
+          .kn-message.is-error .kn-message-body p {
+            font-size: 12px !important;
+            line-height: 1.3 !important;
+          }
+        }
+      </style>
+    `;
+    
+    $('head').append(customStyles);
+  };
+  
+  /**************************************************************************
+   * UTILITY FUNCTIONS - Low-level helpers
+   **************************************************************************/
+  
+  const getDatetime = (inputId) => {
+    try {
+      // Date-time field has two inputs, one for date, and one for time
+      const dateValue = $(`#${inputId}`).val();
+      const timeValue = $(`#${inputId}-time`).val();
 
-  $(`#${viewKey} .kn-button`).on("click", function () {
-    var passesValidation = true;
-    var formDiv = $(this).closest("div")[0];
-    var errorMsgs = "";
+      // Return undefined if date field is empty
+      if (!dateValue) return undefined;
 
-    for (var i = 1; i < 4; i++) {
-      var startField = dateFields[i - 1];
-      var endField = dateFields[i];
-      var startDateTime = getDatetime(`${viewKey}-${startField.key}`);
-      var endDateTime = getDatetime(`${viewKey}-${endField.key}`);
+      // If time field is empty or invalid, default to 0:00 (like Knack does)
+      let timeToUse = timeValue || "0:00";
 
+      // Improved regex to parse time with optional AM/PM
+      // Matches formats like: "14:30", "2:30pm", "2:30 PM", "02:30am"
+      const timeMatch = timeToUse.match(/^\s*(\d{1,2}):(\d{2})\s*(am|pm)?\s*$/i);
+      
+      if (!timeMatch) {
+        // If time doesn't match expected format, default to 0:00
+        return new Date(`${dateValue} 0:0`);
+      }
+
+      let hours = parseInt(timeMatch[1], 10);
+      const minutes = parseInt(timeMatch[2], 10);
+      const amPm = timeMatch[3]?.toLowerCase();
+
+      // Validate parsed values
+      if (isNaN(hours) || isNaN(minutes) || hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+        // If invalid, default to 0:00
+        hours = 0;
+        minutes = 0;
+      }
+
+      // Adjust hours for 12-hour format with AM/PM
+      if (amPm === "pm" && hours < 12) {
+        hours += 12;
+      } else if (amPm === "am" && hours === 12) {
+        hours = 0;
+      }
+
+      // Construct the date object
+      const dateTimeString = `${dateValue} ${hours}:${minutes}`;
+      const dateObject = new Date(dateTimeString);
+
+      // Validate that the date object is valid
+      if (isNaN(dateObject.getTime())) {
+        console.warn(`Invalid date/time constructed for input: ${inputId} - Date: ${dateValue}, Time: ${timeValue}`);
+        return undefined;
+      }
+
+      return dateObject;
+    } catch (error) {
+      console.error(`Error parsing date/time for input: ${inputId}`, error);
+      return undefined;
+    }
+  };
+
+  const formatErrorMessage = (startField, endField) => {
+    return `<u>${startField.name}</u> must be earlier than <u>${endField.name}</u><br/>`;
+  };
+  
+  /**************************************************************************
+   * UI FUNCTIONS - DOM manipulation for errors
+   **************************************************************************/
+  
+  const highlightErrorField = (inputId) => {
+    $(inputId).addClass("input-error");
+    $(`${inputId}-time`).addClass("input-error");
+  };
+
+  const appendErrorMessage = (viewKey, formDiv, msg) => {
+    // remove existing error msg if present
+    $(`#${viewKey}-fail`).remove();
+    
+    const errorDiv = $(
+      `<div id="${viewKey}-fail" class="kn-message is-error">
+        <span class="kn-message-body">
+          <p><strong>${msg}</strong></p>
+        </span>
+      </div>`
+    );
+    errorDiv.insertBefore(formDiv);
+  };
+
+  const updateErrorMessage = (viewKey, formDiv, errorMessages) => {
+    $(`#${viewKey}-fail`).remove();
+    
+    if (errorMessages.length > 0) {
+      const msg = errorMessages.join("");
+      const errorDiv = $(
+        `<div id="${viewKey}-fail" class="kn-message is-error">
+          <span class="kn-message-body">
+            <p><strong>${msg}</strong></p>
+          </span>
+        </div>`
+      );
+      errorDiv.insertBefore(formDiv);
+    }
+  };
+
+  const removeErrorStyling = (inputId, viewKey, formDiv, dateFields) => {
+    $(inputId).removeClass("input-error");
+    $(`${inputId}-time`).removeClass("input-error");
+    
+    // Re-validate all fields and rebuild error messages
+    const errorMessages = [];
+    
+    for (let i = 1; i < dateFields.length; i++) {
+      const startField = dateFields[i - 1];
+      const endField = dateFields[i];
+      const startDateTime = getDatetime(`${viewKey}-${startField.key}`);
+      const endDateTime = getDatetime(`${viewKey}-${endField.key}`);
+      
       if (startDateTime === undefined || endDateTime === undefined) {
-        // this only happens when a date or time field is blank
-        // in which case we do not validate start/end. Knack validations
-        // will step in if these fields are required
         continue;
       }
-      if (startDateTime > endDateTime) {
-        passesValidation = false;
-        // highlight errored fields with red border
-        highlightErrorField(`#${viewKey}-${startField.key}`);
-        highlightErrorField(`#${viewKey}-${endField.key}`);
-
-        errorMsgs = `${errorMsgs}${formatErrorMessage(startField, endField)}`;
+      
+      // Check if times are equal or if start is after end
+      if (startDateTime >= endDateTime) {
+        // Check if these fields still have error styling
+        const startHasError = $(`#${viewKey}-${startField.key}`).hasClass("input-error");
+        const endHasError = $(`#${viewKey}-${endField.key}`).hasClass("input-error");
+        
+        if (startHasError || endHasError) {
+          errorMessages.push(formatErrorMessage(startField, endField));
+        }
       }
     }
-    if (!passesValidation) {
-      // show red error banner
-      appendErrorMessage(viewKey, formDiv, errorMsgs);
-    }
-    return passesValidation;
-  });
-});
+    
+    // Update the error message banner
+    updateErrorMessage(viewKey, formDiv, errorMessages);
+  };
+  
+  /**************************************************************************
+   * INITIALIZATION - Event handlers and setup
+   **************************************************************************/
 
-////////////////////////////////////////////
-/// End Technician Time Log Validation ///
-////////////////////////////////////////////
+  //Add Time Log form
+  $(document).on("knack-view-render.view_3169", (event, page) => {
+    const { key: viewKey } = page;
+    let formDiv;
+    
+    // Inject custom styles once when view renders
+    injectCustomStyles();
+
+    // Set up event listeners to clear errors when fields are interacted with
+    DATE_FIELDS.forEach((field) => {
+      const fieldSelector = `#${viewKey}-${field.key}`;
+      const timeSelector = `${fieldSelector}-time`;
+      
+      // Remove error styling when either date or time input is focused/changed
+      $(fieldSelector).on("focus change", () => {
+        if (!formDiv) {
+          formDiv = $(`#${viewKey} .kn-button`).closest("div")[0];
+        }
+        removeErrorStyling(fieldSelector, viewKey, formDiv, DATE_FIELDS);
+      });
+      
+      $(timeSelector).on("focus change", () => {
+        if (!formDiv) {
+          formDiv = $(`#${viewKey} .kn-button`).closest("div")[0];
+        }
+        removeErrorStyling(fieldSelector, viewKey, formDiv, DATE_FIELDS);
+      });
+    });
+
+    $(`#${viewKey} .kn-button`).on("click", function () {
+      let passesValidation = true;
+      const currentFormDiv = $(this).closest("div")[0];
+      let errorMsgs = "";
+
+      // Clear any existing errors before re-validating - scoped to this view only
+      $(`#${viewKey} .input-error`).removeClass("input-error");
+      $(`#${viewKey}-fail`).remove();
+
+      // Improved loop - dynamically uses DATE_FIELDS.length instead of hard-coded value
+      for (let i = 1; i < DATE_FIELDS.length; i++) {
+        const startField = DATE_FIELDS[i - 1];
+        const endField = DATE_FIELDS[i];
+        const startDateTime = getDatetime(`${viewKey}-${startField.key}`);
+        const endDateTime = getDatetime(`${viewKey}-${endField.key}`);
+
+        if (startDateTime === undefined || endDateTime === undefined) {
+          // this only happens when a date or time field is blank
+          // in which case we do not validate start/end. Knack validations
+          // will step in if these fields are required
+          continue;
+        }
+        // Changed from > to >= to catch equal times as well
+        if (startDateTime >= endDateTime) {
+          passesValidation = false;
+          // highlight errored fields with red border
+          highlightErrorField(`#${viewKey}-${startField.key}`);
+          highlightErrorField(`#${viewKey}-${endField.key}`);
+
+          errorMsgs = `${errorMsgs}${formatErrorMessage(startField, endField)}`;
+        }
+      }
+      if (!passesValidation) {
+        // show red error banner
+        appendErrorMessage(viewKey, currentFormDiv, errorMsgs);
+      }
+      return passesValidation;
+    });
+  });
+
+})();
 
 //// Update link text to cabinet details page from signal detals
 $(document).on("knack-view-render.view_1261", function (event, page) {
