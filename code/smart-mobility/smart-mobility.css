@@ -1,32 +1,80 @@
-/* Big Buttons */
+/**************************************/
+/***** Validation Message Styling *****/
+/**************************************/
+.kn-notification, .is-confirmation, .is-warning, .is-alert { font-size: 1.25em !important; color: black !important;}
+.kn-notification { background-color: #2acee3 !important;}
+.is-confirmation { background-color: #caf4bc !important;}
+.is-warning { background-color: #ffe09a !important;}
+.is-alert { background-color: #ff9b9c !important;}
+
+/***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+/*Centers icon vertically on a line*/
+.fa { vertical-align: baseline; }
+/*Icon rests at the bottom of a line*/
+.fa-bot { vertical-align: text-bottom; }
+/*Icon touches the top of a line*/
+.fa-top { vertical-align: text-top; }
+/*Icon colors*/
+.fa-gold { color: goldenrod; }
+.fa-red { color: red; }
+.fa-green { color: green; }
+.fa-yellow { color: yellow; }
+.fa-orange { color: orange; }
+.fa-blue { color: blue; }
+.fa-purple { color: purple; }
+
+/****************************************/
+/********** Custom CSS Classes **********/
+/****************************************/
+/*Call this class anytime you want to use this cursor*/
+.disabled { cursor: not-allowed; }
+/*Call this class anytime you want to center button text*/
+.centered-text { text-align: center; }
+
+/****************************************/
+/************* Modal Styling ************/
+/****************************************/
+/*Close Modal 'X' Button*/
+.delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
+.close-modal {border: #495057 !important; background-color: #495057 !important;}
+.delete:before, .delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
+
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
 .big-button-container {
-  border-radius: 2px;
+  padding: 20px 20px;
+  border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
-  padding: 10px;
-  margin: 20px;
-  max-width: 16em;
-  display: block
+  max-width: 15em;
+  display: block;
 }
-
+ 
 .big-button-container:hover {
   background-color: #f7f7f7;
   cursor: pointer;
 }
 
-.fa {
-  vertical-align: baseline;
+.big-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+  pointer-events: none;
 }
-
-a.big-button-container {
+ 
+a.big-button-container { 
   text-decoration: none;
 }
 
-/* Small Buttons */
+/***************************************/
+/************ Small Buttons ************/
+/***************************************/
 .small-button-container {
-  padding: 5px;
-  margin: 20px;
-  border-radius: 2px;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 1em;
   max-width: 15em;
@@ -39,54 +87,39 @@ a.big-button-container {
   cursor: pointer;
 }
 
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+}
+
 a.small-button {
   text-decoration: none;
 }
 
-/*******************************************/
-/** Remove Back Links for Living Streets EOI Form Pages **/
-/*******************************************/
+/**********************************************/
+/** Remove Back Links for Living Streets EOI **/
+/**********************************************/
 /*Living Streets EOI - Timeframe*/
-#kn-scene_188 .kn-back-link {
-  display: none;
-}
+#kn-scene_188 .kn-back-link { display: none; }
 /*Healthy Streets EOI - Finalize and Submit page*/
-#kn-scene_206 .kn-back-link {
-  display: none;
-}
+#kn-scene_206 .kn-back-link { display: none; }
 /*Healthy Streets EOI - Confirmation 9age*/
-#kn-scene_208 .kn-back-link {
-  display: none;
-}
+#kn-scene_208 .kn-back-link { display: none; }
 /*Play Streets EOI - Finalize and Submit page*/
-#kn-scene_209 .kn-back-link {
-  display: none;
-}
+#kn-scene_209 .kn-back-link { display: none; }
 /*Play Streets EOI - Confirmation page*/
-#kn-scene_211 .kn-back-link {
-  display: none;
-}
+#kn-scene_211 .kn-back-link { display: none; }
 
 /*Living Streets EOI NEW - Timeframe*/
-#kn-scene_276 .kn-back-link {
-  display: none;
-}
+#kn-scene_276 .kn-back-link { display: none; }
 /*Healthy Streets EOI NEW- Finalize and Submit page*/
-#kn-scene_277 .kn-back-link {
-  display: none;
-}
+#kn-scene_277 .kn-back-link { display: none; }
 /*Healthy Streets EOI NEW- Confirmation 9age*/
-#kn-scene_280 .kn-back-link {
-  display: none;
-}
+#kn-scene_280 .kn-back-link { display: none; }
 /*Play Streets EOI NEW- Finalize and Submit page*/
-#kn-scene_281 .kn-back-link {
-  display: none;
-}
+#kn-scene_281 .kn-back-link { display: none; }
 /*Play Streets EOI NEW- Confirmation page*/
-#kn-scene_284 .kn-back-link {
-  display: none;
-}
+#kn-scene_284 .kn-back-link { display: none; }
 
 /*********************************************/
 /******** Header Banner Image Styling ********/
