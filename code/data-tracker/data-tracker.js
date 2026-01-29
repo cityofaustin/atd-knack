@@ -125,14 +125,6 @@ $(document).on("knack-page-render.any", function (event, page) {
   $('a[title="view in google maps"]').text("View on Google Maps");
 });
 
-$(document).on("knack-view-render.view_958", function (event, page) {
-  //  hide crumb trail at select locations
-  setTimeout(function () {
-    $(".kn-crumbtrail").remove();
-    //do something special
-  }, 1000);
-});
-
 /**
  * Set the URL of the embedded AGOL map on the MMC issue/service request details page
  */
@@ -782,6 +774,7 @@ $(document).on("knack-scene-render.scene_634", function (event, scene) {
   conditionallyDisableTaskOrderEditing();
 });
 
+
 /**************************************/
 /*** Technician Time Log Validation ***/
 /**************************************/
@@ -1043,6 +1036,7 @@ $(document).on("knack-scene-render.scene_634", function (event, scene) {
   });
 
 })();
+
 
 //// Update link text to cabinet details page from signal detals
 $(document).on("knack-view-render.view_1261", function (event, page) {
@@ -1310,6 +1304,29 @@ $(document).on("knack-view-render.view_1294", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadcrumbLinks() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+const BREADCRUMB_SCENES = [
+  // New Project Request Form scene_1591 (Projects Menu)
+  'scene_1620',  // Project Locations page
+  'scene_1623',  // Submit Request page
+  'scene_1624',  // Confirmation page
+];
+
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
+});
+
 /***************************************************************/
 /*** Disable the ability to Click/Touch outside a Modal Page ***/
 /***************************************************************/
