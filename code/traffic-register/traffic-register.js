@@ -203,11 +203,15 @@ window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tas
 /**** Auto Refresh Browser ****/
 /******************************/
 /* 1st Page of Draft Builder */
-(function() { // Wrap interval management in a block to avoid global scope pollution
-    // Store interval IDs for cleanup
+(function() {
+    // Store interval IDs and state
     let pageReloadInterval;
     let countdownInterval;
-
+    let submitCheckInterval;
+    let isSubmitting = false; // Track submission state
+    let timeLeft = 20; // Shared time variable
+    let isInDisabledPeriod = false; // Track if we're in the 3-second disabled period
+    
     $(document).on("knack-scene-render.scene_697", function () {
         // Clear any existing intervals to prevent multiples
         if (pageReloadInterval) {
@@ -216,83 +220,162 @@ window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tas
         if (countdownInterval) {
             clearInterval(countdownInterval);
         }
-        
-        // Set up the page reload timer
-        pageReloadInterval = setInterval(function() {
-            location.reload();
-        }, 20000); // Refreshes every 20 seconds
-    });
-
-    $(document).on("knack-scene-render.scene_697", function () {
-        // Clear existing countdown interval if it exists
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
+        if (submitCheckInterval) {
+            clearInterval(submitCheckInterval);
         }
         
-        let timeLeft = 20;
-        const timeDisplay = document.getElementById("displayTime");
+        // Reset submission flag and timer
+        isSubmitting = false;
+        timeLeft = 20;
+        isInDisabledPeriod = false;
         
+        const timeDisplay = document.getElementById("displayTime");
+        const submitButton = $('.kn-button.is-primary'); // Knack's primary submit button
+        
+        // Set up countdown display
         if (timeDisplay) {
             timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
+        }
+        
+        // Combined countdown and reload logic
+        countdownInterval = setInterval(function() {
+            // Don't refresh if user is submitting
+            if (isSubmitting) {
+                clearInterval(countdownInterval);
+                clearInterval(pageReloadInterval);
+                return;
+            }
             
-            countdownInterval = setInterval(function() {
-                timeLeft--;
+            timeLeft--;
+            
+            if (timeDisplay) {
                 timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
+            }
+            
+            // When we hit 0, enter disabled period
+            if (timeLeft === 0) {
+                isInDisabledPeriod = true;
                 
-                if (timeLeft === 0) {
-                    timeLeft = 20;
-                    location.reload();
+                // Disable submit button
+                if (submitButton.length > 0) {
+                    submitButton.prop('disabled', true);
+                    submitButton.css({
+                        'opacity': '0.5',
+                        'cursor': 'not-allowed'
+                    });
+                    
+                    // Add warning message
+                    if ($('#refresh-warning').length === 0) {
+                        submitButton.before('<div id="refresh-warning" style="color: #d9534f; font-weight: bold; margin-bottom: 10px;">⚠️ Refreshing selection, please wait...</div>');
+                    }
                 }
-            }, 1000); // Updates every 1 second
+                
+                // Wait 3 seconds, then reload
+                setTimeout(function() {
+                    if (!isSubmitting) {
+                        location.reload();
+                    }
+                }, 3000);
+                
+                // Clear the countdown interval since we're done counting
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+        
+        // Backup timer (total 23 seconds: 20 countdown + 3 disabled period)
+        pageReloadInterval = setInterval(function() {
+            if (!isSubmitting) {
+                location.reload();
+            }
+        }, 23000);
+        
+        // Monitor submit button state (keep it enabled until we hit 0)
+        if (submitButton.length > 0) {
+            submitCheckInterval = setInterval(function() {
+                if (isInDisabledPeriod) {
+                    submitButton.prop('disabled', true);
+                    submitButton.css({
+                        'opacity': '0.5',
+                        'cursor': 'not-allowed'
+                    });
+                } else {
+                    submitButton.prop('disabled', false);
+                    submitButton.css({
+                        'opacity': '1',
+                        'cursor': 'pointer'
+                    });
+                }
+            }, 100);
         }
     });
-
-    // Clean up intervals when scene is destroyed or navigated away from
+    
+    // Intercept form submission to prevent refresh during submit
+    $(document).on("knack-form-submit.view_1421", function(event, view, record) {
+        isSubmitting = true;
+        
+        // Clear all intervals immediately on submit
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+            pageReloadInterval = null;
+        }
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+        if (submitCheckInterval) {
+            clearInterval(submitCheckInterval);
+            submitCheckInterval = null;
+        }
+        
+        // Remove warning message
+        $('#refresh-warning').remove();
+    });
+    
+    // Clean up intervals when scene is destroyed
     $(document).on("knack-scene-destroy.scene_697", function () {
         if (pageReloadInterval) {
             clearInterval(pageReloadInterval);
             pageReloadInterval = null;
         }
-        
         if (countdownInterval) {
             clearInterval(countdownInterval);
             countdownInterval = null;
         }
+        if (submitCheckInterval) {
+            clearInterval(submitCheckInterval);
+            submitCheckInterval = null;
+        }
+        
+        // Remove warning message
+        $('#refresh-warning').remove();
     });
-
-    // Clear intervals BEFORE any navigation occurs
+    
+    // Clear intervals before any navigation occurs
     $(document).on("knack-route-change", function() {
         if (pageReloadInterval) {
             clearInterval(pageReloadInterval);
             pageReloadInterval = null;
         }
-        
         if (countdownInterval) {
             clearInterval(countdownInterval);
             countdownInterval = null;
         }
-    });
-
-    // Also listen for any link clicks or navigation attempts
-    $(document).on("click", "a[href], .kn-link", function() {
-        if (pageReloadInterval) {
-            clearInterval(pageReloadInterval);
-            pageReloadInterval = null;
-        }
-        
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
+        if (submitCheckInterval) {
+            clearInterval(submitCheckInterval);
+            submitCheckInterval = null;
         }
     });
-
-    // Additional cleanup for page unload (extra safety measure)
+    
+    // Additional cleanup for page unload
     $(window).on('beforeunload', function() {
         if (pageReloadInterval) {
             clearInterval(pageReloadInterval);
         }
         if (countdownInterval) {
             clearInterval(countdownInterval);
+        }
+        if (submitCheckInterval) {
+            clearInterval(submitCheckInterval);
         }
     });
 })();
