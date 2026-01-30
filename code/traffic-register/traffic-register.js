@@ -205,44 +205,106 @@ window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tas
 /* 1st Page of Draft Builder */
 (function() {
     // Store interval IDs and state
-    let pageReloadInterval;
-    let countdownInterval;
-    let submitCheckInterval;
-    let isSubmitting = false; // Track submission state
-    let timeLeft = 20; // Shared time variable
-    let isInDisabledPeriod = false; // Track if we're in the 3-second disabled period
+    let pageReloadInterval = null;
+    let countdownInterval = null;
+    let submitCheckInterval = null;
+    let isSubmitting = false;
+    let timeLeft = 20;
+    let isInDisabledPeriod = false;
+    let isOnCorrectScene = false;
+    let clickHandlerAttached = false;
     
-    $(document).on("knack-scene-render.scene_697", function () {
-        // Clear any existing intervals to prevent multiples
+    // Function to clear all intervals
+    function clearAllIntervals() {
         if (pageReloadInterval) {
             clearInterval(pageReloadInterval);
+            pageReloadInterval = null;
         }
         if (countdownInterval) {
             clearInterval(countdownInterval);
+            countdownInterval = null;
         }
         if (submitCheckInterval) {
             clearInterval(submitCheckInterval);
+            submitCheckInterval = null;
+        }
+        $('#refresh-warning').remove();
+    }
+    
+    // Navigation click handler (defined once, reused)
+    function handleNavigationClick(e) {
+        const $target = $(e.target).closest('a, .kn-link, .kn-menu-item');
+        
+        // Don't process clicks on form elements
+        if ($(e.target).closest('form, .kn-form, select, input, textarea, button[type="submit"]').length > 0) {
+            return;
         }
         
-        // Reset submission flag and timer
+        const href = $target.attr('href');
+        
+        // If this is a navigation link away from scene_697
+        if (href && href !== '#' && !href.includes('scene_697')) {
+            isOnCorrectScene = false;
+            clearAllIntervals();
+        }
+    }
+    
+    // Function to attach click handler (only when on scene_697)
+    function attachClickHandler() {
+        if (!clickHandlerAttached) {
+            // Use mousedown instead of click to catch navigation earlier
+            // But exclude form elements
+            $(document).on("mousedown.scene697nav", "a:not(form a), .kn-link:not(form .kn-link), .kn-menu-item", handleNavigationClick);
+            clickHandlerAttached = true;
+        }
+    }
+    
+    // Function to detach click handler (when leaving scene_697)
+    function detachClickHandler() {
+        if (clickHandlerAttached) {
+            $(document).off("mousedown.scene697nav");
+            clickHandlerAttached = false;
+        }
+    }
+    
+    // Function to start the countdown and refresh logic
+    function startCountdown() {
+        // Clear any existing intervals first
+        clearAllIntervals();
+        
+        // Mark that we're on the correct scene
+        isOnCorrectScene = true;
+        
+        // Attach click handler only when on this scene
+        attachClickHandler();
+        
+        // Reset state
         isSubmitting = false;
         timeLeft = 20;
         isInDisabledPeriod = false;
         
         const timeDisplay = document.getElementById("displayTime");
-        const submitButton = $('.kn-button.is-primary'); // Knack's primary submit button
+        const submitButton = $('.kn-button.is-primary');
         
         // Set up countdown display
         if (timeDisplay) {
             timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
         }
         
+        // Re-enable submit button
+        if (submitButton.length > 0) {
+            submitButton.prop('disabled', false);
+            submitButton.css({
+                'opacity': '1',
+                'cursor': 'pointer'
+            });
+        }
+        
         // Combined countdown and reload logic
         countdownInterval = setInterval(function() {
-            // Don't refresh if user is submitting
-            if (isSubmitting) {
-                clearInterval(countdownInterval);
-                clearInterval(pageReloadInterval);
+            // Don't refresh if user is submitting or not on correct scene
+            if (isSubmitting || !isOnCorrectScene) {
+                clearAllIntervals();
                 return;
             }
             
@@ -270,9 +332,9 @@ window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tas
                     }
                 }
                 
-                // Wait 3 seconds, then reload
+                // Wait 3 seconds, then reload (only if still on correct scene)
                 setTimeout(function() {
-                    if (!isSubmitting) {
+                    if (!isSubmitting && isOnCorrectScene) {
                         location.reload();
                     }
                 }, 3000);
@@ -284,99 +346,85 @@ window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tas
         
         // Backup timer (total 23 seconds: 20 countdown + 3 disabled period)
         pageReloadInterval = setInterval(function() {
-            if (!isSubmitting) {
+            if (!isSubmitting && isOnCorrectScene) {
                 location.reload();
+            } else if (!isOnCorrectScene) {
+                clearAllIntervals();
             }
         }, 23000);
         
-        // Monitor submit button state (keep it enabled until we hit 0)
+        // Monitor submit button state - only run when near the end
         if (submitButton.length > 0) {
             submitCheckInterval = setInterval(function() {
-                if (isInDisabledPeriod) {
-                    submitButton.prop('disabled', true);
-                    submitButton.css({
-                        'opacity': '0.5',
-                        'cursor': 'not-allowed'
-                    });
-                } else {
-                    submitButton.prop('disabled', false);
-                    submitButton.css({
-                        'opacity': '1',
-                        'cursor': 'pointer'
-                    });
+                // If not on correct scene, stop monitoring
+                if (!isOnCorrectScene) {
+                    clearAllIntervals();
+                    return;
                 }
-            }, 100);
+                
+                // Only check when we're in disabled period or close to it
+                if (timeLeft <= 5) {
+                    if (isInDisabledPeriod) {
+                        submitButton.prop('disabled', true);
+                        submitButton.css({
+                            'opacity': '0.5',
+                            'cursor': 'not-allowed'
+                        });
+                    } else {
+                        submitButton.prop('disabled', false);
+                        submitButton.css({
+                            'opacity': '1',
+                            'cursor': 'pointer'
+                        });
+                    }
+                }
+            }, 500);
         }
+    }
+    
+    // Start countdown when scene renders
+    $(document).on("knack-scene-render.scene_697", function () {
+        setTimeout(function() {
+            startCountdown();
+        }, 50);
     });
     
     // Intercept form submission to prevent refresh during submit
     $(document).on("knack-form-submit.view_1421", function(event, view, record) {
         isSubmitting = true;
-        
-        // Clear all intervals immediately on submit
-        if (pageReloadInterval) {
-            clearInterval(pageReloadInterval);
-            pageReloadInterval = null;
-        }
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-        }
-        if (submitCheckInterval) {
-            clearInterval(submitCheckInterval);
-            submitCheckInterval = null;
-        }
-        
-        // Remove warning message
-        $('#refresh-warning').remove();
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
     });
     
     // Clean up intervals when scene is destroyed
     $(document).on("knack-scene-destroy.scene_697", function () {
-        if (pageReloadInterval) {
-            clearInterval(pageReloadInterval);
-            pageReloadInterval = null;
-        }
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-        }
-        if (submitCheckInterval) {
-            clearInterval(submitCheckInterval);
-            submitCheckInterval = null;
-        }
-        
-        // Remove warning message
-        $('#refresh-warning').remove();
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
     });
     
-    // Clear intervals before any navigation occurs
+    // Clear intervals BEFORE any navigation occurs
     $(document).on("knack-route-change", function() {
-        if (pageReloadInterval) {
-            clearInterval(pageReloadInterval);
-            pageReloadInterval = null;
-        }
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-            countdownInterval = null;
-        }
-        if (submitCheckInterval) {
-            clearInterval(submitCheckInterval);
-            submitCheckInterval = null;
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
+    });
+    
+    // Hash change listener (lightweight detection)
+    $(window).on('hashchange', function() {
+        if (!window.location.hash.includes('scene_697')) {
+            isOnCorrectScene = false;
+            detachClickHandler();
+            clearAllIntervals();
         }
     });
     
     // Additional cleanup for page unload
     $(window).on('beforeunload', function() {
-        if (pageReloadInterval) {
-            clearInterval(pageReloadInterval);
-        }
-        if (countdownInterval) {
-            clearInterval(countdownInterval);
-        }
-        if (submitCheckInterval) {
-            clearInterval(submitCheckInterval);
-        }
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
     });
 })();
 
