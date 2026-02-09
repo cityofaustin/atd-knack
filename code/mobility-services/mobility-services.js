@@ -41,12 +41,12 @@ $(document).on('knack-view-render.view_383', function(event, page) {
 
 $(document).on('knack-view-render.view_1032', function(event, page) {
   // create large New CREATE NEW APPLICATION button on the Operating Authority page
-  bigButton('create-operating-authority-application', 'view_1032', `${APP_URL}#create-operating-authority-application`, 'user', 'Create New Application');
+  bigButton('create-operating-authority-application', 'view_1032', `${APP_URL}#create-operating-authority-application`, 'arrow-right', 'Create New Application');
 });
 
 $(document).on('knack-view-render.view_1033', function(event, page) {
   // create large New JOIN EXISTING APPLICATION button on the Operating Authority page
-  bigButton('join-existing-operating-authority-application', 'view_1033', `${APP_URL}#join-existing-operating-authority-application`, 'group', 'Join Existing Application (Requires Access Code)');
+  bigButton('join-existing-operating-authority-application', 'view_1033', `${APP_URL}#join-existing-operating-authority-application`, 'arrow-right', 'Join Existing Application');
 });
 
 
