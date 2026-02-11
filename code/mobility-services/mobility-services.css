@@ -507,7 +507,7 @@ a.small-button {
 }
 
 /* Print Operating Authoriy Notary */
-/*1144 and 1150 is text content for notary.*/
+/* Lives in scene_341 for "6 - Print Notary" */
 #view_1144,
 #view_1150 {
   display: none;
