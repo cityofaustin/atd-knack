@@ -36,8 +36,19 @@ $(document).on('knack-view-render.view_57', function(event, page) {
 });
 $(document).on('knack-view-render.view_383', function(event, page) {
   // create large START APPLICATION button on the Operating Authority page
-  bigButton('start-application', 'view_383', `${APP_URL}#application-operating-authority`, 'arrow-right', 'Start Operating Authority Application');
+  bigButton('start-application', 'view_383', `${APP_URL}#select-operating-authority`, 'arrow-right', 'Start Operating Authority Application');
 });
+
+$(document).on('knack-view-render.view_1032', function(event, page) {
+  // create large New CREATE NEW APPLICATION button on the Operating Authority page
+  bigButton('create-operating-authority-application', 'view_1032', `${APP_URL}#create-operating-authority-application`, 'arrow-right', 'Create New Application');
+});
+
+$(document).on('knack-view-render.view_1033', function(event, page) {
+  // create large New JOIN EXISTING APPLICATION button on the Operating Authority page
+  bigButton('join-existing-operating-authority-application', 'view_1033', `${APP_URL}#join-existing-operating-authority-application`, 'arrow-right', 'Join Existing Application');
+});
+
 
 /***************************************/
 /**** Input validation for SSN ********/
@@ -195,9 +206,9 @@ $(document).on("knack-view-render.view_304", function (event, view, data) {
 });
 
 /* Print Operating Authority Notary Page */
-$(document).on("knack-view-render.view_480", function (event, view, data) {
+$(document).on("knack-view-render.view_1148", function (event, view, data) {
   // Primary Holder Print
-  printMenuButton("view_480");
+  printMenuButton("view_1148");
 });
 
 /***************************************
@@ -263,20 +274,19 @@ $(document).on("knack-view-render.any", function (event, page) {
 /****************************************/
 // Define dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
 // Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...}
-var dropdown = {
-  "view_687": ["1 - Service Type", "service-type"],
-  "view_750": ["2 - Business Information", "business-information"],
-  "view_689": ["3 - Insurance", "insurance"],
-  "view_691": ["4 - Additional People", "additional-people"],
-  "view_693": ["5 - Vehicle Information", "vehicle-information"],
-  "view_695": ["6 - Review and Submit", "review-and-submit"]
+let dropdown = {
+  "view_1190": ["1 - Service Information", "edit-service-information"],
+  "view_1191": ["2 - Insurance Information", "edit-insurance-information"],
+  "view_1192": ["3 - Additional People", "edit-additional-people-section"],
+  "view_1193": ["4 - Vehicle Information", "edit-vehicle-information"],
+  "view_1194": ["5 - Review and Submit", "edit-review-and-submit"]
 };
 
-var knSlug = "#application-operating-authority";
+let knSlug = "#application-operating-authority";
 
 // Function that returns the dropdown menu item
 function dropdownMenuItem(slug, recordId, route, linkName) {
-  var buttonItem = `<li class="kn-button">\
+  let buttonItem = `<li class="kn-button">\
       <a href="${slug}/${route}/${recordId}/">\
         <span>${linkName}</span>\
       </a></li>`;
@@ -314,35 +324,10 @@ for (let v in dropdown) {
   });
 }
 
-/****************************************/
-/******* Refresh View on Delete  ********/
-/****************************************/
-// A function to refresh a specified view
-function refreshView(viewKey) {
-  Knack.views[viewKey].model.fetch();
-  setTimeout(() => {
-    Knack.views[viewKey].render();
-    Knack.views[viewKey].postRender();
-  }, 2000);
-}
-
-// 2 - Background Information Page
-// If holder is deleted through table, refreshes connected attachment table
-$(document).on('knack-record-delete.view_870', function (event, view, data) {
-  refreshView('view_872');
-});
-
-// 6 - Review and Submit Page
-// If non-primary holder is deleted through table, refreshes connected attachment table and additional people table
-$(document).on('knack-record-delete.view_874', function (event, view, data) {
-  refreshView('view_876'); // Other Affidavit table
-  refreshView('view_464'); // Additional People table in case holder is also a driver
-});
-
 /*******************************************/
 /*** Disable Breadcrumb Navigation Links ***/
 /*******************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -350,23 +335,22 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-let sceneIdDisable = [
-  198,  // Submitted Operating Authority
-  209,  // 1 - Service Type
-  235,  // 2 - Business Information
-  239,  // 3 - Insurance
-  241,  // 4 - Addtional People
-  245,  // 5 - Vehicle Information
-  250,  // 6 - Review and Submit
-  288   // 7 - Add Notary
+const BREADCRUMB_SCENES = [
+  // Operating Authority Tables scene_207
+  'scene_335',  // 1 - Service Information
+  'scene_337',  // 2 - Insurance Information
+  'scene_338',  // 3 - Additional People
+  'scene_339',  // 4 - Vehicle Information
+  'scene_340',  // 5 - Review and Submit
+  'scene_341',  // 6 - Print Notary
+  'scene_342',  // Add Additional Holders
+  'scene_347',  // Edit Personal Information
+  'scene_368',  // Submitted Application
 ];
 
-// Pages to disable crumbtrail
-for (let s in sceneIdDisable) {
-  $(document).on('knack-scene-render.scene_' + sceneIdDisable[s], function () {
-    disableBreadCrumbsNonAdmin();
-  });
-};
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
+});
 
 /*******************************/
 /* Generates a Random Password */
