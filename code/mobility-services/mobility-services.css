@@ -111,7 +111,7 @@
 .progressbar #oa {
   list-style-type: none;
   float: left;
-  width: 15%;
+  width: 20%;
   position: relative;
   text-align: left;
   margin-left: -1px;
@@ -507,9 +507,9 @@ a.small-button {
 }
 
 /* Print Operating Authoriy Notary */
-/*640 and 639 is text content for notary. 614 is form*/
-#view_640,
-#view_639 {
+/* Lives in scene_341 for "6 - Print Notary" */
+#view_1144,
+#view_1150 {
   display: none;
 }
 @media print {
@@ -519,12 +519,14 @@ a.small-button {
   .image-seal {
     width: 100px;
   } 
-  #view_846,
-  #view_920 {
+  /*1147 is Notary Detail Label. 1156 is Notary table attachments. 1159 is submission button*/
+  #view_1147,
+  #view_1156,
+  #view_1159 {
     display: none;
   }
-  #view_640,
-  #view_639 {
+  #view_1144,
+  #view_1150 {
     display: contents;
   }
 }
