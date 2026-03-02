@@ -115,14 +115,14 @@
     
     // PowerAutomate Flow URLs
     flowUrls: {
-      R: 'https://prod-08.usgovtexas.logic.azure.us:443/workflows/ef368a417608495783f67d5377455950/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Z64x-_80hyVAPgfjjkXCCGJQ0BWn-D-AGwB5r-HUGFw',
-      rC: 'https://prod-24.usgovtexas.logic.azure.us:443/workflows/97eb3e24d26d423eb9c96258494dce04/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=zz2BK3y_tYn03Q9E4Se--fml49egWFmt9OkwO3O8v1Q',
-      rC1: 'https://prod-35.usgovtexas.logic.azure.us:443/workflows/a4581428a5514eca8a7062a184e567a0/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=ewKkYqb3er_TLgO7ooVT10SHTWeD6M5V869SD7vB17Y',
-      iC: 'https://prod-03.usgovtexas.logic.azure.us:443/workflows/9d3c05c5e3c24746a263c8aed6d46f60/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YpFbJhyA5WHN9ugLC08kWAZfkKYePZ_y9C__JktoYNM',
-      iC1: 'https://prod-50.usgovtexas.logic.azure.us:443/workflows/61357f18a97644088256112a4e533c48/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lWLNzZPLZhOzXzmkwy-BZlCsJbMy9vBf1qx8A3fsj6M',
-      ciC1: 'https://prod-62.usgovtexas.logic.azure.us:443/workflows/7448983fcf104882a8fa85052b99eb44/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Mc1xkK-efDZfCC718cPtbQib0C8yO8KMjw2q7gXsdPg',
-      U: 'https://prod-61.usgovtexas.logic.azure.us:443/workflows/276b9618f6a144399f09563e0f764ea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=80QkHEIAt4SX5dMdIdRf0Y_AcSgtM4yzy8E2JuXt9UA',
-      P: 'https://prod-40.usgovtexas.logic.azure.us:443/workflows/0996af8f2d764b7580202f391d20b632/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WujBv3GLBd3W-MC889WWlh5Jc8dICPLSJhrj8aZEmhg'
+      R: '',
+      rC: '',
+      rC1: '',
+      iC: '',
+      iC1: '',
+      ciC1: '',
+      U: '',
+      P: ''
     },
     
     // Polling settings
@@ -706,10 +706,10 @@
     triggerViewKey: 'view_1676',   // The form in the modal
     
     // PowerAutomate Flow U webhook URL (does the work)
-    flowUWebhookUrl: 'https://prod-61.usgovtexas.logic.azure.us:443/workflows/276b9618f6a144399f09563e0f764ea8/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=80QkHEIAt4SX5dMdIdRf0Y_AcSgtM4yzy8E2JuXt9UA',
+    flowUWebhookUrl: '',
     
     // PowerAutomate Flow P webhook URL (checks Knack via custom connector)
-    flowPWebhookUrl: 'https://prod-40.usgovtexas.logic.azure.us:443/workflows/0996af8f2d764b7580202f391d20b632/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WujBv3GLBd3W-MC889WWlh5Jc8dICPLSJhrj8aZEmhg',
+    flowPWebhookUrl: '',
     
     // Polling settings
     initialDelayMs: 2000,          // Wait 2 seconds before first poll (Flow U needs time)
