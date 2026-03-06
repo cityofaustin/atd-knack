@@ -14,18 +14,27 @@ $(document).on('knack-view-render.view_11', function(event, page) {
   // create large AVAILABLE SERVICES button on the PORTAL page
   bigButton('available-services', 'view_11', `${APP_URL}#available-services/`, 'list-ul', 'Available Services');
 });
+
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
   bigButton('available-services', 'view_16', `${APP_URL}#portal/`, 'child', 'Customer Portal');
 });
+
 $(document).on('knack-view-render.view_34', function(event, page) {
   // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
   bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, 'files-o', 'Required Documents');
 });
+
 $(document).on('knack-view-render.view_36', function(event, page) {
   // create large START APPLICATION button on the CHAUFFEUR page
   bigButton('start-application', 'view_36', `${APP_URL}#application-chauffeur/`, "arrow-right", "Start Chauffeur Application");
 });
+
+$(document).on('knack-view-render.view_1307', function(event, page) {
+  // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
+  bigButton('required-documents-operating-authority', 'view_1307', `${APP_URL}#required-documents-operating-authority`, 'files-o', 'Required Documents',true);
+});
+
 $(document).on('knack-view-render.view_41', function(event, page) {
   // create large SIGN UP or Log-In button on the PORTAL page
   bigButton('sign-up', 'view_41', `${APP_URL}#sign-up`, 'sign-in', 'Sign up or Log In');
@@ -205,10 +214,16 @@ $(document).on("knack-view-render.view_304", function (event, view, data) {
   printMenuButton("view_304");
 });
 
-/* Print Operating Authority Notary Page */
+/* Print Operating Authority Notary Page - Applicant */
 $(document).on("knack-view-render.view_1148", function (event, view, data) {
   // Primary Holder Print
   printMenuButton("view_1148");
+});
+
+/* Print Operating Authority Notary Page - Reviewer */
+$(document).on("knack-view-render.view_1389", function (event, view, data) {
+  // Primary Holder Print
+  printMenuButton("view_1389");
 });
 
 /***************************************

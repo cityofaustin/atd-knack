@@ -507,11 +507,14 @@ a.small-button {
 }
 
 /* Print Operating Authoriy Notary */
-/* Lives in scene_341 for "6 - Print Notary" */
+/*1144 and 1150 is text content for notary.*/
 #view_1144,
-#view_1150 {
+#view_1150,
+#view_1384,
+#view_1385 {
   display: none;
 }
+
 @media print {
   .image-header-container {
     width: 100%;
@@ -522,11 +525,14 @@ a.small-button {
   /*1147 is Notary Detail Label. 1156 is Notary table attachments. 1159 is submission button*/
   #view_1147,
   #view_1156,
-  #view_1159 {
+  #view_1159,
+  #view_1387 {
     display: none;
   }
   #view_1144,
-  #view_1150 {
+  #view_1150,
+  #view_1384,
+  #view_1385 {
     display: contents;
   }
 }
