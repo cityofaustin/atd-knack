@@ -27,7 +27,7 @@ $(document).on('knack-view-render.view_34', function(event, page) {
 
 $(document).on('knack-view-render.view_36', function(event, page) {
   // create large START APPLICATION button on the CHAUFFEUR page
-  bigButton('start-application', 'view_36', `${APP_URL}#application-chauffeur/`, "arrow-right", "Start Chauffeur Application");
+  bigButton('start-application', 'view_36', `${APP_URL}#application-chauffeur/`, 'arrow-right', 'Start Chauffeur Application');
 });
 
 $(document).on('knack-view-render.view_1307', function(event, page) {
