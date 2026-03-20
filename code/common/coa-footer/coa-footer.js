@@ -27,39 +27,42 @@
   }
 
   function injectFooter() {
-    // Skip everything if a modal is currently open
+    const hash = window.location.hash;
+    const shouldShow = footerHashes.some(function(h) { return hash === h; });
+
+    // Always remove if we're on a non-footer page
+    if (!shouldShow) {
+      $('#coa-footer').remove();
+      return;
+    }
+
+    // Skip inject if a modal is currently open
     if (isModalOpen()) return;
 
-    const hash = window.location.hash;
-    const shouldShow = footerHashes.some(function(h) { return hash.startsWith(h); });
+    // Only inject if footer is not already present inside #knack-body
+    if ($('#knack-body #coa-footer').length) return;
 
-    if (shouldShow) {
-      // Only inject if footer is already present inside #knack-body
-      if ($('#knack-body #coa-footer').length) return;
+    const maxAttempts = 20;
+    let attempts = 0;
 
-      const maxAttempts = 20;
-      let attempts = 0;
-
-      const interval = setInterval(function() {
-        attempts++;
-        if ($('#knack-body').length) {
-          clearInterval(interval);
-          // Remove any orphaned footer before appending fresh one
-          $('#coa-footer').remove();
-          $('#knack-body').append(footerHTML);
-        } else if (attempts >= maxAttempts) {
-          clearInterval(interval);
-          console.warn('COA Footer: #knack-body not found after max attempts');
-        }
-      }, 100);
-
-    } else {
-      // Navigated away from a footer page, remove it
-      $('#coa-footer').remove();
-    }
+    const interval = setInterval(function() {
+      attempts++;
+      if ($('#knack-body').length) {
+        clearInterval(interval);
+        $('#coa-footer').remove();
+        $('#knack-body').append(footerHTML);
+      } else if (attempts >= maxAttempts) {
+        clearInterval(interval);
+        console.warn('COA Footer: #knack-body not found after max attempts');
+      }
+    }, 100);
   }
 
   function injectModalFooter() {
+    const hash = window.location.hash;
+    const shouldShow = footerHashes.some(function(h) { return hash === h; });
+    if (!shouldShow) return;
+
     const $modalBody = $('.modal-card-body');
     if (!$modalBody.length) return;
     // Avoid duplicate
