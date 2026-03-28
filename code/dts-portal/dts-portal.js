@@ -81,6 +81,76 @@ $(document).on("knack-view-render.view_374", function(event, page) {
     bigButton("knack-directory", "view_374", "https://atd.knack.com/dts#knack-directory/", "asterisk", "Knack Directory");
 });
 
+// create large NERF - SERF button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_460", function(event, page) {
+    bigButton("equipment", "view_460", "https://atd.knack.com/dts#sr-tech-services/?view_466_vars=%7B%22field_850%22%3A%5B%22685c6ae6e83cf702be451218%22%5D%7D", "arrow-right", "TPW Employee NERF/SERF");
+});
+
+// create large NEW PRODUCT Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_461", function(event, page) {
+    bigButton("technician-equipment", "view_461", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Request a New Project");
+});
+
+// create large ENHANCEMENT Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_462", function(event, page) {
+    bigButton("technician-equipment", "view_462", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Request an Enhancement");
+});
+
+// create large ACCOUNT/ SOFTWARE ACCESS Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_463", function(event, page) {
+    bigButton("technician-equipment", "view_463", "https://atd.knack.com/dts#account-software-access/", "arrow-right", "Account / Software Access");
+});
+
+// create large NEED ACCOUNT ACCESS Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_472", function(event, page) {
+    bigButton("technician-equipment", "view_472", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Need Account / Access");
+});
+
+// create large NEED SOFTWARE + ACCOUNT ACCESS Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_473", function(event, page) {
+    bigButton("technician-equipment", "view_473", "https://atd.knack.com/dts#sr-tech-services/", "arrow-right", "Need Access + Software");
+});
+
+// create large REPORT A PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_464", function(event, page) {
+    bigButton("technician-equipment", "view_464", "https://atd.knack.com/dts#report-problem", "arrow-right", "Report a Problem");
+});
+
+// create large HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_475", function(event, page) {
+    bigButton("technician-equipment", "view_475", "https://atd.knack.com/dts#hardware-problem/", "arrow-right", "Hardware Problem");
+});
+
+// create large CTM HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_484", function(event, page) {
+    bigButton("technician-equipment", "view_484", "https://atd.knack.com/dts#ctm-ticket/", "arrow-right", "Landline phone, g://drive, resource accounts");
+});
+
+// create large TECH SERVICES HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_485", function(event, page) {
+    bigButton("technician-equipment", "view_485", "https://atd.knack.com/dts#sr-tech-services/?view_466_vars=%7B%22field_850%22%3A%5B%2268a8a70992b5a802e3a370c7%22%5D%7D", "arrow-right", "Computer, tablet, mobile phone, printer, etc..");
+});
+
+// create large AMANDA - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_476", function(event, page) {
+    bigButton("technician-equipment", "view_476", "https://atd.knack.com/dts#report-problem", "arrow-right", "Amanda Problem");
+});
+
+// create large MAXIMO - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_477", function(event, page) {
+    bigButton("technician-equipment", "view_477", "https://atd.knack.com/dts#report-problem", "arrow-right", "Maximo Problem");
+});
+
+// create large GEO - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_478", function(event, page) {
+    bigButton("technician-equipment", "view_478", "https://atd.knack.com/dts#report-problem", "arrow-right", "GIS/Maps/ (ArcGIS)  Problem");
+});
+
+// create large Knack - PROBLEM Tracker button on the SERVICE REQUEST page
+$(document).on("knack-view-render.view_479", function(event, page) {
+    bigButton("technician-equipment", "view_479", "https://atd.knack.com/dts#report-problem", "arrow-right", "Knack Problem");
+});
+
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
@@ -169,9 +239,10 @@ $(document).on('knack-scene-render.scene_214', function(event, scene) {
 window.location.replace("https://atd.knack.com/urban-forestry");
 });
 
-// /*************************************/
-// /****** Knack Directory Buttons ******/
-// /*************************************/
+
+/*************************************/
+/****** Knack Directory Buttons ******/
+/*************************************/
 
 // Transform kn-list-item-container items into directory-style buttons
 // Only targets scene 201, view 377
@@ -327,4 +398,53 @@ $(document).ready(function() {
     console.log('Media query should apply:', window.innerWidth >= 1920);
   }
   
+});
+/*******************************/
+/* Generates a Random Password */
+/*******************************/
+function generatePassword() {
+  const PASSWORD_LENGTH = 20;
+  const LOWER = "abcdefghijklmnopqrstuvwxyz";
+  const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const NUMBERS = "0123456789";
+  const SPECIAL = "!@#$%&*^"; //  `(` and `)` are not special chars according to Knack
+  const ALL_CHARS = LOWER + UPPER + NUMBERS + SPECIAL;
+  /*
+   * Generates a cryptographically secure random integer between 0 and max (inclusive) using rejection sampling to avoid modulo bias.
+   * Must be between 0 and 255 since this uses Uint8Array with 255 as the max value and excludes integers greater than max
+   */
+  function getRandomInt(max) {
+    let int = null;
+    do {
+      const randomIntArray = new Uint8Array(1);
+      crypto.getRandomValues(randomIntArray);
+      int = randomIntArray[0];
+    } while (int !== null && int > max);
+    return int;
+  }
+  // Make sure password contains all required character types
+  function hasAllCharacterTypes(password) {
+    const pwArray = password.split("");
+    const hasLower = pwArray.some((char) => LOWER.includes(char));
+    const hasUpper = pwArray.some((char) => UPPER.includes(char));
+    const hasNumber = pwArray.some((char) => NUMBERS.includes(char));
+    const hasSpecial = pwArray.some((char) => SPECIAL.includes(char));
+    return hasLower && hasUpper && hasNumber && hasSpecial;
+  }
+  // Loop until a valid password is generated
+  let password = "";
+  do {
+    password = "";
+    for (let i = 0; i < PASSWORD_LENGTH; i++) {
+      password += ALL_CHARS[getRandomInt(ALL_CHARS.length - 1)];
+    }
+  } while (!hasAllCharacterTypes(password));
+  return password;
+}
+
+// Handler to target a specific login view to load generated password into the password input box - Admin - Add Account form
+$(document).on("knack-view-render.view_141", function (event, scene) {
+  var pw = generatePassword();
+  $('input[name$="password"]').val(pw);
+  $('input[name$="password_confirmation"]').val(pw);
 });
