@@ -1202,3 +1202,25 @@ $(`<div class="mobile-details-dropdown-menu">\
     </ul>\
   </div>`).appendTo("#view_570")
 })
+// the user will not use this pw. they login with ADFS    //
+//////////////////////////////////////////////////////////////
+
+function generatePassword() {
+  var length = 20,
+    charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    retVal = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    retVal += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return retVal + "!"; // add  a special character, per app requirements
+}
+
+$(document).on("knack-view-render.view_691", function (event, scene) {
+  // set a random password when creating a new account. the user will not
+  // use this pw. they login with ADFS
+  var pw = generatePassword();
+  $('input[name$="password"]').val(pw);
+  $('input[name$="password_confirmation"]').val(pw);
+});
+
+///// end set password //////
