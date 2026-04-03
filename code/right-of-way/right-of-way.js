@@ -123,15 +123,15 @@ $(document).on("knack-view-render.view_1117", function(event, page) {
 });
 // create large ROW Division button on the Customer Portal Home page
 $(document).on("knack-view-render.view_237", function(event, page) {
-  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 // create large ROW Division button on the ROW Portal page
 $(document).on("knack-view-render.view_684", function(event, page) {
-  bigButton("row-division-link", "view_684", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+  bigButton("row-division-link", "view_684", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 // create large ROW Division button on the Customer Home page
 $(document).on("knack-view-render.view_1120", function(event, page) {
-  bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+  bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 
 // create large Task Board button on the Task Board Login page
@@ -538,3 +538,4 @@ $(document).on("knack-view-render.view_29", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+
