@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,115 +55,59 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
+// create large Markings Work Order button on the home page
 $(document).on("knack-view-render.view_2621", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "work-orders-markings",
-    "view_2621",
-    "https://atd.knack.com/signs-markings#work-orders-markings/markings/",
-    "road",
-    "Markings | Work Orders",
-  );
+  bigButton("work-orders-markings", "view_2621", `${APP_URL}#work-orders-markings/markings/`, "road", "Markings | Work Orders");
 });
-
+// create large Markings Service Requests button on the home page
 $(document).on("knack-view-render.view_3178", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "work-orders-service-requests",
-    "view_3178",
-    "https://atd.knack.com/signs-markings#service-requests-markings/",
-    "comments",
-    "Markings | Service Requests",
-  );
+  bigButton("work-orders-service-requests", "view_3178", `${APP_URL}#service-requests-markings/`, "comments", "Markings | Service Requests");
 });
-
+// create large Signs Work Order button on the home page
 $(document).on("knack-view-render.view_2628", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "work-orders-signs",
-    "view_2628",
-    "https://atd.knack.com/signs-markings#work-order-signs/",
-    "flag",
-    "Signs | Work Orders",
-  );
+  bigButton("work-orders-signs", "view_2628", `${APP_URL}#work-order-signs/`, "flag", "Signs | Work Orders");
 });
-
+// create large Signs Service Requests button on the home page
 $(document).on("knack-view-render.view_2629", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "service-requests-signs",
-    "view_2629",
-    "https://atd.knack.com/signs-markings#service-requests-signs/",
-    "comments",
-    "Signs | Service Requests",
-  );
+  bigButton("service-requests-signs", "view_2629", `${APP_URL}#service-requests-signs/`, "comments", "Signs | Service Requests");
 });
-
+// create large Street Banner Program button on the home page
 $(document).on("knack-view-render.view_2630", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "street-banners",
-    "view_2630",
-    "https://atd.knack.com/street-banners#home/",
-    "flag-o",
-    "Street Banners | Program",
-  );
-
+  bigButton("street-banners", "view_2630", "https://atd.knack.com/street-banners#home/", "flag-o", "Street Banners | Program");
 });
-
+// create large Contractor Work Orders button on the home page
 $(document).on("knack-view-render.view_3495", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "sign-fabrication-work-orders",
-    "view_3495",
-    "https://atd.knack.com/signs-markings#work-orders-contractor/",
-    "wrench",
-    "Contractor | Work Orders",
-  );
+  bigButton("sign-fabrication-work-orders", "view_3495", `${APP_URL}#work-orders-contractor/`, "wrench", "Contractor | Work Orders");
 });
-
+// create large Signs QA button on the home page
 $(document).on("knack-view-render.view_2903", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "signs-gis-qa",
-    "view_2903",
-    "https://atd.knack.com/signs-markings#signs-gis-qa/",
-    "flag",
-    "GIS QA | Signs",
-  );
+  bigButton("signs-gis-qa", "view_2903", `${APP_URL}#signs-gis-qa/`, "flag", "GIS QA | Signs");
 });
-
+// create large Markings QA button on the home page
 $(document).on("knack-view-render.view_2904", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "markings-gis-qa",
-    "view_2904",
-    "https://atd.knack.com/signs-markings#markings-gis-qa/",
-    "road",
-    "GIS QA | Markings",
-  );
+  bigButton("markings-gis-qa", "view_2904", `${APP_URL}#markings-gis-qa/`, "road", "GIS QA | Markings");
 });
-
+// create large Contractor QA button on the home page
 $(document).on("knack-view-render.view_3630", function(event, page) {
-  // create large button on the home page
-  bigButton(
-    "sign-fabrication-work-orders",
-    "view_3630",
-    "https://atd.knack.com/signs-markings#work-orders-contractor/contractor-gis-qa/",
-    "wrench",
-    "GIS QA | Contractor",
-  ); 
+  bigButton("sign-fabrication-work-orders", "view_3630", `${APP_URL}#work-orders-contractor/contractor-gis-qa/`, "wrench", "GIS QA | Contractor"); 
 })
-// END: Custom Buttons
 
 /********************************************/
 /************** Small Buttons ***************/
@@ -261,9 +208,6 @@ $(document).on("knack-view-render.any", function() {
   changeTableFieldColor("td.field_2181", colorMapServiceRequestsStatus);
 });
 
-/*************************************************/
-/** Replace Attachment File Name with File Type **/
-/*************************************************/
 function replaceAttachmentFilenameWithFileType(fileFieldId, typeFieldId) {
   //  replace attachment filename with attachment type
   //  find each attachment cell
