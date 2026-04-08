@@ -288,7 +288,7 @@ $(document).on("knack-view-render.any", function (event, page) {
 /**** In-Form Dropdown Menu Buttons  ****/
 /****************************************/
 // Define dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
-// Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...} view_1193
+// Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...}
 let dropdown = {
   "view_1446": ["1 - Service Information", "edit-service-information"],
   "view_1447": ["2 - Insurance Information", "edit-insurance-information"],
