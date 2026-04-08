@@ -288,13 +288,13 @@ $(document).on("knack-view-render.any", function (event, page) {
 /**** In-Form Dropdown Menu Buttons  ****/
 /****************************************/
 // Define dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
-// Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...}
+// Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...} view_1193
 let dropdown = {
-  "view_1190": ["1 - Service Information", "edit-service-information"],
-  "view_1191": ["2 - Insurance Information", "edit-insurance-information"],
-  "view_1192": ["3 - Additional People", "edit-additional-people-section"],
-  "view_1193": ["4 - Vehicle Information", "edit-vehicle-information"],
-  "view_1194": ["5 - Review and Submit", "edit-review-and-submit"]
+  "view_1446": ["1 - Service Information", "edit-service-information"],
+  "view_1447": ["2 - Insurance Information", "edit-insurance-information"],
+  "view_1449": ["3 - Additional People", "edit-additional-people-section"],
+  "view_1445": ["4 - Vehicle Information", "edit-vehicle-information"],
+  "view_1450": ["5 - Review and Submit", "edit-review-and-submit"]
 };
 
 let knSlug = "#application-operating-authority";
@@ -318,7 +318,6 @@ for (let v in dropdown) {
     var desktopDropdownMenu = `<div class="details-dropdown-menu tabs">\
       <ul id="desktop-menu-list"><li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
       <a><span class="nav-dropdown-link">${currentMenu}</span><span class="kn-dropdown-icon fa fa-caret-down" /></a>\
-      <a href="${knSlug}/${currentSlug}/${recordId}" data-kn-slug="${knSlug}"></a>\
       <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">`;
 
     // Mobile dropdown menu code
