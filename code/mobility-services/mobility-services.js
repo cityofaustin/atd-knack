@@ -79,7 +79,7 @@ $(document).on('knack-view-render.view_11', function(event, page) {
 
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-  bigButton('available-services', 'view_16', `${APP_URL}#portal/`, 'child', 'Customer Portal');
+  bigButton('my-applications', 'view_16', `${APP_URL}#my-applications/`, 'child', 'Customer Portal');
 });
 
 $(document).on('knack-view-render.view_34', function(event, page) {
@@ -101,10 +101,7 @@ $(document).on('knack-view-render.view_41', function(event, page) {
   // create large SIGN UP or Log-In button on the PORTAL page
   bigButton('sign-up', 'view_41', `${APP_URL}#sign-up`, 'sign-in', 'Sign up or Log In');
 });
-$(document).on('knack-view-render.view_57', function(event, page) {
-  // create large CUSTOMER PORTAL button on the PORTAL page
-  bigButton('available-services', 'view_57', `${APP_URL}#portal/`, 'arrow-right', 'Mobility Services Portal');
-});
+
 $(document).on('knack-view-render.view_383', function(event, page) {
   // create large START APPLICATION button on the Operating Authority page
   bigButton('start-application', 'view_383', `${APP_URL}#select-operating-authority`, 'arrow-right', 'Start Operating Authority Application');
