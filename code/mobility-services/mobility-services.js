@@ -1,14 +1,76 @@
 const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
+/********************************************/
+/******** COACD Single Sign On Login ********/
+/********************************************/
+function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
+
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
+
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login"
+  });
+  $coacdButton.appendTo("#" + viewId);
+
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
+  );
+
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
+}
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
+
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
+
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_11', function(event, page) {
   // create large AVAILABLE SERVICES button on the PORTAL page
@@ -175,12 +237,12 @@ $(document).on("knack-view-render.any", function (event, view, data) {
   replaceAttachmentFilenameWithNameField("field_285", "field_458");
 });
 
-/****************************************************/
-/*** Disable Trigger buttons from being Clickable ***/
-/****************************************************/
+/**********************************************************/
+/*** Lable Trigger button as disabled for accessibility ***/
+/**********************************************************/
 $(document).on("knack-scene-render.any", function (event, view) {
-  var $disabledTriggerButton = $(".trigger-button-large-disabled").parent();
-  $disabledTriggerButton.removeClass("kn-action-link");
+  var $disabledTriggerButton = $(".trigger-button-large-disabled");
+  $disabledTriggerButton.attr('aria-disabled', 'true');
 });
 
 /***************************************/
@@ -226,64 +288,6 @@ $(document).on("knack-view-render.view_1389", function (event, view, data) {
   printMenuButton("view_1389");
 });
 
-/***************************************
- * Enhance SSO button and hide/show default Knack login form with buttons
- * @parameter {string} viewId - Knack view id to append button link to
-/***************************************/
-function customizeLoginButton(viewId) {
-  // Hide Knack default SSO button, login form, login title, and any other children
-  $("#" + viewId)
-    .children()
-    .hide();
-
-  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
-
-  // Create a div for Login buttons
-  var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
-  });
-  $coacdButton.appendTo("#" + viewId);
-
-  // Append Big SSO Login button and non-SSO Login button
-  bigButton(
-    "coacd-big-button",
-    "coacd-button-login",
-    url,
-    "sign-in",
-    "Sign-In"
-  );
-
-  $coacdButton.append(
-    "<a class='small-button' href='javascript:void(0)'>" +
-      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
-  );
-
-  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
-  var $nonCoacdButton = $(".small-button");
-  $nonCoacdButton.click(function () {
-    $("#" + viewId)
-      .children()
-      .show();
-    $(".small-button-container,.big-button-container").hide();
-    $(".kn-sso-container").hide();
-  });
-}
-
-// Call customizeLoginButton on any view render to customize any login page that renders in app
-$(document).on("knack-view-render.any", function (event, page) {
-  // Find SSO button and existing custom button
-  var $ssoButton = $(".kn-sso-container");
-  var $coacdLoginDiv = $("#coacd-button-login");
-
-  // If SSO button exists on page and there isn't already a custom button
-  if ($ssoButton.length && !$coacdLoginDiv.length) {
-    var $ssoView = $ssoButton.closest("[id^=view_]");
-    var viewId = $ssoView.get(0).id;
-
-    customizeLoginButton(viewId);
-  }
-});
-
 /****************************************/
 /**** In-Form Dropdown Menu Buttons  ****/
 /****************************************/
@@ -325,7 +329,7 @@ for (let v in dropdown) {
     <ul id="mobile-menu-list"><li class="mobile-dropdown-menu">\
     <ul class="kn-dropdown-menu-list mobile-dropdown-menu-list" style="min-width: 152px; margin: 0;">`;
 
-    // Adds dropdown menuu item to desktop and mobile
+    // Adds dropdown menu item to desktop and mobile
     for (let label in dropdown) {
       desktopDropdownMenu += `${dropdownMenuItem(knSlug,recordId,dropdown[label][1],dropdown[label][0])}`;
       mobileDropdownMenu += `${dropdownMenuItem(knSlug,recordId,dropdown[label][1],dropdown[label][0])}`;
