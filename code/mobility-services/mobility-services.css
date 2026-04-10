@@ -200,16 +200,17 @@
 
 .trigger-button-large-disabled {
   width: 250px;
-  border-color: transparent;
+  border-color: gray;
   border-radius: 4px;
-  background-color: #cbcbcb;
-  color: #777777;
   padding: 10px 10px;
   font-size: 1.5em;
   text-align: center;
   opacity: 0.6;
   display: inline-block;
   outline-color: transparent;
+}
+.disabled {
+  cursor: not-allowed;
 }
 
 a.trigger-button-large {
