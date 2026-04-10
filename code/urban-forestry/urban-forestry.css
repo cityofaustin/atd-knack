@@ -146,6 +146,18 @@ img.knHeader__logo-image {
   }
 }
 
+/**************************************************/
+/** Remove Back Links for Urban Forestry Request **/
+/**************************************************/
+/*Add Images Page*/
+#kn-scene_113 .kn-back-link {
+  display: none;
+}
+/*Request Confirmation Page*/
+#kn-scene_133 .kn-back-link {
+  display: none;
+}
+
 /*******************************************/
 /************ Wrap Table Headers ***********/
 /*******************************************/
