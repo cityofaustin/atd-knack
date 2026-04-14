@@ -1090,7 +1090,7 @@ function hireDropdownMenuItem(recordId, route, iconName, linkName, mobile = fals
   if (newTab) {
     return (
       `<li class="${buttonClass}">\
-        <a href="#hiring-management/view-hiring-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
+        <a href="#postings-admin/view-hiring-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
           <span class="icon is-small"> \
             <i class="fa ${iconName}" /> \
           </span>\
@@ -1101,7 +1101,7 @@ function hireDropdownMenuItem(recordId, route, iconName, linkName, mobile = fals
 
   return (
     `<li class="${buttonClass}">\
-      <a href="#hiring-management/view-hiring-details/${recordId}/${route}/${recordId}" class="hire-nav-menu">\
+      <a href="#postings-admin/view-hiring-details/${recordId}/${route}/${recordId}" class="hire-nav-menu">\
         <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
@@ -1117,7 +1117,7 @@ $(document).on('knack-view-render.view_570', function(event, view, record) {
    $(`<div class="details-dropdown-menu tabs">\
     <ul id="desktop-menu-list">\
       <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#hiring-management/" data-kn-slug="#case-management">\
+        <a href="#postings-admin/" data-kn-slug="#postings-admin">\
           <span class="kn-dropdown-icon fa fa-reply" />\
           <span class="nav-dropdown-link">&nbsp;Back to List</span>\
         </a>\
@@ -1125,7 +1125,7 @@ $(document).on('knack-view-render.view_570', function(event, view, record) {
         </ul>\
       </li>\
       <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-        <a href="#hiring-management/view-hiring-details/${recordId}/edit-hiring-info/${recordId}" data-kn-slug="#manage-hiring">\
+        <a href="#postings-admin/view-hiring-details/${recordId}/edit-hiring-info/${recordId}" data-kn-slug="#manage-hiring">\
           <span class="kn-dropdown-icon fa fa-edit" /> \
           <span class="nav-dropdown-link">&nbsp;Manage Hiring</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
@@ -1136,7 +1136,7 @@ $(document).on('knack-view-render.view_570', function(event, view, record) {
         </ul>\
       </li>\
       <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-       <a href="#hiring-management/view-hiring-details/${recordId}/applicants/${recordId}" data-kn-slug="#pre-interview">\
+       <a href="#postings-admin/view-hiring-details/${recordId}/applicants/${recordId}" data-kn-slug="#pre-interview">\
           <span class="kn-dropdown-icon fa fa-edit" /> \
           <span class="nav-dropdown-link">&nbsp;Pre-Interview</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
@@ -1147,7 +1147,7 @@ $(document).on('knack-view-render.view_570', function(event, view, record) {
         </ul>\
       </li>\
       <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-       <a href="#hiring-management/view-hiring-details/${recordId}/edit-zone-offer/${recordId}" data-kn-slug="#post-interview">\
+       <a href="#postings-admin/view-hiring-details/${recordId}/edit-zone-offer/${recordId}" data-kn-slug="#post-interview">\
           <span class="kn-dropdown-icon fa fa-edit" /> \
           <span class="nav-dropdown-link">&nbsp;Post-Interview</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
