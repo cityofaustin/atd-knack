@@ -208,6 +208,9 @@ $(document).on("knack-view-render.any", function() {
   changeTableFieldColor("td.field_2181", colorMapServiceRequestsStatus);
 });
 
+/*************************************************/
+/** Replace Attachment File Name with File Type **/
+/*************************************************/
 function replaceAttachmentFilenameWithFileType(fileFieldId, typeFieldId) {
   //  replace attachment filename with attachment type
   //  find each attachment cell
