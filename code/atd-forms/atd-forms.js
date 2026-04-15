@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,12 +55,20 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
@@ -71,7 +82,7 @@ $(document).on('knack-scene-render.any', function(event, scene) {
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
 /****************************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -79,32 +90,21 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-/********************************************************************************/
-/*** Disable Breadcrumb Navigation Links for Traffic Signal Design Submission ***/
-/********************************************************************************/
-/*Add Comments Page*/
-$(document).on("knack-scene-render.scene_46", function () {
-  disableBreadCrumbsNonAdmin();
-});
+const BREADCRUMB_SCENES = [
+  // Traffic Signal Design Submission
+  'scene_46', // Add Comments page
+  'scene_54', // Edit Information page
+  'scene_55', // Edit Comments page
+  'scene_48', // Finalize and Submit page
+  'scene_53', // Confirmation page
 
-/*Edit Information Page*/
-$(document).on("knack-scene-render.scene_54", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // Detail Sheet Submission
+  'scene_64', // Add Comments page
+  'scene_66', // Confirmation page
+];
 
-/*Edit Comments Page*/
-$(document).on("knack-scene-render.scene_55", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*Finalize & Submit Page*/
-$(document).on("knack-scene-render.scene_48", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*Confirmation Page*/
-$(document).on("knack-scene-render.scene_53", function () {
-  disableBreadCrumbsNonAdmin();
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /********************************************************************/
