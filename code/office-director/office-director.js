@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,27 +55,35 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
-}	
-//>>>HOME TAB BUTTONS
+}
+
+// create large Deadlines button on the Home page
 $(document).on('knack-view-render.view_84', function(event, page) {
-    bigButton('deadlines', 'view_84', "https://atd.knack.com/ood#deadlines/", "calendar", "Deadlines");
+    bigButton("deadlines", "view_84", `${APP_URL}#deadlines/`, "calendar", "Deadlines");
 });
 
 /********************************************************/
 /** Relabel Attachment Links in Tables to 'Attachment' **/
 /********************************************************/
 $(document).on('knack-view-render.any', function(event, view, data) {
- 
- $("a.kn-view-asset").html("Attachment"); 
- 
+  $("a.kn-view-asset").html("Attachment");
 });
+
 /*******************************/
 /* Generates a Random Password */
 /*******************************/
