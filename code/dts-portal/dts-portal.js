@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,113 +55,129 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 // create large Service Requests button on the home page
 $(document).on("knack-view-render.view_127", function(event, page) {
-    bigButton("new-service-request", "view_127", "https://atd.knack.com/dts#new-service-request/", "phone-square", "Service Requests");
+    bigButton("new-service-request", "view_127", `${APP_URL}#new-service-request/`, "phone-square", "Service Requests");
 });
 
 // create large Datasets button on the home page
 $(document).on("knack-view-render.view_128", function(event, page) {
-    bigButton("datasets", "view_128", "https://atd.knack.com/dts#datasets/", "database", "Datasets");
+    bigButton("datasets", "view_128", `${APP_URL}#datasets/`, "database", "Datasets");
 });
 
 // create large Applications button on the home page
 $(document).on("knack-view-render.view_312", function(event, page) {
-    bigButton("applications", "view_312", "https://atd.knack.com/dts#applications/", "laptop", "Applications");
+    bigButton("applications", "view_312", `${APP_URL}#applications/`, "laptop", "Applications");
 });
 
 // create large Knack Directory button on the home page
 $(document).on("knack-view-render.view_374", function(event, page) {
-    bigButton("knack-directory", "view_374", "https://atd.knack.com/dts#knack-directory/", "asterisk", "Knack Directory");
+    bigButton("knack-directory", "view_374", `${APP_URL}#knack-directory/`, "asterisk", "Knack Directory");
 });
 
 // create large NERF - SERF button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_460", function(event, page) {
-    bigButton("equipment", "view_460", "https://atd.knack.com/dts#sr-tech-services/?view_466_vars=%7B%22field_850%22%3A%5B%22685c6ae6e83cf702be451218%22%5D%7D", "arrow-right", "TPW Employee NERF/SERF");
+    bigButton("nerf-serf", "view_460", `${APP_URL}#sr-tech-services/?view_466_vars=%7B%22field_850%22%3A%5B%22685c6ae6e83cf702be451218%22%5D%7D`, "arrow-right", "TPW Employee NERF/SERF");
 });
 
 // create large NEW PRODUCT Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_461", function(event, page) {
-    bigButton("technician-equipment", "view_461", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Request a New Project");
+    bigButton("new-project-request", "view_461", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Request a New Project");
 });
 
 // create large ENHANCEMENT Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_462", function(event, page) {
-    bigButton("technician-equipment", "view_462", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Request an Enhancement");
+    bigButton("enhancement-request", "view_462", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Request an Enhancement");
 });
 
 // create large ACCOUNT/ SOFTWARE ACCESS Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_463", function(event, page) {
-    bigButton("technician-equipment", "view_463", "https://atd.knack.com/dts#account-software-access/", "arrow-right", "Account / Software Access");
+    bigButton("software-access-request", "view_463", `${APP_URL}#account-software-access/`, "arrow-right", "Account / Software Access");
 });
 
 // create large NEED ACCOUNT ACCESS Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_472", function(event, page) {
-    bigButton("technician-equipment", "view_472", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Need Account / Access");
+    bigButton("account-access-request", "view_472", "https://atd.knack.com/test--26-apr-2024--dts--data-and-technology-services-portal#new-sr/", "arrow-right", "Need Account / Access");
 });
 
 // create large NEED SOFTWARE + ACCOUNT ACCESS Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_473", function(event, page) {
-    bigButton("technician-equipment", "view_473", "https://atd.knack.com/dts#sr-tech-services/", "arrow-right", "Need Access + Software");
+    bigButton("software-and-access-request", "view_473", `${APP_URL}#sr-tech-services/`, "arrow-right", "Need Access + Software");
 });
 
 // create large REPORT A PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_464", function(event, page) {
-    bigButton("technician-equipment", "view_464", "https://atd.knack.com/dts#report-problem", "arrow-right", "Report a Problem");
+    bigButton("problem-request", "view_464", `${APP_URL}#report-problem`, "arrow-right", "Report a Problem");
 });
 
 // create large HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_475", function(event, page) {
-    bigButton("technician-equipment", "view_475", "https://atd.knack.com/dts#hardware-problem/", "arrow-right", "Hardware Problem");
+    bigButton("hardware-request", "view_475",`${APP_URL}#hardware-problem/`, "arrow-right", "Hardware Problem");
 });
 
-// create large CTM HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
+// create large ATS HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_484", function(event, page) {
-    bigButton("technician-equipment", "view_484", "https://atd.knack.com/dts#ctm-ticket/", "arrow-right", "Landline phone, g://drive, resource accounts");
+    bigButton("ats-request", "view_484", `${APP_URL}#ctm-ticket/`, "arrow-right", "Landline phone, g://drive, resource accounts");
 });
 
 // create large TECH SERVICES HARDWARE - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_485", function(event, page) {
-    bigButton("technician-equipment", "view_485", "https://atd.knack.com/dts#sr-tech-services/?view_466_vars=%7B%22field_850%22%3A%5B%2268a8a70992b5a802e3a370c7%22%5D%7D", "arrow-right", "Computer, tablet, mobile phone, printer, etc..");
+    bigButton("tech-services-request", "view_485", `${APP_URL}#sr-tech-services/?view_466_vars=%7B%22field_850%22%3A%5B%2268a8a70992b5a802e3a370c7%22%5D%7D`, "arrow-right", "Computer, tablet, mobile phone, printer, etc..");
 });
 
 // create large AMANDA - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_476", function(event, page) {
-    bigButton("technician-equipment", "view_476", "https://atd.knack.com/dts#report-problem", "arrow-right", "Amanda Problem");
+    bigButton("amanda-request", "view_476", `${APP_URL}#report-problem`, "arrow-right", "Amanda Problem");
 });
 
 // create large MAXIMO - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_477", function(event, page) {
-    bigButton("technician-equipment", "view_477", "https://atd.knack.com/dts#report-problem", "arrow-right", "Maximo Problem");
+    bigButton("maximo-request", "view_477", `${APP_URL}#report-problem`, "arrow-right", "Maximo Problem");
 });
 
 // create large GEO - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_478", function(event, page) {
-    bigButton("technician-equipment", "view_478", "https://atd.knack.com/dts#report-problem", "arrow-right", "GIS/Maps/ (ArcGIS)  Problem");
+    bigButton("gis-request", "view_478", `${APP_URL}#report-problem`, "arrow-right", "GIS/Maps/ (ArcGIS)  Problem");
 });
 
 // create large Knack - PROBLEM Tracker button on the SERVICE REQUEST page
 $(document).on("knack-view-render.view_479", function(event, page) {
-    bigButton("technician-equipment", "view_479", "https://atd.knack.com/dts#report-problem", "arrow-right", "Knack Problem");
+    bigButton("knack-request", "view_479", `${APP_URL}#report-problem`, "arrow-right", "Knack Problem");
 });
 
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-function smallButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='small-button-container" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+//Create Small Button nested in a block
+function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " small-button-disabled'" : "'";
+  const html = `
+    <a id='${id}' 
+       class='back-button${disabledClass}' 
+       href='${url}'>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
@@ -399,6 +418,7 @@ $(document).ready(function() {
   }
   
 });
+
 /*******************************/
 /* Generates a Random Password */
 /*******************************/
@@ -448,3 +468,4 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+
