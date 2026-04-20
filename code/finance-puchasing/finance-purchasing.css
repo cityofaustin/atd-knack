@@ -1,4 +1,14 @@
 /***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+/*Centers icon vertically on a line*/
+.fa { vertical-align: baseline; }
+/*Icon rests at the bottom of a line*/
+.fa-bot { vertical-align: text-bottom; }
+/*Icon touches the top of a line*/
+.fa-top { vertical-align: text-top; }
+
+/***************************************/
 /************* Big Buttons *************/
 /***************************************/
 .big-button-container {
@@ -6,7 +16,7 @@
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 2.5em;
   padding: 10px;
-  margin: 20px;
+  margin: 3px;
   max-width: 15em;
   display: block;
 }
@@ -19,10 +29,6 @@
 .big-button-disabled {
   pointer-events: none;
   background-color: #f7f7f7;
-}
-
-.fa {
-  vertical-align: middle;
 }
 
 a.big-button-container {
@@ -46,6 +52,11 @@ a.big-button-container {
 .small-button-container:hover {
   background-color: #4c4c4c;
   cursor: pointer;
+}
+
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
 }
 
 a.small-button {
