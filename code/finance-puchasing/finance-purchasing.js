@@ -124,7 +124,7 @@ $(document).on("knack-view-render.view_1292", function(event, page) {
 
 // create large button on the GET STARTED | PROCARD page - New ProCard Service Request
 $(document).on("knack-view-render.view_1296", function(event, page) {
-  bigButton("procard-request", "view_1296", `${APP_URL}#procard-service-request/?view_1295_vars=%7B%22field_1175%22%3A%5B%22Request%20ProCard%22%5D%7D`, "plus-circle", "ProCard | New Request");
+  bigButton("procard-request", "view_1296", `${APP_URL}#card-service-request/?view_1295_vars=%7B%22field_1175%22%3A%5B%22Request%20ProCard%22%5D%7D`, "plus-circle", "ProCard | New Request");
 });
 
 // create large button on the SERVICES page - Purchase Requests Home
