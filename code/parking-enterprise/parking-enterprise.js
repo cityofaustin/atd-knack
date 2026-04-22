@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,50 +55,40 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
    //HOME TAB BUTTONS - New Button Format
 $(document).on("knack-view-render.view_125", function(event, page) {
-    bigButton(
-    "revenue-tracking", 
-    "view_125", 
-    "https://atd.knack.com/parking-enterprise#home/revenue-tracking/", 
-    "usd", 
-    "Revenue Tracking"
-    );
+    bigButton("revenue-tracking", "view_125", `${APP_URL}#home/revenue-tracking/`, "usd", "Revenue Tracking");
 });
 
 $(document).on("knack-view-render.view_126", function(event, page) {
-    bigButton(
-    "parking-citation-tracking", 
-    "view_126", 
-    "https://atd.knack.com/parking-enterprise#home/parking-citation-tracking/", 
-    "exclamation-triangle", 
-    "Parking Citation Tracking"
-    );
+    bigButton("parking-citation-tracking", "view_126", `${APP_URL}#home/parking-citation-tracking/`, "exclamation-triangle", "Parking Citation Tracking");
 });
 
 $(document).on("knack-view-render.view_127", function(event, page) {
-    bigButton(
-    "officer-citation-tracking", 
-    "view_127", 
-    "https://atd.knack.com/parking-enterprise#home/officer-citation-tracking/", 
-    "exclamation-circle", 
-    "Officer Citation Tracking"
-    );
+    bigButton("officer-citation-tracking", "view_127", `${APP_URL}#home/officer-citation-tracking/`, "exclamation-circle", "Officer Citation Tracking");
 });
 
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
 /****************************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -103,17 +96,15 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-/*Multi Day Request Page*/
-$(document).on("knack-scene-render.scene_298", function () {
-  disableBreadCrumbsNonAdmin();
-});
-/*Daily Details Page*/
-$(document).on("knack-scene-render.scene_299", function () {
-  disableBreadCrumbsNonAdmin();
-});
-/*Confirmation Page*/
-$(document).on("knack-scene-render.scene_300", function () {
-  disableBreadCrumbsNonAdmin();
+const BREADCRUMB_SCENES = [
+  // Event Support
+  'scene_298', // Multi Day Request page
+  'scene_299', // Daily Details page
+  'scene_300', // Confirmation page
+];
+
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /********************************************/
