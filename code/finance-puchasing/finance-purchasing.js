@@ -257,8 +257,8 @@ var colorMapOne = {
     icon: "money",
   },
   "Processing | Purchasing": {
-    background_color: "#41ae76",
-    color: "#fff",
+    background_color: "#f6fa6b",
+    color: "#3C463D",
     icon: "cogs",
   },
   "Pending Invoice": {
