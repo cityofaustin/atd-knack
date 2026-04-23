@@ -102,7 +102,7 @@ $(document).on("knack-view-render.view_1130", function(event, page) {
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-//Create Small Button nested in a block
+//Adds Small Button HTML directly on View ID
 function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
   const disabledClass = is_disabled ? " small-button-disabled'" : "'";
   const html = `
@@ -121,11 +121,20 @@ function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = fals
 /********************************************/
 /************* Trigger Buttons **************/
 /********************************************/
+//Adds Trigger Button HTML directly on View ID
 function triggerButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " trigger-button'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='trigger-button" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " trigger-button'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='trigger-button${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
