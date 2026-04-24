@@ -190,10 +190,12 @@ function disableBreadcrumbLinks() {
 }
 
 const BREADCRUMB_SCENES = [
-  // Draft Builder
+  // SSPR
   'scene_165', // SSPR Details page
-  'scene_471', // Self Nomination page
-  'scene_485', // Member Nomination page
+
+  // Committee Nominations
+  'scene_471', // Self Nomination Attestation page
+  'scene_485', // Member Nomination Attestation page
 ];
 
 BREADCRUMB_SCENES.forEach(scene => {
