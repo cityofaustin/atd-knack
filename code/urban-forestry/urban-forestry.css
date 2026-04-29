@@ -157,6 +157,10 @@ img.knHeader__logo-image {
 #kn-scene_133 .kn-back-link {
   display: none;
 }
+/*View Request Details Page*/
+#kn-scene_149 .kn-back-link {
+  display: none;
+}
 
 /*******************************************/
 /************ Wrap Table Headers ***********/
