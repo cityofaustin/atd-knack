@@ -102,6 +102,7 @@ const BREADCRUMB_SCENES = [
   // Urban Forestry Request
   'scene_113', // Add Images page
   'scene_133', // Request Confirmation page
+  'scene_149', // View Request Details page
 ];
 
 BREADCRUMB_SCENES.forEach(scene => {
@@ -156,4 +157,19 @@ $(document).on("knack-view-render.view_161", function (event, scene) {
   var pw = generatePassword();
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
+});
+
+/***********************************/
+/*** Automatically Submit a Form ***/
+/***********************************/
+/* Disconnect UFR Attachment from Work Ticket - Urban Forestry Request Details page */
+$(document).on('knack-scene-render.scene_145', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+
+/*************************************************************************************/
+/** Disable the ability to Click/Touch outside a Modal Page (accidentally close it) **/
+/*************************************************************************************/
+$(document).on("knack-scene-render.any", function (event, scene) {
+  $(".kn-modal-bg").off("click");
 });
