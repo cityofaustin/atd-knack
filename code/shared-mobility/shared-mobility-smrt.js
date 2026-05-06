@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,27 +55,35 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 /*********** Provider SMRT Portal ***********/
 // create large Get Started button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_626", function(event, page) {
-  bigButton( "get-started", "view_626", "https://atd.knack.com/smrt#get-started/", "file-text", "Get Started");
+  bigButton("get-started", "view_626", `${APP_URL}#get-started/`, "file-text", "Get Started");
 });
 // create large Am I Eligible button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_627", function(event, page) {
-  bigButton("eligibility", "view_627", "https://atd.knack.com/smrt#eligibility/", "book", "Eligibility");
+  bigButton("eligibility", "view_627", `${APP_URL}#eligibility/`, "book", "Eligibility");
 });
 // create large Help button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_628", function(event, page) {
-  bigButton("faq", "view_628", "https://atd.knack.com/smrt#faq/", "info-circle", "Help");
+  bigButton("faq", "view_628", `${APP_URL}#faq/`, "info-circle", "Help");
 });
 // create large About the Program button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_629", function(event, page) {
@@ -82,15 +93,15 @@ $(document).on("knack-view-render.view_629", function(event, page) {
 /*********** Get Started page ***********/
 // create large Home  button on the Customer SMRT Portal page
 $(document).on("knack-view-render.view_875", function(event, page) {
-  bigButton( "home", "view_875", "https://atd.knack.com/smrt#portal/", "home", "Home");
+  bigButton("home", "view_875", `${APP_URL}#portal/`, "home", "Home");
 });
 // create large Required Attachments button on the Customer SMRT Portal, Required Documents page
 $(document).on("knack-view-render.view_878", function(event, page) {
-  bigButton( "required-documents", "view_878", "https://atd.knack.com/smrt#required-documents/", "files-o", "Required Documents");
+  bigButton("required-documents", "view_878", `${APP_URL}#required-documents/`, "files-o", "Required Documents");
 });
 // create large Start Application button on the Customer SMRT Application page
 $(document).on("knack-view-render.view_631", function(event, page) {
-  bigButton( "start-application", "view_631", "https://atd.knack.com/smrt#application/", "arrow-right", "Start Application");
+  bigButton("start-application", "view_631", `${APP_URL}#application/`, "arrow-right", "Start Application");
 });
 
 /********************************************/
@@ -98,12 +109,20 @@ $(document).on("knack-view-render.view_631", function(event, page) {
 /********************************************/
 //Create Small Button nested in a block
 function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " small-button-disabled'" : "'";
+  const html = `
+    <a id='${id}' 
+       class='back-button${disabledClass}' 
+       href='${url}'>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
+
 $(document).on("knack-scene-render.scene_257", function (event, page) {
   // update iframe src from detail field
   var iframe_url = $('a[href*="webappviewer"]').attr("href");
@@ -125,10 +144,10 @@ $(document).on("knack-scene-render.scene_264", function (event, page) {
   $("#csr_view").attr("src", iframe_url);
 });
 
-/*******************************************/
-/*** Disable Breadcrumb Navigation Links ***/
-/*******************************************/
-function disableBreadCrumbsNonAdmin() {
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -136,25 +155,20 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-//Page to disable crumbtrail App Info page
-$(document).on("knack-scene-render.scene_336", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Page to disable crumbtrail Parent Company page
-$(document).on("knack-scene-render.scene_337", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Page to disable crumbtrail Business Information page
-$(document).on("knack-scene-render.scene_338", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Page to disable crumbtrail Past Performance page
-$(document).on("knack-scene-render.scene_339", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Page to disable crumbtrail Fleet Information page
-$(document).on("knack-scene-render.scene_340", function () {
-  disableBreadCrumbsNonAdmin();
+const BREADCRUMB_SCENES = [
+  // Dockless Mobility License Application
+  'scene_336', // App Info page
+  'scene_337', // Parent Company page
+  'scene_338', // Business Information page
+  'scene_339', // Past Performance page
+  'scene_340', // Fleet Information page
+
+  // Bond & Insurance
+  'scene_58', // Bond Details page
+];
+
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /*******************************************/
@@ -167,7 +181,7 @@ function getTodaysDate() {
 }
 
 var headers = {
-  "X-Knack-Application-ID": "6669fb3cd43ca60027942eef",
+  "X-Knack-Application-ID": "",
   Authorization: Knack.getUserToken(),
   "content-type": "application/json",
 };
