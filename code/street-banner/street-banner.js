@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -49,7 +52,9 @@ $(document).on("knack-view-render.any", function (event, page) {
   }
 });
 
-
+/********************************************/
+/************** Citybase API ****************/
+/********************************************/
 function getCitybaseButton(payload, viewId){
     fetch('https://invoice-service.prod.cityba.se/invoices/austin_tx_transportation/street_banner', {
       method: 'POST',
@@ -76,273 +81,205 @@ var headers = {
   "content-type": "application/json",
 };
 
-
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
-  //>>>HOME TAB BUTTONS
+
+// create large Contacts & Organizations button on the home page
 $(document).on('knack-view-render.view_2390', function(event, page) {
-  // create large button on the home page
-    bigButton('contact-directory', 'view_2390', "https://atd.knack.com/street-banners#banners-contacts-organization-directory/", "phone", "Contacts & Organizations");
+    bigButton("contact-directory", "view_2390", `${APP_URL}#banners-contacts-organization-directory/`, "phone", "Contacts & Organizations");
 });
+// create large Reservations button on the home page
 $(document).on('knack-view-render.view_2660', function(event, page) {
-    // create large button on the home page
-    bigButton('reservations', 'view_2660', "https://atd.knack.com/street-banners#reservations/", "pencil-square-o", "Reservations");
+    bigButton("reservations", "view_2660", `${APP_URL}#reservations/`, "pencil-square-o", "Reservations");
 });
-
+// create large Availability Search button on the home page
 $(document).on('knack-view-render.view_2661', function(event, page) {
-    // create large button on the home page
-    bigButton('availability', 'view_2661', "https://atd.knack.com/street-banners#availability-search/", "calendar", "Availability Search");
+    bigButton("availability", "view_2661", `${APP_URL}#availability-search/`, "calendar", "Availability Search");
 });
-
-  // $(document).on('knack-view-render.view_2662', function(event, page) {
-  // create large button on the home page
-  //  bigButton('work-orders', 'view_2662', "https://atd.knack.com/street-banners#work-orders/", "folder-open", "Work Orders");
-// });
-
-  // $(document).on('knack-view-render.view_2750', function(event, page) {
-  // create large button on the home page
-  // bigButton('schedule', 'view_2750', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
-// });
-
-  // $(document).on('knack-view-render.view_3009', function(event, page) {
-  // create large button on the home page
-  //  bigButton('calendar', 'view_3009', "https://atd.knack.com/street-banners#calendar/", "calendar", "Calendar");
-// });
-
+// create large Reports button on the home page
 $(document).on('knack-view-render.view_3006', function(event, page) {
-  // create large button on the home page
-    bigButton('reports', 'view_3006', "https://atd.knack.com/street-banners#reports/", "bar-chart", "Reports");
+    bigButton("reports", "view_3006", `${APP_URL}#reports/`, "bar-chart", "Reports");
 });
-
+// create large Resources button on the home page
 $(document).on('knack-view-render.view_2663', function(event, page) {
-  // create large button on the home page
-    bigButton('resources', 'view_2663', "https://atd.knack.com/street-banners#resources/", "link", "Resources");
-});  
-  //LAMPPOST TAB BUTTONS
+    bigButton("resources", "view_2663", `${APP_URL}#resources/`, "link", "Resources");
+});
+
+// LAMPPOST TAB BUTTONS
 $(document).on('knack-view-render.view_2814', function(event, page) {
-  // create large button on the home page
-    bigButton('lpb-application-dashboard', 'view_2814', "https://atd.knack.com/street-banners#lpb-application-dashboard/", "pencil-square-o", "Lamppost | Reservations");
+    bigButton("lpb-application-dashboard", "view_2814", `${APP_URL}#lpb-application-dashboard/`, "pencil-square-o", "Lamppost | Reservations");
 });
-  
 $(document).on('knack-view-render.view_2815', function(event, page) {
-  // create large button on the home page
-    bigButton('lpb-availability', 'view_2815', "https://atd.knack.com/street-banners#lpb-availability/", "calendar", "Lamppost | Availability");
+    bigButton("lpb-availability", "view_2815", `${APP_URL}#lpb-availability/`, "calendar", "Lamppost | Availability");
 });
-
 $(document).on('knack-view-render.view_2816', function(event, page) {
-  // create large button on the home page
-    bigButton('work-orders-lpb', 'view_2816', "https://atd.knack.com/street-banners#work-orders-lpb/", "folder-open", "Lamppost | Work Orders");
+    bigButton("work-orders-lpb", "view_2816", `${APP_URL}#work-orders-lpb/`, "folder-open", "Lamppost | Work Orders");
 });
-
 $(document).on('knack-view-render.view_2817', function(event, page) {
-  // create large button on the home page
-    bigButton('lpb-schedule', 'view_2817', "https://atd.knack.com/street-banners#lamppost-schedule/", "clipboard", "Lamppost | Schedule");
-});
-  //>>>OVER-THE-STREET TAB BUTTONS
-$(document).on('knack-view-render.view_2818', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-application-dashboard', 'view_2818', "https://atd.knack.com/street-banners#ots-application-dashboard/", "pencil-square-o", "Over-the-Street | Reservations");
+    bigButton("lpb-schedule", "view_2817", `${APP_URL}#lamppost-schedule/`, "clipboard", "Lamppost | Schedule");
 });
 
+// OVER-THE-STREET TAB BUTTONS
+$(document).on('knack-view-render.view_2818', function(event, page) {
+    bigButton("ots-application-dashboard", "view_2818", `${APP_URL}#ots-application-dashboard/`, "pencil-square-o", "Over-the-Street | Reservations");
+});
 $(document).on('knack-view-render.view_2819', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-availability', 'view_2819', "https://atd.knack.com/street-banners#ots-availability/", "calendar", "Over-the-Street | Availability");
+    bigButton("ots-availability", "view_2819", `${APP_URL}#ots-availability/`, "calendar", "Over-the-Street | Availability");
 });
 $(document).on('knack-view-render.view_2820', function(event, page) {
-  // create large button on the home page
-    bigButton('work-orders-ots', 'view_2820', "https://atd.knack.com/street-banners#work-orders-ots/", "folder-open", "Over-the-Street | Work Orders");
+    bigButton("work-orders-ots", "view_2820", `${APP_URL}#work-orders-ots/`, "folder-open", "Over-the-Street | Work Orders");
 });
-
 $(document).on('knack-view-render.view_2821', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-schedule', 'view_2821', "https://atd.knack.com/street-banners#over-the-street-schedule/", "clipboard", "Over-the-Street | Schedule");
+    bigButton("ots-schedule", "view_2821", `${APP_URL}#over-the-street-schedule/`, "clipboard", "Over-the-Street | Schedule");
 });
-
 $(document).on('knack-view-render.view_2907', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-schedule', 'view_2907', "https://atd.knack.com/street-banners#over-the-street-schedule/", "flag-checkered", "Over-the-Street | Schedule");
+    bigButton("ots-schedule", "view_2907", `${APP_URL}#over-the-street-schedule/`, "flag-checkered", "Over-the-Street | Schedule");
 });
-  //>>>TECHNICIAN TAB BUTTONS
+
+// TECHNICIAN TAB BUTTONS
 $(document).on('knack-view-render.view_3046', function(event, page) {
-  // create large button on the home page
-    bigButton('work-orders-tech', 'view_3046', "https://atd.knack.com/street-banners#work-orders//", "folder-open", "Work Orders");
+    bigButton("work-orders-tech", "view_3046", `${APP_URL}#work-orders/`, "folder-open", "Work Orders");
 });
-
 $(document).on('knack-view-render.view_3047', function(event, page) {
-  // create large button on the home page
-    bigButton('schedule', 'view_3047', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
+    bigButton("schedule", "view_3047", `${APP_URL}#schedule/`, "clipboard", "Schedule");
 });
-
-$(document).on('knack-view-render.view_3668', function(event, page) {
-  // create large button on the home page
-    bigButton('signs_markings_tracker', 'view_3668', "https://atd.knack.com/street-banners#schedule/", "clipboard", "Schedule");
-});
-
 $(document).on('knack-view-render.view_3048', function(event, page) {
-  // create large button on the home page
-    bigButton('calendar', 'view_3048', "https://atd.knack.com/street-banners#calendar/", "calendar", "Calendar");
+    bigButton("calendar", "view_3048", `${APP_URL}#calendar/`, "calendar", "Calendar");
 });
-
 $(document).on('knack-view-render.view_3668', function(event, page) {
-  // create large button on the home page
-    bigButton('signs_markings_tracker', 'view_3668', "https://atd.knack.com/signs-markings#home/", "flag", "Signs & Markings Tracker");
+    bigButton("signs_markings_tracker", "view_3668", "https://atd.knack.com/signs-markings#home/", "flag", "Signs & Markings Tracker");
 });
 
-  //>>>ADMIN TAB BUTTONS
+// ADMIN TAB BUTTONS
 $(document).on('knack-view-render.view_3012', function(event, page) {
-  // create large button on the home page
-    bigButton('specifications', 'view_3012', "https://atd.knack.com/street-banners#specifications//", "th-list", "Specifications");
+    bigButton("specifications", "view_3012", `${APP_URL}#specifications/`, "th-list", "Specifications");
 });
-
 $(document).on('knack-view-render.view_3013', function(event, page) {
-  // create large button on the home page
-    bigButton('materials', 'view_3013', "https://atd.knack.com/street-banners#materials/", "shopping-cart", "Materials");
+    bigButton("materials", "view_3013", `${APP_URL}#materials/`, "shopping-cart", "Materials");
 });
-
 $(document).on('knack-view-render.view_3032', function(event, page) {
-  // create large button on the home page
-    bigButton('account-management', 'view_3032', "https://atd.knack.com/street-banners#account-management/", "users", "Account Management");
+    bigButton("account-management", "view_3032", `${APP_URL}#account-management/`, "users", "Account Management");
 });
 
-//Help link button for the Admin tab
+// Help link button for the Admin tab
 $(document).on('knack-view-render.view_3689', function(event, page) {
-  // create large button on the home page
-    bigButton('help', 'view_3689', "https://atd.knack.com/street-banners#help/", "info-circle", "Admin Help Guide");
+    bigButton("help", "view_3689", `${APP_URL}#help/`, "info-circle", "Admin Help Guide");
 });
 
-  //***MENU - RESERVATION PAGE***
+// MENU - RESERVATION PAGE
 $(document).on('knack-view-render.view_2794', function(event, page) {
-  // create large button on the home page
-    bigButton('lpb-rsvp', 'view_2794', "https://atd.knack.com/street-banners#lpb-application-dashboard/", "flag-o", "Lamppost | Reservations");
+    bigButton("lpb-rsvp", "view_2794", `${APP_URL}#lpb-application-dashboard/`, "flag-o", "Lamppost | Reservations");
 });
-
 $(document).on('knack-view-render.view_2795', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-rsvp', 'view_2795', "https://atd.knack.com/street-banners#ots-application-dashboard/", "flag-checkered", "Over-the-Street | Reservations");
+    bigButton("ots-rsvp", "view_2795", `${APP_URL}#ots-application-dashboard/`, "flag-checkered", "Over-the-Street | Reservations");
 });
-  //***MENU - AVAILABILITY PAGE***
+
+// MENU - AVAILABILITY PAGE
 $(document).on('knack-view-render.view_2803', function(event, page) {
-  // create large button on the home page
-    bigButton('lpb-avail', 'view_2803', "https://atd.knack.com/street-banners#lpb-availability/", "flag", "Lamppost | Availability");
+    bigButton("lpb-avail", "view_2803", `${APP_URL}#lpb-availability/`, "flag", "Lamppost | Availability");
 });
-
 $(document).on('knack-view-render.view_2804', function(event, page) {
-   // create large button on the home page
-    bigButton('ots-avail', 'view_2804', "https://atd.knack.com/street-banners#ots-availability/", "flag-checkered", "Over-the-Street | Availability");
-}); 
-  //***MENU - WORK ORDER PAGE***
+    bigButton("ots-avail", "view_2804", `${APP_URL}#ots-availability/`, "flag-checkered", "Over-the-Street | Availability");
+});
+
+// MENU - WORK ORDER PAGE
 $(document).on('knack-view-render.view_2904', function(event, page) {
-  // create large button on the home page
-    bigButton('work-orders-lpb', 'view_2904', "https://atd.knack.com/street-banners#work-orders-lpb/", "flag", "Lamppost | Work Orders");
+    bigButton("work-orders-lpb", "view_2904", `${APP_URL}#work-orders-lpb/`, "flag", "Lamppost | Work Orders");
 });
-
 $(document).on('knack-view-render.view_2905', function(event, page) {
-  // create large button on the home page
-    bigButton('work-orders-ots', 'view_2905', "https://atd.knack.com/street-banners#work-orders-ots", "flag-checkered", "Over-the-Street | Work Orders");
+    bigButton("work-orders-ots", "view_2905", `${APP_URL}#work-orders-ots`, "flag-checkered", "Over-the-Street | Work Orders");
 });
-
 $(document).on('knack-view-render.view_2960', function(event, page) {
-  // create large button on the home page
-    bigButton('maint-work-orders', 'view_2960', "https://atd.knack.com/street-banners#maintenance-work-orders/", "briefcase", "Maintenance | Work Orders");
+    bigButton("maint-work-orders", "view_2960", `${APP_URL}#maintenance-work-orders/`, "briefcase", "Maintenance | Work Orders");
 });
-
 $(document).on('knack-view-render.view_3097', function(event, page) {
-  // create large button on the home page
-    bigButton('signs-work-orders', 'view_3097', "https://atd.knack.com/signs-markings#my-work-orders/", "wrench", "Signs | Work Orders");
+    bigButton("signs-work-orders", "view_3097", "https://atd.knack.com/signs-markings#my-work-orders/", "wrench", "Signs | Work Orders");
 });
-  //***MENU - SCHEDULE PAGE***
+
+// MENU - SCHEDULE PAGE
 $(document).on('knack-view-render.view_2906', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-work-orders', 'view_2906', "https://atd.knack.com/street-banners#lamppost-schedule/", "flag", "Lamppost | Schedule");
+    bigButton("ots-work-orders", "view_2906", `${APP_URL}#lamppost-schedule/`, "flag", "Lamppost | Schedule");
 });
 
-
-  //***MENU - RESOURCES PAGE***
+// MENU - RESOURCES PAGE
 $(document).on('knack-view-render.view_2713', function(event, page) {
-  // create large button on the resources page
-    bigButton('street-banners-external-site', 'view_2713', "http://austintexas.gov/page/street-banners", "external-link-square", "Street Banners (External Site)", true);
+    bigButton("street-banners-external-site", "view_2713", "http://austintexas.gov/page/street-banners", "external-link-square", "Street Banners (External Site)", true);
 });
-
 $(document).on('knack-view-render.view_2796', function(event, page) {
-  // create large button on the resources page
-    bigButton('AMANDA-Users-SP', 'view_2796', "https://atd.knack.com/dts#new-service-request/", "database", "AMANDA Support", true);
+    bigButton("AMANDA-Users-SP", "view_2796", "https://atd.knack.com/dts#new-service-request/", "database", "AMANDA Support", true);
 });
 
-  //***CUSTOMER PORTAL PAGE***
+// CUSTOMER PORTAL PAGE
 $(document).on('knack-view-render.view_3611', function(event, page) {
-  // create large button on the resources page
-    bigButton("eligibility", "view_3611", "https://atd.knack.com/street-banners#eligibility/", "map-marker", "Eligibility");
+    bigButton("eligibility", "view_3611", `${APP_URL}#eligibility/`, "map-marker", "Eligibility");
 });
 $(document).on('knack-view-render.view_3610', function(event, page) {
-  // create large button on the resources page
-    bigButton('get-started', 'view_3610', "https://atd.knack.com/street-banners#get-started/", "list", "Get Started");
+    bigButton("get-started", "view_3610", `${APP_URL}#get-started/`, "list", "Get Started");
 });
 $(document).on('knack-view-render.view_3613', function(event, page) {
-  // create large button on the resources page
-    bigButton( "learn-more", "view_3613", "https://www.austintexas.gov/page/street-banners", "book", "About the Program", true);
+    bigButton("learn-more", "view_3613", "https://www.austintexas.gov/page/street-banners", "book", "About the Program", true);
 });
 $(document).on('knack-view-render.view_3612', function(event, page) {
-  // create large button on the resources page
-   bigButton("faq", "view_3612", "https://atd.knack.com/street-banners#faq/", "info-circle", "Help");
+   bigButton("faq", "view_3612", `${APP_URL}#faq/`, "info-circle", "Help");
 });
 
-  //***GET STARTED PAGE***
+// create large Home button on go back to Portal page
 $(document).on('knack-view-render.view_3614', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('portal', 'view_3614', "https://atd.knack.com/street-banners#portal", "home", "Home");
+    bigButton("portal", "view_3614", `${APP_URL}#portal`, "home", "Home");
 });
+// create large Start Application button on the Get Started page
 $(document).on('knack-view-render.view_3615', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('applications', 'view_3615', "https://atd.knack.com/street-banners#applications", "arrow-right", "Start Application");
+    bigButton("applications", "view_3615", `${APP_URL}#applications`, "arrow-right", "Start Application");
 });
-  //***APPLICATIONS CHOICE PAGE***
+
+// APPLICATIONS CHOICE PAGE
 $(document).on('knack-view-render.view_3153', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('lpb-application', 'view_3153', "https://atd.knack.com/street-banners#lpb-application/", " ", "Lamppost Banner Application");
+    bigButton("lpb-application", "view_3153", `${APP_URL}#lpb-application/`, " ", "Lamppost Banner Application");
 });
 $(document).on('knack-view-render.view_3154', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('ots-application', 'view_3154', "https://atd.knack.com/street-banners#ots-application"," " , "Over-the-Street Banner Application");
+    bigButton("ots-application", "view_3154", `${APP_URL}#ots-application`," " , "Over-the-Street Banner Application");
 });
 
-  //***MANAGE WALLET BUTTONS***
+// MANAGE WALLET BUTTONS
 $(document).on('knack-view-render.view_3673', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('manage-wallet', 'view_3673', "https://austin-tx-austin-tx.uat.cityba.se/login", "credit-card", "Manage Wallet");
+    bigButton("manage-wallet", "view_3673", "https://austin-tx-austin-tx.uat.cityba.se/login", "credit-card", "Manage Wallet");
 });
 $(document).on('knack-view-render.view_3675', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('manage-wallet', 'view_3675', "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
+    bigButton("manage-wallet", "view_3675", "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
 });
 $(document).on('knack-view-render.view_3678', function(event, page) {
-  // create large button on go back to Portal page
-    bigButton('manage-wallet', 'view_3678', "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
+    bigButton("manage-wallet", "view_3678", "https://austin-tx-austin-tx.uat.cityba.se/login","credit-card" , "Manage Wallet");
 });
 
-  //***RESERVATION CALENDAR BUTTONS***
+// RESERVATION CALENDAR BUTTONS
 $(document).on('knack-view-render.view_3728', function(event, page) {
-  // create large button on the home page
-    bigButton('lpb-rsvp', 'view_3728', "https://atd.knack.com/street-banners#lpb-reservation-calendar", "flag-o", "Lamppost | RSVP Calendar");
+    bigButton("lpb-rsvp", "view_3728", `${APP_URL}#lpb-reservation-calendar`, "flag-o", "Lamppost | RSVP Calendar");
 });
-
 $(document).on('knack-view-render.view_3729', function(event, page) {
-  // create large button on the home page
-    bigButton('ots-rsvp', 'view_3729', "https://atd.knack.com/street-banners#ots-reservation-calendar", "flag-checkered", "Over-the-Street | RSVP Calendar");
+    bigButton("ots-rsvp", "view_3729", `${APP_URL}#ots-reservation-calendar`, "flag-checkered", "Over-the-Street | RSVP Calendar");
 });
 
-/*******************************************/
-/*** Disable Breadcrumb Navigation Links ***/
-/*******************************************/
-function disableBreadCrumbsNonAdmin() {
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -350,43 +287,26 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1211", function () {
-  disableBreadCrumbsNonAdmin();
-});
+const BREADCRUMB_SCENES = [
+  // LPB Application
+  'scene_1211', // Event Information page
+  'scene_1212', // Add Design Attachment page
+  'scene_1226', // Add Banner Locations page
 
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1212", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // LPB Applications
+  'scene_1219', // Application Details page
 
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1219", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // OTS Application
+  'scene_1233', // Event Information page
+  'scene_1234', // Add Design Attachment page
+  'scene_1255', // Add Banner Locations page
 
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1226", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1233", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // OTS Applications
+  'scene_1243', // Application Details page
+];
 
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1234", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1243", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-//Page to disable crumbtrail
-$(document).on("knack-scene-render.scene_1255", function () {
-  disableBreadCrumbsNonAdmin();
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 
