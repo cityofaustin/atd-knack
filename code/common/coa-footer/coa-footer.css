@@ -1,3 +1,23 @@
-/***
- * 
- * /
+#coa-footer,
+#coa-footer-modal {
+  text-align: center;
+  padding: 24px 16px;
+  margin-top: 32px;
+  font-size: 13px;
+  color: #888;
+  border-top: 1px solid #e5e5e5;
+}
+
+#coa-footer img,
+#coa-footer-modal img {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: 80px;
+  height: auto;
+}
+
+#coa-footer a,
+#coa-footer-modal a {
+  color: #555;
+  text-decoration: underline;
+}
