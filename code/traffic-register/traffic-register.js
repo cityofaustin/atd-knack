@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,32 +55,41 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 // create large Task Board button on the Home page
 $(document).on("knack-view-render.view_612", function(event, page) {
-  bigButton("task-board", "view_612", "https://atd.knack.com/traffic-register#task-board/my-tasks/", "tasks", "My Task Board");
+  bigButton("task-board", "view_612", `${APP_URL}#task-board/my-tasks/`, "tasks", "My Task Board");
 });
 
 // create large Search Approved Regulations button on the Home page
 $(document).on("knack-view-render.view_613", function(event, page) {
-  bigButton("search-regulations", "view_613", "https://atd.knack.com/traffic-register#approved-regulations/", "search", "Search for Approved Regulations");
+  bigButton("search-regulations", "view_613", `${APP_URL}#approved-regulations/`, "search", "Search for Approved Regulations");
 });
 
 // create large Search Regulation Documents button on the Home page
 $(document).on("knack-view-render.view_614", function(event, page) {
-  bigButton("search-documents", "view_614", "https://atd.knack.com/traffic-register#regulation-documents/", "search", "Search for Regulation Documents");
+  bigButton("search-documents", "view_614", `${APP_URL}#regulation-documents/`, "search", "Search for Regulation Documents");
 });
 
 // create large PDF Search button on the Home page
 $(document).on("knack-view-render.view_615", function(event, page) {
-  bigButton("pdf-search", "view_615", "https://atd.knack.com/traffic-register#pdf-search/", "red fa-file-pdf-o", "PDF Search");
+  bigButton("pdf-search", "view_615", `${APP_URL}#pdf-search/`, "red fa-file-pdf-o", "PDF Search");
 });
 
 /*
@@ -90,22 +102,39 @@ $(document).on("knack-view-render.view_1130", function(event, page) {
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-function smallButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='small-button-container" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+//Adds Small Button HTML directly on View ID
+function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " small-button-disabled'" : "'";
+  const html = `
+    <a id='${id}' 
+       class='back-button${disabledClass}' 
+       href='${url}'>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 /********************************************/
 /************* Trigger Buttons **************/
 /********************************************/
+//Adds Trigger Button HTML directly on View ID
 function triggerButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " trigger-button'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='trigger-button" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " trigger-button'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='trigger-button${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
@@ -146,7 +175,7 @@ $(document).on("knack-page-render.any", function (event, page) {
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
 /****************************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -154,27 +183,16 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-/*************************************************************/
-/*** Disable Breadcrumb Navigation Links for Draft Builder ***/
-/*************************************************************/
-/*Drafting Page*/
-$(document).on("knack-scene-render.scene_698", function () {
-  disableBreadCrumbsNonAdmin();
-});
+const BREADCRUMB_SCENES = [
+  // Draft Builder
+  'scene_698', // Drafting page
+  'scene_699', // Add Regulations page
+  'scene_707', // Save Draft page
+  'scene_708', // Submit Draft page
+];
 
-/*Add Regulations Page*/
-$(document).on("knack-scene-render.scene_699", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*Save Draft Page*/
-$(document).on("knack-scene-render.scene_707", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*Submit Draft Page*/
-$(document).on("knack-scene-render.scene_708", function () {
-  disableBreadCrumbsNonAdmin();
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /********************************************************/
@@ -196,7 +214,7 @@ $(document).on("knack-scene-render.any", function () {
 /*************************************/
 /*Task Board Page*/
 $(document).on('knack-scene-render.scene_435', function(event, scene) { 
-window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tasks/";
+window.location.href = `${APP_URL}#task-board/my-tasks/`;
 });
 
 /******************************/
