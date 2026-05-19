@@ -1,15 +1,25 @@
+/*************************************/
+/**** COA FOOTER - Simple Version ****/
+/*************************************/
+  // Dynamically injects a branded footer into specific customer-facing standard Knack pages only.
+  // Use this version for apps where displaying the footer on modal windows is not required.
+  // Caution: Navigating from a standard page > modal page > and then to a new standard page from a menu view on that modal page may cause footer ghosting/duplication to occur
+  // Best Practice: Modals are okay as long as a user isnt required to navigate with the modal. Instead the user should navigate via the top nav or a standard page
+  //
+  // To display the footer on a new page: append its URL hash and scene ID comment to the footerHashes array below.
 (function() {
 
+  // List of exact URL hashes that should display the footer. Only exact matches are used — child pages (e.g. #customer/my-projects/) are automatically excluded.
   const footerHashes = [
     '#customer/',                 // scene_482 customer login
     '#portal-home/',              // scene_291
-    '#all-services/',             // scene_306 (modal)
-    '#portal-home/all-services/', // scene_306 (modal)
+    '#all-services/',             // scene_306
     '#tcp-traffic-control-plan/', // scene_302
     '#tcp-conflict-shared/',      // scene_305
-    '#contact-us/',               // scene_179 (modal)
   ];
 
+  // Our structured Footer HTML consisting of the COA Brand, the Privacy Policy, and any app specific Contact Info
+  // Styling is handled in the Knack CSS file via the #coa-footer selector.
   const footerHTML = `
     <div id="coa-footer">
       <img 
@@ -22,26 +32,23 @@
     </div>
   `;
 
-  function isModalOpen() {
-    return $('.kn-modal-bg').is(':visible') || $('.kn-modal').is(':visible');
-  }
-
+  // Inject footer for standard pages. Runs on initial page load and every time the URL hash changes.
   function injectFooter() {
     const hash = window.location.hash;
+
+    // Check if the current hash exactly matches one of our footer pages
     const shouldShow = footerHashes.some(function(h) { return hash === h; });
 
-    // Always remove if we're on a non-footer page
+    // If we're not on a footer page, remove the footer and exit
     if (!shouldShow) {
       $('#coa-footer').remove();
       return;
     }
 
-    // Skip inject if a modal is currently open
-    if (isModalOpen()) return;
-
-    // Only inject if footer is not already present inside #knack-body
+    // Check if the footer is already present in #knack-body
     if ($('#knack-body #coa-footer').length) return;
 
+    // Poll every 100ms for #knack-body to be available in the DOM as it may not exist immediately after hash change. Exits after 2s.
     const maxAttempts = 20;
     let attempts = 0;
 
@@ -49,7 +56,6 @@
       attempts++;
       if ($('#knack-body').length) {
         clearInterval(interval);
-        $('#coa-footer').remove();
         $('#knack-body').append(footerHTML);
       } else if (attempts >= maxAttempts) {
         clearInterval(interval);
@@ -58,38 +64,10 @@
     }, 100);
   }
 
-  function injectModalFooter() {
-    const hash = window.location.hash;
-    const shouldShow = footerHashes.some(function(h) { return hash === h; });
-    if (!shouldShow) return;
-
-    const $modalBody = $('.modal-card-body');
-    if (!$modalBody.length) return;
-    // Avoid duplicate
-    if ($modalBody.find('#coa-footer-modal').length) return;
-    // Use a separate ID so it doesn't conflict with the page footer
-    const $modalFooter = $(footerHTML.replace('id="coa-footer"', 'id="coa-footer-modal"'));
-    $modalBody.append($modalFooter);
-  }
-
-  // Watch for modal being added to the DOM
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      mutation.addedNodes.forEach(function(node) {
-        if ($(node).hasClass('kn-modal') || $(node).find('.kn-modal').length) {
-          // Small delay to let modal content fully render
-          setTimeout(injectModalFooter, 300);
-        }
-      });
-    });
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
-
-  // Run on initial load
+  // Run on initial page load
   $(window).on('load', injectFooter);
 
-  // Run on every hash change (Knack navigation)
+  // Run on every hash change (triggered by navigation)
   $(window).on('hashchange', injectFooter);
 
 })();
