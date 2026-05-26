@@ -123,15 +123,15 @@ $(document).on("knack-view-render.view_1117", function(event, page) {
 });
 // create large ROW Division button on the Customer Portal Home page
 $(document).on("knack-view-render.view_237", function(event, page) {
-  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 // create large ROW Division button on the ROW Portal page
 $(document).on("knack-view-render.view_684", function(event, page) {
-  bigButton("row-division-link", "view_684", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+  bigButton("row-division-link", "view_684", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 // create large ROW Division button on the Customer Home page
 $(document).on("knack-view-render.view_1120", function(event, page) {
-  bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/department/right-way-row-management", "bank", "ROW Division", true);
+  bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 
 // create large Task Board button on the Task Board Login page
@@ -162,21 +162,6 @@ $(document).on("knack-view-render.view_1529", function(event, page) {
 // create large DAPCZ Public Portal button on the Manage DAPCZ page
 $(document).on("knack-view-render.view_1593", function(event, page) {
   bigButton("dapcz-meeting", "view_1593", `${APP_URL}#dapcz-meeting/`, "slideshare", "DAPCZ Public Portal");
-});
-
-// create large Manage DAPCZ Links button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1594", function(event, page) {
-  bigButton("manage-links", "view_1594", `${APP_URL}#manage-links/`, "link", "Manage Links");
-});
-
-// create large Manage DAPCZ Meeting Schedule button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1595", function(event, page) {
-  bigButton("manage-schedule", "view_1595", `${APP_URL}#manage-schedule`, "calendar", "Manage Schedule");
-});
-
-// create large DAPCZ Public Portal button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1597", function(event, page) {
-  bigButton("dapcz-meeting", "view_1597", `${APP_URL}#dapcz-meeting/`, "slideshare", "DAPCZ Public Portal");
 });
 
 // create large DAPCZ Agenda button on the DAPCZ Public Portal page
@@ -553,3 +538,4 @@ $(document).on("knack-view-render.view_29", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+

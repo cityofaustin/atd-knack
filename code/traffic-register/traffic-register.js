@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,32 +55,41 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 // create large Task Board button on the Home page
 $(document).on("knack-view-render.view_612", function(event, page) {
-  bigButton("task-board", "view_612", "https://atd.knack.com/traffic-register#task-board/my-tasks/", "tasks", "My Task Board");
+  bigButton("task-board", "view_612", `${APP_URL}#task-board/my-tasks/`, "tasks", "My Task Board");
 });
 
 // create large Search Approved Regulations button on the Home page
 $(document).on("knack-view-render.view_613", function(event, page) {
-  bigButton("search-regulations", "view_613", "https://atd.knack.com/traffic-register#approved-regulations/", "search", "Search for Approved Regulations");
+  bigButton("search-regulations", "view_613", `${APP_URL}#approved-regulations/`, "search", "Search for Approved Regulations");
 });
 
 // create large Search Regulation Documents button on the Home page
 $(document).on("knack-view-render.view_614", function(event, page) {
-  bigButton("search-documents", "view_614", "https://atd.knack.com/traffic-register#regulation-documents/", "search", "Search for Regulation Documents");
+  bigButton("search-documents", "view_614", `${APP_URL}#regulation-documents/`, "search", "Search for Regulation Documents");
 });
 
 // create large PDF Search button on the Home page
 $(document).on("knack-view-render.view_615", function(event, page) {
-  bigButton("pdf-search", "view_615", "https://atd.knack.com/traffic-register#pdf-search/", "red fa-file-pdf-o", "PDF Search");
+  bigButton("pdf-search", "view_615", `${APP_URL}#pdf-search/`, "red fa-file-pdf-o", "PDF Search");
 });
 
 /*
@@ -90,22 +102,39 @@ $(document).on("knack-view-render.view_1130", function(event, page) {
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-function smallButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='small-button-container" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+//Adds Small Button HTML directly on View ID
+function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " small-button-disabled'" : "'";
+  const html = `
+    <a id='${id}' 
+       class='back-button${disabledClass}' 
+       href='${url}'>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 /********************************************/
 /************* Trigger Buttons **************/
 /********************************************/
+//Adds Trigger Button HTML directly on View ID
 function triggerButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " trigger-button'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "";
-    $( "<a id='" + id + "' class='trigger-button" + disabledClass + " href='" + url + "'" 
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " trigger-button'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='trigger-button${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
@@ -146,7 +175,7 @@ $(document).on("knack-page-render.any", function (event, page) {
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
 /****************************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -154,27 +183,16 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-/*************************************************************/
-/*** Disable Breadcrumb Navigation Links for Draft Builder ***/
-/*************************************************************/
-/*Drafting Page*/
-$(document).on("knack-scene-render.scene_698", function () {
-  disableBreadCrumbsNonAdmin();
-});
+const BREADCRUMB_SCENES = [
+  // Draft Builder
+  'scene_698', // Drafting page
+  'scene_699', // Add Regulations page
+  'scene_707', // Save Draft page
+  'scene_708', // Submit Draft page
+];
 
-/*Add Regulations Page*/
-$(document).on("knack-scene-render.scene_699", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*Save Draft Page*/
-$(document).on("knack-scene-render.scene_707", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*Submit Draft Page*/
-$(document).on("knack-scene-render.scene_708", function () {
-  disableBreadCrumbsNonAdmin();
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /********************************************************/
@@ -196,18 +214,237 @@ $(document).on("knack-scene-render.any", function () {
 /*************************************/
 /*Task Board Page*/
 $(document).on('knack-scene-render.scene_435', function(event, scene) { 
-window.location.href = "https://atd.knack.com/traffic-register#task-board/my-tasks/";
+window.location.href = `${APP_URL}#task-board/my-tasks/`;
 });
 
-/****************************/
-/*** Auto Refresh Browser ***/
-/****************************/
-/*1st Page of Draft Builder*/
-$(document).on("knack-scene-render.scene_697", function () {
-  setInterval(function() {
-    location.reload();
-  }, 20000); // Refreshes every 20 seconds (20000 milliseconds)
-});
+/******************************/
+/**** Auto Refresh Browser ****/
+/******************************/
+/* 1st Page of Draft Builder */
+(function() {
+    // Store interval IDs and state
+    let pageReloadInterval = null;
+    let countdownInterval = null;
+    let submitCheckInterval = null;
+    let isSubmitting = false;
+    let timeLeft = 20;
+    let isInDisabledPeriod = false;
+    let isOnCorrectScene = false;
+    let clickHandlerAttached = false;
+    
+    // Function to clear all intervals
+    function clearAllIntervals() {
+        if (pageReloadInterval) {
+            clearInterval(pageReloadInterval);
+            pageReloadInterval = null;
+        }
+        if (countdownInterval) {
+            clearInterval(countdownInterval);
+            countdownInterval = null;
+        }
+        if (submitCheckInterval) {
+            clearInterval(submitCheckInterval);
+            submitCheckInterval = null;
+        }
+        $('#refresh-warning').remove();
+    }
+    
+    // Navigation click handler (defined once, reused)
+    function handleNavigationClick(e) {
+        const $target = $(e.target).closest('a, .kn-link, .kn-menu-item');
+        
+        // Don't process clicks on form elements
+        if ($(e.target).closest('form, .kn-form, select, input, textarea, button[type="submit"]').length > 0) {
+            return;
+        }
+        
+        const href = $target.attr('href');
+        
+        // If this is a navigation link away from scene_697
+        if (href && href !== '#' && !href.includes('scene_697')) {
+            isOnCorrectScene = false;
+            clearAllIntervals();
+        }
+    }
+    
+    // Function to attach click handler (only when on scene_697)
+    function attachClickHandler() {
+        if (!clickHandlerAttached) {
+            // Use mousedown instead of click to catch navigation earlier
+            // But exclude form elements
+            $(document).on("mousedown.scene697nav", "a:not(form a), .kn-link:not(form .kn-link), .kn-menu-item", handleNavigationClick);
+            clickHandlerAttached = true;
+        }
+    }
+    
+    // Function to detach click handler (when leaving scene_697)
+    function detachClickHandler() {
+        if (clickHandlerAttached) {
+            $(document).off("mousedown.scene697nav");
+            clickHandlerAttached = false;
+        }
+    }
+    
+    // Function to start the countdown and refresh logic
+    function startCountdown() {
+        // Clear any existing intervals first
+        clearAllIntervals();
+        
+        // Mark that we're on the correct scene
+        isOnCorrectScene = true;
+        
+        // Attach click handler only when on this scene
+        attachClickHandler();
+        
+        // Reset state
+        isSubmitting = false;
+        timeLeft = 20;
+        isInDisabledPeriod = false;
+        
+        const timeDisplay = document.getElementById("displayTime");
+        const submitButton = $('.kn-button.is-primary');
+        
+        // Set up countdown display
+        if (timeDisplay) {
+            timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
+        }
+        
+        // Re-enable submit button
+        if (submitButton.length > 0) {
+            submitButton.prop('disabled', false);
+            submitButton.css({
+                'opacity': '1',
+                'cursor': 'pointer'
+            });
+        }
+        
+        // Combined countdown and reload logic
+        countdownInterval = setInterval(function() {
+            // Don't refresh if user is submitting or not on correct scene
+            if (isSubmitting || !isOnCorrectScene) {
+                clearAllIntervals();
+                return;
+            }
+            
+            timeLeft--;
+            
+            if (timeDisplay) {
+                timeDisplay.innerHTML = `<strong>${timeLeft}</strong>`;
+            }
+            
+            // When we hit 0, enter disabled period
+            if (timeLeft === 0) {
+                isInDisabledPeriod = true;
+                
+                // Disable submit button
+                if (submitButton.length > 0) {
+                    submitButton.prop('disabled', true);
+                    submitButton.css({
+                        'opacity': '0.5',
+                        'cursor': 'not-allowed'
+                    });
+                    
+                    // Add warning message
+                    if ($('#refresh-warning').length === 0) {
+                        submitButton.before('<div id="refresh-warning" style="color: #d9534f; font-weight: bold; margin-bottom: 10px;">⚠️ Refreshing selection, please wait...</div>');
+                    }
+                }
+                
+                // Wait 3 seconds, then reload (only if still on correct scene)
+                setTimeout(function() {
+                    if (!isSubmitting && isOnCorrectScene) {
+                        location.reload();
+                    }
+                }, 3000);
+                
+                // Clear the countdown interval since we're done counting
+                clearInterval(countdownInterval);
+            }
+        }, 1000);
+        
+        // Backup timer (total 23 seconds: 20 countdown + 3 disabled period)
+        pageReloadInterval = setInterval(function() {
+            if (!isSubmitting && isOnCorrectScene) {
+                location.reload();
+            } else if (!isOnCorrectScene) {
+                clearAllIntervals();
+            }
+        }, 23000);
+        
+        // Monitor submit button state - only run when near the end
+        if (submitButton.length > 0) {
+            submitCheckInterval = setInterval(function() {
+                // If not on correct scene, stop monitoring
+                if (!isOnCorrectScene) {
+                    clearAllIntervals();
+                    return;
+                }
+                
+                // Only check when we're in disabled period or close to it
+                if (timeLeft <= 5) {
+                    if (isInDisabledPeriod) {
+                        submitButton.prop('disabled', true);
+                        submitButton.css({
+                            'opacity': '0.5',
+                            'cursor': 'not-allowed'
+                        });
+                    } else {
+                        submitButton.prop('disabled', false);
+                        submitButton.css({
+                            'opacity': '1',
+                            'cursor': 'pointer'
+                        });
+                    }
+                }
+            }, 500);
+        }
+    }
+    
+    // Start countdown when scene renders
+    $(document).on("knack-scene-render.scene_697", function () {
+        setTimeout(function() {
+            startCountdown();
+        }, 50);
+    });
+    
+    // Intercept form submission to prevent refresh during submit
+    $(document).on("knack-form-submit.view_1421", function(event, view, record) {
+        isSubmitting = true;
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
+    });
+    
+    // Clean up intervals when scene is destroyed
+    $(document).on("knack-scene-destroy.scene_697", function () {
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
+    });
+    
+    // Clear intervals BEFORE any navigation occurs
+    $(document).on("knack-route-change", function() {
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
+    });
+    
+    // Hash change listener (lightweight detection)
+    $(window).on('hashchange', function() {
+        if (!window.location.hash.includes('scene_697')) {
+            isOnCorrectScene = false;
+            detachClickHandler();
+            clearAllIntervals();
+        }
+    });
+    
+    // Additional cleanup for page unload
+    $(window).on('beforeunload', function() {
+        isOnCorrectScene = false;
+        detachClickHandler();
+        clearAllIntervals();
+    });
+})();
 
 /*************************/
 /*** Auto Submit Forms ***/

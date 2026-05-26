@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,27 +55,35 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 /*********** Customer RPP Portal ***********/
 // create large Get Started button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_4", function(event, page) {
-  bigButton( "get-started", "view_4", "https://atd.knack.com/parking#get-started/", "file-text", "Get Started");
+  bigButton( "get-started", "view_4", `${APP_URL}#get-started/`, "file-text", "Get Started");
 });
 // create large Am I Eligible button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_518", function(event, page) {
-  bigButton("verify", "view_518", "https://atd.knack.com/parking#verify/", "map-marker", "Am I Eligible?");
+  bigButton("verify", "view_518", `${APP_URL}#verify/`, "map-marker", "Am I Eligible?");
 });
 // create large Help button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_5", function(event, page) {
-  bigButton( "faq", "view_5", "https://atd.knack.com/parking#faq/", "info-circle", "Help");
+  bigButton( "faq", "view_5", `${APP_URL}#faq/`, "info-circle", "Help");
 });
 // create large About the Program button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_455", function(event, page) {
@@ -81,66 +92,69 @@ $(document).on("knack-view-render.view_455", function(event, page) {
 /************ FAQ Page ************/
 // create large Home button on the FAQ page that navigates back to RPP Portal
 $(document).on("knack-view-render.view_236", function(event, page) {
-  bigButton( "rpp", "view_236", "https://atd.knack.com/parking#rpp", "home", "Home");
+  bigButton( "rpp", "view_236", `${APP_URL}#rpp`, "home", "Home");
 });
 /********** Payment Options Page **********/
 // create large Home button on the Payment Options page that navigates back to RPP Portal
 $(document).on("knack-view-render.view_273", function(event, page) {
-  bigButton( "rpp", "view_273", "https://atd.knack.com/parking#rpp", "home", "Home");
+  bigButton( "rpp", "view_273", `${APP_URL}#rpp`, "home", "Home");
 });
 /********** Get Started Page **********/
 // create large Home button on the Get Started page
 $(document).on("knack-view-render.view_1599", function(event, page) {
-  bigButton( "rpp", "view_1599", "https://atd.knack.com/parking#rpp", "home", "Home");
+  bigButton( "rpp", "view_1599", `${APP_URL}#rpp`, "home", "Home");
 });
 // create large Start Application button on the Get Started page
 $(document).on("knack-view-render.view_127", function(event, page) {
-  bigButton( "apply", "view_127", "https://atd.knack.com/parking#apply-for-permits/", "arrow-right", "Start Application");
-});
-// create large Orange Zone Application button on the Get Started page
-$(document).on("knack-view-render.view_127", function(event, page) {
-  bigButton( "oz-apply", "view_127", "https://parkatx.cmrpay.com/permits", "arrow-right", "Start Orange Zone Application");
+  bigButton( "apply", "view_127", "https://parkatx.cmrpay.com/permits", "arrow-right", "Start Application");
 });
 /********** Am I Eligible Page **********/
 // create large Home button on the Am I Eligible page that navigates back to RPP Portal
 $(document).on("knack-view-render.view_226", function(event, page) {
-  bigButton( "rpp", "view_226", "https://atd.knack.com/parking#rpp", "home", "Home");
+  bigButton( "rpp", "view_226", `${APP_URL}#rpp`, "home", "Home");
 });
 /********** Staff Home Page **********/
 // create large Applications button on the Home page
 $(document).on("knack-view-render.view_27", function(event, page) {
-  bigButton( "applications", "view_27", "https://atd.knack.com/parking#applications/", "files-o", "Applications");
+  bigButton( "applications", "view_27", `${APP_URL}#applications/`, "files-o", "Applications");
 });
 // create large Permits button on the Home page
 $(document).on("knack-view-render.view_28", function(event, page) {
-  bigButton( "permits", "view_28", "https://atd.knack.com/parking#permits", "tags", "Permits");
+  bigButton( "permits", "view_28", `${APP_URL}#permits`, "tags", "Permits");
 });
 // create large Transactions button on the Home page
 $(document).on("knack-view-render.view_267", function(event, page) {
-  bigButton( "transactions", "view_267", "https://atd.knack.com/parking#transactions", "credit-card", "Transactions");
+  bigButton( "transactions", "view_267", `${APP_URL}#transactions`, "credit-card", "Transactions");
 });
 // create large Advanced Search button on the Home page
 $(document).on("knack-view-render.view_184", function(event, page) {
-  bigButton( "advanced-search", "view_184", "https://atd.knack.com/parking#advanced-search/", "search", "Advanced Search");
+  bigButton( "advanced-search", "view_184", `${APP_URL}#advanced-search/`, "search", "Advanced Search");
 });
 // create large Am I Eligible button on the Home page
 $(document).on("knack-view-render.view_396", function(event, page) {
-  bigButton( "verify", "view_396", "https://atd.knack.com/parking#verify/", "map-marker", "Am I Eligible?");
+  bigButton( "verify", "view_396", `${APP_URL}#verify/`, "map-marker", "Am I Eligible?");
 });
 // create large Reports button on the Home page
 $(document).on('knack-view-render.view_208', function(event, page) {
-  bigButton( "reports", "view_208", "https://atd.knack.com/parking#reports", "bar-chart", "Reports");
+  bigButton( "reports", "view_208", `${APP_URL}#reports`, "bar-chart", "Reports");
 });
 
 /********************************************/
 /************** Small Buttons ***************/
 /********************************************/
-//Create Small Button nested in a block
+//Adds Small Button HTML directly on View ID
 function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " small-button-disabled'" : "'";
-    $( "<a id='" + id + "' class='back-button" + disabledClass + " href='" + url + 
-      "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " small-button-disabled'" : "'";
+  const html = `
+    <a id='${id}' 
+       class='back-button${disabledClass}' 
+       href='${url}'>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
 
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
@@ -456,39 +470,29 @@ function getMapUrl(lat, lon, address) {
   );
 }
 
-/***************************************************************/
-/*** Disable Breadcrumb Navigation Links for RPP Application ***/
-/***************************************************************/
-function disableBreadCrumbsNonAdmin() {
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
     });
   }
 }
-//apply for permits page
-$(document).on("knack-scene-render.scene_309", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//permit information page
-$(document).on("knack-scene-render.scene_310", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//required documents page
-$(document).on("knack-scene-render.scene_312", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//review application page
-$(document).on("knack-scene-render.scene_313", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//application invoice page
-$(document).on("knack-scene-render.scene_314", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//edit application page
-$(document).on("knack-scene-render.scene_315", function () {
-  disableBreadCrumbsNonAdmin();
+
+const BREADCRUMB_SCENES = [
+  // Permit Application
+  'scene_309', // Apply for Permits page
+  'scene_310', // Permit Information page
+  'scene_312', // Required Documents page
+  'scene_313', // Submit page
+  'scene_314', // Invoice page
+  'scene_315', // Edit Application page
+];
+
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /***************************************/

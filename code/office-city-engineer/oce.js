@@ -1,18 +1,9 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
-/*************** Big Buttons ****************/
+/******** COACD Single Sign On Login ********/
 /********************************************/
-//Create Big Button nested in a block
-function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
-  if (callback) callback();
-}
-/**
- * Enhance SSO button and hide/show default Knack login form with buttons
- * @parameter {string} viewId - Knack view id to append button link to
- */
 function customizeLoginButton(viewId) {
   // Hide Knack default SSO button, login form, login title, and any other children
   $("#" + viewId)
@@ -23,7 +14,7 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
+    id: "coacd-button-login"
   });
   $coacdButton.appendTo("#" + viewId);
 
@@ -60,6 +51,26 @@ $(document).on("knack-view-render.any", function (event, page) {
     customizeLoginButton(viewId);
   }
 });
+
+/********************************************/
+/*************** Big Buttons ****************/
+/********************************************/
+// Adds big button HTML directly on View id
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
+  if (callback) callback();
+}
 
 /******************************/
 /**** Save Knack Record ID ****/

@@ -111,7 +111,7 @@
 .progressbar #oa {
   list-style-type: none;
   float: left;
-  width: 15%;
+  width: 20%;
   position: relative;
   text-align: left;
   margin-left: -1px;
@@ -200,16 +200,17 @@
 
 .trigger-button-large-disabled {
   width: 250px;
-  border-color: transparent;
+  border-color: gray;
   border-radius: 4px;
-  background-color: #cbcbcb;
-  color: #777777;
   padding: 10px 10px;
   font-size: 1.5em;
   text-align: center;
   opacity: 0.6;
   display: inline-block;
   outline-color: transparent;
+}
+.disabled {
+  cursor: not-allowed;
 }
 
 a.trigger-button-large {
@@ -507,11 +508,14 @@ a.small-button {
 }
 
 /* Print Operating Authoriy Notary */
-/*640 and 639 is text content for notary. 614 is form*/
-#view_640,
-#view_639 {
+/* These views are in scene_341 and scene_309*/
+#view_1144,
+#view_1150,
+#view_1384,
+#view_1385 {
   display: none;
 }
+
 @media print {
   .image-header-container {
     width: 100%;
@@ -519,12 +523,21 @@ a.small-button {
   .image-seal {
     width: 100px;
   } 
-  #view_846,
-  #view_920 {
+  .kn-notification {
     display: none;
   }
-  #view_640,
-  #view_639 {
+
+  /*These views are in scene_341 and scene_309*/
+  #view_1156,
+  #view_1159,
+  #view_1387,
+  #view_1403 {
+    display: none;
+  }
+  #view_1144,
+  #view_1150,
+  #view_1384,
+  #view_1385 {
     display: contents;
   }
 }

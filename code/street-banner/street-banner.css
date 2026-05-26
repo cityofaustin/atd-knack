@@ -1,4 +1,12 @@
-/* Big Buttons */
+/***************************************/
+/********* FA Icon Positioning *********/
+/***************************************/
+/*Centers icon vertically on a line*/
+.fa { vertical-align: baseline; }
+
+/***************************************/
+/************* Big Buttons *************/
+/***************************************/
 .big-button-container {
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
@@ -14,19 +22,23 @@
   cursor: pointer;
 }
 
-.fa {
-  vertical-align: baseline;
+.big-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+  pointer-events: none;
 }
 
 a.big-button-container {
   text-decoration: none;
 }
 
-/* Small Buttons */
+/***************************************/
+/************ Small Buttons ************/
+/***************************************/
 .small-button-container {
-  padding: 5px;
-  margin: 20px;
-  border-radius: 2px;
+  padding: 5px 10px;
+  margin: 10px;
+  border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   font-size: 1em;
   max-width: 15em;
@@ -38,9 +50,17 @@ a.big-button-container {
   background-color: #4c4c4c;
   cursor: pointer;
 }
+
+.small-button-disabled {
+  background-color: #f7f7f7;
+  opacity: 0.6;
+}
+
 a.small-button {
   text-decoration: none;
 }
+
+
 .group-layout-wrapper .view-column {
   display: block;
 }

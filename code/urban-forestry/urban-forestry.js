@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -44,6 +47,7 @@ $(document).on("knack-view-render.any", function (event, page) {
   if ($ssoButton.length && !$coacdLoginDiv.length) {
     var $ssoView = $ssoButton.closest("[id^=view_]");
     var viewId = $ssoView.get(0).id;
+
     customizeLoginButton(viewId);
   }
 });
@@ -51,28 +55,60 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 // create large Add New MANAGE WORK TICKETS button on the Home page
 $(document).on("knack-view-render.view_113", function(event, page) {
-    bigButton("contractor-work-orders", "view_113", "https://atd.knack.com/urban-forestry#contractor-work-tickets/", "wrench", "Manage Work Tickets");
+    bigButton("contractor-work-orders", "view_113", `${APP_URL}#contractor-work-tickets/`, "wrench", "Manage Work Tickets");
 });
 
 // create large Add New MY WORK TICKETS button on the Home page
 $(document).on("knack-view-render.view_119", function(event, page) {
-  bigButton("my-work-tickets", "view_119", "https://atd.knack.com/urban-forestry#my-work-tickets/", "files-o", "My Work Tickets");
+  bigButton("my-work-tickets", "view_119", `${APP_URL}#created-tickets`, "files-o", "My Work Tickets");
 });
 
 // create large Add New MANAGE ACCOUNTS button on the Home page
 $(document).on("knack-view-render.view_120", function(event, page) {
-  bigButton("manage-resources", "view_120", "https://atd.knack.com/urban-forestry#manage-accounts/", "user", "Manage Resources");
+  bigButton("manage-resources", "view_120", `${APP_URL}#manage-accounts/`, "user", "Manage Resources");
 });
+
+/****************************************************/
+/*** Disable Breadcrumb Navigation Links Function ***/
+/****************************************************/
+function disableBreadcrumbLinks() {
+  if (!Knack.user.session) {
+    $(".kn-crumbtrail a").each(function () {
+      $(this).replaceWith($(this).text());
+    });
+  }
+}
+
+const BREADCRUMB_SCENES = [
+  // Urban Forestry Request
+  'scene_113', // Add Images page
+  'scene_133', // Request Confirmation page
+  'scene_149', // View Request Details page
+];
+
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
+});
+
 /*******************************/
 /* Generates a Random Password */
 /*******************************/
@@ -121,4 +157,19 @@ $(document).on("knack-view-render.view_161", function (event, scene) {
   var pw = generatePassword();
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
+});
+
+/***********************************/
+/*** Automatically Submit a Form ***/
+/***********************************/
+/* Disconnect UFR Attachment from Work Ticket - Urban Forestry Request Details page */
+$(document).on('knack-scene-render.scene_145', function(event, scene) {
+    $('button[type=submit]').submit();
+});
+
+/*************************************************************************************/
+/** Disable the ability to Click/Touch outside a Modal Page (accidentally close it) **/
+/*************************************************************************************/
+$(document).on("knack-scene-render.any", function (event, scene) {
+  $(".kn-modal-bg").off("click");
 });

@@ -1,43 +1,122 @@
 const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
+/********************************************/
+/******** COACD Single Sign On Login ********/
+/********************************************/
+function customizeLoginButton(viewId) {
+  // Hide Knack default SSO button, login form, login title, and any other children
+  $("#" + viewId)
+    .children()
+    .hide();
+
+  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
+
+  // Create a div for Login buttons
+  var $coacdButton = $("<div/>", {
+    id: "coacd-button-login"
+  });
+  $coacdButton.appendTo("#" + viewId);
+
+  // Append Big SSO Login button and non-SSO Login button
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+
+  $coacdButton.append(
+    "<a class='small-button' href='javascript:void(0)'>" +
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
+  );
+
+  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
+  var $nonCoacdButton = $(".small-button");
+  $nonCoacdButton.click(function () {
+    $("#" + viewId)
+      .children()
+      .show();
+    $(".small-button-container,.big-button-container").hide();
+    $(".kn-sso-container").hide();
+  });
+}
+
+// Call customizeLoginButton on any view render to customize any login page that renders in app
+$(document).on("knack-view-render.any", function (event, page) {
+  // Find SSO button and existing custom button
+  var $ssoButton = $(".kn-sso-container");
+  var $coacdLoginDiv = $("#coacd-button-login");
+
+  // If SSO button exists on page and there isn't already a custom button
+  if ($ssoButton.length && !$coacdLoginDiv.length) {
+    var $ssoView = $ssoButton.closest("[id^=view_]");
+    var viewId = $ssoView.get(0).id;
+
+    customizeLoginButton(viewId);
+  }
+});
+
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
+
 	//>>>HOME TAB BUTTONS
 $(document).on('knack-view-render.view_11', function(event, page) {
   // create large AVAILABLE SERVICES button on the PORTAL page
   bigButton('available-services', 'view_11', `${APP_URL}#available-services/`, 'list-ul', 'Available Services');
 });
+
 $(document).on('knack-view-render.view_16', function(event, page) {
   // create large CUSTOMER PORTAL button on the PORTAL page
-  bigButton('available-services', 'view_16', `${APP_URL}#portal/`, 'child', 'Customer Portal');
+  bigButton('my-applications', 'view_16', `${APP_URL}#my-applications/`, 'child', 'Customer Portal');
 });
+
 $(document).on('knack-view-render.view_34', function(event, page) {
   // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
   bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, 'files-o', 'Required Documents');
 });
+
 $(document).on('knack-view-render.view_36', function(event, page) {
   // create large START APPLICATION button on the CHAUFFEUR page
-  bigButton('start-application', 'view_36', `${APP_URL}#application-chauffeur/`, "arrow-right", "Start Chauffeur Application");
+  bigButton('start-application', 'view_36', `${APP_URL}#application-chauffeur/`, 'arrow-right', 'Start Chauffeur Application');
 });
+
+$(document).on('knack-view-render.view_1307', function(event, page) {
+  // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
+  bigButton('required-documents-operating-authority', 'view_1307', `${APP_URL}#required-documents-operating-authority`, 'files-o', 'Required Documents',true);
+});
+
 $(document).on('knack-view-render.view_41', function(event, page) {
   // create large SIGN UP or Log-In button on the PORTAL page
   bigButton('sign-up', 'view_41', `${APP_URL}#sign-up`, 'sign-in', 'Sign up or Log In');
 });
-$(document).on('knack-view-render.view_57', function(event, page) {
-  // create large CUSTOMER PORTAL button on the PORTAL page
-  bigButton('available-services', 'view_57', `${APP_URL}#portal/`, 'arrow-right', 'Mobility Services Portal');
-});
+
 $(document).on('knack-view-render.view_383', function(event, page) {
   // create large START APPLICATION button on the Operating Authority page
-  bigButton('start-application', 'view_383', `${APP_URL}#application-operating-authority`, 'arrow-right', 'Start Operating Authority Application');
+  bigButton('start-application', 'view_383', `${APP_URL}#select-operating-authority`, 'arrow-right', 'Start Operating Authority Application');
 });
+
+$(document).on('knack-view-render.view_1032', function(event, page) {
+  // create large New CREATE NEW APPLICATION button on the Operating Authority page
+  bigButton('create-operating-authority-application', 'view_1032', `${APP_URL}#create-operating-authority-application`, 'arrow-right', 'Create New Application');
+});
+
+$(document).on('knack-view-render.view_1033', function(event, page) {
+  // create large New JOIN EXISTING APPLICATION button on the Operating Authority page
+  bigButton('join-existing-operating-authority-application', 'view_1033', `${APP_URL}#join-existing-operating-authority-application`, 'arrow-right', 'Join Existing Application');
+});
+
 
 /***************************************/
 /**** Input validation for SSN ********/
@@ -155,12 +234,12 @@ $(document).on("knack-view-render.any", function (event, view, data) {
   replaceAttachmentFilenameWithNameField("field_285", "field_458");
 });
 
-/****************************************************/
-/*** Disable Trigger buttons from being Clickable ***/
-/****************************************************/
+/**********************************************************/
+/*** Lable Trigger button as disabled for accessibility ***/
+/**********************************************************/
 $(document).on("knack-scene-render.any", function (event, view) {
-  var $disabledTriggerButton = $(".trigger-button-large-disabled").parent();
-  $disabledTriggerButton.removeClass("kn-action-link");
+  var $disabledTriggerButton = $(".trigger-button-large-disabled");
+  $disabledTriggerButton.attr('aria-disabled', 'true');
 });
 
 /***************************************/
@@ -194,68 +273,16 @@ $(document).on("knack-view-render.view_304", function (event, view, data) {
   printMenuButton("view_304");
 });
 
-/* Print Operating Authority Notary Page */
-$(document).on("knack-view-render.view_480", function (event, view, data) {
+/* Print Operating Authority Notary Page - Applicant */
+$(document).on("knack-view-render.view_1148", function (event, view, data) {
   // Primary Holder Print
-  printMenuButton("view_480");
+  printMenuButton("view_1148");
 });
 
-/***************************************
- * Enhance SSO button and hide/show default Knack login form with buttons
- * @parameter {string} viewId - Knack view id to append button link to
-/***************************************/
-function customizeLoginButton(viewId) {
-  // Hide Knack default SSO button, login form, login title, and any other children
-  $("#" + viewId)
-    .children()
-    .hide();
-
-  var url = Knack.url_base + Knack.scene_hash + "auth/COACD";
-
-  // Create a div for Login buttons
-  var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
-  });
-  $coacdButton.appendTo("#" + viewId);
-
-  // Append Big SSO Login button and non-SSO Login button
-  bigButton(
-    "coacd-big-button",
-    "coacd-button-login",
-    url,
-    "sign-in",
-    "Sign-In"
-  );
-
-  $coacdButton.append(
-    "<a class='small-button' href='javascript:void(0)'>" +
-      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
-  );
-
-  // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
-  var $nonCoacdButton = $(".small-button");
-  $nonCoacdButton.click(function () {
-    $("#" + viewId)
-      .children()
-      .show();
-    $(".small-button-container,.big-button-container").hide();
-    $(".kn-sso-container").hide();
-  });
-}
-
-// Call customizeLoginButton on any view render to customize any login page that renders in app
-$(document).on("knack-view-render.any", function (event, page) {
-  // Find SSO button and existing custom button
-  var $ssoButton = $(".kn-sso-container");
-  var $coacdLoginDiv = $("#coacd-button-login");
-
-  // If SSO button exists on page and there isn't already a custom button
-  if ($ssoButton.length && !$coacdLoginDiv.length) {
-    var $ssoView = $ssoButton.closest("[id^=view_]");
-    var viewId = $ssoView.get(0).id;
-
-    customizeLoginButton(viewId);
-  }
+/* Print Operating Authority Notary Page - Reviewer */
+$(document).on("knack-view-render.view_1389", function (event, view, data) {
+  // Primary Holder Print
+  printMenuButton("view_1389");
 });
 
 /****************************************/
@@ -263,20 +290,19 @@ $(document).on("knack-view-render.any", function (event, page) {
 /****************************************/
 // Define dictionary of views needing dropdown menu in editable Operating Authority (OA) pages
 // Format is {"view_id" : ["Dropdown Menu Label", "page-slug"],etc...}
-var dropdown = {
-  "view_687": ["1 - Service Type", "service-type"],
-  "view_750": ["2 - Business Information", "business-information"],
-  "view_689": ["3 - Insurance", "insurance"],
-  "view_691": ["4 - Additional People", "additional-people"],
-  "view_693": ["5 - Vehicle Information", "vehicle-information"],
-  "view_695": ["6 - Review and Submit", "review-and-submit"]
+let dropdown = {
+  "view_1446": ["1 - Service Information", "edit-service-information"],
+  "view_1447": ["2 - Insurance Information", "edit-insurance-information"],
+  "view_1449": ["3 - Additional People", "edit-additional-people-section"],
+  "view_1445": ["4 - Vehicle Information", "edit-vehicle-information"],
+  "view_1450": ["5 - Review and Submit", "edit-review-and-submit"]
 };
 
-var knSlug = "#application-operating-authority";
+let knSlug = "#application-operating-authority";
 
 // Function that returns the dropdown menu item
 function dropdownMenuItem(slug, recordId, route, linkName) {
-  var buttonItem = `<li class="kn-button">\
+  let buttonItem = `<li class="kn-button">\
       <a href="${slug}/${route}/${recordId}/">\
         <span>${linkName}</span>\
       </a></li>`;
@@ -293,7 +319,6 @@ for (let v in dropdown) {
     var desktopDropdownMenu = `<div class="details-dropdown-menu tabs">\
       <ul id="desktop-menu-list"><li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
       <a><span class="nav-dropdown-link">${currentMenu}</span><span class="kn-dropdown-icon fa fa-caret-down" /></a>\
-      <a href="${knSlug}/${currentSlug}/${recordId}" data-kn-slug="${knSlug}"></a>\
       <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">`;
 
     // Mobile dropdown menu code
@@ -301,7 +326,7 @@ for (let v in dropdown) {
     <ul id="mobile-menu-list"><li class="mobile-dropdown-menu">\
     <ul class="kn-dropdown-menu-list mobile-dropdown-menu-list" style="min-width: 152px; margin: 0;">`;
 
-    // Adds dropdown menuu item to desktop and mobile
+    // Adds dropdown menu item to desktop and mobile
     for (let label in dropdown) {
       desktopDropdownMenu += `${dropdownMenuItem(knSlug,recordId,dropdown[label][1],dropdown[label][0])}`;
       mobileDropdownMenu += `${dropdownMenuItem(knSlug,recordId,dropdown[label][1],dropdown[label][0])}`;
@@ -314,35 +339,10 @@ for (let v in dropdown) {
   });
 }
 
-/****************************************/
-/******* Refresh View on Delete  ********/
-/****************************************/
-// A function to refresh a specified view
-function refreshView(viewKey) {
-  Knack.views[viewKey].model.fetch();
-  setTimeout(() => {
-    Knack.views[viewKey].render();
-    Knack.views[viewKey].postRender();
-  }, 2000);
-}
-
-// 2 - Background Information Page
-// If holder is deleted through table, refreshes connected attachment table
-$(document).on('knack-record-delete.view_870', function (event, view, data) {
-  refreshView('view_872');
-});
-
-// 6 - Review and Submit Page
-// If non-primary holder is deleted through table, refreshes connected attachment table and additional people table
-$(document).on('knack-record-delete.view_874', function (event, view, data) {
-  refreshView('view_876'); // Other Affidavit table
-  refreshView('view_464'); // Additional People table in case holder is also a driver
-});
-
 /*******************************************/
 /*** Disable Breadcrumb Navigation Links ***/
 /*******************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -350,23 +350,22 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-let sceneIdDisable = [
-  198,  // Submitted Operating Authority
-  209,  // 1 - Service Type
-  235,  // 2 - Business Information
-  239,  // 3 - Insurance
-  241,  // 4 - Addtional People
-  245,  // 5 - Vehicle Information
-  250,  // 6 - Review and Submit
-  288   // 7 - Add Notary
+const BREADCRUMB_SCENES = [
+  // Operating Authority Tables scene_207
+  'scene_335',  // 1 - Service Information
+  'scene_337',  // 2 - Insurance Information
+  'scene_338',  // 3 - Additional People
+  'scene_339',  // 4 - Vehicle Information
+  'scene_340',  // 5 - Review and Submit
+  'scene_341',  // 6 - Print Notary
+  'scene_342',  // Add Additional Holders
+  'scene_347',  // Edit Personal Information
+  'scene_368',  // Submitted Application
 ];
 
-// Pages to disable crumbtrail
-for (let s in sceneIdDisable) {
-  $(document).on('knack-scene-render.scene_' + sceneIdDisable[s], function () {
-    disableBreadCrumbsNonAdmin();
-  });
-};
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
+});
 
 /*******************************/
 /* Generates a Random Password */

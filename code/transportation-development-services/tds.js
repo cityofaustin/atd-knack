@@ -1,3 +1,6 @@
+// Setting constant variable to this app URL
+const APP_URL = `https://atd.knack.com/${Knack.app.attributes.slug}`;
+
 /********************************************/
 /******** COACD Single Sign On Login ********/
 /********************************************/
@@ -52,68 +55,76 @@ $(document).on("knack-view-render.any", function (event, page) {
 /********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
+// Adds big button HTML directly on View id
 function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='big-button-container" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " big-button-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "" ;
+  const html = `
+    <a id='${id}' 
+       class='big-button-container${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
-
 // create large Task Board button on the Home page
 $(document).on("knack-view-render.view_1664", function(event, page) {
-  bigButton("task-board", "view_1664", "https://atd.knack.com/development-services#task-board/my-tasks", "tasks", "Task Board");
+  bigButton("task-board", "view_1664", `${APP_URL}#task-board/my-tasks`, "tasks", "Task Board");
 });
 // create large TDR Reviews button on the Home page
 $(document).on("knack-view-render.view_1269", function(event, page) {
-  bigButton("tdr-reviews", "view_1269", "https://atd.knack.com/development-services#home/tdr-reviews/", "list-ul", "TDR Reviews");
+  bigButton("tdr-reviews", "view_1269", `${APP_URL}#home/tdr-reviews/`, "list-ul", "TDR Reviews");
 });
 // create large TIA Reviews button on the Home page
 $(document).on("knack-view-render.view_719", function(event, page) {
-  bigButton("tia-reviews", "view_719", "https://atd.knack.com/development-services#tia-reviews/", "list-ul", "TIA Reviews");
+  bigButton("tia-reviews", "view_719", `${APP_URL}#tia-reviews/`, "list-ul", "TIA Reviews");
 });
 // create large TDA Reviews button on the Home page
 $(document).on("knack-view-render.view_724", function(event, page) {
-  bigButton("tda-reviews", "view_724", "https://atd.knack.com/development-services#tda-reviews/", "list-ul", "TDA Reviews");
+  bigButton("tda-reviews", "view_724", `${APP_URL}#tda-reviews/`, "list-ul", "TDA Reviews");
 });
 // create large Customer Portal button on the Home page
 $(document).on("knack-view-render.view_1271", function(event, page) {
-  bigButton("customer-portal", "view_1271", "https://atd.knack.com/development-services#customer-portal/", "child", "Customer Portal");
+  bigButton("customer-portal", "view_1271", `${APP_URL}#customer-portal/`, "child", "Customer Portal");
 });
 // create large TIA Mitigations button on the Home page
 $(document).on("knack-view-render.view_1662", function(event, page) {
-  bigButton("tia-mitigations", "view_1662", "https://atd.knack.com/development-services#tia-mitigations/", "dollar", "TIA Mitigations");
+  bigButton("tia-mitigations", "view_1662", `${APP_URL}#tia-mitigations/`, "dollar", "TIA Mitigations");
 });
 // create large TIA Determinations button on the Home page
 $(document).on("knack-view-render.view_721", function(event, page) {
-  bigButton("tia-determinations", "view_721", "https://atd.knack.com/development-services#tia-determinations/", "file-text-o", "TIA Determinations");
+  bigButton("tia-determinations", "view_721", `${APP_URL}#tia-determinations/`, "file-text-o", "TIA Determinations");
 });
 // create large SIF Worksheets button on the Home page
 $(document).on("knack-view-render.view_1663", function(event, page) {
-  bigButton("sif-worksheets", "view_1663", "https://atd.knack.com/development-services#sif-worksheets/", "calculator", "SIF Worksheets");
+  bigButton("sif-worksheets", "view_1663", `${APP_URL}#sif-worksheets/`, "calculator", "SIF Worksheets");
 });
 // create large Account Managment button on the Home page
 $(document).on("knack-view-render.view_720", function(event, page) {
-  bigButton("account-management", "view_720", "https://atd.knack.com/development-services#account-management/", "users", "Account Management");
+  bigButton("account-management", "view_720", `${APP_URL}#account-management/`, "users", "Account Management");
 });
 // create large Viewer Managment button on the Home page
 $(document).on("knack-view-render.view_1661", function(event, page) {
-  bigButton("viewer-management", "view_1661", "https://atd.knack.com/development-services#viewer-management/", "users", "Viewer Management");
+  bigButton("viewer-management", "view_1661", `${APP_URL}#viewer-management/`, "users", "Viewer Management");
 });
 // create large Reporting button on the Home page
 $(document).on("knack-view-render.view_1270", function(event, page) {
-  bigButton("reporting", "view_1270", "https://atd.knack.com/development-services#reporting/", "pie-chart", "Reporting");
+  bigButton("reporting", "view_1270", `${APP_URL}#reporting/`, "pie-chart", "Reporting");
 });
 // create large Reporting button on the Home page
 $(document).on("knack-view-render.view_1272", function(event, page) {
-  bigButton("sep", "view_1272", "https://atd.knack.com/development-services#sif-encumbrance-projects/", "certificate", "SIF Encumbrance Projects");
+  bigButton("sep", "view_1272", `${APP_URL}#sif-encumbrance-projects/`, "certificate", "SIF Encumbrance Projects");
 });
 
 
 // create large Available Services button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1429", function(event, page) {
-  bigButton("available-services", "view_1429", "https://atd.knack.com/development-services#customer-portal/services/", "list-ul", "Available Services");
+  bigButton("available-services", "view_1429", `${APP_URL}#customer-portal/services/`, "list-ul", "Available Services");
 });
 
 // create large TDS Link button on the Customer Portal Home page
@@ -127,55 +138,63 @@ $(document).on("knack-view-render.view_1433", function(event, page) {
 
 // create large Task Board button on the Task Board Login page
 $(document).on("knack-view-render.view_3019", function(event, page) {
-  bigButton("task-board", "view_3019", "https://atd.knack.com/development-services#task-board/my-tasks", "tasks", "Go to My Tasks");
+  bigButton("task-board", "view_3019", `${APP_URL}#task-board/my-tasks`, "tasks", "Go to My Tasks");
 });
 
 /********************************************/
 /*********** Large Submit Buttons ***********/
 /********************************************/
 function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
-  var disabledClass = is_disabled ? " submit-button-large-disabled'" : "'";
-  var newTab = target_blank ? " target='_blank'" : "" ;
-    $( "<a id='" + id + "' class='submit-button-large" + disabledClass + " href='" + url + "'"
-      + newTab + "'><span><i class='fa fa-" + fa_icon + "'></i></span><span> " + button_label + "</span></a>" ).appendTo("#" + view_id);
+  const disabledClass = is_disabled ? " submit-button-large-disabled'" : "'";
+  const newTab = target_blank ? " target='_blank'" : "";
+  const html = `
+    <a id='${id}' 
+       class='submit-button-large${disabledClass}' 
+       href='${url}'${newTab}>
+      <span><i class='fa fa-${fa_icon}'></i></span>
+      <span> ${button_label}</span>
+    </a>
+  `;
+
+  $(`#${view_id}`).append(html);
   if (callback) callback();
 }
 
 // create large Start Submittal button on the TDS Customer Portal - Services page for TIA Determinations
 $(document).on("knack-view-render.view_1876", function(event, page) {
-  largeSubmitButton("start-tia-determination-submittal", "view_1876", "https://atd.knack.com/development-services#tia-determination/", "arrow-right", "Start Submittal");
+  largeSubmitButton("start-tia-determination-submittal", "view_1876", `${APP_URL}#tia-determination/`, "arrow-right", "Start Submittal");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for TIA Compliance
 $(document).on("knack-view-render.view_1894", function(event, page) {
-  largeSubmitButton("start-tia-compliance-application", "view_1894", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+  largeSubmitButton("start-tia-compliance-application", "view_1894", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for TIA
 $(document).on("knack-view-render.view_1870", function(event, page) {
-  largeSubmitButton("start-tia-application", "view_1870", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+  largeSubmitButton("start-tia-application", "view_1870", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for NTA
 $(document).on("knack-view-render.view_1900", function(event, page) {
-  largeSubmitButton("start-nta-application", "view_1900", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+  largeSubmitButton("start-nta-application", "view_1900", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for TA
 $(document).on("knack-view-render.view_1909", function(event, page) {
-  largeSubmitButton("start-ta-application", "view_1909", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+  largeSubmitButton("start-ta-application", "view_1909", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for ZTA
 $(document).on("knack-view-render.view_1904", function(event, page) {
-  largeSubmitButton("start-zta-application", "view_1904", "https://atd.knack.com/development-services#tia-application/", "arrow-right", "Start Application");
+  largeSubmitButton("start-zta-application", "view_1904", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Submittal button on the TDS Customer Portal - Services page for SIF Worksheets
 $(document).on("knack-view-render.view_1874", function(event, page) {
-  largeSubmitButton("start-sif-worksheet-submittal", "view_1874", "https://atd.knack.com/development-services#sif-worksheet-submittal/", "arrow-right", "Start Submittal");
+  largeSubmitButton("start-sif-worksheet-submittal", "view_1874", `${APP_URL}#sif-worksheet-submittal/`, "arrow-right", "Start Submittal");
 });
 // create large Start Request button on the WVR Start page for TPW Waiver Requests
 $(document).on("knack-view-render.view_3254", function(event, page) {
-  largeSubmitButton("start-wvr", "view_3254", "https://atd.knack.com/development-services#create-wvr/", "arrow-right", "Start Request");
+  largeSubmitButton("start-wvr", "view_3254", `${APP_URL}#create-wvr/`, "arrow-right", "Start Request");
 });
 // create large Start Request button on the TDS Customer Portal - Services page for TPW Waiver Requests
 $(document).on("knack-view-render.view_2918", function(event, page) {
-  largeSubmitButton("start-wvr", "view_2918", "https://atd.knack.com/development-services#wvr-start/", "arrow-right", "Start Request");
+  largeSubmitButton("start-wvr", "view_2918", `${APP_URL}#wvr-start/`, "arrow-right", "Start Request");
 });
 
 /**********************************************************/
@@ -205,7 +224,7 @@ $(document).on('knack-page-render.any', function(event, page) {
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
 /****************************************************/
-function disableBreadCrumbsNonAdmin() {
+function disableBreadcrumbLinks() {
   if (!Knack.user.session) {
     $(".kn-crumbtrail a").each(function () {
       $(this).replaceWith($(this).text());
@@ -213,296 +232,92 @@ function disableBreadCrumbsNonAdmin() {
   }
 }
 
-/********************************************************************/
-//TIA Request Type Selection page
-$(document).on("knack-scene-render.scene_377", function () {
-  disableBreadCrumbsNonAdmin();
-});
+const BREADCRUMB_SCENES = [
+  // TIA Request Type Selection
+  'scene_377',
 
-/*****************************************************************/
-/*** Disable Breadcrumb Navigation Links for TIA Determination ***/
-/*****************************************************************/
+  // TIA Determination
+  'scene_412', // Determination Information page
+  'scene_413', // Review Determination page
+  'scene_414', // Edit Information page
+  'scene_417', // Determination Confirmation page
+  'scene_640', // Determination Document page
 
-//Determination Information page
-$(document).on("knack-scene-render.scene_412", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Review Determination page
-$(document).on("knack-scene-render.scene_413", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Edit Information page
-$(document).on("knack-scene-render.scene_414", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Determination Confirmation page
-$(document).on("knack-scene-render.scene_417", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Determination Document page
-$(document).on("knack-scene-render.scene_640", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // TIA Compliance Application
+  'scene_381', // TIA Applicant Information page
+  'scene_387', // TIA Project Information page
+  'scene_393', // TIA Required Documents page
+  'scene_394', // TIA Review Application page
+  'scene_397', // TIA Application Confirmation page
+  'scene_395', // TIA Edit Information page
+  'scene_396', // TIA Edit Attachments page
 
-/**************************************************************************/
-/*** Disable Breadcrumb Navigation Links for TIA Compliance Application ***/
-/**************************************************************************/
+  // Full TIA Application
+  'scene_385', // TIA Applicant Information page
+  'scene_386', // TIA Project Information page
+  'scene_388', // TIA Required Documents page
+  'scene_389', // TIA Review Application page
+  'scene_392', // TIA Application Confirmation page
+  'scene_390', // TIA Edit Information page
+  'scene_391', // TIA Edit Attachments page
 
-//TIA Applicant Information page
-$(document).on("knack-scene-render.scene_381", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Project Information page
-$(document).on("knack-scene-render.scene_387", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Required Documents page
-$(document).on("knack-scene-render.scene_393", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Review Application page
-$(document).on("knack-scene-render.scene_394", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Application Confirmation page
-$(document).on("knack-scene-render.scene_397", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Edit Information page
-$(document).on("knack-scene-render.scene_395", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Edit Attachments page
-$(document).on("knack-scene-render.scene_396", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // NTA Application
+  'scene_384', // NTA Applicant Information page
+  'scene_419', // NTA Project Information page
+  'scene_420', // NTA Required Documents page
+  'scene_421', // NTA Review Application page
+  'scene_424', // NTA Application Confirmation page
+  'scene_422', // NTA Edit Information page
+  'scene_423', // NTA Edit Attachments page
 
-/********************************************************************/
-/*** Disable Breadcrumb Navigation Links for Full TIA Application ***/
-/********************************************************************/
+  // TA Application
+  'scene_598', // TA Applicant Information page
+  'scene_606', // TA Project Information page
+  'scene_607', // TA Required Documents page
+  'scene_608', // TA Review Application page
+  'scene_611', // TA Application Confirmation page
+  'scene_609', // TA Edit Information page
+  'scene_610', // TA Edit Attachments page
 
-//TIA Applicant Information page
-$(document).on("knack-scene-render.scene_385", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Project Information page
-$(document).on("knack-scene-render.scene_386", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Required Documents page
-$(document).on("knack-scene-render.scene_388", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Review Application page
-$(document).on("knack-scene-render.scene_389", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Application Confirmation page
-$(document).on("knack-scene-render.scene_392", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Edit Information page
-$(document).on("knack-scene-render.scene_390", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TIA Edit Attachments page
-$(document).on("knack-scene-render.scene_391", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // ZTA Application
+  'scene_599', // ZTA Applicant Information page
+  'scene_600', // ZTA Project Information page
+  'scene_601', // ZTA Required Documents page
+  'scene_602', // ZTA Review Application page
+  'scene_605', // ZTA Application Confirmation page
+  'scene_603', // ZTA Edit Information page
+  'scene_604', // ZTA Edit Attachments page
 
-/*******************************************************************/
-/*** Disable Breadcrumb Navigation Links for NTA Application ***/
-/*******************************************************************/
+  // Non-TIA Application
+  'scene_1019', // Non-TIA Customer Information page
+  'scene_1020', // Non-TIA Project Information page
+  'scene_1021', // Non-TIA Add Documentation page
+  'scene_1022', // Non-TIA Submit page
+  'scene_1023', // Non-TIA Edit Information page
+  'scene_1024', // Non-TIA Edit Attachments page
 
-//NTA Applicant Information page
-$(document).on("knack-scene-render.scene_384", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//NTA Project Information page
-$(document).on("knack-scene-render.scene_419", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//NTA Required Documents page
-$(document).on("knack-scene-render.scene_420", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//NTA Review Application page
-$(document).on("knack-scene-render.scene_421", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//NTA Application Confirmation page
-$(document).on("knack-scene-render.scene_424", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//NTA Edit Information page
-$(document).on("knack-scene-render.scene_422", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//NTA Edit Attachments page
-$(document).on("knack-scene-render.scene_423", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // TPW Waiver Request
+  'scene_1025', // WVR Customer Information page
+  'scene_1026', // WVR Project Information page
+  'scene_1027', // WVR Add Documentation page
+  'scene_1028', // WVR Submit page
+  'scene_1029', // WVR Edit Information page
+  'scene_1030', // WVR Edit Attachments page
 
-/*******************************************************************/
-/*** Disable Breadcrumb Navigation Links for TA Application ***/
-/*******************************************************************/
+  // SWF Assessment
+  'scene_817', // SWF Assessment Documents page
 
-//TA Applicant Information page
-$(document).on("knack-scene-render.scene_598", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TA Project Information page
-$(document).on("knack-scene-render.scene_606", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TA Required Documents page
-$(document).on("knack-scene-render.scene_607", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TA Review Application page
-$(document).on("knack-scene-render.scene_608", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TA Application Confirmation page
-$(document).on("knack-scene-render.scene_611", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TA Edit Information page
-$(document).on("knack-scene-render.scene_609", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//TA Edit Attachments page
-$(document).on("knack-scene-render.scene_610", function () {
-  disableBreadCrumbsNonAdmin();
-});
+  // SIF Assessment
+  'scene_819', // SIF Worksheet Documents page
+  'scene_820', // Submit SIF Worksheet Submittal page
+  'scene_823', // Edit Information page
+  'scene_824', // Edit Attachments page
+  'scene_821', // SIF Worksheet Submittal Confirmation page
+  'scene_822', // SIF Worksheet Submittal Completed Documents page
+];
 
-/*******************************************************************/
-/*** Disable Breadcrumb Navigation Links for ZTA Application ***/
-/*******************************************************************/
-
-//ZTA Applicant Information page
-$(document).on("knack-scene-render.scene_599", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//ZTA Project Information page
-$(document).on("knack-scene-render.scene_600", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//ZTA Required Documents page
-$(document).on("knack-scene-render.scene_601", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//ZTA Review Application page
-$(document).on("knack-scene-render.scene_602", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//ZTA Application Confirmation page
-$(document).on("knack-scene-render.scene_605", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//ZTA Edit Information page
-$(document).on("knack-scene-render.scene_603", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//ZTA Edit Attachments page
-$(document).on("knack-scene-render.scene_604", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/*******************************************************************/
-/*** Disable Breadcrumb Navigation Links for Non-TIA Application ***/
-/*******************************************************************/
-
-//Non-TIA Customer Information page
-$(document).on("knack-scene-render.scene_1019", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Non-TIA Project Information page
-$(document).on("knack-scene-render.scene_1020", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Non-TIA Add Documentation page
-$(document).on("knack-scene-render.scene_1021", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Non-TIA Submit page
-$(document).on("knack-scene-render.scene_1022", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Non-TIA Edit Information page
-$(document).on("knack-scene-render.scene_1023", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Non-TIA Edit Attachments page
-$(document).on("knack-scene-render.scene_1024", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/******************************************************************/
-/*** Disable Breadcrumb Navigation Links for TPW Waiver Request ***/
-/******************************************************************/
-
-//WVR Customer Information page
-$(document).on("knack-scene-render.scene_1025", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//WVR Project Information page
-$(document).on("knack-scene-render.scene_1026", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//WVR Add Documentation page
-$(document).on("knack-scene-render.scene_1027", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//WVR Submit page
-$(document).on("knack-scene-render.scene_1028", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//WVR Edit Information page
-$(document).on("knack-scene-render.scene_1029", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//WVR Edit Attachments page
-$(document).on("knack-scene-render.scene_1030", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/**************************************************************/
-/*** Disable Breadcrumb Navigation Links for SWF Assessment ***/
-/**************************************************************/
-
-//SWF Assessment Documents page
-$(document).on("knack-scene-render.scene_817", function () {
-  disableBreadCrumbsNonAdmin();
-});
-
-/**************************************************************/
-/*** Disable Breadcrumb Navigation Links for SIF Assessment ***/
-/**************************************************************/
-
-//SIF Worksheet Documents page
-$(document).on("knack-scene-render.scene_819", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Submit SIF Worksheet Submittal page
-$(document).on("knack-scene-render.scene_820", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Edit Information page
-$(document).on("knack-scene-render.scene_823", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//Edit Attachments page
-$(document).on("knack-scene-render.scene_824", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//SIF Worksheet Submittal Confirmation page
-$(document).on("knack-scene-render.scene_821", function () {
-  disableBreadCrumbsNonAdmin();
-});
-//SIF Worksheet Submittal Completed Documents page
-$(document).on("knack-scene-render.scene_822", function () {
-  disableBreadCrumbsNonAdmin();
+BREADCRUMB_SCENES.forEach(scene => {
+  $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
 /********************************************************/
@@ -579,7 +394,6 @@ $(document).on('click', '.mobile-dropdown-button', function(event) {
 /* Reporting Dashboard Page */
 $(document).on('knack-view-render.view_2433', function(event, view, record) {
   var recordId = view.scene.scene_id;
-  //$("#view_2433").removeClass("kn-menu")
 
   $(`<div class="details-dropdown-menu tabs">\
     <ul id="tia-menu-list">\
@@ -1070,6 +884,7 @@ $(document).on('knack-view-render.view_901', function(event, view, record) {
       ${dropdownMenuItem(recordId, "begin-scope-submission-review", "fa-play-circle-o", "Begin Review")}\
       ${dropdownMenuItem(recordId, "complete-scope-submission-review", "fa-exchange", "Reject/Approve")}\
       ${dropdownMenuItem(recordId, "assign-scope-submission-reviewer", "fa-hand-o-up", "Assign Reviewer")}\
+      ${dropdownMenuItem(recordId, "adjust-ts-scope-cycle-due-date", "fa-calendar", "Adjust Due Date")}\
     </ul>\
   </div>`).appendTo("#view_901")
 
@@ -1090,6 +905,7 @@ $(`<div class="mobile-details-dropdown-menu">\
       ${dropdownMenuItem(recordId, "begin-scope-submission-review", "fa-play-circle-o", "Begin Review", true)}\
       ${dropdownMenuItem(recordId, "complete-scope-submission-review", "fa-exchange", "Reject/Approve", true)}\
       ${dropdownMenuItem(recordId, "assign-scope-submission-reviewer", "fa-hand-o-up", "Assign Reviewer", true)}\
+      ${dropdownMenuItem(recordId, "adjust-ts-scope-cycle-due-date", "fa-calendar", "Adjust Due Date", true)}\
     </ul>\
   </div>`).appendTo("#view_901")
 })
@@ -1116,6 +932,7 @@ $(document).on('knack-view-render.view_902', function(event, view, record) {
       ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review")}\
       ${dropdownMenuItem(recordId, "complete-submission-review", "fa-exchange", "Reject/Approve")}\
       ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer")}\
+      ${dropdownMenuItem(recordId, "adjust-ts-submission-cycle-due-date", "fa-calendar", "Adjust Due Date")}\
     </ul>\
   </div>`).appendTo("#view_902")
 
@@ -1136,6 +953,7 @@ $(`<div class="mobile-details-dropdown-menu">\
       ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review", true)}\
       ${dropdownMenuItem(recordId, "complete-submission-review", "fa-exchange", "Reject/Approve", true)}\
       ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer", true)}\
+      ${dropdownMenuItem(recordId, "adjust-ts-submission-cycle-due-date", "fa-calendar", "Adjust Due Date", true)}\
     </ul>\
   </div>`).appendTo("#view_902")
 })
@@ -1226,17 +1044,17 @@ $(document).on("knack-scene-render.scene_616", function (event, page) {
 /*************************************/
 /*Customer Home Page "https://atd.knack.com/development-services#customer/" */
 $(document).on('knack-scene-render.scene_870', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#customer-portal/";
+window.location.href = `${APP_URL}#customer-portal/`;
 });
 
 /*Access Case Page "https://atd.knack.com/development-services#access-case-redirect/" */
 $(document).on('knack-scene-render.scene_580', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#customer-portal/access-case/61e9958f57ad0100231d515e/";
+window.location.href = `${APP_URL}#customer-portal/access-case/61e9958f57ad0100231d515e/`;
 });
 
 /*Task Board Page "https://atd.knack.com/development-services#task-board" */
 $(document).on('knack-scene-render.scene_656', function(event, scene) { 
-window.location.href = "https://atd.knack.com/development-services#task-board/my-tasks/";
+window.location.href = `${APP_URL}#task-board/my-tasks/`;
 });
 
 /***********************************/

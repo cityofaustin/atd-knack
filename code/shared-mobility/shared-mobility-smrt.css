@@ -77,6 +77,7 @@ a.big-button-container {
 a.small-button {
   text-decoration: none;
 }
+
 /************ Completed Action Button #1 - Phase 1 Review ************/
 #view_754 > div > a{
   background-color: #1A3D6B;
@@ -116,8 +117,9 @@ a.small-button {
   opacity: 0.9;
   border-color: gray;
 }
+
 /***************************************/
-/*********** Trigger Buttons ***********/
+/******* Large Trigger Buttons *********/
 /***************************************/
 .trigger-button-large {
   width: 250px;
@@ -156,12 +158,15 @@ a.small-button {
 
 a.trigger-button-large {text-decoration: none;}
 
-#kn-scene_444 .kn-back-link {
-  display: none;
-}
-#kn-scene_455 .kn-back-link {
-  display: none;
-}
+
+/*************************/
+/*** Remove Back Links ***/
+/*************************/
+/*Add SR Photos*/
+#kn-scene_444 .kn-back-link { display: none; }
+/*Add SR Details*/
+#kn-scene_455 .kn-back-link { display: none; }
+
 /*********************************/
 /********* Mobile Styling ********/
 /*********************************/
