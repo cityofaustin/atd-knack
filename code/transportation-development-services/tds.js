@@ -129,11 +129,11 @@ $(document).on("knack-view-render.view_1429", function(event, page) {
 
 // create large TDS Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1432", function(event, page) {
-  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/department/transportation-development-services", "bank", "TDS Division Home", true);
+  bigButton("tds-link", "view_1432", "https://www.austintexas.gov/transportation-public-works/divisions/transportation-development-services", "bank", "TDS Division Home", true);
 });
 // create large SIF Link button on the Customer Portal Home page
 $(document).on("knack-view-render.view_1433", function(event, page) {
-  bigButton("sif-program-link", "view_1433", "https://www.austintexas.gov/department/street-impact-fee", "road", "SIF Program", true);
+  bigButton("sif-program-link", "view_1433", "https://www.austintexas.gov/transportation-public-works/programs/street-impact-fee-program", "road", "SIF Program", true);
 });
 
 // create large Task Board button on the Task Board Login page
@@ -1107,12 +1107,12 @@ $(document).on('knack-scene-render.any', function(event, scene) {
   const isModal = Knack.modals.length != 0
   const markup = 
   `
-    <div id="scroll-buttons">
-      <button id="go-to-top" class="kn-button">
-        <i class="fa fa-arrow-up"></i>
+    <div id="scroll-buttons" role="group" aria-label="Quick page navigation">
+      <button id="go-to-top" class="kn-button" aria-label="Go to top of page">
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
       </button>
-      <button id="go-to-bottom" class="kn-button">
-        <i class="fa fa-arrow-down"></i>
+      <button id="go-to-bottom" class="kn-button" aria-label="Go to bottom of page">
+        <i class="fa fa-arrow-down" aria-hidden="true"></i>
       </button>
     </div>
   `
