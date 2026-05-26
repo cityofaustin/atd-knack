@@ -133,59 +133,42 @@ var colorMapOne = {
   "FINAL REVIEW": { background_color: "#4daf4a", color: "#fff" },
 };
 
-$(document).on("knack-view-render.view_2107", function (event, page) {
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_2405").each(function () {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function (index) {
-        var attachmentType = "";
+/********************************************************/
+/*** Relabel Attachment Links in Tables to Name Field ***/
+/********************************************************/
+//  replace attachment file name with name field. hide_name to hide nameField from table
+function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_name = true) {
+  // find each attachment cell
+  $("td." + fileFieldId).each(function() {
+    // find each attachment link within the cell
+    $(this).find("span").children("span").each(function() {
+      let attachmentType = "View";
+      let fileRecordId = $(this).context.id;
 
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_2403")
-          .find("span")
-          .children("span")
-          .each(function (index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        $(this).html(attachmentType);
-      });
+      // if neighboring field exists on same table, retrieve the corresponding type
+      $(this).closest("tr").children("td." + nameFieldId)
+        .find("span")
+        .children("span")
+        .each(function() {
+          let nameRecordId = $(this).context.id;
+          if (fileRecordId == nameRecordId) {
+            attachmentType = $(this).text();
+          }
+        });
+      //  update link contents
+      $(this).find("a").html(attachmentType);
+    });
   });
-});
 
-$(document).on("knack-view-render.view_2108", function (event, page) {
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_2405").each(function () {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function (index) {
-        var attachmentType = "";
+  // hides the name field ID based on third parameter. Default true.
+  if (hide_name){
+    $("td." + nameFieldId).hide();
+    $("th." + nameFieldId).hide();
+  }
+}
 
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_2403")
-          .find("span")
-          .children("span")
-          .each(function (index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-        //  update link contents
-        $(this).html(attachmentType);
-      });
-  });
+$(document).on("knack-view-render.any", function (event, view, data) {
+  replaceAttachmentFilenameWithNameField("field_3176", "field_3174"); // Traffic Count Attachments
 });
 
 //  replace 'Quantity' label with UOM of measure by parsing the select value contents
@@ -271,125 +254,6 @@ $(document).on("knack-view-render.view_1206", function () {
 ////////////////////////////////////////
 // End non-digit character removal /////
 ////////////////////////////////////////
-
-$(document).on("knack-view-render.view_2357", function (event, page) {
-  //  now with minor changes, used for traffic count attachments field
-  //  this one affects the table that those with editing priviledges see
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_3176").each(function () {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function (index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function (index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
-
-$(document).on("knack-view-render.view_2486", function (event, page) {
-  //  now with minor changes, used for traffic count attachments field
-  //  this one affects the table that those without editing priviledges see
-  //  replace attachment filename with attachment type
-  //  find each attachment cell
-  $("td.field_3176").each(function () {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function (index) {
-        var attachmentType = "";
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function (index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
-
-$(document).on("knack-view-render.view_2491", function (event, page) {
-  // Another copy of the find and replace attachment types script, this one for the manage requests
-  // page
-  $("td.field_3176").each(function () {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function (index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function (index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
-
-$(document).on("knack-view-render.view_2465", function (event, page) {
-  // Another copy of the find and replace attachment types script.  This one is used
-  // on the Request Status page under Traffic Counts.
-  $("td.field_3176").each(function () {
-    //  find each attachment link within the cell
-    $(this)
-      .find("a")
-      .each(function (index) {
-        var attachmentType = "";
-
-        //  search the neighboring field (attachmenty type) and retrieve the corresponding type
-        $(this)
-          .closest("tr")
-          .children("td.field_3174")
-          .find("span")
-          .children("span")
-          .each(function (index2) {
-            if (index == index2) {
-              attachmentType = $(this).text();
-            }
-          });
-
-        //  update link contents
-        // and add a line break to make it consistent with the box next to it (BH)
-        $(this).html(attachmentType + "<br>");
-      });
-  });
-});
 
 /////////////////////////////////////////////////////////////
 //// Change field color of inventory request statuses ///////

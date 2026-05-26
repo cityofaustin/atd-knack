@@ -130,7 +130,10 @@ a.small-button {
     font-size: 22px;
   }
 }
-        
+
+/***************************************/
+/************ Miscellaneous ************/
+/***************************************/    
 .kn-link-disabled span {
   color: #bdbebf !important;
 }
@@ -140,27 +143,21 @@ a.small-button {
 }
 
 .button-padding {
-  padding-left: 20%
+  padding-left: 20%;
 }
-
-/* hide attachment type column (field contents are extracted via JS */
-div.view_2107 .field_2403 { display: none; }
-div.view_2108 .field_2403 { display: none; }
-
-/* hide attachment type columns (in Traffic Counts), field contents extracted via JS */
-div.view_2357 .field_3174 { display: none; }
-div.view_2486 .field_3174 { display: none; }
-
-/* hide attachment type columns (in Manage Requests under Traffic Counts), field contents extracted via JS */
-div.view_2491 .field_3174 { display: none; }
-
-/* hide attachment type columns (in Request Status under Traffic Counts), field contents extracted via JS */
-div.view_2465 .field_3174 { display: none; }
 
 .hiddenFormField {
   visibility: hidden;
   height: 0px;
   margin-bottom: 0 !important;
+}
+
+/* Wraps text in Signals Details > Service Requests - Details field */
+view_1704 td.field_1446 > * {
+  overflow: auto;
+  overflow-wrap: break-word;
+  width: 60px;
+  max-height: 100px;
 }
 
 /***************************/
@@ -291,14 +288,6 @@ div.view_2465 .field_3174 { display: none; }
     margin-top: -2em;
   }
 
-}
-
-/* Wraps text in Signals Details>Service Requests - Details field */
-view_1704 td.field_1446 > * {
-  overflow: auto;
-  overflow-wrap: break-word;
-  width: 60px;
-  max-height: 100px;
 }
 
 /*********************************************/
