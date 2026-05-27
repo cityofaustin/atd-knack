@@ -81,10 +81,10 @@ $(document).on('knack-view-render.any', function (event, view, data) {
 
 });
 
-// If a dropdown multi-choice has a new item, add close label to close link
 const observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(mutation) {
     mutation.addedNodes.forEach(function(node) {
+      // If a dropdown multi-choice has a new item, add close label to close link
       if ($(node).hasClass('search-choice')) {
         const searchChoice = document.querySelectorAll('.search-choice span');
         const searchChoiceClose = document.querySelectorAll('a.search-choice-close');
@@ -93,6 +93,9 @@ const observer = new MutationObserver(function(mutations) {
           item.setAttribute('aria-label', `Remove '${label}'`);
         });
       }
+      // If an Address field has "Address Auto-complete" toggled on
+      const streetInput = $('input#street');
+      streetInput.attr("autocomplete", "off");
     });
   });
 });
