@@ -1132,14 +1132,14 @@ $(document).on('knack-view-render.view_570', function(event, view, record) {
         </ul>\
       </li>\
       <li class="desktop-dropdown-menu kn-dropdown-menu kn-button">\
-       <a href="#postings-admin/view-hiring-details/${recordId}/edit-zone-offer/${recordId}" data-kn-slug="#post-interview">\
+       <a href="#postings-admin/view-hiring-details/${recordId}/edit-zoning/${recordId}" data-kn-slug="#post-interview">\
           <span class="kn-dropdown-icon fa fa-edit" /> \
           <span class="nav-dropdown-link">&nbsp;Post-Interview</span>\
           <span class="kn-dropdown-icon fa fa-caret-down" /> \
         </a>\
         <ul class="kn-dropdown-menu-list desktop-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
-          ${hireDropdownMenuItem(recordId, "edit-zone-offer", "fa-edit", "Zone & Offer Details")}\
-          ${hireDropdownMenuItem(recordId, "edit-zoning-form", "fa-edit", "Edit Zoning Information")}\
+          ${hireDropdownMenuItem(recordId, "edit-zoning", "fa-edit", "Zoning Information")}\
+          ${hireDropdownMenuItem(recordId, "edit-offer", "fa-edit", "Offer Information")}\
         </ul>\
       </li>\
       ${hireDropdownMenuItem(recordId, "change-status", "fa-exchange", "Status")}\
@@ -1179,8 +1179,8 @@ $(`<div class="mobile-details-dropdown-menu">\
           Post Interview Menu\
         </span>\
         <ul class="desktop-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
-          ${hireDropdownMenuItem(recordId, "edit-zone-offer", "fa-edit", "Zone & Offer Details", true)}\
-          ${hireDropdownMenuItem(recordId, "edit-zoning-form", "fa-edit", "Edit Zoning Information", true)}\
+          ${hireDropdownMenuItem(recordId, "edit-zoning", "fa-edit", "Zoning Information", true)}\
+          ${hireDropdownMenuItem(recordId, "edit-offer", "fa-edit", "Offer Information", true)}\
         </ul>\
       </li>\
       ${hireDropdownMenuItem(recordId, "change-status", "fa-exchange", "Status", true)}\
