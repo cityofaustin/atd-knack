@@ -236,20 +236,20 @@ a.trigger-button-large {text-decoration: none;}
 a.submit-button-large {text-decoration: none;}
 
 /***************************************/
-/******** Table Trigger Buttons ********/
+/***** Table Green Confirm Buttons *****/
 /***************************************/
-.table-trigger-button {
-  padding: 2px 8px;
+.table-confirm-button {
+  padding: 4px 12px 6px 12px;
   border-width: 1px;
-  border-color: #4CAE49;
+  border-color: #2D7A2B;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
-  background-color: #4CAE49;
+  background-color: #2D7A2B;
   color: white;
   text-align: center;
 }
 
-.table-trigger-button:hover {
+.table-confirm-button:hover {
   cursor: pointer;
   opacity: 0.8;
   border-style: solid;
@@ -257,7 +257,7 @@ a.submit-button-large {text-decoration: none;}
   border-color: black;
 }
 
-a.table-trigger-button { text-decoration: none; }
+a.table-confirm-button { text-decoration: none; }
 
 /****************************************/
 /****** Table Icon Trigger Buttons ******/
