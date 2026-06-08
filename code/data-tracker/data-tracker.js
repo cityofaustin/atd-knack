@@ -1182,9 +1182,9 @@ async function pasteCoordinates(latitude,longitude) {
       const lngField = document.querySelector(`input[name="${longitude}"]`);
       const text = await navigator.clipboard.readText();
       const coords = text.split(',').map(parseFloat);
-      if(coords.length == 2 && !Number.isNaN(coords)) {
-          lngField.value = - Math.max(...coords.map(Math.abs));
-          latField.value = Math.min(...coords.map(Math.abs));
+      if(coords.length == 2 && coords) {
+        lngField.value = Math.min(...coords);
+        latField.value = Math.max(...coords);
       }
       // Run if address coordinate field exists
       pasteCoordinates("latitude","longitude");
