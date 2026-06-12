@@ -1637,35 +1637,37 @@ var DapczLink = (function () {
       return;
     }
 
-    $("body").append(
-      '<div id="dapcz-link-modal-overlay" class="dapcz-link-modal-overlay" aria-hidden="true">' +
-        '<div id="dapcz-link-modal" class="dapcz-link-modal" role="dialog" aria-modal="true">' +
-        '<div class="dapcz-link-modal-header">' +
-        '<h3 id="dapcz-link-modal-title" class="dapcz-link-modal-title"></h3>' +
-        '<button type="button" id="dapcz-link-modal-close" class="dapcz-link-modal-close" aria-label="Close">&times;</button>' +
-        "</div>" +
-        '<p id="dapcz-link-modal-hint" class="dapcz-link-modal-hint"></p>' +
-        '<div id="dapcz-link-modal-message"></div>' +
-        '<div id="dapcz-link-modal-filter" class="dapcz-link-filter-group" role="group" aria-label="Filter projects">' +
-        '<button type="button" class="dapcz-link-filter-btn is-active" data-filter="all">All <span class="dapcz-link-filter-count" data-count="all">0</span></button>' +
-        '<button type="button" class="dapcz-link-filter-btn" data-filter="assigned">Assigned <span class="dapcz-link-filter-count" data-count="assigned">0</span></button>' +
-        '<button type="button" class="dapcz-link-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-link-filter-count" data-count="unassigned">0</span></button>' +
-        "</div>" +
-        '<div class="dapcz-link-modal-table-wrap">' +
-        '<table class="dapcz-link-modal-table">' +
-        getModalTableHeadHtml() +
-        '<tbody id="dapcz-link-modal-rows"></tbody>' +
-        "</table>" +
-        '<div id="dapcz-link-modal-empty" class="dapcz-link-empty-state" hidden></div>' +
-        "</div>" +
-        '<div id="dapcz-link-progress-slot"></div>' +
-        '<div class="dapcz-link-modal-actions">' +
-        '<a id="dapcz-link-modal-submit" class="dapcz-link-btn dapcz-link-btn-primary" href="javascript:void(0)">' +
-        '<span class="icon is-small"><i class="fa fa-link"></i></span><span>Save Project Links</span></a>' +
-        '<a id="dapcz-link-modal-cancel" class="dapcz-link-btn dapcz-link-btn-secondary" href="javascript:void(0)">' +
-        '<span class="icon is-small"><i class="fa fa-times"></i></span><span>Cancel</span></a>' +
-        "</div></div></div>",
-    );
+    $("body").append([
+      '<div id="dapcz-link-modal-overlay" class="dapcz-link-modal-overlay" aria-hidden="true">',
+      '  <div id="dapcz-link-modal" class="dapcz-link-modal" role="dialog" aria-modal="true">',
+      '    <div class="dapcz-link-modal-header">',
+      '      <h3 id="dapcz-link-modal-title" class="dapcz-link-modal-title"></h3>',
+      '      <button type="button" id="dapcz-link-modal-close" class="dapcz-link-modal-close" aria-label="Close">&times;</button>',
+      '    </div>',
+      '    <p id="dapcz-link-modal-hint" class="dapcz-link-modal-hint"></p>',
+      '    <div id="dapcz-link-modal-message"></div>',
+      '    <div id="dapcz-link-modal-filter" class="dapcz-link-filter-group" role="group" aria-label="Filter projects">',
+      '      <button type="button" class="dapcz-link-filter-btn is-active" data-filter="all">All <span class="dapcz-link-filter-count" data-count="all">0</span></button>',
+      '      <button type="button" class="dapcz-link-filter-btn" data-filter="assigned">Assigned <span class="dapcz-link-filter-count" data-count="assigned">0</span></button>',
+      '      <button type="button" class="dapcz-link-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-link-filter-count" data-count="unassigned">0</span></button>',
+      '    </div>',
+      '    <div class="dapcz-link-modal-table-wrap">',
+      '      <table class="dapcz-link-modal-table">',
+                 getModalTableHeadHtml(),
+      '        <tbody id="dapcz-link-modal-rows"></tbody>',
+      '      </table>',
+      '      <div id="dapcz-link-modal-empty" class="dapcz-link-empty-state" hidden></div>',
+      '    </div>',
+      '    <div id="dapcz-link-progress-slot"></div>',
+      '    <div class="dapcz-link-modal-actions">',
+      '      <a id="dapcz-link-modal-submit" class="dapcz-link-btn dapcz-link-btn-primary" href="javascript:void(0)">',
+      '        <span class="icon is-small"><i class="fa fa-link"></i></span><span>Save Project Links</span></a>',
+      '      <a id="dapcz-link-modal-cancel" class="dapcz-link-btn dapcz-link-btn-secondary" href="javascript:void(0)">',
+      '        <span class="icon is-small"><i class="fa fa-times"></i></span><span>Cancel</span></a>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+    ].join("\n"));
 
     $("#dapcz-link-modal-close, #dapcz-link-modal-cancel").on(
       "click",
