@@ -1713,26 +1713,6 @@ var DapczLink = (function () {
     );
   }
 
-  function ensureModalFilterGroup() {
-    if ($("#dapcz-link-modal-filter").length) {
-      return;
-    }
-
-    $("#dapcz-link-modal-message").after(
-      '<div id="dapcz-link-modal-filter" class="dapcz-link-filter-group" role="group" aria-label="Filter projects">' +
-        '<button type="button" class="dapcz-link-filter-btn is-active" data-filter="all">All <span class="dapcz-link-filter-count" data-count="all">0</span></button>' +
-        '<button type="button" class="dapcz-link-filter-btn" data-filter="assigned">Assigned <span class="dapcz-link-filter-count" data-count="assigned">0</span></button>' +
-        '<button type="button" class="dapcz-link-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-link-filter-count" data-count="unassigned">0</span></button>' +
-        "</div>",
-    );
-
-    $("#dapcz-link-modal-filter").on(
-      "click",
-      ".dapcz-link-filter-btn",
-      handleModalFilterClick,
-    );
-  }
-
   function getModalFilterEmptyMessage(filter) {
     if (filter === "assigned") {
       return "No projects are linked to this meeting.";
@@ -1973,7 +1953,6 @@ var DapczLink = (function () {
 
   function openModal(meeting, skipLoading) {
     ensureModalShell();
-    ensureModalFilterGroup();
     updateModalTableStructure();
     operationState.currentMeeting = meeting;
     operationState.modalFilter = "all";
