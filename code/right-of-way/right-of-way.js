@@ -781,29 +781,20 @@ var DapczLink = (function () {
     return [];
   }
 
-  /** True if a Knack model's connection field includes the given meeting (by ID or date label). */
-  function isLinkedToMeeting(model, meetingId, fieldKey, meetingLabel) {
-    var targetId = String(meetingId);
-    return getConnectionRecords(model, fieldKey).some(
-      function (record) {
-        if (String(record.id) === targetId) {
-          return true;
-        }
-        if (meetingLabel && record.identifier === meetingLabel) {
-          return true;
-        }
-        return false;
-      },
-    );
-  }
-
-  /** True if a normalized connection array includes the given meeting. */
-  function isLinkedToMeetingFromConnections(connections, meeting) {
-    if (!connections || !connections.length || !meeting) {
+  /**
+   * True when the given meeting appears in a project's connection data.
+   * Checks three sources in priority order:
+   *   1. Pre-fetched connections array (fastest, from operationState cache)
+   *   2. Knack model's connection field via getConnectionRecords
+   *   3. DOM cell text in the projects table row (last resort)
+   * Any param may be null/empty — the function skips that tier and falls through.
+   */
+  function isProjectLinkedToMeeting(connections, model, $row, meeting) {
+    if (!meeting) {
       return false;
     }
 
-    return connections.some(function (record) {
+    function matchesMeeting(record) {
       if (String(record.id) === String(meeting.id)) {
         return true;
       }
@@ -814,30 +805,33 @@ var DapczLink = (function () {
         return true;
       }
       return false;
-    });
-  }
-
-  /** Fallback link check: search the project table row's meeting cell text for the date label. */
-  function isLinkedToMeetingFromRow($row, meeting) {
-    var meetingFieldKey =
-      projectsTableFields.meetingConnection ||
-      CONFIG.fields.projectMeetingConnection;
-
-    if (!$row.length || !meetingFieldKey) {
-      return false;
     }
 
-    var cellText = getCellText($row, meetingFieldKey);
-    if (!cellText) {
-      return false;
-    }
-
-    if (meeting.dateLabel && cellText.indexOf(meeting.dateLabel) >= 0) {
+    if (connections && connections.length && connections.some(matchesMeeting)) {
       return true;
     }
 
-    if (meeting.identifier && cellText.indexOf(meeting.identifier) >= 0) {
-      return true;
+    if (model) {
+      var fieldKey = CONFIG.fields.projectMeetingConnection;
+      var modelRecords = getConnectionRecords(model, fieldKey);
+      if (modelRecords.length && modelRecords.some(matchesMeeting)) {
+        return true;
+      }
+    }
+
+    if ($row && $row.length) {
+      var meetingFieldKey =
+        projectsTableFields.meetingConnection ||
+        CONFIG.fields.projectMeetingConnection;
+      var cellText = meetingFieldKey ? getCellText($row, meetingFieldKey) : "";
+      if (cellText) {
+        if (meeting.dateLabel && cellText.indexOf(meeting.dateLabel) >= 0) {
+          return true;
+        }
+        if (meeting.identifier && cellText.indexOf(meeting.identifier) >= 0) {
+          return true;
+        }
+      }
     }
 
     return false;
@@ -1152,12 +1146,7 @@ var DapczLink = (function () {
     var connectionMap = operationState.projectConnections || {};
 
     Object.keys(connectionMap).forEach(function (projectId) {
-      if (
-        isLinkedToMeetingFromConnections(
-          connectionMap[projectId],
-          meeting,
-        )
-      ) {
+      if (isProjectLinkedToMeeting(connectionMap[projectId], null, null, meeting)) {
         initialLinkedIds[projectId] = true;
       }
     });
@@ -1480,15 +1469,12 @@ var DapczLink = (function () {
         connections = getConnectionRecords(model, connectionField);
       }
 
-      var linkedToMeeting =
-        isLinkedToMeetingFromConnections(connections, meeting) ||
-        isLinkedToMeeting(
-          model,
-          meeting.id,
-          connectionField,
-          meeting.dateLabel,
-        ) ||
-        isLinkedToMeetingFromRow($row, meeting);
+      var linkedToMeeting = isProjectLinkedToMeeting(
+        connections,
+        model,
+        $row,
+        meeting,
+      );
 
       rows.push({
         id: projectId,
