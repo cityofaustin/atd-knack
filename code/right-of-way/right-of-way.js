@@ -14,16 +14,22 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login"
+    id: "coacd-button-login",
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
+  bigButton(
+    "coacd-big-button",
+    "coacd-button-login",
+    url,
+    "sign-in",
+    "Sign-In",
+  );
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
-      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>",
   );
 
   // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
@@ -56,9 +62,18 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 // Adds big button HTML directly on View id
-function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+function bigButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  target_blank = false,
+  is_disabled = false,
+  callback = null,
+) {
   const disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  const newTab = target_blank ? " target='_blank'" : "" ;
+  const newTab = target_blank ? " target='_blank'" : "";
   const html = `
     <a id='${id}' 
        class='big-button-container${disabledClass}' 
@@ -73,121 +88,283 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
 }
 
 // create large Task Board button on the Home page
-$(document).on("knack-view-render.view_644", function(event, page) {
-  bigButton("task-board", "view_644", `${APP_URL}#task-board/`, "tasks", "Task Board");
+$(document).on("knack-view-render.view_644", function (event, page) {
+  bigButton(
+    "task-board",
+    "view_644",
+    `${APP_URL}#task-board/`,
+    "tasks",
+    "Task Board",
+  );
 });
 // create large Customer Portal button on the Home page
-$(document).on("knack-view-render.view_645", function(event, page) {
-  bigButton("row-portal", "view_645", `${APP_URL}#portal-home/`, "child", "Customer Portal");
+$(document).on("knack-view-render.view_645", function (event, page) {
+  bigButton(
+    "row-portal",
+    "view_645",
+    `${APP_URL}#portal-home/`,
+    "child",
+    "Customer Portal",
+  );
 });
 // create large Customer Home button on the Home page
-$(document).on("knack-view-render.view_1087", function(event, page) {
-  bigButton("customer-login", "view_1087", `${APP_URL}#customer/`, "unlock-alt", "Customer Login");
+$(document).on("knack-view-render.view_1087", function (event, page) {
+  bigButton(
+    "customer-login",
+    "view_1087",
+    `${APP_URL}#customer/`,
+    "unlock-alt",
+    "Customer Login",
+  );
 });
 // create large Account Managment button on the Home page
-$(document).on("knack-view-render.view_646", function(event, page) {
-  bigButton("account-management", "view_646", `${APP_URL}#account-management/`, "users", "Manage Internal Accounts");
+$(document).on("knack-view-render.view_646", function (event, page) {
+  bigButton(
+    "account-management",
+    "view_646",
+    `${APP_URL}#account-management/`,
+    "users",
+    "Manage Internal Accounts",
+  );
 });
 // create large Manage Customer Accounts button on the Home page
-$(document).on("knack-view-render.view_1086", function(event, page) {
-  bigButton("manage-customers", "view_1086", `${APP_URL}#app-admin/manage-customers/`, "user", "Manage Customer Accounts");
+$(document).on("knack-view-render.view_1086", function (event, page) {
+  bigButton(
+    "manage-customers",
+    "view_1086",
+    `${APP_URL}#app-admin/manage-customers/`,
+    "user",
+    "Manage Customer Accounts",
+  );
 });
 // create large TCP Projects button on the Home page
-$(document).on("knack-view-render.view_31", function(event, page) {
-  bigButton("tcp-projects", "view_31", `${APP_URL}#tcp-projects/`, "briefcase", "TCP Projects");
+$(document).on("knack-view-render.view_31", function (event, page) {
+  bigButton(
+    "tcp-projects",
+    "view_31",
+    `${APP_URL}#tcp-projects/`,
+    "briefcase",
+    "TCP Projects",
+  );
 });
 // create large CCM button on the Home page
-$(document).on("knack-view-render.view_244", function(event, page) {
-  bigButton("ccm", "view_244", `${APP_URL}#court-case-management/`, "suitcase", "Court Case Management");
+$(document).on("knack-view-render.view_244", function (event, page) {
+  bigButton(
+    "ccm",
+    "view_244",
+    `${APP_URL}#court-case-management/`,
+    "suitcase",
+    "Court Case Management",
+  );
 });
 // create large COS Reporting button on the Home page
-$(document).on("knack-view-render.view_245", function(event, page) {
-  bigButton("cos", "view_245", `${APP_URL}#cost-of-service-data/`, "dollar", "Cost of Service Data");
+$(document).on("knack-view-render.view_245", function (event, page) {
+  bigButton(
+    "cos",
+    "view_245",
+    `${APP_URL}#cost-of-service-data/`,
+    "dollar",
+    "Cost of Service Data",
+  );
 });
 // create large CSWZ button on the Home page
-$(document).on("knack-view-render.view_451", function(event, page) {
-  bigButton("tcp-cswz", "view_451", `${APP_URL}#tcp-cswz/`, "files-o", "Conflict/Shared Requests");
+$(document).on("knack-view-render.view_451", function (event, page) {
+  bigButton(
+    "tcp-cswz",
+    "view_451",
+    `${APP_URL}#tcp-cswz/`,
+    "files-o",
+    "Conflict/Shared Requests",
+  );
 });
 
 // create large Available Services button on the Customer Portal Home page
-$(document).on("knack-view-render.view_234", function(event, page) {
-  bigButton("services", "view_234", `${APP_URL}#customer-portal/services`, "list-ul", "Available Services");
+$(document).on("knack-view-render.view_234", function (event, page) {
+  bigButton(
+    "services",
+    "view_234",
+    `${APP_URL}#customer-portal/services`,
+    "list-ul",
+    "Available Services",
+  );
 });
 // create large Available Services button on the ROW Portal page
-$(document).on("knack-view-render.view_681", function(event, page) {
-  bigButton("all-services", "view_681", `${APP_URL}#portal-home/all-services`, "list-ul", "Available Services");
+$(document).on("knack-view-render.view_681", function (event, page) {
+  bigButton(
+    "all-services",
+    "view_681",
+    `${APP_URL}#portal-home/all-services`,
+    "list-ul",
+    "Available Services",
+  );
 });
 // create large Available Services button on the Customer Home page
-$(document).on("knack-view-render.view_1117", function(event, page) {
-  bigButton("customer-services", "view_1117", `${APP_URL}#customer/customer-services`, "list-ul", "Available Services");
+$(document).on("knack-view-render.view_1117", function (event, page) {
+  bigButton(
+    "customer-services",
+    "view_1117",
+    `${APP_URL}#customer/customer-services`,
+    "list-ul",
+    "Available Services",
+  );
 });
 // create large ROW Division button on the Customer Portal Home page
-$(document).on("knack-view-render.view_237", function(event, page) {
-  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
+$(document).on("knack-view-render.view_237", function (event, page) {
+  bigButton(
+    "row-division-link",
+    "view_237",
+    "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management",
+    "bank",
+    "ROW Division",
+    true,
+  );
 });
 // create large ROW Division button on the ROW Portal page
-$(document).on("knack-view-render.view_684", function(event, page) {
-  bigButton("row-division-link", "view_684", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
+$(document).on("knack-view-render.view_684", function (event, page) {
+  bigButton(
+    "row-division-link",
+    "view_684",
+    "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management",
+    "bank",
+    "ROW Division",
+    true,
+  );
 });
 // create large ROW Division button on the Customer Home page
-$(document).on("knack-view-render.view_1120", function(event, page) {
-  bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
+$(document).on("knack-view-render.view_1120", function (event, page) {
+  bigButton(
+    "row-division-link",
+    "view_1120",
+    "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management",
+    "bank",
+    "ROW Division",
+    true,
+  );
 });
 
 // create large Task Board button on the Task Board Login page
-$(document).on("knack-view-render.view_1385", function(event, page) {
-  bigButton("task-board", "view_1385", `${APP_URL}#task-board/my-tasks`, "tasks", "Go to My Tasks");
+$(document).on("knack-view-render.view_1385", function (event, page) {
+  bigButton(
+    "task-board",
+    "view_1385",
+    `${APP_URL}#task-board/my-tasks`,
+    "tasks",
+    "Go to My Tasks",
+  );
 });
 
 // create large DAPCZ Meeting button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1526", function(event, page) {
-  bigButton("manage-dapcz-meetings", "view_1526", `${APP_URL}#manage-dapcz-meetings/`, "microphone", "DAPCZ Meeting");
+$(document).on("knack-view-render.view_1526", function (event, page) {
+  bigButton(
+    "manage-dapcz-meetings",
+    "view_1526",
+    `${APP_URL}#manage-dapcz-meetings/`,
+    "microphone",
+    "DAPCZ Meeting",
+  );
 });
 
 // create large DAPCZ Project button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1527", function(event, page) {
-  bigButton("manage-dapcz-project", "view_1527", `${APP_URL}#manage-dapcz-project/`, "cubes", "DAPCZ Projects");
+$(document).on("knack-view-render.view_1527", function (event, page) {
+  bigButton(
+    "manage-dapcz-project",
+    "view_1527",
+    `${APP_URL}#manage-dapcz-project/`,
+    "cubes",
+    "DAPCZ Projects",
+  );
 });
 
 // create large DAPCZ Contacts button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1528", function(event, page) {
-  bigButton("manage-dapcz-contacts", "view_1528", `${APP_URL}#manage-dapcz-contacts/`, "users", "DAPCZ Contacts");
+$(document).on("knack-view-render.view_1528", function (event, page) {
+  bigButton(
+    "manage-dapcz-contacts",
+    "view_1528",
+    `${APP_URL}#manage-dapcz-contacts/`,
+    "users",
+    "DAPCZ Contacts",
+  );
 });
 
 // create large DAPCZ Resources button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1529", function(event, page) {
-  bigButton("manage-dapcz-resources", "view_1529", `${APP_URL}#manage-dapcz-resources/`, "book", "DAPCZ Resources");
+$(document).on("knack-view-render.view_1529", function (event, page) {
+  bigButton(
+    "manage-dapcz-resources",
+    "view_1529",
+    `${APP_URL}#manage-dapcz-resources/`,
+    "book",
+    "DAPCZ Resources",
+  );
 });
 
 // create large DAPCZ Public Portal button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1593", function(event, page) {
-  bigButton("dapcz-meeting", "view_1593", `${APP_URL}#dapcz-meeting/`, "slideshare", "DAPCZ Public Portal");
+$(document).on("knack-view-render.view_1593", function (event, page) {
+  bigButton(
+    "dapcz-meeting",
+    "view_1593",
+    `${APP_URL}#dapcz-meeting/`,
+    "slideshare",
+    "DAPCZ Public Portal",
+  );
 });
 
 // create large DAPCZ Agenda button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1505", function(event, page) {
-  bigButton("dapcz-agenda", "view_1505", `${APP_URL}#dapcz-meeting/dapcz-agenda/`, "file-o", "DAPCZ Agenda");
+$(document).on("knack-view-render.view_1505", function (event, page) {
+  bigButton(
+    "dapcz-agenda",
+    "view_1505",
+    `${APP_URL}#dapcz-meeting/dapcz-agenda/`,
+    "file-o",
+    "DAPCZ Agenda",
+  );
 });
 
 // create large DAPCZ Project List button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1506", function(event, page) {
-  bigButton("dapcz-project-list", "view_1506", `${APP_URL}#dapcz-meeting/dapcz-project-list/`, "list-ul", "DAPCZ Project List");
+$(document).on("knack-view-render.view_1506", function (event, page) {
+  bigButton(
+    "dapcz-project-list",
+    "view_1506",
+    `${APP_URL}#dapcz-meeting/dapcz-project-list/`,
+    "list-ul",
+    "DAPCZ Project List",
+  );
 });
 
 // create large DAPCZ Links button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1507", function(event, page) {
-  bigButton("dapcz-links", "view_1507", `${APP_URL}#dapcz-meeting/dapcz-links/`, "link", "DAPCZ Links & Resources");
+$(document).on("knack-view-render.view_1507", function (event, page) {
+  bigButton(
+    "dapcz-links",
+    "view_1507",
+    `${APP_URL}#dapcz-meeting/dapcz-links/`,
+    "link",
+    "DAPCZ Links & Resources",
+  );
 });
 
 // create large DAPCZ Meeting Schedule button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1508", function(event, page) {
-  bigButton("dapcz-meeting-schedule", "view_1508", `${APP_URL}#dapcz-meeting/dapcz-meeting-schedule`, "calendar", "DAPCZ Meeting Schedule");
+$(document).on("knack-view-render.view_1508", function (event, page) {
+  bigButton(
+    "dapcz-meeting-schedule",
+    "view_1508",
+    `${APP_URL}#dapcz-meeting/dapcz-meeting-schedule`,
+    "calendar",
+    "DAPCZ Meeting Schedule",
+  );
 });
 
 /********************************************/
 /*********** Large Submit Buttons ***********/
 /********************************************/
-function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
+function largeSubmitButton(
+  id,
+  view_id,
+  url,
+  fa_icon,
+  button_label,
+  target_blank = false,
+  is_disabled = false,
+  callback = null,
+) {
   const disabledClass = is_disabled ? " submit-button-large-disabled'" : "'";
   const newTab = target_blank ? " target='_blank'" : "";
   const html = `
@@ -204,9 +381,15 @@ function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank
 }
 
 // create large My Projects button on the Customer Dashboard - Customer Services page
-$(document).on("knack-view-render.view_1089", function(event, page) {
-  largeSubmitButton("my-projects", "view_1089", `${APP_URL}#customer/my-projects`, "arrow-right", "My Projects");
-}); 
+$(document).on("knack-view-render.view_1089", function (event, page) {
+  largeSubmitButton(
+    "my-projects",
+    "view_1089",
+    `${APP_URL}#customer/my-projects`,
+    "arrow-right",
+    "My Projects",
+  );
+});
 
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
@@ -221,47 +404,47 @@ function disableBreadcrumbLinks() {
 
 const BREADCRUMB_SCENES = [
   // Old TCP Application
-  'scene_97',  // TCP Application Project Information page
-  'scene_98',  // TCP Application Attachments page
-  'scene_99',  // Review TCP Application page
-  'scene_100', // Edit Information page
-  'scene_101', // Edit Attachments page
-  'scene_102', // TCP Application Confirmation page
-  
+  "scene_97", // TCP Application Project Information page
+  "scene_98", // TCP Application Attachments page
+  "scene_99", // Review TCP Application page
+  "scene_100", // Edit Information page
+  "scene_101", // Edit Attachments page
+  "scene_102", // TCP Application Confirmation page
+
   // New TCP Application
-  'scene_137', // New TCP Application page
-  'scene_138', // TCP Project Information page
-  'scene_148', // TCP Fee Information page
-  'scene_149', // TCP Documents page
-  'scene_150', // Finalize TCP Application page
-  'scene_151', // Edit Information page
-  'scene_152', // Edit Attachments page
-  'scene_153', // TCP Application Confirmation page
-  
+  "scene_137", // New TCP Application page
+  "scene_138", // TCP Project Information page
+  "scene_148", // TCP Fee Information page
+  "scene_149", // TCP Documents page
+  "scene_150", // Finalize TCP Application page
+  "scene_151", // Edit Information page
+  "scene_152", // Edit Attachments page
+  "scene_153", // TCP Application Confirmation page
+
   // Staff TCP Application
-  'scene_583', // Submit Staff TCP Application page
-  
+  "scene_583", // Submit Staff TCP Application page
+
   // TCP Conflict/Shared TCP Request
-  'scene_183', // Applicant Information page
-  'scene_184', // Conflicting Party page
-  'scene_185', // Attachments page
-  'scene_186', // Review Request page
-  'scene_187', // Submittal Confirmation page
-  'scene_188', // Edit Information page
-  'scene_189', // Edit Attachments page
-  
+  "scene_183", // Applicant Information page
+  "scene_184", // Conflicting Party page
+  "scene_185", // Attachments page
+  "scene_186", // Review Request page
+  "scene_187", // Submittal Confirmation page
+  "scene_188", // Edit Information page
+  "scene_189", // Edit Attachments page
+
   // Customer Account Signup
-  'scene_480', // Customer Confirm Account Login Step 2 page
-  'scene_476', // Customer Complete Account Setup Step 3 page
-  
+  "scene_480", // Customer Confirm Account Login Step 2 page
+  "scene_476", // Customer Complete Account Setup Step 3 page
+
   // Customer Project Creation
-  'scene_463', // Customer Create TCP Project Step 1 page
-  'scene_464', // Customer Create TCP Project Step 2 page
-  'scene_465', // Customer Create CSWZ Request Step 1 page
-  'scene_467'  // Customer Create CSWZ Request Step 2 page
+  "scene_463", // Customer Create TCP Project Step 1 page
+  "scene_464", // Customer Create TCP Project Step 2 page
+  "scene_465", // Customer Create CSWZ Request Step 1 page
+  "scene_467", // Customer Create CSWZ Request Step 2 page
 ];
 
-BREADCRUMB_SCENES.forEach(scene => {
+BREADCRUMB_SCENES.forEach((scene) => {
   $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
@@ -281,8 +464,8 @@ window.location.href = `${APP_URL}#portal-home/`;
 });
 
 /*Task Board Page "https://atd.knack.com/pte#task-board/" */
-$(document).on('knack-scene-render.scene_166', function(event, scene) { 
-window.location.href = `${APP_URL}#task-board/my-tasks/`;
+$(document).on("knack-scene-render.scene_166", function (event, scene) {
+  window.location.href = `${APP_URL}#task-board/my-tasks/`;
 });
 
 /*****************************/
@@ -290,53 +473,58 @@ window.location.href = `${APP_URL}#task-board/my-tasks/`;
 /*****************************/
 
 /* Auto Submit New TCP Intake Submission Cycle for Customer Manage TCP Project Page*/
-$(document).on('knack-scene-render.scene_589', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_589", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 /* Auto Submit New TCP Review Submission Cycle for Customer Manage TCP Project Page*/
-$(document).on('knack-scene-render.scene_411', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_411", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 /* Auto Submit New CSWZ Submission Cycle for Customer Customer Manage Conflict/Shared TCP Project Page*/
-$(document).on('knack-scene-render.scene_417', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_417", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 
 /* Auto Submit Approve TCP Case */
-$(document).on('knack-scene-render.scene_488', function(event, scene) {
-    $('button[type=submit]').submit();
+$(document).on("knack-scene-render.scene_488", function (event, scene) {
+  $("button[type=submit]").submit();
 });
 
 /***********************************/
 /*** Custom TCP Navigation Menu  ***/
 /***********************************/
-function tcpDropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
-  const buttonClass = mobile ? "desktop-button" : "kn-button"
+function tcpDropdownMenuItem(
+  recordId,
+  route,
+  iconName,
+  linkName,
+  mobile = false,
+  newTab = false,
+) {
+  const buttonClass = mobile ? "desktop-button" : "kn-button";
   if (newTab) {
-    return (
-      `<li class="${buttonClass}">\
+    return `<li class="${buttonClass}">\
         <a href="#tcp-projects/tcp-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
           <span class="icon is-small"> \
             <i class="fa ${iconName}" /> \
           </span>\
           <span>${linkName}</span>\
         </a>\
-      </li>`)
+      </li>`;
   }
 
-  return (
-    `<li class="${buttonClass}">\
+  return `<li class="${buttonClass}">\
       <a href="#tcp-projects/tcp-details/${recordId}/${route}/${recordId}" class="tcp-nav-menu">\
         <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
         <span style="color:#163f6e">${linkName}</span>\
       </a>\
-    </li>`)
+    </li>`;
 }
 
 /* TCP Case Details Page */
-$(document).on('knack-view-render.view_1175', function(event, view, record) {
+$(document).on("knack-view-render.view_1175", function (event, view, record) {
   var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
@@ -395,39 +583,44 @@ $(`<div class="mobile-details-dropdown-menu">\
       </li>\
       
     </ul>\
-  </div>`).appendTo("#view_1175")
-})
+  </div>`).appendTo("#view_1175");
+});
 
 /************************************/
 /*** Custom CSWZ Navigation Menu  ***/
 /************************************/
-function cswzDropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
-  const buttonClass = mobile ? "desktop-button" : "kn-button"
+function cswzDropdownMenuItem(
+  recordId,
+  route,
+  iconName,
+  linkName,
+  mobile = false,
+  newTab = false,
+) {
+  const buttonClass = mobile ? "desktop-button" : "kn-button";
   if (newTab) {
-    return (
-      `<li class="${buttonClass}">\
+    return `<li class="${buttonClass}">\
         <a href="#tcp-cswz/cswz-request-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
           <span class="icon is-small"> \
             <i class="fa ${iconName}" /> \
           </span>\
           <span>${linkName}</span>\
         </a>\
-      </li>`)
+      </li>`;
   }
 
-  return (
-    `<li class="${buttonClass}">\
+  return `<li class="${buttonClass}">\
       <a href="#tcp-cswz/cswz-request-details/${recordId}/${route}/${recordId}" class="cswz-nav-menu">\
         <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
         <span style="color:#163f6e">${linkName}</span>\
       </a>\
-    </li>`)
+    </li>`;
 }
 
 /* CSWZ Case Details Page */
-$(document).on('knack-view-render.view_1176', function(event, view, record) {
+$(document).on("knack-view-render.view_1176", function (event, view, record) {
   var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
@@ -743,15 +936,17 @@ function dapczLink_getConnectionRecords(model, fieldKey) {
 
 function dapczLink_isLinkedToMeeting(model, meetingId, fieldKey, meetingLabel) {
   var targetId = String(meetingId);
-  return dapczLink_getConnectionRecords(model, fieldKey).some(function (record) {
-    if (String(record.id) === targetId) {
-      return true;
-    }
-    if (meetingLabel && record.identifier === meetingLabel) {
-      return true;
-    }
-    return false;
-  });
+  return dapczLink_getConnectionRecords(model, fieldKey).some(
+    function (record) {
+      if (String(record.id) === targetId) {
+        return true;
+      }
+      if (meetingLabel && record.identifier === meetingLabel) {
+        return true;
+      }
+      return false;
+    },
+  );
 }
 
 function dapczLink_isLinkedToMeetingFromConnections(connections, meeting) {
@@ -846,7 +1041,12 @@ function dapczLink_getCellText($row, fieldKey) {
   if (!$row.length || !fieldKey) {
     return "";
   }
-  return $row.find("td." + fieldKey).first().text().replace(/\s+/g, " ").trim();
+  return $row
+    .find("td." + fieldKey)
+    .first()
+    .text()
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function dapczLink_getGroupHeaderForRow($row) {
@@ -951,13 +1151,16 @@ function dapczLink_fetchProjectConnectionsBatch(projectIds) {
       batch.map(function (projectId) {
         return dapczLink_fetchProjectRecord(projectId)
           .then(function (record) {
-            connectionMap[projectId] = dapczLink_getConnectionRecords(record, fieldKey);
+            connectionMap[projectId] = dapczLink_getConnectionRecords(
+              record,
+              fieldKey,
+            );
           })
           .catch(function (error) {
             dapczLink_logApiError(error);
             connectionMap[projectId] = [];
           });
-      })
+      }),
     ).then(function () {
       if (index < projectIds.length) {
         return new Promise(function (resolve) {
@@ -993,7 +1196,7 @@ function dapczLink_hasCompleteProjectConnectionCache() {
   return projectIds.every(function (projectId) {
     return Object.prototype.hasOwnProperty.call(
       dapczLinkOperationState.projectConnections,
-      projectId
+      projectId,
     );
   });
 }
@@ -1013,11 +1216,14 @@ function dapczLink_prefetchProjectConnections() {
   var missingIds = projectIds.filter(function (projectId) {
     return !Object.prototype.hasOwnProperty.call(
       dapczLinkOperationState.projectConnections,
-      projectId
+      projectId,
     );
   });
 
-  if (!missingIds.length && dapczLinkOperationState.prefetchProjectIdsKey === idsKey) {
+  if (
+    !missingIds.length &&
+    dapczLinkOperationState.prefetchProjectIdsKey === idsKey
+  ) {
     dapczLinkOperationState.prefetchComplete = true;
     return Promise.resolve(dapczLinkOperationState.projectConnections);
   }
@@ -1034,21 +1240,20 @@ function dapczLink_prefetchProjectConnections() {
 
   var idsToFetch = missingIds.length ? missingIds : projectIds;
 
-  dapczLinkOperationState.prefetchPromise = dapczLink_fetchProjectConnectionsBatch(
-    idsToFetch
-  )
-    .then(function (connectionMap) {
-      dapczLink_mergeProjectConnections(connectionMap);
-      dapczLinkOperationState.prefetchComplete =
-        dapczLink_hasCompleteProjectConnectionCache();
-      dapczLinkOperationState.prefetchPromise = null;
-      return dapczLinkOperationState.projectConnections;
-    })
-    .catch(function (error) {
-      dapczLinkOperationState.prefetchPromise = null;
-      dapczLinkOperationState.prefetchComplete = false;
-      throw error;
-    });
+  dapczLinkOperationState.prefetchPromise =
+    dapczLink_fetchProjectConnectionsBatch(idsToFetch)
+      .then(function (connectionMap) {
+        dapczLink_mergeProjectConnections(connectionMap);
+        dapczLinkOperationState.prefetchComplete =
+          dapczLink_hasCompleteProjectConnectionCache();
+        dapczLinkOperationState.prefetchPromise = null;
+        return dapczLinkOperationState.projectConnections;
+      })
+      .catch(function (error) {
+        dapczLinkOperationState.prefetchPromise = null;
+        dapczLinkOperationState.prefetchComplete = false;
+        throw error;
+      });
 
   return dapczLinkOperationState.prefetchPromise;
 }
@@ -1071,7 +1276,12 @@ function dapczLink_setInitialLinkedIdsForMeeting(meeting) {
   var connectionMap = dapczLinkOperationState.projectConnections || {};
 
   Object.keys(connectionMap).forEach(function (projectId) {
-    if (dapczLink_isLinkedToMeetingFromConnections(connectionMap[projectId], meeting)) {
+    if (
+      dapczLink_isLinkedToMeetingFromConnections(
+        connectionMap[projectId],
+        meeting,
+      )
+    ) {
       initialLinkedIds[projectId] = true;
     }
   });
@@ -1087,7 +1297,11 @@ function dapczLink_loadProjectLinkState(meeting) {
   });
 }
 
-function dapczLink_buildProjectMeetingPayload(meeting, existingConnections, shouldLink) {
+function dapczLink_buildProjectMeetingPayload(
+  meeting,
+  existingConnections,
+  shouldLink,
+) {
   var fieldKey = DAPCZ_LINK_CONFIG.fields.projectMeetingConnection;
   var connections = (existingConnections || []).map(function (record) {
     return {
@@ -1173,27 +1387,33 @@ function dapczLink_updateProjectMeetingLink(project, meeting, shouldLink) {
 
   return dapczLink_fetchProjectRecord(project.id)
     .then(function (record) {
-      var existingConnections = dapczLink_getConnectionRecords(record, fieldKey);
-      dapczLinkOperationState.projectConnections[project.id] = existingConnections;
+      var existingConnections = dapczLink_getConnectionRecords(
+        record,
+        fieldKey,
+      );
+      dapczLinkOperationState.projectConnections[project.id] =
+        existingConnections;
 
       var payload = dapczLink_buildProjectMeetingPayload(
         meeting,
         existingConnections,
-        shouldLink
+        shouldLink,
       );
       var clearingAllMeetings = !shouldLink && payload[fieldKey].length === 0;
 
-      return dapczLink_putProjectPayload(project.id, payload).catch(function (xhr) {
-        if (!clearingAllMeetings || !xhr || xhr.status !== 400) {
-          throw xhr;
-        }
+      return dapczLink_putProjectPayload(project.id, payload).catch(
+        function (xhr) {
+          if (!clearingAllMeetings || !xhr || xhr.status !== 400) {
+            throw xhr;
+          }
 
-        var emptyPayload = {};
-        emptyPayload[fieldKey] = "";
-        emptyPayload[fieldKey + "_raw"] = "";
+          var emptyPayload = {};
+          emptyPayload[fieldKey] = "";
+          emptyPayload[fieldKey + "_raw"] = "";
 
-        return dapczLink_putProjectPayload(project.id, emptyPayload);
-      });
+          return dapczLink_putProjectPayload(project.id, emptyPayload);
+        },
+      );
     })
     .then(function (response) {
       var record = response.record || response;
@@ -1247,7 +1467,10 @@ function dapczLink_getProjectNameFromRow($row, model) {
     }
   }
 
-  return dapczLink_getFieldDisplayValue(model, DAPCZ_LINK_CONFIG.fields.projectName);
+  return dapczLink_getFieldDisplayValue(
+    model,
+    DAPCZ_LINK_CONFIG.fields.projectName,
+  );
 }
 
 function dapczLink_getProjectDisplayLabelFromRow($row, model) {
@@ -1271,11 +1494,13 @@ function dapczLink_getProjectModels() {
     return [];
   }
 
-  return (Knack.views[viewKey].model.data.models || []).filter(function (model) {
-    var projectId = model.id || model.get("id");
-    var $row = $("#" + viewKey + " tbody tr#" + projectId);
-    return $row.length && !$row.hasClass("kn-table-group");
-  });
+  return (Knack.views[viewKey].model.data.models || []).filter(
+    function (model) {
+      var projectId = model.id || model.get("id");
+      var $row = $("#" + viewKey + " tbody tr#" + projectId);
+      return $row.length && !$row.hasClass("kn-table-group");
+    },
+  );
 }
 
 function dapczLink_refreshViewModels(viewKey) {
@@ -1318,7 +1543,7 @@ function dapczLink_refreshProjectModels() {
   return dapczLink_refreshViewModels(DAPCZ_LINK_CONFIG.views.projects).then(
     function () {
       return dapczLink_getProjectModels();
-    }
+    },
   );
 }
 
@@ -1363,7 +1588,7 @@ function dapczLink_buildProjectRows(meeting) {
         model,
         meeting.id,
         connectionField,
-        meeting.dateLabel
+        meeting.dateLabel,
       ) ||
       dapczLink_isLinkedToMeetingFromRow($row, meeting);
 
@@ -1372,12 +1597,12 @@ function dapczLink_buildProjectRows(meeting) {
       zone: dapczLink_getProjectFieldValue(
         $row,
         model,
-        DAPCZ_LINK_CONFIG.fields.projectZone
+        DAPCZ_LINK_CONFIG.fields.projectZone,
       ),
       rsn: dapczLink_getProjectFieldValue(
         $row,
         model,
-        DAPCZ_LINK_CONFIG.fields.projectRsn
+        DAPCZ_LINK_CONFIG.fields.projectRsn,
       ),
       label: dapczLink_getProjectNameFromRow($row, model) || "Project",
       isLinked: isLinkedToMeeting,
@@ -1484,7 +1709,7 @@ function dapczLink_compareModalRowElements($a, $b, column, direction) {
   if (result === 0) {
     result = dapczLink_compareNaturalSortValues(
       $a.data("project-label"),
-      $b.data("project-label")
+      $b.data("project-label"),
     );
   }
 
@@ -1501,7 +1726,7 @@ function dapczLink_reorderModalRows() {
       $(rowA),
       $(rowB),
       sort.column,
-      sort.direction
+      sort.direction,
     );
   });
 
@@ -1513,21 +1738,33 @@ function dapczLink_reorderModalRows() {
 function dapczLink_syncModalSortHeaders() {
   var sort = dapczLinkOperationState.modalSort;
 
-  $("#dapcz-link-modal-overlay .dapcz-link-sort-col[data-sort-col]").each(function () {
-    var $th = $(this);
-    var column = $th.data("sort-col");
-    var $btn = $th.find(".dapcz-link-sort-btn");
-    var $icon = $btn.find(".dapcz-link-sort-icon");
-    var isActive = column === sort.column;
+  $("#dapcz-link-modal-overlay .dapcz-link-sort-col[data-sort-col]").each(
+    function () {
+      var $th = $(this);
+      var column = $th.data("sort-col");
+      var $btn = $th.find(".dapcz-link-sort-btn");
+      var $icon = $btn.find(".dapcz-link-sort-icon");
+      var isActive = column === sort.column;
 
-    $btn.toggleClass("is-active", isActive);
-    $icon.removeClass("fa-sort fa-sort-asc fa-sort-desc");
-    $icon.addClass(isActive ? (sort.direction === "asc" ? "fa-sort-asc" : "fa-sort-desc") : "fa-sort");
-    $th.attr(
-      "aria-sort",
-      isActive ? (sort.direction === "asc" ? "ascending" : "descending") : "none"
-    );
-  });
+      $btn.toggleClass("is-active", isActive);
+      $icon.removeClass("fa-sort fa-sort-asc fa-sort-desc");
+      $icon.addClass(
+        isActive
+          ? sort.direction === "asc"
+            ? "fa-sort-asc"
+            : "fa-sort-desc"
+          : "fa-sort",
+      );
+      $th.attr(
+        "aria-sort",
+        isActive
+          ? sort.direction === "asc"
+            ? "ascending"
+            : "descending"
+          : "none",
+      );
+    },
+  );
 }
 
 function dapczLink_handleModalSortClick(event) {
@@ -1583,10 +1820,13 @@ function dapczLink_ensureModalShell() {
       '<span class="icon is-small"><i class="fa fa-link"></i></span><span>Save Project Links</span></a>' +
       '<a id="dapcz-link-modal-cancel" class="dapcz-link-btn dapcz-link-btn-secondary" href="javascript:void(0)">' +
       '<span class="icon is-small"><i class="fa fa-times"></i></span><span>Cancel</span></a>' +
-      "</div></div></div>"
+      "</div></div></div>",
   );
 
-  $("#dapcz-link-modal-close, #dapcz-link-modal-cancel").on("click", dapczLink_closeModal);
+  $("#dapcz-link-modal-close, #dapcz-link-modal-cancel").on(
+    "click",
+    dapczLink_closeModal,
+  );
   $("#dapcz-link-modal-overlay").on("click", function (event) {
     if (event.target === this) {
       dapczLink_closeModal();
@@ -1594,18 +1834,22 @@ function dapczLink_ensureModalShell() {
   });
   $("#dapcz-link-select-all").on("change", dapczLink_handleSelectAllChange);
   $("#dapcz-link-modal-submit").on("click", dapczLink_handleModalSubmit);
-  $("#dapcz-link-modal-filter").on("click", ".dapcz-link-filter-btn", dapczLink_handleModalFilterClick);
+  $("#dapcz-link-modal-filter").on(
+    "click",
+    ".dapcz-link-filter-btn",
+    dapczLink_handleModalFilterClick,
+  );
   $("#dapcz-link-modal-overlay .dapcz-link-modal-table").on(
     "click",
     ".dapcz-link-sort-btn",
-    dapczLink_handleModalSortClick
+    dapczLink_handleModalSortClick,
   );
   $(document).on(
     "change.dapczLinkCheckbox",
     "#dapcz-link-modal-rows .dapcz-link-project-checkbox",
     function () {
       dapczLink_syncSelectAllCheckbox();
-    }
+    },
   );
 }
 
@@ -1619,10 +1863,14 @@ function dapczLink_ensureModalFilterGroup() {
       '<button type="button" class="dapcz-link-filter-btn is-active" data-filter="all">All <span class="dapcz-link-filter-count" data-count="all">0</span></button>' +
       '<button type="button" class="dapcz-link-filter-btn" data-filter="assigned">Assigned <span class="dapcz-link-filter-count" data-count="assigned">0</span></button>' +
       '<button type="button" class="dapcz-link-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-link-filter-count" data-count="unassigned">0</span></button>' +
-      "</div>"
+      "</div>",
   );
 
-  $("#dapcz-link-modal-filter").on("click", ".dapcz-link-filter-btn", dapczLink_handleModalFilterClick);
+  $("#dapcz-link-modal-filter").on(
+    "click",
+    ".dapcz-link-filter-btn",
+    dapczLink_handleModalFilterClick,
+  );
 }
 
 function dapczLink_getModalFilterEmptyMessage(filter) {
@@ -1650,15 +1898,20 @@ function dapczLink_updateFilterCounts() {
   var unassigned = total - assigned;
 
   $('.dapcz-link-filter-count[data-count="all"]').text("(" + total + ")");
-  $('.dapcz-link-filter-count[data-count="assigned"]').text("(" + assigned + ")");
-  $('.dapcz-link-filter-count[data-count="unassigned"]').text("(" + unassigned + ")");
+  $('.dapcz-link-filter-count[data-count="assigned"]').text(
+    "(" + assigned + ")",
+  );
+  $('.dapcz-link-filter-count[data-count="unassigned"]').text(
+    "(" + unassigned + ")",
+  );
 }
 
 function dapczLink_applyModalFilter(filter) {
   dapczLinkOperationState.modalFilter = filter || "all";
 
   $("#dapcz-link-modal-filter .dapcz-link-filter-btn").each(function () {
-    var isActive = $(this).data("filter") === dapczLinkOperationState.modalFilter;
+    var isActive =
+      $(this).data("filter") === dapczLinkOperationState.modalFilter;
     $(this).toggleClass("is-active", isActive).attr("aria-pressed", isActive);
   });
 
@@ -1683,7 +1936,11 @@ function dapczLink_applyModalFilter(filter) {
 
   if (visibleCount === 0) {
     $empty
-      .text(dapczLink_getModalFilterEmptyMessage(dapczLinkOperationState.modalFilter))
+      .text(
+        dapczLink_getModalFilterEmptyMessage(
+          dapczLinkOperationState.modalFilter,
+        ),
+      )
       .prop("hidden", false);
     $table.addClass("is-empty");
   } else {
@@ -1707,17 +1964,24 @@ function dapczLink_showModalLoading(message) {
   $("#dapcz-link-modal-rows").html(
     '<tr class="dapcz-link-loading-row"><td colspan="4">' +
       dapczLink_escapeHtml(message || "Loading project links...") +
-      "</td></tr>"
+      "</td></tr>",
   );
   $("#dapcz-link-modal-empty").prop("hidden", true);
-  $("#dapcz-link-modal-overlay .dapcz-link-modal-table").removeClass("is-empty");
+  $("#dapcz-link-modal-overlay .dapcz-link-modal-table").removeClass(
+    "is-empty",
+  );
   $("#dapcz-link-modal-filter .dapcz-link-filter-btn").prop("disabled", true);
-  $("#dapcz-link-select-all").prop("checked", false).prop("indeterminate", false).prop("disabled", true);
+  $("#dapcz-link-select-all")
+    .prop("checked", false)
+    .prop("indeterminate", false)
+    .prop("disabled", true);
 }
 
 function dapczLink_closeModal() {
   dapczLink_clearModalFeedbackDismiss();
-  $("#dapcz-link-modal-overlay").removeClass("is-active").attr("aria-hidden", "true");
+  $("#dapcz-link-modal-overlay")
+    .removeClass("is-active")
+    .attr("aria-hidden", "true");
   $("#dapcz-link-progress-slot").empty();
   $("#dapcz-link-modal-message").empty();
   dapczLinkOperationState.currentMeeting = null;
@@ -1769,12 +2033,14 @@ function dapczLink_renderModalRows(rows) {
 
 function dapczLink_getVisibleProjectCheckboxes() {
   return $(
-    "#dapcz-link-modal-rows tr[data-project-id]:not(.is-filter-hidden) .dapcz-link-project-checkbox"
+    "#dapcz-link-modal-rows tr[data-project-id]:not(.is-filter-hidden) .dapcz-link-project-checkbox",
   );
 }
 
 function dapczLink_getAllProjectCheckboxes() {
-  return $("#dapcz-link-modal-rows tr[data-project-id] .dapcz-link-project-checkbox");
+  return $(
+    "#dapcz-link-modal-rows tr[data-project-id] .dapcz-link-project-checkbox",
+  );
 }
 
 function dapczLink_syncSelectAllCheckbox() {
@@ -1783,7 +2049,10 @@ function dapczLink_syncSelectAllCheckbox() {
   var $selectAll = $("#dapcz-link-select-all");
 
   if (!$visible.length) {
-    $selectAll.prop("checked", false).prop("indeterminate", false).prop("disabled", true);
+    $selectAll
+      .prop("checked", false)
+      .prop("indeterminate", false)
+      .prop("disabled", true);
     return;
   }
 
@@ -1791,7 +2060,7 @@ function dapczLink_syncSelectAllCheckbox() {
   $selectAll.prop("checked", $visible.length === $checked.length);
   $selectAll.prop(
     "indeterminate",
-    $checked.length > 0 && $checked.length < $visible.length
+    $checked.length > 0 && $checked.length < $visible.length,
   );
 }
 
@@ -1803,9 +2072,13 @@ function dapczLink_handleSelectAllChange() {
 
 function dapczLink_showModalMessage(type, message) {
   var typeClass =
-    type === "error" ? "is-error" : type === "success" ? "is-success" : "is-info";
+    type === "error"
+      ? "is-error"
+      : type === "success"
+        ? "is-success"
+        : "is-info";
   $("#dapcz-link-modal-message").html(
-    '<div class="dapcz-link-message ' + typeClass + '">' + message + "</div>"
+    '<div class="dapcz-link-message ' + typeClass + '">' + message + "</div>",
   );
 }
 
@@ -1832,7 +2105,9 @@ function dapczLink_updateModalTableStructure() {
   }
   $table.find("thead").remove();
   $table.prepend(dapczLink_getModalTableHeadHtml());
-  $("#dapcz-link-select-all").off("change").on("change", dapczLink_handleSelectAllChange);
+  $("#dapcz-link-select-all")
+    .off("change")
+    .on("change", dapczLink_handleSelectAllChange);
   dapczLink_syncModalSortHeaders();
 }
 
@@ -1845,19 +2120,21 @@ function dapczLink_openModal(meeting, skipLoading) {
   dapczLink_resetModalSort();
 
   $("#dapcz-link-modal-title").text(
-    "Link Active Projects — " + meeting.dateLabel
+    "Link Active Projects — " + meeting.dateLabel,
   );
   $("#dapcz-link-modal-hint").text(
     "Checked projects are linked to the " +
       meeting.dateLabel +
-      " meeting. Uncheck a project to remove it from this meeting, or check additional projects to link them."
+      " meeting. Uncheck a project to remove it from this meeting, or check additional projects to link them.",
   );
 
   if (!skipLoading) {
     dapczLink_showModalLoading();
   }
 
-  $("#dapcz-link-modal-overlay").addClass("is-active").attr("aria-hidden", "false");
+  $("#dapcz-link-modal-overlay")
+    .addClass("is-active")
+    .attr("aria-hidden", "false");
 }
 
 function dapczLink_refreshModalProjectRows(meeting) {
@@ -1887,11 +2164,11 @@ function dapczLink_refreshModalProjectRows(meeting) {
         if (!hadCache) {
           dapczLink_showModalMessage(
             "error",
-            "Unable to load current project links. Showing table data only."
+            "Unable to load current project links. Showing table data only.",
           );
         }
         dapczLink_renderModalRows(
-          dapczLink_buildProjectRows(dapczLinkOperationState.currentMeeting)
+          dapczLink_buildProjectRows(dapczLinkOperationState.currentMeeting),
         );
       }
     });
@@ -1914,7 +2191,9 @@ function dapczLink_handleOpenModalClick(event) {
       : null;
 
   if (!meetingModel) {
-    window.alert("Unable to load meeting details. Refresh the page and try again.");
+    window.alert(
+      "Unable to load meeting details. Refresh the page and try again.",
+    );
     return;
   }
 
@@ -1976,7 +2255,7 @@ function dapczLink_createProgressBar(total) {
       '<span class="progress-stat-item"><i class="fa fa-times-circle progress-stat-failed"></i> Failed: <span id="dapcz-link-failed-count">0</span></span>' +
       '<span class="progress-stat-item"><i class="fa fa-gears progress-stat-remaining"></i> Remaining: <span id="dapcz-link-remaining-count">' +
       total +
-      "</span></span></div></div>"
+      "</span></span></div></div>",
   );
 }
 
@@ -1985,7 +2264,7 @@ function dapczLink_updateProgress(completed, total, failed, currentAction) {
   $("#dapcz-link-progress-bar-fill").css("width", percentage + "%");
   $("#dapcz-link-progress-percentage").text(percentage + "%");
   $("#dapcz-link-progress-text").text(
-    currentAction || "Updating project " + completed + " of " + total
+    currentAction || "Updating project " + completed + " of " + total,
   );
   $("#dapcz-link-success-count").text(completed - failed);
   $("#dapcz-link-failed-count").text(failed);
@@ -1995,11 +2274,17 @@ function dapczLink_updateProgress(completed, total, failed, currentAction) {
 function dapczLink_completeProgress(total, failed, linkedCount, unlinkedCount) {
   var $progressBar = $("#dapcz-link-progress-bar-fill");
   $progressBar.removeClass("progress-fill-update");
-  $progressBar.addClass(failed > 0 ? "progress-fill-warning" : "progress-fill-update");
+  $progressBar.addClass(
+    failed > 0 ? "progress-fill-warning" : "progress-fill-update",
+  );
 
   if (failed > 0) {
     $("#dapcz-link-progress-text").text(
-      "Finished with errors. Updated " + (total - failed) + " of " + total + " projects."
+      "Finished with errors. Updated " +
+        (total - failed) +
+        " of " +
+        total +
+        " projects.",
     );
     return;
   }
@@ -2015,7 +2300,7 @@ function dapczLink_completeProgress(total, failed, linkedCount, unlinkedCount) {
   $("#dapcz-link-progress-text").text(
     parts.length
       ? "Successfully " + parts.join(" and ") + " project(s)."
-      : "Project links saved."
+      : "Project links saved.",
   );
 }
 
@@ -2029,13 +2314,13 @@ function dapczLink_applyProjectChangesBatch(changes, meeting) {
       .concat(
         changes.toUnlink.map(function (project) {
           return { project: project, shouldLink: false, action: "unlink" };
-        })
+        }),
       );
     var results = [];
 
     dapczLink_createProgressBar(tasks.length);
     $("#dapcz-link-progress-container .progress-title").text(
-      "Saving Project Links to Meeting"
+      "Saving Project Links to Meeting",
     );
 
     function processBatch(startIndex) {
@@ -2048,14 +2333,19 @@ function dapczLink_applyProjectChangesBatch(changes, meeting) {
         results.filter(function (r) {
           return !r.success;
         }).length,
-        "Updating projects " + (startIndex + 1) + "–" + endIndex + " of " + tasks.length
+        "Updating projects " +
+          (startIndex + 1) +
+          "–" +
+          endIndex +
+          " of " +
+          tasks.length,
       );
 
       var promises = batch.map(function (task) {
         return dapczLink_updateProjectMeetingLink(
           task.project,
           meeting,
-          task.shouldLink
+          task.shouldLink,
         )
           .then(function () {
             return {
@@ -2091,7 +2381,7 @@ function dapczLink_applyProjectChangesBatch(changes, meeting) {
             tasks.length,
             failedCount,
             changes.toLink.length,
-            changes.toUnlink.length
+            changes.toUnlink.length,
           );
           resolve(results);
         }
@@ -2136,7 +2426,7 @@ function dapczLink_handleModalSubmit(event) {
   if (!changes.toLink.length && !changes.toUnlink.length) {
     dapczLink_showModalMessage(
       "error",
-      "No changes to save. Check or uncheck projects to link or unlink them from this meeting."
+      "No changes to save. Check or uncheck projects to link or unlink them from this meeting.",
     );
     return;
   }
@@ -2144,7 +2434,7 @@ function dapczLink_handleModalSubmit(event) {
   if (!DAPCZ_LINK_CONFIG.api.projectUpdateView) {
     dapczLink_showModalMessage(
       "error",
-      "Linking is not configured yet. Add an API-enabled Form view on the Connect Project to Meeting page (field_1423 on dapcz_project) and set DAPCZ_LINK_CONFIG.api.projectUpdateView in right-of-way.js."
+      "Linking is not configured yet. Add an API-enabled Form view on the Connect Project to Meeting page (field_1423 on dapcz_project) and set DAPCZ_LINK_CONFIG.api.projectUpdateView in right-of-way.js.",
     );
     return;
   }
@@ -2186,7 +2476,7 @@ function dapczLink_handleModalSubmit(event) {
             " of " +
             results.length +
             " project(s).<br><br>" +
-            errorDetails
+            errorDetails,
         );
       } else {
         var summaryParts = [];
@@ -2199,7 +2489,9 @@ function dapczLink_handleModalSubmit(event) {
 
         dapczLink_showModalMessage(
           "success",
-          "Successfully " + summaryParts.join(" and ") + " project(s) for this meeting."
+          "Successfully " +
+            summaryParts.join(" and ") +
+            " project(s) for this meeting.",
         );
       }
 
@@ -2217,7 +2509,7 @@ function dapczLink_handleModalSubmit(event) {
       console.error("DAPCZ link projects failed:", error);
       dapczLink_showModalMessage(
         "error",
-        "Something went wrong while linking projects. Please try again."
+        "Something went wrong while linking projects. Please try again.",
       );
       dapczLink_scheduleModalFeedbackDismiss();
     })
@@ -2237,7 +2529,7 @@ function dapczLink_injectMeetingActionColumn(view) {
 
   if (!$(tableSelector + " thead .dapcz-link-col").length) {
     $(tableSelector + " thead tr").append(
-      '<th class="dapcz-link-col"><span class="table-fixed-label">Link Projects</span></th>'
+      '<th class="dapcz-link-col"><span class="table-fixed-label">Link Projects</span></th>',
     );
   }
 
@@ -2258,7 +2550,7 @@ function dapczLink_injectMeetingActionColumn(view) {
         meetingId +
         '">' +
         '<span class="icon is-small"><i class="fa fa-link"></i></span>' +
-        "<span>Link Projects</span></a></td>"
+        "<span>Link Projects</span></a></td>",
     );
   });
 
@@ -2285,14 +2577,14 @@ $(document).on(
   function () {
     dapczLink_cacheProjectsTableFields();
     dapczLink_scheduleProjectConnectionsPrefetch();
-  }
+  },
 );
 
 $(document).on(
   "knack-view-render." + DAPCZ_LINK_CONFIG.views.meetings,
   function (event, view) {
     dapczLink_addMeetingActionColumn(view);
-  }
+  },
 );
 
 $(document).on("knack-scene-render.scene_759", function () {
@@ -2348,4 +2640,3 @@ $(document).on("knack-view-render.view_29", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
-
