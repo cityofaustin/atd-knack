@@ -1579,54 +1579,21 @@ var DapczLink = (function () {
     });
   }
 
-  /** Sort key from a rendered modal table row's data attributes. */
-  function getModalRowSortValue($row, column) {
-    if (column === "zone") {
-      return String($row.data("zone") || "");
-    }
-    if (column === "rsn") {
-      return String($row.data("rsn") || "");
-    }
-    if (column === "linked") {
-      return $row.hasClass("is-linked") ? 1 : 0;
-    }
-    return String($row.data("project-label") || "");
-  }
-
-  /** Compare two rendered modal rows for sorting (ties break on project name). */
-  function compareModalRowElements($a, $b, column, direction) {
-    var aVal = getModalRowSortValue($a, column);
-    var bVal = getModalRowSortValue($b, column);
-    var result = compareProjectRowValues(aVal, bVal, column);
-
-    if (result === 0) {
-      result = compareNaturalSortValues(
-        $a.data("project-label"),
-        $b.data("project-label"),
-      );
-    }
-
-    return direction === "desc" ? -result : result;
-  }
-
-  /** Re-sort tbody rows in the DOM (preserves checkbox state vs re-rendering). */
-  function reorderModalRows() {
-    var $tbody = $("#dapcz-link-modal-rows");
-    var sort = operationState.modalSort;
-    var $rows = $tbody.children("tr[data-project-id]").get();
-
-    $rows.sort(function (rowA, rowB) {
-      return compareModalRowElements(
-        $(rowA),
-        $(rowB),
-        sort.column,
-        sort.direction,
-      );
+  /** Read current row data and checkbox states from the modal DOM (for re-sort without data loss). */
+  function getModalRowData() {
+    var rows = [];
+    $("#dapcz-link-modal-rows tr[data-project-id]").each(function () {
+      var $row = $(this);
+      rows.push({
+        id: String($row.data("project-id")),
+        zone: String($row.data("zone") || ""),
+        rsn: String($row.data("rsn") || ""),
+        label: String($row.data("project-label") || ""),
+        isLinked: $row.hasClass("is-linked"),
+        isChecked: $row.find(".dapcz-link-project-checkbox").is(":checked"),
+      });
     });
-
-    $.each($rows, function (_, row) {
-      $tbody.append(row);
-    });
+    return rows;
   }
 
   /** Update sort icon and aria-sort on column headers to match modalSort state. */
@@ -1678,9 +1645,7 @@ var DapczLink = (function () {
       operationState.modalSort.direction = "asc";
     }
 
-    reorderModalRows();
-    syncModalSortHeaders();
-    syncSelectAllCheckbox();
+    renderModalRows(getModalRowData());
   }
 
   function ensureModalShell() {
