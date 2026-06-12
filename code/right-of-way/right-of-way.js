@@ -495,7 +495,7 @@ $(`<div class="mobile-details-dropdown-menu">\
 /********************************************/
 // Helpers live in the IIFE; Knack hooks stay global (see DapczLink at bottom).
 var DapczLink = (function () {
-  const CONFIG = {
+  var CONFIG = {
     views: {
       meetings: "view_1768",
       projects: "view_1755",
@@ -1460,15 +1460,15 @@ var DapczLink = (function () {
   /** HTML for one sortable modal column header button. */
   function getModalSortableHeaderCell(column, label) {
     return (
-      '<th class="dapcz-link-sort-col" scope="col" data-sort-col="' +
+      '<th class="dapcz-sort-col" scope="col" data-sort-col="' +
       column +
       '">' +
-      '<button type="button" class="dapcz-link-sort-btn" data-sort="' +
+      '<button type="button" class="dapcz-sort-btn" data-sort="' +
       column +
       '">' +
-      '<span class="dapcz-link-sort-label">' +
+      '<span class="dapcz-sort-label">' +
       label +
-      '</span> <i class="dapcz-link-sort-icon fa fa-sort" aria-hidden="true"></i>' +
+      '</span> <i class="dapcz-sort-icon fa fa-sort" aria-hidden="true"></i>' +
       "</button></th>"
     );
   }
@@ -1477,8 +1477,8 @@ var DapczLink = (function () {
   function getModalTableHeadHtml() {
     return (
       "<thead><tr>" +
-      '<th class="dapcz-link-sort-col dapcz-link-sort-col-select" scope="col">' +
-      '<input type="checkbox" id="dapcz-link-select-all" class="dapcz-link-modal-checkbox" aria-label="Select all projects">' +
+      '<th class="dapcz-sort-col dapcz-sort-col-select" scope="col">' +
+      '<input type="checkbox" id="dapcz-select-all" class="dapcz-modal-checkbox" aria-label="Select all projects">' +
       "</th>" +
       getModalSortableHeaderCell("zone", "Zone") +
       getModalSortableHeaderCell("rsn", "RSN #") +
@@ -1537,7 +1537,7 @@ var DapczLink = (function () {
   /** Read current row data and checkbox states from the modal DOM (for re-sort without data loss). */
   function getModalRowData() {
     var rows = [];
-    $("#dapcz-link-modal-rows tr[data-project-id]").each(function () {
+    $("#dapcz-modal-rows tr[data-project-id]").each(function () {
       var $row = $(this);
       rows.push({
         id: String($row.data("project-id")),
@@ -1545,7 +1545,7 @@ var DapczLink = (function () {
         rsn: String($row.data("rsn") || ""),
         label: String($row.data("project-label") || ""),
         isLinked: $row.hasClass("is-linked"),
-        isChecked: $row.find(".dapcz-link-project-checkbox").is(":checked"),
+        isChecked: $row.find(".dapcz-project-checkbox").is(":checked"),
       });
     });
     return rows;
@@ -1555,12 +1555,12 @@ var DapczLink = (function () {
   function syncModalSortHeaders() {
     var sort = operationState.modalSort;
 
-    $("#dapcz-link-modal-overlay .dapcz-link-sort-col[data-sort-col]").each(
+    $("#dapcz-modal-overlay .dapcz-sort-col[data-sort-col]").each(
       function () {
         var $th = $(this);
         var column = $th.data("sort-col");
-        var $btn = $th.find(".dapcz-link-sort-btn");
-        var $icon = $btn.find(".dapcz-link-sort-icon");
+        var $btn = $th.find(".dapcz-sort-btn");
+        var $icon = $btn.find(".dapcz-sort-icon");
         var isActive = column === sort.column;
 
         $btn.toggleClass("is-active", isActive);
@@ -1604,66 +1604,66 @@ var DapczLink = (function () {
   }
 
   function ensureModalShell() {
-    if ($("#dapcz-link-modal-overlay").length) {
+    if ($("#dapcz-modal-overlay").length) {
       return;
     }
 
     $("body").append([
-      '<div id="dapcz-link-modal-overlay" class="dapcz-link-modal-overlay" aria-hidden="true">',
-      '  <div id="dapcz-link-modal" class="dapcz-link-modal" role="dialog" aria-modal="true">',
-      '    <div class="dapcz-link-modal-header">',
-      '      <h3 id="dapcz-link-modal-title" class="dapcz-link-modal-title"></h3>',
-      '      <button type="button" id="dapcz-link-modal-close" class="dapcz-link-modal-close" aria-label="Close">&times;</button>',
+      '<div id="dapcz-modal-overlay" class="dapcz-modal-overlay" aria-hidden="true">',
+      '  <div id="dapcz-modal" class="dapcz-modal" role="dialog" aria-modal="true">',
+      '    <div class="dapcz-modal-header">',
+      '      <h3 id="dapcz-modal-title" class="dapcz-modal-title"></h3>',
+      '      <button type="button" id="dapcz-modal-close" class="dapcz-modal-close" aria-label="Close">&times;</button>',
       '    </div>',
-      '    <p id="dapcz-link-modal-hint" class="dapcz-link-modal-hint"></p>',
-      '    <div id="dapcz-link-modal-message"></div>',
-      '    <div id="dapcz-link-modal-filter" class="dapcz-link-filter-group" role="group" aria-label="Filter projects">',
-      '      <button type="button" class="dapcz-link-filter-btn is-active" data-filter="all">All <span class="dapcz-link-filter-count" data-count="all">0</span></button>',
-      '      <button type="button" class="dapcz-link-filter-btn" data-filter="assigned">Assigned <span class="dapcz-link-filter-count" data-count="assigned">0</span></button>',
-      '      <button type="button" class="dapcz-link-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-link-filter-count" data-count="unassigned">0</span></button>',
+      '    <p id="dapcz-modal-hint" class="dapcz-modal-hint"></p>',
+      '    <div id="dapcz-modal-message"></div>',
+      '    <div id="dapcz-modal-filter" class="dapcz-filter-group" role="group" aria-label="Filter projects">',
+      '      <button type="button" class="dapcz-filter-btn is-active" data-filter="all">All <span class="dapcz-filter-count" data-count="all">0</span></button>',
+      '      <button type="button" class="dapcz-filter-btn" data-filter="assigned">Assigned <span class="dapcz-filter-count" data-count="assigned">0</span></button>',
+      '      <button type="button" class="dapcz-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-filter-count" data-count="unassigned">0</span></button>',
       '    </div>',
-      '    <div class="dapcz-link-modal-table-wrap">',
-      '      <table class="dapcz-link-modal-table">',
+      '    <div class="dapcz-modal-table-wrap">',
+      '      <table class="dapcz-modal-table">',
                  getModalTableHeadHtml(),
-      '        <tbody id="dapcz-link-modal-rows"></tbody>',
+      '        <tbody id="dapcz-modal-rows"></tbody>',
       '      </table>',
-      '      <div id="dapcz-link-modal-empty" class="dapcz-link-empty-state" hidden></div>',
+      '      <div id="dapcz-modal-empty" class="dapcz-empty-state" hidden></div>',
       '    </div>',
-      '    <div id="dapcz-link-progress-slot"></div>',
-      '    <div class="dapcz-link-modal-actions">',
-      '      <a id="dapcz-link-modal-submit" class="dapcz-link-btn dapcz-link-btn-primary" href="javascript:void(0)">',
+      '    <div id="dapcz-progress-slot"></div>',
+      '    <div class="dapcz-modal-actions">',
+      '      <a id="dapcz-modal-submit" class="dapcz-btn dapcz-btn-primary" href="javascript:void(0)">',
       '        <span class="icon is-small"><i class="fa fa-link"></i></span><span>Save Project Links</span></a>',
-      '      <a id="dapcz-link-modal-cancel" class="dapcz-link-btn dapcz-link-btn-secondary" href="javascript:void(0)">',
+      '      <a id="dapcz-modal-cancel" class="dapcz-btn dapcz-btn-secondary" href="javascript:void(0)">',
       '        <span class="icon is-small"><i class="fa fa-times"></i></span><span>Cancel</span></a>',
       '    </div>',
       '  </div>',
       '</div>',
     ].join("\n"));
 
-    $("#dapcz-link-modal-close, #dapcz-link-modal-cancel").on(
+    $("#dapcz-modal-close, #dapcz-modal-cancel").on(
       "click",
       closeModal,
     );
-    $("#dapcz-link-modal-overlay").on("click", function (event) {
+    $("#dapcz-modal-overlay").on("click", function (event) {
       if (event.target === this) {
         closeModal();
       }
     });
-    $("#dapcz-link-select-all").on("change", handleSelectAllChange);
-    $("#dapcz-link-modal-submit").on("click", handleModalSubmit);
-    $("#dapcz-link-modal-filter").on(
+    $("#dapcz-select-all").on("change", handleSelectAllChange);
+    $("#dapcz-modal-submit").on("click", handleModalSubmit);
+    $("#dapcz-modal-filter").on(
       "click",
-      ".dapcz-link-filter-btn",
+      ".dapcz-filter-btn",
       handleModalFilterClick,
     );
-    $("#dapcz-link-modal-overlay .dapcz-link-modal-table").on(
+    $("#dapcz-modal-overlay .dapcz-modal-table").on(
       "click",
-      ".dapcz-link-sort-btn",
+      ".dapcz-sort-btn",
       handleModalSortClick,
     );
     $(document).on(
       "change.dapczCheckbox",
-      "#dapcz-link-modal-rows .dapcz-link-project-checkbox",
+      "#dapcz-modal-rows .dapcz-project-checkbox",
       function () {
         syncSelectAllCheckbox();
       },
@@ -1681,7 +1681,7 @@ var DapczLink = (function () {
   }
 
   function updateFilterCounts() {
-    var $rows = $("#dapcz-link-modal-rows tr[data-project-id]");
+    var $rows = $("#dapcz-modal-rows tr[data-project-id]");
     var total = $rows.length;
     var initialLinkedIds = operationState.initialLinkedIds || {};
     var assigned = 0;
@@ -1694,11 +1694,11 @@ var DapczLink = (function () {
 
     var unassigned = total - assigned;
 
-    $('.dapcz-link-filter-count[data-count="all"]').text("(" + total + ")");
-    $('.dapcz-link-filter-count[data-count="assigned"]').text(
+    $('.dapcz-filter-count[data-count="all"]').text("(" + total + ")");
+    $('.dapcz-filter-count[data-count="assigned"]').text(
       "(" + assigned + ")",
     );
-    $('.dapcz-link-filter-count[data-count="unassigned"]').text(
+    $('.dapcz-filter-count[data-count="unassigned"]').text(
       "(" + unassigned + ")",
     );
   }
@@ -1706,14 +1706,14 @@ var DapczLink = (function () {
   function applyModalFilter(filter) {
     operationState.modalFilter = filter || "all";
 
-    $("#dapcz-link-modal-filter .dapcz-link-filter-btn").each(function () {
+    $("#dapcz-modal-filter .dapcz-filter-btn").each(function () {
       var isActive = $(this).data("filter") === operationState.modalFilter;
       $(this).toggleClass("is-active", isActive).attr("aria-pressed", isActive);
     });
 
     var initialLinkedIds = operationState.initialLinkedIds || {};
     var visibleCount = 0;
-    $("#dapcz-link-modal-rows tr[data-project-id]").each(function () {
+    $("#dapcz-modal-rows tr[data-project-id]").each(function () {
       var $row = $(this);
       var isSavedLinked = !!initialLinkedIds[$row.data("project-id")];
       var show =
@@ -1727,8 +1727,8 @@ var DapczLink = (function () {
       }
     });
 
-    var $empty = $("#dapcz-link-modal-empty");
-    var $table = $("#dapcz-link-modal-overlay .dapcz-link-modal-table");
+    var $empty = $("#dapcz-modal-empty");
+    var $table = $("#dapcz-modal-overlay .dapcz-modal-table");
 
     if (visibleCount === 0) {
       $empty
@@ -1753,17 +1753,17 @@ var DapczLink = (function () {
   }
 
   function showModalLoading(message) {
-    $("#dapcz-link-modal-rows").html(
-      '<tr class="dapcz-link-loading-row"><td colspan="4">' +
+    $("#dapcz-modal-rows").html(
+      '<tr class="dapcz-loading-row"><td colspan="4">' +
         escapeHtml(message || "Loading project links...") +
         "</td></tr>",
     );
-    $("#dapcz-link-modal-empty").prop("hidden", true);
-    $("#dapcz-link-modal-overlay .dapcz-link-modal-table").removeClass(
+    $("#dapcz-modal-empty").prop("hidden", true);
+    $("#dapcz-modal-overlay .dapcz-modal-table").removeClass(
       "is-empty",
     );
-    $("#dapcz-link-modal-filter .dapcz-link-filter-btn").prop("disabled", true);
-    $("#dapcz-link-select-all")
+    $("#dapcz-modal-filter .dapcz-filter-btn").prop("disabled", true);
+    $("#dapcz-select-all")
       .prop("checked", false)
       .prop("indeterminate", false)
       .prop("disabled", true);
@@ -1771,11 +1771,11 @@ var DapczLink = (function () {
 
   function closeModal() {
     clearModalFeedbackDismiss();
-    $("#dapcz-link-modal-overlay")
+    $("#dapcz-modal-overlay")
       .removeClass("is-active")
       .attr("aria-hidden", "true");
-    $("#dapcz-link-progress-slot").empty();
-    $("#dapcz-link-modal-message").empty();
+    $("#dapcz-progress-slot").empty();
+    $("#dapcz-modal-message").empty();
     operationState.currentMeeting = null;
     operationState.initialLinkedIds = {};
     operationState.modalFilter = "all";
@@ -1800,7 +1800,7 @@ var DapczLink = (function () {
         '" data-rsn="' +
         escapeHtml(row.rsn) +
         '">' +
-        '<td><input type="checkbox" class="dapcz-link-project-checkbox dapcz-link-modal-checkbox" ' +
+        '<td><input type="checkbox" class="dapcz-project-checkbox dapcz-modal-checkbox" ' +
         (row.isChecked ? "checked " : "") +
         'aria-label="Select ' +
         escapeHtml(row.label) +
@@ -1816,8 +1816,8 @@ var DapczLink = (function () {
         "</td></tr>";
     });
 
-    $("#dapcz-link-modal-rows").html(html);
-    $("#dapcz-link-modal-filter .dapcz-link-filter-btn").prop("disabled", false);
+    $("#dapcz-modal-rows").html(html);
+    $("#dapcz-modal-filter .dapcz-filter-btn").prop("disabled", false);
     syncModalSortHeaders();
     updateFilterCounts();
     applyModalFilter(operationState.modalFilter);
@@ -1825,20 +1825,20 @@ var DapczLink = (function () {
 
   function getVisibleProjectCheckboxes() {
     return $(
-      "#dapcz-link-modal-rows tr[data-project-id]:not(.is-filter-hidden) .dapcz-link-project-checkbox",
+      "#dapcz-modal-rows tr[data-project-id]:not(.is-filter-hidden) .dapcz-project-checkbox",
     );
   }
 
   function getAllProjectCheckboxes() {
     return $(
-      "#dapcz-link-modal-rows tr[data-project-id] .dapcz-link-project-checkbox",
+      "#dapcz-modal-rows tr[data-project-id] .dapcz-project-checkbox",
     );
   }
 
   function syncSelectAllCheckbox() {
     var $visible = getVisibleProjectCheckboxes();
     var $checked = $visible.filter(":checked");
-    var $selectAll = $("#dapcz-link-select-all");
+    var $selectAll = $("#dapcz-select-all");
 
     if (!$visible.length) {
       $selectAll
@@ -1857,7 +1857,7 @@ var DapczLink = (function () {
   }
 
   function handleSelectAllChange() {
-    var isChecked = $("#dapcz-link-select-all").is(":checked");
+    var isChecked = $("#dapcz-select-all").is(":checked");
     getVisibleProjectCheckboxes().prop("checked", isChecked);
     syncSelectAllCheckbox();
   }
@@ -1869,8 +1869,8 @@ var DapczLink = (function () {
         : type === "success"
           ? "is-success"
           : "is-info";
-    $("#dapcz-link-modal-message").html(
-      '<div class="dapcz-link-message ' + typeClass + '">' + message + "</div>",
+    $("#dapcz-modal-message").html(
+      '<div class="dapcz-message ' + typeClass + '">' + message + "</div>",
     );
   }
 
@@ -1885,8 +1885,8 @@ var DapczLink = (function () {
     clearModalFeedbackDismiss();
     operationState.feedbackDismissTimeoutId = setTimeout(function () {
       operationState.feedbackDismissTimeoutId = null;
-      $("#dapcz-link-modal-message").empty();
-      $("#dapcz-link-progress-slot").empty();
+      $("#dapcz-modal-message").empty();
+      $("#dapcz-progress-slot").empty();
     }, CONFIG.feedbackDismissMs);
   }
 
@@ -1896,10 +1896,10 @@ var DapczLink = (function () {
     operationState.modalFilter = "all";
     resetModalSort();
 
-    $("#dapcz-link-modal-title").text(
+    $("#dapcz-modal-title").text(
       "Link Active Projects — " + meeting.dateLabel,
     );
-    $("#dapcz-link-modal-hint").text(
+    $("#dapcz-modal-hint").text(
       "Checked projects are linked to the " +
         meeting.dateLabel +
         " meeting. Uncheck a project to remove it from this meeting, or check additional projects to link them.",
@@ -1909,7 +1909,7 @@ var DapczLink = (function () {
       showModalLoading();
     }
 
-    $("#dapcz-link-modal-overlay")
+    $("#dapcz-modal-overlay")
       .addClass("is-active")
       .attr("aria-hidden", "false");
   }
@@ -1987,14 +1987,14 @@ var DapczLink = (function () {
     var toUnlink = [];
     var initialLinkedIds = operationState.initialLinkedIds || {};
 
-    $("#dapcz-link-modal-rows tr").each(function () {
+    $("#dapcz-modal-rows tr").each(function () {
       var $row = $(this);
       var projectId = $row.data("project-id");
       if (!projectId) {
         return;
       }
 
-      var $checkbox = $row.find(".dapcz-link-project-checkbox");
+      var $checkbox = $row.find(".dapcz-project-checkbox");
       if (!$checkbox.length) {
         return;
       }
@@ -2017,18 +2017,18 @@ var DapczLink = (function () {
   }
 
   function createProgressBar(total) {
-    $("#dapcz-link-progress-slot").html(
-      '<div id="dapcz-link-progress-container" class="progress-container">' +
-        '<div class="progress-title">Linking Active Projects to Meeting</div>' +
-        '<div id="dapcz-link-progress-text" class="progress-text">Preparing to update ' +
+    $("#dapcz-progress-slot").html(
+      '<div id="dapcz-progress-container" class="dapcz-progress-container">' +
+        '<div class="dapcz-progress-title">Linking Active Projects to Meeting</div>' +
+        '<div id="dapcz-progress-text" class="dapcz-progress-text">Preparing to update ' +
         total +
         " projects...</div>" +
-        '<div class="progress-track"><div id="dapcz-link-progress-bar-fill" class="progress-fill progress-fill-update">' +
-        '<div id="dapcz-link-progress-percentage" class="progress-percentage">0%</div></div></div>' +
-        '<div class="progress-stats">' +
-        '<span class="progress-stat-item"><i class="fa fa-check-circle progress-stat-success"></i> Updated: <span id="dapcz-link-success-count">0</span></span>' +
-        '<span class="progress-stat-item"><i class="fa fa-times-circle progress-stat-failed"></i> Failed: <span id="dapcz-link-failed-count">0</span></span>' +
-        '<span class="progress-stat-item"><i class="fa fa-gears progress-stat-remaining"></i> Remaining: <span id="dapcz-link-remaining-count">' +
+        '<div class="dapcz-progress-track"><div id="dapcz-progress-bar-fill" class="dapcz-progress-fill dapcz-progress-fill-update">' +
+        '<div id="dapcz-progress-percentage" class="dapcz-progress-percentage">0%</div></div></div>' +
+        '<div class="dapcz-progress-stats">' +
+        '<span class="dapcz-progress-stat-item"><i class="fa fa-check-circle dapcz-progress-stat-success"></i> Updated: <span id="dapcz-success-count">0</span></span>' +
+        '<span class="dapcz-progress-stat-item"><i class="fa fa-times-circle dapcz-progress-stat-failed"></i> Failed: <span id="dapcz-failed-count">0</span></span>' +
+        '<span class="dapcz-progress-stat-item"><i class="fa fa-gears dapcz-progress-stat-remaining"></i> Remaining: <span id="dapcz-remaining-count">' +
         total +
         "</span></span></div></div>",
     );
@@ -2036,25 +2036,25 @@ var DapczLink = (function () {
 
   function updateProgress(completed, total, failed, currentAction) {
     var percentage = total ? Math.round((completed / total) * 100) : 0;
-    $("#dapcz-link-progress-bar-fill").css("width", percentage + "%");
-    $("#dapcz-link-progress-percentage").text(percentage + "%");
-    $("#dapcz-link-progress-text").text(
+    $("#dapcz-progress-bar-fill").css("width", percentage + "%");
+    $("#dapcz-progress-percentage").text(percentage + "%");
+    $("#dapcz-progress-text").text(
       currentAction || "Updating project " + completed + " of " + total,
     );
-    $("#dapcz-link-success-count").text(completed - failed);
-    $("#dapcz-link-failed-count").text(failed);
-    $("#dapcz-link-remaining-count").text(total - completed);
+    $("#dapcz-success-count").text(completed - failed);
+    $("#dapcz-failed-count").text(failed);
+    $("#dapcz-remaining-count").text(total - completed);
   }
 
   function completeProgress(total, failed, linkedCount, unlinkedCount) {
-    var $progressBar = $("#dapcz-link-progress-bar-fill");
-    $progressBar.removeClass("progress-fill-update");
+    var $progressBar = $("#dapcz-progress-bar-fill");
+    $progressBar.removeClass("dapcz-progress-fill-update");
     $progressBar.addClass(
-      failed > 0 ? "progress-fill-warning" : "progress-fill-update",
+      failed > 0 ? "dapcz-progress-fill-warning" : "dapcz-progress-fill-update",
     );
 
     if (failed > 0) {
-      $("#dapcz-link-progress-text").text(
+      $("#dapcz-progress-text").text(
         "Finished with errors. Updated " +
           (total - failed) +
           " of " +
@@ -2072,7 +2072,7 @@ var DapczLink = (function () {
       parts.push("unlinked " + unlinkedCount);
     }
 
-    $("#dapcz-link-progress-text").text(
+    $("#dapcz-progress-text").text(
       parts.length
         ? "Successfully " + parts.join(" and ") + " project(s)."
         : "Project links saved.",
@@ -2094,7 +2094,7 @@ var DapczLink = (function () {
       var results = [];
 
       createProgressBar(tasks.length);
-      $("#dapcz-link-progress-container .progress-title").text(
+      $("#dapcz-progress-container .dapcz-progress-title").text(
         "Saving Project Links to Meeting",
       );
 
@@ -2168,7 +2168,7 @@ var DapczLink = (function () {
   }
 
   function setModalSubmitLoading(isLoading) {
-    var $button = $("#dapcz-link-modal-submit");
+    var $button = $("#dapcz-modal-submit");
     var $icon = $button.find("i");
     $button.prop("disabled", isLoading).toggleClass("is-loading", isLoading);
     if (isLoading) {
@@ -2215,7 +2215,7 @@ var DapczLink = (function () {
     operationState.lastOperationTime = now;
     setModalSubmitLoading(true);
     clearModalFeedbackDismiss();
-    $("#dapcz-link-modal-message").empty();
+    $("#dapcz-modal-message").empty();
 
     applyProjectChangesBatch(changes, meeting)
       .then(function (results) {
@@ -2299,15 +2299,15 @@ var DapczLink = (function () {
       return;
     }
 
-    if (!$(tableSelector + " thead .dapcz-link-col").length) {
+    if (!$(tableSelector + " thead .dapcz-col").length) {
       $(tableSelector + " thead tr").append(
-        '<th class="dapcz-link-col"><span class="table-fixed-label">Link Projects</span></th>',
+        '<th class="dapcz-col"><span class="table-fixed-label">Link Projects</span></th>',
       );
     }
 
     $(tableSelector + " tbody tr").each(function () {
       var $row = $(this);
-      if ($row.find(".dapcz-link-col").length) {
+      if ($row.find(".dapcz-col").length) {
         return;
       }
 
@@ -2317,8 +2317,8 @@ var DapczLink = (function () {
       }
 
       $row.append(
-        '<td class="dapcz-link-col">' +
-          '<a class="kn-button dapcz-link-open-btn" href="javascript:void(0)" data-meeting-id="' +
+        '<td class="dapcz-col">' +
+          '<a class="kn-button dapcz-open-btn" href="javascript:void(0)" data-meeting-id="' +
           meetingId +
           '">' +
           '<span class="icon is-small"><i class="fa fa-link"></i></span>' +
@@ -2326,7 +2326,7 @@ var DapczLink = (function () {
       );
     });
 
-    $(viewSelector + " .dapcz-link-open-btn")
+    $(viewSelector + " .dapcz-open-btn")
       .off("click.dapcz")
       .on("click.dapcz", handleOpenModalClick);
   }
