@@ -457,10 +457,10 @@ $(document).on('knack-view-render.view_1176', function(event, view, record) {
       ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle")}\
       ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override")}\
     </ul>\
-  </div>`).appendTo("#view_1176")
+  </div>`).appendTo("#view_1176");
 
-/* Mobile CSWZ Case Details Page */
-$(`<div class="mobile-details-dropdown-menu">\
+  /* Mobile CSWZ Case Details Page */
+  $(`<div class="mobile-details-dropdown-menu">\
     <ul id="mobile-menu-list">\
       <li class="mobile-dropdown-menu">\
         <span class="desktop-button mobile-dropdown-button"> \
@@ -486,8 +486,8 @@ $(`<div class="mobile-details-dropdown-menu">\
       ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle", true)}\
       ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override", true)}\
     </ul>\
-  </div>`).appendTo("#view_1176")
-})
+  </div>`).appendTo("#view_1176");
+});
 
 /********************************************/
 /** DAPCZ: Link Active Projects to Meeting **/
@@ -501,7 +501,6 @@ const DAPCZ_LINK_CONFIG = {
   api: {
     baseUrl: "https://api.knack.com/v1",
     scene: "scene_776",
-    // API edit form on dapcz_project — field_1423 must NOT be required (unlink sends []).
     projectUpdateView: "view_1786",
   },
   fields: {
@@ -560,6 +559,55 @@ function dapczLink_logApiError(error) {
   }
 }
 
+function dapczLink_getApiErrorFromBody(body) {
+  if (!body) {
+    return "";
+  }
+  if (body.message) {
+    return body.message;
+  }
+  if (body.errors) {
+    return JSON.stringify(body.errors);
+  }
+  return "";
+}
+
+function dapczLink_getApiErrorFromXhr(xhr) {
+  if (!xhr) {
+    return "";
+  }
+
+  var fromResponseJson = dapczLink_getApiErrorFromBody(xhr.responseJSON);
+  if (fromResponseJson) {
+    return fromResponseJson;
+  }
+
+  var responseText =
+    typeof xhr.responseText === "string" ? xhr.responseText : "";
+
+  if (xhr.status === 400 && responseText && /required/i.test(responseText)) {
+    return (
+      "Knack rejected clearing the meeting connection. On view_1786, set field_1423 " +
+      "(dapcz_meetings) to not required so projects can be unlinked."
+    );
+  }
+
+  if (responseText) {
+    try {
+      var fromParsed = dapczLink_getApiErrorFromBody(JSON.parse(responseText));
+      if (fromParsed) {
+        return fromParsed;
+      }
+    } catch (parseError) {
+      if (responseText.length < 300) {
+        return responseText;
+      }
+    }
+  }
+
+  return xhr.statusText || "";
+}
+
 function dapczLink_formatApiError(error) {
   if (!error) {
     return "Unknown error";
@@ -570,45 +618,9 @@ function dapczLink_formatApiError(error) {
   if (error.message) {
     return error.message;
   }
-  var xhr = error.xhr || error;
-  if (xhr.responseJSON) {
-    if (xhr.responseJSON.message) {
-      return xhr.responseJSON.message;
-    }
-    if (xhr.responseJSON.errors) {
-      return JSON.stringify(xhr.responseJSON.errors);
-    }
-  }
-  if (xhr.status === 400 && xhr.responseText) {
-    if (
-      xhr.responseText.indexOf("required") >= 0 ||
-      xhr.responseText.indexOf("Required") >= 0
-    ) {
-      return (
-        "Knack rejected clearing the meeting connection. On view_1786, set field_1423 " +
-        "(dapcz_meetings) to not required so projects can be unlinked."
-      );
-    }
-  }
-  if (xhr.responseText && typeof xhr.responseText === "string") {
-    try {
-      var parsed = JSON.parse(xhr.responseText);
-      if (parsed.message) {
-        return parsed.message;
-      }
-      if (parsed.errors) {
-        return JSON.stringify(parsed.errors);
-      }
-    } catch (parseError) {
-      if (xhr.responseText.length < 300) {
-        return xhr.responseText;
-      }
-    }
-  }
-  if (xhr.statusText) {
-    return xhr.statusText;
-  }
-  return "Request failed";
+
+  var xhrMessage = dapczLink_getApiErrorFromXhr(error.xhr || error);
+  return xhrMessage || "Request failed";
 }
 
 function dapczLink_cacheProjectsTableFields() {
@@ -617,13 +629,13 @@ function dapczLink_cacheProjectsTableFields() {
     viewKey,
     function (text) {
       return text === "project name" || text.indexOf("project name") === 0;
-    }
+    },
   );
   dapczLinkProjectsTableFields.groupHeader = dapczLink_getTableFieldKeyByHeader(
     viewKey,
     function (text) {
       return text.indexOf("group header") >= 0;
-    }
+    },
   );
   dapczLinkProjectsTableFields.meetingConnection =
     DAPCZ_LINK_CONFIG.fields.projectMeetingConnection ||
