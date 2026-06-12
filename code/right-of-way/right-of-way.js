@@ -1938,22 +1938,8 @@ var DapczLink = (function () {
     }, CONFIG.feedbackDismissMs);
   }
 
-  function updateModalTableStructure() {
-    var $table = $("#dapcz-link-modal-overlay .dapcz-link-modal-table");
-    if (!$table.length) {
-      return;
-    }
-    $table.find("thead").remove();
-    $table.prepend(getModalTableHeadHtml());
-    $("#dapcz-link-select-all")
-      .off("change")
-      .on("change", handleSelectAllChange);
-    syncModalSortHeaders();
-  }
-
   function openModal(meeting, skipLoading) {
     ensureModalShell();
-    updateModalTableStructure();
     operationState.currentMeeting = meeting;
     operationState.modalFilter = "all";
     resetModalSort();
