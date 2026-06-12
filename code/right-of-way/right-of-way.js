@@ -529,7 +529,6 @@ var DapczLink = (function () {
     modalFilter: "all",
     prefetchPromise: null,
     prefetchProjectIdsKey: "",
-    prefetchComplete: false,
     feedbackDismissTimeoutId: null,
     modalSort: { column: "project", direction: "asc" },
   };
@@ -1058,7 +1057,6 @@ var DapczLink = (function () {
 
     var projectIds = getProjectIdsFromTable();
     if (!projectIds.length) {
-      operationState.prefetchComplete = false;
       return Promise.resolve(operationState.projectConnections);
     }
 
@@ -1074,7 +1072,6 @@ var DapczLink = (function () {
       !missingIds.length &&
       operationState.prefetchProjectIdsKey === idsKey
     ) {
-      operationState.prefetchComplete = true;
       return Promise.resolve(operationState.projectConnections);
     }
 
@@ -1086,7 +1083,6 @@ var DapczLink = (function () {
     }
 
     operationState.prefetchProjectIdsKey = idsKey;
-    operationState.prefetchComplete = false;
 
     var idsToFetch = missingIds.length ? missingIds : projectIds;
 
@@ -1094,14 +1090,11 @@ var DapczLink = (function () {
       fetchProjectConnectionsBatch(idsToFetch)
         .then(function (connectionMap) {
           mergeProjectConnections(connectionMap);
-          operationState.prefetchComplete =
-            hasCompleteProjectConnectionCache();
           operationState.prefetchPromise = null;
           return operationState.projectConnections;
         })
         .catch(function (error) {
           operationState.prefetchPromise = null;
-          operationState.prefetchComplete = false;
           throw error;
         });
 
