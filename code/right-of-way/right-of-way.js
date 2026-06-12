@@ -457,10 +457,10 @@ $(document).on('knack-view-render.view_1176', function(event, view, record) {
       ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle")}\
       ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override")}\
     </ul>\
-  </div>`).appendTo("#view_1176");
+  </div>`).appendTo("#view_1176")
 
-  /* Mobile CSWZ Case Details Page */
-  $(`<div class="mobile-details-dropdown-menu">\
+/* Mobile CSWZ Case Details Page */
+$(`<div class="mobile-details-dropdown-menu">\
     <ul id="mobile-menu-list">\
       <li class="mobile-dropdown-menu">\
         <span class="desktop-button mobile-dropdown-button"> \
@@ -486,8 +486,8 @@ $(document).on('knack-view-render.view_1176', function(event, view, record) {
       ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle", true)}\
       ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override", true)}\
     </ul>\
-  </div>`).appendTo("#view_1176");
-});
+  </div>`).appendTo("#view_1176")
+})
 
 /********************************************/
 /** DAPCZ: Link Active Projects to Meeting **/
