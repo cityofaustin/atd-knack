@@ -14,22 +14,16 @@ function customizeLoginButton(viewId) {
 
   // Create a div for Login buttons
   var $coacdButton = $("<div/>", {
-    id: "coacd-button-login",
+    id: "coacd-button-login"
   });
   $coacdButton.appendTo("#" + viewId);
 
   // Append Big SSO Login button and non-SSO Login button
-  bigButton(
-    "coacd-big-button",
-    "coacd-button-login",
-    url,
-    "sign-in",
-    "Sign-In",
-  );
+  bigButton("coacd-big-button", "coacd-button-login", url, "sign-in", "Sign-In")
 
   $coacdButton.append(
     "<a class='small-button' href='javascript:void(0)'>" +
-      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>",
+      "<div class='small-button-container'><span><i class='fa fa-lock'></i></span><span> Non-COA Sign-In</span></div></a>"
   );
 
   // On non-SSO button click, hide SSO and non-SSO buttons and show Knack Login form
@@ -62,18 +56,9 @@ $(document).on("knack-view-render.any", function (event, page) {
 /*************** Big Buttons ****************/
 /********************************************/
 // Adds big button HTML directly on View id
-function bigButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  target_blank = false,
-  is_disabled = false,
-  callback = null,
-) {
+function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   const disabledClass = is_disabled ? " big-button-disabled'" : "'";
-  const newTab = target_blank ? " target='_blank'" : "";
+  const newTab = target_blank ? " target='_blank'" : "" ;
   const html = `
     <a id='${id}' 
        class='big-button-container${disabledClass}' 
@@ -88,283 +73,121 @@ function bigButton(
 }
 
 // create large Task Board button on the Home page
-$(document).on("knack-view-render.view_644", function (event, page) {
-  bigButton(
-    "task-board",
-    "view_644",
-    `${APP_URL}#task-board/`,
-    "tasks",
-    "Task Board",
-  );
+$(document).on("knack-view-render.view_644", function(event, page) {
+  bigButton("task-board", "view_644", `${APP_URL}#task-board/`, "tasks", "Task Board");
 });
 // create large Customer Portal button on the Home page
-$(document).on("knack-view-render.view_645", function (event, page) {
-  bigButton(
-    "row-portal",
-    "view_645",
-    `${APP_URL}#portal-home/`,
-    "child",
-    "Customer Portal",
-  );
+$(document).on("knack-view-render.view_645", function(event, page) {
+  bigButton("row-portal", "view_645", `${APP_URL}#portal-home/`, "child", "Customer Portal");
 });
 // create large Customer Home button on the Home page
-$(document).on("knack-view-render.view_1087", function (event, page) {
-  bigButton(
-    "customer-login",
-    "view_1087",
-    `${APP_URL}#customer/`,
-    "unlock-alt",
-    "Customer Login",
-  );
+$(document).on("knack-view-render.view_1087", function(event, page) {
+  bigButton("customer-login", "view_1087", `${APP_URL}#customer/`, "unlock-alt", "Customer Login");
 });
 // create large Account Managment button on the Home page
-$(document).on("knack-view-render.view_646", function (event, page) {
-  bigButton(
-    "account-management",
-    "view_646",
-    `${APP_URL}#account-management/`,
-    "users",
-    "Manage Internal Accounts",
-  );
+$(document).on("knack-view-render.view_646", function(event, page) {
+  bigButton("account-management", "view_646", `${APP_URL}#account-management/`, "users", "Manage Internal Accounts");
 });
 // create large Manage Customer Accounts button on the Home page
-$(document).on("knack-view-render.view_1086", function (event, page) {
-  bigButton(
-    "manage-customers",
-    "view_1086",
-    `${APP_URL}#app-admin/manage-customers/`,
-    "user",
-    "Manage Customer Accounts",
-  );
+$(document).on("knack-view-render.view_1086", function(event, page) {
+  bigButton("manage-customers", "view_1086", `${APP_URL}#app-admin/manage-customers/`, "user", "Manage Customer Accounts");
 });
 // create large TCP Projects button on the Home page
-$(document).on("knack-view-render.view_31", function (event, page) {
-  bigButton(
-    "tcp-projects",
-    "view_31",
-    `${APP_URL}#tcp-projects/`,
-    "briefcase",
-    "TCP Projects",
-  );
+$(document).on("knack-view-render.view_31", function(event, page) {
+  bigButton("tcp-projects", "view_31", `${APP_URL}#tcp-projects/`, "briefcase", "TCP Projects");
 });
 // create large CCM button on the Home page
-$(document).on("knack-view-render.view_244", function (event, page) {
-  bigButton(
-    "ccm",
-    "view_244",
-    `${APP_URL}#court-case-management/`,
-    "suitcase",
-    "Court Case Management",
-  );
+$(document).on("knack-view-render.view_244", function(event, page) {
+  bigButton("ccm", "view_244", `${APP_URL}#court-case-management/`, "suitcase", "Court Case Management");
 });
 // create large COS Reporting button on the Home page
-$(document).on("knack-view-render.view_245", function (event, page) {
-  bigButton(
-    "cos",
-    "view_245",
-    `${APP_URL}#cost-of-service-data/`,
-    "dollar",
-    "Cost of Service Data",
-  );
+$(document).on("knack-view-render.view_245", function(event, page) {
+  bigButton("cos", "view_245", `${APP_URL}#cost-of-service-data/`, "dollar", "Cost of Service Data");
 });
 // create large CSWZ button on the Home page
-$(document).on("knack-view-render.view_451", function (event, page) {
-  bigButton(
-    "tcp-cswz",
-    "view_451",
-    `${APP_URL}#tcp-cswz/`,
-    "files-o",
-    "Conflict/Shared Requests",
-  );
+$(document).on("knack-view-render.view_451", function(event, page) {
+  bigButton("tcp-cswz", "view_451", `${APP_URL}#tcp-cswz/`, "files-o", "Conflict/Shared Requests");
 });
 
 // create large Available Services button on the Customer Portal Home page
-$(document).on("knack-view-render.view_234", function (event, page) {
-  bigButton(
-    "services",
-    "view_234",
-    `${APP_URL}#customer-portal/services`,
-    "list-ul",
-    "Available Services",
-  );
+$(document).on("knack-view-render.view_234", function(event, page) {
+  bigButton("services", "view_234", `${APP_URL}#customer-portal/services`, "list-ul", "Available Services");
 });
 // create large Available Services button on the ROW Portal page
-$(document).on("knack-view-render.view_681", function (event, page) {
-  bigButton(
-    "all-services",
-    "view_681",
-    `${APP_URL}#portal-home/all-services`,
-    "list-ul",
-    "Available Services",
-  );
+$(document).on("knack-view-render.view_681", function(event, page) {
+  bigButton("all-services", "view_681", `${APP_URL}#portal-home/all-services`, "list-ul", "Available Services");
 });
 // create large Available Services button on the Customer Home page
-$(document).on("knack-view-render.view_1117", function (event, page) {
-  bigButton(
-    "customer-services",
-    "view_1117",
-    `${APP_URL}#customer/customer-services`,
-    "list-ul",
-    "Available Services",
-  );
+$(document).on("knack-view-render.view_1117", function(event, page) {
+  bigButton("customer-services", "view_1117", `${APP_URL}#customer/customer-services`, "list-ul", "Available Services");
 });
 // create large ROW Division button on the Customer Portal Home page
-$(document).on("knack-view-render.view_237", function (event, page) {
-  bigButton(
-    "row-division-link",
-    "view_237",
-    "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management",
-    "bank",
-    "ROW Division",
-    true,
-  );
+$(document).on("knack-view-render.view_237", function(event, page) {
+  bigButton("row-division-link", "view_237", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 // create large ROW Division button on the ROW Portal page
-$(document).on("knack-view-render.view_684", function (event, page) {
-  bigButton(
-    "row-division-link",
-    "view_684",
-    "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management",
-    "bank",
-    "ROW Division",
-    true,
-  );
+$(document).on("knack-view-render.view_684", function(event, page) {
+  bigButton("row-division-link", "view_684", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 // create large ROW Division button on the Customer Home page
-$(document).on("knack-view-render.view_1120", function (event, page) {
-  bigButton(
-    "row-division-link",
-    "view_1120",
-    "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management",
-    "bank",
-    "ROW Division",
-    true,
-  );
+$(document).on("knack-view-render.view_1120", function(event, page) {
+  bigButton("row-division-link", "view_1120", "https://www.austintexas.gov/transportation-public-works/divisions/right-way-management", "bank", "ROW Division", true);
 });
 
 // create large Task Board button on the Task Board Login page
-$(document).on("knack-view-render.view_1385", function (event, page) {
-  bigButton(
-    "task-board",
-    "view_1385",
-    `${APP_URL}#task-board/my-tasks`,
-    "tasks",
-    "Go to My Tasks",
-  );
+$(document).on("knack-view-render.view_1385", function(event, page) {
+  bigButton("task-board", "view_1385", `${APP_URL}#task-board/my-tasks`, "tasks", "Go to My Tasks");
 });
 
 // create large DAPCZ Meeting button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1526", function (event, page) {
-  bigButton(
-    "manage-dapcz-meetings",
-    "view_1526",
-    `${APP_URL}#manage-dapcz-meetings/`,
-    "microphone",
-    "DAPCZ Meeting",
-  );
+$(document).on("knack-view-render.view_1526", function(event, page) {
+  bigButton("manage-dapcz-meetings", "view_1526", `${APP_URL}#manage-dapcz-meetings/`, "microphone", "DAPCZ Meeting");
 });
 
 // create large DAPCZ Project button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1527", function (event, page) {
-  bigButton(
-    "manage-dapcz-project",
-    "view_1527",
-    `${APP_URL}#manage-dapcz-project/`,
-    "cubes",
-    "DAPCZ Projects",
-  );
+$(document).on("knack-view-render.view_1527", function(event, page) {
+  bigButton("manage-dapcz-project", "view_1527", `${APP_URL}#manage-dapcz-project/`, "cubes", "DAPCZ Projects");
 });
 
 // create large DAPCZ Contacts button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1528", function (event, page) {
-  bigButton(
-    "manage-dapcz-contacts",
-    "view_1528",
-    `${APP_URL}#manage-dapcz-contacts/`,
-    "users",
-    "DAPCZ Contacts",
-  );
+$(document).on("knack-view-render.view_1528", function(event, page) {
+  bigButton("manage-dapcz-contacts", "view_1528", `${APP_URL}#manage-dapcz-contacts/`, "users", "DAPCZ Contacts");
 });
 
 // create large DAPCZ Resources button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1529", function (event, page) {
-  bigButton(
-    "manage-dapcz-resources",
-    "view_1529",
-    `${APP_URL}#manage-dapcz-resources/`,
-    "book",
-    "DAPCZ Resources",
-  );
+$(document).on("knack-view-render.view_1529", function(event, page) {
+  bigButton("manage-dapcz-resources", "view_1529", `${APP_URL}#manage-dapcz-resources/`, "book", "DAPCZ Resources");
 });
 
 // create large DAPCZ Public Portal button on the Manage DAPCZ page
-$(document).on("knack-view-render.view_1593", function (event, page) {
-  bigButton(
-    "dapcz-meeting",
-    "view_1593",
-    `${APP_URL}#dapcz-meeting/`,
-    "slideshare",
-    "DAPCZ Public Portal",
-  );
+$(document).on("knack-view-render.view_1593", function(event, page) {
+  bigButton("dapcz-meeting", "view_1593", `${APP_URL}#dapcz-meeting/`, "slideshare", "DAPCZ Public Portal");
 });
 
 // create large DAPCZ Agenda button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1505", function (event, page) {
-  bigButton(
-    "dapcz-agenda",
-    "view_1505",
-    `${APP_URL}#dapcz-meeting/dapcz-agenda/`,
-    "file-o",
-    "DAPCZ Agenda",
-  );
+$(document).on("knack-view-render.view_1505", function(event, page) {
+  bigButton("dapcz-agenda", "view_1505", `${APP_URL}#dapcz-meeting/dapcz-agenda/`, "file-o", "DAPCZ Agenda");
 });
 
 // create large DAPCZ Project List button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1506", function (event, page) {
-  bigButton(
-    "dapcz-project-list",
-    "view_1506",
-    `${APP_URL}#dapcz-meeting/dapcz-project-list/`,
-    "list-ul",
-    "DAPCZ Project List",
-  );
+$(document).on("knack-view-render.view_1506", function(event, page) {
+  bigButton("dapcz-project-list", "view_1506", `${APP_URL}#dapcz-meeting/dapcz-project-list/`, "list-ul", "DAPCZ Project List");
 });
 
 // create large DAPCZ Links button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1507", function (event, page) {
-  bigButton(
-    "dapcz-links",
-    "view_1507",
-    `${APP_URL}#dapcz-meeting/dapcz-links/`,
-    "link",
-    "DAPCZ Links & Resources",
-  );
+$(document).on("knack-view-render.view_1507", function(event, page) {
+  bigButton("dapcz-links", "view_1507", `${APP_URL}#dapcz-meeting/dapcz-links/`, "link", "DAPCZ Links & Resources");
 });
 
 // create large DAPCZ Meeting Schedule button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1508", function (event, page) {
-  bigButton(
-    "dapcz-meeting-schedule",
-    "view_1508",
-    `${APP_URL}#dapcz-meeting/dapcz-meeting-schedule`,
-    "calendar",
-    "DAPCZ Meeting Schedule",
-  );
+$(document).on("knack-view-render.view_1508", function(event, page) {
+  bigButton("dapcz-meeting-schedule", "view_1508", `${APP_URL}#dapcz-meeting/dapcz-meeting-schedule`, "calendar", "DAPCZ Meeting Schedule");
 });
 
 /********************************************/
 /*********** Large Submit Buttons ***********/
 /********************************************/
-function largeSubmitButton(
-  id,
-  view_id,
-  url,
-  fa_icon,
-  button_label,
-  target_blank = false,
-  is_disabled = false,
-  callback = null,
-) {
+function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank = false, is_disabled = false, callback = null) {
   const disabledClass = is_disabled ? " submit-button-large-disabled'" : "'";
   const newTab = target_blank ? " target='_blank'" : "";
   const html = `
@@ -381,15 +204,9 @@ function largeSubmitButton(
 }
 
 // create large My Projects button on the Customer Dashboard - Customer Services page
-$(document).on("knack-view-render.view_1089", function (event, page) {
-  largeSubmitButton(
-    "my-projects",
-    "view_1089",
-    `${APP_URL}#customer/my-projects`,
-    "arrow-right",
-    "My Projects",
-  );
-});
+$(document).on("knack-view-render.view_1089", function(event, page) {
+  largeSubmitButton("my-projects", "view_1089", `${APP_URL}#customer/my-projects`, "arrow-right", "My Projects");
+}); 
 
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
@@ -404,47 +221,47 @@ function disableBreadcrumbLinks() {
 
 const BREADCRUMB_SCENES = [
   // Old TCP Application
-  "scene_97", // TCP Application Project Information page
-  "scene_98", // TCP Application Attachments page
-  "scene_99", // Review TCP Application page
-  "scene_100", // Edit Information page
-  "scene_101", // Edit Attachments page
-  "scene_102", // TCP Application Confirmation page
-
+  'scene_97',  // TCP Application Project Information page
+  'scene_98',  // TCP Application Attachments page
+  'scene_99',  // Review TCP Application page
+  'scene_100', // Edit Information page
+  'scene_101', // Edit Attachments page
+  'scene_102', // TCP Application Confirmation page
+  
   // New TCP Application
-  "scene_137", // New TCP Application page
-  "scene_138", // TCP Project Information page
-  "scene_148", // TCP Fee Information page
-  "scene_149", // TCP Documents page
-  "scene_150", // Finalize TCP Application page
-  "scene_151", // Edit Information page
-  "scene_152", // Edit Attachments page
-  "scene_153", // TCP Application Confirmation page
-
+  'scene_137', // New TCP Application page
+  'scene_138', // TCP Project Information page
+  'scene_148', // TCP Fee Information page
+  'scene_149', // TCP Documents page
+  'scene_150', // Finalize TCP Application page
+  'scene_151', // Edit Information page
+  'scene_152', // Edit Attachments page
+  'scene_153', // TCP Application Confirmation page
+  
   // Staff TCP Application
-  "scene_583", // Submit Staff TCP Application page
-
+  'scene_583', // Submit Staff TCP Application page
+  
   // TCP Conflict/Shared TCP Request
-  "scene_183", // Applicant Information page
-  "scene_184", // Conflicting Party page
-  "scene_185", // Attachments page
-  "scene_186", // Review Request page
-  "scene_187", // Submittal Confirmation page
-  "scene_188", // Edit Information page
-  "scene_189", // Edit Attachments page
-
+  'scene_183', // Applicant Information page
+  'scene_184', // Conflicting Party page
+  'scene_185', // Attachments page
+  'scene_186', // Review Request page
+  'scene_187', // Submittal Confirmation page
+  'scene_188', // Edit Information page
+  'scene_189', // Edit Attachments page
+  
   // Customer Account Signup
-  "scene_480", // Customer Confirm Account Login Step 2 page
-  "scene_476", // Customer Complete Account Setup Step 3 page
-
+  'scene_480', // Customer Confirm Account Login Step 2 page
+  'scene_476', // Customer Complete Account Setup Step 3 page
+  
   // Customer Project Creation
-  "scene_463", // Customer Create TCP Project Step 1 page
-  "scene_464", // Customer Create TCP Project Step 2 page
-  "scene_465", // Customer Create CSWZ Request Step 1 page
-  "scene_467", // Customer Create CSWZ Request Step 2 page
+  'scene_463', // Customer Create TCP Project Step 1 page
+  'scene_464', // Customer Create TCP Project Step 2 page
+  'scene_465', // Customer Create CSWZ Request Step 1 page
+  'scene_467'  // Customer Create CSWZ Request Step 2 page
 ];
 
-BREADCRUMB_SCENES.forEach((scene) => {
+BREADCRUMB_SCENES.forEach(scene => {
   $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
@@ -459,13 +276,13 @@ $(document).on("knack-scene-render.any", function (event, scene) {
 /*** Redirect from Blank Nav Pages ***/
 /*************************************/
 /*Customer Home Page "https://atd.knack.com/pte#customer-portal-home/" */
-$(document).on("knack-scene-render.scene_586", function (event, scene) {
-  window.location.href = `${APP_URL}#portal-home/`;
+$(document).on('knack-scene-render.scene_586', function(event, scene) { 
+window.location.href = `${APP_URL}#portal-home/`;
 });
 
 /*Task Board Page "https://atd.knack.com/pte#task-board/" */
-$(document).on("knack-scene-render.scene_166", function (event, scene) {
-  window.location.href = `${APP_URL}#task-board/my-tasks/`;
+$(document).on('knack-scene-render.scene_166', function(event, scene) { 
+window.location.href = `${APP_URL}#task-board/my-tasks/`;
 });
 
 /*****************************/
@@ -473,58 +290,53 @@ $(document).on("knack-scene-render.scene_166", function (event, scene) {
 /*****************************/
 
 /* Auto Submit New TCP Intake Submission Cycle for Customer Manage TCP Project Page*/
-$(document).on("knack-scene-render.scene_589", function (event, scene) {
-  $("button[type=submit]").submit();
+$(document).on('knack-scene-render.scene_589', function(event, scene) {
+    $('button[type=submit]').submit();
 });
 /* Auto Submit New TCP Review Submission Cycle for Customer Manage TCP Project Page*/
-$(document).on("knack-scene-render.scene_411", function (event, scene) {
-  $("button[type=submit]").submit();
+$(document).on('knack-scene-render.scene_411', function(event, scene) {
+    $('button[type=submit]').submit();
 });
 /* Auto Submit New CSWZ Submission Cycle for Customer Customer Manage Conflict/Shared TCP Project Page*/
-$(document).on("knack-scene-render.scene_417", function (event, scene) {
-  $("button[type=submit]").submit();
+$(document).on('knack-scene-render.scene_417', function(event, scene) {
+    $('button[type=submit]').submit();
 });
 
 /* Auto Submit Approve TCP Case */
-$(document).on("knack-scene-render.scene_488", function (event, scene) {
-  $("button[type=submit]").submit();
+$(document).on('knack-scene-render.scene_488', function(event, scene) {
+    $('button[type=submit]').submit();
 });
 
 /***********************************/
 /*** Custom TCP Navigation Menu  ***/
 /***********************************/
-function tcpDropdownMenuItem(
-  recordId,
-  route,
-  iconName,
-  linkName,
-  mobile = false,
-  newTab = false,
-) {
-  const buttonClass = mobile ? "desktop-button" : "kn-button";
+function tcpDropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
+  const buttonClass = mobile ? "desktop-button" : "kn-button"
   if (newTab) {
-    return `<li class="${buttonClass}">\
+    return (
+      `<li class="${buttonClass}">\
         <a href="#tcp-projects/tcp-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
           <span class="icon is-small"> \
             <i class="fa ${iconName}" /> \
           </span>\
           <span>${linkName}</span>\
         </a>\
-      </li>`;
+      </li>`)
   }
 
-  return `<li class="${buttonClass}">\
+  return (
+    `<li class="${buttonClass}">\
       <a href="#tcp-projects/tcp-details/${recordId}/${route}/${recordId}" class="tcp-nav-menu">\
         <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
         <span style="color:#163f6e">${linkName}</span>\
       </a>\
-    </li>`;
+    </li>`)
 }
 
 /* TCP Case Details Page */
-$(document).on("knack-view-render.view_1175", function (event, view, record) {
+$(document).on('knack-view-render.view_1175', function(event, view, record) {
   var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
@@ -554,10 +366,10 @@ $(document).on("knack-view-render.view_1175", function (event, view, record) {
       </li>\
       
     </ul>\
-  </div>`).appendTo("#view_1175");
+  </div>`).appendTo("#view_1175")
 
-  /* Mobile TCP Case Details Page */
-  $(`<div class="mobile-details-dropdown-menu">\
+/* Mobile TCP Case Details Page */
+$(`<div class="mobile-details-dropdown-menu">\
     <ul id="mobile-menu-list">\
       <li class="mobile-dropdown-menu">\
         <span class="desktop-button mobile-dropdown-button"> \
@@ -583,44 +395,39 @@ $(document).on("knack-view-render.view_1175", function (event, view, record) {
       </li>\
       
     </ul>\
-  </div>`).appendTo("#view_1175");
-});
+  </div>`).appendTo("#view_1175")
+})
 
 /************************************/
 /*** Custom CSWZ Navigation Menu  ***/
 /************************************/
-function cswzDropdownMenuItem(
-  recordId,
-  route,
-  iconName,
-  linkName,
-  mobile = false,
-  newTab = false,
-) {
-  const buttonClass = mobile ? "desktop-button" : "kn-button";
+function cswzDropdownMenuItem(recordId, route, iconName, linkName, mobile = false, newTab = false) {
+  const buttonClass = mobile ? "desktop-button" : "kn-button"
   if (newTab) {
-    return `<li class="${buttonClass}">\
+    return (
+      `<li class="${buttonClass}">\
         <a href="#tcp-cswz/cswz-request-details/${recordId}/${route}/${recordId}" target="_blank" and rel="noopener noreferrer">\
           <span class="icon is-small"> \
             <i class="fa ${iconName}" /> \
           </span>\
           <span>${linkName}</span>\
         </a>\
-      </li>`;
+      </li>`)
   }
 
-  return `<li class="${buttonClass}">\
+  return (
+    `<li class="${buttonClass}">\
       <a href="#tcp-cswz/cswz-request-details/${recordId}/${route}/${recordId}" class="cswz-nav-menu">\
         <span class="icon is-small" style="color:#163f6e"> \
           <i class="fa ${iconName}" /> \
         </span>\
         <span style="color:#163f6e">${linkName}</span>\
       </a>\
-    </li>`;
+    </li>`)
 }
 
 /* CSWZ Case Details Page */
-$(document).on("knack-view-render.view_1176", function (event, view, record) {
+$(document).on('knack-view-render.view_1176', function(event, view, record) {
   var recordId = view.scene.scene_id;
 
   $(`<div class="details-dropdown-menu tabs">\
@@ -650,10 +457,10 @@ $(document).on("knack-view-render.view_1176", function (event, view, record) {
       ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle")}\
       ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override")}\
     </ul>\
-  </div>`).appendTo("#view_1176");
+  </div>`).appendTo("#view_1176")
 
-  /* Mobile CSWZ Case Details Page */
-  $(`<div class="mobile-details-dropdown-menu">\
+/* Mobile CSWZ Case Details Page */
+$(`<div class="mobile-details-dropdown-menu">\
     <ul id="mobile-menu-list">\
       <li class="mobile-dropdown-menu">\
         <span class="desktop-button mobile-dropdown-button"> \
@@ -679,8 +486,9 @@ $(document).on("knack-view-render.view_1176", function (event, view, record) {
       ${cswzDropdownMenuItem(recordId, "create-cswz-submission-cycle-staff", "fa-plus-square", "Create Submission Cycle", true)}\
       ${cswzDropdownMenuItem(recordId, "cswz-submission-override", "fa-share-square", "Create Submission Cycle Override", true)}\
     </ul>\
-  </div>`).appendTo("#view_1176");
-});
+  </div>`).appendTo("#view_1176")
+})
+
 /********************************************/
 /** DAPCZ: Link Active Projects to Meeting **/
 /** https://github.com/cityofaustin/atd-data-tech/issues/26752 **/
@@ -1937,9 +1745,6 @@ function dapczLink_renderModalRows(rows) {
       "</td>" +
       "<td>" +
       dapczLink_escapeHtml(row.label) +
-      (row.isLinked
-        ? ' <span class="dapcz-link-row-note">(Linked to this meeting)</span>'
-        : "") +
       "</td></tr>";
   });
 
@@ -2482,7 +2287,6 @@ $(document).on("knack-scene-render.scene_759", function () {
   dapczLink_addMeetingActionColumn({ key: DAPCZ_LINK_CONFIG.views.meetings });
   dapczLink_scheduleProjectConnectionsPrefetch();
 });
-
 /********************************************************************/
 /* Generates a Strong Random Password for Internal Account Creation */
 /********************************************************************/
@@ -2532,3 +2336,4 @@ $(document).on("knack-view-render.view_29", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+
