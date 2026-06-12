@@ -518,6 +518,10 @@ var DapczLink = (function () {
     batchDelay: 500,
     operationCooldownMs: 3000,
     feedbackDismissMs: 5000,
+    knownErrors: {
+      fieldRequired:
+        "Knack rejected clearing the meeting connection. Make sure the field_1423 (dapcz_meetings) is not required a required field on the dapcz_project object.",
+    },
   };
 
   var operationState = {
@@ -591,10 +595,7 @@ var DapczLink = (function () {
       typeof xhr.responseText === "string" ? xhr.responseText : "";
 
     if (xhr.status === 400 && responseText && /required/i.test(responseText)) {
-      return (
-        "Knack rejected clearing the meeting connection. On view_1786, set field_1423 " +
-        "(dapcz_meetings) to not required so projects can be unlinked."
-      );
+      return CONFIG.knownErrors.fieldRequired;
     }
 
     if (responseText) {
@@ -733,7 +734,9 @@ var DapczLink = (function () {
    */
   function getConnectionRecords(model, fieldKey) {
     // Best case: structured _raw array from API or rich model data.
-    var raw = model.get ? model.get(fieldKey + "_raw") : model[fieldKey + "_raw"];
+    var raw = model.get
+      ? model.get(fieldKey + "_raw")
+      : model[fieldKey + "_raw"];
     if (raw && raw.length) {
       return raw.map(function (record) {
         return { id: record.id, identifier: record.identifier || "" };
@@ -833,7 +836,9 @@ var DapczLink = (function () {
       return "";
     }
 
-    var raw = model.get ? model.get(fieldKey + "_raw") : model[fieldKey + "_raw"];
+    var raw = model.get
+      ? model.get(fieldKey + "_raw")
+      : model[fieldKey + "_raw"];
     if (raw && raw.length && raw[0].identifier) {
       return String(raw[0].identifier).trim();
     }
@@ -885,8 +890,7 @@ var DapczLink = (function () {
   function getGroupHeaderForRow($row) {
     var groupHeader = "";
     var groupFieldKey =
-      projectsTableFields.groupHeader ||
-      CONFIG.fields.projectGroupHeader;
+      projectsTableFields.groupHeader || CONFIG.fields.projectGroupHeader;
 
     if ($row.length && groupFieldKey) {
       groupHeader = getCellText($row, groupFieldKey);
@@ -993,10 +997,7 @@ var DapczLink = (function () {
         batch.map(function (projectId) {
           return fetchProjectRecord(projectId)
             .then(function (record) {
-              connectionMap[projectId] = getConnectionRecords(
-                record,
-                fieldKey,
-              );
+              connectionMap[projectId] = getConnectionRecords(record, fieldKey);
             })
             .catch(function (error) {
               logApiError(error);
@@ -1026,8 +1027,7 @@ var DapczLink = (function () {
   /** Merge a batch fetch result into operationState.projectConnections. */
   function mergeProjectConnections(connectionMap) {
     Object.keys(connectionMap || {}).forEach(function (projectId) {
-      operationState.projectConnections[projectId] =
-        connectionMap[projectId];
+      operationState.projectConnections[projectId] = connectionMap[projectId];
     });
   }
 
@@ -1068,10 +1068,7 @@ var DapczLink = (function () {
       );
     });
 
-    if (
-      !missingIds.length &&
-      operationState.prefetchProjectIdsKey === idsKey
-    ) {
+    if (!missingIds.length && operationState.prefetchProjectIdsKey === idsKey) {
       return Promise.resolve(operationState.projectConnections);
     }
 
@@ -1086,17 +1083,16 @@ var DapczLink = (function () {
 
     var idsToFetch = missingIds.length ? missingIds : projectIds;
 
-    operationState.prefetchPromise =
-      fetchProjectConnectionsBatch(idsToFetch)
-        .then(function (connectionMap) {
-          mergeProjectConnections(connectionMap);
-          operationState.prefetchPromise = null;
-          return operationState.projectConnections;
-        })
-        .catch(function (error) {
-          operationState.prefetchPromise = null;
-          throw error;
-        });
+    operationState.prefetchPromise = fetchProjectConnectionsBatch(idsToFetch)
+      .then(function (connectionMap) {
+        mergeProjectConnections(connectionMap);
+        operationState.prefetchPromise = null;
+        return operationState.projectConnections;
+      })
+      .catch(function (error) {
+        operationState.prefetchPromise = null;
+        throw error;
+      });
 
     return operationState.prefetchPromise;
   }
@@ -1241,12 +1237,8 @@ var DapczLink = (function () {
 
     return fetchProjectRecord(project.id)
       .then(function (record) {
-        var existingConnections = getConnectionRecords(
-          record,
-          fieldKey,
-        );
-        operationState.projectConnections[project.id] =
-          existingConnections;
+        var existingConnections = getConnectionRecords(record, fieldKey);
+        operationState.projectConnections[project.id] = existingConnections;
 
         var payload = buildProjectMeetingPayload(
           meeting,
@@ -1255,24 +1247,24 @@ var DapczLink = (function () {
         );
         var clearingAllMeetings = !shouldLink && payload[fieldKey].length === 0;
 
-        return putProjectPayload(project.id, payload).catch(
-          function (xhr) {
-            if (!clearingAllMeetings || !xhr || xhr.status !== 400) {
-              throw xhr;
-            }
+        return putProjectPayload(project.id, payload).catch(function (xhr) {
+          if (!clearingAllMeetings || !xhr || xhr.status !== 400) {
+            throw xhr;
+          }
 
-            var emptyPayload = {};
-            emptyPayload[fieldKey] = "";
-            emptyPayload[fieldKey + "_raw"] = "";
+          var emptyPayload = {};
+          emptyPayload[fieldKey] = "";
+          emptyPayload[fieldKey + "_raw"] = "";
 
-            return putProjectPayload(project.id, emptyPayload);
-          },
-        );
+          return putProjectPayload(project.id, emptyPayload);
+        });
       })
       .then(function (response) {
         var record = response.record || response;
-        operationState.projectConnections[project.id] =
-          getConnectionRecords(record, fieldKey);
+        operationState.projectConnections[project.id] = getConnectionRecords(
+          record,
+          fieldKey,
+        );
         return response;
       })
       .catch(function (xhr) {
@@ -1308,8 +1300,7 @@ var DapczLink = (function () {
       }
     }
 
-    var nameFieldKey =
-      projectsTableFields.projectName || configNameField;
+    var nameFieldKey = projectsTableFields.projectName || configNameField;
 
     if ($row.length && nameFieldKey) {
       var $cell = $row.find("td." + nameFieldKey).first();
@@ -1323,10 +1314,7 @@ var DapczLink = (function () {
       }
     }
 
-    return getFieldDisplayValue(
-      model,
-      CONFIG.fields.projectName,
-    );
+    return getFieldDisplayValue(model, CONFIG.fields.projectName);
   }
 
   /** Full display label: optional group header prefix + project name. */
@@ -1400,11 +1388,9 @@ var DapczLink = (function () {
 
   /** Refresh view_1755 and return updated project models. */
   function refreshProjectModels() {
-    return refreshViewModels(CONFIG.views.projects).then(
-      function () {
-        return getProjectModels();
-      },
-    );
+    return refreshViewModels(CONFIG.views.projects).then(function () {
+      return getProjectModels();
+    });
   }
 
   /** Refresh view_1768 (meetings table) after save. */
@@ -1455,16 +1441,8 @@ var DapczLink = (function () {
 
       rows.push({
         id: projectId,
-        zone: getProjectFieldValue(
-          $row,
-          model,
-          CONFIG.fields.projectZone,
-        ),
-        rsn: getProjectFieldValue(
-          $row,
-          model,
-          CONFIG.fields.projectRsn,
-        ),
+        zone: getProjectFieldValue($row, model, CONFIG.fields.projectZone),
+        rsn: getProjectFieldValue($row, model, CONFIG.fields.projectRsn),
         label: getProjectNameFromRow($row, model) || "Project",
         isLinked: linkedToMeeting,
         isChecked: linkedToMeeting,
@@ -1729,8 +1707,7 @@ var DapczLink = (function () {
     operationState.modalFilter = filter || "all";
 
     $("#dapcz-link-modal-filter .dapcz-link-filter-btn").each(function () {
-      var isActive =
-        $(this).data("filter") === operationState.modalFilter;
+      var isActive = $(this).data("filter") === operationState.modalFilter;
       $(this).toggleClass("is-active", isActive).attr("aria-pressed", isActive);
     });
 
@@ -1755,11 +1732,7 @@ var DapczLink = (function () {
 
     if (visibleCount === 0) {
       $empty
-        .text(
-          getModalFilterEmptyMessage(
-            operationState.modalFilter,
-          ),
-        )
+        .text(getModalFilterEmptyMessage(operationState.modalFilter))
         .prop("hidden", false);
       $table.addClass("is-empty");
     } else {
@@ -1971,9 +1944,7 @@ var DapczLink = (function () {
               "Unable to load current project links. Showing table data only.",
             );
           }
-          renderModalRows(
-            buildProjectRows(operationState.currentMeeting),
-          );
+          renderModalRows(buildProjectRows(operationState.currentMeeting));
         }
       });
   }
@@ -2214,10 +2185,7 @@ var DapczLink = (function () {
     if (operationState.isProcessing) {
       return;
     }
-    if (
-      now - operationState.lastOperationTime <
-      CONFIG.operationCooldownMs
-    ) {
+    if (now - operationState.lastOperationTime < CONFIG.operationCooldownMs) {
       return;
     }
 
@@ -2389,14 +2357,14 @@ $(document).on(
   function () {
     DapczLink.cacheProjectsTableFields();
     DapczLink.scheduleProjectConnectionsPrefetch();
-  }
+  },
 );
 
 $(document).on(
   "knack-view-render." + DapczLink.CONFIG.views.meetings,
   function (event, view) {
     DapczLink.addMeetingActionColumn(view);
-  }
+  },
 );
 
 $(document).on("knack-scene-render.scene_759", function () {
