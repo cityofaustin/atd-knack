@@ -746,7 +746,7 @@ var DapczLink = (function () {
       return [];
     }
 
-    // Array of connection objects or bare record IDs.
+    // Defensive: array of connection objects or bare record IDs.
     if (Array.isArray(value)) {
       return value
         .map(function (record) {
@@ -761,18 +761,18 @@ var DapczLink = (function () {
         .filter(Boolean);
     }
 
-    // Single linked record object.
+    // Defensive: single linked record object.
     if (typeof value === "object" && value.id) {
       return [{ id: value.id, identifier: value.identifier || "" }];
     }
 
     if (typeof value === "string") {
-      // Rendered HTML spans (table cells) or a lone 24-char record ID.
       var fromHtml = parseConnectionHtml(value);
       if (fromHtml.length) {
         return fromHtml;
       }
 
+      // Defensive: lone 24-char Knack record ID.
       if (/^[a-f0-9]{24}$/i.test(value)) {
         return [{ id: value, identifier: "" }];
       }
@@ -783,13 +783,12 @@ var DapczLink = (function () {
 
   /**
    * True when the given meeting appears in a project's connection data.
-   * Checks three sources in priority order:
-   *   1. Pre-fetched connections array (fastest, from operationState cache)
-   *   2. Knack model's connection field via getConnectionRecords
-   *   3. DOM cell text in the projects table row (last resort)
+   * Checks two sources in priority order:
+   *   1. Pre-fetched connections array (from operationState cache or buildProjectRows)
+   *   2. DOM cell text in the projects table row (last resort)
    * Any param may be null/empty — the function skips that tier and falls through.
    */
-  function isProjectLinkedToMeeting(connections, model, $row, meeting) {
+  function isProjectLinkedToMeeting(connections, $row, meeting) {
     if (!meeting) {
       return false;
     }
@@ -811,14 +810,6 @@ var DapczLink = (function () {
       return true;
     }
 
-    if (model) {
-      var fieldKey = CONFIG.fields.projectMeetingConnection;
-      var modelRecords = getConnectionRecords(model, fieldKey);
-      if (modelRecords.length && modelRecords.some(matchesMeeting)) {
-        return true;
-      }
-    }
-
     if ($row && $row.length) {
       var meetingFieldKey =
         projectsTableFields.meetingConnection ||
@@ -835,12 +826,6 @@ var DapczLink = (function () {
     }
 
     return false;
-  }
-
-  /** Return the first linked record from a connection field, or null. */
-  function getConnectionDetails(model, fieldKey) {
-    var records = getConnectionRecords(model, fieldKey);
-    return records.length ? records[0] : null;
   }
 
   /** Read a Knack field's display text from model _raw, identifier, or plain value. */
@@ -1146,7 +1131,7 @@ var DapczLink = (function () {
     var connectionMap = operationState.projectConnections || {};
 
     Object.keys(connectionMap).forEach(function (projectId) {
-      if (isProjectLinkedToMeeting(connectionMap[projectId], null, null, meeting)) {
+      if (isProjectLinkedToMeeting(connectionMap[projectId], null, meeting)) {
         initialLinkedIds[projectId] = true;
       }
     });
@@ -1471,7 +1456,6 @@ var DapczLink = (function () {
 
       var linkedToMeeting = isProjectLinkedToMeeting(
         connections,
-        model,
         $row,
         meeting,
       );
