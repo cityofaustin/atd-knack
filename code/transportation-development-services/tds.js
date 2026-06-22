@@ -162,7 +162,7 @@ function largeSubmitButton(id, view_id, url, fa_icon, button_label, target_blank
 
 // create large Start Submittal button on the TDS Customer Portal - Services page for TIA Determinations
 $(document).on("knack-view-render.view_1876", function(event, page) {
-  largeSubmitButton("start-tia-determination-submittal", "view_1876", `${APP_URL}#tia-determination/`, "arrow-right", "Start Submittal");
+  largeSubmitButton("start-tia-determination-application", "view_1876", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for TIA Compliance
 $(document).on("knack-view-render.view_1894", function(event, page) {
@@ -170,7 +170,7 @@ $(document).on("knack-view-render.view_1894", function(event, page) {
 });
 // create large Start Application button on the TDS Customer Portal - Services page for TIA
 $(document).on("knack-view-render.view_1870", function(event, page) {
-  largeSubmitButton("start-tia-application", "view_1870", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
+  largeSubmitButton("start-full-tia-application", "view_1870", `${APP_URL}#tia-application/`, "arrow-right", "Start Application");
 });
 // create large Start Application button on the TDS Customer Portal - Services page for NTA
 $(document).on("knack-view-render.view_1900", function(event, page) {
@@ -236,12 +236,22 @@ const BREADCRUMB_SCENES = [
   // TIA Request Type Selection
   'scene_377',
 
-  // TIA Determination
+  // old TIA Determination
   'scene_412', // Determination Information page
   'scene_413', // Review Determination page
   'scene_414', // Edit Information page
   'scene_417', // Determination Confirmation page
   'scene_640', // Determination Document page
+
+  // TIA Determination
+  'scene_1098', // TIA Applicant Information page
+  'scene_1099', // TIA Project Information page
+  'scene_1100', // TIA Required Documents page
+  'scene_1101', // TIA Submit Application page
+  'scene_1102', // TIA Edit Information page
+  'scene_1103', // TIA Edit Attachments page
+  'scene_1104', // TIA Application Confirmation page
+  'scene_1105', // Completed Documents page
 
   // TIA Compliance Application
   'scene_381', // TIA Applicant Information page
@@ -738,6 +748,62 @@ $(`<div class="mobile-details-dropdown-menu">\
   </div>`).appendTo("#view_3346")
 })
 
+/* Case Details Page for TIA Determination */
+$(document).on('knack-view-render.view_3564', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-reviews/tia-case-details/${recordId}/" data-kn-slug="#mitigation-details">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+        </ul>\
+      </li>\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-reviews/tia-case-details/${recordId}/edit-tia-case-details/${recordId}" data-kn-slug="#update-case-details">\
+          <span class="nav-dropdown-link">Update Case Details</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" /> \
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes")}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers")}\
+        </ul>\
+      </li>\
+    </ul>\
+  </div>`).appendTo("#view_3564")
+
+/* Mobile Case Details Page for TIA Determination */
+$(`<div class="mobile-details-dropdown-menu">\
+    <ul id="tia-mobile-menu-list">\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button"> \
+          <i class="fa fa-angle-down tia-dropdown" /> \
+          Case Management Menu\
+        </span>\
+        <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
+        </ul>\
+      </li>\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button">\
+          <i class="fa fa-angle-down tia-dropdown" /> \
+          Update Case Details Menu\
+        </span>\
+        <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${dropdownMenuItem(recordId, "edit-tia-case-details", "fa-edit", "Edit Case Details & Notes", true)}\
+          ${dropdownMenuItem(recordId, "assign-case-reviewers", "fa-users", "Assign Case Reviewers", true)}\
+        </ul>\
+      </li>\
+    </ul>\
+  </div>`).appendTo("#view_3564")
+})
+
 /* Case Management Page */
 $(document).on('knack-view-render.view_887', function(event, view, record) {
   var recordId = view.scene.scene_id;
@@ -776,6 +842,44 @@ $(`<div class="mobile-details-dropdown-menu">\
       ${dropdownMenuItem(recordId, "manage-tia", "fa-child", "Customer's View", true)}\
     </ul>\
   </div>`).appendTo("#view_887")
+})
+
+/* Case Management Page - Determination Menu */
+$(document).on('knack-view-render.view_3576', function(event, view, record) {
+  var recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-reviews/tia-case-details/${recordId}/tia-case-management/${recordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "manage-tia", "fa-child", "Customer's View")}\
+    </ul>\
+  </div>`).appendTo("#view_3576")
+
+/* Mobile Case Management Page - Determination Menu */
+$(`<div class="mobile-details-dropdown-menu">\
+    <ul id="tia-mobile-menu-list">\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button"> \
+          <i class="fa fa-angle-down tia-dropdown" /> \
+          Case Management Menu\
+        </span>\
+        <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${dropdownMenuItem(recordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(recordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "manage-tia", "fa-child", "Customer's View", true)}\
+    </ul>\
+  </div>`).appendTo("#view_3576")
 })
 
 /* Mitigation Page */
@@ -930,7 +1034,7 @@ $(document).on('knack-view-render.view_902', function(event, view, record) {
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review")}\
-      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-exchange", "Reject/Approve")}\
+      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-gavel", "Complete Review")}\
       ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer")}\
       ${dropdownMenuItem(recordId, "adjust-ts-submission-cycle-due-date", "fa-calendar", "Adjust Due Date")}\
     </ul>\
@@ -951,11 +1055,57 @@ $(`<div class="mobile-details-dropdown-menu">\
         </ul>\
       </li>\
       ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review", true)}\
-      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-exchange", "Reject/Approve", true)}\
+      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-gavel", "Complete Review", true)}\
       ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer", true)}\
       ${dropdownMenuItem(recordId, "adjust-ts-submission-cycle-due-date", "fa-calendar", "Adjust Due Date", true)}\
     </ul>\
   </div>`).appendTo("#view_902")
+})
+
+/* Submission Details Page - Determination Cycle Menu */
+$(document).on('knack-view-render.view_3577', function(event, view, record) {
+   // regex: match the 24 digit record id that comes in hash part of url after "/"
+  const parentRecordId = window.location.hash.match(/(?<=\/)\d[a-z0-9]{23}/)[0];
+  const recordId = view.scene.scene_id;
+
+  $(`<div class="details-dropdown-menu tabs">\
+    <ul id="tia-menu-list">\
+      <li class="tia-dropdown-menu kn-dropdown-menu kn-button">\
+        <a href="#tia-reviews/tia-case-details/${parentRecordId}/tia-case-management/${parentRecordId}" data-kn-slug="#case-management">\
+          <span class="nav-dropdown-link">Case Management</span>\
+          <span class="kn-dropdown-icon fa fa-caret-down" />\
+        </a>\
+        <ul class="kn-dropdown-menu-list tia-dropdown-menu-list" style="min-width: 152px; margin: 0;">\
+          ${dropdownMenuItem(parentRecordId, "tia-case-details", "fa-list-alt", "Case Details")}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-management", "fa-archive", "Scope & Submissions")}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review")}\
+      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-gavel", "Complete Review")}\
+      ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer")}\
+      ${dropdownMenuItem(recordId, "adjust-ts-submission-cycle-due-date", "fa-calendar", "Adjust Due Date")}\
+    </ul>\
+  </div>`).appendTo("#view_3577")
+
+/* Mobile Submission Details Page - Determination Cycle Menu */
+$(`<div class="mobile-details-dropdown-menu">\
+    <ul id="tia-mobile-menu-list">\
+      <li class="tia-mobile-dropdown-menu">\
+        <span class="tia-button mobile-dropdown-button"> \
+          <i class="fa fa-angle-down tia-dropdown" /> \
+          Case Management Menu\
+        </span>\
+        <ul class="tia-dropdown-menu-list" style="min-width: 152px; margin: .5em;">\
+          ${dropdownMenuItem(parentRecordId, "tia-case-details", "fa-list-alt", "Case Details", true)}\
+          ${dropdownMenuItem(parentRecordId, "tia-case-management", "fa-archive", "Scope & Submissions", true)}\
+        </ul>\
+      </li>\
+      ${dropdownMenuItem(recordId, "begin-submission-review", "fa-play-circle-o", "Begin Review", true)}\
+      ${dropdownMenuItem(recordId, "complete-submission-review", "fa-gavel", "Complete Review", true)}\
+      ${dropdownMenuItem(recordId, "assign-submission-reviewer", "fa-hand-o-up", "Assign Reviewer", true)}\
+      ${dropdownMenuItem(recordId, "adjust-ts-submission-cycle-due-date", "fa-calendar", "Adjust Due Date", true)}\
+    </ul>\
+  </div>`).appendTo("#view_3577")
 })
 
 /*************************************************/
