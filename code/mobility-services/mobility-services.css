@@ -199,6 +199,7 @@
 }
 
 .trigger-button-large-disabled {
+  cursor: not-allowed;
   width: 250px;
   border-color: gray;
   border-radius: 4px;
@@ -208,9 +209,6 @@
   opacity: 0.6;
   display: inline-block;
   outline-color: transparent;
-}
-.disabled {
-  cursor: not-allowed;
 }
 
 a.trigger-button-large {
@@ -259,17 +257,19 @@ a.big-button-container {
 /**************************************/
 /***** Remove Back Links on Scene *****/
 /**************************************/
-#kn-scene_198 .kn-back-link,    /* Submitted OA            */
-#kn-scene_209 .kn-back-link,    /* 1 - Service Type        */
-#kn-scene_235 .kn-back-link,    /* 2 - Business Info       */
-#kn-scene_239 .kn-back-link,    /* 3 - Insurance           */
-#kn-scene_241 .kn-back-link,    /* 4 - Additional People   */
-#kn-scene_245 .kn-back-link,    /* 5 - Vehicle Information */
-#kn-scene_250 .kn-back-link,    /* 6 - Review and Submit   */
-#kn-scene_288 .kn-back-link     /* 7 - Add Notary          */
-{
-  display: none;
-}
+:where(
+  #kn-scene_198 .kn-back-link,    /* Submitted OA            */
+  #kn-scene_209 .kn-back-link,    /* 1 - Service Type        */
+  #kn-scene_235 .kn-back-link,    /* 2 - Business Info       */
+  #kn-scene_239 .kn-back-link,    /* 3 - Insurance           */
+  #kn-scene_241 .kn-back-link,    /* 4 - Additional People   */
+  #kn-scene_245 .kn-back-link,    /* 5 - Vehicle Information */
+  #kn-scene_250 .kn-back-link,    /* 6 - Review and Submit   */
+  #kn-scene_288 .kn-back-link,    /* 7 - Add Notary          */
+  #kn-scene_463 .kn-back-link     /* OA - Approval Documents */
+  ) {
+    display: none;
+    }
 
 /***************************************/
 /********* FA Icon Positioning *********/
