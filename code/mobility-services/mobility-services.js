@@ -425,7 +425,6 @@ $(document).on('knack-view-render.view_1496', function(event, page) {
   const links = document.querySelectorAll("#view_1496 a");
   links.forEach(link => {
     link.setAttribute("target", "_blank");
-    link.setAttribute("rel", "noopener noreferrer");
   });
 });
 
