@@ -416,15 +416,3 @@ $(document).on("knack-view-render.view_353", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
-
-/**********************************/
-/* Open preview button in new Tab */
-/**********************************/
-// Opens preview approval documents in a new tab.
-$(document).on('knack-view-render.view_1496', function(event, page) {
-  const links = document.querySelectorAll("#view_1496 a");
-  links.forEach(link => {
-    link.setAttribute("target", "_blank");
-  });
-});
-
