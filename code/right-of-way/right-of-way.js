@@ -489,6 +489,1889 @@ $(`<div class="mobile-details-dropdown-menu">\
   </div>`).appendTo("#view_1176")
 })
 
+/********************************************/
+/** DAPCZ: Link Active Projects to Meeting **/
+/** https://github.com/cityofaustin/atd-data-tech/issues/26752 **/
+/********************************************/
+// Helpers live in the IIFE; Knack hooks stay global (see DapczLink at bottom).
+var DapczLink = (function () {
+  var CONFIG = {
+    views: {
+      meetings: "view_1768",
+      projects: "view_1755",
+    },
+    api: {
+      baseUrl: "https://api.knack.com/v1",
+      scene: "scene_776",
+      projectUpdateView: "view_1786",
+    },
+    fields: {
+      projectMeetingConnection: "field_1423",
+      meetingDate: "field_1402",
+      projectName: "field_1394",
+      projectZone: "field_1414",
+      projectRsn: "field_1421",
+      projectStatus: "field_1410",
+      projectGroupHeader: "",
+    },
+    batchSize: 5,
+    batchDelay: 500,
+    operationCooldownMs: 3000,
+    feedbackDismissMs: 5000,
+    knownErrors: {
+      fieldRequired:
+        "Knack rejected clearing the meeting connection. Make sure the field_1423 (dapcz_meetings) is not required a required field on the dapcz_project object.",
+    },
+  };
+
+  var operationState = {
+    isProcessing: false,
+    lastOperationTime: 0,
+    currentMeeting: null,
+    projectConnections: {},
+    initialLinkedIds: {},
+    modalFilter: "all",
+    prefetchPromise: null,
+    prefetchProjectIdsKey: "",
+    feedbackDismissTimeoutId: null,
+    modalSort: { column: "project", direction: "asc" },
+  };
+
+  var projectsTableFields = {
+    projectName: null,
+    groupHeader: null,
+    meetingConnection: null,
+  };
+
+  /** Poll until a DOM selector matches, then run callback (Knack views render async). */
+  function elementLoaded(el, callback, attempts) {
+    var tryCount = attempts || 0;
+    if ($(el).length) {
+      callback($(el));
+      return;
+    }
+    if (tryCount > 40) {
+      return;
+    }
+    setTimeout(function () {
+      elementLoaded(el, callback, tryCount + 1);
+    }, 300);
+  }
+
+  /** Log Knack API failures to the console for debugging. */
+  function logApiError(error) {
+    console.error("DAPCZ link API error:", error);
+    if (error && error.responseText) {
+      console.error("DAPCZ API response:", error.responseText);
+    }
+  }
+
+  /** Extract a user-facing message from a parsed Knack error response body. */
+  function getApiErrorFromBody(body) {
+    if (!body) {
+      return "";
+    }
+    if (body.message) {
+      return body.message;
+    }
+    if (body.errors) {
+      return JSON.stringify(body.errors);
+    }
+    return "";
+  }
+
+  /** Extract a user-facing message from a jQuery XHR / Knack API failure. */
+  function getApiErrorFromXhr(xhr) {
+    if (!xhr) {
+      return "";
+    }
+
+    var fromResponseJson = getApiErrorFromBody(xhr.responseJSON);
+    if (fromResponseJson) {
+      return fromResponseJson;
+    }
+
+    var responseText =
+      typeof xhr.responseText === "string" ? xhr.responseText : "";
+
+    if (xhr.status === 400 && responseText && /required/i.test(responseText)) {
+      return CONFIG.knownErrors.fieldRequired;
+    }
+
+    if (responseText) {
+      try {
+        var fromParsed = getApiErrorFromBody(JSON.parse(responseText));
+        if (fromParsed) {
+          return fromParsed;
+        }
+      } catch (parseError) {
+        if (responseText.length < 300) {
+          return responseText;
+        }
+      }
+    }
+
+    return xhr.statusText || "";
+  }
+
+  /** Normalize any API error (string, Error, or XHR) into a modal-friendly message. */
+  function formatApiError(error) {
+    if (!error) {
+      return "Unknown error";
+    }
+    if (typeof error === "string") {
+      return error;
+    }
+    if (error.message) {
+      return error.message;
+    }
+
+    var xhrMessage = getApiErrorFromXhr(error.xhr || error);
+    return xhrMessage || "Request failed";
+  }
+
+  /**
+   * Resolve field keys for the Active Projects table (view_1755) by matching column headers.
+   * Knack cells are selected via td.field_XXXX classes, not labels, this cache lets row
+   * helpers (ex: getProjectNameFromRow) read values from the DOM when the
+   * model is missing data.
+   */
+  function cacheProjectsTableFields() {
+    var viewKey = CONFIG.views.projects;
+
+    // Project name column — header label may vary slightly in Builder.
+    projectsTableFields.projectName = getTableFieldKeyByHeader(
+      viewKey,
+      function (text) {
+        return text === "project name" || text.indexOf("project name") === 0;
+      },
+    );
+
+    // Group header rows in the table (used as a fallback for row grouping).
+    projectsTableFields.groupHeader = getTableFieldKeyByHeader(
+      viewKey,
+      function (text) {
+        return text.indexOf("group header") >= 0;
+      },
+    );
+
+    // Meeting connection: prefer config (field_1423); fall back to header lookup if unset.
+    projectsTableFields.meetingConnection =
+      CONFIG.fields.projectMeetingConnection ||
+      getTableFieldKeyByHeader(viewKey, function (text) {
+        return (
+          text.indexOf("dapcz_meeting") >= 0 ||
+          text === "dapcz_meetings" ||
+          text.indexOf("meeting date") >= 0
+        );
+      });
+  }
+
+  /** Escape text before inserting into dynamically built HTML. */
+  function escapeHtml(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  /**
+   * Extract a display string from a dapcz_meeting Knack model (field_1402).
+   * Knack date fields may be a plain string or an object with .date / .iso_date
+   * depending on context (table model vs API record). Used for modal title/hint
+   * and as a fallback when matching meeting connection identifiers.
+   */
+  function formatMeetingDate(model) {
+    var dateField = CONFIG.fields.meetingDate;
+    var value = model.get ? model.get(dateField) : model[dateField];
+
+    if (!value) {
+      return "Meeting";
+    }
+    if (typeof value === "object" && value.date) {
+      return value.date;
+    }
+    if (typeof value === "object" && value.iso_date) {
+      return value.iso_date;
+    }
+
+    return String(value);
+  }
+
+  /**
+   * Parse linked meeting records from Knack connection-field HTML.
+   * When field_1423 lacks a _raw array, Knack may return markup like
+   * <span class="{recordId}" data-kn="connection-value">{date}</span>.
+   * Returns [{ id, identifier }, ...] so link detection matches the _raw shape.
+   */
+  function parseConnectionHtml(value) {
+    if (!value || typeof value !== "string" || value.indexOf("data-kn") === -1) {
+      return [];
+    }
+
+    var records = [];
+    // Capture record ID (class) and display label (inner text) per connection span.
+    var pattern =
+      /class="([a-f0-9]{24})"[^>]*data-kn="connection-value"[^>]*>([^<]*)</gi;
+    var match;
+
+    while ((match = pattern.exec(value)) !== null) {
+      records.push({
+        id: match[1],
+        identifier: (match[2] || "").trim(),
+      });
+    }
+
+    return records;
+  }
+
+  /**
+   * Normalize a Knack connection field (field_1423) into [{ id, identifier }, ...].
+   * Knack exposes the same link data in many shapes depending on source (API record,
+   * table model, rendered HTML). This function always returns a uniform array for link checks
+   * and payload building. Returns [] when the field is empty or unrecognized.
+   */
+  function getConnectionRecords(model, fieldKey) {
+    // Best case: structured _raw array from API or rich model data.
+    var raw = model.get
+      ? model.get(fieldKey + "_raw")
+      : model[fieldKey + "_raw"];
+    if (raw && raw.length) {
+      return raw.map(function (record) {
+        return { id: record.id, identifier: record.identifier || "" };
+      });
+    }
+
+    var value = model.get ? model.get(fieldKey) : model[fieldKey];
+    if (!value) {
+      return [];
+    }
+
+    // Defensive: array of connection objects or bare record IDs.
+    if (Array.isArray(value)) {
+      return value
+        .map(function (record) {
+          if (typeof record === "object" && record && record.id) {
+            return { id: record.id, identifier: record.identifier || "" };
+          }
+          if (typeof record === "string") {
+            return { id: record, identifier: "" };
+          }
+          return null;
+        })
+        .filter(Boolean);
+    }
+
+    // Defensive: single linked record object.
+    if (typeof value === "object" && value.id) {
+      return [{ id: value.id, identifier: value.identifier || "" }];
+    }
+
+    if (typeof value === "string") {
+      var fromHtml = parseConnectionHtml(value);
+      if (fromHtml.length) {
+        return fromHtml;
+      }
+
+      // Defensive: lone 24-char Knack record ID.
+      if (/^[a-f0-9]{24}$/i.test(value)) {
+        return [{ id: value, identifier: "" }];
+      }
+    }
+
+    return [];
+  }
+
+  /**
+   * True when the given meeting appears in a project's connection data.
+   * Checks two sources in priority order:
+   *   1. Pre-fetched connections array (from operationState cache or buildProjectRows)
+   *   2. DOM cell text in the projects table row (last resort)
+   * Any param may be null/empty — the function skips that tier and falls through.
+   */
+  function isProjectLinkedToMeeting(connections, $row, meeting) {
+    if (!meeting) {
+      return false;
+    }
+
+    function matchesMeeting(record) {
+      if (String(record.id) === String(meeting.id)) {
+        return true;
+      }
+      if (meeting.dateLabel && record.identifier === meeting.dateLabel) {
+        return true;
+      }
+      if (meeting.identifier && record.identifier === meeting.identifier) {
+        return true;
+      }
+      return false;
+    }
+
+    if (connections && connections.length && connections.some(matchesMeeting)) {
+      return true;
+    }
+
+    if ($row && $row.length) {
+      var meetingFieldKey =
+        projectsTableFields.meetingConnection ||
+        CONFIG.fields.projectMeetingConnection;
+      var cellText = meetingFieldKey ? getCellText($row, meetingFieldKey) : "";
+      if (cellText) {
+        if (meeting.dateLabel && cellText.indexOf(meeting.dateLabel) >= 0) {
+          return true;
+        }
+        if (meeting.identifier && cellText.indexOf(meeting.identifier) >= 0) {
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  /** Read a Knack field's display text from model _raw, identifier, or plain value. */
+  function getFieldDisplayValue(model, fieldKey) {
+    if (!fieldKey) {
+      return "";
+    }
+
+    var raw = model.get
+      ? model.get(fieldKey + "_raw")
+      : model[fieldKey + "_raw"];
+    if (raw && raw.length && raw[0].identifier) {
+      return String(raw[0].identifier).trim();
+    }
+
+    var value = model.get ? model.get(fieldKey) : model[fieldKey];
+    if (value === null || value === undefined) {
+      return "";
+    }
+
+    if (typeof value === "object" && value.identifier) {
+      return String(value.identifier).trim();
+    }
+
+    return String(value).trim();
+  }
+
+  /** Find a table column's field key (e.g. field_1394) by matching its header text. */
+  function getTableFieldKeyByHeader(viewKey, headerMatch) {
+    var fieldKey = null;
+    $("#" + viewKey + " table.kn-table-table thead th").each(function () {
+      var headerText = $(this).text().replace(/\s+/g, " ").trim().toLowerCase();
+      if (headerMatch(headerText)) {
+        var classes = (this.className || "").split(/\s+/);
+        for (var i = 0; i < classes.length; i++) {
+          if (classes[i].indexOf("field_") === 0) {
+            fieldKey = classes[i];
+            return false;
+          }
+        }
+      }
+    });
+    return fieldKey;
+  }
+
+  /** Read trimmed cell text from a table row by Knack field key class. */
+  function getCellText($row, fieldKey) {
+    if (!$row.length || !fieldKey) {
+      return "";
+    }
+    return $row
+      .find("td." + fieldKey)
+      .first()
+      .text()
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+  /** Get the group header label for a project row (field or preceding kn-table-group row). */
+  function getGroupHeaderForRow($row) {
+    var groupHeader = "";
+    var groupFieldKey =
+      projectsTableFields.groupHeader || CONFIG.fields.projectGroupHeader;
+
+    if ($row.length && groupFieldKey) {
+      groupHeader = getCellText($row, groupFieldKey);
+    }
+
+    if (!groupHeader && $row.length) {
+      groupHeader = $row
+        .prevAll("tr.kn-table-group")
+        .first()
+        .find("td")
+        .first()
+        .text()
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    return groupHeader;
+  }
+
+  /** Knack REST API root URL from config. */
+  function getApiBaseUrl() {
+    return CONFIG.api.baseUrl || "https://api.knack.com/v1";
+  }
+
+  /** Auth headers for Knack REST calls using the logged-in user's session token. */
+  function getApiHeaders() {
+    return {
+      "X-Knack-Application-Id": Knack.application_id,
+      "X-Knack-REST-API-KEY": "knack",
+      Authorization: Knack.getUserToken(),
+      "content-type": "application/json",
+    };
+  }
+
+  /** Build the PUT/GET URL for a project record via view_1786. */
+  function getProjectUpdateUrl(projectId) {
+    var api = CONFIG.api;
+    return (
+      getApiBaseUrl() +
+      "/scenes/" +
+      api.scene +
+      "/views/" +
+      api.projectUpdateView +
+      "/records/" +
+      projectId
+    );
+  }
+
+  /** GET a single dapcz_project record through the API edit form (view_1786). */
+  function fetchProjectRecord(projectId) {
+    return new Promise(function (resolve, reject) {
+      $.ajax({
+        type: "GET",
+        url: getProjectUpdateUrl(projectId),
+        headers: getApiHeaders(),
+      })
+        .done(function (response) {
+          resolve(response.record || response);
+        })
+        .fail(function (xhr) {
+          reject(xhr);
+        });
+    });
+  }
+
+  /** Collect record IDs from visible project rows in view_1755 (skips group headers). */
+  function getProjectIdsFromTable() {
+    var viewKey = CONFIG.views.projects;
+    var projectIds = [];
+
+    $("#" + viewKey + " tbody tr[id]").each(function () {
+      var $row = $(this);
+      if ($row.hasClass("kn-table-group")) {
+        return;
+      }
+      var projectId = $row.attr("id");
+      if (projectId) {
+        projectIds.push(projectId);
+      }
+    });
+
+    return projectIds;
+  }
+
+  /**
+   * Batch-fetch field_1423 connections for many projects (rate-limited).
+   * Returns { [projectId]: [{ id, identifier }, ...] }.
+   */
+  function fetchProjectConnectionsBatch(projectIds) {
+    var batchSize = CONFIG.batchSize;
+    var fieldKey = CONFIG.fields.projectMeetingConnection;
+    var connectionMap = {};
+    var index = 0;
+
+    function processBatch() {
+      var batch = projectIds.slice(index, index + batchSize);
+      if (!batch.length) {
+        return Promise.resolve(connectionMap);
+      }
+
+      index += batchSize;
+
+      return Promise.all(
+        batch.map(function (projectId) {
+          return fetchProjectRecord(projectId)
+            .then(function (record) {
+              connectionMap[projectId] = getConnectionRecords(record, fieldKey);
+            })
+            .catch(function (error) {
+              logApiError(error);
+              connectionMap[projectId] = [];
+            });
+        }),
+      ).then(function () {
+        if (index < projectIds.length) {
+          return new Promise(function (resolve) {
+            setTimeout(function () {
+              resolve(processBatch());
+            }, CONFIG.batchDelay);
+          });
+        }
+        return connectionMap;
+      });
+    }
+
+    return processBatch();
+  }
+
+  /** Stable cache key from sorted project IDs (detects table changes). */
+  function getProjectIdsKey(projectIds) {
+    return projectIds.slice().sort().join(",");
+  }
+
+  /** Merge a batch fetch result into operationState.projectConnections. */
+  function mergeProjectConnections(connectionMap) {
+    Object.keys(connectionMap || {}).forEach(function (projectId) {
+      operationState.projectConnections[projectId] = connectionMap[projectId];
+    });
+  }
+
+  /** True when every visible project row has a cached connection entry. */
+  function hasCompleteProjectConnectionCache() {
+    var projectIds = getProjectIdsFromTable();
+    if (!projectIds.length) {
+      return false;
+    }
+
+    return projectIds.every(function (projectId) {
+      return Object.prototype.hasOwnProperty.call(
+        operationState.projectConnections,
+        projectId,
+      );
+    });
+  }
+
+  /**
+   * Prefetch project→meeting connections for all visible projects.
+   * Deduplicates in-flight requests; only fetches missing IDs when possible.
+   */
+  function prefetchProjectConnections() {
+    if (!CONFIG.api.projectUpdateView) {
+      return Promise.resolve(operationState.projectConnections);
+    }
+
+    var projectIds = getProjectIdsFromTable();
+    if (!projectIds.length) {
+      return Promise.resolve(operationState.projectConnections);
+    }
+
+    var idsKey = getProjectIdsKey(projectIds);
+    var missingIds = projectIds.filter(function (projectId) {
+      return !Object.prototype.hasOwnProperty.call(
+        operationState.projectConnections,
+        projectId,
+      );
+    });
+
+    if (!missingIds.length && operationState.prefetchProjectIdsKey === idsKey) {
+      return Promise.resolve(operationState.projectConnections);
+    }
+
+    if (
+      operationState.prefetchPromise &&
+      operationState.prefetchProjectIdsKey === idsKey
+    ) {
+      return operationState.prefetchPromise;
+    }
+
+    operationState.prefetchProjectIdsKey = idsKey;
+
+    var idsToFetch = missingIds.length ? missingIds : projectIds;
+
+    operationState.prefetchPromise = fetchProjectConnectionsBatch(idsToFetch)
+      .then(function (connectionMap) {
+        mergeProjectConnections(connectionMap);
+        operationState.prefetchPromise = null;
+        return operationState.projectConnections;
+      })
+      .catch(function (error) {
+        operationState.prefetchPromise = null;
+        throw error;
+      });
+
+    return operationState.prefetchPromise;
+  }
+
+  /** Wait for view_1755 rows, then start connection prefetch (non-blocking). */
+  function scheduleProjectConnectionsPrefetch() {
+    if (!CONFIG.api.projectUpdateView) {
+      return;
+    }
+
+    var viewKey = CONFIG.views.projects;
+    elementLoaded("#" + viewKey + " tbody tr[id]", function () {
+      prefetchProjectConnections().catch(function (error) {
+        console.warn("DAPCZ project connection prefetch failed:", error);
+      });
+    });
+  }
+
+  /**
+   * Snapshot which projects are linked to the meeting (saved baseline).
+   * Used for Assigned/Unassigned filters and detecting checkbox changes on Save.
+   */
+  function setInitialLinkedIdsForMeeting(meeting) {
+    var initialLinkedIds = {};
+    var connectionMap = operationState.projectConnections || {};
+
+    Object.keys(connectionMap).forEach(function (projectId) {
+      if (isProjectLinkedToMeeting(connectionMap[projectId], null, meeting)) {
+        initialLinkedIds[projectId] = true;
+      }
+    });
+
+    operationState.initialLinkedIds = initialLinkedIds;
+    return initialLinkedIds;
+  }
+
+  /** Prefetch connections and refresh initialLinkedIds for the open meeting. */
+  function loadProjectLinkState(meeting) {
+    return prefetchProjectConnections().then(function () {
+      setInitialLinkedIdsForMeeting(meeting);
+      return operationState.projectConnections;
+    });
+  }
+
+  /**
+   * Build a minimal PUT payload for field_1423 only — add or remove one meeting
+   * from existing connections without touching other project fields.
+   */
+  function buildProjectMeetingPayload(
+    meeting,
+    existingConnections,
+    shouldLink,
+  ) {
+    var fieldKey = CONFIG.fields.projectMeetingConnection;
+    var connections = (existingConnections || []).map(function (record) {
+      return {
+        id: record.id,
+        identifier: record.identifier || "",
+      };
+    });
+    var meetingEntry = {
+      id: meeting.id,
+      identifier: meeting.identifier || meeting.dateLabel || "",
+    };
+    var payload = {};
+
+    if (shouldLink) {
+      if (
+        !connections.some(function (record) {
+          return String(record.id) === String(meetingEntry.id);
+        })
+      ) {
+        connections.push(meetingEntry);
+      }
+    } else {
+      connections = connections.filter(function (record) {
+        if (String(record.id) === String(meetingEntry.id)) {
+          return false;
+        }
+        if (meeting.dateLabel && record.identifier === meeting.dateLabel) {
+          return false;
+        }
+        if (meeting.identifier && record.identifier === meeting.identifier) {
+          return false;
+        }
+        return true;
+      });
+    }
+
+    payload[fieldKey] = connections;
+    payload[fieldKey + "_raw"] = connections;
+
+    return payload;
+  }
+
+  /** PUT a JSON payload to view_1786 for one project record. */
+  function putProjectPayload(projectId, payload) {
+    return new Promise(function (resolve, reject) {
+      $.ajax({
+        type: "PUT",
+        url: getProjectUpdateUrl(projectId),
+        headers: getApiHeaders(),
+        data: JSON.stringify(payload),
+        contentType: "application/json",
+      })
+        .done(function (response) {
+          resolve(response);
+        })
+        .fail(function (xhr) {
+          reject(xhr);
+        });
+    });
+  }
+
+  /** Get a project Backbone model from view_1755 by record ID. */
+  function getProjectModel(projectId) {
+    var viewKey = CONFIG.views.projects;
+    if (
+      !Knack.views[viewKey] ||
+      !Knack.views[viewKey].model ||
+      !Knack.views[viewKey].model.data
+    ) {
+      return null;
+    }
+
+    return Knack.views[viewKey].model.data.get(projectId);
+  }
+
+  /**
+   * Link or unlink one project from a meeting via API.
+   * GET fresh record → merge field_1423 → PUT; retries empty string on unlink 400.
+   */
+  function updateProjectMeetingLink(project, meeting, shouldLink) {
+    if (!CONFIG.api.projectUpdateView) {
+      return Promise.reject({
+        message:
+          "DAPCZ API form view is not configured. Set CONFIG.api.projectUpdateView to view_1786.",
+      });
+    }
+
+    var fieldKey = CONFIG.fields.projectMeetingConnection;
+
+    return fetchProjectRecord(project.id)
+      .then(function (record) {
+        var existingConnections = getConnectionRecords(record, fieldKey);
+        operationState.projectConnections[project.id] = existingConnections;
+
+        var payload = buildProjectMeetingPayload(
+          meeting,
+          existingConnections,
+          shouldLink,
+        );
+        var clearingAllMeetings = !shouldLink && payload[fieldKey].length === 0;
+
+        return putProjectPayload(project.id, payload).catch(function (xhr) {
+          if (!clearingAllMeetings || !xhr || xhr.status !== 400) {
+            throw xhr;
+          }
+
+          var emptyPayload = {};
+          emptyPayload[fieldKey] = "";
+          emptyPayload[fieldKey + "_raw"] = "";
+
+          return putProjectPayload(project.id, emptyPayload);
+        });
+      })
+      .then(function (response) {
+        var record = response.record || response;
+        operationState.projectConnections[project.id] = getConnectionRecords(
+          record,
+          fieldKey,
+        );
+        return response;
+      })
+      .catch(function (xhr) {
+        var message = formatApiError(xhr);
+        logApiError(xhr);
+        return Promise.reject({ message: message, xhr: xhr });
+      });
+  }
+
+  /** Read a field value from Knack model first, then fall back to table cell text. */
+  function getProjectFieldValue($row, model, fieldKey) {
+    if (model && fieldKey) {
+      var fromModel = getFieldDisplayValue(model, fieldKey);
+      if (fromModel) {
+        return fromModel;
+      }
+    }
+
+    if ($row.length && fieldKey) {
+      return getCellText($row, fieldKey);
+    }
+
+    return "";
+  }
+
+  /** Resolve project display name from model, cached field key, or table cell link text. */
+  function getProjectNameFromRow($row, model) {
+    var configNameField = CONFIG.fields.projectName;
+    if (model && configNameField) {
+      var fromModel = getFieldDisplayValue(model, configNameField);
+      if (fromModel) {
+        return fromModel;
+      }
+    }
+
+    var nameFieldKey = projectsTableFields.projectName || configNameField;
+
+    if ($row.length && nameFieldKey) {
+      var $cell = $row.find("td." + nameFieldKey).first();
+      var fromLink = $cell.find("a").first().text().replace(/\s+/g, " ").trim();
+      if (fromLink) {
+        return fromLink;
+      }
+      var fromCell = $cell.text().replace(/\s+/g, " ").trim();
+      if (fromCell) {
+        return fromCell;
+      }
+    }
+
+    return getFieldDisplayValue(model, CONFIG.fields.projectName);
+  }
+
+  /** Full display label: optional group header prefix + project name. */
+  function getProjectDisplayLabelFromRow($row, model) {
+    var projectName = getProjectNameFromRow($row, model);
+    var groupHeader = getGroupHeaderForRow($row);
+
+    if (groupHeader && projectName) {
+      return groupHeader + " - " + projectName;
+    }
+
+    return projectName || "Project";
+  }
+
+  /** All project models in view_1755 that have a matching visible table row. */
+  function getProjectModels() {
+    var viewKey = CONFIG.views.projects;
+    if (
+      !Knack.views[viewKey] ||
+      !Knack.views[viewKey].model ||
+      !Knack.views[viewKey].model.data
+    ) {
+      return [];
+    }
+
+    return (Knack.views[viewKey].model.data.models || []).filter(
+      function (model) {
+        var projectId = model.id || model.get("id");
+        var $row = $("#" + viewKey + " tbody tr#" + projectId);
+        return $row.length && !$row.hasClass("kn-table-group");
+      },
+    );
+  }
+
+  /** Re-fetch a Knack view's model and wait for re-render (with timeout fallback). */
+  function refreshViewModels(viewKey) {
+    return new Promise(function (resolve) {
+      if (!Knack.views[viewKey] || !Knack.views[viewKey].model) {
+        resolve();
+        return;
+      }
+
+      var resolved = false;
+      function finish() {
+        if (resolved) {
+          return;
+        }
+        resolved = true;
+        resolve();
+      }
+
+      var timeoutId = setTimeout(finish, 2500);
+
+      $(document).one("knack-view-render." + viewKey, function () {
+        clearTimeout(timeoutId);
+        setTimeout(finish, 300);
+      });
+
+      Knack.views[viewKey].model.fetch({
+        success: function () {
+          clearTimeout(timeoutId);
+          finish();
+        },
+        error: function () {
+          clearTimeout(timeoutId);
+          finish();
+        },
+      });
+    });
+  }
+
+  /** Refresh view_1755 and return updated project models. */
+  function refreshProjectModels() {
+    return refreshViewModels(CONFIG.views.projects).then(function () {
+      return getProjectModels();
+    });
+  }
+
+  /** Refresh view_1768 (meetings table) after save. */
+  function refreshMeetingView() {
+    return refreshViewModels(CONFIG.views.meetings);
+  }
+
+  /**
+   * Build modal row data from view_1755: zone, RSN, name, and link state
+   * for the given meeting (uses cache, model, and row fallbacks).
+   */
+  function buildProjectRows(meeting) {
+    cacheProjectsTableFields();
+
+    var viewKey = CONFIG.views.projects;
+    var connectionField = CONFIG.fields.projectMeetingConnection;
+    var connectionMap = operationState.projectConnections || {};
+    var rows = [];
+
+    $("#" + viewKey + " tbody tr[id]").each(function () {
+      var $row = $(this);
+      if ($row.hasClass("kn-table-group")) {
+        return;
+      }
+
+      var projectId = $row.attr("id");
+      if (!projectId) {
+        return;
+      }
+
+      var model =
+        Knack.views[viewKey] &&
+        Knack.views[viewKey].model &&
+        Knack.views[viewKey].model.data
+          ? Knack.views[viewKey].model.data.get(projectId)
+          : null;
+      var connections = connectionMap[projectId];
+
+      if (!connections && model) {
+        connections = getConnectionRecords(model, connectionField);
+      }
+
+      var linkedToMeeting = isProjectLinkedToMeeting(
+        connections,
+        $row,
+        meeting,
+      );
+
+      rows.push({
+        id: projectId,
+        zone: getProjectFieldValue($row, model, CONFIG.fields.projectZone),
+        rsn: getProjectFieldValue($row, model, CONFIG.fields.projectRsn),
+        label: getProjectNameFromRow($row, model) || "Project",
+        isLinked: linkedToMeeting,
+        isChecked: linkedToMeeting,
+      });
+    });
+
+    return rows;
+  }
+
+  /** Reset modal table sort to Project ascending (on open/close). */
+  function resetModalSort() {
+    operationState.modalSort = { column: "project", direction: "asc" };
+  }
+
+  /** HTML for one sortable modal column header button. */
+  function getModalSortableHeaderCell(column, label) {
+    return (
+      '<th class="dapcz-sort-col" scope="col" data-sort-col="' +
+      column +
+      '">' +
+      '<button type="button" class="dapcz-sort-btn" data-sort="' +
+      column +
+      '">' +
+      '<span class="dapcz-sort-label">' +
+      label +
+      '</span> <i class="dapcz-sort-icon fa fa-sort" aria-hidden="true"></i>' +
+      "</button></th>"
+    );
+  }
+
+  /** HTML for the modal table thead (select-all + Zone / RSN / Project). */
+  function getModalTableHeadHtml() {
+    return (
+      "<thead><tr>" +
+      '<th class="dapcz-sort-col dapcz-sort-col-select" scope="col">' +
+      '<input type="checkbox" id="dapcz-select-all" class="dapcz-modal-checkbox" aria-label="Select all projects">' +
+      "</th>" +
+      getModalSortableHeaderCell("zone", "Zone") +
+      getModalSortableHeaderCell("rsn", "RSN #") +
+      getModalSortableHeaderCell("project", "Project") +
+      "</tr></thead>"
+    );
+  }
+
+  /** Case-insensitive compare with numeric sorting (e.g. RSN 2 before 10). */
+  function compareNaturalSortValues(a, b) {
+    return String(a).localeCompare(String(b), undefined, {
+      numeric: true,
+      sensitivity: "base",
+    });
+  }
+
+  /** Sort key for a project row object by column name. */
+  function getProjectRowSortValue(row, column) {
+    if (column === "zone") {
+      return row.zone || "";
+    }
+    if (column === "rsn") {
+      return row.rsn || "";
+    }
+    if (column === "linked") {
+      return row.isLinked ? 1 : 0;
+    }
+    return row.label || "";
+  }
+
+  /** Compare two sort values for a given column (numeric for linked, natural otherwise). */
+  function compareProjectRowValues(aVal, bVal, column) {
+    if (column === "linked") {
+      return (Number(aVal) || 0) - (Number(bVal) || 0);
+    }
+    return compareNaturalSortValues(aVal, bVal);
+  }
+
+  /** Sort project row data in place using operationState.modalSort. */
+  function sortProjectRowData(rows) {
+    var sort = operationState.modalSort;
+
+    rows.sort(function (a, b) {
+      var aVal = getProjectRowSortValue(a, sort.column);
+      var bVal = getProjectRowSortValue(b, sort.column);
+      var result = compareProjectRowValues(aVal, bVal, sort.column);
+
+      if (result === 0) {
+        result = compareNaturalSortValues(a.label, b.label);
+      }
+
+      return sort.direction === "desc" ? -result : result;
+    });
+  }
+
+  /** Read current row data and checkbox states from the modal DOM (for re-sort without data loss). */
+  function getModalRowData() {
+    var rows = [];
+    $("#dapcz-modal-rows tr[data-project-id]").each(function () {
+      var $row = $(this);
+      rows.push({
+        id: String($row.data("project-id")),
+        zone: String($row.data("zone") || ""),
+        rsn: String($row.data("rsn") || ""),
+        label: String($row.data("project-label") || ""),
+        isLinked: $row.hasClass("is-linked"),
+        isChecked: $row.find(".dapcz-project-checkbox").is(":checked"),
+      });
+    });
+    return rows;
+  }
+
+  /** Update sort icon and aria-sort on column headers to match modalSort state. */
+  function syncModalSortHeaders() {
+    var sort = operationState.modalSort;
+
+    $("#dapcz-modal-overlay .dapcz-sort-col[data-sort-col]").each(
+      function () {
+        var $th = $(this);
+        var column = $th.data("sort-col");
+        var $btn = $th.find(".dapcz-sort-btn");
+        var $icon = $btn.find(".dapcz-sort-icon");
+        var isActive = column === sort.column;
+
+        $btn.toggleClass("is-active", isActive);
+        $icon.removeClass("fa-sort fa-sort-asc fa-sort-desc");
+        $icon.addClass(
+          isActive
+            ? sort.direction === "asc"
+              ? "fa-sort-asc"
+              : "fa-sort-desc"
+            : "fa-sort",
+        );
+        $th.attr(
+          "aria-sort",
+          isActive
+            ? sort.direction === "asc"
+              ? "ascending"
+              : "descending"
+            : "none",
+        );
+      },
+    );
+  }
+
+  function handleModalSortClick(event) {
+    event.preventDefault();
+
+    var column = $(this).data("sort");
+    if (!column) {
+      return;
+    }
+
+    if (operationState.modalSort.column === column) {
+      operationState.modalSort.direction =
+        operationState.modalSort.direction === "asc" ? "desc" : "asc";
+    } else {
+      operationState.modalSort.column = column;
+      operationState.modalSort.direction = "asc";
+    }
+
+    renderModalRows(getModalRowData());
+  }
+
+  function ensureModalShell() {
+    if ($("#dapcz-modal-overlay").length) {
+      return;
+    }
+
+    $("body").append([
+      '<div id="dapcz-modal-overlay" class="dapcz-modal-overlay" aria-hidden="true">',
+      '  <div id="dapcz-modal" class="dapcz-modal" role="dialog" aria-modal="true">',
+      '    <div class="dapcz-modal-header">',
+      '      <h3 id="dapcz-modal-title" class="dapcz-modal-title"></h3>',
+      '      <button type="button" id="dapcz-modal-close" class="dapcz-modal-close" aria-label="Close">&times;</button>',
+      '    </div>',
+      '    <p id="dapcz-modal-hint" class="dapcz-modal-hint"></p>',
+      '    <div id="dapcz-modal-message"></div>',
+      '    <div id="dapcz-modal-filter" class="dapcz-filter-group" role="group" aria-label="Filter projects">',
+      '      <button type="button" class="dapcz-filter-btn is-active" data-filter="all">All <span class="dapcz-filter-count" data-count="all">0</span></button>',
+      '      <button type="button" class="dapcz-filter-btn" data-filter="assigned">Assigned <span class="dapcz-filter-count" data-count="assigned">0</span></button>',
+      '      <button type="button" class="dapcz-filter-btn" data-filter="unassigned">Unassigned <span class="dapcz-filter-count" data-count="unassigned">0</span></button>',
+      '    </div>',
+      '    <div class="dapcz-modal-table-wrap">',
+      '      <table class="dapcz-modal-table">',
+                 getModalTableHeadHtml(),
+      '        <tbody id="dapcz-modal-rows"></tbody>',
+      '      </table>',
+      '      <div id="dapcz-modal-empty" class="dapcz-empty-state" hidden></div>',
+      '    </div>',
+      '    <div id="dapcz-progress-slot"></div>',
+      '    <div class="dapcz-modal-actions">',
+      '      <a id="dapcz-modal-submit" class="dapcz-btn dapcz-btn-primary" href="javascript:void(0)">',
+      '        <span class="icon is-small"><i class="fa fa-link"></i></span><span>Save Project Links</span></a>',
+      '      <a id="dapcz-modal-cancel" class="dapcz-btn dapcz-btn-secondary" href="javascript:void(0)">',
+      '        <span class="icon is-small"><i class="fa fa-times"></i></span><span>Cancel</span></a>',
+      '    </div>',
+      '  </div>',
+      '</div>',
+    ].join("\n"));
+
+    $("#dapcz-modal-close, #dapcz-modal-cancel").on(
+      "click",
+      closeModal,
+    );
+    $("#dapcz-modal-overlay").on("click", function (event) {
+      if (event.target === this) {
+        closeModal();
+      }
+    });
+    $("#dapcz-select-all").on("change", handleSelectAllChange);
+    $("#dapcz-modal-submit").on("click", handleModalSubmit);
+    $("#dapcz-modal-filter").on(
+      "click",
+      ".dapcz-filter-btn",
+      handleModalFilterClick,
+    );
+    $("#dapcz-modal-overlay .dapcz-modal-table").on(
+      "click",
+      ".dapcz-sort-btn",
+      handleModalSortClick,
+    );
+    $(document).on(
+      "change.dapczCheckbox",
+      "#dapcz-modal-rows .dapcz-project-checkbox",
+      function () {
+        syncSelectAllCheckbox();
+      },
+    );
+  }
+
+  function getModalFilterEmptyMessage(filter) {
+    if (filter === "assigned") {
+      return "No projects are linked to this meeting.";
+    }
+    if (filter === "unassigned") {
+      return "No unassigned projects. All active projects are linked to this meeting.";
+    }
+    return "There are no active projects to display.";
+  }
+
+  function updateFilterCounts() {
+    var $rows = $("#dapcz-modal-rows tr[data-project-id]");
+    var total = $rows.length;
+    var initialLinkedIds = operationState.initialLinkedIds || {};
+    var assigned = 0;
+
+    $rows.each(function () {
+      if (initialLinkedIds[$(this).data("project-id")]) {
+        assigned++;
+      }
+    });
+
+    var unassigned = total - assigned;
+
+    $('.dapcz-filter-count[data-count="all"]').text("(" + total + ")");
+    $('.dapcz-filter-count[data-count="assigned"]').text(
+      "(" + assigned + ")",
+    );
+    $('.dapcz-filter-count[data-count="unassigned"]').text(
+      "(" + unassigned + ")",
+    );
+  }
+
+  function applyModalFilter(filter) {
+    operationState.modalFilter = filter || "all";
+
+    $("#dapcz-modal-filter .dapcz-filter-btn").each(function () {
+      var isActive = $(this).data("filter") === operationState.modalFilter;
+      $(this).toggleClass("is-active", isActive).attr("aria-pressed", isActive);
+    });
+
+    var initialLinkedIds = operationState.initialLinkedIds || {};
+    var visibleCount = 0;
+    $("#dapcz-modal-rows tr[data-project-id]").each(function () {
+      var $row = $(this);
+      var isSavedLinked = !!initialLinkedIds[$row.data("project-id")];
+      var show =
+        operationState.modalFilter === "all" ||
+        (operationState.modalFilter === "assigned" && isSavedLinked) ||
+        (operationState.modalFilter === "unassigned" && !isSavedLinked);
+
+      $row.toggleClass("is-filter-hidden", !show);
+      if (show) {
+        visibleCount++;
+      }
+    });
+
+    var $empty = $("#dapcz-modal-empty");
+    var $table = $("#dapcz-modal-overlay .dapcz-modal-table");
+
+    if (visibleCount === 0) {
+      $empty
+        .text(getModalFilterEmptyMessage(operationState.modalFilter))
+        .prop("hidden", false);
+      $table.addClass("is-empty");
+    } else {
+      $empty.prop("hidden", true).empty();
+      $table.removeClass("is-empty");
+    }
+
+    syncSelectAllCheckbox();
+  }
+
+  function handleModalFilterClick(event) {
+    event.preventDefault();
+    var filter = $(event.currentTarget).data("filter");
+    if (!filter || filter === operationState.modalFilter) {
+      return;
+    }
+    applyModalFilter(filter);
+  }
+
+  function showModalLoading(message) {
+    $("#dapcz-modal-rows").html(
+      '<tr class="dapcz-loading-row"><td colspan="4">' +
+        escapeHtml(message || "Loading project links...") +
+        "</td></tr>",
+    );
+    $("#dapcz-modal-empty").prop("hidden", true);
+    $("#dapcz-modal-overlay .dapcz-modal-table").removeClass(
+      "is-empty",
+    );
+    $("#dapcz-modal-filter .dapcz-filter-btn").prop("disabled", true);
+    $("#dapcz-select-all")
+      .prop("checked", false)
+      .prop("indeterminate", false)
+      .prop("disabled", true);
+  }
+
+  function closeModal() {
+    clearModalFeedbackDismiss();
+    $("#dapcz-modal-overlay")
+      .removeClass("is-active")
+      .attr("aria-hidden", "true");
+    $("#dapcz-progress-slot").empty();
+    $("#dapcz-modal-message").empty();
+    operationState.currentMeeting = null;
+    operationState.initialLinkedIds = {};
+    operationState.modalFilter = "all";
+    resetModalSort();
+  }
+
+  function renderModalRows(rows) {
+    var html = "";
+
+    sortProjectRowData(rows);
+
+    rows.forEach(function (row) {
+      html +=
+        '<tr class="' +
+        (row.isLinked ? "is-linked" : "") +
+        '" data-project-id="' +
+        escapeHtml(row.id) +
+        '" data-project-label="' +
+        escapeHtml(row.label) +
+        '" data-zone="' +
+        escapeHtml(row.zone) +
+        '" data-rsn="' +
+        escapeHtml(row.rsn) +
+        '">' +
+        '<td><input type="checkbox" class="dapcz-project-checkbox dapcz-modal-checkbox" ' +
+        (row.isChecked ? "checked " : "") +
+        'aria-label="Select ' +
+        escapeHtml(row.label) +
+        '"></td>' +
+        "<td>" +
+        escapeHtml(row.zone) +
+        "</td>" +
+        "<td>" +
+        escapeHtml(row.rsn) +
+        "</td>" +
+        "<td>" +
+        escapeHtml(row.label) +
+        "</td></tr>";
+    });
+
+    $("#dapcz-modal-rows").html(html);
+    $("#dapcz-modal-filter .dapcz-filter-btn").prop("disabled", false);
+    syncModalSortHeaders();
+    updateFilterCounts();
+    applyModalFilter(operationState.modalFilter);
+  }
+
+  function getVisibleProjectCheckboxes() {
+    return $(
+      "#dapcz-modal-rows tr[data-project-id]:not(.is-filter-hidden) .dapcz-project-checkbox",
+    );
+  }
+
+  function getAllProjectCheckboxes() {
+    return $(
+      "#dapcz-modal-rows tr[data-project-id] .dapcz-project-checkbox",
+    );
+  }
+
+  function syncSelectAllCheckbox() {
+    var $visible = getVisibleProjectCheckboxes();
+    var $checked = $visible.filter(":checked");
+    var $selectAll = $("#dapcz-select-all");
+
+    if (!$visible.length) {
+      $selectAll
+        .prop("checked", false)
+        .prop("indeterminate", false)
+        .prop("disabled", true);
+      return;
+    }
+
+    $selectAll.prop("disabled", false);
+    $selectAll.prop("checked", $visible.length === $checked.length);
+    $selectAll.prop(
+      "indeterminate",
+      $checked.length > 0 && $checked.length < $visible.length,
+    );
+  }
+
+  function handleSelectAllChange() {
+    var isChecked = $("#dapcz-select-all").is(":checked");
+    getVisibleProjectCheckboxes().prop("checked", isChecked);
+    syncSelectAllCheckbox();
+  }
+
+  function showModalMessage(type, message) {
+    var typeClass =
+      type === "error"
+        ? "is-error"
+        : type === "success"
+          ? "is-success"
+          : "is-info";
+    $("#dapcz-modal-message").html(
+      '<div class="dapcz-message ' + typeClass + '">' + message + "</div>",
+    );
+  }
+
+  function clearModalFeedbackDismiss() {
+    if (operationState.feedbackDismissTimeoutId) {
+      clearTimeout(operationState.feedbackDismissTimeoutId);
+      operationState.feedbackDismissTimeoutId = null;
+    }
+  }
+
+  function scheduleModalFeedbackDismiss() {
+    clearModalFeedbackDismiss();
+    operationState.feedbackDismissTimeoutId = setTimeout(function () {
+      operationState.feedbackDismissTimeoutId = null;
+      $("#dapcz-modal-message").empty();
+      $("#dapcz-progress-slot").empty();
+    }, CONFIG.feedbackDismissMs);
+  }
+
+  function openModal(meeting, skipLoading) {
+    ensureModalShell();
+    operationState.currentMeeting = meeting;
+    operationState.modalFilter = "all";
+    resetModalSort();
+
+    $("#dapcz-modal-title").text(
+      "Link Active Projects — " + meeting.dateLabel,
+    );
+    $("#dapcz-modal-hint").text(
+      "Checked projects are linked to the " +
+        meeting.dateLabel +
+        " meeting. Uncheck a project to remove it from this meeting, or check additional projects to link them.",
+    );
+
+    if (!skipLoading) {
+      showModalLoading();
+    }
+
+    $("#dapcz-modal-overlay")
+      .addClass("is-active")
+      .attr("aria-hidden", "false");
+  }
+
+  function refreshModalProjectRows(meeting) {
+    var hadCache = hasCompleteProjectConnectionCache();
+
+    if (hadCache) {
+      setInitialLinkedIdsForMeeting(meeting);
+      renderModalRows(buildProjectRows(meeting));
+    }
+
+    return refreshProjectModels()
+      .then(function () {
+        return loadProjectLinkState(meeting);
+      })
+      .then(function () {
+        if (
+          !operationState.currentMeeting ||
+          operationState.currentMeeting.id !== meeting.id
+        ) {
+          return;
+        }
+        renderModalRows(buildProjectRows(meeting));
+      })
+      .catch(function (error) {
+        console.error("DAPCZ failed to load project links:", error);
+        if (operationState.currentMeeting) {
+          if (!hadCache) {
+            showModalMessage(
+              "error",
+              "Unable to load current project links. Showing table data only.",
+            );
+          }
+          renderModalRows(buildProjectRows(operationState.currentMeeting));
+        }
+      });
+  }
+
+  function handleOpenModalClick(event) {
+    event.preventDefault();
+
+    if (operationState.isProcessing) {
+      return;
+    }
+
+    var meetingId = $(event.currentTarget).data("meeting-id");
+    var viewKey = CONFIG.views.meetings;
+    var meetingModel =
+      Knack.views[viewKey] &&
+      Knack.views[viewKey].model &&
+      Knack.views[viewKey].model.data
+        ? Knack.views[viewKey].model.data.get(meetingId)
+        : null;
+
+    if (!meetingModel) {
+      window.alert(
+        "Unable to load meeting details. Refresh the page and try again.",
+      );
+      return;
+    }
+
+    var meeting = {
+      id: meetingId,
+      dateLabel: formatMeetingDate(meetingModel),
+      identifier: formatMeetingDate(meetingModel),
+    };
+
+    openModal(meeting, hasCompleteProjectConnectionCache());
+    refreshModalProjectRows(meeting);
+  }
+
+  function getModalProjectChanges() {
+    var toLink = [];
+    var toUnlink = [];
+    var initialLinkedIds = operationState.initialLinkedIds || {};
+
+    $("#dapcz-modal-rows tr").each(function () {
+      var $row = $(this);
+      var projectId = $row.data("project-id");
+      if (!projectId) {
+        return;
+      }
+
+      var $checkbox = $row.find(".dapcz-project-checkbox");
+      if (!$checkbox.length) {
+        return;
+      }
+
+      var isChecked = $checkbox.is(":checked");
+      var wasLinked = !!initialLinkedIds[projectId];
+      var project = {
+        id: projectId,
+        label: $row.data("project-label") || "",
+      };
+
+      if (isChecked && !wasLinked) {
+        toLink.push(project);
+      } else if (!isChecked && wasLinked) {
+        toUnlink.push(project);
+      }
+    });
+
+    return { toLink: toLink, toUnlink: toUnlink };
+  }
+
+  function createProgressBar(total) {
+    $("#dapcz-progress-slot").html(
+      '<div id="dapcz-progress-container" class="dapcz-progress-container">' +
+        '<div class="dapcz-progress-title">Linking Active Projects to Meeting</div>' +
+        '<div id="dapcz-progress-text" class="dapcz-progress-text">Preparing to update ' +
+        total +
+        " projects...</div>" +
+        '<div class="dapcz-progress-track"><div id="dapcz-progress-bar-fill" class="dapcz-progress-fill dapcz-progress-fill-update">' +
+        '<div id="dapcz-progress-percentage" class="dapcz-progress-percentage">0%</div></div></div>' +
+        '<div class="dapcz-progress-stats">' +
+        '<span class="dapcz-progress-stat-item"><i class="fa fa-check-circle dapcz-progress-stat-success"></i> Updated: <span id="dapcz-success-count">0</span></span>' +
+        '<span class="dapcz-progress-stat-item"><i class="fa fa-times-circle dapcz-progress-stat-failed"></i> Failed: <span id="dapcz-failed-count">0</span></span>' +
+        '<span class="dapcz-progress-stat-item"><i class="fa fa-gears dapcz-progress-stat-remaining"></i> Remaining: <span id="dapcz-remaining-count">' +
+        total +
+        "</span></span></div></div>",
+    );
+  }
+
+  function updateProgress(completed, total, failed, currentAction) {
+    var percentage = total ? Math.round((completed / total) * 100) : 0;
+    $("#dapcz-progress-bar-fill").css("width", percentage + "%");
+    $("#dapcz-progress-percentage").text(percentage + "%");
+    $("#dapcz-progress-text").text(
+      currentAction || "Updating project " + completed + " of " + total,
+    );
+    $("#dapcz-success-count").text(completed - failed);
+    $("#dapcz-failed-count").text(failed);
+    $("#dapcz-remaining-count").text(total - completed);
+  }
+
+  function completeProgress(total, failed, linkedCount, unlinkedCount) {
+    var $progressBar = $("#dapcz-progress-bar-fill");
+    $progressBar.removeClass("dapcz-progress-fill-update");
+    $progressBar.addClass(
+      failed > 0 ? "dapcz-progress-fill-warning" : "dapcz-progress-fill-update",
+    );
+
+    if (failed > 0) {
+      $("#dapcz-progress-text").text(
+        "Finished with errors. Updated " +
+          (total - failed) +
+          " of " +
+          total +
+          " projects.",
+      );
+      return;
+    }
+
+    var parts = [];
+    if (linkedCount) {
+      parts.push("linked " + linkedCount);
+    }
+    if (unlinkedCount) {
+      parts.push("unlinked " + unlinkedCount);
+    }
+
+    $("#dapcz-progress-text").text(
+      parts.length
+        ? "Successfully " + parts.join(" and ") + " project(s)."
+        : "Project links saved.",
+    );
+  }
+
+  function applyProjectChangesBatch(changes, meeting) {
+    return new Promise(function (resolve) {
+      var batchSize = CONFIG.batchSize;
+      var tasks = changes.toLink
+        .map(function (project) {
+          return { project: project, shouldLink: true, action: "link" };
+        })
+        .concat(
+          changes.toUnlink.map(function (project) {
+            return { project: project, shouldLink: false, action: "unlink" };
+          }),
+        );
+      var results = [];
+
+      createProgressBar(tasks.length);
+      $("#dapcz-progress-container .dapcz-progress-title").text(
+        "Saving Project Links to Meeting",
+      );
+
+      function processBatch(startIndex) {
+        var endIndex = Math.min(startIndex + batchSize, tasks.length);
+        var batch = tasks.slice(startIndex, endIndex);
+
+        updateProgress(
+          results.length,
+          tasks.length,
+          results.filter(function (r) {
+            return !r.success;
+          }).length,
+          "Updating projects " +
+            (startIndex + 1) +
+            "–" +
+            endIndex +
+            " of " +
+            tasks.length,
+        );
+
+        var promises = batch.map(function (task) {
+          return updateProjectMeetingLink(
+            task.project,
+            meeting,
+            task.shouldLink,
+          )
+            .then(function () {
+              return {
+                project: task.project,
+                action: task.action,
+                success: true,
+              };
+            })
+            .catch(function (error) {
+              return {
+                project: task.project,
+                action: task.action,
+                success: false,
+                error: formatApiError(error),
+              };
+            });
+        });
+
+        Promise.all(promises).then(function (batchResults) {
+          results = results.concat(batchResults);
+          var failedCount = results.filter(function (r) {
+            return !r.success;
+          }).length;
+
+          updateProgress(results.length, tasks.length, failedCount);
+
+          if (endIndex < tasks.length) {
+            setTimeout(function () {
+              processBatch(endIndex);
+            }, CONFIG.batchDelay);
+          } else {
+            completeProgress(
+              tasks.length,
+              failedCount,
+              changes.toLink.length,
+              changes.toUnlink.length,
+            );
+            resolve(results);
+          }
+        });
+      }
+
+      processBatch(0);
+    });
+  }
+
+  function setModalSubmitLoading(isLoading) {
+    var $button = $("#dapcz-modal-submit");
+    var $icon = $button.find("i");
+    $button.prop("disabled", isLoading).toggleClass("is-loading", isLoading);
+    if (isLoading) {
+      $icon.removeClass("fa-link").addClass("fa-spinner fa-spin");
+    } else {
+      $icon.removeClass("fa-spinner fa-spin").addClass("fa-link");
+    }
+  }
+
+  function handleModalSubmit(event) {
+    event.preventDefault();
+
+    var now = Date.now();
+    if (operationState.isProcessing) {
+      return;
+    }
+    if (now - operationState.lastOperationTime < CONFIG.operationCooldownMs) {
+      return;
+    }
+
+    var meeting = operationState.currentMeeting;
+    if (!meeting) {
+      return;
+    }
+
+    var changes = getModalProjectChanges();
+    if (!changes.toLink.length && !changes.toUnlink.length) {
+      showModalMessage(
+        "error",
+        "No changes to save. Check or uncheck projects to link or unlink them from this meeting.",
+      );
+      return;
+    }
+
+    if (!CONFIG.api.projectUpdateView) {
+      showModalMessage(
+        "error",
+        "Linking is not configured yet. Add an API-enabled Form view on the Connect Project to Meeting page (field_1423 on dapcz_project) and set CONFIG.api.projectUpdateView in right-of-way.js.",
+      );
+      return;
+    }
+
+    operationState.isProcessing = true;
+    operationState.lastOperationTime = now;
+    setModalSubmitLoading(true);
+    clearModalFeedbackDismiss();
+    $("#dapcz-modal-message").empty();
+
+    applyProjectChangesBatch(changes, meeting)
+      .then(function (results) {
+        var failed = results.filter(function (r) {
+          return !r.success;
+        });
+        var successCount = results.length - failed.length;
+
+        if (failed.length) {
+          var errorDetails = results
+            .filter(function (result) {
+              return !result.success;
+            })
+            .slice(0, 3)
+            .map(function (result) {
+              return (
+                escapeHtml(result.project.label || result.project.id) +
+                " (" +
+                escapeHtml(result.action || "update") +
+                "): " +
+                escapeHtml(result.error || "Update failed")
+              );
+            })
+            .join("<br>");
+
+          showModalMessage(
+            "error",
+            "Updated " +
+              successCount +
+              " of " +
+              results.length +
+              " project(s).<br><br>" +
+              errorDetails,
+          );
+        } else {
+          var summaryParts = [];
+          if (changes.toLink.length) {
+            summaryParts.push("linked " + changes.toLink.length);
+          }
+          if (changes.toUnlink.length) {
+            summaryParts.push("unlinked " + changes.toUnlink.length);
+          }
+
+          showModalMessage(
+            "success",
+            "Successfully " +
+              summaryParts.join(" and ") +
+              " project(s) for this meeting.",
+          );
+        }
+
+        scheduleModalFeedbackDismiss();
+
+        return refreshProjectModels()
+          .then(refreshMeetingView)
+          .then(function () {
+            operationState.modalFilter = "all";
+            setInitialLinkedIdsForMeeting(meeting);
+            renderModalRows(buildProjectRows(meeting));
+          });
+      })
+      .catch(function (error) {
+        console.error("DAPCZ link projects failed:", error);
+        showModalMessage(
+          "error",
+          "Something went wrong while linking projects. Please try again.",
+        );
+        scheduleModalFeedbackDismiss();
+      })
+      .finally(function () {
+        operationState.isProcessing = false;
+        setModalSubmitLoading(false);
+      });
+  }
+
+  function injectMeetingActionColumn(view) {
+    var viewSelector = "#" + view.key;
+    var tableSelector = viewSelector + " table.kn-table-table";
+
+    if (!$(tableSelector + " thead tr").length) {
+      return;
+    }
+
+    if (!$(tableSelector + " thead .dapcz-col").length) {
+      $(tableSelector + " thead tr").append(
+        '<th class="dapcz-col"><span class="table-fixed-label">Link Projects</span></th>',
+      );
+    }
+
+    $(tableSelector + " tbody tr").each(function () {
+      var $row = $(this);
+      if ($row.find(".dapcz-col").length) {
+        return;
+      }
+
+      var meetingId = $row.attr("id");
+      if (!meetingId) {
+        return;
+      }
+
+      $row.append(
+        '<td class="dapcz-col">' +
+          '<a class="kn-button dapcz-open-btn" href="javascript:void(0)" data-meeting-id="' +
+          meetingId +
+          '">' +
+          '<span class="icon is-small"><i class="fa fa-link"></i></span>' +
+          "<span>Link Projects</span></a></td>",
+      );
+    });
+
+    $(viewSelector + " .dapcz-open-btn")
+      .off("click.dapcz")
+      .on("click.dapcz", handleOpenModalClick);
+  }
+
+  function addMeetingActionColumn(view) {
+    var tableSelector = "#" + view.key + " table.kn-table-table";
+
+    if ($(tableSelector + " tbody tr").length) {
+      injectMeetingActionColumn(view);
+      return;
+    }
+
+    elementLoaded(tableSelector + " tbody tr", function () {
+      injectMeetingActionColumn(view);
+    });
+  }
+
+  return {
+    CONFIG: CONFIG,
+    addMeetingActionColumn: addMeetingActionColumn,
+    cacheProjectsTableFields: cacheProjectsTableFields,
+    scheduleProjectConnectionsPrefetch: scheduleProjectConnectionsPrefetch,
+  };
+})();
+
+$(document).on(
+  "knack-view-render." + DapczLink.CONFIG.views.projects,
+  function () {
+    DapczLink.cacheProjectsTableFields();
+    DapczLink.scheduleProjectConnectionsPrefetch();
+  },
+);
+
+$(document).on(
+  "knack-view-render." + DapczLink.CONFIG.views.meetings,
+  function (event, view) {
+    DapczLink.addMeetingActionColumn(view);
+  },
+);
+
+$(document).on("knack-scene-render.scene_759", function () {
+  DapczLink.addMeetingActionColumn({ key: DapczLink.CONFIG.views.meetings });
+  DapczLink.scheduleProjectConnectionsPrefetch();
+});
+
 /********************************************************************/
 /* Generates a Strong Random Password for Internal Account Creation */
 /********************************************************************/
@@ -538,4 +2421,3 @@ $(document).on("knack-view-render.view_29", function (event, scene) {
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
-
