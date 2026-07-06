@@ -119,7 +119,7 @@ $(document).on('knack-view-render.view_1033', function(event, page) {
 
 $(document).on('knack-view-render.view_1529', function(event, page) {
   // create large New Start a Charter Bus License Application button on the Operating Authority page
-  bigButton('create-operating-authority-application', 'view_1529', `${APP_URL}#create-charter-bus-application`, 'arrow-right', 'Start a Charter Bus License Application');
+  bigButton('create-charter-bus-application', 'view_1529', `${APP_URL}#create-charter-bus-application`, 'arrow-right', 'Start a Charter Bus License Application');
 });
 
 /***************************************/
