@@ -247,7 +247,7 @@ $(document).on("knack-scene-render.any", function (event, view) {
 });
 
 /***************************************/
-/***** Print Menu Button ************/
+/******** Print Menu Button ************/
 /***************************************/
 function printMenuButton(view_id) {
   $("#" + view_id + " .knMenuLink").click(function (e) {
@@ -255,38 +255,22 @@ function printMenuButton(view_id) {
   });
 }
 
-/* Print 3 pages menu view button - Chauffeur Permit*/
-$(document).on("knack-view-render.view_227", function (event, view, data) {
-  // Customer Print
-  printMenuButton("view_227");
-});
+// Print Menu Button Views
+const PRINT_MENU_VIEWS = [
+  'view_227',   // Chauffeur Permit - 3 Pages - Applicant
+  'view_315',   // Chauffeur Permit - 3 Pages - Reviewer
+  'view_228',   // Chauffeur Permit - 4 Pages - Applicant
+  'view_304',   // Chauffeur Permit - 4 Pages - Reviewer
+  'view_1148',  // Operating Authority - Notary - Applicant
+  'view_1389',  // Operating Authority - Notary - Reviewer
+  'view_1546',  // Operating Authority - Approval Letter
+  'view_1547',  // Operating Authority - Certificate Letter
+];
 
-$(document).on("knack-view-render.view_315", function (event, view, data) {
-  // Reviewer Print
-  printMenuButton("view_315");
-});
-
-/* Print 4 pages menu view button - Chauffeur Permit*/
-$(document).on("knack-view-render.view_228", function (event, view, data) {
-  // Customer Print
-  printMenuButton("view_228");
-});
-
-$(document).on("knack-view-render.view_304", function (event, view, data) {
-  // Reviewer Print
-  printMenuButton("view_304");
-});
-
-/* Print Operating Authority Notary Page - Applicant */
-$(document).on("knack-view-render.view_1148", function (event, view, data) {
-  // Primary Holder Print
-  printMenuButton("view_1148");
-});
-
-/* Print Operating Authority Notary Page - Reviewer */
-$(document).on("knack-view-render.view_1389", function (event, view, data) {
-  // Primary Holder Print
-  printMenuButton("view_1389");
+PRINT_MENU_VIEWS.forEach(view => {
+  $(document).on(`knack-view-render.${view}`, function() {
+  printMenuButton(view);
+  });
 });
 
 /****************************************/
