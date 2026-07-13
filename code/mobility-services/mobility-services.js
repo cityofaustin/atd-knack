@@ -269,7 +269,7 @@ const PRINT_MENU_VIEWS = [
 
 PRINT_MENU_VIEWS.forEach(view => {
   $(document).on(`knack-view-render.${view}`, function() {
-  printMenuButton(view);
+    printMenuButton(view);
   });
 });
 
