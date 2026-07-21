@@ -518,6 +518,8 @@ var DapczLink = (function () {
     batchDelay: 500,
     operationCooldownMs: 3000,
     feedbackDismissMs: 5000,
+    elementPollMs: 300,
+    elementPollMaxAttempts: 40,
     knownErrors: {
       fieldRequired:
         "Knack rejected clearing the meeting connection. Make sure the field_1423 (dapcz_meetings) is not required a required field on the dapcz_project object.",
@@ -543,19 +545,23 @@ var DapczLink = (function () {
     meetingConnection: null,
   };
 
-  /** Poll until a DOM selector matches, then run callback (Knack views render async). */
+  /**
+   * Poll until a DOM selector matches, then run callback.
+   * Caps out at ~12 s (40 × 300 ms) so a missing view fails silently
+   * instead of polling forever — the feature just won't appear.
+   */
   function elementLoaded(el, callback, attempts) {
     var tryCount = attempts || 0;
     if ($(el).length) {
       callback($(el));
       return;
     }
-    if (tryCount > 40) {
+    if (tryCount > CONFIG.elementPollMaxAttempts) {
       return;
     }
     setTimeout(function () {
       elementLoaded(el, callback, tryCount + 1);
-    }, 300);
+    }, CONFIG.elementPollMs);
   }
 
   /** Log Knack API failures to the console for debugging. */
@@ -605,6 +611,8 @@ var DapczLink = (function () {
           return fromParsed;
         }
       } catch (parseError) {
+        // Short plain-text errors are safe to show; long responses are likely
+        // HTML error pages from Knack that would be unreadable in the modal.
         if (responseText.length < 300) {
           return responseText;
         }
