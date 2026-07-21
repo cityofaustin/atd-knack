@@ -574,7 +574,7 @@ $(document).on("knack-view-render.view_29", function (event, scene) {
     const hash = window.location.hash;
 
     // Check if the current hash exactly matches one of our footer pages
-    const shouldShow = footerHashes.some(function(h) { return hash === h; });
+    const shouldShow = footerHashes.includes(hash);
 
     // If we're not on a footer page, remove the footer and exit
     if (!shouldShow) {
