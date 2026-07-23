@@ -859,6 +859,11 @@ img.knHeader__logo-image {
   --dapcz-error: #dc3545;
 }
 
+#view_1755 td.field_1423,
+#view_1755 th.field_1423 {
+  display: none;
+}
+
 .dapcz-col {
   vertical-align: middle !important;
   white-space: nowrap;
@@ -1034,23 +1039,12 @@ img.knHeader__logo-image {
   opacity: 1;
 }
 
-.dapcz-modal-table tr.is-disabled td {
-  color: var(--dapcz-text-muted);
-  background: var(--dapcz-bg);
-}
-
 .dapcz-modal-table tr.is-linked td {
   background: var(--dapcz-linked-bg);
 }
 
 .dapcz-modal-table tr.is-linked .dapcz-project-checkbox {
   cursor: pointer;
-}
-
-.dapcz-loading-row td {
-  color: var(--dapcz-text-muted);
-  font-style: italic;
-  text-align: center;
 }
 
 .dapcz-modal-table tr.is-filter-hidden {
@@ -1234,3 +1228,5 @@ img.knHeader__logo-image {
 .dapcz-progress-stat-remaining {
   color: var(--dapcz-text-muted);
 }
+
+/***** END --- DAPCZ Link Projects to Meeting *******/
