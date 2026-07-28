@@ -1199,3 +1199,20 @@ $(document).on('knack-view-render.view_4966', function () {
   lat.addEventListener('paste',     () => {pasteCoordinates("field_5331","field_5330")});
   long.addEventListener('paste',     () => {pasteCoordinates("field_5331","field_5330")});
 });
+
+/****************************************/
+/******* Refresh View on Submit  ********/
+/****************************************/
+// A function to refresh a specified view
+function refreshView(viewKey) {
+  Knack.views[viewKey].model.fetch();
+  setTimeout(() => {
+    Knack.views[viewKey].render();
+    Knack.views[viewKey].postRender(); 
+  }, 2000);
+}
+
+// When request complete form is submitted, refresh Traffic Count Details view
+$(document).on('knack-form-submit.view_5026', function (event, view, data) {
+  refreshView('view_2359');
+});
