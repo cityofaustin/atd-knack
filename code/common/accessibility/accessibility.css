@@ -1,0 +1,7 @@
+/*********************************************/
+/******** Accessibility Updates **************/
+/*********************************************/
+.chzn-container-single .chzn-single span,
+h1.modal-card-title {
+  overflow: visible;
+}
