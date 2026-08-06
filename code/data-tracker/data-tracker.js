@@ -1171,3 +1171,48 @@ BREADCRUMB_SCENES.forEach(scene => {
 $(document).on("knack-scene-render.any", function (event, scene) {
   $(".kn-modal-bg").off("click");
 });
+
+/*******************************************/
+/*** Lat/Long Coordinate Clipboard Paste ***/
+/*******************************************/
+// Paste Coordinates from clipboard
+async function pasteCoordinates(latitude,longitude) {
+    try {
+      const latField = document.querySelector(`input[name="${latitude}"]`);
+      const lngField = document.querySelector(`input[name="${longitude}"]`);
+      const text = await navigator.clipboard.readText();
+      const coords = text.split(',').map(parseFloat);
+      if(coords.length == 2 && coords) {
+        lngField.value = Math.min(...coords);
+        latField.value = Math.max(...coords);
+      }
+      // Run if address coordinate field exists
+      pasteCoordinates("latitude","longitude");
+    } catch (err) {
+        console.error(`Clipboard read failed:`, err);
+    }
+}
+
+$(document).on('knack-view-render.view_4966', function () {
+  const lat = document.querySelector('input[name="field_5331"]');
+  const long = document.querySelector('input[name="field_5330"]');
+  lat.addEventListener('paste',     () => {pasteCoordinates("field_5331","field_5330")});
+  long.addEventListener('paste',     () => {pasteCoordinates("field_5331","field_5330")});
+});
+
+/****************************************/
+/******* Refresh View on Submit  ********/
+/****************************************/
+// A function to refresh a specified view
+function refreshView(viewKey) {
+  Knack.views[viewKey].model.fetch();
+  setTimeout(() => {
+    Knack.views[viewKey].render();
+    Knack.views[viewKey].postRender(); 
+  }, 2000);
+}
+
+// When request complete form is submitted, refresh Traffic Count Details view
+$(document).on('knack-form-submit.view_5026', function (event, view, data) {
+  refreshView('view_2359');
+});

@@ -83,7 +83,7 @@ $(document).on("knack-view-render.view_627", function(event, page) {
 });
 // create large Help button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_628", function(event, page) {
-  bigButton("faq", "view_628", `${APP_URL}#faq/`, "info-circle", "Help");
+  bigButton("faq", "view_628", `${APP_URL}#help/`, "info-circle", "Help");
 });
 // create large About the Program button on the Customer RPP Portal page
 $(document).on("knack-view-render.view_629", function(event, page) {

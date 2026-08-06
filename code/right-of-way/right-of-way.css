@@ -260,20 +260,20 @@ a.back-button {text-decoration: none;}
 a.submit-button-large {text-decoration: none;}
 
 /***************************************/
-/******** Table Confirm Buttons ********/
+/***** Table Green Confirm Buttons *****/
 /***************************************/
-.table-trigger-button {
-  padding: 2px 8px;
+.table-confirm-button {
+  padding: 4px 12px 6px 12px;
   border-width: 1px;
-  border-color: #4CAE49;
+  border-color: #2D7A2B;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
-  background-color: #4CAE49;
+  background-color: #2D7A2B;
   color: white;
   text-align: center;
 }
 
-.table-trigger-button:hover {
+.table-confirm-button:hover {
   cursor: pointer;
   opacity: 0.8;
   border-style: solid;
@@ -281,7 +281,7 @@ a.submit-button-large {text-decoration: none;}
   border-color: black;
 }
 
-a.table-trigger-button { text-decoration: none; }
+a.table-confirm-button { text-decoration: none; }
 
 /***********************************/
 /****** Table Archive Buttons ******/
@@ -1230,3 +1230,27 @@ img.knHeader__logo-image {
 }
 
 /***** END --- DAPCZ Link Projects to Meeting *******/
+
+/*************************************/
+/**** COA FOOTER - Simple Version ****/
+/*************************************/
+#coa-footer {
+  text-align: center;
+  padding: 24px 16px;
+  margin-top: 32px;
+  font-size: 13px;
+  color: #888;
+  border-top: 1px solid #e5e5e5;
+}
+
+#coa-footer img {
+  display: block;
+  margin: 0 auto 12px;
+  max-width: 80px;
+  height: auto;
+}
+
+#coa-footer a {
+  color: #555;
+  text-decoration: underline;
+}
