@@ -859,6 +859,14 @@ img.knHeader__logo-image {
   --dapcz-error: #dc3545;
 }
 
+/* Hide API Form (Link Meeting) — link columns have no field_* class.
+   nth-child(11) assumes current Builder order (fragile if columns move). */
+#view_1755 thead th:nth-child(11),
+#view_1755 tbody tr:not(.kn-table-group) td:nth-child(11) {
+  display: none;
+}
+
+/* Hide dapcz_meetings — kept in Builder so models expose field_1423_raw */
 #view_1755 td.field_1423,
 #view_1755 th.field_1423 {
   display: none;
