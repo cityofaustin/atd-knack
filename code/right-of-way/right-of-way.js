@@ -171,8 +171,14 @@ $(document).on("knack-view-render.view_1506", function(event, page) {
 });
 
 // create large DAPCZ Links button on the DAPCZ Public Portal page
-$(document).on("knack-view-render.view_1507", function(event, page) {
-  bigButton("dapcz-links", "view_1507", `${APP_URL}#dapcz-meeting/dapcz-links/`, "link", "Helpful Links & Resources");
+$(document).on("knack-view-render.view_1507", function (event, page) {
+  bigButton(
+    "dapcz-links",
+    "view_1507",
+    `${APP_URL}#dapcz-meeting/dapcz-links/`,
+    "link",
+    "Links & Resources",
+  );
 });
 
 // create large DAPCZ Meeting Schedule button on the DAPCZ Public Portal page
