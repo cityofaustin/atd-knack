@@ -84,7 +84,7 @@ $(document).on('knack-view-render.view_16', function(event, page) {
 
 $(document).on('knack-view-render.view_34', function(event, page) {
   // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
-  bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, 'files-o', 'Required Documents');
+  bigButton('required-documents-chauffeur', 'view_34', `${APP_URL}#chauffeur-permit/required-documents-chauffeur/`, 'files-o', 'View Required Documents');
 });
 
 $(document).on('knack-view-render.view_36', function(event, page) {
@@ -93,8 +93,13 @@ $(document).on('knack-view-render.view_36', function(event, page) {
 });
 
 $(document).on('knack-view-render.view_1307', function(event, page) {
-  // create large REQUIRED DOCUMENTS button on the CHAUFFEUR page
-  bigButton('required-documents-operating-authority', 'view_1307', `${APP_URL}#required-documents-operating-authority`, 'files-o', 'Required Documents',true);
+  // create large REQUIRED DOCUMENTS button on the OPERATING AUHTHORITY page
+  bigButton('required-documents-operating-authority', 'view_1307', `${APP_URL}#required-documents-operating-authority/`, 'files-o', 'View Required Documents',true);
+});
+
+$(document).on('knack-view-render.view_1558', function(event, page) {
+  // create large REQUIRED DOCUMENTS button on the CHARTER BUS page
+  bigButton('required-documents-operating-authority', 'view_1558', `${APP_URL}#required-documents-operating-authority/`, 'files-o', 'View Required Documents',true);
 });
 
 $(document).on('knack-view-render.view_41', function(event, page) {
