@@ -438,9 +438,9 @@ $(document).on("knack-view-render.view_353", function (event, scene) {
   // Our structured Footer HTML consisting of the COA Brand, the Privacy Policy, and any app specific Contact Info
   // Styling is handled in the Knack CSS file via the #coa-footer selector.
   const footerHTML = `
-    <div id="coa-footer" style="text-align: center;">
+    <div id="coa-footer">
       <img 
-        src="https://images.gitbook.com/__img/dpr=2,width=60,onerror=redirect,format=auto,signature=1503205633/https%3A%2F%2Ffiles.gitbook.com%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FCqNGfEc0WO4ar1y6yBB3%252Fuploads%252F94aonme89HIUpHVnpeuK%252FCOA-Logo-Horizontal-Official-RGB.png%3Falt%3Dmedia%26token%3Da9121b5d-9d3c-41d0-9e72-90e25938e553" 
+        src="https://images.gitbook.com/__img/dpr=2,width=600,onerror=redirect,format=auto,signature=1503205633/https%3A%2F%2Ffiles.gitbook.com%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FCqNGfEc0WO4ar1y6yBB3%252Fuploads%252F94aonme89HIUpHVnpeuK%252FCOA-Logo-Horizontal-Official-RGB.png%3Falt%3Dmedia%26token%3Da9121b5d-9d3c-41d0-9e72-90e25938e553" 
         alt="City of Austin Footer Logo" 
       />
       <p><a href="mailto:MobilityServices@AustinTexas.gov">MobilityServices@AustinTexas.gov</a> | (512) 974-7857 | 1501 Toomey Rd, Austin, TX 78704</p>
