@@ -336,3 +336,12 @@ img.knHeader__logo-image {
     max-width: 800px !important;
   }
 }
+
+/*********************************************/
+/******** Add Multiple Attachments  ********/
+/*********************************************/
+#dropzone-field_4212 {
+  border: 2px dashed #A8B2BC;
+  border-radius: 5%;
+  font-weight: 500;
+}
