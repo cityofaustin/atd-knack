@@ -233,22 +233,22 @@ function restrictToDigits() {
 
 $(document).on("knack-view-render.view_1199", function () {
   // New location form - add primary street segment
-  $("#field_119").keyup(restrictToDigits);
+  $("#field_119").on("input", restrictToDigits);
 });
 
 $(document).on("knack-view-render.view_1200", function () {
   // New location form - cross street segment
-  $("#field_119").keyup(restrictToDigits);
+  $("#field_119").on("input", restrictToDigits);
 });
 
 $(document).on("knack-view-render.view_1207", function () {
   // Edit location form - primary street segment
-  $("#field_119").keyup(restrictToDigits);
+  $("#field_119").on("input", restrictToDigits);
 });
 
 $(document).on("knack-view-render.view_1206", function () {
   // Edit location form - cross street segment
-  $("#field_119").keyup(restrictToDigits);
+  $("#field_119").on("input", restrictToDigits);
 });
 
 ////////////////////////////////////////
@@ -1208,7 +1208,7 @@ function refreshView(viewKey) {
   Knack.views[viewKey].model.fetch();
   setTimeout(() => {
     Knack.views[viewKey].render();
-    Knack.views[viewKey].postRender(); 
+    Knack.views[viewKey].postRender();
   }, 2000);
 }
 
