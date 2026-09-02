@@ -497,12 +497,13 @@ $(`<div class="mobile-details-dropdown-menu">\
 /********************************************/
 /**
  * Flow:
- *   1. Meetings table (view_1768) renders → inject "Link Projects" column
- *   2. Click → open modal → read field_1423_raw from view_1755 models → render checkboxes
- *   3. User toggles / sorts / filters → updates operationState.modalRows → re-render
+ *   1. view_1768 (hidden) supplies CURRENT meeting count on scene_728
+ *   2. Exactly one → "Link Projects" in button group opens modal
+ *   3. Modal reads field_1423_raw from view_1755 models → render checkboxes
  *   4. Save → diff isChecked vs isLinked → rate-limited PUTs → refresh Knack views
  *
  * Builder dependencies:
+ *   - scene_728: Manage Meetings (view_1768 + view_1755 backend tables)
  *   - view_1786: API-enabled form on scene_776 (project update)
  *   - field_1423 must NOT be required on that form (unlink clears the connection)
  *   - view_1755: Active Projects table must include field_1423 as a column so
@@ -512,18 +513,25 @@ $(`<div class="mobile-details-dropdown-menu">\
  */
 var DapczLink = (function () {
   var CONFIG = {
+    scenes: {
+      manageMeetings: "scene_728",
+    },
     views: {
       meetings: "view_1768",
       projects: "view_1755",
     },
+    copy: {
+      singleMeetingRequired:
+        "There must only be 1 CURRENT meeting in order to Link Projects",
+    },
     api: {
       baseUrl: "https://api.knack.com/v1",
       // Staging IDS
-      // scene: "scene_776",
-      // projectUpdateView: "view_1786",
+      scene: "scene_776",
+      projectUpdateView: "view_1786",
       // Production IDs
-      scene: "scene_788",
-      projectUpdateView: "view_1823",
+      // scene: "scene_788",
+      // projectUpdateView: "view_1823",
     },
     // Field keys are pinned in Builder. If renamed, update here — do not scrape the DOM.
     fields: {
@@ -537,8 +545,6 @@ var DapczLink = (function () {
     batchDelay: 500,
     operationCooldownMs: 3000,
     feedbackDismissMs: 5000,
-    elementPollMs: 300,
-    elementPollMaxAttempts: 40,
     knownErrors: {
       fieldRequired:
         "Knack rejected clearing the meeting connection. In Builder, open view_1786 and set field_1423 (dapcz_meetings) to not required so projects can be unlinked.",
@@ -556,24 +562,8 @@ var DapczLink = (function () {
   };
 
   /**
-   * Poll until a DOM selector matches, then run callback.
-   * Caps out at ~12 s so a missing view fails silently instead of polling forever.
+   * Normalize any API error into a short modal-friendly message.
    */
-  function elementLoaded(el, callback, attempts) {
-    var tryCount = attempts || 0;
-    if ($(el).length) {
-      callback($(el));
-      return;
-    }
-    if (tryCount > CONFIG.elementPollMaxAttempts) {
-      return;
-    }
-    setTimeout(function () {
-      elementLoaded(el, callback, tryCount + 1);
-    }, CONFIG.elementPollMs);
-  }
-
-  /** Normalize any API error into a short modal-friendly message. */
   function formatApiError(error) {
     if (!error) {
       return "Unknown error";
@@ -1346,33 +1336,88 @@ var DapczLink = (function () {
     renderModalRows();
   }
 
-  function handleOpenModalClick(event) {
-    event.preventDefault();
-    if (operationState.isProcessing) {
-      return;
-    }
-
-    var meetingId = $(event.currentTarget).data("meeting-id");
+  function getMeetingModels() {
     var viewKey = CONFIG.views.meetings;
-    var meetingModel =
-      Knack.views[viewKey] &&
-      Knack.views[viewKey].model &&
-      Knack.views[viewKey].model.data
-        ? Knack.views[viewKey].model.data.get(meetingId)
-        : null;
+    if (
+      !Knack.views[viewKey] ||
+      !Knack.views[viewKey].model ||
+      !Knack.views[viewKey].model.data
+    ) {
+      return [];
+    }
+    return Knack.views[viewKey].model.data.models || [];
+  }
 
-    if (!meetingModel) {
-      window.alert(
-        "Unable to load meeting details. Refresh the page and try again.",
-      );
+  function getMeetingFromModel(model) {
+    return {
+      id: model.id,
+      dateLabel: formatMeetingDate(model),
+      identifier: formatMeetingDate(model),
+    };
+  }
+
+  function ensureLinkProjectsButton() {
+    var $scene = $("#" + CONFIG.scenes.manageMeetings);
+    if (!$scene.length) {
+      return $();
+    }
+
+    var $existing = $scene.find(".dapcz-link-projects-btn");
+    if ($existing.length) {
+      return $existing;
+    }
+
+    var $button = $(`
+      <a class="kn-button dapcz-link-projects-btn" href="javascript:void(0)">
+        <span class="icon is-small"><i class="fa fa-link"></i></span>
+        <span>Link Projects</span>
+      </a>
+    `);
+
+    var $menu = $scene.find(".kn-view-menu .kn-menu-list, .kn-view-menu").first();
+    $menu.append($button);
+    $button.on("click.dapcz", handleLinkProjectsButtonClick);
+    return $button;
+  }
+
+  function handleLinkProjectsButtonClick(event) {
+    event.preventDefault();
+    if (
+      operationState.isProcessing ||
+      $(event.currentTarget).hasClass("is-disabled")
+    ) {
       return;
     }
 
-    openModal({
-      id: meetingId,
-      dateLabel: formatMeetingDate(meetingModel),
-      identifier: formatMeetingDate(meetingModel),
-    });
+    var meetings = getMeetingModels();
+    if (meetings.length !== 1) {
+      return;
+    }
+
+    openModal(getMeetingFromModel(meetings[0]));
+  }
+
+  function syncMeetingsLinkUi() {
+    var viewSelector = "#" + CONFIG.views.meetings;
+    var $view = $(viewSelector);
+    var count = getMeetingModels().length;
+    var message = CONFIG.copy.singleMeetingRequired;
+    var $button = ensureLinkProjectsButton();
+    var $warning = $view.next(".dapcz-meeting-warning");
+
+    if (!$warning.length) {
+      $warning = $('<p class="dapcz-meeting-warning" role="status" hidden></p>');
+      $view.after($warning);
+    }
+
+    if (count === 1) {
+      $button.removeClass("is-disabled").attr("aria-disabled", "false");
+      $warning.prop("hidden", true).empty();
+      return;
+    }
+
+    $button.addClass("is-disabled").attr("aria-disabled", "true");
+    $warning.text(message).prop("hidden", false);
   }
 
   function getModalProjectChanges() {
@@ -1659,71 +1704,25 @@ var DapczLink = (function () {
       });
   }
 
-  function injectMeetingActionColumn(view) {
-    var viewSelector = "#" + view.key;
-    var tableSelector = viewSelector + " table.kn-table-table";
-
-    if (!$(tableSelector + " thead tr").length) {
-      return;
-    }
-
-    if (!$(tableSelector + " thead .dapcz-col").length) {
-      $(tableSelector + " thead tr").append(
-        '<th class="dapcz-col"><span class="table-fixed-label">Link Projects</span></th>',
-      );
-    }
-
-    $(tableSelector + " tbody tr").each(function () {
-      var $row = $(this);
-      if ($row.find(".dapcz-col").length) {
-        return;
-      }
-      var meetingId = $row.attr("id");
-      if (!meetingId) {
-        return;
-      }
-      $row.append(`
-        <td class="dapcz-col">
-          <a class="kn-button dapcz-open-btn" href="javascript:void(0)" data-meeting-id="${meetingId}">
-            <span class="icon is-small"><i class="fa fa-link"></i></span>
-            <span>Link Projects</span>
-          </a>
-        </td>
-      `);
-    });
-
-    $(viewSelector + " .dapcz-open-btn")
-      .off("click.dapcz")
-      .on("click.dapcz", handleOpenModalClick);
-  }
-
-  function addMeetingActionColumn(view) {
-    var tableSelector = "#" + view.key + " table.kn-table-table";
-    if ($(tableSelector + " tbody tr").length) {
-      injectMeetingActionColumn(view);
-      return;
-    }
-    elementLoaded(tableSelector + " tbody tr", function () {
-      injectMeetingActionColumn(view);
-    });
-  }
-
   return {
     CONFIG: CONFIG,
-    addMeetingActionColumn: addMeetingActionColumn,
+    syncMeetingsLinkUi: syncMeetingsLinkUi,
   };
 })();
 
 $(document).on(
   "knack-view-render." + DapczLink.CONFIG.views.meetings,
-  function (event, view) {
-    DapczLink.addMeetingActionColumn(view);
+  function () {
+    DapczLink.syncMeetingsLinkUi();
   },
 );
 
-$(document).on("knack-scene-render.scene_759", function () {
-  DapczLink.addMeetingActionColumn({ key: DapczLink.CONFIG.views.meetings });
-});
+$(document).on(
+  "knack-scene-render." + DapczLink.CONFIG.scenes.manageMeetings,
+  function () {
+    DapczLink.syncMeetingsLinkUi();
+  },
+);
 
 /********************************************************************/
 /* Generates a Strong Random Password for Internal Account Creation */
