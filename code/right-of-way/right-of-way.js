@@ -497,8 +497,8 @@ $(`<div class="mobile-details-dropdown-menu">\
 /********************************************/
 /**
  * Flow:
- *   1. view_1768 (hidden) supplies CURRENT meeting count on scene_728
- *   2. Exactly one → "Link Projects" in button group opens modal
+ *   1. view_1768 supplies CURRENT meeting count and Link Projects column
+ *   2. Button group "Link Projects" also opens modal when exactly one CURRENT meeting
  *   3. Modal reads field_1423_raw from view_1755 models → render checkboxes
  *   4. Save → diff isChecked vs isLinked → rate-limited PUTs → refresh Knack views
  *
@@ -1356,18 +1356,110 @@ var DapczLink = (function () {
     };
   }
 
-  function ensureLinkProjectsButton() {
+  function getManageMeetingsScene() {
     var $scene = $("#" + CONFIG.scenes.manageMeetings);
+    if ($scene.length) {
+      return $scene;
+    }
+    return $("#" + CONFIG.views.meetings).closest("[id^='kn-scene_']");
+  }
+
+  function injectMeetingLinkColumn(view) {
+    var viewKey = view && view.key ? view.key : CONFIG.views.meetings;
+    var viewSelector = "#" + viewKey;
+    var tableSelector = viewSelector + " table.kn-table-table";
+
+    if (!$(tableSelector + " thead tr").length) {
+      return;
+    }
+
+    if (!$(tableSelector + " thead .dapcz-col").length) {
+      $(tableSelector + " thead tr").append(
+        '<th class="dapcz-col"><span class="table-fixed-label">Link Projects</span></th>',
+      );
+    }
+
+    $(tableSelector + " tbody tr").each(function () {
+      var $row = $(this);
+      if ($row.find(".dapcz-col").length || $row.hasClass("kn-table-group")) {
+        return;
+      }
+      var meetingId = $row.attr("id");
+      if (!meetingId) {
+        return;
+      }
+      $row.append(`
+        <td class="dapcz-col">
+          <a class="kn-button dapcz-open-btn" href="javascript:void(0)" data-meeting-id="${meetingId}">
+            <span class="icon is-small"><i class="fa fa-link"></i></span>
+            <span>Link Projects</span>
+          </a>
+        </td>
+      `);
+    });
+
+    $(viewSelector + " .dapcz-open-btn")
+      .off("click.dapcz")
+      .on("click.dapcz", handleOpenModalClick);
+  }
+
+  function handleOpenModalClick(event) {
+    event.preventDefault();
+    if (
+      operationState.isProcessing ||
+      $(event.currentTarget).hasClass("is-disabled")
+    ) {
+      return;
+    }
+
+    var meetingId = $(event.currentTarget).data("meeting-id");
+    var viewKey = CONFIG.views.meetings;
+    var meetingModel =
+      Knack.views[viewKey] &&
+      Knack.views[viewKey].model &&
+      Knack.views[viewKey].model.data
+        ? Knack.views[viewKey].model.data.get(meetingId)
+        : null;
+
+    if (!meetingModel) {
+      window.alert(
+        "Unable to load meeting details. Refresh the page and try again.",
+      );
+      return;
+    }
+
+    openModal(getMeetingFromModel(meetingModel));
+  }
+
+  function ensureLinkProjectsButton() {
+    var $scene = getManageMeetingsScene();
     if (!$scene.length) {
       return $();
     }
 
-    var $existing = $scene.find(".dapcz-link-projects-btn");
-    if ($existing.length) {
-      return $existing;
+    $scene.find("a.kn-button").each(function () {
+      var $button = $(this);
+      if ($button.hasClass("dapcz-open-btn")) {
+        return;
+      }
+      if ($button.text().trim().indexOf("Link Projects") === -1) {
+        return;
+      }
+      $button
+        .addClass("dapcz-link-projects-btn")
+        .off("click.dapcz")
+        .on("click.dapcz", handleLinkProjectsButtonClick);
+    });
+
+    var $button = $scene
+      .find(".dapcz-link-projects-btn")
+      .not(".dapcz-open-btn")
+      .first();
+    if ($button.length) {
+      return $button;
     }
 
-    var $button = $(`
+    $button = $(`
       <a class="kn-button dapcz-link-projects-btn" href="javascript:void(0)">
         <span class="icon is-small"><i class="fa fa-link"></i></span>
         <span>Link Projects</span>
@@ -1397,26 +1489,34 @@ var DapczLink = (function () {
     openModal(getMeetingFromModel(meetings[0]));
   }
 
-  function syncMeetingsLinkUi() {
+  function syncMeetingsLinkUi(view) {
+    if (view) {
+      injectMeetingLinkColumn(view);
+    }
+
     var viewSelector = "#" + CONFIG.views.meetings;
     var $view = $(viewSelector);
     var count = getMeetingModels().length;
     var message = CONFIG.copy.singleMeetingRequired;
     var $button = ensureLinkProjectsButton();
-    var $warning = $view.next(".dapcz-meeting-warning");
+    var $warning = $view.prev(".dapcz-meeting-warning");
+    var isEnabled = count === 1;
 
     if (!$warning.length) {
       $warning = $('<p class="dapcz-meeting-warning" role="status" hidden></p>');
-      $view.after($warning);
+      $view.before($warning);
     }
 
-    if (count === 1) {
-      $button.removeClass("is-disabled").attr("aria-disabled", "false");
+    getManageMeetingsScene()
+      .find(".dapcz-link-projects-btn, .dapcz-open-btn")
+      .toggleClass("is-disabled", !isEnabled)
+      .attr("aria-disabled", String(!isEnabled));
+
+    if (isEnabled) {
       $warning.prop("hidden", true).empty();
       return;
     }
 
-    $button.addClass("is-disabled").attr("aria-disabled", "true");
     $warning.text(message).prop("hidden", false);
   }
 
@@ -1712,8 +1812,8 @@ var DapczLink = (function () {
 
 $(document).on(
   "knack-view-render." + DapczLink.CONFIG.views.meetings,
-  function () {
-    DapczLink.syncMeetingsLinkUi();
+  function (event, view) {
+    DapczLink.syncMeetingsLinkUi(view);
   },
 );
 
