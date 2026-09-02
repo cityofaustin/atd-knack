@@ -1649,13 +1649,33 @@ img.knHeader__logo-image {
   display: none;
 }
 
+/* Backend projects table on Manage Meetings — hidden but required for model data */
+#kn-scene_728 #view_1755,
+[id^="kn-scene_"] #view_1755 {
+  display: none;
+}
+
 .dapcz-col {
   vertical-align: middle !important;
   white-space: nowrap;
 }
 
-.dapcz-open-btn {
-  font-size: 0.95em;
+.dapcz-link-projects-btn.is-disabled,
+.dapcz-open-btn.is-disabled {
+  pointer-events: none;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.kn-view view_1768 {
+  margin-bottom: 0;
+}
+
+.dapcz-meeting-warning {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--dapcz-error);
+  font-weight: bold;
 }
 
 .dapcz-modal-overlay {
