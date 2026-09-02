@@ -1,45 +1,96 @@
 /**************************************/
 /***** Validation Message Styling *****/
 /**************************************/
-.kn-notification, .is-confirmation, .is-warning, .is-alert { font-size: 1.25em !important; color: black !important;}
-.kn-notification { background-color: #2acee3 !important;}
-.is-confirmation { background-color: #caf4bc !important;}
-.is-warning { background-color: #ffe09a !important;}
-.is-alert { background-color: #ff9b9c !important;}
+.kn-notification,
+.is-confirmation,
+.is-warning,
+.is-alert {
+  font-size: 1.25em !important;
+  color: black !important;
+}
+.kn-notification {
+  background-color: #2acee3 !important;
+}
+.is-confirmation {
+  background-color: #caf4bc !important;
+}
+.is-warning {
+  background-color: #ffe09a !important;
+}
+.is-alert {
+  background-color: #ff9b9c !important;
+}
 
 /***************************************/
 /********* FA Icon Positioning *********/
 /***************************************/
 /*Centers icon vertically on a line*/
-.fa { vertical-align: baseline; }
+.fa {
+  vertical-align: baseline;
+}
 /*Icon rests at the bottom of a line*/
-.fa-bot { vertical-align: text-bottom; }
+.fa-bot {
+  vertical-align: text-bottom;
+}
 /*Icon touches the top of a line*/
-.fa-top { vertical-align: text-top; }
+.fa-top {
+  vertical-align: text-top;
+}
 /*Icon colors*/
-.fa-gold { color: goldenrod; }
-.fa-red { color: red; }
-.fa-green { color: green; }
-.fa-yellow { color: yellow; }
-.fa-orange { color: orange; }
-.fa-blue { color: blue; }
-.fa-purple { color: purple; }
+.fa-gold {
+  color: goldenrod;
+}
+.fa-red {
+  color: red;
+}
+.fa-green {
+  color: green;
+}
+.fa-yellow {
+  color: yellow;
+}
+.fa-orange {
+  color: orange;
+}
+.fa-blue {
+  color: blue;
+}
+.fa-purple {
+  color: purple;
+}
 
 /****************************************/
 /********** Custom CSS Classes **********/
 /****************************************/
 /*Call this class anytime you want to use this cursor*/
-.disabled { cursor: not-allowed; }
+.disabled {
+  cursor: not-allowed;
+}
 /*Call this class anytime you want to center button text*/
-.centered-text { text-align: center; }
+.centered-text {
+  text-align: center;
+}
 
 /****************************************/
 /************* Modal Styling ************/
 /****************************************/
 /*Close Modal 'X' Button*/
-.delete { border: #adb5bd .2em !important; background-color: #adb5bd !important;}
-.close-modal {border: #495057 !important; background-color: #495057 !important;}
-.delete:before, .delete:after { background-color: white !important; width: 66% !important; left: 42% !important; height: 3px !important; border-radius: 2px !important;}
+.delete {
+  border: #adb5bd 0.2em !important;
+  background-color: #adb5bd !important;
+}
+.close-modal {
+  border: #495057 !important;
+  background-color: #495057 !important;
+}
+.delete:before,
+.delete:after {
+  background-color: white !important;
+  width: 66% !important;
+  left: 42% !important;
+  height: 3px !important;
+  border-radius: 2px !important;
+}
 
 /***************************************/
 /************* Big Buttons *************/
@@ -52,7 +103,7 @@
   max-width: 15em;
   display: block;
 }
- 
+
 .big-button-container:hover {
   background-color: #f7f7f7;
   cursor: pointer;
@@ -63,8 +114,8 @@
   opacity: 0.6;
   pointer-events: none;
 }
- 
-a.big-button-container { 
+
+a.big-button-container {
   text-decoration: none;
 }
 
@@ -138,7 +189,9 @@ a.small-button {
   border-color: gray;
 }
 
-a.back-button {text-decoration: none;}
+a.back-button {
+  text-decoration: none;
+}
 
 /***************************************/
 /*********** Trigger Buttons ***********/
@@ -257,7 +310,9 @@ a.back-button {text-decoration: none;}
   background-color: #163f6e;
 }
 
-a.submit-button-large {text-decoration: none;}
+a.submit-button-large {
+  text-decoration: none;
+}
 
 /***************************************/
 /***** Table Green Confirm Buttons *****/
@@ -265,10 +320,10 @@ a.submit-button-large {text-decoration: none;}
 .table-confirm-button {
   padding: 4px 12px 6px 12px;
   border-width: 1px;
-  border-color: #2D7A2B;
+  border-color: #2d7a2b;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
-  background-color: #2D7A2B;
+  background-color: #2d7a2b;
   color: white;
   text-align: center;
 }
@@ -281,7 +336,9 @@ a.submit-button-large {text-decoration: none;}
   border-color: black;
 }
 
-a.table-confirm-button { text-decoration: none; }
+a.table-confirm-button {
+  text-decoration: none;
+}
 
 /***********************************/
 /****** Table Archive Buttons ******/
@@ -290,7 +347,7 @@ a.table-confirm-button { text-decoration: none; }
 .table-archive-button {
   padding: 2px 8px 4px 8px;
   border-width: 1px;
-  border-color: #367DB7;
+  border-color: #367db7;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   background-color: #dddddd;
@@ -323,7 +380,9 @@ a.table-confirm-button { text-decoration: none; }
   border-color: gray;
 }
 
-a.table-icon-modal-button { text-decoration: none; }
+a.table-icon-modal-button {
+  text-decoration: none;
+}
 
 /***************************************/
 /***** Table Icon Checkbox Buttons *****/
@@ -331,7 +390,7 @@ a.table-icon-modal-button { text-decoration: none; }
 .table-icon-checkbox-button {
   padding: 0px 4px;
   border-width: 1px;
-  border-color: #367DB7;
+  border-color: #367db7;
   border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   background-color: transparent;
