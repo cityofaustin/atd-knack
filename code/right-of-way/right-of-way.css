@@ -1672,9 +1672,9 @@ img.knHeader__logo-image {
 }
 
 .dapcz-meeting-warning {
-  margin: 0 0 8px;
+  margin: 10px 0 0;
   font-size: 14px;
-  color: var(--dapcz-error);
+  color: red;
   font-weight: bold;
 }
 
