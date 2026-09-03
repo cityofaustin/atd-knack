@@ -522,7 +522,7 @@ var DapczLink = (function () {
     },
     copy: {
       singleMeetingRequired:
-        "There must only be 1 CURRENT meeting in order to Link Projects",
+        "NOTE: There must only be 1 CURRENT meeting in order to Link Projects",
     },
     api: {
       baseUrl: "https://api.knack.com/v1",
@@ -1499,12 +1499,22 @@ var DapczLink = (function () {
     var count = getMeetingModels().length;
     var message = CONFIG.copy.singleMeetingRequired;
     var $button = ensureLinkProjectsButton();
-    var $warning = $view.prev(".dapcz-meeting-warning");
+    var $table = $view.find(".kn-table-wrapper table").first();
+    var $warning = $view.find(".dapcz-meeting-warning");
     var isEnabled = count === 1;
 
+    // Drop any legacy placement above the view
+    $view.prev(".dapcz-meeting-warning").remove();
+
     if (!$warning.length) {
-      $warning = $('<p class="dapcz-meeting-warning" role="status" hidden></p>');
-      $view.before($warning);
+      $warning = $(
+        '<p class="dapcz-meeting-warning" role="status" hidden></p>',
+      );
+      if ($table.length) {
+        $table.after($warning);
+      } else {
+        $view.append($warning);
+      }
     }
 
     getManageMeetingsScene()
