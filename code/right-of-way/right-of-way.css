@@ -1702,6 +1702,12 @@ img.knHeader__logo-image {
   display: none;
 }
 
+/* Hide Current DAPCZ Meeting table since it should only have 1 row */
+/* view_1768 for both staging and prod */
+#kn-scene_728 #view_1768 {
+  display: none;
+}
+
 .dapcz-col {
   vertical-align: middle !important;
   white-space: nowrap;
@@ -1714,10 +1720,7 @@ img.knHeader__logo-image {
   cursor: not-allowed;
 }
 
-.kn-view view_1768 {
-  margin-bottom: 0;
-}
-
+#view_1746 + .dapcz-meeting-warning,
 .dapcz-meeting-warning {
   margin: 10px 0 0;
   font-size: 16px;
