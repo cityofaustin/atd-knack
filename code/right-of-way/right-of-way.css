@@ -1636,16 +1636,10 @@ img.knHeader__logo-image {
   --dapcz-error: #dc3545;
 }
 
-/* Hide API Form (Link Meeting) — link columns have no field_* class.
-   nth-child(11) assumes current Builder order (fragile if columns move). */
-#view_1755 thead th:nth-child(11),
-#view_1755 tbody tr:not(.kn-table-group) td:nth-child(11) {
-  display: none;
-}
-
-/* Hide dapcz_meetings — kept in Builder so models expose field_1423_raw */
-#view_1755 td.field_1423,
-#view_1755 th.field_1423 {
+/* Backend projects table on Manage Meetings — hidden but required for model data */
+/* TEST env view_1755, PROD env view_1838 */
+#kn-scene_728 #view_1755,
+#kn-scene_728 #view_1838 {
   display: none;
 }
 
@@ -1654,8 +1648,22 @@ img.knHeader__logo-image {
   white-space: nowrap;
 }
 
-.dapcz-open-btn {
-  font-size: 0.95em;
+.dapcz-link-projects-btn.is-disabled,
+.dapcz-open-btn.is-disabled {
+  pointer-events: none;
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.kn-view view_1768 {
+  margin-bottom: 0;
+}
+
+.dapcz-meeting-warning {
+  margin: 10px 0 0;
+  font-size: 16px;
+  color: red;
+  font-weight: bold;
 }
 
 .dapcz-modal-overlay {
