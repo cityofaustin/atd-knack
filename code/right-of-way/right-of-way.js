@@ -698,7 +698,7 @@ $(document).on("knack-view-render.view_1176", function (event, view, record) {
  */
 var DapczLink = (function () {
   // false = Test (APR 16 2026); true = Prod (ROW Portal)
-  var IS_PROD = true;
+  var IS_PROD = false;
 
   var ENV = IS_PROD
     ? {
@@ -1695,32 +1695,36 @@ var DapczLink = (function () {
     return $button;
   }
 
-  function ensureMeetingWarning() {
-    var $host = $("#" + CONFIG.views.warningHost);
-    var meetingsSelector = "#" + CONFIG.views.meetings;
+  function clearMeetingWarning() {
+    $(".dapcz-meeting-warning").remove();
+  }
 
-    // Clear legacy placements (inside/above the hidden Current Meeting table)
-    $(meetingsSelector).find(".dapcz-meeting-warning").remove();
-    $(meetingsSelector).prev(".dapcz-meeting-warning").remove();
-
-    if (!$host.length) {
-      getManageMeetingsScene().find(".dapcz-meeting-warning").remove();
-      return $();
+  function showMeetingWarning() {
+    var $anchor = $("#" + CONFIG.views.warningHost);
+    clearMeetingWarning();
+    if (!$anchor.length) {
+      return;
     }
+    $anchor.after(
+      $("<p>", {
+        class: "dapcz-meeting-warning",
+        role: "status",
+        text: CONFIG.copy.singleMeetingRequired,
+      }),
+    );
+  }
 
-    var $warning = $host.next(".dapcz-meeting-warning");
-    getManageMeetingsScene()
-      .find(".dapcz-meeting-warning")
-      .not($warning)
-      .remove();
-
-    if (!$warning.length) {
-      $warning = $(
-        '<p class="dapcz-meeting-warning" role="status" hidden></p>',
-      );
-      $host.after($warning);
+  /**
+   * CURRENT meeting count, or null while view_1768 hasn't loaded its data yet.
+   * Knack.views[key].model.data only exists after that view renders, so this
+   * doubles as the "is the count reliable yet?" check — no flags needed.
+   */
+  function getMeetingCount() {
+    var meetingsView = Knack.views[CONFIG.views.meetings];
+    if (!meetingsView || !meetingsView.model || !meetingsView.model.data) {
+      return null;
     }
-    return $warning;
+    return (meetingsView.model.data.models || []).length;
   }
 
   function handleLinkProjectsButtonClick(event) {
@@ -1740,15 +1744,23 @@ var DapczLink = (function () {
     openModal(getMeetingFromModel(meetings[0]));
   }
 
+  /**
+   * Single source of truth for button state + warning. Everything is derived
+   * from live DOM/model state at call time, so it's safe to call from any
+   * render event in any order (view renders fire first, scene render last).
+   *
+   *   count === null  → data still loading: button disabled, no warning (no flash)
+   *   count === 1     → button enabled, no warning
+   *   otherwise       → button disabled, warning under view_1746
+   */
   function syncMeetingsLinkUi(view) {
     if (view && view.key === CONFIG.views.meetings) {
       injectMeetingLinkColumn(view);
     }
 
-    var count = getMeetingModels().length;
-    var message = CONFIG.copy.singleMeetingRequired;
     ensureLinkProjectsButton();
-    var $warning = ensureMeetingWarning();
+
+    var count = getMeetingCount();
     var isEnabled = count === 1;
 
     getManageMeetingsScene()
@@ -1756,16 +1768,11 @@ var DapczLink = (function () {
       .toggleClass("is-disabled", !isEnabled)
       .attr("aria-disabled", String(!isEnabled));
 
-    if (!$warning.length) {
-      return;
+    if (count !== null && !isEnabled) {
+      showMeetingWarning();
+    } else {
+      clearMeetingWarning();
     }
-
-    if (isEnabled) {
-      $warning.prop("hidden", true).empty();
-      return;
-    }
-
-    $warning.text(message).prop("hidden", false);
   }
 
   function getModalProjectChanges() {
@@ -2067,18 +2074,12 @@ $(document).on(
 
 $(document).on(
   "knack-view-render." + DapczLink.CONFIG.views.meetingsTable,
-  function () {
-    DapczLink.syncMeetingsLinkUi();
+  function (event, view) {
+    DapczLink.syncMeetingsLinkUi(view);
   },
 );
 
-$(document).on(
-  "knack-view-render." + DapczLink.CONFIG.views.warningHost,
-  function () {
-    DapczLink.syncMeetingsLinkUi();
-  },
-);
-
+// Scene render fires after all views have rendered — final authoritative sync.
 $(document).on(
   "knack-scene-render." + DapczLink.CONFIG.scenes.manageMeetings,
   function () {
