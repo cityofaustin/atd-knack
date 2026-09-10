@@ -270,6 +270,7 @@ const PRINT_MENU_VIEWS = [
   'view_1389',  // Operating Authority - Notary - Reviewer
   'view_1546',  // Operating Authority - Approval Letter
   'view_1547',  // Operating Authority - Certificate Letter
+  'view_1591',  // Operating Authority - Submitted Application
 ];
 
 PRINT_MENU_VIEWS.forEach(view => {
