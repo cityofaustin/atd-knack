@@ -499,26 +499,42 @@ $(`<div class="mobile-details-dropdown-menu">\
  * Flow:
  *   1. view_1768 supplies CURRENT meeting count and Link Projects column
  *   2. Button group "Link Projects" also opens modal when exactly one CURRENT meeting
- *   3. Modal reads field_1423_raw from view_1755 models → render checkboxes
+ *   3. Modal reads field_1423_raw from Active Projects models → render checkboxes
  *   4. Save → diff isChecked vs isLinked → rate-limited PUTs → refresh Knack views
  *
- * Builder dependencies:
- *   - scene_728: Manage Meetings (view_1768 + view_1755 backend tables)
- *   - view_1786: API-enabled form on scene_776 (project update)
+ * Builder dependencies (flip IS_PROD below for Test vs Prod IDs):
+ *   - scene_728: Manage Meetings (view_1768 + Active Projects table)
+ *   - Link Meeting API form: Test scene_784/view_1805; Prod scene_797/view_1852
  *   - field_1423 must NOT be required on that form (unlink clears the connection)
- *   - view_1755: Active Projects table must include field_1423 as a column so
- *     Backbone models expose field_1423_raw (hide the column with CSS if unwanted)
+ *   - Active Projects table must include field_1423 as a column so Backbone models
+ *     expose field_1423_raw (hide the column with CSS if unwanted)
  *
  * Helpers live in the IIFE; Knack hooks stay global (see bottom).
  */
 var DapczLink = (function () {
+  // false = Test (APR 16 2026); true = Prod (ROW Portal)
+  var IS_PROD = true;
+
+  var ENV = IS_PROD
+    ? {
+        projectsView: "view_1838",
+        apiScene: "scene_797",
+        apiView: "view_1852",
+      }
+    : {
+        projectsView: "view_1755",
+        apiScene: "scene_784",
+        apiView: "view_1805",
+      };
+
   var CONFIG = {
+    isProd: IS_PROD,
     scenes: {
       manageMeetings: "scene_728",
     },
     views: {
       meetings: "view_1768",
-      projects: "view_1755",
+      projects: ENV.projectsView,
     },
     copy: {
       singleMeetingRequired:
@@ -526,12 +542,8 @@ var DapczLink = (function () {
     },
     api: {
       baseUrl: "https://api.knack.com/v1",
-      // Staging IDS
-      scene: "scene_776",
-      projectUpdateView: "view_1786",
-      // Production IDs
-      // scene: "scene_788",
-      // projectUpdateView: "view_1823",
+      scene: ENV.apiScene,
+      projectUpdateView: ENV.apiView,
     },
     // Field keys are pinned in Builder. If renamed, update here — do not scrape the DOM.
     fields: {
@@ -547,7 +559,9 @@ var DapczLink = (function () {
     feedbackDismissMs: 5000,
     knownErrors: {
       fieldRequired:
-        "Knack rejected clearing the meeting connection. In Builder, open view_1786 and set field_1423 (dapcz_meetings) to not required so projects can be unlinked.",
+        "Knack rejected clearing the meeting connection. In Builder, open " +
+        ENV.apiView +
+        " and set field_1423 (dapcz_meetings) to not required so projects can be unlinked.",
     },
   };
 
@@ -830,7 +844,7 @@ var DapczLink = (function () {
     if (!CONFIG.api.projectUpdateView) {
       return Promise.reject({
         message:
-          "DAPCZ API form view is not configured. Set CONFIG.api.projectUpdateView to view_1786.",
+          "DAPCZ API form view is not configured. Set CONFIG.api.projectUpdateView.",
       });
     }
 
@@ -1466,7 +1480,9 @@ var DapczLink = (function () {
       </a>
     `);
 
-    var $menu = $scene.find(".kn-view-menu .kn-menu-list, .kn-view-menu").first();
+    var $menu = $scene
+      .find(".kn-view-menu .kn-menu-list, .kn-view-menu")
+      .first();
     $menu.append($button);
     $button.on("click.dapcz", handleLinkProjectsButtonClick);
     return $button;
