@@ -469,3 +469,49 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
   $('input[name$="password_confirmation"]').val(pw);
 });
 
+/**
+ * Auto-refresh checkbox on service desk management page
+ */
+var view516AutoRefreshInterval = null;
+
+function view516SyncAutoRefreshUI(isActive) {
+  $("#auto-refresh-view_516").prop("checked", isActive);
+  $("#auto-refresh-view_516-dot").css(
+    "display",
+    isActive ? "inline-block" : "none",
+  );
+  $("label[for='auto-refresh-view_516']").css(
+    "color",
+    isActive ? "#2563eb" : "#666",
+  );
+}
+
+$(document).on("knack-view-render.view_516", function (event, page) {
+  var autoRefreshCheckbox = $(
+    "<span style='width: 1em'></span><label for='auto-refresh-view_516' style='display: inline-flex; align-items: center; vertical-align: middle; padding: .55em 0; cursor: pointer; color: #666;'><input type='checkbox' id='auto-refresh-view_516' style='margin-right: .4em; cursor: pointer; width: 1.1em; height: 1.1em; accent-color: #2563eb;'> Auto-refresh (1 min)<span id='auto-refresh-view_516-dot' style='display: none;'></span></label>",
+  );
+
+  autoRefreshCheckbox.insertAfter(
+    $("#view_516").find("form.table-keyword-search").find("a")[0],
+  );
+
+  view516SyncAutoRefreshUI(view516AutoRefreshInterval !== null);
+
+  $("#auto-refresh-view_516").change(function (e) {
+    var isActive = e.target.checked;
+
+    if (isActive) {
+      if (view516AutoRefreshInterval === null) {
+        view516AutoRefreshInterval = setInterval(function () {
+          Knack.views["view_516"].model.fetch();
+        }, 10000);
+      }
+    } else {
+      clearInterval(view516AutoRefreshInterval);
+      view516AutoRefreshInterval = null;
+    }
+
+    view516SyncAutoRefreshUI(isActive);
+  });
+});
+
