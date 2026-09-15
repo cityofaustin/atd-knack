@@ -472,6 +472,10 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
 /**
  * Auto-refresh checkbox on service desk management page
  */
+// initialize refresh interval by default
+var refreshIntervalView591 = setInterval(function () {
+  Knack.views[viewkey].model.fetch();
+}, 10000);
 $(document).on("knack-view-render.view_591", function (event, page) {
   var viewkey = "view_591";
   function syncAutoRefreshUI(isActive) {
@@ -485,56 +489,51 @@ $(document).on("knack-view-render.view_591", function (event, page) {
     );
   }
 
-  // initialize refresh interval by default
-  var refreshInterval = setInterval(function () {
-    Knack.views[viewkey].model.fetch();
-  }, 10000);
-
   var autoRefreshCheckbox = $(
     `
-    <span style="width: 1em"></span
-      ><label
-        for="auto-refresh-${viewkey}"
-        style="
-          display: inline-flex;
-          align-items: center;
-          vertical-align: middle;
-          padding: 0.55em 0;
-          cursor: pointer;
-          color: #666;
-        "
-        ><input
-           checked  
-           type="checkbox"
-          id="auto-refresh-${viewkey}"
-          style="
-            margin-right: 0.4em;
+        <span style="width: 1em"></span
+        ><label
+            for="auto-refresh-${viewkey}"
+            style="
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+            padding: 0.55em 0;
             cursor: pointer;
-            width: 1.1em;
-            height: 1.1em;
-            accent-color: #2563eb;"
-        />
-        Auto-refresh (1 min)</label>`,
+            color: #666;
+            "
+            ><input
+            checked  
+            type="checkbox"
+            id="auto-refresh-${viewkey}"
+            style="
+                margin-right: 0.4em;
+                cursor: pointer;
+                width: 1.1em;
+                height: 1.1em;
+                accent-color: #2563eb;"
+            />
+            Auto-refresh (1 min)</label>`,
   );
 
   autoRefreshCheckbox.insertAfter(
     $(`#${viewkey}`).find("form.table-keyword-search").find("a")[0],
   );
 
-  syncAutoRefreshUI(refreshInterval !== null);
+  syncAutoRefreshUI(refreshIntervalView591 !== null);
 
   $(`#auto-refresh-${viewkey}`).change(function (e) {
     var isActive = e.target.checked;
 
     if (isActive) {
-      if (refreshInterval === null) {
-        refreshInterval = setInterval(function () {
+      if (refreshIntervalView591 === null) {
+        refreshIntervalView591 = setInterval(function () {
           Knack.views[viewkey].model.fetch();
         }, 10000);
       }
     } else {
-      clearInterval(refreshInterval);
-      refreshInterval = null;
+      clearInterval(refreshIntervalView591);
+      refreshIntervalView591 = null;
     }
 
     syncAutoRefreshUI(isActive);
