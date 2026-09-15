@@ -474,17 +474,21 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
  */
 $(document).on("knack-view-render.view_591", function (event, page) {
   var viewkey = "view_591";
-  var refreshInterval = null;
-  /**
-   * Update apply the active/inactive checkbox label color
-   */
   function syncAutoRefreshUI(isActive) {
+    /**
+     * Sync the active/inactive checkbox label color with active state
+     */
     $(`#auto-refresh-${viewkey}`).prop("checked", isActive);
     $(`label[for='auto-refresh-${viewkey}']`).css(
       "color",
       isActive ? "#2563eb" : "#666",
     );
   }
+
+  // initialize refresh interval by default
+  var refreshInterval = setInterval(function () {
+    Knack.views[viewkey].model.fetch();
+  }, 10000);
 
   var autoRefreshCheckbox = $(
     `
@@ -500,15 +504,16 @@ $(document).on("knack-view-render.view_591", function (event, page) {
           color: #666;
         "
         ><input
-          type="checkbox"
+           checked  
+           type="checkbox"
           id="auto-refresh-${viewkey}"
           style="
             margin-right: 0.4em;
             cursor: pointer;
             width: 1.1em;
             height: 1.1em;
-            accent-color: #2563eb;
-          " />
+            accent-color: #2563eb;"
+        />
         Auto-refresh (1 min)</label>`,
   );
 
