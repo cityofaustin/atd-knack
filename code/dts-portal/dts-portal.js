@@ -469,3 +469,73 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
   $('input[name$="password_confirmation"]').val(pw);
 });
 
+/**
+ * Auto-refresh checkbox on service desk management page
+ */
+// initialize refresh interval by default
+var refreshIntervalView591 = setInterval(function () {
+  Knack.views[viewkey].model.fetch();
+}, 10000);
+$(document).on("knack-view-render.view_591", function (event, page) {
+  var viewkey = "view_591";
+  function syncAutoRefreshUI(isActive) {
+    /**
+     * Sync the active/inactive checkbox label color with active state
+     */
+    $(`#auto-refresh-${viewkey}`).prop("checked", isActive);
+    $(`label[for='auto-refresh-${viewkey}']`).css(
+      "color",
+      isActive ? "#2563eb" : "#666",
+    );
+  }
+
+  var autoRefreshCheckbox = $(
+    `
+        <span style="width: 1em"></span
+        ><label
+            for="auto-refresh-${viewkey}"
+            style="
+            display: inline-flex;
+            align-items: center;
+            vertical-align: middle;
+            padding: 0.55em 0;
+            cursor: pointer;
+            color: #666;
+            "
+            ><input
+            checked  
+            type="checkbox"
+            id="auto-refresh-${viewkey}"
+            style="
+                margin-right: 0.4em;
+                cursor: pointer;
+                width: 1.1em;
+                height: 1.1em;
+                accent-color: #2563eb;"
+            />
+            Auto-refresh (1 min)</label>`,
+  );
+
+  autoRefreshCheckbox.insertAfter(
+    $(`#${viewkey}`).find("form.table-keyword-search").find("a")[0],
+  );
+
+  syncAutoRefreshUI(refreshIntervalView591 !== null);
+
+  $(`#auto-refresh-${viewkey}`).change(function (e) {
+    var isActive = e.target.checked;
+
+    if (isActive) {
+      if (refreshIntervalView591 === null) {
+        refreshIntervalView591 = setInterval(function () {
+          Knack.views[viewkey].model.fetch();
+        }, 10000);
+      }
+    } else {
+      clearInterval(refreshIntervalView591);
+      refreshIntervalView591 = null;
+    }
+
+    syncAutoRefreshUI(isActive);
+  });
+});
