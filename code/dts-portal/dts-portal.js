@@ -473,17 +473,19 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
  * Auto-refresh checkbox on service desk management page
  */
 // initialize refresh interval by default
+var srListviewkey = "view_591";
 var refreshIntervalView591 = setInterval(function () {
-  Knack.views[viewkey].model.fetch();
+  console.log("Refresh service request list");
+  Knack.views[srListviewkey].model.fetch();
 }, 10000);
 $(document).on("knack-view-render.view_591", function (event, page) {
-  var viewkey = "view_591";
+  
   function syncAutoRefreshUI(isActive) {
     /**
      * Sync the active/inactive checkbox label color with active state
      */
-    $(`#auto-refresh-${viewkey}`).prop("checked", isActive);
-    $(`label[for='auto-refresh-${viewkey}']`).css(
+    $(`#auto-refresh-${srListviewkey}`).prop("checked", isActive);
+    $(`label[for='auto-refresh-${srListviewkey}']`).css(
       "color",
       isActive ? "#2563eb" : "#666",
     );
@@ -493,7 +495,7 @@ $(document).on("knack-view-render.view_591", function (event, page) {
     `
         <span style="width: 1em"></span
         ><label
-            for="auto-refresh-${viewkey}"
+            for="auto-refresh-${srListviewkey}"
             style="
             display: inline-flex;
             align-items: center;
@@ -505,7 +507,7 @@ $(document).on("knack-view-render.view_591", function (event, page) {
             ><input
             checked  
             type="checkbox"
-            id="auto-refresh-${viewkey}"
+            id="auto-refresh-${srListviewkey}"
             style="
                 margin-right: 0.4em;
                 cursor: pointer;
@@ -517,18 +519,19 @@ $(document).on("knack-view-render.view_591", function (event, page) {
   );
 
   autoRefreshCheckbox.insertAfter(
-    $(`#${viewkey}`).find("form.table-keyword-search").find("a")[0],
+    $(`#${srListviewkey}`).find("form.table-keyword-search").find("a")[0],
   );
 
   syncAutoRefreshUI(refreshIntervalView591 !== null);
 
-  $(`#auto-refresh-${viewkey}`).change(function (e) {
+  $(`#auto-refresh-${srListviewkey}`).change(function (e) {
     var isActive = e.target.checked;
 
     if (isActive) {
       if (refreshIntervalView591 === null) {
         refreshIntervalView591 = setInterval(function () {
-          Knack.views[viewkey].model.fetch();
+          console.log("Refresh service request list");
+          Knack.views[srListviewkey].model.fetch();
         }, 10000);
       }
     } else {
