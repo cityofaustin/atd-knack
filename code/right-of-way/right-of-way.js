@@ -698,7 +698,7 @@ $(document).on("knack-view-render.view_1176", function (event, view, record) {
  */
 var DapczLink = (function () {
   // false = Test (APR 16 2026); true = Prod (ROW Portal)
-  var IS_PROD = false;
+  var IS_PROD = true;
 
   var ENV = IS_PROD
     ? {
