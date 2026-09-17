@@ -679,15 +679,17 @@ $(document).on("knack-view-render.view_1176", function (event, view, record) {
 /**
  * Flow:
  *   1. view_1768 supplies CURRENT meeting count (hidden backend table)
- *   2. Link Projects button on view_1421 (DAPCZ Meetings) opens modal when
- *      exactly one CURRENT meeting; warning shows under view_1746 otherwise
+ *   2. Link Projects button joins the Add/Preview button group (inside
+ *      view_1421 or a sibling Menu view); warning shows under view_1746
+ *      unless exactly one CURRENT meeting
  *   3. Modal reads field_1423_raw from Active Projects models → render checkboxes
  *   4. Save → diff isChecked vs isLinked → rate-limited PUTs → refresh Knack views
  *
  * Builder dependencies (flip IS_PROD below for Test vs Prod IDs):
  *   - scene_728: Manage Meetings
  *   - view_1768: Current DAPCZ Meeting (data source; hidden via CSS)
- *   - view_1421: DAPCZ Meetings table (Link Projects button host)
+ *   - view_1421: DAPCZ Meetings table
+ *   - Add/Preview button group: menu inside view_1421 (staging) or sibling Menu view (prod)
  *   - view_1746: host for the single-CURRENT-meeting warning
  *   - Link Meeting API form: Test scene_784/view_1805; Prod scene_797/view_1852
  *   - field_1423 must NOT be required on that form (unlink clears the connection)
@@ -1633,64 +1635,44 @@ var DapczLink = (function () {
   }
 
   function ensureLinkProjectsButton() {
-    var $meetingsTableTitle = $("#" + CONFIG.views.meetingsTable);
-    if (!$meetingsTableTitle.length) {
+    var $scene = getManageMeetingsScene();
+    if (!$scene.length) {
       return $();
     }
 
-    // Remove any button that was previously injected into the hidden
-    // Current Meeting view (view_1768) or elsewhere on the scene.
-    getManageMeetingsScene()
-      .find(".dapcz-link-projects-btn")
-      .not(".dapcz-open-btn")
-      .each(function () {
-        var $existing = $(this);
-        if (!$existing.closest("#" + CONFIG.views.meetingsTable).length) {
-          $existing.remove();
-        }
-      });
-
-    $meetingsTableTitle.find("a.kn-button").each(function () {
-      var $button = $(this);
-      if ($button.hasClass("dapcz-open-btn")) {
-        return;
-      }
-      if ($button.text().trim().indexOf("Link Projects") === -1) {
-        return;
-      }
-      $button
-        .addClass("dapcz-link-projects-btn")
-        .off("click.dapcz")
-        .on("click.dapcz", handleLinkProjectsButtonClick);
-    });
-
-    var $button = $meetingsTableTitle
+    // Already injected — return it.
+    var $existing = $scene
       .find(".dapcz-link-projects-btn")
       .not(".dapcz-open-btn")
       .first();
-    if ($button.length) {
-      return $button;
+    if ($existing.length) {
+      return $existing;
     }
 
-    $button = $(`
+    // Find a known sibling button so we can drop Link Projects right next to it.
+    var $sibling = $scene
+      .find("a.kn-button")
+      .filter(function () {
+        var text = $(this).text().trim();
+        return (
+          text.indexOf("Add DAPCZ Meeting") !== -1 ||
+          text.indexOf("Preview Public View") !== -1
+        );
+      })
+      .last();
+
+    if (!$sibling.length) {
+      return $();
+    }
+
+    var $button = $(`
       <a class="kn-button dapcz-link-projects-btn" href="javascript:void(0)">
         <span class="icon is-small"><i class="fa fa-link"></i></span>
         <span>Link Projects</span>
       </a>
     `);
 
-    var $menu = $meetingsTableTitle
-      .find(".kn-view-menu .kn-menu-list, .kn-view-menu")
-      .first();
-    if ($menu.length) {
-      $menu.append($button);
-    } else {
-      $meetingsTableTitle.prepend(
-        $('<div class="kn-view-menu dapcz-link-projects-menu"></div>').append(
-          $button,
-        ),
-      );
-    }
+    $sibling.after($button);
     $button.on("click.dapcz", handleLinkProjectsButtonClick);
     return $button;
   }
