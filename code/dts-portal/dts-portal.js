@@ -475,7 +475,7 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
 var originalDocumentTitle = document.title;
 var srListViewkey = "view_591";
 var srListSceneKey = "scene_364";
-var refrshSecondsView591 = 10;
+var refrshSecondsView591 = 30;
 var refreshIntervalView591 = null;
 var autoRefreshEnabled = true; // respects checkbox state across scene visits
 var faviconBadgeActive = false;
