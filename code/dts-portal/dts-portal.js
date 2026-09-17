@@ -472,30 +472,51 @@ $(document).on("knack-view-render.view_141", function (event, scene) {
 /**
  * Auto-refresh checkbox on service desk management page
  */
-// initialize refresh interval by default
-var srListviewkey = "view_591";
-var refreshIntervalView591 = setInterval(function () {
-  console.log("Refresh service request list");
-  Knack.views[srListviewkey].model.fetch();
-}, 10000);
-$(document).on("knack-view-render.view_591", function (event, page) {
-  
-  function syncAutoRefreshUI(isActive) {
-    /**
-     * Sync the active/inactive checkbox label color with active state
-     */
-    $(`#auto-refresh-${srListviewkey}`).prop("checked", isActive);
-    $(`label[for='auto-refresh-${srListviewkey}']`).css(
-      "color",
-      isActive ? "#2563eb" : "#666",
-    );
+var originalDocumentTitle = document.title;
+var srListViewkey = "view_591";
+var srListSceneKey = "scene_364";
+var refrshSecondsView591 = 30;
+var refreshIntervalView591 = null;
+var autoRefreshEnabled = true; // respects checkbox state across scene visits
+var faviconBadgeActive = false;
+
+function startAutoRefresh() {
+  if (refreshIntervalView591 !== null) return; // already running
+  refreshIntervalView591 = setInterval(function () {
+    console.log("Refresh service request list");
+    Knack.views[srListViewkey]?.model?.fetch();
+  }, refrshSecondsView591 * 1000);
+}
+
+function stopAutoRefresh() {
+  clearInterval(refreshIntervalView591);
+  refreshIntervalView591 = null;
+}
+
+function syncAutoRefreshUI(isActive) {
+  /**
+   * Sync the active/inactive checkbox label color with active state
+   */
+  $(`#auto-refresh-${srListViewkey}`).prop("checked", isActive);
+  $(`label[for='auto-refresh-${srListViewkey}']`).css(
+    "color",
+    isActive ? "#2563eb" : "#666",
+  );
+}
+
+$(document).on("knack-view-render." + srListViewkey, function () {
+  updateInboxAlerts();
+
+  // (re)start refresh interval based on last known checkbox state
+  if (autoRefreshEnabled) {
+    startAutoRefresh();
   }
 
   var autoRefreshCheckbox = $(
     `
         <span style="width: 1em"></span
         ><label
-            for="auto-refresh-${srListviewkey}"
+            for="auto-refresh-${srListViewkey}"
             style="
             display: inline-flex;
             align-items: center;
@@ -507,7 +528,7 @@ $(document).on("knack-view-render.view_591", function (event, page) {
             ><input
             checked  
             type="checkbox"
-            id="auto-refresh-${srListviewkey}"
+            id="auto-refresh-${srListViewkey}"
             style="
                 margin-right: 0.4em;
                 cursor: pointer;
@@ -519,26 +540,80 @@ $(document).on("knack-view-render.view_591", function (event, page) {
   );
 
   autoRefreshCheckbox.insertAfter(
-    $(`#${srListviewkey}`).find("form.table-keyword-search").find("a")[0],
+    $(`#${srListViewkey}`).find("form.table-keyword-search").find("a")[0],
   );
 
-  syncAutoRefreshUI(refreshIntervalView591 !== null);
+  syncAutoRefreshUI(autoRefreshEnabled);
 
-  $(`#auto-refresh-${srListviewkey}`).change(function (e) {
-    var isActive = e.target.checked;
+  $(`#auto-refresh-${srListViewkey}`).change(function (e) {
+    autoRefreshEnabled = e.target.checked;
 
-    if (isActive) {
-      if (refreshIntervalView591 === null) {
-        refreshIntervalView591 = setInterval(function () {
-          console.log("Refresh service request list");
-          Knack.views[srListviewkey].model.fetch();
-        }, 10000);
-      }
+    if (autoRefreshEnabled) {
+      startAutoRefresh();
     } else {
-      clearInterval(refreshIntervalView591);
-      refreshIntervalView591 = null;
+      stopAutoRefresh();
     }
 
-    syncAutoRefreshUI(isActive);
+    syncAutoRefreshUI(autoRefreshEnabled);
   });
+});
+
+function updateInboxAlerts() {
+  const model = Knack.views[srListViewkey]?.model;
+  // check for rows in table with "NEW" status
+  const newSrs = model?.data?.filter(
+    (row) => row.attributes.field_1125_raw === "NEW",
+  );
+  showSrInboxCount(newSrs?.length || 0);
+  setFaviconBadge(Boolean(newSrs?.length));
+}
+
+function showSrInboxCount(count) {
+  const countStr = count ? `(${String(count)}) ` : "";
+  document.title = countStr + originalDocumentTitle;
+}
+
+/**
+ * Show "notification" badge in favicon
+ */
+function setFaviconBadge(showBadge) {
+  if (showBadge === faviconBadgeActive) return; // no-op if already in that state
+  faviconBadgeActive = showBadge;
+
+  const canvas = document.createElement("canvas");
+  canvas.width = 32;
+  canvas.height = 32;
+  const ctx = canvas.getContext("2d");
+
+  const img = new Image();
+  img.src = "/favicon.ico"; // original favicon
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, 32, 32);
+
+    if (showBadge) {
+      ctx.beginPath();
+      ctx.arc(24, 8, 6, 0, 2 * Math.PI); // small circle top-right
+      ctx.fillStyle = "#3b82f6"; // blue
+      ctx.fill();
+    }
+
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link); // only appended once, when created
+    }
+    link.href = canvas.toDataURL("image/png");
+  };
+}
+
+$(document).on("knack-scene-render.any", function (event, scene) {
+  // reset title + favicon + stop polling if we're not looking at the manage service requests page
+  if (scene.key !== srListSceneKey) {
+    if (document.title !== originalDocumentTitle) {
+      document.title = originalDocumentTitle;
+    }
+    setFaviconBadge(false);
+    stopAutoRefresh();
+  }
 });
