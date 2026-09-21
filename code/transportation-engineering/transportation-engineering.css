@@ -1,6 +1,8 @@
-/* Classic Big Buttons */
+/********************************************/
+/********* Big Buttons -  Menu View *********/
+/********************************************/
 :where(#view_44).kn-menu .kn-button {
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow: 0px 1px 2px 0px gray;
   color: #22254E;
   background-color: white;
@@ -165,27 +167,6 @@ a.small-button {
   .option.checkbox {
     font-size: 22px;
   }
-}
-
-/***************************************/
-/************ Miscellaneous ************/
-/***************************************/    
-.kn-link-disabled span {
-  color: #bdbebf !important;
-}
-        
-.hidden {
-  display: none;
-}
-
-.button-padding {
-  padding-left: 20%;
-}
-
-.hiddenFormField {
-  visibility: hidden;
-  height: 0px;
-  margin-bottom: 0 !important;
 }
 
 /*********************************************/
