@@ -104,14 +104,17 @@ $(document).on("knack-page-render.any", function (event, page) {
 /********************************************************/
 //  replace attachment file name with name field. hide_name to hide nameField from table
 function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_name = true) {
-  // find each attachment cell
+  // Check if file name has changed
+  let  nameChange = false;
+
+  // Find each attachment cell
   $("td." + fileFieldId).each(function() {
-    // find each attachment link within the cell
+    // Find each attachment link within the cell
     $(this).find("span").children("span").each(function() {
       let attachmentType = "View";
       let fileRecordId = $(this).context.id;
 
-      // if neighboring field exists on same table, retrieve the corresponding type
+      // If neighboring field exists on same table, retrieve the corresponding type
       $(this).closest("tr").children("td." + nameFieldId)
         .find("span")
         .children("span")
@@ -119,6 +122,8 @@ function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_n
           let nameRecordId = $(this).context.id;
           if (fileRecordId == nameRecordId) {
             attachmentType = $(this).text();
+            nameChange = true;
+
           }
         });
       //  update link contents
@@ -126,14 +131,14 @@ function replaceAttachmentFilenameWithNameField(fileFieldId, nameFieldId, hide_n
     });
   });
 
-  // hides the name field ID based on third parameter. Default true.
-  if (hide_name){
+  // Hides the name field ID based on third parameter. Default true.
+  if (hide_name && nameChange){
     $("td." + nameFieldId).hide();
     $("th." + nameFieldId).hide();
   }
 }
 
-$(document).on("knack-view-render.any", function (event, view, data) {
+$(document).on("knack-view-render.table", function (event, view, data) {
   replaceAttachmentFilenameWithNameField("field_3176", "field_3174"); // Traffic Count Attachments
 });
 
