@@ -1179,14 +1179,15 @@ $(document).on("knack-scene-render.any", function (event, scene) {
   $(".kn-modal-bg").off("click");
 });
 
+
 /***************************************/
 /*** TEST - Add multiple attachments ***/
 /***************************************/
 const KNACK_APP_ID = Knack.application_id;
-var fieldId = 'field_4212'; 
-var viewId = 'view_4214';
-var sceneId = 'scene_1688';
-var maxFilesLoaded = 10; // Maximum amount of files uploaded in dropzone
+let fieldId = 'field_4212'; 
+let viewId = 'view_4214';
+let sceneId = 'scene_1688';
+let maxFilesLoaded = 10; // Maximum amount of files uploaded in dropzone
 
 $(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
   var knackHeaders = {
@@ -1201,13 +1202,11 @@ $(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
 
   var $fileInputBtn=$(`#kn-input-${fieldId} input[type=file]`);
   var $formSubmitBtn = $(`#${viewId} .kn-submit button[type=submit]`);
-  $formSubmitBtn.prop('disabled', true);
 
   $fileInputBtn.prop("multiple", true);
   $fileInputBtn.after(`<div id="dropzone-${fieldId}" class="dropzone dropzone-knack" />`);
   $fileInputBtn.hide();
 
-  var $buFiledrag=$(`#filedrag-${fieldId}`);
   var $form = $(`#${viewId} form`);
   var $formConfirmation = $(`#${viewId} .kn-form-confirmation`);
 
@@ -1223,23 +1222,42 @@ $(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
         paramName: 'files', 
         addRemoveLinks: true,
         maxFiles: maxFilesLoaded,
-        dictDefaultMessage: '<div class="dz-message needsclick"><button type="button" class="dz-button">Drop files here or click to upload.</button><br></div>',
+        dictDefaultMessage: '<div class="dz-message needsclick"><button type="button" class="dz-button">Drop files here or upload. Max 10 files.</button><br></div>',
       });
-    // Only allow submission when we are not actively processing images
-    dz.on("addedfile", function(file) { $formSubmitBtn.prop('disabled', true); });
-    dz.on("queuecomplete", function(file) { $formSubmitBtn.prop('disabled', false); });
+
+    // Check for following conditions
+    dz.on("addedfile", function(file) { $formSubmitBtn.prop('disabled', true);});
     dz.on("removedfile", deleteFile);
     dz.on("maxfilesexceeded", function(file) { this.removeFile(file); });
     dz.on("success", function(file, responseText, e) {
       file['responseText'] = responseText;
       files.push(file);
+      $formSubmitBtn.prop('disabled', false);
+      dz.on("queuecomplete", function(file) { $formSubmitBtn.prop('disabled', false); });
    });
+    dz.on("error", function(file, msg) {
+      let errorNotification =
+      `<div id="toast-container" class="toast-top-right" aria-live="polite" role="alert">
+      <div class="toast toast-error"><div class="toast-message">
+      <p>Cannot upload file. ${msg}.</p></div></div></div>`
+      $formSubmitBtn.prop('disabled', true);
+      this.removeFile(file);
+      $("body").append(errorNotification);
+      setTimeout(() => { $("#toast-container").remove() },6000);
+    });
     $formSubmitBtn.on('click', handleFormSubmit);
   }
 
+  // Removes file from dropzone
   function deleteFile(removedFile) {
+    console.log(removedFile)
     // Update the files array
     files = files.filter(file => file.name != removedFile.name);
+    console.log("files", files)
+    if (files.length > 0)
+    {
+      $formSubmitBtn.prop('disabled', false);
+    }
   }
 
   function showMessage(err, message) {
@@ -1279,6 +1297,8 @@ $(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
     var targetUrl = `${Knack.api_url}/v1/pages/${sceneId}/views/${viewId}/records`
 
     const upload = file => new Promise((res, rej) => {
+      console.log("hi im uploading")
+      console.log(file)
       // Add the one file we are submitting to the existing form data
       formDataClone = { ...formData };
       formDataClone[fieldId] = file.responseText.id;
@@ -1300,11 +1320,13 @@ $(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
       });
 
       jqXHR.fail((xhr, textStatus, errorThrown) => {
+        console.log(textStatus, "jqxhr failed")
         let json = JSON.parse(xhr.responseText);
         let errMsg = "Unknown Error";
         if (json && json.errors) {
           errMsg = json.errors.reduce((acc, cur) => acc + `<p>${cur.message}</p>`, "");
         }
+        console.log(errMsg)
         rej(errMsg);
       });
     });
@@ -1330,7 +1352,9 @@ $(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
   } 
 });
 
+
 function asyncPool(poolLimit, array, iteratorFn) {
+  console.log(array)
   let i = 0;
   const ret = [];
   const executing = [];
