@@ -53,6 +53,35 @@ $(document).on("knack-view-render.any", function (event, page) {
 });
 
 /********************************************/
+/************** Citybase API ****************/
+/********************************************/
+function getCitybaseButton(payload, viewId){
+    fetch('https://invoice-service.prod.cityba.se/invoices/austin_tx_transportation/street_banner', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        console.log("Citybase make payment URL:", response.url)
+        bigButton('citybase-payment-button', viewId, response.url, "arrow-right", "Make Payment");
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+var knackUserToken = Knack.getUserToken();
+
+var headers = {
+  "X-Knack-Application-Id": Knack.application_id,
+  "X-Knack-REST-API-KEY": "knack",
+  Authorization: knackUserToken,
+  "content-type": "application/json",
+};
+
+/********************************************/
 /*************** Big Buttons ****************/
 /********************************************/
 // Adds big button HTML directly on View id
@@ -72,78 +101,6 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
   if (callback) callback();
 }
 
-/*********** Provider SMRT Portal ***********/
-// create large Get Started button on the Customer RPP Portal page
-$(document).on("knack-view-render.view_626", function(event, page) {
-  bigButton("get-started", "view_626", `${APP_URL}#get-started/`, "file-text", "Get Started");
-});
-// create large Am I Eligible button on the Customer RPP Portal page
-$(document).on("knack-view-render.view_627", function(event, page) {
-  bigButton("eligibility", "view_627", `${APP_URL}#eligibility/`, "book", "Eligibility");
-});
-// create large Help button on the Customer RPP Portal page
-$(document).on("knack-view-render.view_628", function(event, page) {
-  bigButton("faq", "view_628", `${APP_URL}#help/`, "info-circle", "Help");
-});
-// create large About the Program button on the Customer RPP Portal page
-$(document).on("knack-view-render.view_629", function(event, page) {
-  bigButton("about-the-program", "view_629", "https://www.austintexas.gov/page/shared-mobility-regulations-and-license-application", "book", "About the Program");
-});
-
-/*********** Get Started page ***********/
-// create large Home  button on the Customer SMRT Portal page
-$(document).on("knack-view-render.view_875", function(event, page) {
-  bigButton("home", "view_875", `${APP_URL}#portal/`, "home", "Home");
-});
-// create large Required Attachments button on the Customer SMRT Portal, Required Documents page
-$(document).on("knack-view-render.view_878", function(event, page) {
-  bigButton("required-documents", "view_878", `${APP_URL}#required-documents/`, "files-o", "Required Documents");
-});
-// create large Start Application button on the Customer SMRT Application page
-$(document).on("knack-view-render.view_631", function(event, page) {
-  bigButton("start-application", "view_631", `${APP_URL}#application/`, "arrow-right", "Start Application");
-});
-
-/********************************************/
-/************** Small Buttons ***************/
-/********************************************/
-//Create Small Button nested in a block
-function smallButton(id, view_id, url, fa_icon, button_label, is_disabled = false, callback = null) {
-  const disabledClass = is_disabled ? " small-button-disabled'" : "'";
-  const html = `
-    <a id='${id}' 
-       class='back-button${disabledClass}' 
-       href='${url}'>
-      <span><i class='fa fa-${fa_icon}'></i></span>
-      <span> ${button_label}</span>
-    </a>
-  `;
-
-  $(`#${view_id}`).append(html);
-  if (callback) callback();
-}
-
-$(document).on("knack-scene-render.scene_257", function (event, page) {
-  // update iframe src from detail field
-  var iframe_url = $('a[href*="webappviewer"]').attr("href");
-  $(".view_534").hide();
-  $("#csr_view").attr("src", iframe_url);
-});
-
-$(document).on("knack-scene-render.scene_260", function (event, page) {
-  // update iframe src from detail field
-  var iframe_url = $('a[href*="webappviewer"]').attr("href");
-  $(".view_547").hide();
-  $("#csr_view").attr("src", iframe_url);
-});
-
-$(document).on("knack-scene-render.scene_264", function (event, page) {
-  // update iframe src from detail field
-  var iframe_url = $('a[href*="webappviewer"]').attr("href");
-  $(".view_558").hide();
-  $("#csr_view").attr("src", iframe_url);
-});
-
 /****************************************************/
 /*** Disable Breadcrumb Navigation Links Function ***/
 /****************************************************/
@@ -156,252 +113,206 @@ function disableBreadcrumbLinks() {
 }
 
 const BREADCRUMB_SCENES = [
-  // Dockless Mobility License Application
-  'scene_336', // App Info page
-  'scene_337', // Parent Company page
-  'scene_338', // Business Information page
-  'scene_339', // Past Performance page
-  'scene_340', // Fleet Information page
+  // LPB Application
+  'scene_1211', // Event Information page
+  'scene_1212', // Add Design Attachment page
+  'scene_1226', // Add Banner Locations page
 
-  // Bond & Insurance
-  'scene_58', // Bond Details page
+  // LPB Applications
+  'scene_1219', // Application Details page
+
+  // OTS Application
+  'scene_1233', // Event Information page
+  'scene_1234', // Add Design Attachment page
+  'scene_1255', // Add Banner Locations page
+
+  // OTS Applications
+  'scene_1243', // Application Details page
 ];
 
 BREADCRUMB_SCENES.forEach(scene => {
   $(document).on(`knack-scene-render.${scene}`, disableBreadcrumbLinks);
 });
 
-/****************************************************/
-/*** Disable Trigger buttons from being Clickable ***/
-/****************************************************/
-$(document).on('knack-scene-render.any', function(event, view) {
-  var $disabledTriggerButton = $(".trigger-button-large-disabled").parent();
-  $disabledTriggerButton.removeClass("kn-action-link");
-})
 
-/*******************************************/
-/*** Associate impoundments with invoice ***/
-/*******************************************/
-
-function getTodaysDate() {
-  var today = new Date()
-  return((today.getMonth() + 1) + "/" + today.getDate() + "/"+ today.getFullYear())
-}
-
-var headers = {
-  "X-Knack-Application-ID": Knack.application_id,
-  Authorization: Knack.getUserToken(),
-  "content-type": "application/json",
-};
-
-// Create invoice items from items after selection and submission
-function handleAddImpoundmentsClick(id, viewKey) {
-
-  var impoundmentDetailsView = "view_392";
-  var impoundmentDetailsScene = "scene_210";
-
-  // Get current invoice knack ID
-  var hrefArray = window.location.href.split("/");
-  var invoiceId = hrefArray[hrefArray.length - 2];
-
-  // Show spinner
-  $("#" + id).append(
-    '<span id="' +
-      id +
-      '-spinner" class="icon is-2x">&nbsp;<i class="fa fa-spinner fa-spin"></i></span>'
-  );
-
-  // Cycle through selected checkboxes, get their id and create payload
-
-  var selectedImpoundments = [];
-
-  $("#" + viewKey + " tbody input[type=checkbox]:checked").each(function () {
-    // Get id of row
-    var id = $(this).closest("tr").attr("id");
-
-     $.ajax({
-      type: "GET",
-      url:
-        "https://api.knack.com/v1/scenes/" + impoundmentDetailsScene + "/views/" +
-        impoundmentDetailsView + "/records/" + id,
-      headers: headers,
-      contentType: "application/json",
-      })
-        .then(function (res) {
-          newInvoiceItem = {
-              "field_404": res["field_121_raw"], // provider
-              "field_407": res["field_128_raw"], // impound fee: transaction amount
-              "field_454": res["field_115"], // description: date of impound
-              "field_403": getTodaysDate(), // Created Date
-              "field_401": "Impoundment Fee",
-              "field_408": [{ // Created By
-                  "id": Knack.user.id,
-                  "identifier": Knack.user.attributes.values.name.full
-                }],
-              "field_405": [{id:id}], // impoundment id
-              "field_411": "UNPAID", // transaction status
-              "crumbtrail": {"invoice-details_id": invoiceId}
-            }
-            return(newInvoiceItem)
-          })
-          .then(function(newInvoiceItem) {
-            console.log("Creating invoice item:", newInvoiceItem)
-            $.ajax({
-              type: "POST",
-              url: "https://api.knack.com/v1/pages/scene_231/views/view_459/records",
-              headers: headers,
-              data: JSON.stringify(newInvoiceItem),
-              contentType: "application/json",
-            })
-            .then(function (res) {
-              Knack.views["view_459"].model.fetch();
-            })
-            .fail(function (jqXHR, textStatus, errorThrown) {
-                console.error("Failed to create new invoice item")
-                console.error("Status:", textStatus);
-                console.error("Error:", errorThrown);
-                console.error("Response Text:", jqXHR.responseText);
-                console.error("Status Code:", jqXHR.status);
-            });
-          })
-
-    selectedImpoundments.push({
-      id: id,
-      payload: {
-        "field_467": [{
-          "id": invoiceId,
-        }]
-      }
-    });
-
-
-  });
-
-  // if no impoundments have been selected, remove the spinner
-  if (selectedImpoundments.length < 1) {
-      $("#" + id + "-spinner").remove();
-  }
-
-
-  // For each selected impoundment, make call to set invoice
-  selectedImpoundments.forEach(function (item) {
-    $.ajax({
-      type: "PUT",
-      url:
-        "https://api.knack.com/v1/scenes/scene_231/views/" +
-        viewKey + "/records/" + item.id,
-      headers: headers,
-      data: JSON.stringify(item.payload),
-      contentType: "application/json",
-      })
-        .then(function (res) {
-          // Remove spinner after invoice item record is created
-          $("#" + id + "-spinner").remove();
-          // Clear all checkboxes
-          $(".table-checkboxes").each(function (event) {
-            $(this).prop("checked", false);
-          });
-          // refetch view
-          Knack.views[viewKey].model.fetch();
-        })
-        .fail(function (jqXHR, textStatus, errorThrown) {
-          $("#" + id + "-spinner").remove();
-          console.error("Failed to set impoundment invoice ID")
-          console.error("Failed to create new invoice item")
-          console.error("Status:", textStatus);
-          console.error("Error:", errorThrown);
-          console.error("Response Text:", jqXHR.responseText);
-          console.error("Status Code:", jqXHR.status);
-        });
-    });
-}
-
-function addCheckboxes(view) {
-  // Add the checkbox to to the header to select/unselect all
-  $("#" + view.key + ".kn-table thead tr").prepend(
-    '<th class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></th>'
-  );
-
-  $("#" + view.key + ".kn-table thead input").change(function () {
-    $("." + view.key + ".kn-table tbody tr input").each(function () {
-      $(this).attr(
-        "checked",
-        $("#" + view.key + ".kn-table thead input").attr("checked") !==
-          undefined
-      );
-    });
-  });
-
-  // Add a checkbox to each row in the table body
-  $("#" + view.key + ".kn-table tbody tr").each(function () {
-    $(this).prepend(
-      '<td class="table-checkboxes-parent"><input class="table-checkboxes" type="checkbox"></td>'
-    );
-  });
-
-  function toggleCheckbox($checkbox) {
-    $checkbox.is(":checked")
-      ? $checkbox.prop("checked", false)
-      : $checkbox.prop("checked", true);
-  }
-
-  // Add click event handler to checkbox parent to check/uncheck child box
-  $("#" + view.key + " .table-checkboxes-parent").click(function (event) {
-    // If table header, check/uncheck all checkboxes
-    if ($(this).is("th")) {
-      var $headerCheckbox = $($(this).children()[0]);
-      toggleCheckbox($headerCheckbox);
-      $(
-        "#" + view.key + " td.table-checkboxes-parent input.table-checkboxes"
-      ).each(function () {
-        $headerCheckbox.is(":checked")
-          ? $(this).prop("checked", true)
-          : $(this).prop("checked", false);
-      });
-    } else {
-      var $checkbox = $($(this).children()[0]);
-      toggleCheckbox($checkbox);
-    }
-  });
-
-  // Restore default checkbox toggle
-  $("#" + view.key + " .table-checkboxes").click(function (event) {
-    var $checkbox = $(this);
-    toggleCheckbox($checkbox);
-  });
-
-}
-
-function appendSubmitButton(buttonString, selector, handler, viewKey) {
-  var id = buttonString.toLowerCase().split(" ").join("-");
-  $(selector).append(
-    '<a id="' +
-      id +
-      '" class="kn-button"><span class="icon is-small"><i class="fa fa-check"></i></span><span>' +
-      buttonString +
-      "</span></a>"
-  );
-
-  $("#" + id).click(function () {
-    handler(id, viewKey);
-  });
-}
-
-// the view with the Provider Impoundments table
-$(document).on("knack-view-render.view_1044", function(event, view, data) {
-  addCheckboxes(view);
-
-  appendSubmitButton(
-    "Add to invoice items",
-    "#" + view.key + " > .kn-table-wrapper",
-    handleAddImpoundmentsClick,
-    view.key,
-  );
+// Reload LPB Application when Design Ready "Yes"
+$(document).on("knack-scene-render.scene_1212", function () {
+  $('#view_3392 .kn-link:contains("Yes")').on("click", function(){
+    location.reload();
+  })
 });
 
-/********************************************************************/
-/* Generates a Strong Random Password for Internal Account Creation */
-/********************************************************************/
+// Reload OTS Application when Design Ready "Yes"
+$(document).on("knack-scene-render.scene_1234", function () {
+  $('#view_3397 .kn-link:contains("Yes")').on("click", function(){
+    location.reload();
+  })
+});
+
+
+// lamppost application details
+$(document).on("knack-view-render.view_3664", function (event, page, view) {
+  $("#view_3664").hide();
+  // operating under the expectation that there is only one line item to add
+  var transactionRecord = view[0];
+
+  var payload = {
+    allowed_payment_methods: ["CARD", "BANK"],
+    cancel_url: {
+      url: window.location.href,
+      label: "Cancel",
+    },
+    return_url: {
+      url: window.location.href,
+      label: "Continue",
+    },
+  };
+
+  if (transactionRecord) {
+    payload["line_items"] = [
+      {
+        description: transactionRecord["field_3350"],
+        amount: parseInt(transactionRecord["field_3342_raw"] * 100),
+        sub_description: transactionRecord["field_3351"],
+        custom_attributes: [
+          {
+            key: "knack_record_id",
+            value: transactionRecord["id"],
+          },
+          {
+            key: "invoice_number",
+            value: transactionRecord["field_3327"],
+          },
+          {
+            key: "fund",
+            value: String(transactionRecord["field_3356"]),
+          },
+          {
+            key: "dept",
+            value: String(transactionRecord["field_3357"]),
+          },
+          {
+            key: "unit",
+            value: String(transactionRecord["field_3358"]),
+          },
+          {
+            key: "revenue",
+            value: String(transactionRecord["field_3359"]),
+          },
+        ],
+      },
+    ];
+    payload["custom_attributes"] = [
+      {
+        key: "knack_record_id",
+        value: transactionRecord["id"],
+      },
+      {
+        key: "invoice_number",
+        value: transactionRecord["field_3327"],
+      },
+      {
+        key: "banner_type",
+        value: "LAMPPOST",
+      },
+      {
+        key: "parent_record_id",
+        value: String(transactionRecord["field_3328_raw"][0]["id"]),
+      },
+      {
+        key: "knack_app",
+        value: "STREET_BANNER",
+      },
+    ];
+    // uncomment line below for debugging
+    // console.log(JSON.stringify(payload));
+    getCitybaseButton(payload, "view_3667");
+  }
+});
+
+// over the street
+$(document).on("knack-view-render.view_3665", function (event, page, view) {
+  $("#view_3665").hide();
+  // operating under the expectation that there is only one line item to add
+  var transactionRecord = view[0];
+
+  var payload = {
+    allowed_payment_methods: ["CARD", "BANK"],
+    cancel_url: {
+      url: window.location.href,
+      label: "Cancel",
+    },
+    return_url: {
+      url: window.location.href,
+      label: "Continue",
+    },
+  };
+
+  if (transactionRecord) {
+    payload["line_items"] = [
+      {
+        description: transactionRecord["field_3350"],
+        amount: parseInt(transactionRecord["field_3342_raw"] * 100),
+        sub_description: transactionRecord["field_3351"],
+        custom_attributes: [
+          {
+            key: "knack_record_id",
+            value: transactionRecord["id"],
+          },
+          {
+            key: "invoice_number",
+            value: transactionRecord["field_3327"],
+          },
+          {
+            key: "fund",
+            value: String(transactionRecord["field_3356"]),
+          },
+          {
+            key: "dept",
+            value: String(transactionRecord["field_3357"]),
+          },
+          {
+            key: "unit",
+            value: String(transactionRecord["field_3358"]),
+          },
+          {
+            key: "revenue",
+            value: String(transactionRecord["field_3359"]),
+          },
+        ],
+      },
+    ];
+    payload["custom_attributes"] = [
+      {
+        key: "knack_record_id",
+        value: transactionRecord["id"],
+      },
+      {
+        key: "invoice_number",
+        value: transactionRecord["field_3327"],
+      },
+      {
+        key: "banner_type",
+        value: "OVER_THE_STREET",
+      },
+      {
+        key: "parent_record_id",
+        value: String(transactionRecord["field_3329_raw"][0]["id"]),
+      },
+      {
+        key: "knack_app",
+        value: "STREET_BANNER",
+      },
+    ];
+    // uncomment line below for debugging
+    // console.log(JSON.stringify(payload));
+    getCitybaseButton(payload, "view_3666");
+  }
+});
+
+/*******************************/
+/* Generates a Random Password */
+/*******************************/
 function generatePassword() {
   const PASSWORD_LENGTH = 20;
   const LOWER = "abcdefghijklmnopqrstuvwxyz";
@@ -442,12 +353,13 @@ function generatePassword() {
   return password;
 }
 
-// Load Password for Internal Account Creation form
-$(document).on("knack-view-render.view_775", function (event, scene) {
+// Handler to target a specific login view to load generated password into the password input box - Acct Mgmt - Add Account form
+$(document).on("knack-view-render.view_3040", function (event, scene) {
   var pw = generatePassword();
   $('input[name$="password"]').val(pw);
   $('input[name$="password_confirmation"]').val(pw);
 });
+
 /*************************************/
 /**** COA FOOTER - Simple Version ****/
 /*************************************/
@@ -461,12 +373,15 @@ $(document).on("knack-view-render.view_775", function (event, scene) {
 
   // List of exact URL hashes that should display the footer. Only exact matches are used — child pages (e.g. #customer/my-projects/) are automatically excluded.
   const footerHashes = [
-    '#portal/',                                         // scene_285
-    '#get-started/',                                    // scene_286
-    '#application/',                                    // scene_335
-    '#my-application/',                                 // scene_276
-    '#help/',                                           // scene_394
-    ];
+    '#portal/',                                         // scene_1221
+    '#get-started/',                                    // scene_1220
+    '#lpb-application/',                                // scene_1209
+    '#submission-lpb/',                                 // scene_1231
+    '#ots-application/',                                // scene_1232
+    '#submission-ots/',                                 // scene_1244
+    '#manage-wallet/',                                  // scene_1351
+    '#payment-help/',                                   // scene_1278
+  ];
 
   // Our structured Footer HTML consisting of the COA Brand, the Privacy Policy, and any app specific Contact Info
   // Styling is handled in the Knack CSS file via the #coa-footer selector.
@@ -476,7 +391,7 @@ $(document).on("knack-view-render.view_775", function (event, scene) {
         src="https://images.gitbook.com/__img/dpr=2,width=600,onerror=redirect,format=auto,signature=1503205633/https%3A%2F%2Ffiles.gitbook.com%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FCqNGfEc0WO4ar1y6yBB3%252Fuploads%252F94aonme89HIUpHVnpeuK%252FCOA-Logo-Horizontal-Official-RGB.png%3Falt%3Dmedia%26token%3Da9121b5d-9d3c-41d0-9e72-90e25938e553" 
         alt="City of Austin Footer Logo" 
       />
-      <p><a href="https://www.austintexas.gov/page/shared-mobility-regulations-and-license-application" target="_blank" rel="noopener noreferrer">About the Shared Mobility Services Program</a></p>
+      <p>Contact us at <a href="mailto:ATXstreetbanners@AustinTexas.gov">ATXstreetbanners@austintexas.gov</a></p>
       <p><a href="https://www.austintexas.gov/page/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
     </div>
   `;
