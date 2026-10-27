@@ -32,6 +32,52 @@ a.big-button-container {
   text-decoration: none;
 }
 
+:where(#view_3796,#view_3797,#view_3798,#view_3799,#view_3800,#view_3801,#view_3802,
+#view_3803,#view_3804,#view_3805,#view_3806,#view_3807,#view_3808,#view_3810,#view_3811
+,#view_3812,#view_3813,#view_3814).kn-menu .kn-button {
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px 0px gray;
+  color: #22254E;
+  background-color: white;
+  font-size: 2.5em;
+  padding: 18px;
+  display: block;
+  width: 20em;
+}
+	
+:where(#view_3796,#view_3797,#view_3798,#view_3799,#view_3800,#view_3801,#view_3802,
+#view_3803,#view_3804,#view_3805,#view_3806,#view_3807,#view_3808,#view_3810,#view_3811
+,#view_3812,#view_3813,#view_3814).kn-menu .kn-link {
+  margin-bottom: 20px !important;
+  text-align: left;
+}
+
+:where(#view_3796,#view_3797,#view_3798,#view_3799,#view_3800,#view_3801,#view_3802,
+#view_3803,#view_3804,#view_3805,#view_3806,#view_3807,#view_3808,#view_3810,#view_3811
+,#view_3812,#view_3813,#view_3814).kn-menu .kn-button span {
+  margin-left: 5px;
+}
+
+
+:where(#view_3796,#view_3797,#view_3798,#view_3799,#view_3800,#view_3801,#view_3802,
+#view_3803,#view_3804,#view_3805,#view_3806,#view_3807,#view_3808,#view_3810,#view_3811
+,#view_3812,#view_3813,#view_3814).kn-menu .icon {
+  font-size: inherit;
+  line-height: inherit;
+  padding-right: 30px;
+}
+
+:where(#view_3796,#view_3797,#view_3798,#view_3799,#view_3800,#view_3801,#view_3802,
+#view_3803,#view_3804,#view_3805,#view_3806,#view_3807,#view_3808,#view_3810,#view_3811
+,#view_3812,#view_3813,#view_3814).kn-menu .kn-button:hover,
+:where(#view_3796,#view_3797,#view_3798,#view_3799,#view_3800,#view_3801,#view_3802,
+#view_3803,#view_3804,#view_3805,#view_3806,#view_3807,#view_3808,#view_3810,#view_3811
+,#view_3812,#view_3813,#view_3814).kn-menu .kn-button:focus {
+  background-color: #f7f7f7;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
 /***************************************/
 /************ Small Buttons ************/
 /***************************************/
@@ -141,4 +187,5 @@ img.knHeader__logo-image {
     width: 80% !important; /* Medium width on medium screens */
     max-width: 800px !important;
   }
+}
 }
