@@ -72,10 +72,6 @@ function bigButton(id, view_id, url, fa_icon, button_label, target_blank = false
   if (callback) callback();
 }
 
-// create large Account Administration button on the Home page
-$(document).on('knack-view-render.view_74', function(event, page) {
-    bigButton("contact-directory", "view_74", `${APP_URL}#account-administration/`, "users", "Account Administration");
-});
 
 /*******************************/
 /* Generates a Random Password */
