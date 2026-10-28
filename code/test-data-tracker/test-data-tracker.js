@@ -1178,3 +1178,204 @@ $(document).on("knack-scene-render.scene_1607", function (event, scene) {
 $(document).on("knack-scene-render.any", function (event, scene) {
   $(".kn-modal-bg").off("click");
 });
+
+
+/***************************************/
+/*** TEST - Add multiple attachments ***/
+/***************************************/
+const KNACK_APP_ID = Knack.application_id;
+let fieldId = 'field_4212'; 
+let viewId = 'view_4214';
+let sceneId = 'scene_1688';
+let maxFilesLoaded = 10; // Maximum amount of files uploaded in dropzone
+
+$(document).on(`knack-view-render.${viewId}`, function (event, view, data) {
+  var knackHeaders = {
+    'X-Knack-Application-ID': KNACK_APP_ID,
+    'Authorization': Knack.getUserToken()
+  }
+  LazyLoad.css('https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/dropzone.min.css', function () {});
+  LazyLoad.js(['https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js'], function () {
+    Dropzone.autoDiscover = false;
+    initialize();
+  });
+
+  var $fileInputBtn=$(`#kn-input-${fieldId} input[type=file]`);
+  var $formSubmitBtn = $(`#${viewId} .kn-submit button[type=submit]`);
+
+  $fileInputBtn.prop("multiple", true);
+  $fileInputBtn.after(`<div id="dropzone-${fieldId}" class="dropzone dropzone-knack" />`);
+  $fileInputBtn.hide();
+
+  var $form = $(`#${viewId} form`);
+  var $formConfirmation = $(`#${viewId} .kn-form-confirmation`);
+
+  var files = [];
+
+  function initialize() {
+    var upurl = `${Knack.api_url}/v1/applications/${KNACK_APP_ID}/assets/file/upload`;
+
+    var dz = new Dropzone(`div#dropzone-${fieldId}`, 
+      { 
+        url: upurl, 
+        headers: knackHeaders, 
+        paramName: 'files', 
+        addRemoveLinks: true,
+        maxFiles: maxFilesLoaded,
+        dictDefaultMessage: '<div class="dz-message needsclick"><button type="button" class="dz-button">Drop files here or upload. Max 10 files.</button><br></div>',
+      });
+
+    // Check for following conditions
+    dz.on("addedfile", function(file) { $formSubmitBtn.prop('disabled', true);});
+    dz.on("removedfile", deleteFile);
+    dz.on("maxfilesexceeded", function(file) { this.removeFile(file); });
+    dz.on("success", function(file, responseText, e) {
+      file['responseText'] = responseText;
+      files.push(file);
+      $formSubmitBtn.prop('disabled', false);
+      dz.on("queuecomplete", function(file) { $formSubmitBtn.prop('disabled', false); });
+   });
+    dz.on("error", function(file, msg) {
+      let errorNotification =
+      `<div id="toast-container" class="toast-top-right" aria-live="polite" role="alert">
+      <div class="toast toast-error"><div class="toast-message">
+      <p>Cannot upload file. ${msg}.</p></div></div></div>`
+      $formSubmitBtn.prop('disabled', true);
+      this.removeFile(file);
+      $("body").append(errorNotification);
+      setTimeout(() => { $("#toast-container").remove() },6000);
+    });
+    $formSubmitBtn.on('click', handleFormSubmit);
+  }
+
+  // Removes file from dropzone
+  function deleteFile(removedFile) {
+    console.log(removedFile)
+    // Update the files array
+    files = files.filter(file => file.name != removedFile.name);
+    console.log("files", files)
+    if (files.length > 0)
+    {
+      $formSubmitBtn.prop('disabled', false);
+    }
+  }
+
+  function showMessage(err, message) {
+    $formConfirmation.show();
+    var clazz = err === true ? "is-error" : "success";
+    $formConfirmation.append(`<div class="kn-message ${clazz}"><p>${message}</p></div>`);
+    if (err === true) {
+      $formConfirmation.find('.kn-form-reload').hide();
+    } else {
+      $formConfirmation.find('.kn-form-reload').show();
+    }
+  }
+
+  function clearMessages() {
+    // Form messages come from Knack JS - they know the form is still visible. form-confirm is used
+    // when form might have been hidden
+    $formConfirmation.find('.kn-message').remove();
+    $form.find('.kn-message').remove();
+    $formConfirmation.hide();
+  }
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+
+    // Show progress and prevent an impatient click
+    Knack.showSpinner();
+    $formSubmitBtn.addClass("is-loading");
+    $formSubmitBtn.prop('disabled', true); 
+
+    // Grab all other data items from the form into a simple key-value object
+    var formData = $form.serializeArray().reduce(function (output, value) {
+        var field = value.name.split('-').pop(); // Not sure why but multichoice does `view_id-field_id`
+        output[field] = value.value
+        return output
+    }, {});
+
+    var targetUrl = `${Knack.api_url}/v1/pages/${sceneId}/views/${viewId}/records`
+
+    const upload = file => new Promise((res, rej) => {
+      console.log("hi im uploading")
+      console.log(file)
+      // Add the one file we are submitting to the existing form data
+      formDataClone = { ...formData };
+      formDataClone[fieldId] = file.responseText.id;
+
+      var jqXHR = $.ajax({
+        type: 'POST',
+        url: targetUrl,
+        headers: knackHeaders,
+        data: formDataClone,
+        enctype: 'multipart/form-data'
+        }); 
+
+      // Mark uploaded file with record created
+      // TODO - should we just remove it from the dropzone? That might be 
+      // simpler than maintaining a list in memory 
+      jqXHR.done(() => {
+        file['knackRecordCreated'] = true;
+        res();
+      });
+
+      jqXHR.fail((xhr, textStatus, errorThrown) => {
+        console.log(textStatus, "jqxhr failed")
+        let json = JSON.parse(xhr.responseText);
+        let errMsg = "Unknown Error";
+        if (json && json.errors) {
+          errMsg = json.errors.reduce((acc, cur) => acc + `<p>${cur.message}</p>`, "");
+        }
+        console.log(errMsg)
+        rej(errMsg);
+      });
+    });
+
+    clearMessages();
+    // TODO handle HTTP 429 events
+    // TODO try #s > 2 to see how well it works
+    asyncPool(2, files, upload)
+      .then(() => { 
+        console.log("success");
+        $form.hide();
+        history.back(); // go back to parent page
+        //showMessage(false, "Form submitted"); // reload form
+      })
+      .catch((errors) => { 
+        log("errors"); 
+        console.log(errors);
+        $formSubmitBtn.removeClass("is-loading");
+        Knack.hideSpinner();
+        showMessage(true, errors);
+        $formSubmitBtn.prop('disabled', false);
+      });
+  } 
+});
+
+
+function asyncPool(poolLimit, array, iteratorFn) {
+  console.log(array)
+  let i = 0;
+  const ret = [];
+  const executing = [];
+  const enqueue = function() {
+    if (i === array.length) {
+      return Promise.resolve();
+    }
+    const item = array[i++];
+    const p = Promise.resolve().then(() => iteratorFn(item, array));
+    ret.push(p);
+
+    let r = Promise.resolve();
+
+    if (poolLimit <= array.length) {
+      const e = p.then(() => executing.splice(executing.indexOf(e), 1));
+      executing.push(e);
+      if (executing.length >= poolLimit) {
+        r = Promise.race(executing);
+      }
+    }
+    return r.then(() => enqueue());
+  };
+  return enqueue().then(() => Promise.all(ret));
+}
