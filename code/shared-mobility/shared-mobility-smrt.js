@@ -189,7 +189,7 @@ function getTodaysDate() {
 }
 
 var headers = {
-  "X-Knack-Application-ID": "5eb46c3fed64e10015c6216e",
+  "X-Knack-Application-ID": Knack.application_id,
   Authorization: Knack.getUserToken(),
   "content-type": "application/json",
 };
