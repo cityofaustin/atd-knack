@@ -477,7 +477,7 @@ $(document).on("knack-view-render.view_775", function (event, scene) {
         src="https://images.gitbook.com/__img/dpr=2,width=600,onerror=redirect,format=auto,signature=1503205633/https%3A%2F%2Ffiles.gitbook.com%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FCqNGfEc0WO4ar1y6yBB3%252Fuploads%252F94aonme89HIUpHVnpeuK%252FCOA-Logo-Horizontal-Official-RGB.png%3Falt%3Dmedia%26token%3Da9121b5d-9d3c-41d0-9e72-90e25938e553" 
         alt="City of Austin Footer Logo" 
       />
-      <p><a href="https://www.austintexas.gov/page/shared-mobility-regulations-and-license-application">About the Shared Mobility Services Program</a></p>
+      <p><a href="https://www.austintexas.gov/page/shared-mobility-regulations-and-license-application" target="_blank" rel="noopener noreferrer">About the Shared Mobility Services Program</a></p>
       <p><a href="https://www.austintexas.gov/page/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a></p>
     </div>
   `;
