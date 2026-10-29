@@ -452,12 +452,12 @@ $(document).on("knack-view-render.view_775", function (event, scene) {
 /*************************************/
 /**** COA FOOTER - Simple Version ****/
 /*************************************/
-  // Dynamically injects a branded footer into specific customer-facing standard Knack pages only.
-  // Use this version for apps where displaying the footer on modal windows is not required.
-  // Caution: Navigating from a standard page > modal page > and then to a new standard page from a menu view on that modal page may cause footer ghosting/duplication to occur
-  // Best Practice: Modals are okay as long as a user isnt required to navigate with the modal. Instead the user should navigate via the top nav or a standard page
-  //
-  // To display the footer on a new page: append its URL hash and scene ID comment to the footerHashes array below.
+// Dynamically injects a branded footer into specific customer-facing standard Knack pages only.
+// Use this version for apps where displaying the footer on modal windows is not required.
+// Caution: Navigating from a standard page > modal page > and then to a new standard page from a menu view on that modal page may cause footer ghosting/duplication to occur
+// Best Practice: Modals are okay as long as a user isnt required to navigate with the modal. Instead the user should navigate via the top nav or a standard page
+//
+// To display the footer on a new page: append its URL hash and scene ID comment to the footerHashes array below.
 (function() {
 
   // List of exact URL hashes that should display the footer. Only exact matches are used — child pages (e.g. #customer/my-projects/) are automatically excluded.
