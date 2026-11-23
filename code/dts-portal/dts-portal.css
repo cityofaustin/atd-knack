@@ -423,3 +423,42 @@ img.knHeader__logo-image {
     max-width: 100% !important;
   }
 }
+
+/******************************************************************/
+/************* Big Button Styling applied to Nav Menus ************/
+/******************************************************************/
+/* Shared across view_541, view_542, view_535, view_528 —
+   add new view IDs to this selector list instead of duplicating the block */
+
+:where(#view_637, #view_639, #view_641, #view_643, #view_644).kn-menu .kn-button {
+  border-radius: 4px;
+  box-shadow: 0px 1px 0px 0px gray;
+  color: #22254e;
+  background-color: white;
+  font-size: 2.5em;
+  padding: 18px;
+  display: block;
+  width: 15em;
+}
+
+:where(#view_637, #view_639, #view_641, #view_643, #view_644).kn-menu .kn-link {
+  margin-bottom: 20px !important;
+  text-align: left;
+}
+
+:where(#view_637, #view_639, #view_641, #view_643, #view_644).kn-menu .kn-button span {
+  margin-left: 5px;
+}
+
+:where(#view_637, #view_639, #view_641, #view_643, #view_644).kn-menu .icon {
+  font-size: inherit;
+  line-height: inherit;
+  padding-right: 30px;
+}
+
+:where(#view_637, #view_639, #view_641, #view_643, #view_644).kn-menu .kn-button:hover,
+:where(#view_637, #view_639, #view_641, #view_643, #view_644).kn-menu .kn-button:focus {
+  background-color: #f7f7f7;
+  transform: translateY(-1px);
+  text-decoration: none;
+}
